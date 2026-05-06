@@ -1,0 +1,35 @@
+# Ignore massive zip files
+*.zip
+
+# Ignore Node modules
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Ignore env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Next.js build output
+.next/
+out/
+build/
+
+# Mac OS
+.DS_Store
+
+# Prisma
+*.db
+*.db-journal
+
+# Temporaries
+temp_id_rsa
+temp_id_rsa.pub
+
+# Ignore old backup and PHP folders
+oroubafoods.com/
+archive/
+static/

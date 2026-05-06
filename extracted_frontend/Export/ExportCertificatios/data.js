@@ -1,0 +1,34 @@
+export const certificationsData=[
+  {
+    id:1,
+    image:require("../../../assets/cert1.png")
+  },
+  {
+    id:2,
+    image:require("../../../assets/cert2.png")
+  },
+  {
+    id:3,
+    image:require("../../../assets/cert3.png")
+  },
+  {
+    id:4,
+    image:require("../../../assets/cert4.png")
+  },
+  {
+    id:5,
+    image:require("../../../assets/cert5.png")
+  },
+  {
+    id:6,
+    image:require("../../../assets/cert6.png")
+  },
+  {
+    id:7,
+    image:require("../../../assets/cert7.png")
+  },
+  {
+    id:8,
+    image:require("../../../assets/crt8.png")
+  },
+]

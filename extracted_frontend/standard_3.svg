@@ -1,0 +1,40 @@
+var _g, _defs;
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+import * as React from "react";
+function SvgStandard3(_ref, svgRef) {
+  let {
+    title,
+    titleId,
+    ...props
+  } = _ref;
+  return /*#__PURE__*/React.createElement("svg", _extends({
+    width: 77,
+    height: 76,
+    viewBox: "0 0 77 76",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg",
+    ref: svgRef,
+    "aria-labelledby": titleId
+  }, props), title ? /*#__PURE__*/React.createElement("title", {
+    id: titleId
+  }, title) : null, _g || (_g = /*#__PURE__*/React.createElement("g", {
+    id: "test_11386038",
+    clipPath: "url(#clip0_820_52196)"
+  }, /*#__PURE__*/React.createElement("g", {
+    id: "Layer_3"
+  }, /*#__PURE__*/React.createElement("path", {
+    id: "Vector",
+    d: "M75.5504 71.725L71.8692 68.875C71.9879 68.7562 72.1067 68.5187 72.2254 68.4C73.6504 65.7875 73.4129 62.5812 71.7504 60.2062L55.1254 36.1L75.5504 20.3062C76.6192 19.475 76.7379 18.05 76.0254 16.9813C75.1942 15.9125 73.7692 15.7937 72.7004 16.5063L52.5129 32.0625L49.1879 27.3125V4.75C50.3754 4.63125 51.3254 3.5625 51.3254 2.375C51.3254 1.06875 50.2567 0 48.9504 0H28.0504C26.7442 0 25.6754 1.06875 25.6754 2.375C25.6754 3.5625 26.6254 4.63125 27.8129 4.75V27.4312L24.4879 32.1813L4.30044 16.625C3.23169 15.7937 1.80669 16.0312 0.975442 17.1C0.144192 18.1687 0.381692 19.5938 1.45044 20.425L21.8754 36.2188L5.25044 60.2062C3.58794 62.7 3.35044 65.7875 4.77544 68.4C4.89419 68.5187 5.01294 68.7562 5.13169 68.875L1.45044 71.725C0.381692 72.5563 0.262942 73.9813 0.975442 75.05C1.80669 76.1188 3.23169 76.2375 4.30044 75.525L8.69419 72.0813C9.64419 72.4375 10.7129 72.675 11.6629 72.675H65.1004C66.1692 72.675 67.2379 72.4375 68.0692 72.0813L72.4629 75.525C73.5317 76.3562 74.9567 76.1188 75.7879 75.05C76.8567 73.9813 76.6192 72.5563 75.5504 71.725ZM67.8317 62.9375C68.4254 63.8875 68.5442 64.9562 68.0692 66.025L42.4192 46.075L51.4442 39.0688L67.8317 62.9375ZM32.0879 29.5688C32.3254 29.2125 32.5629 28.7375 32.5629 28.2625V4.75H44.4379V28.1438C44.4379 28.6188 44.5567 29.0938 44.9129 29.45L48.8317 35.0312L38.5004 43.1063L28.2879 35.15L32.0879 29.5688ZM9.16919 62.9375L25.5567 39.0688L34.5817 46.075L8.81294 66.025C8.45669 64.9562 8.45669 63.8875 9.16919 62.9375ZM14.1567 67.925L38.5004 49.0438L62.8442 67.925H14.1567Z",
+    fill: "white"
+  })))), _defs || (_defs = /*#__PURE__*/React.createElement("defs", null, /*#__PURE__*/React.createElement("clipPath", {
+    id: "clip0_820_52196"
+  }, /*#__PURE__*/React.createElement("rect", {
+    width: 76,
+    height: 76,
+    fill: "white",
+    transform: "translate(0.5)"
+  })))));
+}
+const ForwardRef = /*#__PURE__*/React.forwardRef(SvgStandard3);
+export default __webpack_public_path__ + "static/media/standard_3.59b6a390530a3a4a6c3f63aaafa5a005.svg";
+export { ForwardRef as ReactComponent };

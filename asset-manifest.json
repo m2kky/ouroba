@@ -1,0 +1,41 @@
+{
+  "files": {
+    "main.css": "/static/css/main.56115a45.css",
+    "main.js": "/static/js/main.349cc576.js",
+    "static/js/453.0797c66a.chunk.js": "/static/js/453.0797c66a.chunk.js",
+    "static/media/industrial-park-factory-building-warehouse 1.png": "/static/media/industrial-park-factory-building-warehouse 1.55844ac1b44827d4b2d4.png",
+    "static/media/slider_1.png": "/static/media/slider_1.e66276a350e560483d72.png",
+    "static/media/slider_2.png": "/static/media/slider_2.f6137ea1282d5c92d967.png",
+    "static/media/bg_form.png": "/static/media/bg_form.928401ac91975cd8629d.png",
+    "static/media/contactUsImage.png": "/static/media/contactUsImage.bc7db8fa7afd7e28c313.png",
+    "static/media/Artboard6.jpg": "/static/media/Artboard6.85b01b1c1d9f5af28041.jpg",
+    "static/media/Artboard7.jpg": "/static/media/Artboard7.dee129bd00c38c766828.jpg",
+    "static/media/Artboard8.jpg": "/static/media/Artboard8.9aee453ff562191b2b4b.jpg",
+    "static/media/Artboard9.jpg": "/static/media/Artboard9.9c46e8f13c86160ef993.jpg",
+    "static/media/cert4.png": "/static/media/cert4.6553422ff1750367b50d.png",
+    "static/media/cert7.png": "/static/media/cert7.1233d41cb2a9b813e9ea.png",
+    "static/media/cert3.png": "/static/media/cert3.007b45edae92a8b1cbec.png",
+    "static/media/standards_bg.png": "/static/media/standards_bg.670ef8d7bd71308b8453.png",
+    "static/media/cert1.png": "/static/media/cert1.cfe92468e792455180d1.png",
+    "static/media/cert2.png": "/static/media/cert2.dd3e359b0e9efc8dbf9c.png",
+    "static/media/cert5.png": "/static/media/cert5.9d725400a2543f12c154.png",
+    "static/media/Rectangle 29.png": "/static/media/Rectangle 29.479c660994860049fed6.png",
+    "static/media/footer_logo.png": "/static/media/footer_logo.ddae0bf40dad21fa904a.png",
+    "static/media/jpeg": "/static/media/ae80dc6490189e5cc4ccc946d433cc69.0f8e0b58e3b3fbd66d87.jpeg",
+    "static/media/crt8.png": "/static/media/crt8.49524518dfaf0a776330.png",
+    "static/media/cert6.png": "/static/media/cert6.67ef10db15e582938de9.png",
+    "static/media/logo.png": "/static/media/logo.c0b669f6b893b6ff3c5b.png",
+    "static/media/headerRigh1.png": "/static/media/headerRigh1.4eaddc7ebf9f04965208.png",
+    "static/media/standard_2.svg": "/static/media/standard_2.f691a96758c1f9d210e781c5502570b9.svg",
+    "static/media/standard_1.svg": "/static/media/standard_1.42f578e2d6fdc45d005d51e8a2726820.svg",
+    "static/media/standard_3.svg": "/static/media/standard_3.59b6a390530a3a4a6c3f63aaafa5a005.svg",
+    "index.html": "/index.html",
+    "main.56115a45.css.map": "/static/css/main.56115a45.css.map",
+    "main.349cc576.js.map": "/static/js/main.349cc576.js.map",
+    "453.0797c66a.chunk.js.map": "/static/js/453.0797c66a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.56115a45.css",
+    "static/js/main.349cc576.js"
+  ]
+}
