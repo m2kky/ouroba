@@ -6,7 +6,7 @@ import HoverCard from "@/components/ui/HoverCard";
 
 export default async function HomePage() {
   const data = await getSiteData();
-  const { brands, banners, sectionTexts, whyChooseUs, features, continents, recipes } = data;
+  const { brands, banners, sectionTexts, whyChooseUs, features, continents, recipes, standards } = data;
 
   // Hero Banner
   const desktopBanners = banners?.filter((b: any) => b.isDesktop && !b.isHidden) || [];
