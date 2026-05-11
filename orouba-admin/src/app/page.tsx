@@ -9,10 +9,10 @@ export default async function HomePage() {
   const { brands, banners, sectionTexts, whyChooseUs, features, continents, recipes, standards } = data;
 
   // Hero Banner
-  const desktopBanners = banners?.filter((b: any) => b.isDesktop && !b.isHidden) || [];
-  const firstBanner = desktopBanners[0];
+  const activeBanners = banners?.filter((b: any) => !b.isHidden) || [];
+  const firstBanner = activeBanners[0];
   const isVideo = firstBanner?.type === "video";
-  const heroMedia = firstBanner?.image || "https://camp-coding.site/eloroba/storage/app/images/1.mp4"; // Fallback
+  const heroMedia = firstBanner?.videoLink || firstBanner?.image || "https://camp-coding.site/eloroba/storage/app/images/1.mp4"; // Fallback
 
   // Vision Section Text (Assuming number 1 or specific title)
   const visionSection = sectionTexts?.find((s: any) => s.titleEn?.toLowerCase().includes("vision") || s.number === 1);
