@@ -89,7 +89,7 @@ export async function GET() {
     ]);
 
     // Transform settings to key-value map
-    const settings = siteSettings.reduce((acc: any, s) => {
+    const settings = siteSettings.reduce((acc: Record<string, { en: string | null; ar: string | null }>, s: { key: string; valueEn: string | null; valueAr: string | null }) => {
       acc[s.key] = { en: s.valueEn, ar: s.valueAr };
       return acc;
     }, {});

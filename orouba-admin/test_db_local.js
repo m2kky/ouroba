@@ -1,0 +1,1 @@
+const { PrismaClient } = require("@prisma/client"); const prisma = new PrismaClient({datasources: { db: { url: "postgresql://orouba:108200@72.61.144.100:5434/postgres" } }}); async function test() { const banners = await prisma.banner.findMany(); console.log(banners); } test();

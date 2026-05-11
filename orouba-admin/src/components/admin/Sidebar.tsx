@@ -22,7 +22,8 @@ import {
   Briefcase, 
   MessageSquare, 
   Settings,
-  Users
+  Users,
+  Megaphone
 } from "lucide-react";
 
 interface SidebarProps {
@@ -65,6 +66,7 @@ export default function Sidebar({ userRole }: SidebarProps) {
         { name: "مرافق المصنع", href: "/admin/buildings", icon: Building2 },
         { name: "المميزات", href: "/admin/features", icon: Star },
         { name: "مناطق التصدير", href: "/admin/continents", icon: Globe2 },
+        { name: "النوافذ المنبثقة", href: "/admin/popups", icon: Megaphone },
       ]
     },
     {

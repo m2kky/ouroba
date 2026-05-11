@@ -1,57 +1,94 @@
-import Image from "next/image";
+/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { getSiteData } from "@/lib/api-client";
 import FadeIn from "@/components/ui/FadeIn";
 import HoverCard from "@/components/ui/HoverCard";
 
+interface BannerItem { id: string; isHidden: boolean; type: string; videoLink?: string; image?: string; smallVideo?: string; smallImg?: string; }
+interface SectionTextItem { id: string; titleEn?: string; titleAr?: string; textAr?: string; number: number; }
+interface BrandItem { id: string; nameAr?: string; image?: string; }
+interface WhyItem { id: string; descriptionAr: string; }
+interface StandardItem { id: string; descriptionAr: string; image?: string; }
+interface RecipeItem { id: string; nameAr?: string; internalImage?: string; }
+
 export default async function HomePage() {
   const data = await getSiteData();
-  const { brands, banners, sectionTexts, whyChooseUs, features, continents, recipes, standards } = data;
+  const { brands, banners, sectionTexts, whyChooseUs, standards } = data;
 
   // Hero Banner
-  const activeBanners = banners?.filter((b: any) => !b.isHidden) || [];
+  const activeBanners = banners?.filter((b: BannerItem) => !b.isHidden) || [];
   const firstBanner = activeBanners[0];
-  const isVideo = firstBanner?.type === "video";
-  const heroMedia = firstBanner?.videoLink || firstBanner?.image || "https://camp-coding.site/eloroba/storage/app/images/1.mp4"; // Fallback
+  
+  // Desktop Media
+  const isVideoDesktop = firstBanner?.type === "video";
+  const mediaDesktop = firstBanner?.videoLink || firstBanner?.image || "https://camp-coding.site/eloroba/storage/app/images/1.mp4";
+  
+  // Mobile Media
+  const mediaMobile = firstBanner?.smallVideo || firstBanner?.smallImg || mediaDesktop;
+  const isVideoMobile = !!firstBanner?.smallVideo || (mediaMobile === mediaDesktop && isVideoDesktop);
 
   // Vision Section Text (Assuming number 1 or specific title)
-  const visionSection = sectionTexts?.find((s: any) => s.titleEn?.toLowerCase().includes("vision") || s.number === 1);
+  const visionSection = sectionTexts?.find((s: SectionTextItem) => s.titleEn?.toLowerCase().includes("vision") || s.number === 1);
 
   return (
     <div className="bg-white" dir="rtl">
       
       {/* 1. Hero Section */}
-      <section className="relative w-full overflow-hidden flex items-center justify-center bg-gray-900 min-h-[50vh]">
-        {isVideo ? (
-          <video 
-            src={heroMedia} 
-            autoPlay 
-            loop 
-            muted 
-            playsInline
-            className="w-full h-auto max-h-[85vh] object-cover z-0 block"
-          />
-        ) : (
-          <img 
-            src={heroMedia} 
-            alt="Hero Banner"
-            className="w-full h-auto max-h-[85vh] object-cover z-0 block"
-          />
-        )}
+      <section className="relative w-full overflow-hidden mt-4">
+        
+        {/* Desktop View */}
+        <div className="hidden md:block w-full">
+          {isVideoDesktop ? (
+            <video 
+              src={mediaDesktop} 
+              autoPlay 
+              loop 
+              muted 
+              playsInline
+              className="w-full h-auto max-h-[85vh] object-cover z-0 block"
+            />
+          ) : (
+            <img 
+              src={mediaDesktop} 
+              alt="Hero Banner"
+              className="w-full h-auto max-h-[85vh] object-cover z-0 block"
+            />
+          )}
+        </div>
+
+        {/* Mobile View */}
+        <div className="block md:hidden w-full">
+          {isVideoMobile ? (
+            <video 
+              src={mediaMobile} 
+              autoPlay 
+              loop 
+              muted 
+              playsInline
+              className="w-full h-auto object-cover z-0 block"
+            />
+          ) : (
+            <img 
+              src={mediaMobile} 
+              alt="Hero Banner"
+              className="w-full h-auto object-cover z-0 block"
+            />
+          )}
+        </div>
+
       </section>
 
       {/* 2. From Vision to Reality */}
       <section className="py-24 bg-white relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-64 h-64 bg-gray-50 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
         <div className="max-w-[1400px] mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center gap-16 relative z-10">
-          <FadeIn direction="right" className="w-full md:w-1/2 order-2 md:order-1 relative">
-             <img src="https://camp-coding.site/eloroba/storage/app/images/ZHVQeLXeXFxqfGf27Yd4yiETR1EmFh2Tij1rUudu.png" alt="Orouba Products" className="w-full h-auto object-contain drop-shadow-2xl" />
+          <FadeIn direction="right" className="w-full md:w-1/2 relative flex justify-center">
+             <img src="https://camp-coding.site/eloroba/storage/app/images/ZHVQeLXeXFxqfGf27Yd4yiETR1EmFh2Tij1rUudu.png" alt="Orouba Products" className="w-[60%] md:w-3/4 max-w-sm h-auto object-contain" />
           </FadeIn>
-          <FadeIn direction="left" delay={0.2} className="w-full md:w-1/2 order-1 md:order-2">
+          <FadeIn direction="left" delay={0.2} className="w-full md:w-1/2">
             <h2 className="text-4xl md:text-5xl font-bold text-orouba-blue mb-8 leading-tight">
               {visionSection?.titleAr || "من الرؤية إلى الواقع"}
             </h2>
-            <p className="text-lg text-gray-600 leading-loose mb-10 text-justify whitespace-pre-wrap">
+            <p className="text-base font-medium tracking-tight text-gray-700 leading-relaxed mb-10 text-justify whitespace-pre-wrap">
               {visionSection?.textAr || "تأسست شركة العروبة لصناعة المواد الغذائية سنة ١٩٩٨، برؤية تهدف للتمييز فى انتاج و ابتكار منتجات غذائية مجمدة عالية الجودة وسريعة الطهى لجميع انحاء العالم. تبلغ مساحة المصنع ٢٠,٠٠٠ متر مربع، وهو مجهز بأحدث التقنيات، تحت إشراف وإدارة فريق من المهندسين والعامليين ذوى الخبرة والكفاءة العالية لضمان انتاج عالى الجودة وفقا للمعايير الدولية. حرصا منا على إرضاء عملائنا والحفاظ على ثقتهم، فإننا نقدم مجموعة كبيرة ومتنوعة من المنتجات الطازجة المجمدة من خضروات، فواكة، بقوليات، حبوب وأيضا فلافل ومنتجات نصف مقلية مجمدة يتم إنتاجها جميعا من مكونات طبيعية دون أى اضافات."}
             </p>
             <Link href="/about/whoWeAre" className="inline-block bg-orouba-yellow text-orouba-blue font-bold px-10 py-4 rounded-full text-lg hover:bg-yellow-400 transition-colors shadow-md">
@@ -62,13 +99,13 @@ export default async function HomePage() {
       </section>
 
       {/* 3. Our Brands */}
-      <section className="py-24 bg-gray-50">
+      <section className="py-24 bg-white">
         <div className="max-w-[1400px] mx-auto px-4 md:px-8">
           <FadeIn direction="up" className="text-center mb-16">
             <h2 className="text-5xl font-bold text-orouba-blue mb-4">منتجاتنا</h2>
           </FadeIn>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {brands?.slice(0, 3).map((brand: any, index: number) => (
+            {brands?.slice(0, 3).map((brand: BrandItem, index: number) => (
               <FadeIn key={brand.id} direction="up" delay={0.1 * (index + 1)} className="h-full">
                 <Link href={`/brands/${brand.id}`} className="block h-full">
                   <HoverCard className="rounded-[30px] overflow-hidden shadow-xl h-[400px] relative group cursor-pointer">
@@ -97,18 +134,16 @@ export default async function HomePage() {
       </section>
 
       {/* 4. Why Choose Us */}
-      <section className="py-24 bg-[#f8f9fa] relative overflow-hidden">
-        <div className="absolute -right-20 top-20 w-64 h-64 bg-orouba-blue opacity-5 rounded-full blur-3xl"></div>
+      <section className="py-24 bg-white relative overflow-hidden">
         <div className="max-w-[1400px] mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center gap-16 relative z-10">
-          <FadeIn direction="right" className="w-full md:w-1/2 relative">
-             <div className="absolute -bottom-10 -right-10 w-full h-full bg-orouba-yellow rounded-3xl opacity-20 -z-10"></div>
-             <img src="https://camp-coding.site/eloroba/storage/app/images/wAyRPeQNWO2V0bTsRk8tDHD2NxsesoXWWSXjqHi5.png" alt="Plates" className="w-full h-[500px] object-contain rounded-3xl" />
+          <FadeIn direction="right" className="w-full md:w-1/2 relative flex justify-center">
+             <img src="https://camp-coding.site/eloroba/storage/app/images/wAyRPeQNWO2V0bTsRk8tDHD2NxsesoXWWSXjqHi5.png" alt="Plates" className="w-[80%] md:w-full max-w-md h-auto object-contain rounded-3xl" />
           </FadeIn>
           <FadeIn direction="left" delay={0.2} className="w-full md:w-1/2">
             <h2 className="text-4xl md:text-5xl font-bold text-orouba-blue mb-4">لماذا العروبة ؟</h2>
             {whyChooseUs && whyChooseUs.length > 0 ? (
               <div className="space-y-6 mt-8">
-                {whyChooseUs.map((reason: any) => (
+                {whyChooseUs.map((reason: WhyItem) => (
                   <p key={reason.id} className="text-xl text-gray-600 leading-relaxed text-justify">
                     {reason.descriptionAr}
                   </p>
@@ -138,7 +173,7 @@ export default async function HomePage() {
           
           {standards && standards.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-              {standards.map((standard: any, idx: number) => (
+              {standards.map((standard: StandardItem, idx: number) => (
                 <FadeIn key={standard.id} direction="up" delay={0.1 * (idx + 1)}>
                   <div className="text-center rounded-2xl overflow-hidden hover:shadow-2xl transition-shadow h-full">
                     {standard.image ? (
@@ -192,14 +227,14 @@ export default async function HomePage() {
       </section>
 
       {/* 7. Suggested Recipes */}
-      <section className="py-24 bg-gray-50">
+      <section className="py-24 bg-white">
         <div className="max-w-[1400px] mx-auto px-4 md:px-8 text-center">
           <FadeIn direction="up">
             <h2 className="text-5xl font-bold text-orouba-blue mb-16">وصفات مقترحة</h2>
           </FadeIn>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 text-right">
-            {data?.recipes?.slice(0, 3).map((recipe: any, index: number) => {
+            {data?.recipes?.slice(0, 3).map((recipe: RecipeItem, index: number) => {
               const imageSrc = recipe.internalImage?.startsWith("http") 
                 ? recipe.internalImage 
                 : recipe.internalImage 

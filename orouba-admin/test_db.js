@@ -1,0 +1,1 @@
+const { execSync } = require("child_process"); console.log(execSync("docker run --rm postgres:16 psql -d \"postgresql://orouba:108200@72.61.144.100:5434/postgres\" -c \"SELECT \\\"nameAr\\\" FROM \\\"Category\\\" LIMIT 5;\"").toString());

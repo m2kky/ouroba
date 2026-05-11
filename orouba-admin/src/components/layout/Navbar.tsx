@@ -1,12 +1,27 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 
-export default function Navbar({ settings, brands }: { settings?: any; brands?: any[] }) {
+/* eslint-disable @next/next/no-img-element */
+
+export default function Navbar({ settings }: { settings?: Record<string, { en?: string; ar?: string }> }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [openAccordion, setOpenAccordion] = useState<string | null>(null);
   const pathname = usePathname();
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
 
   const navLinks = [
     { label: "الرئيسية", href: "/" },
@@ -35,7 +50,7 @@ export default function Navbar({ settings, brands }: { settings?: any; brands?: 
   ];
 
   return (
-    <nav className="bg-orouba-blue sticky top-0 z-50 text-white shadow-md rounded-b-[2rem] pb-2 -mb-8">
+    <nav className={`bg-orouba-blue sticky top-0 z-50 text-white shadow-md pb-2 -mb-8 transition-[border-radius] duration-300 ${isMenuOpen ? "rounded-b-none" : "rounded-b-[2rem]"}`}>
       <div className="max-w-[1400px] mx-auto px-4 md:px-8">
         <div className="flex justify-between items-center h-24">
           
@@ -86,27 +101,22 @@ export default function Navbar({ settings, brands }: { settings?: any; brands?: 
 
           {/* Left Actions (Icons + Button) */}
           <div className="hidden lg:flex items-center gap-4">
-            
-            {/* Search Icon */}
             <button className="p-2 hover:text-orouba-yellow transition-colors">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </button>
-            {/* Language Icon */}
             <button className="p-2 hover:text-orouba-yellow transition-colors">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </button>
-            
             <Link 
               href="/export-catalog" 
               className="bg-orouba-yellow text-orouba-blue font-bold px-6 py-2 rounded-full hover:bg-yellow-400 transition-colors shadow-sm whitespace-nowrap"
             >
               تحميل الكتالوج
             </Link>
-
           </div>
 
           {/* Mobile menu button */}
@@ -116,54 +126,97 @@ export default function Navbar({ settings, brands }: { settings?: any; brands?: 
               className="text-white hover:text-gray-200 p-2"
             >
               <span className="sr-only">Open main menu</span>
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+              {isMenuOpen ? (
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
-      {isMenuOpen && (
-        <div className="lg:hidden bg-orouba-blue border-t border-blue-800 rounded-b-[2rem] overflow-hidden">
-          <div className="px-4 pt-2 pb-6 space-y-2">
-            {navLinks.map((link) => (
-              <div key={link.label}>
-                <Link 
-                  href={link.href} 
-                  className="block px-3 py-2 text-base font-bold hover:bg-blue-800 rounded-md transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {link.label}
-                </Link>
-                {link.children && link.children.length > 0 && (
-                  <div className="pr-6 space-y-1 mt-1 border-r-2 border-orouba-yellow">
-                    {link.children.map((child, index) => (
-                      <Link
-                        key={index}
-                        href={child.href}
-                        className="block px-3 py-2 text-sm font-medium text-gray-200 hover:text-white transition-colors"
-                        onClick={() => setIsMenuOpen(false)}
+      {/* Mobile Menu - flows inside nav as natural extension */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.35, ease: "easeInOut" }}
+            className="lg:hidden overflow-hidden"
+          >
+            <div className="px-6 pt-4 pb-10 space-y-2">
+              {navLinks.map((link) => (
+                <div key={link.label} className="text-center">
+                  {link.children && link.children.length > 0 ? (
+                    <>
+                      <button
+                        onClick={() => setOpenAccordion(openAccordion === link.label ? null : link.label)}
+                        className="w-full flex items-center justify-center gap-2 py-3 text-[18px] font-bold text-white transition-colors"
                       >
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
-                )}
+                        <svg 
+                          className={`w-4 h-4 transition-transform duration-200 ${openAccordion === link.label ? "-rotate-90" : ""}`} 
+                          fill="none" 
+                          stroke="currentColor" 
+                          viewBox="0 0 24 24"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M15 19l-7-7 7-7" />
+                        </svg>
+                        {link.label}
+                      </button>
+                      
+                      <AnimatePresence>
+                        {openAccordion === link.label && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="overflow-hidden"
+                          >
+                            <div className="space-y-3 py-3">
+                              {link.children.map((child, index) => (
+                                <Link
+                                  key={index}
+                                  href={child.href}
+                                  className="block py-2 text-base font-bold text-white/80 hover:text-orouba-yellow transition-colors"
+                                  onClick={() => setIsMenuOpen(false)}
+                                >
+                                  {child.label}
+                                </Link>
+                              ))}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </>
+                  ) : (
+                    <Link 
+                      href={link.href} 
+                      className="block py-3 text-[18px] font-bold text-white transition-colors"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  )}
+                </div>
+              ))}
+              <div className="pt-6">
+                <a 
+                  href={settings?.catalogFileUrl?.ar || "#"} 
+                  className="block mx-auto max-w-[200px] py-3 text-lg font-bold text-[#1e4a8c] text-center bg-orouba-yellow rounded-full transition-colors shadow-lg"
+                >
+                  تحميل الكتالوج
+                </a>
               </div>
-            ))}
-            <div className="pt-4 mt-2 border-t border-blue-800">
-              <a 
-                href={settings?.catalogFileUrl || "#"} 
-                className="block px-3 py-2 text-base font-bold text-orouba-yellow text-center bg-blue-900 rounded-full"
-              >
-                تحميل الكتالوج
-              </a>
             </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

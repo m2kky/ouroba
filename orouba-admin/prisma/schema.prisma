@@ -608,3 +608,45 @@ model SystemLog {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+// -----------------------------------------------------------------------------
+// Popups Manager
+// -----------------------------------------------------------------------------
+
+model Popup {
+  id               String   @id @default(cuid())
+  internalName     String
+  titleEn          String?
+  titleAr          String?
+  contentEn        String?  @db.Text
+  contentAr        String?  @db.Text
+  image            String?
+
+  // Style & Animation
+  type             String   @default("MODAL")
+  animation        String   @default("FADE")
+  backgroundColor  String   @default("#ffffff")
+  textColor        String   @default("#000000")
+  overlayColor     String   @default("rgba(0,0,0,0.5)")
+  borderRadius     Int      @default(16)
+  maxWidth         Int      @default(500)
+
+  // Custom Buttons – JSON array
+  buttons          Json?
+
+  // Trigger
+  trigger          String   @default("ON_LOAD")
+  triggerValue     Int      @default(0)
+
+  // Advanced Conditions – JSON object
+  conditions       Json?
+
+  // Scheduling & Status
+  isActive         Boolean  @default(false)
+  priority         Int      @default(0)
+  startDate        DateTime?
+  endDate          DateTime?
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
