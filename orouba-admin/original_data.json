@@ -1,0 +1,807 @@
+[
+  {
+    "id": 5,
+    "nameAr": "بسمة",
+    "nameEn": "Basma",
+    "image": "https://camp-coding.site/eloroba/storage/app/images/yeaQYQUjSi9l9iThgxvahIGd8khBLpWoE6KbDznW.png",
+    "categories": [
+      {
+        "id": 11,
+        "nameAr": "الخضار والفواكه المجمدة",
+        "nameEn": "Frozen Vegetables & Fruits",
+        "products": [
+          {
+            "id": 27,
+            "nameAr": "ملوخية خضراء أوراق",
+            "nameEn": "Molokhia Leaves",
+            "images": [
+              {
+                "product_id": 27,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/SDOzNwx7kU3yBZ2DnhRcwEljl7sneNJuyQrTJ3zT.png"
+              }
+            ]
+          },
+          {
+            "id": 28,
+            "nameAr": "ملوخية خضراء مخروطة",
+            "nameEn": "Minced Molokhia",
+            "images": [
+              {
+                "product_id": 28,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/7RtsXYVs5pregZwlGvvdqnyjf4R51wjHLvGk8zhC.png"
+              }
+            ]
+          },
+          {
+            "id": 29,
+            "nameAr": "ملوخية خضراء مخروطة بالتقلية",
+            "nameEn": "Minced Molokhia with Garlic Mix Sachet",
+            "images": [
+              {
+                "product_id": 29,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/F1Nqsq5wQ9xjZN1qkEd6r8xoSEk4rz4AipE0mrOR.png"
+              }
+            ]
+          },
+          {
+            "id": 21,
+            "nameAr": "بسلة خضراء مجمدة",
+            "nameEn": "Green Peas",
+            "images": [
+              {
+                "product_id": 21,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/pNjztYF62nkpP41Ts1G8fiywKEvpqfpWBVvVHbJb.png"
+              }
+            ]
+          },
+          {
+            "id": 22,
+            "nameAr": "بسلة بالجزر",
+            "nameEn": "Peas with Carrots",
+            "images": [
+              {
+                "product_id": 22,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/Ba1RQVgDidJVpGhTImXhY3vjONrWWkrxeC4m4BlZ.png"
+              }
+            ]
+          },
+          {
+            "id": 80,
+            "nameAr": "خضار مشكل بالذرة السكرية",
+            "nameEn": "Mixed Vegetables with sweet corn",
+            "images": [
+              {
+                "product_id": 80,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/RrngGBkkOQIMwgprua7muURhxqQZTNgXDMT65RER.png"
+              }
+            ]
+          },
+          {
+            "id": 23,
+            "nameAr": "خضار مشكل",
+            "nameEn": "Mixed Vegetables",
+            "images": [
+              {
+                "product_id": 23,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/2HFHwdVnOwusUSsiBrwLw87FtFiFVH8XQddrueKr.png"
+              }
+            ]
+          },
+          {
+            "id": 24,
+            "nameAr": "خضروات مشكلة لشوربة الخضار",
+            "nameEn": "Vegetables Mix for Soup",
+            "images": [
+              {
+                "product_id": 24,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/uk7flMGyClD0IUnnhWGkwJqTNeeSQusRi0gm4rpd.png"
+              }
+            ]
+          },
+          {
+            "id": 32,
+            "nameAr": "بامية إكسترا",
+            "nameEn": "Okra Extra",
+            "images": [
+              {
+                "product_id": 32,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/8ZvMrlSBXGYCYlLrsH4Wa3tmn8IQCIGzqwBY1iwz.png"
+              }
+            ]
+          },
+          {
+            "id": 33,
+            "nameAr": "بامية زيرو",
+            "nameEn": "Okra Zero",
+            "images": [
+              {
+                "product_id": 33,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/nM5BgyMjfMR0K7jNtGsaEEd9Vp38Lt7zgXGZ575u.png"
+              }
+            ]
+          },
+          {
+            "id": 34,
+            "nameAr": "بامية ممتازة",
+            "nameEn": "Okra Excellent",
+            "images": [
+              {
+                "product_id": 34,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/2AVAs63bwhM0IDnqUovcuz5DgqJMxKsQ2zWCbSNG.png"
+              }
+            ]
+          },
+          {
+            "id": 79,
+            "nameAr": "بامية رقم 1",
+            "nameEn": "Okra No.1",
+            "images": [
+              {
+                "product_id": 79,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/Qs7Zm0HfwWMxPrgOYbKa0LMpUPZwFg2hZXgmyecW.png"
+              }
+            ]
+          },
+          {
+            "id": 31,
+            "nameAr": "بامية خضراء",
+            "nameEn": "Green Okra",
+            "images": [
+              {
+                "product_id": 31,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/D5yw6CbSE0firA0D9NXjfd0VYbBlwDcCuwkMNh9t.png"
+              }
+            ]
+          },
+          {
+            "id": 30,
+            "nameAr": "فول اخضر",
+            "nameEn": "Green Broad Beans",
+            "images": [
+              {
+                "product_id": 30,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/k4iDzuN6722Tx6pMGsMjIqWoCr6lndEM2D82xPlF.png"
+              }
+            ]
+          },
+          {
+            "id": 75,
+            "nameAr": "فول اخضر مقشر",
+            "nameEn": "Peeled Green Broad Beans",
+            "images": [
+              {
+                "product_id": 75,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/r0HBX3FxiewTZGMKdbh77ovWmvemR1PIru7ZCLhN.png"
+              }
+            ]
+          },
+          {
+            "id": 25,
+            "nameAr": "فاصوليا خضراء مقطعة",
+            "nameEn": "Cut Green Beans",
+            "images": [
+              {
+                "product_id": 25,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/lD7urgTmmX7ghLUQiLyGJd5KNe2jjfivvWDp5KX5.png"
+              }
+            ]
+          },
+          {
+            "id": 44,
+            "nameAr": "بصل مبشور",
+            "nameEn": "Grated Onion",
+            "images": [
+              {
+                "product_id": 44,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/hR0HLoTnhUPm74urs8yp4XL6wqhj1P1tllVMNwMT.png"
+              }
+            ]
+          },
+          {
+            "id": 46,
+            "nameAr": "طماطم مفرومة (مصفاه)",
+            "nameEn": "Chopped Tomato (sifted)",
+            "images": [
+              {
+                "product_id": 46,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/v1wKKdmoAG0U5ps4n4K3980mBUTxjrzhCytU5G8X.png"
+              }
+            ]
+          },
+          {
+            "id": 45,
+            "nameAr": "ثوم مفروم (مكعبات)",
+            "nameEn": "Crushed Garlic",
+            "images": [
+              {
+                "product_id": 45,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/6tVBuvejgLiiI0WoW3jLpIyq94SqexHB1fjvO9lA.png"
+              }
+            ]
+          },
+          {
+            "id": 39,
+            "nameAr": "قلقاس",
+            "nameEn": "Coloccasia (Taro)",
+            "images": [
+              {
+                "product_id": 39,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/3oWI9VpOtv01J2n6aVwXZQrInnDoAZLwdzq9vr4G.png"
+              }
+            ]
+          },
+          {
+            "id": 38,
+            "nameAr": "خرشوف (أقراص)",
+            "nameEn": "Artichoke (Bottoms)",
+            "images": [
+              {
+                "product_id": 38,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/LSvtdESjZLUDO1tSFDtqBSWsXkUoGl7Nqm0Ez4JJ.png"
+              }
+            ]
+          },
+          {
+            "id": 36,
+            "nameAr": "سبانخ مقطعة",
+            "nameEn": "Spinach (Cut)",
+            "images": [
+              {
+                "product_id": 36,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/jqAP6xNff0PCXnubTqhyt9Y5Je8KsUylfHd8CaHl.png"
+              }
+            ]
+          },
+          {
+            "id": 35,
+            "nameAr": "ورق العنب",
+            "nameEn": "Vine Leaves",
+            "images": [
+              {
+                "product_id": 35,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/rhXcXaRzEKApb1xZqgsV3gykgge1Xr7QnE4EZ9e0.png"
+              }
+            ]
+          },
+          {
+            "id": 37,
+            "nameAr": "قرنبيط",
+            "nameEn": "Cauliflower",
+            "images": [
+              {
+                "product_id": 37,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/ZZ7h33d7O15mdJelUZGGeqJmkHzJj0vr5VxYLlIK.png"
+              }
+            ]
+          },
+          {
+            "id": 40,
+            "nameAr": "بروكلي",
+            "nameEn": "Broccoli",
+            "images": [
+              {
+                "product_id": 40,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/GJZuE93uNREn5uC8yfxxNtWCXXmyrK8P4hy5sWHe.png"
+              }
+            ]
+          },
+          {
+            "id": 47,
+            "nameAr": "بنجر مكعبات",
+            "nameEn": "Beetroot (Cubes)",
+            "images": [
+              {
+                "product_id": 47,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/NNojYX0stJLXyl0u3Rrp8GItu7cNkDimV0XN68Fb.png"
+              }
+            ]
+          },
+          {
+            "id": 82,
+            "nameAr": "جزر مكعبات صغيرة",
+            "nameEn": "Diced Carrots",
+            "images": [
+              {
+                "product_id": 82,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/AL3JIE4qZWPMdaYDwHjtymSUCvNhfziggl14cmHo.png"
+              }
+            ]
+          },
+          {
+            "id": 41,
+            "nameAr": "فراولة",
+            "nameEn": "Strawberries",
+            "images": [
+              {
+                "product_id": 41,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/f6GZAd4EmLPuMiXbpJ7gi15qrKfIRBU2WnNETVIW.png"
+              }
+            ]
+          },
+          {
+            "id": 42,
+            "nameAr": "مانجو (عصير)",
+            "nameEn": "Mango (Juice)",
+            "images": [
+              {
+                "product_id": 42,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/dpXGu1wNm2KE6lFicQlT93GjV1F1y47TyyHXjLMA.png"
+              }
+            ]
+          },
+          {
+            "id": 85,
+            "nameAr": "مانجو (شرائح)",
+            "nameEn": "Mango (Slices)",
+            "images": [
+              {
+                "product_id": 85,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/oWffh0Xb4tvBhvjCtMcr2ZcPmhgHsRNgRXrjvcYF.png"
+              }
+            ]
+          },
+          {
+            "id": 87,
+            "nameAr": "بلح برحي",
+            "nameEn": "Barhi Dates",
+            "images": [
+              {
+                "product_id": 87,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/pV6W2O1X5NUI8TqZviOct0QG1XTtcL0x4sXA56I5.png"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "nameAr": "بقوليات وحبوب مجمدة",
+        "nameEn": "Frozen Beans & Grains",
+        "products": [
+          {
+            "id": 51,
+            "nameAr": "حمص (مسلوق)",
+            "nameEn": "Chickpeas (Boiled)",
+            "images": [
+              {
+                "product_id": 51,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/NS9UID7h3hUojYNvafYfaNQJzeSBRgD4AkF9sm7E.png"
+              }
+            ]
+          },
+          {
+            "id": 54,
+            "nameAr": "ترمس (مسلوق)",
+            "nameEn": "Lupini (Boiled)",
+            "images": [
+              {
+                "product_id": 54,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/QoQNHrRb94omTtooRc3Oza3xgUb0nzuXfJmdv0uB.png"
+              }
+            ]
+          },
+          {
+            "id": 50,
+            "nameAr": "فاصوليا بيضاء (مسلوقة)",
+            "nameEn": "White Beans (Boiled)",
+            "images": [
+              {
+                "product_id": 50,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/WqdwYvD5qd9Jjjkok7w6Ve0MoZp5QbSQKxoJDnLN.png"
+              }
+            ]
+          },
+          {
+            "id": 53,
+            "nameAr": "ذرة سكرية",
+            "nameEn": "Sweet Corn",
+            "images": [
+              {
+                "product_id": 53,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/N9RazfDFZNR9AHKp1GGW9n3UuPtW9oRRa2xd8z39.png"
+              }
+            ]
+          },
+          {
+            "id": 52,
+            "nameAr": "لوبيا (مسلوقة)",
+            "nameEn": "Black Eyed Peas (Boiled)",
+            "images": [
+              {
+                "product_id": 52,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/TfxxmPR77rSMjTTB3Qqkv0motvzfuojCm7k70fob.png"
+              }
+            ]
+          },
+          {
+            "id": 58,
+            "nameAr": "قمح (مسلوق)",
+            "nameEn": "Wheat (Boiled)",
+            "images": [
+              {
+                "product_id": 58,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/ctEfbunJWsH0rK5xa3WJXYxgrWjh45JzfAoc7BsZ.png"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "nameAr": "فلافل مجمدة",
+        "nameEn": "Frozen Falafel",
+        "products": [
+          {
+            "id": 48,
+            "nameAr": "فلافل نصف مقلية",
+            "nameEn": "Pre- Fried Falafel Beans",
+            "images": [
+              {
+                "product_id": 48,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/yTszxfbcMR9nKPEWqOiw7PawjtTeZhvYu0w5Zw8n.png"
+              }
+            ]
+          },
+          {
+            "id": 49,
+            "nameAr": "فلافل حمص نصف مقلية",
+            "nameEn": "Pre-Fried Falafel Chick-Peas",
+            "images": [
+              {
+                "product_id": 49,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/5iJNOSfT1aXCqrZZ2n9bEFiSOtTh3OGZ1MMcMB45.png"
+              }
+            ]
+          },
+          {
+            "id": 43,
+            "nameAr": "برجر نباتي نصف مقلي",
+            "nameEn": "Pre- fried Vegetarian Burger",
+            "images": [
+              {
+                "product_id": 43,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/7YCX7uLmSVmzryuEo8aucOWihi15ScvDPdDvwWPe.png"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "nameAr": "باببيتس",
+        "nameEn": "Frozen Pre-Fried Bites",
+        "products": [
+          {
+            "id": 55,
+            "nameAr": "بطاطس بالسبانخ ستربس",
+            "nameEn": "Pre-Fried Potato & Spinach Strips",
+            "images": [
+              {
+                "product_id": 55,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/4pzUNp7Mu4tjoWcLUq0ovxK15cLWnL9YiqS72toW.png"
+              }
+            ]
+          },
+          {
+            "id": 83,
+            "nameAr": "بطاطس مقرمشة",
+            "nameEn": "Pre-Fried Crispy Spuds",
+            "images": [
+              {
+                "product_id": 83,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/xu3gVkKG9OZ27mLYSQNRpUDBU4dPNEkD7jFCMGkk.png"
+              }
+            ]
+          },
+          {
+            "id": 84,
+            "nameAr": "أصابع باذنجان مقرمشة",
+            "nameEn": "Pre-Fried Crispy Eggplant Fingers",
+            "images": [
+              {
+                "product_id": 84,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/L5Qz8LS5DNdd8E2VN8Hj7uaC65rKOcRq6YxNdG1L.png"
+              }
+            ]
+          },
+          {
+            "id": 56,
+            "nameAr": "فلافل حمص حارة",
+            "nameEn": "Pre-Fried Spicy Chickpeas Falafel Bites",
+            "images": [
+              {
+                "product_id": 56,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/GzVDpE7bdovh6eAaoUbOa0eFYnf2cWlRe8kvTqFj.png"
+              }
+            ]
+          },
+          {
+            "id": 57,
+            "nameAr": "قرنبيط نصف مقلي",
+            "nameEn": "Pre-Fried Cauliflower",
+            "images": [
+              {
+                "product_id": 57,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/si6VSL7oftrZnP9UOgxlgghB1uUQVJ5AlF9ATc05.png"
+              }
+            ]
+          },
+          {
+            "id": 88,
+            "nameAr": "بطاطس بهارات مقرمشة",
+            "nameEn": "Pre-Fried Spiced Crispy Fries",
+            "images": [
+              {
+                "product_id": 88,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/MbEBltDDTTTbd6TXAqbrYrVOdEbr9685SaP34Q4y.png"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "nameAr": "باببيتس",
+    "nameEn": "Bap Bites",
+    "image": "https://camp-coding.site/eloroba/storage/app/images/IUCTGnDAvK2nTDvkbXysdBfNmCrJgh9Z4OBRh0Xl.png",
+    "categories": []
+  },
+  {
+    "id": 7,
+    "nameAr": "فريدة",
+    "nameEn": "Farida",
+    "image": "https://camp-coding.site/eloroba/storage/app/images/dkLxVxvEFQ2yzgnKAalEmGfbN6CzMkKEUSThjPvq.jpg",
+    "categories": [
+      {
+        "id": 4,
+        "nameAr": "الخضروات المجمدة",
+        "nameEn": "Frozen Vegetables",
+        "products": [
+          {
+            "id": 59,
+            "nameAr": "ملوخية خضراء مخروطة",
+            "nameEn": "Minced Molokhia",
+            "images": [
+              {
+                "product_id": 59,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/MANqaL9ulOnMqPXva2Rpa6B2bYoHBKi1n4wDOI9z.png"
+              }
+            ]
+          },
+          {
+            "id": 72,
+            "nameAr": "سبانخ أوراق",
+            "nameEn": "Spinach Leaves",
+            "images": [
+              {
+                "product_id": 72,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/ZL1Tm185TLgI0cQm1xy8Cht2kOtAJGoVUyEI4XQR.png"
+              }
+            ]
+          },
+          {
+            "id": 73,
+            "nameAr": "سبانخ مقطعة",
+            "nameEn": "Spinach Leaves (Cut)",
+            "images": [
+              {
+                "product_id": 73,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/eSz1XNzjLOOsd9wUtu7wna0rWvLP4onCra7cjeV3.png"
+              }
+            ]
+          },
+          {
+            "id": 76,
+            "nameAr": "فول اخضر",
+            "nameEn": "Green Broad Beans",
+            "images": [
+              {
+                "product_id": 76,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/C2bTkOzAV70z2DjMlZDrGGoexz2y2iO6Z5R6VKMW.png"
+              }
+            ]
+          },
+          {
+            "id": 64,
+            "nameAr": "فول اخضر مقشر",
+            "nameEn": "Peeled Green Broad Beans",
+            "images": [
+              {
+                "product_id": 64,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/qyuqUL5voBBEywMs3hRX9M8aytCZsSkq1GirKacy.png"
+              }
+            ]
+          },
+          {
+            "id": 81,
+            "nameAr": "فاصوليا خضراء مقطعة",
+            "nameEn": "Green Beans (Cut)",
+            "images": [
+              {
+                "product_id": 81,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/eYlHl1frKossCR6Sjf9dOuA4MkklkQqZsJ5RWiqi.png"
+              }
+            ]
+          },
+          {
+            "id": 71,
+            "nameAr": "بامية صغيرة جدًا",
+            "nameEn": "Okra Very Small",
+            "images": [
+              {
+                "product_id": 71,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/dI9aSFNJAGIjitQsEtBp5H1o9iV6c6UsCizAZogD.png"
+              }
+            ]
+          },
+          {
+            "id": 60,
+            "nameAr": "بامية صغيرة",
+            "nameEn": "Okra Small",
+            "images": [
+              {
+                "product_id": 60,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/0DsWtORtwJ1zGAPj3LLUZOBtF9WlVZ4qZPKoMwmt.png"
+              }
+            ]
+          },
+          {
+            "id": 77,
+            "nameAr": "بامية متوسطة",
+            "nameEn": "Okra Medium",
+            "images": [
+              {
+                "product_id": 77,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/r0vcnpL2nOsKtg7U2kBaJox2RCLEuv9SwInVUBBl.png"
+              }
+            ]
+          },
+          {
+            "id": 69,
+            "nameAr": "بسلة خضراء",
+            "nameEn": "Peas",
+            "images": [
+              {
+                "product_id": 69,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/UW3Ong0MFVO2WgqK1eepm56XqOwGWWzzBBgDa8wi.png"
+              }
+            ]
+          },
+          {
+            "id": 78,
+            "nameAr": "خضار مشكل",
+            "nameEn": "Frozen Mixed Vegetables",
+            "images": [
+              {
+                "product_id": 78,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/jfioQqu1PAYosGoPmSaWDIiav77Tk6IDHBCLa8G1.png"
+              }
+            ]
+          },
+          {
+            "id": 70,
+            "nameAr": "بسلة بالجزر",
+            "nameEn": "Peas with Carrots",
+            "images": [
+              {
+                "product_id": 70,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/l35dkgPcTezg5Ex6FXRDSbPcojlpMNXl8y97zI7k.png"
+              }
+            ]
+          },
+          {
+            "id": 62,
+            "nameAr": "قلقاس",
+            "nameEn": "Taro",
+            "images": [
+              {
+                "product_id": 62,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/k0OQ5j4Wm8eLjIuHESZVCJFOqI8oT0FBBGAPdVJA.png"
+              }
+            ]
+          },
+          {
+            "id": 68,
+            "nameAr": "خرشوف (أقراص)",
+            "nameEn": "Artichoke (Bottoms)",
+            "images": [
+              {
+                "product_id": 68,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/ca0iIJ39VIB5LMG47rzlH9IdMQ1NNot7aCUeTCY2.png"
+              }
+            ]
+          },
+          {
+            "id": 66,
+            "nameAr": "بروكلي",
+            "nameEn": "Broccoli",
+            "images": [
+              {
+                "product_id": 66,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/sQ8Ww78aMuKVdnflhtwbUVvKwvayei5hSgEMFLcQ.png"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "nameAr": "الفواكه المجمدة",
+        "nameEn": "Frozen Fruits",
+        "products": [
+          {
+            "id": 86,
+            "nameAr": "مانجو شرائح",
+            "nameEn": "Mango Slices",
+            "images": [
+              {
+                "product_id": 86,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/RRxQ5OczyF6XMjd3j1qwt1bXq8YV8us6afIMHrsY.png"
+              }
+            ]
+          },
+          {
+            "id": 63,
+            "nameAr": "فراولة",
+            "nameEn": "Strawberries",
+            "images": [
+              {
+                "product_id": 63,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/z6VNIMFEa5ytFITNHyJb0BstJiTJpmf7mxiLybZU.png"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "nameAr": "فلافل مجمدة",
+        "nameEn": "Frozen Falafel",
+        "products": [
+          {
+            "id": 67,
+            "nameAr": "فلافل حمص نصف مقلية",
+            "nameEn": "Pre-Fried Falafel Chick-Peas",
+            "images": [
+              {
+                "product_id": 67,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/Am4sKeSMyAQdciiXENh5H65nHQfiXVaDLaBbHcdQ.png"
+              }
+            ]
+          },
+          {
+            "id": 61,
+            "nameAr": "فلافل نصف مقلية",
+            "nameEn": "Pre-Fried Falafel Beans",
+            "images": [
+              {
+                "product_id": 61,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/jFnENFfQ3kK94rLA0ZSyZKcXlpfHtb78JQNSkxb6.png"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "nameAr": "بقوليات وحبوب مجمدة",
+        "nameEn": "Frozen Beans & Grains",
+        "products": [
+          {
+            "id": 74,
+            "nameAr": "ذرة سكرية مجمدة",
+            "nameEn": "Sweet Corn",
+            "images": [
+              {
+                "product_id": 74,
+                "url": "https://camp-coding.site/eloroba/storage/app/images/BOimPZmzHZPo0jodNFatKVbi5DEnS0FKWrsHtMTG.png"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

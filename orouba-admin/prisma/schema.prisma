@@ -20,7 +20,7 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
-  password      String?   // For Admin Credentials login
+  password      String?
   role          Role      @default(USER)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
@@ -29,150 +29,334 @@ model User {
   cartItems     CartItem[]
 }
 
+model Admin {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  phone     String?
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 enum Role {
   USER
   ADMIN
 }
 
 // -----------------------------------------------------------------------------
-// Main Entities (Products, Brands, Recipes)
+// Main Entities (Brands, Categories, Products)
 // -----------------------------------------------------------------------------
 
 model Brand {
-  id             String   @id @default(cuid())
+  id             String     @id @default(cuid())
   nameEn         String
   nameAr         String
-  number         Int      @default(0)
-  imageBrand     String?
+  number         Int        @default(999)
+  image          String?    // maps to image
+  imageMain      String?    // maps to imageMain / imageBrand
   imageSmall     String?
-  imageMain      String?
   imageSmallMain String?
   colorBrand     String?
   colorHover     String?
-  descriptionEn  String?  @db.Text
-  descriptionAr  String?  @db.Text
-  isHidden       Boolean  @default(false)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  descriptionEn  String?    @db.Text
+  descriptionAr  String?    @db.Text
+  isHidden       Boolean    @default(false)
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+
+  categories     Category[]
+
+  @@index([isHidden])
+}
+
+model CategoryType {
+  id            String     @id @default(cuid())
+  titleEn       String
+  titleAr       String
+  descriptionEn String?    @db.Text
+  descriptionAr String?    @db.Text
+  image         String?
+  number        Int        @default(999)
+  isHidden      Boolean    @default(false)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  categories    CategoryTypeCategory[]
+
+  @@index([isHidden])
+}
+
+model Category {
+  id            String     @id @default(cuid())
+  nameEn        String
+  nameAr        String
+  descriptionEn String?    @db.Text
+  descriptionAr String?    @db.Text
+  image         String?
+  imageEn       String?
+  number        Int        @default(999)
+  isHidden      Boolean    @default(false)
   
-  // Relations if needed
-  // products Product[]
+  brandId       String
+  brand         Brand      @relation(fields: [brandId], references: [id], onDelete: Cascade)
+
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  products      CategoryProduct[]
+  categoryTypes CategoryTypeCategory[]
+
+  @@index([isHidden])
+  @@index([brandId])
+}
+
+model CategoryTypeCategory {
+  id             String       @id @default(cuid())
+  categoryId     String
+  categoryTypeId String
+  image          String?
+  number         Int          @default(999)
+  
+  category       Category     @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryType   CategoryType @relation(fields: [categoryTypeId], references: [id], onDelete: Cascade)
+
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@unique([categoryId, categoryTypeId])
 }
 
 model ProductType {
   id        String    @id @default(cuid())
   nameEn    String
   nameAr    String
-  image     String?
   isHidden  Boolean   @default(false)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 
   products  Product[]
-}
 
-model Category {
-  id          String    @id @default(cuid())
-  nameEn      String
-  nameAr      String
-  slug        String    @unique
-  description String?
-  imageUrl    String?
-  isHidden    Boolean   @default(false)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-
-  products    Product[]
+  @@index([isHidden])
 }
 
 model Product {
   id            String    @id @default(cuid())
   nameEn        String
   nameAr        String
-  number        Int       @default(0)
   descriptionEn String?   @db.Text
   descriptionAr String?   @db.Text
-  image         String?
-  color         String?
-  price         Float     @default(0.0) // Kept for B2B inquiry/reference
-  stock         Int       @default(0)   // Kept for B2B inquiry/reference
+  color         String    @default("#ffffff")
+  number        Int       @default(999)
   isHidden      Boolean   @default(false)
   
   typeId        String?
-  categoryId    String?
+  type          ProductType? @relation(fields: [typeId], references: [id], onDelete: SetNull)
 
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
-  type          ProductType?    @relation(fields: [typeId], references: [id])
-  category      Category?       @relation(fields: [categoryId], references: [id])
-  socials       ProductSocial[]
-  cartItems     CartItem[]
-  orderItems    OrderItem[]
-  recipes       Recipe[]        // Implicit many-to-many
+  images             ProductImage[]
+  categories         CategoryProduct[]
+  recommendedRecipes RecommendedRecipe[]
+  cartItems          CartItem[]
+  orderItems         OrderItem[]
+  socials            ProductSocial[]
+
+  @@index([isHidden])
+  @@index([typeId])
 }
 
-model RecipeCategory {
-  id        String   @id @default(cuid())
-  titleEn   String
-  titleAr   String
-  number    Int      @default(0)
-  image     String?
-  isHidden  Boolean  @default(false)
+model CategoryProduct {
+  id         String   @id @default(cuid())
+  categoryId String
+  productId  String
+  isHidden   Boolean  @default(false)
   
-  parentId  String?
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([categoryId, productId])
+}
+
+model ProductImage {
+  id        String   @id @default(cuid())
+  productId String
+  url       String
+  
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// -----------------------------------------------------------------------------
+// Recipes & Food (Cooks)
+// -----------------------------------------------------------------------------
+
+model RecipeCategory { // Was 'recipes' in SQL
+  id        String   @id @default(cuid())
+  nameEn    String
+  nameAr    String
+  image     String?
+  number    Int      @default(999)
+  isHidden  Boolean  @default(false)
   
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  parent    RecipeCategory?  @relation("SubCategories", fields: [parentId], references: [id])
-  children  RecipeCategory[] @relation("SubCategories")
-  recipes   Recipe[]
+  foods     RecipeCategoryFood[]
 }
 
-model Recipe {
-  id              String   @id @default(cuid())
-  nameEn          String
-  nameAr          String
-  number          Int      @default(0)
-  imageMain       String?
-  imageInternal   String?
-  videoLink       String?
-  descriptionEn   String?  @db.Text
-  descriptionAr   String?  @db.Text
-  isHidden        Boolean  @default(false)
+model Recipe { // Was 'cooks' in SQL
+  id             String   @id @default(cuid())
+  nameEn         String?
+  nameAr         String?
+  descriptionEn  String?  @db.Text
+  descriptionAr  String?  @db.Text
+  videoLink      String?  @db.Text
+  internalImage  String?  @db.Text
+  number         Int      @default(999)
+  isHidden       Boolean  @default(false)
   
-  categoryId      String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  images             RecipeImage[]
+  properties         RecipeProperty[]
+  steps              RecipeStep[]
+  foods              RecipeFood[]
+  recommendedWith    RecommendedRecipe[]
 
-  category        RecipeCategory? @relation(fields: [categoryId], references: [id])
-  relatedProducts Product[]       // Implicit many-to-many
+  @@index([isHidden])
+}
+
+model RecipeImage { // Was 'cook_images'
+  id        String   @id @default(cuid())
+  recipeId  String
+  url       String   @db.Text
+  
+  recipe    Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model RecipeProperty { // Was 'cook_props'
+  id        String   @id @default(cuid())
+  recipeId  String
+  icon      String?
+  titleEn   String
+  titleAr   String
+  textEn    String
+  textAr    String
+  
+  recipe    Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model RecipeStep { // Was 'food_steps'
+  id        String   @id @default(cuid())
+  recipeId  String
+  stepEn    String   @db.Text
+  stepAr    String   @db.Text
+  
+  recipe    Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Food { // Ingredients/Food items
+  id        String   @id @default(cuid())
+  nameEn    String?
+  nameAr    String?
+  image     String?
+  number    Int      @default(999)
+  isHidden  Boolean  @default(false)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  recipes          RecipeFood[]
+  recipeCategories RecipeCategoryFood[]
+
+  @@index([isHidden])
+}
+
+model RecipeFood { // Pivot 'food_cooks'
+  id        String   @id @default(cuid())
+  recipeId  String
+  foodId    String
+  
+  recipe    Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  food      Food     @relation(fields: [foodId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([recipeId, foodId])
+}
+
+model RecipeCategoryFood { // Pivot 'recipe_foods'
+  id               String         @id @default(cuid())
+  recipeCategoryId String
+  foodId           String
+  
+  recipeCategory   RecipeCategory @relation(fields: [recipeCategoryId], references: [id], onDelete: Cascade)
+  food             Food           @relation(fields: [foodId], references: [id], onDelete: Cascade)
+
+  @@unique([recipeCategoryId, foodId])
+}
+
+model RecommendedRecipe { // Pivot 'recommend_recipes'
+  id        String   @id @default(cuid())
+  productId String
+  recipeId  String
+  
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  recipe    Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([productId, recipeId])
 }
 
 // -----------------------------------------------------------------------------
 // Site Content & Marketing
 // -----------------------------------------------------------------------------
 
-model Slider {
+model Banner {
   id             String     @id @default(cuid())
   titleEn        String
   titleAr        String
-  number         Int        @default(0)
-  type           BannerType @default(IMAGE)
-  fileImage      String?
-  fileSmallImage String?
-  fileVideo      String?
-  fileSmallVideo String?
+  type           BannerType @default(image)
+  image          String?
+  imageEn        String?
+  videoLink      String?
+  videoLinkEn    String?
+  smallImg       String?
+  smallImgEn     String?
+  smallVideo     String?
+  smallVideoEn   String?
+  number         Int        @default(999)
   isHidden       Boolean    @default(false)
+  
   createdAt      DateTime   @default(now())
   updatedAt      DateTime   @updatedAt
+
+  @@index([isHidden])
 }
 
 enum BannerType {
-  IMAGE
-  VIDEO
+  image
+  video
 }
 
 model Certificate {
@@ -195,10 +379,10 @@ model Standard {
 
 model Value {
   id            String   @id @default(cuid())
-  titleEn       String
-  titleAr       String
-  descriptionEn String   @db.Text
-  descriptionAr String   @db.Text
+  titleEn       String?
+  titleAr       String?
+  descriptionEn String?  @db.Text
+  descriptionAr String?  @db.Text
   image         String?
   isHidden      Boolean  @default(false)
   createdAt     DateTime @default(now())
@@ -216,10 +400,10 @@ model WhyChooseUs {
 
 model Building {
   id            String   @id @default(cuid())
-  titleEn       String
-  titleAr       String
-  descriptionEn String   @db.Text
-  descriptionAr String   @db.Text
+  titleEn       String?
+  titleAr       String?
+  descriptionEn String?  @db.Text
+  descriptionAr String?  @db.Text
   image         String?
   isHidden      Boolean  @default(false)
   createdAt     DateTime @default(now())
@@ -228,10 +412,10 @@ model Building {
 
 model Feature {
   id            String   @id @default(cuid())
-  titleEn       String
-  titleAr       String
-  descriptionEn String   @db.Text
-  descriptionAr String   @db.Text
+  titleEn       String?
+  titleAr       String?
+  descriptionEn String?  @db.Text
+  descriptionAr String?  @db.Text
   image         String?
   isHidden      Boolean  @default(false)
   createdAt     DateTime @default(now())
@@ -242,7 +426,7 @@ model ProductionStep {
   id        String   @id @default(cuid())
   textEn    String   @db.Text
   textAr    String   @db.Text
-  number    Int      @default(0)
+  number    Int      @default(999)
   image     String?
   isHidden  Boolean  @default(false)
   createdAt DateTime @default(now())
@@ -251,11 +435,11 @@ model ProductionStep {
 
 model SectionText {
   id        String   @id @default(cuid())
-  titleEn   String
-  titleAr   String
-  textEn    String   @db.Text
-  textAr    String   @db.Text
-  number    Int      @default(0)
+  titleEn   String?
+  titleAr   String?
+  textEn    String?  @db.Text
+  textAr    String?  @db.Text
+  number    Int      @default(999)
   isHidden  Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -266,6 +450,13 @@ model Social {
   image     String?
   link      String
   isHidden  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SocialParent {
+  id        String   @id @default(cuid())
+  image     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -281,11 +472,11 @@ model ProductSocial {
   product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
-model SiteSettings {
+model SiteSetting { // site_infos
   id          String   @id @default(cuid())
   key         String   @unique
-  valueEn     String   @db.Text
-  valueAr     String   @db.Text
+  valueEn     String?  @db.Text
+  valueAr     String?  @db.Text
   description String?
   updatedAt   DateTime @updatedAt
 }
@@ -296,8 +487,8 @@ model SiteSettings {
 
 model Continent {
   id        String    @id @default(cuid())
-  nameEn    String
-  nameAr    String
+  nameEn    String?
+  nameAr    String?
   isHidden  Boolean   @default(false)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -305,10 +496,10 @@ model Continent {
   countries Country[]
 }
 
-model Country {
+model Country { // contiries
   id          String    @id @default(cuid())
-  nameEn      String
-  nameAr      String
+  nameEn      String?
+  nameAr      String?
   continentId String
   isHidden    Boolean   @default(false)
   createdAt   DateTime  @default(now())
@@ -321,7 +512,7 @@ model Country {
 // Lead Generation (Forms)
 // -----------------------------------------------------------------------------
 
-model ContactRequest {
+model ContactRequest { // contacts
   id        String        @id @default(cuid())
   name      String
   email     String
@@ -331,7 +522,7 @@ model ContactRequest {
   createdAt DateTime      @default(now())
 }
 
-model CareerRequest {
+model CareerRequest { // joins
   id        String        @id @default(cuid())
   name      String
   email     String
@@ -342,10 +533,11 @@ model CareerRequest {
   createdAt DateTime      @default(now())
 }
 
-model CollaborateRequest {
+model CollaborateRequest { // collaborates
   id        String        @id @default(cuid())
-  firstName String
-  lastName  String
+  firstName String?
+  lastName  String?
+  name      String?
   email     String
   phone     String?
   status    RequestStatus @default(UNREAD)
@@ -359,7 +551,7 @@ enum RequestStatus {
 }
 
 // -----------------------------------------------------------------------------
-// B2B Inquiry Models (Formerly E-commerce)
+// B2B Inquiry Models
 // -----------------------------------------------------------------------------
 
 model CartItem {
@@ -377,12 +569,11 @@ model CartItem {
   @@unique([sessionId, productId])
 }
 
-// Orders act as the submitted B2B Inquiry form
 model Order {
   id          String      @id @default(cuid())
   userId      String?     
   status      OrderStatus @default(PENDING)
-  totalAmount Float       // Can be 0 for a generic inquiry without pricing
+  totalAmount Float       @default(0)
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
 
@@ -395,7 +586,7 @@ model OrderItem {
   orderId   String
   productId String
   quantity  Int
-  price     Float    // Can be 0 for an inquiry
+  price     Float    @default(0)
   
   order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
   product   Product  @relation(fields: [productId], references: [id])
@@ -407,4 +598,18 @@ enum OrderStatus {
   SHIPPED
   DELIVERED
   CANCELLED
+}
+
+// -----------------------------------------------------------------------------
+// System
+// -----------------------------------------------------------------------------
+
+model SystemLog { // logs
+  id        String   @id @default(cuid())
+  userId    String?  // Might map to Admin ID
+  action    String?
+  date      String?
+  ip        String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

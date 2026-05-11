@@ -1,0 +1,203 @@
+CREATE TABLE `cook_props` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `icon` varchar(255) DEFAULT NULL,
+  `title_ar` varchar(255) NOT NULL,
+  `title_en` varchar(255) NOT NULL,
+  `text_ar` varchar(255) NOT NULL,
+  `text_en` varchar(255) NOT NULL,
+  `cook_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=
+
+CREATE TABLE `cook_images` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `url` longtext NOT NULL,
+  `cook_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=
+
+CREATE TABLE `food` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name_ar` varchar(255) DEFAULT NULL,
+  `name_en` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `recipe_id` bigint(20) UNSIGNED NOT NULL,
+  `hidden` tinyint(4) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `number` int(11) NOT NULL DEFAULT 999
+) ENGINE=
+
+CREATE TABLE `food_cooks` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `food_id` bigint(20) UNSIGNED NOT NULL,
+  `cook_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=
+
+CREATE TABLE `food_steps` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `step_ar` longtext NOT NULL,
+  `step_en` longtext NOT NULL,
+  `cook_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=
+
+CREATE TABLE `product_images` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=
+
+CREATE TABLE `recipe_foods` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `food_id` bigint(20) UNSIGNED NOT NULL,
+  `recipe_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=
+
+CREATE TABLE `recommend_recipes` (
+  `id` bigint(20) NOT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL,
+  `cook_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=
+
+CREATE TABLE `types` (
+  `id` bigint(20) NOT NULL,
+  `name_ar` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_en` varchar(90) NOT NULL,
+  `hidden` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=
+
+CREATE TABLE `social_parents` (
+  `id` int(11) NOT NULL,
+  `image` varchar(200) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=
+
+CREATE TABLE `category_type_categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `category_id` bigint(20) UNSIGNED NOT NULL,
+  `category_type_id` bigint(20) UNSIGNED NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `number` int(11) NOT NULL DEFAULT 999
+) ENGINE=
+
+CREATE TABLE `logs` (
+  `id` bigint(20) NOT NULL,
+  `user_id` int(20) DEFAULT NULL,
+  `action` varchar(200) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
+  `date` varchar(200) DEFAULT NULL,
+  `ip` varchar(200) DEFAULT NULL
+) ENGINE=
+
+CREATE TABLE `categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name_ar` varchar(255) NOT NULL,
+  `name_en` varchar(255) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `hidden` tinyint(4) NOT NULL DEFAULT 0,
+  `brand_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `description_ar` mediumtext DEFAULT NULL,
+  `description_en` mediumtext DEFAULT NULL,
+  `number` int(11) NOT NULL DEFAULT 999,
+  `image_en` varchar(255) DEFAULT NULL
+) ENGINE=
+
+CREATE TABLE `category_types` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `title_ar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title_en` varchar(255) NOT NULL,
+  `description_ar` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description_en` longtext NOT NULL,
+  `hidden` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `number` int(11) NOT NULL DEFAULT 999
+) ENGINE=
+
+CREATE TABLE `category_products` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `category_id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL,
+  `hidden` tinyint(4) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=
+
+CREATE TABLE `products` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name_ar` varchar(255) NOT NULL,
+  `name_en` varchar(255) NOT NULL,
+  `description_ar` longtext NOT NULL,
+  `description_en` longtext NOT NULL,
+  `hidden` tinyint(4) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `type_id` bigint(20) DEFAULT NULL,
+  `color` varchar(16) NOT NULL DEFAULT '#fff',
+  `number` int(11) NOT NULL DEFAULT 999
+) ENGINE=
+
+CREATE TABLE `cooks` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name_ar` varchar(255) DEFAULT NULL,
+  `name_en` varchar(255) DEFAULT NULL,
+  `description_ar` longtext DEFAULT NULL,
+  `description_en` longtext DEFAULT NULL,
+  `hidden` tinyint(4) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
+  `video_link` text NOT NULL,
+  `internal_image` text NOT NULL,
+  `number` int(11) NOT NULL DEFAULT 999
+) ENGINE=
+
+CREATE TABLE `recipes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name_ar` varchar(255) NOT NULL,
+  `name_en` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `hidden` tinyint(4) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `number` int(11) NOT NULL DEFAULT 999
+) ENGINE=
+
+CREATE TABLE `standers` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `description_ar` longtext NOT NULL,
+  `description_en` longtext NOT NULL,
+  `hidden` tinyint(4) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=
+
+CREATE TABLE `contiries` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name_ar` varchar(255) DEFAULT NULL,
+  `name_en` varchar(255) DEFAULT NULL,
+  `hidden` tinyint(4) NOT NULL DEFAULT 0,
+  `continent_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=
+
