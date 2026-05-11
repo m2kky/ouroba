@@ -6,14 +6,14 @@ import { NextRequest } from "next/server";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { firstName, lastName, name, email, phone } = body;
+    const { firstName, lastName, name, email, phone, message } = body;
 
     if (!email) {
       return apiError("email is required");
     }
 
     const collaborate = await prisma.collaborateRequest.create({
-      data: { firstName, lastName, name, email, phone },
+      data: { firstName, lastName, name, email, phone, message },
     });
     return apiSuccess(collaborate, 201);
   } catch (error) {

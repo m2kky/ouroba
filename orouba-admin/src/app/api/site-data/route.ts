@@ -28,6 +28,8 @@ export async function GET() {
       socialParents,
       recipeCategories,
       categoryTypes,
+      recipes,
+      sectionTexts,
     ] = await Promise.all([
       prisma.brand.findMany({
         where: { isHidden: false },
@@ -74,10 +76,16 @@ export async function GET() {
         orderBy: { number: "asc" },
         include: {
           categories: {
-            include: { category: true },
+            include: { category: { include: { brand: true } } },
           },
         },
       }),
+      prisma.recipe.findMany({
+        where: { isHidden: false },
+        orderBy: { createdAt: "desc" },
+        take: 6,
+      }),
+      prisma.sectionText.findMany({ where: { isHidden: false }, orderBy: { number: "asc" } })
     ]);
 
     // Transform settings to key-value map
@@ -102,6 +110,8 @@ export async function GET() {
       socialParents,
       recipeCategories,
       categoryTypes,
+      recipes,
+      sectionTexts,
     });
   } catch (error) {
     console.error("site-data error:", error);

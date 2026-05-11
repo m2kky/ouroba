@@ -1,5 +1,6 @@
 import { getSiteData } from "@/lib/api-client";
 import { Metadata } from "next";
+import CollaborateForm from "@/components/export/CollaborateForm";
 
 export const metadata: Metadata = {
   title: "العروبة حول العالم | Orouba Foods",
@@ -79,6 +80,10 @@ export default async function ExportPage() {
             <p className="text-gray-500 text-lg">جاري تحديث بيانات التصدير حالياً.</p>
           </div>
         )}
+      </section>
+      {/* Collaborate Form */}
+      <section className="py-12 bg-gray-50 relative px-4 md:px-8">
+        <CollaborateForm locale="ar" />
       </section>
     </div>
   );

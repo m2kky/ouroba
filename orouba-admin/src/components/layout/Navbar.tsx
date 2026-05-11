@@ -16,12 +16,12 @@ export default function Navbar({ settings, brands }: { settings?: any; brands?: 
       children: [
         { label: "من نحن", href: "/about/whoWeAre" },
         { label: "الشهادات", href: "/about/certifications/ar" },
-        { label: "أصناف المنتجات", href: "/about/ProductType/ar" },
+        { label: "أصناف المنتجات", href: "/products" },
       ]
     },
     { 
       label: "المنتجات", 
-      href: "/brands",
+      href: "/products",
       children: [
         { label: "بسمة", href: "/brands/5/ar" },
         { label: "بابيتس", href: "/brands/8/ar" },
@@ -29,7 +29,8 @@ export default function Navbar({ settings, brands }: { settings?: any; brands?: 
       ]
     },
     { label: "التصدير", href: "/export" },
-    { label: "الوصفات", href: "/recipes" },
+    { label: "الوصفات", href: "/recipes/ar" },
+    { label: "الوظائف", href: "/careers" },
     { label: "اتصل بنا", href: "/contact" },
   ];
 
@@ -50,7 +51,7 @@ export default function Navbar({ settings, brands }: { settings?: any; brands?: 
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-6 space-x-reverse font-medium text-[16px] h-full">
+          <div className="hidden lg:flex items-center gap-8 font-medium text-[16px] h-full">
             {navLinks.map((link) => (
               <div key={link.label} className="relative group h-full flex items-center">
                 <Link 
@@ -84,7 +85,8 @@ export default function Navbar({ settings, brands }: { settings?: any; brands?: 
           </div>
 
           {/* Left Actions (Icons + Button) */}
-          <div className="hidden lg:flex items-center space-x-4 space-x-reverse">
+          <div className="hidden lg:flex items-center gap-4">
+            
             {/* Search Icon */}
             <button className="p-2 hover:text-orouba-yellow transition-colors">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -97,15 +99,14 @@ export default function Navbar({ settings, brands }: { settings?: any; brands?: 
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </button>
-            {/* Download Catalog */}
-            <a 
-              href={settings?.catalogFileUrl || "#"} 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white text-orouba-blue px-6 py-2 rounded-full font-bold text-sm hover:bg-gray-100 hover:text-orouba-yellow transition-colors shadow-sm"
+            
+            <Link 
+              href="/export-catalog" 
+              className="bg-orouba-yellow text-orouba-blue font-bold px-6 py-2 rounded-full hover:bg-yellow-400 transition-colors shadow-sm whitespace-nowrap"
             >
               تحميل الكتالوج
-            </a>
+            </Link>
+
           </div>
 
           {/* Mobile menu button */}

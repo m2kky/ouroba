@@ -54,7 +54,7 @@ export default async function BrandsIndexPage() {
                   </span>
                 </div>
                 <Link
-                  href={`/brands/${brand.id}`}
+                  href={`/brands/${brand.id}/ar`}
                   className="block w-full text-center py-4 rounded-full font-bold transition-colors bg-orouba-yellow text-orouba-blue hover:bg-yellow-400 shadow-sm"
                 >
                   تصفح المنتجات

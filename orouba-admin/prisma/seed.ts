@@ -46,17 +46,18 @@ async function main() {
     prisma.collaborateRequest.deleteMany(),
     prisma.siteSetting.deleteMany(),
     prisma.systemLog.deleteMany(),
-    prisma.admin.deleteMany(),
     prisma.user.deleteMany(),
   ]);
 
   // ─── Admin ───
-  const admin = await prisma.admin.create({
+  const admin = await prisma.user.create({
     data: {
       email: "admin@oroubafoods.com",
-      password: "$2b$12$EEUo6nYSbJElnVzVe8zVRetx0KVIzL4UCsWebsDEaXavrtyotXn9C",
+      password: "$2b$12$EEUo6nYSbJElnVzVe8zVRetx0KVIzL4UCsWebsDEaXavrtyotXn9C", // bcrypt hash
       phone: "01276549343",
       name: "Admin",
+      role: "ADMIN",
+      permissions: ["*"],
     },
   });
   console.log("✅ Admin created");

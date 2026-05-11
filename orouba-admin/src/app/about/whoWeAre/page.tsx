@@ -9,7 +9,9 @@ export const metadata: Metadata = {
 
 export default async function AboutPage() {
   const data = await getSiteData();
-  const { settings, values, buildings, productionSteps } = data;
+  const { settings, values, buildings, productionSteps, sectionTexts, whyChooseUs } = data;
+
+  const visionSection = sectionTexts?.find((s: any) => s.titleEn?.toLowerCase().includes("vision") || s.number === 1);
 
   return (
     <div className="bg-white min-h-screen" dir="rtl">
@@ -34,9 +36,11 @@ export default async function AboutPage() {
              <img src="https://camp-coding.site/eloroba/storage/app/images/ZHVQeLXeXFxqfGf27Yd4yiETR1EmFh2Tij1rUudu.png" alt="Orouba Products" className="w-full h-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500" />
           </div>
           <div className="w-full md:w-1/2 order-1 md:order-2">
-            <h2 className="text-4xl md:text-5xl font-bold text-orouba-blue mb-8 leading-tight">من الرؤية إلى الواقع</h2>
-            <p className="text-lg text-gray-600 leading-loose mb-10 text-justify">
-              تأسست شركة العروبة لصناعة المواد الغذائية سنة ١٩٩٨، برؤية تهدف للتمييز فى انتاج و ابتكار منتجات غذائية مجمدة عالية الجودة وسريعة الطهى لجميع انحاء العالم. تبلغ مساحة المصنع ٢٠,٠٠٠ متر مربع، وهو مجهز بأحدث التقنيات، تحت إشراف وإدارة فريق من المهندسين والعامليين ذوى الخبرة والكفاءة العالية لضمان انتاج عالى الجودة وفقا للمعايير الدولية. حرصا منا على إرضاء عملائنا والحفاظ على ثقتهم، فإننا نقدم مجموعة كبيرة ومتنوعة من المنتجات الطازجة المجمدة من خضروات، فواكة، بقوليات، حبوب وأيضا فلافل ومنتجات نصف مقلية مجمدة يتم إنتاجها جميعا من مكونات طبيعية دون أى اضافات.
+            <h2 className="text-4xl md:text-5xl font-bold text-orouba-blue mb-8 leading-tight">
+              {visionSection?.titleAr || "من الرؤية إلى الواقع"}
+            </h2>
+            <p className="text-lg text-gray-600 leading-loose mb-10 text-justify whitespace-pre-wrap">
+              {visionSection?.textAr || "تأسست شركة العروبة لصناعة المواد الغذائية سنة ١٩٩٨، برؤية تهدف للتمييز فى انتاج و ابتكار منتجات غذائية مجمدة عالية الجودة وسريعة الطهى لجميع انحاء العالم. تبلغ مساحة المصنع ٢٠,٠٠٠ متر مربع، وهو مجهز بأحدث التقنيات، تحت إشراف وإدارة فريق من المهندسين والعامليين ذوى الخبرة والكفاءة العالية لضمان انتاج عالى الجودة وفقا للمعايير الدولية. حرصا منا على إرضاء عملائنا والحفاظ على ثقتهم، فإننا نقدم مجموعة كبيرة ومتنوعة من المنتجات الطازجة المجمدة من خضروات، فواكة، بقوليات، حبوب وأيضا فلافل ومنتجات نصف مقلية مجمدة يتم إنتاجها جميعا من مكونات طبيعية دون أى اضافات."}
             </p>
           </div>
         </div>
@@ -48,10 +52,24 @@ export default async function AboutPage() {
         <div className="max-w-[1400px] mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center gap-16 relative z-10">
           <div className="w-full md:w-1/2">
             <h2 className="text-4xl md:text-5xl font-bold text-orouba-blue mb-4">لماذا العروبة ؟</h2>
-            <h3 className="text-2xl font-bold text-gray-800 mb-8">اكتشف الفرق في كل قضمة:</h3>
-            <p className="text-xl text-gray-600 leading-loose mb-10 text-justify">
-              يعد اختيار العروبة هو اختيار التميز والسهولة ومتعة الطهي وذلك لإلتزامنا بالمعايير الدولية وشغفنا بالابتكار. تلبي منتجاتنا الطبيعية واللذيذة أذواقًا متنوعة، و تجعل إعداد الطعام أكثر سهولة ومتعة. ثق في العروبة لتحويل الوجبات العادية إلى تجارب غير تقليدية وإضفاء البهجة على مطبخك ومائدتك. انضم إلينا واكتشف متعة الطهي مع العروبة!!.
-            </p>
+            
+            {whyChooseUs && whyChooseUs.length > 0 ? (
+              <div className="space-y-6 mt-8">
+                {whyChooseUs.map((reason: any) => (
+                  <p key={reason.id} className="text-xl text-gray-600 leading-relaxed text-justify">
+                    {reason.descriptionAr}
+                  </p>
+                ))}
+              </div>
+            ) : (
+              <>
+                <h3 className="text-2xl font-bold text-gray-800 mb-8 mt-4">اكتشف الفرق في كل قضمة:</h3>
+                <p className="text-xl text-gray-600 leading-loose mb-10 text-justify">
+                  يعد اختيار العروبة هو اختيار التميز والسهولة ومتعة الطهي وذلك لإلتزامنا بالمعايير الدولية وشغفنا بالابتكار. تلبي منتجاتنا الطبيعية واللذيذة أذواقًا متنوعة، و تجعل إعداد الطعام أكثر سهولة ومتعة. ثق في العروبة لتحويل الوجبات العادية إلى تجارب غير تقليدية وإضفاء البهجة على مطبخك ومائدتك. انضم إلينا واكتشف متعة الطهي مع العروبة!!.
+                </p>
+              </>
+            )}
+
           </div>
           <div className="w-full md:w-1/2 relative">
              <div className="absolute -bottom-10 -right-10 w-full h-full bg-orouba-yellow rounded-[3rem] opacity-20 -z-10 transition-transform duration-500 hover:rotate-2"></div>

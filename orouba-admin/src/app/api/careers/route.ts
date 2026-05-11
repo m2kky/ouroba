@@ -6,14 +6,14 @@ import { NextRequest } from "next/server";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, email, phone, position, resumeUrl } = body;
+    const { name, email, phone, position, message, resumeUrl } = body;
 
     if (!name || !email) {
       return apiError("name and email are required");
     }
 
     const career = await prisma.careerRequest.create({
-      data: { name, email, phone, position, resumeUrl },
+      data: { name, email, phone, position, message, resumeUrl },
     });
     return apiSuccess(career, 201);
   } catch (error) {

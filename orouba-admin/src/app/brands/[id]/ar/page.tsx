@@ -162,7 +162,7 @@ export default async function BrandDetailPage({ params }: { params: Promise<{ id
                           {category.nameAr}
                         </h3>
                         <Link 
-                          href={`/categories/${category.id}/ar`} 
+                          href={`/brands/${brand.id}/${category.id}/ar`} 
                           className="text-white hover:text-orouba-yellow font-bold text-lg flex items-center justify-center gap-2 transition-all group-hover:gap-3"
                         >
                           <span className="drop-shadow-sm text-sm md:text-base">إظهار الكل</span>

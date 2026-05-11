@@ -31,9 +31,9 @@ export default function Footer({ settings, socials, brands }: { settings?: any; 
             <div className="text-center">
               <h3 className="text-xl font-bold mb-8 text-[#ffcc00] inline-block">منتجاتنا</h3>
               <ul className="space-y-6">
-                <li><Link href="/brands" className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">بسمة</Link></li>
-                <li><Link href="/brands" className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">فريدة</Link></li>
-                <li><Link href="/brands" className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">بابيتس</Link></li>
+                <li><Link href="/brands/5/ar" className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">بسمة</Link></li>
+                <li><Link href="/brands/7/ar" className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">فريدة</Link></li>
+                <li><Link href="/brands/8/ar" className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">بابيتس</Link></li>
               </ul>
             </div>
 
@@ -41,9 +41,10 @@ export default function Footer({ settings, socials, brands }: { settings?: any; 
             <div className="text-center">
               <h3 className="text-xl font-bold mb-8 text-[#ffcc00] inline-block">روابط سريعة</h3>
               <ul className="space-y-6">
-                <li><Link href="/about" className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">من نحن</Link></li>
-                <li><Link href="/brands" className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">منتجاتنا</Link></li>
-                <li><Link href="/recipes" className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">وصفات</Link></li>
+                <li><Link href="/about/whoWeAre" className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">من نحن</Link></li>
+                <li><Link href="/products" className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">منتجاتنا</Link></li>
+                <li><Link href="/recipes/ar" className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">وصفات</Link></li>
+                <li><Link href="/careers" className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">الوظائف</Link></li>
               </ul>
             </div>
 
@@ -54,9 +55,7 @@ export default function Footer({ settings, socials, brands }: { settings?: any; 
                 
                 <li className="flex items-start gap-3 justify-end w-full">
                   <div className="text-right text-sm leading-relaxed max-w-[200px]">
-                    مدينة العبور، بلوك 12008، قسم 5،<br />
-                    القاهرة، عرب العبور 43، مدينة<br />
-                    العبور، مصر
+                    {settings?.address?.ar || "مدينة العبور، بلوك 12008، قسم 5، القاهرة، عرب العبور 43، مصر"}
                   </div>
                   <span className="text-[#ffcc00] mt-1 text-xl">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
@@ -64,21 +63,21 @@ export default function Footer({ settings, socials, brands }: { settings?: any; 
                 </li>
 
                 <li className="flex items-center gap-3 justify-end w-full mt-2">
-                  <span className="text-sm" dir="ltr">+20 22 4489 226</span>
+                  <span className="text-sm" dir="ltr">{settings?.phone_1?.en || "+20 22 4489 226"}</span>
                   <span className="text-[#ffcc00] text-xl">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                   </span>
                 </li>
 
                 <li className="flex items-center gap-3 justify-end w-full mt-2">
-                  <span className="text-sm" dir="ltr">+20 22 4489 227</span>
+                  <span className="text-sm" dir="ltr">{settings?.fax?.en || "+20 22 4489 227"}</span>
                   <span className="text-[#ffcc00] text-xl">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
                   </span>
                 </li>
 
                 <li className="flex items-center gap-3 justify-end w-full mt-2 mb-6">
-                  <a href="mailto:oroubaemail@orouba-ajwa.com" className="text-sm hover:text-[#ffcc00] transition-colors">oroubaemail@orouba-ajwa.com</a>
+                  <a href={`mailto:${settings?.email?.en || "oroubaemail@orouba-ajwa.com"}`} className="text-sm hover:text-[#ffcc00] transition-colors">{settings?.email?.en || "oroubaemail@orouba-ajwa.com"}</a>
                   <span className="text-[#ffcc00] text-xl">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                   </span>
@@ -86,29 +85,20 @@ export default function Footer({ settings, socials, brands }: { settings?: any; 
 
                 {/* Social Media Links from image */}
                 <li className="flex flex-col gap-3 justify-end w-full mt-4">
-                  <div className="flex items-center justify-end gap-3">
-                    <div className="flex gap-2">
-                      <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center">
-                         <span className="text-blue-600 text-xs font-bold">f</span>
+                  {brands?.slice(0, 3).map((brand: any) => (
+                    <div key={brand.id} className="flex items-center justify-end gap-3">
+                      <div className="flex gap-2">
+                        {socials?.filter((s: any) => !s.isHidden).map((social: any) => (
+                          <a key={social.id} href={social.link} target="_blank" rel="noreferrer" className="w-6 h-6 rounded-full bg-white flex items-center justify-center overflow-hidden hover:scale-110 transition-transform">
+                            {social.image ? <img src={social.image} alt="social" className="w-full h-full object-cover" /> : <span className="text-blue-600 text-xs font-bold">@</span>}
+                          </a>
+                        ))}
                       </div>
-                      <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center">
-                         <span className="text-pink-600 text-xs font-bold">📷</span>
-                      </div>
+                      <Link href={`/brands/${brand.id}`}>
+                        <img src={brand.image || "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png"} alt={brand.nameAr} className="w-12 h-12 object-contain bg-white rounded-md p-1" />
+                      </Link>
                     </div>
-                    <img src="https://camp-coding.site/eloroba/storage/app/images/yeaQYQUjSi9l9iThgxvahIGd8khBLpWoE6KbDznW.png" alt="Farida" className="w-12 h-12 object-contain bg-white rounded-md p-1" />
-                  </div>
-
-                  <div className="flex items-center justify-end gap-3">
-                    <div className="flex gap-2">
-                      <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center">
-                         <span className="text-blue-600 text-xs font-bold">f</span>
-                      </div>
-                      <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center">
-                         <span className="text-pink-600 text-xs font-bold">📷</span>
-                      </div>
-                    </div>
-                    <img src="https://camp-coding.site/eloroba/storage/app/images/IUCTGnDAvK2nTDvkbXysdBfNmCrJgh9Z4OBRh0Xl.png" alt="Bap Bites" className="w-12 h-12 object-contain bg-white rounded-md p-1" />
-                  </div>
+                  ))}
                 </li>
 
               </ul>
@@ -117,9 +107,12 @@ export default function Footer({ settings, socials, brands }: { settings?: any; 
           </div>
 
           {/* Bottom Bar: Copyright */}
-          <div className="border-t border-[#1a6ba8] py-6 flex justify-center items-center">
+          <div className="border-t border-[#1a6ba8] py-6 flex justify-center items-center flex-wrap gap-2">
             <div className="text-white text-lg font-medium text-center">
-              جميع الحقوق محفوظة لدى © ٢٠٢٤ العروبة.
+              جميع الحقوق محفوظة لدى © 2026 العروبة.
+            </div>
+            <div className="text-white text-lg font-medium text-center">
+              تم التطوير بواسطة <a href="https://valueims.com" target="_blank" rel="noopener noreferrer" className="text-[#ffcc00] hover:underline font-bold">ValueIMS</a>
             </div>
           </div>
         </div>

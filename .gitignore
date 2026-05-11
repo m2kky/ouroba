@@ -32,4 +32,8 @@ temp_id_rsa.pub
 # Ignore old backup and PHP folders
 oroubafoods.com/
 archive/
-static/
+static/*
+!static/media/
+
+# Allow specific zip files
+!media.zip
