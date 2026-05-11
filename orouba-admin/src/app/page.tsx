@@ -137,19 +137,19 @@ export default async function HomePage() {
           </FadeIn>
           
           {standards && standards.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
               {standards.map((standard: any, idx: number) => (
                 <FadeIn key={standard.id} direction="up" delay={0.1 * (idx + 1)}>
-                  <HoverCard className="text-center p-6 border border-gray-100 rounded-3xl hover:shadow-xl transition-shadow bg-gray-50 h-full">
+                  <div className="text-center rounded-2xl overflow-hidden hover:shadow-2xl transition-shadow h-full">
                     {standard.image ? (
-                      <div className="w-20 h-20 mx-auto mb-6">
-                        <img src={standard.image} alt="Standard" className="w-full h-full object-contain" />
-                      </div>
+                      <img src={standard.image} alt="Standard" className="w-full h-auto object-cover" />
                     ) : (
-                      <div className="w-20 h-20 mx-auto bg-green-100 text-green-600 rounded-full flex items-center justify-center text-3xl mb-6">✨</div>
+                      <div className="bg-orouba-blue p-8 rounded-2xl text-white h-full flex flex-col items-center justify-center">
+                        <div className="text-4xl mb-4">✨</div>
+                        <p className="text-lg font-medium leading-relaxed">{standard.descriptionAr}</p>
+                      </div>
                     )}
-                    <p className="text-lg text-gray-700 font-medium">{standard.descriptionAr}</p>
-                  </HoverCard>
+                  </div>
                 </FadeIn>
               ))}
             </div>
