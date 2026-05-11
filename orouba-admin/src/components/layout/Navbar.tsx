@@ -35,7 +35,7 @@ export default function Navbar({ settings, brands }: { settings?: any; brands?: 
   ];
 
   return (
-    <nav className="bg-orouba-blue sticky top-0 z-50 text-white shadow-md rounded-b-[2rem]">
+    <nav className="bg-orouba-blue sticky top-0 z-50 text-white shadow-md rounded-b-[2rem] pb-2 -mb-8">
       <div className="max-w-[1400px] mx-auto px-4 md:px-8">
         <div className="flex justify-between items-center h-24">
           
