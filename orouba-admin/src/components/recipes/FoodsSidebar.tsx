@@ -55,7 +55,7 @@ export default function FoodsSidebar({
             return (
               <Link 
                 key={food.id} 
-                href={`/recipes/ar?c=${activeCategoryId}&f=${food.id}`}
+                href={`/${locale}/recipes?c=${activeCategoryId}&f=${food.id}`}
                 onClick={() => setIsOpen(false)}
               >
                 <motion.div

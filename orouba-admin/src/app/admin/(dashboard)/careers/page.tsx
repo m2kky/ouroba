@@ -9,7 +9,7 @@ interface Career {
   name: string;
   phone: string;
   email: string;
-  cvPath: string | null;
+  resumeUrl: string | null;
   createdAt: string;
 }
 
@@ -62,11 +62,11 @@ export default function CareersPage() {
     { key: "email", label: "البريد الإلكتروني" },
     { key: "phone", label: "رقم الهاتف", render: (item) => <span dir="ltr">{item.phone}</span> },
     { 
-      key: "cvPath", 
+      key: "resumeUrl", 
       label: "السيرة الذاتية", 
-      render: (item) => item.cvPath ? (
+      render: (item) => item.resumeUrl ? (
         <a 
-          href={item.cvPath} 
+          href={item.resumeUrl} 
           target="_blank" 
           rel="noreferrer"
           className="inline-flex items-center gap-1 text-orouba-blue hover:underline font-semibold"
@@ -156,9 +156,9 @@ export default function CareersPage() {
               </div>
               
               <div className="mt-6 pt-6 border-t border-gray-100 flex justify-center">
-                 {selectedCareer.cvPath ? (
+                 {selectedCareer.resumeUrl ? (
                     <a 
-                      href={selectedCareer.cvPath} 
+                      href={selectedCareer.resumeUrl} 
                       target="_blank" 
                       rel="noreferrer"
                       className="flex items-center gap-2 bg-orouba-blue text-white px-8 py-3 rounded-xl font-bold hover:bg-orouba-blue/90 transition-colors shadow-md hover:shadow-lg"

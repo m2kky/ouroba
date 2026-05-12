@@ -1,0 +1,299 @@
+/* eslint-disable @next/next/no-img-element */
+import Link from "next/link";
+import { ChevronLeft } from "lucide-react";
+import { getSiteData } from "@/lib/api-client";
+import FadeIn from "@/components/ui/FadeIn";
+import HoverCard from "@/components/ui/HoverCard";
+
+interface BannerItem { id: string; isHidden: boolean; type: string; videoLink?: string; image?: string; smallVideo?: string; smallImg?: string; }
+interface SectionTextItem { id: string; titleEn?: string; titleAr?: string; textAr?: string; number: number; }
+interface BrandItem { id: string; nameAr?: string; image?: string; }
+interface WhyItem { id: string; descriptionAr: string; }
+interface StandardItem { id: string; descriptionAr: string; image?: string; }
+interface RecipeItem { id: string; nameAr?: string; internalImage?: string; }
+
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const resolvedParams = await params;
+  const locale = resolvedParams.locale;
+  const isEn = locale === "en";
+
+  const data = await getSiteData();
+  const { brands, banners, sectionTexts, whyChooseUs, standards } = data;
+
+  // Hero Banner
+  const activeBanners = banners?.filter((b: BannerItem) => !b.isHidden) || [];
+  const firstBanner = activeBanners[0];
+  
+  // Desktop Media
+  const isVideoDesktop = firstBanner?.type === "video";
+  const mediaDesktop = firstBanner?.videoLink || firstBanner?.image || "https://camp-coding.site/eloroba/storage/app/images/1.mp4";
+  
+  // Mobile Media
+  const mediaMobile = firstBanner?.smallVideo || firstBanner?.smallImg || mediaDesktop;
+  const isVideoMobile = !!firstBanner?.smallVideo || (mediaMobile === mediaDesktop && isVideoDesktop);
+
+  // Vision Section Text (Assuming number 1 or specific title)
+  const visionSection = sectionTexts?.find((s: SectionTextItem) => s.titleEn?.toLowerCase().includes("vision") || s.number === 1);
+
+  return (
+    <div className="bg-white">
+      
+      {/* 1. Hero Section */}
+      <section className="relative w-full overflow-hidden -mt-4">
+        
+        {/* Desktop View */}
+        <div className="hidden md:block w-full">
+          {isVideoDesktop ? (
+            <video 
+              src={mediaDesktop} 
+              autoPlay 
+              loop 
+              muted 
+              playsInline
+              className="w-full h-auto max-h-[85vh] object-cover z-0 block"
+            />
+          ) : (
+            <img 
+              src={mediaDesktop} 
+              alt="Hero Banner"
+              className="w-full h-auto max-h-[85vh] object-cover z-0 block"
+            />
+          )}
+        </div>
+
+        {/* Mobile View */}
+        <div className="block md:hidden w-full">
+          {isVideoMobile ? (
+            <video 
+              src={mediaMobile} 
+              autoPlay 
+              loop 
+              muted 
+              playsInline
+              className="w-full h-auto object-cover z-0 block"
+            />
+          ) : (
+            <img 
+              src={mediaMobile} 
+              alt="Hero Banner"
+              className="w-full h-auto object-cover z-0 block"
+            />
+          )}
+        </div>
+
+      </section>
+
+      {/* 2. From Vision to Reality */}
+      <section className="py-12 md:py-24 bg-white relative overflow-hidden">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center gap-8 md:gap-16 relative z-10">
+          <FadeIn direction={isEn ? "left" : "right"} className="w-full md:w-1/2 relative flex justify-center">
+             <img src="https://camp-coding.site/eloroba/storage/app/images/ZHVQeLXeXFxqfGf27Yd4yiETR1EmFh2Tij1rUudu.png" alt="Orouba Products" className="w-[60%] md:w-3/4 max-w-sm h-auto object-contain" />
+          </FadeIn>
+          <FadeIn direction={isEn ? "right" : "left"} delay={0.2} className="w-full md:w-1/2">
+            <h2 className="text-4xl md:text-5xl font-bold text-orouba-blue mb-8 leading-tight">
+              {isEn ? visionSection?.titleEn || "From Vision to Reality" : visionSection?.titleAr || "من الرؤية إلى الواقع"}
+            </h2>
+            <p className="text-base font-medium tracking-tight text-gray-700 leading-relaxed mb-8 md:mb-10 text-justify whitespace-pre-wrap">
+              {isEn 
+                ? visionSection?.textEn?.trim() || "Orouba Food Industries was established in 1998, with a vision to excel in the production and innovation of high quality, quick-to-cook frozen food products for the whole world. The factory covers an area of 20,000 square meters, equipped with the latest technologies, under the supervision and management of an experienced and highly efficient team of engineers and workers to ensure high quality production in accordance with international standards."
+                : visionSection?.textAr?.trim() || "تأسست شركة العروبة لصناعة المواد الغذائية سنة ١٩٩٨، برؤية تهدف للتمييز فى انتاج و ابتكار منتجات غذائية مجمدة عالية الجودة وسريعة الطهى لجميع انحاء العالم. تبلغ مساحة المصنع ٢٠,٠٠٠ متر مربع، وهو مجهز بأحدث التقنيات، تحت إشراف وإدارة فريق من المهندسين والعامليين ذوى الخبرة والكفاءة العالية لضمان انتاج عالى الجودة وفقا للمعايير الدولية."}
+            </p>
+            <Link href={`/${locale}/about/whoWeAre`} className="inline-flex items-center justify-center gap-2 bg-orouba-yellow text-orouba-blue font-bold px-8 py-3 rounded-full text-lg hover:bg-yellow-400 transition-colors shadow-md w-fit">
+              <span>{isEn ? "About Orouba" : "عن العروبة"}</span>
+              <ChevronLeft className={`w-5 h-5 stroke-[3] ${isEn ? "rotate-180" : ""}`} />
+            </Link>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* 3. Our Brands */}
+      <section className="py-12 md:py-24 bg-white">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-8">
+          <FadeIn direction="up" className="text-center mb-10 md:mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-orouba-blue mb-4">{isEn ? "Our Brands" : "منتجاتنا"}</h2>
+          </FadeIn>
+          <div className="flex md:grid md:grid-cols-3 gap-4 md:gap-8 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-6 -mx-4 px-4 md:mx-auto md:px-0">
+            {brands?.slice(0, 3).map((brand: BrandItem, index: number) => (
+              <FadeIn key={brand.id} direction="up" delay={0.1 * (index + 1)} className="min-w-[85vw] md:min-w-0 flex-shrink-0 snap-center md:h-full">
+                <Link href={`/${locale}/brands/${brand.id}`} className="block h-[400px]">
+                  <HoverCard className="rounded-[30px] overflow-hidden shadow-xl h-full relative group cursor-pointer border-4 border-white/20">
+                    <img 
+                      src={brand.image || "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png"} 
+                      alt={isEn ? brand.nameEn || brand.nameAr : brand.nameAr} 
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <span className="text-white font-bold text-2xl drop-shadow-md">{isEn ? brand.nameEn || brand.nameAr : brand.nameAr}</span>
+                    </div>
+                  </HoverCard>
+                </Link>
+              </FadeIn>
+            ))}
+          </div>
+          
+          {brands && brands.length > 3 && (
+            <FadeIn direction="up" delay={0.4} className="text-center mt-12">
+              <Link href={`/${locale}/brands`} className="inline-block border-2 border-orouba-blue text-orouba-blue font-bold px-10 py-4 rounded-full text-lg hover:bg-orouba-blue hover:text-white transition-colors">
+                {isEn ? "View All Brands" : "عرض كل البراندات"}
+              </Link>
+            </FadeIn>
+          )}
+        </div>
+      </section>
+
+      {/* 4. Why Choose Us */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center gap-16 relative z-10">
+          <FadeIn direction={isEn ? "left" : "right"} className="w-full md:w-1/2 relative flex justify-center">
+             <img src="https://camp-coding.site/eloroba/storage/app/images/wAyRPeQNWO2V0bTsRk8tDHD2NxsesoXWWSXjqHi5.png" alt="Plates" className="w-[80%] md:w-full max-w-md h-auto object-contain rounded-3xl" />
+          </FadeIn>
+          <FadeIn direction={isEn ? "right" : "left"} delay={0.2} className="w-full md:w-1/2">
+            <h2 className="text-4xl md:text-5xl font-bold text-orouba-blue mb-4">{isEn ? "Why Orouba?" : "لماذا العروبة ؟"}</h2>
+            {whyChooseUs && whyChooseUs.length > 0 ? (
+              <div className="space-y-6 mt-8">
+                {whyChooseUs.map((reason: WhyItem) => (
+                  <p key={reason.id} className="text-xl text-gray-600 leading-relaxed text-justify">
+                    {isEn ? reason.descriptionEn || reason.descriptionAr : reason.descriptionAr}
+                  </p>
+                ))}
+              </div>
+            ) : (
+              <>
+                <h3 className="text-2xl font-bold text-gray-800 mb-8 mt-4">{isEn ? "Discover the difference in every bite:" : "اكتشف الفرق في كل قضمة:"}</h3>
+                <p className="text-xl text-gray-600 leading-loose mb-10 text-justify">
+                  {isEn 
+                    ? "Choosing Orouba means choosing excellence, convenience and the joy of cooking, due to our commitment to international standards and passion for innovation. Our natural and delicious products cater to diverse tastes, making food preparation easier and more enjoyable."
+                    : "يعد اختيار العروبة هو اختيار التميز والسهولة ومتعة الطهي وذلك لإلتزامنا بالمعايير الدولية وشغفنا بالابتكار. تلبي منتجاتنا الطبيعية واللذيذة أذواقًا متنوعة، و تجعل إعداد الطعام أكثر سهولة ومتعة. ثق في العروبة لتحويل الوجبات العادية إلى تجارب غير تقليدية وإضفاء البهجة على مطبخك ومائدتك. انضم إلينا واكتشف متعة الطهي مع العروبة!!."}
+                </p>
+              </>
+            )}
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* 5. Our Standards */}
+      <section className="py-24 bg-white relative">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-8">
+          <FadeIn direction="up" className="text-center max-w-3xl mx-auto mb-20">
+            <h2 className="text-5xl font-bold text-orouba-blue mb-8">{isEn ? "Our Standards" : "معاييرنا"}</h2>
+            <p className="text-xl text-gray-600 leading-relaxed">
+              {isEn ? "At Orouba, we adhere to the highest quality standards to ensure every product we offer meets your needs and exceeds expectations." : "نلتزم في العروبة بأعلى معايير الجودة لضمان أن كل منتج نقدمه يلبي احتياجاتك ويتجاوز توقعاتك."}
+            </p>
+          </FadeIn>
+          
+          {standards && standards.length > 0 ? (
+            <div className="flex md:grid md:grid-cols-3 gap-4 md:gap-12 mb-12 max-w-5xl mx-auto overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-6 -mx-4 px-4 md:mx-auto md:px-0">
+              {standards.map((standard: StandardItem, idx: number) => (
+                <FadeIn key={standard.id} direction="up" delay={0.1 * (idx + 1)} className="min-w-[85vw] md:min-w-0 flex-shrink-0 snap-center md:h-full">
+                  <div className="bg-[#245b95] p-6 rounded-[2rem] text-white aspect-square md:aspect-auto md:h-full min-h-[300px] flex flex-col items-center justify-center shadow-xl relative overflow-hidden group">
+                    {/* Subtle hover effect */}
+                    <div className="absolute inset-0 bg-blue-900/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    
+                    {standard.image ? (
+                      <div className="w-24 h-24 mb-6 relative z-10 flex items-center justify-center">
+                        <img src={standard.image} alt="Standard Icon" className="w-full h-full object-contain filter invert" />
+                      </div>
+                    ) : (
+                      <div className="text-5xl mb-6 relative z-10">✨</div>
+                    )}
+                    <p className="text-lg md:text-sm font-bold leading-relaxed relative z-10 text-center">{isEn ? standard.descriptionEn || standard.descriptionAr : standard.descriptionAr}</p>
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
+          ) : null}
+
+          {/* More Button */}
+          <FadeIn direction="up" className="text-center mt-8">
+            <Link href={`/${locale}/export`} className={`inline-flex items-center gap-2 text-2xl font-bold text-[#1e4a8c] hover:text-blue-900 transition-colors ${isEn ? "flex-row-reverse" : ""}`}>
+              <ChevronLeft className={`w-6 h-6 stroke-[3] ${isEn ? "rotate-180" : ""}`} />
+              <span>{isEn ? "More" : "المزيد"}</span>
+            </Link>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* 6. Orouba Around The World */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center gap-16 relative z-10">
+          <FadeIn direction={isEn ? "left" : "right"} className="w-full md:w-1/2">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-orouba-blue">{isEn ? "Orouba Around The World" : "العروبة حول العالم"}</h2>
+            <p className="text-lg text-gray-700 leading-loose mb-10 text-justify font-medium">
+              {isEn 
+                ? "Orouba is committed to expanding its global reach, providing its high-quality products to various tables around the world. Our extensive network ensures the delivery of our products all year round to more than 50 countries."
+                : "تلتزم العروبة بتوسيع نطاق انتشارها عالميًا، حيث توفر منتجاتها عالية الجودة لمختلف موائد العالم. تضمن شبكتنا الواسعة إيصال منتجاتنا طوال العام لأكثر من ٥٠ دولة حول العالم."}
+            </p>
+            <Link href={`/${locale}/export`} className="inline-block bg-orouba-yellow text-orouba-blue font-bold px-10 py-3 rounded-lg text-lg hover:bg-yellow-400 transition-colors shadow-sm">
+              {isEn ? "More >" : "المزيد >"}
+            </Link>
+          </FadeIn>
+          <FadeIn direction={isEn ? "right" : "left"} delay={0.2} className="w-full md:w-1/2 flex justify-center">
+            {/* The exact map image from their original website */}
+            <div className="relative w-full max-w-[600px] h-[350px]">
+              <img 
+                src="https://camp-coding.site/eloroba/storage/app/images/9GWFp84wGE40aoJaGczEwt15qAjnjKtjAlQvqKNz.jpg"
+                alt="Orouba World Map" 
+                className="w-full h-full object-contain"
+              />
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* 7. Suggested Recipes */}
+      <section className="py-24 bg-white">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-8 text-center">
+          <FadeIn direction="up">
+            <h2 className="text-5xl font-bold text-orouba-blue mb-16">{isEn ? "Suggested Recipes" : "وصفات مقترحة"}</h2>
+          </FadeIn>
+          
+          <div className="flex md:grid md:grid-cols-3 gap-4 md:gap-8 mb-12 text-right overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-6 -mx-4 px-4 md:mx-auto md:px-0">
+            {data?.recipes?.slice(0, 3).map((recipe: RecipeItem, index: number) => {
+              const imageSrc = recipe.internalImage?.startsWith("http") 
+                ? recipe.internalImage 
+                : recipe.internalImage 
+                  ? `https://camp-coding.site/eloroba/${recipe.internalImage}`
+                  : "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png";
+
+              return (
+                <FadeIn key={recipe.id} direction="up" delay={0.1 * (index + 1)} className="min-w-[85vw] md:min-w-0 flex-shrink-0 snap-center">
+                  <Link href={`/${locale}/recipes/${recipe.id}`} className="group block h-[450px]">
+                    <HoverCard className="rounded-[32px] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 h-full relative">
+                      
+                      {/* Full Background Image */}
+                      <img src={imageSrc} alt={isEn ? recipe.nameEn || recipe.nameAr : recipe.nameAr} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 z-0" />
+                      
+                      {/* Permanent Gradient Overlay for text visibility */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
+
+                      {/* Content at Bottom */}
+                      <div className={`absolute bottom-0 left-0 right-0 p-8 z-20 flex flex-col justify-end h-full ${isEn ? "text-left" : "text-right"}`}>
+                        <h3 className="text-3xl font-bold text-white mb-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">{isEn ? recipe.nameEn || recipe.nameAr : recipe.nameAr}</h3>
+                        <div className={`flex items-center text-white/80 opacity-0 group-hover:opacity-100 font-medium text-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 ${isEn ? "" : "flex-row-reverse justify-end"}`}>
+                          <span>{isEn ? "View Recipe" : "عرض الوصفة"}</span>
+                          <svg className={`w-5 h-5 ${isEn ? "ml-2 rotate-180" : "mr-2"}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+                        </div>
+                      </div>
+
+                    </HoverCard>
+                  </Link>
+                </FadeIn>
+              );
+            })}
+          </div>
+
+          <FadeIn direction="up" delay={0.4}>
+            <Link href={`/${locale}/recipes`} className="inline-block border-2 border-orouba-blue text-orouba-blue font-bold px-10 py-4 rounded-full text-lg hover:bg-orouba-blue hover:text-white transition-colors">
+              {isEn ? "View More" : "عرض المزيد"}
+            </Link>
+          </FadeIn>
+        </div>
+      </section>
+
+    </div>
+  );
+}

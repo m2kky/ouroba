@@ -12,15 +12,15 @@ interface RecipeBannerProps {
 
 export default function RecipeBanner({ recipe, locale }: RecipeBannerProps) {
   const recipeName = locale === "ar" ? recipe.nameAr : recipe.nameEn;
-  const imageSrc = recipe.internalImage?.startsWith("http") 
-    ? recipe.internalImage 
-    : recipe.internalImage 
-      ? `https://camp-coding.site/eloroba/${recipe.internalImage}`
-      : "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png";
+  const imageSrc = recipe.internalImage 
+    ? (recipe.internalImage.startsWith("http") || recipe.internalImage.startsWith("/")) 
+      ? recipe.internalImage 
+      : `https://camp-coding.site/eloroba/${recipe.internalImage}`
+    : "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png";
 
   return (
     <div className="relative w-full min-h-[60vh] md:min-h-[80vh] flex flex-col justify-end pb-16 overflow-hidden rounded-b-[3rem]">
-      {/* Background Image/Video */}
+      {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
           src={imageSrc}
@@ -41,7 +41,7 @@ export default function RecipeBanner({ recipe, locale }: RecipeBannerProps) {
               {locale === "ar" ? "الصفحة الرئيسية" : "Home"}
             </Link>
             <ChevronLeft className="w-4 h-4 mt-1" />
-            <Link href={`/recipes/${locale}`} className="hover:text-orouba-yellow transition-colors">
+            <Link href={`/${locale}/recipes`} className="hover:text-orouba-yellow transition-colors">
               {locale === "ar" ? "الوصفات" : "Recipes"}
             </Link>
             <ChevronLeft className="w-4 h-4 mt-1" />
@@ -64,26 +64,6 @@ export default function RecipeBanner({ recipe, locale }: RecipeBannerProps) {
             {recipeName}
           </h1>
         </motion.div>
-
-        {/* Video Play Button */}
-        {recipe.videoLink && (
-          <motion.a 
-            href={recipe.videoLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex flex-col items-center gap-3 cursor-pointer group"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <div className="w-20 h-20 md:w-24 md:h-24 bg-orouba-yellow rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(255,241,0,0.5)] group-hover:scale-110 group-hover:shadow-[0_0_50px_rgba(255,241,0,0.8)] transition-all duration-300">
-              <Play className="w-10 h-10 text-white fill-white ml-2" />
-            </div>
-            <span className="text-white font-bold text-lg drop-shadow-md group-hover:text-orouba-yellow transition-colors">
-              {locale === "ar" ? "شاهد الفيديو" : "Watch Video"}
-            </span>
-          </motion.a>
-        )}
       </div>
     </div>
   );

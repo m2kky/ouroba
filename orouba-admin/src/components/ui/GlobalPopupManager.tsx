@@ -3,12 +3,14 @@
 import { useEffect, useState, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLocale } from "@/lib/locale-context";
 
 /* eslint-disable @next/next/no-img-element */
 
 interface PopupButton {
   id: string;
   textAr: string;
+  textEn: string;
   bgColor: string;
   textColor: string;
   actionType: string;
@@ -26,7 +28,9 @@ interface PopupConditions {
 interface PopupData {
   id: string;
   titleAr?: string;
+  titleEn?: string;
   contentAr?: string;
+  contentEn?: string;
   image?: string;
   type: string;
   animation: string;
@@ -94,6 +98,7 @@ function recordClose(id: string) {
 
 export default function GlobalPopupManager() {
   const pathname = usePathname();
+  const { locale } = useLocale();
   const [allPopups, setAllPopups] = useState<PopupData[]>([]);
   const [activePopupId, setActivePopupId] = useState<string | null>(null);
 
@@ -200,13 +205,13 @@ export default function GlobalPopupManager() {
           >
             <button onClick={close} className="absolute top-3 left-3 w-8 h-8 rounded-full bg-black/10 hover:bg-black/20 flex items-center justify-center text-lg font-bold z-10" style={{ color: popup.textColor }}>✕</button>
             {popup.image && <div className="w-full h-48 overflow-hidden"><img src={popup.image} alt="" className="w-full h-full object-cover" /></div>}
-            <div className="p-6 text-center" dir="rtl">
-              {popup.titleAr && <h3 className="text-2xl font-bold mb-3">{popup.titleAr}</h3>}
-              {popup.contentAr && <p className="text-sm leading-relaxed opacity-80 mb-6">{popup.contentAr}</p>}
+            <div className={`p-6 text-center`} dir={locale === "ar" ? "rtl" : "ltr"}>
+              {(locale === "ar" ? popup.titleAr : popup.titleEn) && <h3 className="text-2xl font-bold mb-3">{locale === "ar" ? popup.titleAr : popup.titleEn}</h3>}
+              {(locale === "ar" ? popup.contentAr : popup.contentEn) && <p className="text-sm leading-relaxed opacity-80 mb-6">{locale === "ar" ? popup.contentAr : popup.contentEn}</p>}
               {popup.buttons && Array.isArray(popup.buttons) && popup.buttons.length > 0 && (
                 <div className="flex flex-wrap gap-3 justify-center">
                   {(popup.buttons as PopupButton[]).map(btn => (
-                    <button key={btn.id} onClick={() => handleButtonClick(btn)} style={{ backgroundColor: btn.bgColor, color: btn.textColor, borderRadius: popup.borderRadius / 2 }} className="px-6 py-2.5 text-sm font-bold shadow-sm hover:opacity-90 transition-opacity">{btn.textAr}</button>
+                    <button key={btn.id} onClick={() => handleButtonClick(btn)} style={{ backgroundColor: btn.bgColor, color: btn.textColor, borderRadius: popup.borderRadius / 2 }} className="px-6 py-2.5 text-sm font-bold shadow-sm hover:opacity-90 transition-opacity">{locale === "ar" ? btn.textAr : btn.textEn}</button>
                   ))}
                 </div>
               )}

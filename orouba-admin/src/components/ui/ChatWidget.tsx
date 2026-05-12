@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, ChevronLeft, ArrowUp } from "lucide-react";
+import { useLocale } from "@/lib/locale-context";
 
 interface MenuItem {
   id: string;
@@ -26,11 +27,7 @@ export default function ChatWidget() {
   const panelRef = useRef<HTMLDivElement>(null);
 
   // Detect language from HTML dir attribute
-  const [lang, setLang] = useState<"ar" | "en">("ar");
-  useEffect(() => {
-    const dir = document.documentElement.dir || "rtl";
-    setLang(dir === "ltr" ? "en" : "ar");
-  }, [pathname]);
+  const { locale: lang } = useLocale();
 
   // Fetch menu items
   useEffect(() => {
@@ -53,9 +50,28 @@ export default function ChatWidget() {
     }
   }, []);
 
-  // Scroll listener for back to top
+  // Scroll listener — show back-to-top ONLY when scrolling UP
+  const lastScrollY = useRef(0);
   useEffect(() => {
-    const onScroll = () => setShowBackToTop(window.scrollY > 400);
+    const onScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Hide if at the very top
+      if (currentScrollY < 100) {
+        setShowBackToTop(false);
+      } 
+      // If scrolling UP, show the button
+      else if (currentScrollY < lastScrollY.current) {
+        setShowBackToTop(true);
+      } 
+      // If scrolling DOWN, hide the button
+      else if (currentScrollY > lastScrollY.current) {
+        setShowBackToTop(false);
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+    
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -104,7 +120,7 @@ export default function ChatWidget() {
             initial={{ opacity: 0, y: 20, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.8 }}
-            className="bg-white rounded-2xl shadow-xl border border-gray-100 px-5 py-3.5 max-w-[260px] cursor-pointer"
+            className="bg-white rounded-2xl shadow-xl border border-gray-100 px-5 py-3.5 max-w-[260px] cursor-pointer relative"
             onClick={() => { setShowNotification(false); setIsOpen(true); }}
           >
             <button onClick={(e) => { e.stopPropagation(); setShowNotification(false); }} className="absolute -top-2 -left-2 w-6 h-6 bg-gray-200 rounded-full flex items-center justify-center text-xs text-gray-600 hover:bg-gray-300">✕</button>
@@ -174,7 +190,7 @@ export default function ChatWidget() {
                         return (
                           <Link
                             key={item.id}
-                            href={item.linkUrl}
+                            href={item.linkUrl.startsWith("http") ? item.linkUrl : `/${lang}${item.linkUrl.startsWith("/") ? "" : "/"}${item.linkUrl}`}
                             onClick={() => setIsOpen(false)}
                             className="flex items-center gap-3 px-5 py-3.5 hover:bg-blue-50 transition-colors"
                           >
@@ -198,7 +214,7 @@ export default function ChatWidget() {
                       child.linkUrl ? (
                         <Link
                           key={child.id}
-                          href={child.linkUrl}
+                          href={child.linkUrl.startsWith("http") ? child.linkUrl : `/${lang}${child.linkUrl.startsWith("/") ? "" : "/"}${child.linkUrl}`}
                           onClick={() => setIsOpen(false)}
                           className="flex items-center gap-3 px-5 py-3.5 hover:bg-blue-50 transition-colors"
                         >
@@ -216,55 +232,43 @@ export default function ChatWidget() {
                 )}
               </AnimatePresence>
             </div>
-
-            {/* Footer */}
-            <div className="border-t border-gray-100 px-5 py-3 text-center">
-              <p className="text-xs text-gray-400">
-                {lang === "en" ? "Powered by Orouba Foods" : "بدعم من العروبة"}
-              </p>
-            </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Back to Top Button */}
-      <AnimatePresence>
-        {showBackToTop && (
-          <motion.button
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0 }}
-            onClick={scrollToTop}
-            className="w-12 h-12 bg-white text-[#1e4a8c] rounded-full shadow-lg border border-gray-200 flex items-center justify-center hover:bg-gray-50 hover:shadow-xl transition-all"
-            title={lang === "en" ? "Back to top" : "العودة للأعلى"}
-          >
-            <ArrowUp className="w-5 h-5" />
-          </motion.button>
-        )}
-      </AnimatePresence>
-
-      {/* Main Chat Button */}
-      <motion.button
-        onClick={() => { setIsOpen(!isOpen); setShowNotification(false); }}
-        className="w-14 h-14 bg-[#1e4a8c] text-white rounded-full shadow-lg hover:shadow-xl flex items-center justify-center transition-all hover:scale-105 relative"
-        whileTap={{ scale: 0.9 }}
-      >
-        <AnimatePresence mode="wait">
-          {isOpen ? (
-            <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }}>
-              <X className="w-6 h-6" />
-            </motion.div>
-          ) : (
-            <motion.div key="chat" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }}>
-              <MessageCircle className="w-6 h-6" />
-            </motion.div>
+      {/* Buttons Container for Smooth Swapping */}
+      <div className="relative w-14 h-[120px] flex justify-center">
+        
+        {/* Back to Top Button — Fixed at bottom */}
+        <AnimatePresence>
+          {showBackToTop && (
+            <motion.button
+              initial={{ opacity: 0, scale: 0.5, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.5, y: 20 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              onClick={scrollToTop}
+              className="absolute bottom-0 w-12 h-12 bg-white text-[#1e4a8c] rounded-full shadow-lg border border-gray-200 flex items-center justify-center hover:bg-gray-50 hover:shadow-xl transition-colors"
+              title={lang === "en" ? "Back to top" : "العودة للأعلى"}
+            >
+              <ArrowUp className="w-5 h-5" />
+            </motion.button>
           )}
         </AnimatePresence>
-        {/* Pulse ring on first load */}
-        {!isOpen && !sessionStorage?.getItem?.("chat_notif_shown") && (
-          <span className="absolute inset-0 rounded-full bg-[#1e4a8c] animate-ping opacity-30" />
-        )}
-      </motion.button>
+
+        {/* Main Chat Button — Moves up when back-to-top is visible */}
+        <motion.button
+          animate={{ y: showBackToTop ? -60 : 0 }}
+          transition={{ type: "spring", stiffness: 400, damping: 25 }}
+          onClick={() => { setIsOpen(!isOpen); setShowNotification(false); setActiveParent(null); }}
+          className="absolute bottom-0 w-14 h-14 bg-[#1e4a8c] text-white rounded-full shadow-lg hover:shadow-xl flex items-center justify-center transition-shadow"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <MessageCircle className="w-6 h-6" />
+        </motion.button>
+
+      </div>
     </div>
   );
 }

@@ -7,25 +7,31 @@ interface Recipe {
   nameAr: string | null;
   nameEn: string | null;
   internalImage: string | null;
-  videoLink: string | null;
 }
 
 interface RecommendedRecipesSliderProps {
   recipes: Recipe[];
   locale: "ar" | "en";
+  textColor?: string;
 }
 
-export default function RecommendedRecipesSlider({ recipes, locale }: RecommendedRecipesSliderProps) {
+export default function RecommendedRecipesSlider({ recipes, locale, textColor }: RecommendedRecipesSliderProps) {
   if (!recipes || recipes.length === 0) return null;
 
   return (
-    <div className="w-full mt-16 mb-24 bg-gray-50 py-16">
+    <div className="w-full mt-16 mb-24 py-16">
       <div className="max-w-[1400px] mx-auto px-4 md:px-8 mb-8 flex justify-between items-end">
         <div>
-          <h2 className="text-3xl md:text-4xl font-bold text-orouba-blue mb-2">
+          <h2 
+            className="text-3xl md:text-4xl font-bold mb-2"
+            style={{ color: textColor || "#004A99" }}
+          >
             {locale === "ar" ? "وصفات مقترحة" : "Recommended Recipes"}
           </h2>
-          <p className="text-gray-500 text-sm md:text-base">
+          <p 
+            className="text-sm md:text-base opacity-80"
+            style={{ color: textColor || "#6b7280" }}
+          >
             {locale === "ar" 
               ? "اكتشف أشهى الوصفات التي يمكنك تحضيرها باستخدام هذا المنتج" 
               : "Discover delicious recipes you can make with this product"}

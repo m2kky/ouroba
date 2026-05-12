@@ -3,14 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Play } from "lucide-react";
 
 interface Recipe {
   id: string;
   nameAr: string | null;
   nameEn: string | null;
   internalImage: string | null;
-  videoLink: string | null;
 }
 
 interface RecipeCardProps {
@@ -20,14 +18,14 @@ interface RecipeCardProps {
 
 export default function RecipeCard({ recipe, locale }: RecipeCardProps) {
   const recipeName = locale === "ar" ? recipe.nameAr : recipe.nameEn;
-  const imageSrc = recipe.internalImage?.startsWith("http") 
-    ? recipe.internalImage 
-    : recipe.internalImage 
-      ? `https://camp-coding.site/eloroba/${recipe.internalImage}`
-      : "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png";
+  const imageSrc = recipe.internalImage 
+    ? (recipe.internalImage.startsWith("http") || recipe.internalImage.startsWith("/")) 
+      ? recipe.internalImage 
+      : `https://camp-coding.site/eloroba/${recipe.internalImage}`
+    : "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png";
 
   return (
-    <Link href={`/recipes/details/${recipe.id}/${locale}`}>
+    <Link href={`/${locale}/recipes/${recipe.id}`}>
       <motion.div
         className="relative group bg-white rounded-3xl overflow-hidden shadow-md cursor-pointer w-full h-[280px]"
         initial={{ opacity: 0, scale: 0.95 }}
@@ -48,13 +46,6 @@ export default function RecipeCard({ recipe, locale }: RecipeCardProps) {
           {/* Dark Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-10" />
         </div>
-
-        {/* Play Icon if there's a video */}
-        {recipe.videoLink && (
-          <div className="absolute top-4 right-4 z-20 bg-orouba-yellow w-10 h-10 rounded-full flex items-center justify-center shadow-lg transform transition-transform group-hover:scale-110">
-            <Play className="w-4 h-4 text-white fill-white ml-1" />
-          </div>
-        )}
 
         {/* Content */}
         <div className="absolute bottom-0 left-0 right-0 p-5 z-20">

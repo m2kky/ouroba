@@ -27,7 +27,7 @@ export default function RecipeFeatures({ properties, locale }: RecipeFeaturesPro
             {prop.icon && (
               <div className="w-12 h-12 relative opacity-80">
                 <Image
-                  src={prop.icon.startsWith("http") ? prop.icon : `https://camp-coding.site/eloroba/${prop.icon}`}
+                  src={(prop.icon.startsWith("http") || prop.icon.startsWith("/")) ? prop.icon : `https://camp-coding.site/eloroba/${prop.icon}`}
                   alt={locale === "ar" ? prop.titleAr : prop.titleEn}
                   fill
                   className="object-contain"

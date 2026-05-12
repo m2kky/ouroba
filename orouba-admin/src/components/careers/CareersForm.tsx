@@ -23,20 +23,19 @@ export default function CareersForm({ locale }: { locale: "ar" | "en" }) {
     setSuccessMsg("");
 
     try {
-      let resumeUrl = "";
-
-      // If there's a file, we could upload it to an endpoint first.
-      // Since this is a migration, we'll assume the API expects the URL.
-      // We will skip actual file upload logic to cloud storage for now 
-      // unless an API route exists. We just pass a placeholder or handle it later.
+      const formDataToSend = new FormData();
+      formDataToSend.append("name", formData.name);
+      formDataToSend.append("email", formData.email);
+      formDataToSend.append("phone", formData.phone);
+      formDataToSend.append("position", formData.position);
+      formDataToSend.append("message", formData.message);
       if (file) {
-        resumeUrl = file.name; // Placeholder for now
+        formDataToSend.append("file", file);
       }
 
       const res = await fetch("/api/careers", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, resumeUrl }),
+        body: formDataToSend,
       });
 
       const data = await res.json();

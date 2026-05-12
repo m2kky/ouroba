@@ -19,11 +19,11 @@ interface RecipeAboutProps {
 }
 
 export default function RecipeAbout({ recipe, locale }: RecipeAboutProps) {
-  const imageSrc = recipe.internalImage?.startsWith("http") 
-    ? recipe.internalImage 
-    : recipe.internalImage 
-      ? `https://camp-coding.site/eloroba/${recipe.internalImage}`
-      : "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png";
+  const imageSrc = recipe.internalImage 
+    ? (recipe.internalImage.startsWith("http") || recipe.internalImage.startsWith("/")) 
+      ? recipe.internalImage 
+      : `https://camp-coding.site/eloroba/${recipe.internalImage}`
+    : "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png";
 
   const description = locale === "ar" ? recipe.descriptionAr : recipe.descriptionEn;
 

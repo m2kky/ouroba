@@ -49,53 +49,57 @@ export default function CollaborateForm({ locale }: { locale: "ar" | "en" }) {
   };
 
   return (
-    <div className="bg-white rounded-[3rem] p-8 md:p-12 shadow-[0_10px_40px_rgba(0,0,0,0.08)] border border-gray-100 max-w-5xl mx-auto w-full relative z-10 my-16">
-      <div className="text-center mb-10">
-        <h2 className="text-3xl md:text-4xl font-bold text-orouba-blue mb-4">
+    <div className="bg-[#fff148] rounded-xl p-8 md:p-12 max-w-5xl mx-auto w-full relative z-10 overflow-hidden shadow-sm">
+      {/* Background brush texture effect */}
+      <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/clean-textile.png')] mix-blend-overlay pointer-events-none"></div>
+
+      <div className="text-right mb-10 relative z-10">
+        <h2 className="text-3xl font-bold text-[#0d2a58] mb-3">
           {locale === "ar" ? "تعاون معنا الآن" : "Collaborate With Us Now"}
         </h2>
-        <p className="text-gray-600 text-lg">
+        <p className="text-[#3b5e8c] text-base font-medium">
           {locale === "ar"
             ? "تواصل معنا لمساعدتك على تلبية طلبك"
             : "We are here to help and excited to hear from you"}
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <input
-            required
-            type="text"
-            value={formData.firstName}
-            onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-            placeholder={locale === "ar" ? "الاسم الأول" : "First Name"}
-            className="w-full px-6 py-4 bg-[#f8f9fa] rounded-[2rem] border border-gray-100 focus:outline-none focus:border-orouba-yellow focus:ring-1 focus:ring-orouba-yellow transition-all"
-          />
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <input
             required
             type="text"
             value={formData.lastName}
             onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
             placeholder={locale === "ar" ? "الاسم الثاني" : "Last Name"}
-            className="w-full px-6 py-4 bg-[#f8f9fa] rounded-[2rem] border border-gray-100 focus:outline-none focus:border-orouba-yellow focus:ring-1 focus:ring-orouba-yellow transition-all"
+            className="w-full px-6 py-4 bg-white rounded-lg border-0 focus:outline-none focus:ring-2 focus:ring-[#1e4a8c] transition-all text-gray-700"
+          />
+          <input
+            required
+            type="text"
+            value={formData.firstName}
+            onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+            placeholder={locale === "ar" ? "الاسم الأول" : "First Name"}
+            className="w-full px-6 py-4 bg-white rounded-lg border-0 focus:outline-none focus:ring-2 focus:ring-[#1e4a8c] transition-all text-gray-700"
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <input
-            type="tel"
-            value={formData.phone}
-            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-            placeholder={locale === "ar" ? "رقم الهاتف" : "Your Number"}
-            className="w-full px-6 py-4 bg-[#f8f9fa] rounded-[2rem] border border-gray-100 focus:outline-none focus:border-orouba-yellow focus:ring-1 focus:ring-orouba-yellow transition-all"
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <input
             required
             type="email"
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             placeholder={locale === "ar" ? "البريد الإلكترونى" : "Your Email"}
-            className="w-full px-6 py-4 bg-[#f8f9fa] rounded-[2rem] border border-gray-100 focus:outline-none focus:border-orouba-yellow focus:ring-1 focus:ring-orouba-yellow transition-all"
+            className="w-full px-6 py-4 bg-white rounded-lg border-0 focus:outline-none focus:ring-2 focus:ring-[#1e4a8c] transition-all text-gray-700"
+          />
+          <input
+            type="tel"
+            value={formData.phone}
+            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+            placeholder={locale === "ar" ? "رقم الهاتف" : "Your Number"}
+            className="w-full px-6 py-4 bg-white rounded-lg border-0 focus:outline-none focus:ring-2 focus:ring-[#1e4a8c] transition-all text-gray-700 text-right"
+            dir={locale === "ar" ? "rtl" : "ltr"}
           />
         </div>
 
@@ -104,18 +108,18 @@ export default function CollaborateForm({ locale }: { locale: "ar" | "en" }) {
           value={formData.message}
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
           placeholder={locale === "ar" ? "تفاصيل الطلب" : "Request Details"}
-          rows={4}
-          className="w-full px-6 py-4 bg-[#f8f9fa] rounded-[2rem] border border-gray-100 focus:outline-none focus:border-orouba-yellow focus:ring-1 focus:ring-orouba-yellow transition-all resize-none"
+          rows={5}
+          className="w-full px-6 py-4 bg-white rounded-lg border-0 focus:outline-none focus:ring-2 focus:ring-[#1e4a8c] transition-all resize-none text-gray-700"
         ></textarea>
 
-        {successMsg && <p className="text-green-600 font-medium text-center">{successMsg}</p>}
-        {errorMsg && <p className="text-red-600 font-medium text-center">{errorMsg}</p>}
+        {successMsg && <p className="text-green-700 font-bold text-center mt-2">{successMsg}</p>}
+        {errorMsg && <p className="text-red-600 font-bold text-center mt-2">{errorMsg}</p>}
 
-        <div className="flex justify-center mt-4">
+        <div className="mt-2">
           <button
             type="submit"
             disabled={loading}
-            className="w-full md:w-auto px-16 py-4 bg-orouba-yellow text-orouba-blue rounded-full font-bold text-lg hover:bg-yellow-400 transition-colors shadow-md disabled:opacity-70 flex justify-center items-center gap-2"
+            className="w-full py-4 bg-[#1e4a8c] text-white rounded-lg font-bold text-lg hover:bg-blue-900 transition-colors shadow-sm disabled:opacity-70 flex justify-center items-center gap-2"
           >
             {loading && <Loader2 className="w-5 h-5 animate-spin" />}
             {locale === "ar" ? "إرسال" : "Submit"}
