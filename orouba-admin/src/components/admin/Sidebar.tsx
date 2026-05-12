@@ -23,7 +23,8 @@ import {
   MessageSquare, 
   Settings,
   Users,
-  Megaphone
+  Megaphone,
+  MessagesSquare
 } from "lucide-react";
 
 interface SidebarProps {
@@ -67,6 +68,7 @@ export default function Sidebar({ userRole }: SidebarProps) {
         { name: "المميزات", href: "/admin/features", icon: Star },
         { name: "مناطق التصدير", href: "/admin/continents", icon: Globe2 },
         { name: "النوافذ المنبثقة", href: "/admin/popups", icon: Megaphone },
+        { name: "قائمة الشات", href: "/admin/chat-menu", icon: MessagesSquare },
       ]
     },
     {

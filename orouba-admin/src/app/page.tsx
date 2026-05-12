@@ -34,7 +34,7 @@ export default async function HomePage() {
     <div className="bg-white" dir="rtl">
       
       {/* 1. Hero Section */}
-      <section className="relative w-full overflow-hidden mt-4">
+      <section className="relative w-full overflow-hidden -mt-4">
         
         {/* Desktop View */}
         <div className="hidden md:block w-full">

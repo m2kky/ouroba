@@ -50,7 +50,7 @@ export default function Navbar({ settings }: { settings?: Record<string, { en?: 
   ];
 
   return (
-    <nav className={`bg-orouba-blue sticky top-0 z-50 text-white shadow-md pb-2 -mb-8 transition-[border-radius] duration-300 ${isMenuOpen ? "rounded-b-none" : "rounded-b-[2rem]"}`}>
+    <nav className={`bg-orouba-blue sticky top-0 z-50 text-white shadow-md transition-[border-radius] duration-300 ${isMenuOpen ? "rounded-b-none" : "rounded-b-[2rem]"}`}>
       <div className="max-w-[1400px] mx-auto px-4 md:px-8">
         <div className="flex justify-between items-center h-24">
           

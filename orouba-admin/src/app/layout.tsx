@@ -7,6 +7,7 @@ import { getSiteData } from "@/lib/api-client";
 
 import SmoothScroll from "@/components/layout/SmoothScroll";
 import GlobalPopupManager from "@/components/ui/GlobalPopupManager";
+import ChatWidget from "@/components/ui/ChatWidget";
 
 const cairo = Cairo({
   variable: "--font-cairo",
@@ -40,9 +41,10 @@ export default async function RootLayout({
   const socials = data?.socials || [];
 
   return (
-    <html lang="ar" dir="rtl">
+    <html lang="ar" dir="rtl" suppressHydrationWarning>
       <body
         className={`${cairo.variable} font-cairo antialiased min-h-screen flex flex-col`}
+        suppressHydrationWarning
       >
         <SmoothScroll>
           <Navbar settings={settings} />
@@ -51,6 +53,7 @@ export default async function RootLayout({
           </main>
           <Footer settings={settings} socials={socials} brands={brands} />
           <GlobalPopupManager />
+          <ChatWidget />
         </SmoothScroll>
       </body>
     </html>

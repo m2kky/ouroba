@@ -650,3 +650,25 @@ model Popup {
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 }
+
+// -----------------------------------------------------------------------------
+// Chat Widget
+// -----------------------------------------------------------------------------
+
+model ChatMenuItem {
+  id          String  @id @default(cuid())
+  labelAr     String
+  labelEn     String
+  icon        String? // emoji or icon name
+  linkUrl     String? // internal or external link
+  parentId    String? // null = top-level, else = sub-item
+  number      Int     @default(999)
+  isHidden    Boolean @default(false)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([parentId])
+  @@index([isHidden])
+}
+
