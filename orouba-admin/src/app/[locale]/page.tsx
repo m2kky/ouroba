@@ -29,12 +29,15 @@ export default async function HomePage({
   const firstBanner = activeBanners[0];
   
   // Desktop Media
-  const isVideoDesktop = firstBanner?.type === "video";
-  const mediaDesktop = firstBanner?.videoLink || firstBanner?.image || "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/1.mp4";
+  const fallbackVideo = isEn 
+    ? "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/1_en.mp4"
+    : "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/1.mp4";
+  const isVideoDesktop = firstBanner ? firstBanner.type === "video" : true;
+  const mediaDesktop = firstBanner?.videoLink || firstBanner?.image || fallbackVideo;
   
   // Mobile Media
   const mediaMobile = firstBanner?.smallVideo || firstBanner?.smallImg || mediaDesktop;
-  const isVideoMobile = !!firstBanner?.smallVideo || (mediaMobile === mediaDesktop && isVideoDesktop);
+  const isVideoMobile = firstBanner ? !!firstBanner.smallVideo || (!firstBanner.smallImg && isVideoDesktop) : true;
 
   // Vision Section Text (Assuming number 1 or specific title)
   const visionSection = sectionTexts?.find((s: SectionTextItem) => s.titleEn?.toLowerCase().includes("vision") || s.number === 1);
