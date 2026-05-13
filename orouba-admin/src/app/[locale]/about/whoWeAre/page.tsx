@@ -55,11 +55,21 @@ export default async function AboutPage({
           <div className="w-full">
             <picture>
               <source media="(max-width: 500px)" srcSet={getImageUrl(smallAboutImage)} />
-              <img
-                src={getImageUrl(aboutImage) || "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png"}
-                alt="who we are"
-                className="w-full h-auto object-cover rounded-[20px] shadow-lg"
-              />
+              {getImageUrl(aboutImage) ? (
+                <img
+                  src={getImageUrl(aboutImage)}
+                  alt="who we are"
+                  className="w-full h-auto md:max-h-[500px] object-cover rounded-[20px] shadow-lg"
+                />
+              ) : (
+                <div className="w-full h-[300px] md:h-[400px] bg-gray-50 flex items-center justify-center rounded-[20px] shadow-lg border border-gray-100">
+                  <img
+                    src="https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png"
+                    alt="Orouba Foods"
+                    className="w-48 h-48 md:w-64 md:h-64 object-contain opacity-50"
+                  />
+                </div>
+              )}
             </picture>
           </div>
         </div>
