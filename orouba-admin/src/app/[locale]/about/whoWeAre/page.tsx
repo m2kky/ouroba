@@ -118,16 +118,16 @@ export default async function AboutPage({
 
         {/* Features / Areas */}
         <div className="mt-16 mb-20">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-12 gap-x-8">
+          <div className="flex flex-wrap justify-center gap-y-16 gap-x-8 md:gap-x-12">
             {features && features.map((item: any) => (
-              <div key={item.id} className="flex flex-col items-center text-center group">
-                <div className="w-24 h-24 rounded-full bg-[#ffcc00] flex items-center justify-center mb-6 shadow-md transform group-hover:scale-110 transition-transform duration-300">
-                  <img src={getImageUrl(item.image)} alt={item.titleEn} className="w-12 h-12 object-contain" />
+              <div key={item.id} className="flex flex-col items-center text-center group w-full sm:w-[calc(50%-2rem)] md:w-[calc(33.333%-2rem)]">
+                <div className="w-24 h-24 flex items-center justify-center mb-6 transform group-hover:scale-110 transition-transform duration-300">
+                  <img src={getImageUrl(item.image)} alt={item.titleEn} className="w-16 h-16 object-contain" />
                 </div>
-                <h5 className="font-bold text-[24px] text-[#035297] mb-3">
+                <h5 className="font-bold text-[22px] text-[#035297] mb-3">
                   {locale === 'en' ? item.titleEn : item.titleAr}
                 </h5>
-                <p className="w-3/4 mx-auto text-[#7a7a7a] leading-relaxed">
+                <p className="w-4/5 mx-auto text-[#035297] font-medium leading-relaxed">
                   {locale === 'en' ? item.descriptionEn : item.descriptionAr}
                 </p>
               </div>
@@ -140,23 +140,50 @@ export default async function AboutPage({
           <h4 className="text-[40px] text-[#035297] font-bold mb-12" style={{ textAlign: locale === 'en' ? 'left' : 'right' }}>
             {locale === 'ar' ? "مراحل الإنتاج" : "Production Steps"}
           </h4>
-          <div className="flex flex-col gap-16">
-            {productionSteps && productionSteps.map((item: any, index: number) => (
-              <div key={item.id} className={`flex flex-col md:flex-row items-center gap-16 md:gap-24 py-10 ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
-                <div className="w-full md:w-1/2 relative">
-                  {/* Tilted Yellow Background */}
-                  <div className={`absolute inset-0 bg-[#ffcc00] rounded-[20px] transform ${index % 2 !== 0 ? '-rotate-3 -translate-x-3 translate-y-3' : 'rotate-3 translate-x-3 translate-y-3'}`}></div>
-                  <img src={getImageUrl(item.image)} alt="Production Step" className="w-full h-auto rounded-[20px] shadow-lg relative z-10" />
-                </div>
-                <div 
-                  className="w-full md:w-1/2 [&_b]:text-[#035297] [&_b]:text-xl [&_li]:mb-4 [&_ul]:list-none [&_ul]:p-0 [&_span]:text-[#7a7a7a] [&_span]:text-lg"
-                  style={{ textAlign: locale === 'en' ? 'left' : 'right' }}
-                  dangerouslySetInnerHTML={{
-                    __html: sanitizeHtml(locale === 'ar' ? item.textAr : item.textEn),
-                  }}
-                />
-              </div>
-            ))}
+          <div className="space-y-24">
+            {(() => {
+              if (!productionSteps) return null;
+              const chunks = [];
+              for (let i = 0; i < productionSteps.length; i += 3) {
+                chunks.push(productionSteps.slice(i, i + 3));
+              }
+              return chunks.map((chunk, chunkIndex) => {
+                const isEven = chunkIndex % 2 === 0;
+                const stepWithImage = chunk.find((s: any) => s.image) || chunk[0];
+                return (
+                  <div key={chunkIndex} className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-12 mb-24`}>
+                    
+                    {/* Image Column */}
+                    <div className="w-full md:w-1/2 relative flex justify-center">
+                      <div className={`absolute inset-0 bg-[#ffcc00] rounded-[20px] transform ${isEven ? '-rotate-3' : 'rotate-3'} scale-105 z-0 hidden md:block`}></div>
+                      {stepWithImage?.image ? (
+                        <div className="relative z-10 w-full h-80 md:h-[400px] rounded-[20px] overflow-hidden shadow-lg bg-gray-100">
+                          <img src={getImageUrl(stepWithImage.image)} alt="Production Step" className="w-full h-full object-cover" />
+                        </div>
+                      ) : (
+                        <div className="relative z-10 w-full h-80 md:h-[400px] rounded-[20px] shadow-lg bg-gray-200 flex items-center justify-center">
+                          <span className="text-gray-400">No Image</span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Texts Column */}
+                    <div className="w-full md:w-1/2 flex flex-col gap-6" style={{ textAlign: locale === 'en' ? 'left' : 'right' }}>
+                      {chunk.map((step: any) => (
+                        <div key={step.id}>
+                          <div 
+                            className="text-[#035297] text-[18px] md:text-[20px] leading-relaxed inline-block"
+                            dangerouslySetInnerHTML={{
+                              __html: sanitizeHtml(locale === 'en' ? step.textEn : step.textAr)
+                            }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              });
+            })()}
           </div>
         </div>
 
