@@ -74,7 +74,7 @@ export default function RelatedProductsSlider({ products, brand, locale, textCol
             const mainImg = product.images?.[0]?.url;
             return (
               <div key={product.id} className="min-w-[240px] sm:min-w-[280px] snap-center shrink-0 flex justify-center">
-                <Link href={`/${locale}/products/details/${product.id}`} className="group flex flex-col items-center">
+                <Link href={`/${locale}/products/details/${product.id}/${(locale === "ar" ? product.nameAr : product.nameEn).replace(/\s+/g, '-')}`} className="group flex flex-col items-center">
                   <div className="relative w-[220px] h-[220px] md:w-[260px] md:h-[260px] flex items-center justify-center transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3">
                     {mainImg ? (
                       <Image

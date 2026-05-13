@@ -15,12 +15,20 @@ function getBaseUrl(): string {
 
 export function getImageUrl(url: string | null | undefined): string {
   if (!url) return "";
+  
+  const r2Url = process.env.NEXT_PUBLIC_R2_URL || process.env.R2_PUBLIC_URL;
+  
+  // Intercept and rewrite legacy DB full URLs to R2 bucket
+  if (r2Url && url.includes("camp-coding.site/eloroba/storage/app/images/")) {
+    const filename = url.split('/').pop();
+    return `${r2Url}/${filename}`;
+  }
+
   if (url.startsWith("http") || url.startsWith("data:") || url.startsWith("/")) {
     return url;
   }
   
   // If it's a relative path, prefix with R2 URL or legacy URL
-  const r2Url = process.env.NEXT_PUBLIC_R2_URL || process.env.R2_PUBLIC_URL;
   if (r2Url) {
     return `${r2Url}/${url}`;
   }
