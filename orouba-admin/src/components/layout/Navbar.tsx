@@ -8,7 +8,7 @@ import { useLocale } from "@/lib/locale-context";
 
 /* eslint-disable @next/next/no-img-element */
 
-export default function Navbar({ settings }: { settings?: Record<string, { en?: string; ar?: string }> }) {
+export default function Navbar({ settings, brands: brandsProp }: { settings?: Record<string, { en?: string; ar?: string }>; brands?: any[] }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
@@ -61,6 +61,16 @@ export default function Navbar({ settings }: { settings?: Record<string, { en?: 
     };
   }, [isMenuOpen]);
 
+  // Build brand children dynamically from actual database data
+  const brandChildren = (brandsProp || []).slice(0, 5).map((brand: any) => {
+    const brandName = locale === 'ar' ? brand.nameAr : (brand.nameEn || brand.nameAr);
+    const slugName = (brand.nameEn || brand.nameAr || 'brand').replace(/\s+/g, '-');
+    return {
+      label: brandName,
+      href: `/${locale}/brands/${slugName}/${brand.id}`,
+    };
+  });
+
   const navLinks = [
     { label: locale === "ar" ? "الرئيسية" : "Home", href: `/${locale}` },
     { 
@@ -75,10 +85,8 @@ export default function Navbar({ settings }: { settings?: Record<string, { en?: 
     { 
       label: locale === "ar" ? "العلامات التجارية" : "Brands", 
       href: `#`,
-      children: [
-        { label: locale === "ar" ? "بسمة" : "Basma", href: `/${locale}/brands/Basma/5` },
-        { label: locale === "ar" ? "بابيتس" : "Babits", href: `/${locale}/brands/Babits/8` },
-        { label: locale === "ar" ? "فريدة" : "Farida", href: `/${locale}/brands/Farida/7` },
+      children: brandChildren.length > 0 ? brandChildren : [
+        { label: locale === "ar" ? "عرض الكل" : "View All", href: `/${locale}/brands` },
       ]
     },
     { label: locale === "ar" ? "التصدير" : "Export", href: `/${locale}/export` },
@@ -190,7 +198,7 @@ export default function Navbar({ settings }: { settings?: Record<string, { en?: 
               </button>
 
               {/* Search Dropdown */}
-              <div className={`absolute top-[140px] right-1/2 translate-x-1/2 w-72 bg-white shadow-2xl p-4 z-50 transition-all duration-300 rounded-t-3xl ${isSearchOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}>
+              <div className={`absolute top-full right-0 mt-4 w-72 md:w-80 bg-white shadow-2xl p-4 z-50 transition-all duration-300 rounded-t-3xl md:translate-x-1/4 ${isSearchOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}>
                 <form onSubmit={handleSearch} className="flex items-center gap-2 relative z-10">
                   <input 
                     type="text" 
@@ -226,7 +234,7 @@ export default function Navbar({ settings }: { settings?: Record<string, { en?: 
                 </svg>
               </button>
               
-              <div className={`absolute top-[140px] right-1/2 translate-x-1/2 w-48 bg-white shadow-2xl text-center z-50 rounded-t-3xl transition-all duration-300 ${isLangMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible lg:group-hover:opacity-100 lg:group-hover:visible'}`}>
+              <div className={`absolute top-full right-0 mt-4 w-48 bg-white shadow-2xl text-center z-50 rounded-t-3xl transition-all duration-300 ${isLangMenuOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2 lg:group-hover:opacity-100 lg:group-hover:visible'}`}>
                 <ul className="flex flex-col py-4 relative z-10">
                   <li>
                     <button 

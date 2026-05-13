@@ -6,6 +6,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import LogoLoader from "@/components/ui/LogoLoader";
+import { getImageUrl } from "@/lib/api-client";
 
 interface ProductCardProps {
   product: {
@@ -58,7 +59,7 @@ export default function ProductCard({ product, brand, locale }: ProductCardProps
         <div className="relative z-10 w-full flex-grow flex items-center justify-center p-6 pb-2 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3 mt-4">
           {product.images?.[0]?.url ? (
             <Image
-              src={(product.images[0].url.startsWith("http") || product.images[0].url.startsWith("/")) ? product.images[0].url : `https://camp-coding.site/eloroba/${product.images[0].url}`}
+              src={getImageUrl(product.images?.[0]?.url)}
               alt={productName}
               width={250}
               height={250}

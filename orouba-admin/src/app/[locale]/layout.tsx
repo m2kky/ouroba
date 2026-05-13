@@ -42,7 +42,7 @@ export default async function PublicLayout({
   return (
     <SmoothScroll>
       <PageTransitionLoader />
-      <Navbar settings={settings} />
+      <Navbar settings={settings} brands={brands} />
       <main className="flex-grow">
         {children}
       </main>

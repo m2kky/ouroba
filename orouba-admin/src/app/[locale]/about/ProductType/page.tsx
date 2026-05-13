@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getSiteData } from "@/lib/api-client";
+import { getSiteData, getImageUrl } from "@/lib/api-client";
 import { Metadata } from "next";
 import { ChevronLeft } from "lucide-react";
 import FadeIn from "@/components/ui/FadeIn";
@@ -129,7 +129,7 @@ export default async function ProductsPage({
                     <div className="group relative w-72 h-72 md:w-[450px] md:h-[450px] transition-all duration-700 ease-out hover:rotate-6 hover:scale-110 hover:-translate-y-4 cursor-pointer">
                       {item.image ? (
                         <Image
-                          src={item.image || "/placeholder.png"}
+                          src={getImageUrl(item.image) || "/placeholder.png"}
                           alt={t(locale, item.titleAr, item.titleEn)}
                           fill
                           className="object-contain drop-shadow-2xl group-hover:drop-shadow-[0_20px_40px_rgba(0,0,0,0.4)] transition-all duration-700"
@@ -158,21 +158,19 @@ export default async function ProductsPage({
                         const cat = catTypeCat.category;
                         if (!cat || !cat.brand) return null;
                         const brandLogo = catTypeCat.image || cat.brand.imageSmallMain || cat.brand.image;
-                        const brandName = locale === 'ar' ? cat.brand.nameAr : cat.brand.nameEn;
-                        const catName = locale === 'ar' ? cat.nameAr : cat.nameEn;
-                        const slugBrandName = brandName.replace(/\s+/g, '-');
-                        const slugCatName = catName.replace(/\s+/g, '-');
+                        const brandNameEn = cat.brand.nameEn || cat.brand.nameAr || 'brand';
+                        const slugBrandName = brandNameEn.replace(/\s+/g, '-');
                         
                         return (
                           <Link 
                             key={catTypeCat.id}
-                            href={`/${locale}/brands/${slugBrandName}/${cat.brand.id}/${cat.id}/${slugCatName}?q=${cat.id}`}
+                            href={`/${locale}/brands/${slugBrandName}/${cat.brand.id}/${cat.id}/${(cat.nameEn || cat.nameAr || 'category').replace(/\s+/g, '-')}`}
                             className="group relative block w-28 h-28 bg-transparent transition-all duration-500 hover:-translate-y-3 hover:scale-110"
                             title={`${cat.brand.nameAr} - ${cat.nameAr}`}
                           >
                             {brandLogo ? (
                               <Image 
-                                src={catTypeCat.image || (cat.brand.id === '5' ? '/basma.png' : '/farida.png')}
+                                src={getImageUrl(brandLogo)}
                                 alt={locale === 'ar' ? cat.brand.nameAr : cat.brand.nameEn}
                                 fill
                                 className="object-contain brightness-100 group-hover:brightness-110 group-hover:drop-shadow-[0_10px_20px_rgba(0,0,0,0.3)] transition-all duration-500"

@@ -15,7 +15,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 export default async function BrandsIndexPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
+  const { locale: rawLocale } = await params;
+  const locale = (rawLocale === 'en' ? 'en' : 'ar') as import("@/lib/server-locale").Locale;
   const data = await getSiteData();
   const { brands } = data;
 
@@ -35,7 +36,9 @@ export default async function BrandsIndexPage({ params }: { params: Promise<{ lo
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {brands.map((brand: any) => (
+          {brands.map((brand: any) => {
+            const slugName = (brand.nameEn || brand.nameAr || 'brand').replace(/\s+/g, '-');
+            return (
             <div
               key={brand.id}
               className="bg-white rounded-[2rem] p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group flex flex-col"
@@ -66,14 +69,15 @@ export default async function BrandsIndexPage({ params }: { params: Promise<{ lo
                   </span>
                 </div>
                 <Link
-                  href={`/${locale}/brands/${brand.id}`}
+                  href={`/${locale}/brands/${slugName}/${brand.id}`}
                   className="block w-full text-center py-4 rounded-full font-bold transition-colors bg-orouba-yellow text-orouba-blue hover:bg-yellow-400 shadow-sm"
                 >
                   {locale === 'ar' ? 'تصفح المنتجات' : 'Browse Products'}
                 </Link>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

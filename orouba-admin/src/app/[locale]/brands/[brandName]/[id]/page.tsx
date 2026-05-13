@@ -7,15 +7,9 @@ import { getServerLocale, t } from "@/lib/server-locale";
 export async function generateMetadata({ params }: { params: Promise<{ brandName: string; id: string, locale: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
   const data = await getSiteData();
-  let brand = data.brands.find((b: any) => b.id === resolvedParams.id);
+  const brand = data.brands.find((b: any) => b.id === resolvedParams.id);
   const isEn = resolvedParams.locale === 'en';
 
-  if (!brand) {
-    if (resolvedParams.id === "5") brand = { id: "5", nameAr: "بسمة", nameEn: "Basma", descriptionAr: "منتجات بسمة عالية الجودة", descriptionEn: "High quality Basma products", categories: [] };
-    else if (resolvedParams.id === "8") brand = { id: "8", nameAr: "بابيتس", nameEn: "Babits", descriptionAr: "منتجات بابيتس المميزة", descriptionEn: "Special Babits products", categories: [] };
-    else if (resolvedParams.id === "7") brand = { id: "7", nameAr: "فريدة", nameEn: "Farida", descriptionAr: "منتجات فريدة الفاخرة", descriptionEn: "Luxurious Farida products", categories: [] };
-  }
-  
   return {
     title: brand ? `${isEn ? brand.nameEn : brand.nameAr} | ${isEn ? 'Our Products' : 'منتجاتنا'}` : (isEn ? 'Brand Not Found' : 'علامة غير موجودة'),
     description: (isEn ? brand?.descriptionEn : brand?.descriptionAr) || (isEn ? "Explore this brand's products." : "استكشف منتجات هذه العلامة التجارية."),
@@ -27,7 +21,7 @@ export default async function BrandDetailPage({ params }: { params: Promise<{ br
   const data = await getSiteData();
   const locale = (resolvedParams.locale as any) === "en" ? "en" : "ar";
   const isEn = locale === 'en';
-  let brand = data.brands.find((b: any) => b.id === resolvedParams.id);
+  const brand = data.brands.find((b: any) => b.id === resolvedParams.id);
 
   if (!brand) {
     return (
@@ -168,7 +162,7 @@ export default async function BrandDetailPage({ params }: { params: Promise<{ br
                           {t(locale, category.nameAr, category.nameEn)}
                         </h3>
                         <Link 
-                          href={`/${locale}/brands/${brand.id}/${category.id}`} 
+                          href={`/${locale}/brands/${resolvedParams.brandName}/${brand.id}/${category.id}/${(isEn ? category.nameEn : category.nameAr || 'category').replace(/\s+/g, '-')}`} 
                           className="text-white hover:text-orouba-yellow font-bold text-lg flex items-center justify-center gap-2 transition-all group-hover:gap-3"
                         >
                           <span className="drop-shadow-sm text-sm md:text-base">{isEn ? 'Show All' : 'إظهار الكل'}</span>

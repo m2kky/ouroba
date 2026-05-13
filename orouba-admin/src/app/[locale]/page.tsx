@@ -119,9 +119,11 @@ export default async function HomePage({
             <h2 className="text-4xl md:text-5xl font-bold text-orouba-blue mb-4">{isEn ? "Our Brands" : "منتجاتنا"}</h2>
           </FadeIn>
           <div className="flex md:grid md:grid-cols-3 gap-4 md:gap-8 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-6 -mx-4 px-4 md:mx-auto md:px-0">
-            {brands?.slice(0, 3).map((brand: BrandItem, index: number) => (
+            {brands?.slice(0, 3).map((brand: BrandItem, index: number) => {
+              const slugName = (brand.nameEn || brand.nameAr || 'brand').replace(/\s+/g, '-');
+              return (
               <FadeIn key={brand.id} direction="up" delay={0.1 * (index + 1)} className="w-[75vw] sm:w-[45vw] md:w-auto flex-shrink-0 snap-center md:h-full">
-                <Link href={`/${locale}/brands/${brand.id}`} className="block h-[400px]">
+                <Link href={`/${locale}/brands/${slugName}/${brand.id}`} className="block h-[400px]">
                   <HoverCard className="rounded-[30px] overflow-hidden shadow-xl h-full relative group cursor-pointer border-4 border-white/20">
                     <img 
                       src={brand.image || "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png"} 
@@ -134,7 +136,8 @@ export default async function HomePage({
                   </HoverCard>
                 </Link>
               </FadeIn>
-            ))}
+              );
+            })}
           </div>
           
           {brands && brands.length > 3 && (

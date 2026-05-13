@@ -69,9 +69,25 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
             <div className="text-center">
               <h3 className="text-xl font-bold mb-8 text-[#ffcc00] inline-block">{locale === "ar" ? "العلامات التجارية" : "Brands"}</h3>
               <ul className="space-y-6">
-                <li><Link href={`/${locale}/brands/Basma/5`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "بسمة" : "Basma"}</Link></li>
-                <li><Link href={`/${locale}/brands/Farida/7`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "فريدة" : "Farida"}</Link></li>
-                <li><Link href={`/${locale}/brands/Babits/8`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "بابيتس" : "Babits"}</Link></li>
+                {(brands && brands.length > 0) ? (
+                  brands.slice(0, 3).map((brand) => {
+                    const brandName = locale === 'ar' ? (brand as any).nameAr : ((brand as any).nameEn || (brand as any).nameAr || 'Brand');
+                    const slug = ((brand as any).nameEn || (brand as any).nameAr || 'brand').replace(/\s+/g, '-');
+                    return (
+                      <li key={brand.id}>
+                        <Link href={`/${locale}/brands/${slug}/${brand.id}`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">
+                          {brandName}
+                        </Link>
+                      </li>
+                    );
+                  })
+                ) : (
+                  <>
+                    <li><Link href={`/${locale}/brands/Basma/5`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "بسمة" : "Basma"}</Link></li>
+                    <li><Link href={`/${locale}/brands/Farida/7`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "فريدة" : "Farida"}</Link></li>
+                    <li><Link href={`/${locale}/brands/Babits/8`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "بابيتس" : "Babits"}</Link></li>
+                  </>
+                )}
               </ul>
             </div>
 
@@ -131,7 +147,7 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                           </a>
                         ))}
                       </div>
-                      <Link href={`/${locale}/brands/${(brand as any).nameEn || "Brand"}/${brand.id}`}>
+                      <Link href={`/${locale}/brands/${((brand as any).nameEn || (brand as any).nameAr || 'brand').replace(/\s+/g, '-')}/${brand.id}`}>
                         <img src={brand.image || "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png"} alt={brand.nameAr} className="w-12 h-12 object-contain bg-white rounded-md p-1" />
                       </Link>
                     </div>
@@ -181,9 +197,25 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                       className="overflow-hidden"
                     >
                       <ul className={`space-y-4 pt-6 text-xl font-medium ${locale === "ar" ? "text-right pl-10 pr-2" : "text-left pr-10 pl-2"}`}>
-                        <li><Link href={`/${locale}/brands/Basma/5`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "بسمة" : "Basma"}</Link></li>
-                        <li><Link href={`/${locale}/brands/Farida/7`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "فريدة" : "Farida"}</Link></li>
-                        <li><Link href={`/${locale}/brands/Babits/8`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "بابيتس" : "Babits"}</Link></li>
+                        {(brands && brands.length > 0) ? (
+                          brands.slice(0, 3).map((brand) => {
+                            const brandName = locale === 'ar' ? (brand as any).nameAr : ((brand as any).nameEn || (brand as any).nameAr || 'Brand');
+                            const slug = ((brand as any).nameEn || (brand as any).nameAr || 'brand').replace(/\s+/g, '-');
+                            return (
+                              <li key={brand.id}>
+                                <Link href={`/${locale}/brands/${slug}/${brand.id}`} className="text-white hover:text-[#ffcc00] transition-colors">
+                                  {brandName}
+                                </Link>
+                              </li>
+                            );
+                          })
+                        ) : (
+                          <>
+                            <li><Link href={`/${locale}/brands/Basma/5`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "بسمة" : "Basma"}</Link></li>
+                            <li><Link href={`/${locale}/brands/Farida/7`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "فريدة" : "Farida"}</Link></li>
+                            <li><Link href={`/${locale}/brands/Babits/8`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "بابيتس" : "Babits"}</Link></li>
+                          </>
+                        )}
                       </ul>
                     </motion.div>
                   )}

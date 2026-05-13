@@ -1,4 +1,4 @@
-import { getSiteData } from "@/lib/api-client";
+import { getSiteData, getImageUrl } from "@/lib/api-client";
 import { Metadata } from "next";
 import Link from "next/link";
 import { t } from "@/lib/server-locale";
@@ -54,9 +54,9 @@ export default async function AboutPage({
         <div className="flex flex-col md:flex-row mb-12 justify-center">
           <div className="w-full">
             <picture>
-              <source media="(max-width: 500px)" srcSet={smallAboutImage} />
+              <source media="(max-width: 500px)" srcSet={getImageUrl(smallAboutImage)} />
               <img
-                src={aboutImage}
+                src={getImageUrl(aboutImage) || "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png"}
                 alt="who we are"
                 className="w-full h-auto object-cover rounded-xl"
               />
@@ -89,6 +89,11 @@ export default async function AboutPage({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-center mt-12 mb-16">
           {buildings && buildings.map((item: any) => (
             <div key={item.id} className="flex gap-4 items-start text-start" style={{ textAlign: locale === 'en' ? 'left' : 'right', flexDirection: locale === 'ar' ? 'row-reverse' : 'row' }}>
+              {item.image && (
+                <div className="flex-shrink-0 w-24 h-24 relative rounded-xl overflow-hidden shadow-sm">
+                  <img src={getImageUrl(item.image)} alt={item.titleEn} className="w-full h-full object-cover" />
+                </div>
+              )}
               <div>
                 <h4 className="text-[24px] text-[#035297] font-bold mb-2">
                   {locale === 'en' ? item.titleEn : item.titleAr}
@@ -106,7 +111,7 @@ export default async function AboutPage({
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-12 gap-x-8">
             {features && features.map((item: any) => (
               <div key={item.id} className="flex flex-col items-center text-center">
-                <img src={item.image} alt={item.titleEn} className="mb-4 max-w-full rounded-xl" />
+                <img src={getImageUrl(item.image)} alt={item.titleEn} className="mb-4 max-w-full rounded-xl" />
                 <h5 className="font-bold text-[20px] text-[#035297] mb-3">
                   <b>{locale === 'en' ? item.titleEn : item.titleAr}</b>
                 </h5>
@@ -125,9 +130,9 @@ export default async function AboutPage({
           </h4>
           <div className="flex flex-col gap-16">
             {productionSteps && productionSteps.map((item: any, index: number) => (
-              <div key={item.id} className={`flex flex-col md:flex-row items-center gap-10 ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
+              <div key={item.id} className={`flex flex-col md:flex-row items-center gap-16 ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
                 <div className="w-full md:w-1/2">
-                  <img src={item.image} alt="Production Step" className="w-full h-auto rounded-xl shadow-sm" />
+                  <img src={getImageUrl(item.image)} alt="Production Step" className="w-full h-auto rounded-xl shadow-sm" />
                 </div>
                 <div 
                   className="w-full md:w-1/2 [&_b]:text-[#035297] [&_b]:text-xl [&_li]:mb-4 [&_ul]:list-none [&_ul]:p-0 [&_span]:text-[#7a7a7a] [&_span]:text-lg"
