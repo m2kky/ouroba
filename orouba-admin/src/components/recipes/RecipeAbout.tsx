@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { sanitizeHtml } from "@/lib/sanitize";
 
 interface RecipeStep {
   id: string;
@@ -65,7 +66,7 @@ export default function RecipeAbout({ recipe, locale }: RecipeAboutProps) {
                   className="flex items-start gap-4 p-4 bg-gray-50 rounded-2xl border border-gray-100 hover:bg-white hover:shadow-md transition-all duration-300"
                 >
                   <div className="w-2 h-2 rounded-full bg-orouba-yellow mt-3 flex-shrink-0" />
-                  <div dangerouslySetInnerHTML={{ __html: stepHtml }} />
+                  <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(stepHtml) }} />
                 </div>
               );
             })}
@@ -88,7 +89,7 @@ export default function RecipeAbout({ recipe, locale }: RecipeAboutProps) {
             </h3>
             <div 
               className="text-lg md:text-xl leading-loose font-medium text-white/90 max-w-5xl prose prose-invert prose-p:mb-6"
-              dangerouslySetInnerHTML={{ __html: description }}
+              dangerouslySetInnerHTML={{ __html: sanitizeHtml(description) }}
             />
           </div>
         </div>

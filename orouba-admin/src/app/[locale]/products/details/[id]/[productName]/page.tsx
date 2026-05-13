@@ -6,6 +6,7 @@ import { ChevronLeft } from "lucide-react";
 import FadeIn from "@/components/ui/FadeIn";
 import RelatedProductsSlider from "@/components/products/RelatedProductsSlider";
 import RecommendedRecipesSlider from "@/components/recipes/RecommendedRecipesSlider";
+import { sanitizeHtml } from "@/lib/sanitize";
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string; productName: string; locale: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
@@ -172,7 +173,7 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
                 <div 
                   className="text-lg md:text-xl leading-relaxed font-bold max-w-lg drop-shadow-sm"
                   style={{ color: descColor }}
-                  dangerouslySetInnerHTML={{ __html: productDesc }}
+                  dangerouslySetInnerHTML={{ __html: sanitizeHtml(productDesc) }}
                 />
               )}
             </FadeIn>

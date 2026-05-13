@@ -2,6 +2,7 @@ import { getSiteData } from "@/lib/api-client";
 import { Metadata } from "next";
 import Link from "next/link";
 import { t } from "@/lib/server-locale";
+import { sanitizeHtml } from "@/lib/sanitize";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -78,7 +79,7 @@ export default async function AboutPage({
                 marginLeft: locale === 'ar' ? 'auto' : '0'
               }}
               dangerouslySetInnerHTML={{
-                __html: locale === 'en' ? item.textEn : item.textAr,
+                __html: sanitizeHtml(locale === 'en' ? item.textEn : item.textAr),
               }}
             />
           </div>
@@ -132,7 +133,7 @@ export default async function AboutPage({
                   className="w-full md:w-1/2 [&_b]:text-[#035297] [&_b]:text-xl [&_li]:mb-4 [&_ul]:list-none [&_ul]:p-0 [&_span]:text-[#7a7a7a] [&_span]:text-lg"
                   style={{ textAlign: locale === 'en' ? 'left' : 'right' }}
                   dangerouslySetInnerHTML={{
-                    __html: locale === 'ar' ? item.textAr : item.textEn,
+                    __html: sanitizeHtml(locale === 'ar' ? item.textAr : item.textEn),
                   }}
                 />
               </div>

@@ -1,6 +1,10 @@
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import path from "path";
 
+// File upload constraints
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+const ALLOWED_EXTENSIONS = [".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg", ".mp4", ".pdf", ".doc", ".docx"];
+
 // Initialize S3 Client for Cloudflare R2
 const getS3Client = () => {
   const accountId = process.env.R2_ACCOUNT_ID;
@@ -26,6 +30,17 @@ export async function uploadFile(
   fileName: string,
   folder: string = "uploads"
 ): Promise<string> {
+  // Validate file size
+  if (fileBuffer.length > MAX_FILE_SIZE) {
+    throw new Error(`File too large. Maximum size is ${MAX_FILE_SIZE / 1024 / 1024}MB`);
+  }
+
+  // Validate file extension
+  const ext = path.extname(fileName).toLowerCase();
+  if (!ALLOWED_EXTENSIONS.includes(ext)) {
+    throw new Error(`File type "${ext}" is not allowed. Allowed: ${ALLOWED_EXTENSIONS.join(", ")}`);
+  }
+
   const bucketName = process.env.R2_BUCKET_NAME;
   const publicUrl = process.env.R2_PUBLIC_URL;
 
@@ -38,7 +53,6 @@ export async function uploadFile(
   const fileKey = `${folder}/${uniqueFileName}`; // Path inside the R2 bucket
 
   // Determine Content-Type based on extension
-  const ext = path.extname(fileName).toLowerCase();
   let contentType = "application/octet-stream";
   if (ext === ".jpg" || ext === ".jpeg") contentType = "image/jpeg";
   else if (ext === ".png") contentType = "image/png";
@@ -46,6 +60,9 @@ export async function uploadFile(
   else if (ext === ".webp") contentType = "image/webp";
   else if (ext === ".mp4") contentType = "video/mp4";
   else if (ext === ".svg") contentType = "image/svg+xml";
+  else if (ext === ".pdf") contentType = "application/pdf";
+  else if (ext === ".doc") contentType = "application/msword";
+  else if (ext === ".docx") contentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
   const s3 = getS3Client();
 

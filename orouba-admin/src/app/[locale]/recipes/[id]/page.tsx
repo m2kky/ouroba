@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { Metadata } from "next";
+import { sanitizeHtml } from "@/lib/sanitize";
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string, locale: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
@@ -76,7 +77,7 @@ export default async function RecipeDetailPage({ params }: { params: Promise<{ i
             {(isEn ? recipe.descriptionEn : recipe.descriptionAr) && (
               <div 
                 className="text-xl text-gray-600 max-w-2xl mx-auto mb-8 leading-relaxed prose prose-lg"
-                dangerouslySetInnerHTML={{ __html: (isEn ? recipe.descriptionEn : recipe.descriptionAr) || '' }}
+                dangerouslySetInnerHTML={{ __html: sanitizeHtml((isEn ? recipe.descriptionEn : recipe.descriptionAr) || '') }}
               />
             )}
             <div className={`flex flex-wrap justify-center gap-6 text-sm font-bold text-gray-500 ${isEn ? 'flex-row' : ''}`}>
@@ -159,7 +160,7 @@ export default async function RecipeDetailPage({ params }: { params: Promise<{ i
                       {idx + 1}
                     </div>
                     <div className="pt-2 bg-gray-50 rounded-2xl p-6 flex-grow border border-gray-100 hover:shadow-md transition-shadow">
-                      <div className="text-lg text-gray-700 leading-loose prose" dangerouslySetInnerHTML={{ __html: isEn ? step.stepEn : step.stepAr }} />
+                      <div className="text-lg text-gray-700 leading-loose prose" dangerouslySetInnerHTML={{ __html: sanitizeHtml(isEn ? step.stepEn : step.stepAr) }} />
                     </div>
                   </div>
                 ))}

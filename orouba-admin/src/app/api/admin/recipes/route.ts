@@ -5,6 +5,11 @@ import { authOptions } from "@/lib/auth";
 import { uploadFile } from "@/lib/upload";
 
 export async function GET() {
+  const session = await getServerSession(authOptions);
+  if (!session || (session.user as any).role !== "ADMIN") {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   try {
     const recipes = await prisma.recipe.findMany({
       include: {
