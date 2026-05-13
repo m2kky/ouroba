@@ -5,6 +5,7 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocale } from "@/lib/locale-context";
+import { getImageUrl } from "@/lib/api-client";
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -143,12 +144,12 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                       <div className="flex gap-2">
                         {socials?.filter((s) => !s.isHidden).map((social) => (
                           <a key={social.id} href={social.link} target="_blank" rel="noreferrer" className="w-6 h-6 rounded-full bg-white flex items-center justify-center overflow-hidden hover:scale-110 transition-transform">
-                            {social.image ? <img src={social.image} alt="social" className="w-full h-full object-cover" /> : <span className="text-blue-600 text-xs font-bold">@</span>}
+                            {social.image ? <img src={getImageUrl(social.image)} alt="social" className="w-full h-full object-cover" /> : <span className="text-blue-600 text-xs font-bold">@</span>}
                           </a>
                         ))}
                       </div>
                       <Link href={`/${locale}/brands/${((brand as any).nameEn || (brand as any).nameAr || 'brand').replace(/\s+/g, '-')}/${brand.id}`}>
-                        <img src={brand.image || "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png"} alt={brand.nameAr} className="w-12 h-12 object-contain bg-white rounded-md p-1" />
+                        <img src={getImageUrl(brand.image) || "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png"} alt={brand.nameAr} className="w-12 h-12 object-contain bg-white rounded-md p-1" />
                       </Link>
                     </div>
                   ))}
@@ -319,12 +320,12 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                               <div className="flex gap-2">
                                 {socials?.filter((s) => !s.isHidden).map((social) => (
                                   <a key={social.id} href={social.link} target="_blank" rel="noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center overflow-hidden hover:scale-110 transition-transform">
-                                    {social.image ? <img src={social.image} alt="social" className="w-full h-full object-cover" /> : <span className="text-blue-600 text-sm font-bold">@</span>}
+                                    {social.image ? <img src={getImageUrl(social.image)} alt="social" className="w-full h-full object-cover" /> : <span className="text-blue-600 text-sm font-bold">@</span>}
                                   </a>
                                 ))}
                               </div>
                               <Link href={`/${locale}/brands/${(brand as any).nameEn || "Brand"}/${brand.id}`}>
-                                <img src={brand.image || "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png"} alt={brand.nameAr} className="w-14 h-14 object-contain bg-white rounded-md p-1" />
+                                <img src={getImageUrl(brand.image) || "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png"} alt={brand.nameAr} className="w-14 h-14 object-contain bg-white rounded-md p-1" />
                               </Link>
                             </div>
                           ))}
