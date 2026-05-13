@@ -23,7 +23,7 @@ export default function RecipeAbout({ recipe, locale }: RecipeAboutProps) {
   const imageSrc = recipe.internalImage 
     ? (recipe.internalImage.startsWith("http") || recipe.internalImage.startsWith("/")) 
       ? recipe.internalImage 
-      : `https://camp-coding.site/eloroba/${recipe.internalImage}`
+      : `https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/${recipe.internalImage}`
     : "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png";
 
   const description = locale === "ar" ? recipe.descriptionAr : recipe.descriptionEn;

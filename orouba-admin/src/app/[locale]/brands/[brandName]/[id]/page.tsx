@@ -35,9 +35,9 @@ export default async function BrandDetailPage({ params }: { params: Promise<{ br
   }
 
   const brandVideos: Record<string, string> = {
-    "بسمة": "https://camp-coding.site/eloroba/storage/app/images/yaDeQPeAbx9rXc1VrhlsVXAtHfcEAsqUCH8ifzk3.mp4",
-    "بابيتس": "https://camp-coding.site/eloroba/storage/app/images/2ACCr5zYZdX2UP5fEK30Kd8Jcs0hYXCGSSqgndxG.mp4",
-    "فريدة": "https://camp-coding.site/eloroba/storage/app/images/SZzjLGH7CJNvqRkaCBKfPz9AwL88wok3VELoGFTr.mp4",
+    "بسمة": "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/yaDeQPeAbx9rXc1VrhlsVXAtHfcEAsqUCH8ifzk3.mp4",
+    "بابيتس": "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/2ACCr5zYZdX2UP5fEK30Kd8Jcs0hYXCGSSqgndxG.mp4",
+    "فريدة": "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/SZzjLGH7CJNvqRkaCBKfPz9AwL88wok3VELoGFTr.mp4",
   };
 
   const videoUrl = brandVideos[brand.nameAr] || brandVideos[brand.nameEn] || null;

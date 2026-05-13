@@ -78,7 +78,7 @@ export default function RelatedProductsSlider({ products, brand, locale, textCol
                   <div className="relative w-[220px] h-[220px] md:w-[260px] md:h-[260px] flex items-center justify-center transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3">
                     {mainImg ? (
                       <Image
-                        src={(mainImg.startsWith("http") || mainImg.startsWith("/")) ? mainImg : `https://camp-coding.site/eloroba/${mainImg}`}
+                        src={(mainImg.startsWith("http") || mainImg.startsWith("/")) ? mainImg : `https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/${mainImg}`}
                         alt={locale === "ar" ? product.nameAr : product.nameEn}
                         fill
                         className="object-contain"

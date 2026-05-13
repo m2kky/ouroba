@@ -146,7 +146,7 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
               {mainImage ? (
                 <div className="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px]">
                   <Image
-                    src={(mainImage.startsWith("http") || mainImage.startsWith("/")) ? mainImage : `https://camp-coding.site/eloroba/${mainImage}`}
+                    src={(mainImage.startsWith("http") || mainImage.startsWith("/")) ? mainImage : `https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/${mainImage}`}
                     alt={productName}
                     fill
                     className="object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.3)] hover:scale-105 transition-transform duration-500"

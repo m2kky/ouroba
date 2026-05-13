@@ -20,7 +20,11 @@ export function getImageUrl(url: string | null | undefined): string {
   
   // Intercept and rewrite legacy DB full URLs to R2 bucket
   if (r2Url && url.includes("camp-coding.site/eloroba/storage/app/images/")) {
-    const filename = url.split('/').pop();
+    let filename = url.split('/').pop();
+    // Convert extension to .webp since we are converting all images
+    if (filename) {
+      filename = filename.replace(/\.(png|jpe?g)$/i, '.webp');
+    }
     return `${r2Url}/${filename}`;
   }
 
@@ -33,7 +37,7 @@ export function getImageUrl(url: string | null | undefined): string {
     return `${r2Url}/${url}`;
   }
   
-  return `https://camp-coding.site/eloroba/${url}`;
+  return `https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/${url}`;
 }
 
 export async function getSiteData() {

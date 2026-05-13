@@ -63,7 +63,7 @@ export default function CertificationsPage() {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-orouba-blue/95 mix-blend-multiply z-10" />
           <Image
-            src="https://camp-coding.site/eloroba/storage/app/images/1.jpg"
+            src="https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/1.webp"
             alt="Hero Background"
             fill
             className="object-cover opacity-30"

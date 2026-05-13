@@ -34,7 +34,8 @@
     "puppeteer": "^24.43.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "sanitize-html": "^2.17.3"
+    "sanitize-html": "^2.17.3",
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

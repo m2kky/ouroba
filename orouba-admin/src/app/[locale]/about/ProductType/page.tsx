@@ -34,7 +34,7 @@ export default async function ProductsPage({
   const categoryTypes = (data.categoryTypes || []).sort((a: any, b: any) => (a.number || 999) - (b.number || 999));
   const settings = data.settings || {};
 
-  const headerImg = settings.product_type_img?.[locale] || settings.product_type_img?.ar || "https://camp-coding.site/eloroba/storage/app/images/8inON8KtTSi8Ijpf6Qa7btLtpOgyJ6YuoOw69c8E.jpg";
+  const headerImg = settings.product_type_img?.[locale] || settings.product_type_img?.ar || "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/8inON8KtTSi8Ijpf6Qa7btLtpOgyJ6YuoOw69c8E.webp";
   const headerText = locale === 'ar' 
     ? "نحن نفخر بتصنيع وتوفير المنتجات الغذائية الصحية كل يوم. جميع منتجاتنا لا تحتوي على أي إضافات لأننا نعتمد فقط على المكونات الطبيعية. لدينا خطوط إنتاج مختلفة ومجموعة كبيرة من العلامات التجارية والأنواع."
     : "We take pride in manufacturing and supplying nutritious, healthy products every day. All our products contain no additives as we depend only on natural ingredients. We have different product lines and large portfolio of brands & types";

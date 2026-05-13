@@ -30,7 +30,7 @@ export default function RecipesCategoriesSlider({
           const isActive = cat.id === activeCategoryId;
           const catName = locale === "ar" ? cat.nameAr : cat.nameEn;
           const displayImage = cat.image 
-            ? ((cat.image.startsWith("http") || cat.image.startsWith("/")) ? cat.image : `https://camp-coding.site/eloroba/${cat.image}`)
+            ? ((cat.image.startsWith("http") || cat.image.startsWith("/")) ? cat.image : `https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/${cat.image}`)
             : "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png";
 
           return (

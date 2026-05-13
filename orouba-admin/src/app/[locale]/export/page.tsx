@@ -63,7 +63,7 @@ export default async function ExportPage({ params }: { params: Promise<{ locale:
       <section className="max-w-[1200px] mx-auto px-4 md:px-8 py-8 mb-20">
         <FadeIn direction="up" className="relative w-full">
           <img 
-            src="https://camp-coding.site/eloroba/storage/app/images/9GWFp84wGE40aoJaGczEwt15qAjnjKtjAlQvqKNz.jpg" 
+            src="https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/9GWFp84wGE40aoJaGczEwt15qAjnjKtjAlQvqKNz.webp" 
             alt="Orouba World Map" 
             className="w-full h-auto object-contain"
           />

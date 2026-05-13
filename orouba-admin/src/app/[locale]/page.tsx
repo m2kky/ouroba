@@ -30,7 +30,7 @@ export default async function HomePage({
   
   // Desktop Media
   const isVideoDesktop = firstBanner?.type === "video";
-  const mediaDesktop = firstBanner?.videoLink || firstBanner?.image || "https://camp-coding.site/eloroba/storage/app/images/1.mp4";
+  const mediaDesktop = firstBanner?.videoLink || firstBanner?.image || "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/1.mp4";
   
   // Mobile Media
   const mediaMobile = firstBanner?.smallVideo || firstBanner?.smallImg || mediaDesktop;
@@ -93,7 +93,7 @@ export default async function HomePage({
       <section className="py-6 md:py-10 bg-white relative overflow-hidden">
         <div className="max-w-[1400px] mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center gap-8 md:gap-16 relative z-10">
           <FadeIn direction={isEn ? "left" : "right"} className="w-full md:w-1/2 relative flex justify-center">
-             <img src="https://camp-coding.site/eloroba/storage/app/images/ZHVQeLXeXFxqfGf27Yd4yiETR1EmFh2Tij1rUudu.png" alt="Orouba Products" className="w-[60%] md:w-3/4 max-w-sm h-auto object-contain" />
+             <img src="https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/ZHVQeLXeXFxqfGf27Yd4yiETR1EmFh2Tij1rUudu.webp" alt="Orouba Products" className="w-[60%] md:w-3/4 max-w-sm h-auto object-contain" />
           </FadeIn>
           <FadeIn direction={isEn ? "right" : "left"} delay={0.2} className="w-full md:w-1/2">
             <h2 className="text-4xl md:text-5xl font-bold text-orouba-blue mb-8 leading-tight">
@@ -154,7 +154,7 @@ export default async function HomePage({
       <section className="py-6 md:py-10 bg-white relative overflow-hidden">
         <div className="max-w-[1400px] mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center gap-16 relative z-10">
           <FadeIn direction={isEn ? "left" : "right"} className="w-full md:w-1/2 relative flex justify-center">
-             <img src="https://camp-coding.site/eloroba/storage/app/images/wAyRPeQNWO2V0bTsRk8tDHD2NxsesoXWWSXjqHi5.png" alt="Plates" className="w-[80%] md:w-full max-w-md h-auto object-contain rounded-3xl" />
+             <img src="https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/wAyRPeQNWO2V0bTsRk8tDHD2NxsesoXWWSXjqHi5.webp" alt="Plates" className="w-[80%] md:w-full max-w-md h-auto object-contain rounded-3xl" />
           </FadeIn>
           <FadeIn direction={isEn ? "right" : "left"} delay={0.2} className="w-full md:w-1/2">
             <h2 className="text-4xl md:text-5xl font-bold text-orouba-blue mb-4">{isEn ? "Why Orouba?" : "لماذا العروبة ؟"}</h2>
@@ -254,7 +254,7 @@ export default async function HomePage({
             {/* The exact map image from their original website */}
             <div className="relative w-full max-w-[600px] h-[350px]">
               <img 
-                src="https://camp-coding.site/eloroba/storage/app/images/9GWFp84wGE40aoJaGczEwt15qAjnjKtjAlQvqKNz.jpg"
+                src="https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/9GWFp84wGE40aoJaGczEwt15qAjnjKtjAlQvqKNz.webp"
                 alt="Orouba World Map" 
                 className="w-full h-full object-contain"
               />
@@ -277,7 +277,7 @@ export default async function HomePage({
                 : recipe.internalImage?.startsWith("/uploads") || recipe.internalImage?.startsWith("/storage")
                   ? recipe.internalImage
                   : recipe.internalImage 
-                    ? `https://camp-coding.site/eloroba/${recipe.internalImage}`
+                    ? `https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/${recipe.internalImage}`
                     : "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png";
 
               return (
