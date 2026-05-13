@@ -1,15 +1,16 @@
 import { prisma } from "@/lib/prisma";
 import { apiSuccess, apiError, parsePagination } from "@/lib/api-helpers";
 import { NextRequest } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 
-// GET /api/brands — List all brands
+// GET /api/brands — Public: read-only
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = request.nextUrl;
     const { page, limit, skip } = parsePagination(searchParams);
-    const showHidden = searchParams.get("showHidden") === "true";
 
-    const where = showHidden ? {} : { isHidden: false };
+    const where = { isHidden: false };
 
     const [brands, total] = await Promise.all([
       prisma.brand.findMany({
@@ -38,8 +39,13 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST /api/brands — Create a new brand
+// POST /api/brands — Admin only
 export async function POST(request: NextRequest) {
+  const session = await getServerSession(authOptions);
+  if (!session || (session.user as any).role !== "ADMIN") {
+    return apiError("Unauthorized", 401);
+  }
+
   try {
     const body = await request.json();
     const { nameEn, nameAr, descriptionEn, descriptionAr, image, imageMain, imageSmall, imageSmallMain, colorBrand, colorHover, number } = body;
