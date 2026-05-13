@@ -58,7 +58,7 @@ export default async function AboutPage({
               <img
                 src={getImageUrl(aboutImage) || "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png"}
                 alt="who we are"
-                className="w-full h-auto object-cover rounded-xl"
+                className="w-full h-auto object-cover rounded-[20px] shadow-lg"
               />
             </picture>
           </div>
@@ -68,7 +68,7 @@ export default async function AboutPage({
         {sectionTexts && sectionTexts.map((item: any) => (
           <div key={item.id} className="mb-10 w-full" style={{ textAlign: locale === 'en' ? 'left' : 'right' }}>
             <h3 
-              className="text-[28px] font-bold mb-4 text-[#035297]"
+              className="text-[32px] md:text-[40px] font-bold mb-6 text-[#035297]"
             >
               {locale === 'en' ? item.titleEn : item.titleAr}
             </h3>
@@ -90,7 +90,7 @@ export default async function AboutPage({
           {buildings && buildings.map((item: any) => (
             <div key={item.id} className="flex gap-4 items-start text-start" style={{ textAlign: locale === 'en' ? 'left' : 'right', flexDirection: locale === 'ar' ? 'row-reverse' : 'row' }}>
               {item.image && (
-                <div className="flex-shrink-0 w-24 h-24 relative rounded-xl overflow-hidden shadow-sm">
+                <div className="flex-shrink-0 w-28 h-28 relative rounded-[20px] overflow-hidden shadow-md">
                   <img src={getImageUrl(item.image)} alt={item.titleEn} className="w-full h-full object-cover" />
                 </div>
               )}
@@ -110,10 +110,12 @@ export default async function AboutPage({
         <div className="mt-16 mb-20">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-12 gap-x-8">
             {features && features.map((item: any) => (
-              <div key={item.id} className="flex flex-col items-center text-center">
-                <img src={getImageUrl(item.image)} alt={item.titleEn} className="mb-4 max-w-full rounded-xl" />
-                <h5 className="font-bold text-[20px] text-[#035297] mb-3">
-                  <b>{locale === 'en' ? item.titleEn : item.titleAr}</b>
+              <div key={item.id} className="flex flex-col items-center text-center group">
+                <div className="w-24 h-24 rounded-full bg-[#ffcc00] flex items-center justify-center mb-6 shadow-md transform group-hover:scale-110 transition-transform duration-300">
+                  <img src={getImageUrl(item.image)} alt={item.titleEn} className="w-12 h-12 object-contain" />
+                </div>
+                <h5 className="font-bold text-[24px] text-[#035297] mb-3">
+                  {locale === 'en' ? item.titleEn : item.titleAr}
                 </h5>
                 <p className="w-3/4 mx-auto text-[#7a7a7a] leading-relaxed">
                   {locale === 'en' ? item.descriptionEn : item.descriptionAr}
@@ -130,9 +132,11 @@ export default async function AboutPage({
           </h4>
           <div className="flex flex-col gap-16">
             {productionSteps && productionSteps.map((item: any, index: number) => (
-              <div key={item.id} className={`flex flex-col md:flex-row items-center gap-16 ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
-                <div className="w-full md:w-1/2">
-                  <img src={getImageUrl(item.image)} alt="Production Step" className="w-full h-auto rounded-xl shadow-sm" />
+              <div key={item.id} className={`flex flex-col md:flex-row items-center gap-16 md:gap-24 py-10 ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
+                <div className="w-full md:w-1/2 relative">
+                  {/* Tilted Yellow Background */}
+                  <div className={`absolute inset-0 bg-[#ffcc00] rounded-[20px] transform ${index % 2 !== 0 ? '-rotate-3 -translate-x-3 translate-y-3' : 'rotate-3 translate-x-3 translate-y-3'}`}></div>
+                  <img src={getImageUrl(item.image)} alt="Production Step" className="w-full h-auto rounded-[20px] shadow-lg relative z-10" />
                 </div>
                 <div 
                   className="w-full md:w-1/2 [&_b]:text-[#035297] [&_b]:text-xl [&_li]:mb-4 [&_ul]:list-none [&_ul]:p-0 [&_span]:text-[#7a7a7a] [&_span]:text-lg"
