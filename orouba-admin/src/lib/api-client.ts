@@ -16,10 +16,11 @@ function getBaseUrl(): string {
 export function getImageUrl(url: string | null | undefined): string {
   if (!url) return "";
   
-  const r2Url = process.env.NEXT_PUBLIC_R2_URL || process.env.R2_PUBLIC_URL;
+  // Safe fallback to the hardcoded R2 URL for client-side rendering where non-NEXT_PUBLIC env vars are undefined
+  const r2Url = process.env.NEXT_PUBLIC_R2_URL || process.env.R2_PUBLIC_URL || "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev";
   
   // Intercept and rewrite legacy DB full URLs to R2 bucket
-  if (r2Url && url.includes("camp-coding.site/eloroba/storage/app/images/")) {
+  if (url.includes("camp-coding.site/eloroba/storage/app/images/")) {
     let filename = url.split('/').pop();
     // Convert extension to .webp since we are converting all images
     if (filename) {
@@ -28,7 +29,19 @@ export function getImageUrl(url: string | null | undefined): string {
     return `${r2Url}/${filename}`;
   }
 
-  if (url.startsWith("http") || url.startsWith("data:") || url.startsWith("/")) {
+  if (url.startsWith("http") || url.startsWith("data:")) {
+    return url;
+  }
+  
+  if (url.startsWith("/")) {
+    // If it's a local upload, redirect it to R2 to use the optimized WebP images
+    if (url.startsWith("/uploads/images/")) {
+      let filename = url.split('/').pop();
+      if (filename) {
+        filename = filename.replace(/\.(png|jpe?g)$/i, '.webp');
+      }
+      return `${r2Url}/${filename}`;
+    }
     return url;
   }
   

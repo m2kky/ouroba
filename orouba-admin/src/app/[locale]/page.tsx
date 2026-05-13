@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
-import { getSiteData } from "@/lib/api-client";
+import { getSiteData, getImageUrl } from "@/lib/api-client";
 import FadeIn from "@/components/ui/FadeIn";
 import HoverCard from "@/components/ui/HoverCard";
 
@@ -126,7 +126,7 @@ export default async function HomePage({
                 <Link href={`/${locale}/brands/${slugName}/${brand.id}`} className="block h-[400px]">
                   <HoverCard className="rounded-[30px] overflow-hidden shadow-xl h-full relative group cursor-pointer border-4 border-white/20">
                     <img 
-                      src={brand.image || "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png"} 
+                      src={getImageUrl(brand.image) || "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png"} 
                       alt={isEn ? brand.nameEn || brand.nameAr : brand.nameAr} 
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
