@@ -42,6 +42,8 @@ interface Recipe {
   descriptionEn: string;
   internalImage: string | null;
   videoLink: string | null;
+  tagEn: string | null;
+  tagAr: string | null;
   isHidden: boolean;
   images: RecipeImage[];
   properties: RecipeProperty[];
@@ -310,6 +312,17 @@ export default function RecipesPage() {
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1">وصف قصير (إنجليزي)</label>
                     <textarea name="descriptionEn" defaultValue={editingRecipe?.descriptionEn} dir="ltr" className="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none resize-none" rows={3} />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1">الوسم / الـ Tag (عربي) [اختياري]</label>
+                    <input type="text" name="tagAr" placeholder="مثال: وصفة مميزة، جديد، صحي" defaultValue={editingRecipe?.tagAr || ""} className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orouba-blue/20 outline-none" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1">الوسم / الـ Tag (إنجليزي) [اختياري]</label>
+                    <input type="text" name="tagEn" placeholder="e.g. Special Recipe, New, Healthy" defaultValue={editingRecipe?.tagEn || ""} dir="ltr" className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orouba-blue/20 outline-none" />
                   </div>
                 </div>
               </div>

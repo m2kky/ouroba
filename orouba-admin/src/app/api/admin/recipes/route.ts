@@ -35,6 +35,8 @@ export async function POST(req: Request) {
     const descriptionAr = formData.get("descriptionAr") as string;
     const descriptionEn = formData.get("descriptionEn") as string;
     const videoLink = formData.get("videoLink") as string || null;
+    const tagEn = formData.get("tagEn") as string || null;
+    const tagAr = formData.get("tagAr") as string || null;
     const internalImageFile = formData.get("internalImage") as File | null;
     const isHidden = formData.get("isHidden") === "true";
     
@@ -73,6 +75,8 @@ export async function POST(req: Request) {
         descriptionAr,
         descriptionEn,
         videoLink,
+        tagEn,
+        tagAr,
         internalImage: internalImageUrl,
         isHidden,
         images: {

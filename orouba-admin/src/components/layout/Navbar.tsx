@@ -45,7 +45,7 @@ export default function Navbar({ settings }: { settings?: Record<string, { en?: 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      window.location.href = `/${locale}/products?q=${encodeURIComponent(searchQuery.trim())}`;
+      window.location.href = `/${locale}/about/ProductType?q=${encodeURIComponent(searchQuery.trim())}`;
       setIsSearchOpen(false);
     }
   };
@@ -69,16 +69,16 @@ export default function Navbar({ settings }: { settings?: Record<string, { en?: 
       children: [
         { label: locale === "ar" ? "من نحن" : "Who We Are", href: `/${locale}/about/whoWeAre` },
         { label: locale === "ar" ? "الشهادات" : "Certifications", href: `/${locale}/about/certifications` },
-        { label: locale === "ar" ? "أصناف المنتجات" : "Product Categories", href: `/${locale}/products` },
+        { label: locale === "ar" ? "أصناف المنتجات" : "Product Categories", href: `/${locale}/about/ProductType` },
       ]
     },
     { 
-      label: locale === "ar" ? "المنتجات" : "Products", 
-      href: `/${locale}/products`,
+      label: locale === "ar" ? "العلامات التجارية" : "Brands", 
+      href: `#`,
       children: [
-        { label: locale === "ar" ? "بسمة" : "Basma", href: `/${locale}/brands/5` },
-        { label: locale === "ar" ? "بابيتس" : "Babits", href: `/${locale}/brands/8` },
-        { label: locale === "ar" ? "فريدة" : "Farida", href: `/${locale}/brands/7` },
+        { label: locale === "ar" ? "بسمة" : "Basma", href: `/${locale}/brands/Basma/5` },
+        { label: locale === "ar" ? "بابيتس" : "Babits", href: `/${locale}/brands/Babits/8` },
+        { label: locale === "ar" ? "فريدة" : "Farida", href: `/${locale}/brands/Farida/7` },
       ]
     },
     { label: locale === "ar" ? "التصدير" : "Export", href: `/${locale}/export` },
@@ -109,14 +109,24 @@ export default function Navbar({ settings }: { settings?: Record<string, { en?: 
           <div className="hidden lg:flex items-center gap-8 font-medium text-[16px] h-full">
             {navLinks.map((link) => (
               <div key={link.label} className="relative group h-full flex items-center">
-                <Link 
-                  href={link.href} 
-                  className={`hover:text-orouba-yellow transition-colors duration-200 py-8 ${
-                    pathname === link.href ? "text-orouba-yellow" : ""
-                  }`}
-                >
-                  {link.label}
-                </Link>
+                {link.href === "#" ? (
+                  <span 
+                    className={`hover:text-orouba-yellow transition-colors duration-200 py-8 cursor-default ${
+                      pathname === link.href ? "text-orouba-yellow" : ""
+                    }`}
+                  >
+                    {link.label}
+                  </span>
+                ) : (
+                  <Link 
+                    href={link.href} 
+                    className={`hover:text-orouba-yellow transition-colors duration-200 py-8 ${
+                      pathname === link.href ? "text-orouba-yellow" : ""
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                )}
 
                 {/* Dropdown Menu */}
                 {link.children && link.children.length > 0 && (

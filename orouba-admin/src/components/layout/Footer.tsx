@@ -65,13 +65,13 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
               </Link>
             </div>
 
-            {/* Column 2: Our Products */}
+            {/* Column 2: Our Brands */}
             <div className="text-center">
-              <h3 className="text-xl font-bold mb-8 text-[#ffcc00] inline-block">{locale === "ar" ? "منتجاتنا" : "Our Products"}</h3>
+              <h3 className="text-xl font-bold mb-8 text-[#ffcc00] inline-block">{locale === "ar" ? "العلامات التجارية" : "Brands"}</h3>
               <ul className="space-y-6">
-                <li><Link href={`/${locale}/brands/5`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "بسمة" : "Basma"}</Link></li>
-                <li><Link href={`/${locale}/brands/7`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "فريدة" : "Farida"}</Link></li>
-                <li><Link href={`/${locale}/brands/8`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "بابيتس" : "Babits"}</Link></li>
+                <li><Link href={`/${locale}/brands/Basma/5`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "بسمة" : "Basma"}</Link></li>
+                <li><Link href={`/${locale}/brands/Farida/7`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "فريدة" : "Farida"}</Link></li>
+                <li><Link href={`/${locale}/brands/Babits/8`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "بابيتس" : "Babits"}</Link></li>
               </ul>
             </div>
 
@@ -80,7 +80,7 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
               <h3 className="text-xl font-bold mb-8 text-[#ffcc00] inline-block">{locale === "ar" ? "روابط سريعة" : "Quick Links"}</h3>
               <ul className="space-y-6">
                 <li><Link href={`/${locale}/about/whoWeAre`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "من نحن" : "Who We Are"}</Link></li>
-                <li><Link href={`/${locale}/products`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "منتجاتنا" : "Our Products"}</Link></li>
+                <li><Link href={`/${locale}/about/ProductType`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "العلامات التجارية" : "Brands"}</Link></li>
                 <li><Link href={`/${locale}/recipes`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "وصفات" : "Recipes"}</Link></li>
                 <li><Link href={`/${locale}/careers`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "الوظائف" : "Careers"}</Link></li>
               </ul>
@@ -131,7 +131,7 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                           </a>
                         ))}
                       </div>
-                      <Link href={`/${locale}/brands/${brand.id}`}>
+                      <Link href={`/${locale}/brands/${(brand as any).nameEn || "Brand"}/${brand.id}`}>
                         <img src={brand.image || "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png"} alt={brand.nameAr} className="w-12 h-12 object-contain bg-white rounded-md p-1" />
                       </Link>
                     </div>
@@ -162,7 +162,7 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                   onClick={() => toggleSection('products')}
                   className={`w-full flex items-center gap-4 ${locale === "ar" ? "justify-end text-right" : "justify-start text-left"}`}
                 >
-                  <h3 className="text-3xl font-bold text-[#ffcc00]">{locale === "ar" ? "منتجاتنا" : "Our Products"}</h3>
+                  <h3 className="text-3xl font-bold text-[#ffcc00]">{locale === "ar" ? "العلامات التجارية" : "Brands"}</h3>
                   <motion.svg 
                     animate={{ rotate: openSection === 'products' ? (locale === "ar" ? 90 : -90) : 0 }}
                     transition={{ duration: 0.2 }}
@@ -181,9 +181,9 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                       className="overflow-hidden"
                     >
                       <ul className={`space-y-4 pt-6 text-xl font-medium ${locale === "ar" ? "text-right pl-10 pr-2" : "text-left pr-10 pl-2"}`}>
-                        <li><Link href={`/${locale}/brands/5`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "بسمة" : "Basma"}</Link></li>
-                        <li><Link href={`/${locale}/brands/7`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "فريدة" : "Farida"}</Link></li>
-                        <li><Link href={`/${locale}/brands/8`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "بابيتس" : "Babits"}</Link></li>
+                        <li><Link href={`/${locale}/brands/Basma/5`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "بسمة" : "Basma"}</Link></li>
+                        <li><Link href={`/${locale}/brands/Farida/7`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "فريدة" : "Farida"}</Link></li>
+                        <li><Link href={`/${locale}/brands/Babits/8`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "بابيتس" : "Babits"}</Link></li>
                       </ul>
                     </motion.div>
                   )}
@@ -216,7 +216,7 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                     >
                       <ul className={`space-y-4 pt-6 text-xl font-medium ${locale === "ar" ? "text-right pl-10 pr-2" : "text-left pr-10 pl-2"}`}>
                         <li><Link href={`/${locale}/about/whoWeAre`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "من نحن" : "Who We Are"}</Link></li>
-                        <li><Link href={`/${locale}/products`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "منتجاتنا" : "Our Products"}</Link></li>
+                        <li><Link href={`/${locale}/about/ProductType`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "العلامات التجارية" : "Brands"}</Link></li>
                         <li><Link href={`/${locale}/recipes`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "وصفات" : "Recipes"}</Link></li>
                         <li><Link href={`/${locale}/careers`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "الوظائف" : "Careers"}</Link></li>
                       </ul>
@@ -291,7 +291,7 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                                   </a>
                                 ))}
                               </div>
-                              <Link href={`/${locale}/brands/${brand.id}`}>
+                              <Link href={`/${locale}/brands/${(brand as any).nameEn || "Brand"}/${brand.id}`}>
                                 <img src={brand.image || "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png"} alt={brand.nameAr} className="w-14 h-14 object-contain bg-white rounded-md p-1" />
                               </Link>
                             </div>

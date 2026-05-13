@@ -4,7 +4,7 @@ import { Metadata } from "next";
 import { ChevronLeft } from "lucide-react";
 import { getServerLocale, t } from "@/lib/server-locale";
 
-export async function generateMetadata({ params }: { params: Promise<{ id: string, locale: string }> }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ brandName: string; id: string, locale: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
   const data = await getSiteData();
   let brand = data.brands.find((b: any) => b.id === resolvedParams.id);
@@ -22,10 +22,10 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   };
 }
 
-export default async function BrandDetailPage({ params }: { params: Promise<{ id: string, locale: string }> }) {
+export default async function BrandDetailPage({ params }: { params: Promise<{ brandName: string; id: string, locale: string }> }) {
   const resolvedParams = await params;
   const data = await getSiteData();
-  const locale = resolvedParams.locale;
+  const locale = (resolvedParams.locale as any) === "en" ? "en" : "ar";
   const isEn = locale === 'en';
   let brand = data.brands.find((b: any) => b.id === resolvedParams.id);
 
@@ -33,7 +33,7 @@ export default async function BrandDetailPage({ params }: { params: Promise<{ id
     return (
       <div className="min-h-[50vh] flex flex-col items-center justify-center bg-gray-50">
         <h1 className="text-3xl font-bold text-orouba-blue mb-4">{isEn ? 'Brand Not Found' : 'العلامة التجارية غير موجودة'}</h1>
-        <Link href={`/${locale}/products`} className="text-orouba-yellow bg-orouba-blue px-6 py-2 rounded-full hover:bg-blue-800 transition-colors">
+        <Link href={`/${locale}/about/ProductType`} className="text-orouba-yellow bg-orouba-blue px-6 py-2 rounded-full hover:bg-blue-800 transition-colors">
           {isEn ? 'Back to Products' : 'العودة للمنتجات'}
         </Link>
       </div>
@@ -64,7 +64,7 @@ export default async function BrandDetailPage({ params }: { params: Promise<{ id
         <div className={`flex items-center gap-2 font-bold text-lg md:text-xl ${theme.textPrimary} ${isEn ? "flex-row" : "flex-row-reverse justify-end"}`}>
           <Link href={`/${locale}`} className="hover:text-orouba-yellow transition-colors">{locale === 'ar' ? 'الصفحة الرئيسية' : 'Home'}</Link>
           <ChevronLeft className={`w-5 h-5 mt-1 ${isEn ? 'rotate-180' : ''}`} />
-          <Link href={`/${locale}/products`} className="hover:text-orouba-yellow transition-colors">{locale === 'ar' ? 'المنتجات' : 'Products'}</Link>
+          <Link href={`/${locale}/about/ProductType`} className="hover:text-orouba-yellow transition-colors">{locale === 'ar' ? 'المنتجات' : 'Products'}</Link>
           <ChevronLeft className={`w-5 h-5 mt-1 ${isEn ? 'rotate-180' : ''}`} />
           <span>{t(locale, brand.nameAr, brand.nameEn)}</span>
         </div>

@@ -6,7 +6,7 @@ import CategoriesSlider from "@/components/brands/CategoriesSlider";
 import ProductCard from "@/components/products/ProductCard";
 import { getServerLocale, t } from "@/lib/server-locale";
 
-export async function generateMetadata({ params }: { params: Promise<{ id: string; categoryId: string, locale: string }> }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ brandName: string; id: string; categoryId: string; categoryName: string; locale: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
   const brand = await prisma.brand.findUnique({ where: { id: resolvedParams.id } });
   const category = await prisma.category.findUnique({ where: { id: resolvedParams.categoryId } });
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   };
 }
 
-export default async function BrandCategoryProductsPage({ params }: { params: Promise<{ id: string; categoryId: string, locale: string }> }) {
+export default async function BrandCategoryProductsPage({ params }: { params: Promise<{ brandName: string; id: string; categoryId: string; categoryName: string; locale: string }> }) {
   const resolvedParams = await params;
   const locale = resolvedParams.locale as "ar" | "en";
   const isEn = locale === 'en';
@@ -78,7 +78,7 @@ export default async function BrandCategoryProductsPage({ params }: { params: Pr
         <div className={`flex items-center justify-center gap-2 font-bold text-base md:text-lg text-gray-500 ${isEn ? 'flex-row' : 'flex-row-reverse'}`}>
           <Link href={`/${locale}`} className="hover:text-black transition-colors">{locale === 'ar' ? 'الصفحة الرئيسية' : 'Home'}</Link>
           <ChevronLeft className={`w-4 h-4 mt-1 ${isEn ? 'rotate-180' : ''}`} />
-          <Link href={`/${locale}/products`} className="hover:text-black transition-colors">{locale === 'ar' ? 'المنتجات' : 'Products'}</Link>
+          <Link href={`/${locale}/about/ProductType`} className="hover:text-black transition-colors">{locale === 'ar' ? 'المنتجات' : 'Products'}</Link>
           <ChevronLeft className={`w-4 h-4 mt-1 ${isEn ? 'rotate-180' : ''}`} />
           <Link href={`/${locale}/brands/${brand.id}`} className="hover:text-black transition-colors">{t(locale, brand.nameAr, brand.nameEn)}</Link>
           <ChevronLeft className={`w-4 h-4 mt-1 ${isEn ? 'rotate-180' : ''}`} />

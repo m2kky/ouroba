@@ -40,8 +40,10 @@ export default function ProductCard({ product, brand, locale }: ProductCardProps
   
   const hoverTextColor = isLightColor(hoverColor) ? "#1e4a8c" : "#ffffff";
 
+  const slugProductName = productName.replace(/\s+/g, '-');
+
   return (
-    <Link href={`/${locale}/products/details/${product.id}`}>
+    <Link href={`/${locale}/products/details/${product.id}/${slugProductName}`}>
       <motion.div
         className="relative flex flex-col items-center justify-between rounded-[2.5rem] overflow-hidden cursor-pointer w-full max-w-[300px] mx-auto h-[380px] shadow-sm hover:shadow-2xl transition-all duration-500 group"
         onMouseEnter={() => setIsHovered(true)}

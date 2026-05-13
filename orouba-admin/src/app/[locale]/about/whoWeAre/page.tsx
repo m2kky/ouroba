@@ -1,7 +1,7 @@
 import { getSiteData } from "@/lib/api-client";
 import { Metadata } from "next";
 import Link from "next/link";
-import { getServerLocale, t } from "@/lib/server-locale";
+import { t } from "@/lib/server-locale";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -22,154 +22,155 @@ export default async function AboutPage({
   const locale = resolvedParams.locale;
 
   const data = await getSiteData();
-  const { settings, values, buildings, productionSteps, sectionTexts, whyChooseUs } = data;
+  const { settings, buildings, productionSteps, sectionTexts, features } = data;
 
-  const visionSection = sectionTexts?.find((s: any) => s.titleEn?.toLowerCase().includes("vision") || s.number === 1);
+  const aboutImage = settings?.about_image?.en || settings?.about_image?.ar;
+  const smallAboutImage = settings?.small_about_img?.en || settings?.small_about_img?.ar || aboutImage;
+  const quotationEn = settings?.quotation_en?.en || settings?.quotation?.en || "We believe food brings people together. That’s why we offer a wide range of delicious frozen products, from fresh veggies, fruits, and beans to flavorful falafel and appetizers. We're always innovating to offer exciting new choices made with simple, all-natural ingredients. We make in-the-kitchen experiences easy, quick and fun for everyone. Our aim is to inspire joyful mealtimes and help you share the magic of food with your loved ones.";
+  const quotationAr = settings?.quotation_ar?.ar || settings?.quotation?.ar || "نحن نؤمن بأن الطعام يجمع الناس معًا. لهذا السبب نقدم مجموعة واسعة من المنتجات المجمدة اللذيذة، من الخضار الطازجة والفواكه والفاصوليا إلى الفلافل والمقبلات اللذيذة. نحن نبتكر دائمًا لتقديم خيارات جديدة ومثيرة مصنوعة من مكونات بسيطة وطبيعية بالكامل. نحن نجعل تجارب الطهي سهلة وسريعة وممتعة للجميع. هدفنا هو إلهام أوقات الوجبات المبهجة ومساعدتك على مشاركة سحر الطعام مع أحبائك.";
 
   return (
-    <div className="bg-white min-h-screen">
-      {/* 1. Hero / Header */}
-      <section className="py-24 bg-orouba-blue text-white text-center relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]" />
-        
-        <div className="max-w-4xl mx-auto px-4 md:px-8 relative z-10">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-orouba-yellow">{locale === 'ar' ? 'من نحن' : 'About Us'}</h1>
-          <div className="w-24 h-1 bg-orouba-yellow mx-auto rounded-full mb-8" />
-          <p className="text-xl text-blue-50 leading-relaxed font-medium">
-            {locale === 'ar' ? 'تعرف على رحلتنا، رؤيتنا، ولماذا تعتبر العروبة خيارك الأول في عالم الصناعات الغذائية.' : 'Discover our journey, vision, and why Orouba is your first choice in the food industry.'}
-          </p>
-        </div>
-      </section>
+    <div className="bg-white min-h-screen pb-20">
+      {/* Breadcrumbs */}
+      <div className="container mx-auto px-4 mt-28 mb-8">
+        <nav className="flex text-sm text-gray-500 font-medium" style={{ justifyContent: locale === 'en' ? 'flex-start' : 'flex-end', flexDirection: locale === 'ar' ? 'row-reverse' : 'row' }}>
+          <Link href={`/${locale}`} className="hover:text-[#035297]">
+            {locale === 'ar' ? "الصفحة الرئيسية" : "Home"}
+          </Link>
+          <span className="mx-2">/</span>
+          <span className="text-gray-500">
+            {locale === 'ar' ? "عن العروبة" : "About US"}
+          </span>
+          <span className="mx-2">/</span>
+          <span className="text-[#035297] font-bold">
+            {locale === 'ar' ? "من نحن" : "Who We Are "}
+          </span>
+        </nav>
+      </div>
 
-      {/* 2. From Vision to Reality */}
-      <section className="py-24 bg-white relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-64 h-64 bg-gray-50 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
-        <div className="max-w-[1400px] mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center gap-16 relative z-10">
-          <div className="w-full md:w-1/2 order-2 md:order-1 relative">
-             <img src="https://camp-coding.site/eloroba/storage/app/images/ZHVQeLXeXFxqfGf27Yd4yiETR1EmFh2Tij1rUudu.png" alt="Orouba Products" className="w-full h-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500" />
-          </div>
-          <div className="w-full md:w-1/2 order-1 md:order-2">
-            <h2 className="text-4xl md:text-5xl font-bold text-orouba-blue mb-8 leading-tight">
-              {t(locale, visionSection?.titleAr, visionSection?.titleEn) || (locale === 'ar' ? 'من الرؤية إلى الواقع' : 'From Vision to Reality')}
-            </h2>
-            <p className="text-lg text-gray-600 leading-loose mb-10 text-justify whitespace-pre-wrap">
-              {t(locale, visionSection?.textAr, visionSection?.textEn) || ''}
-            </p>
+      <div className="container mx-auto px-4 text-start max-w-7xl">
+        {/* Main Image */}
+        <div className="flex flex-col md:flex-row mb-12 justify-center">
+          <div className="w-full">
+            <picture>
+              <source media="(max-width: 500px)" srcSet={smallAboutImage} />
+              <img
+                src={aboutImage}
+                alt="who we are"
+                className="w-full h-auto object-cover rounded-xl"
+              />
+            </picture>
           </div>
         </div>
-      </section>
 
-      {/* 3. Why Choose Us */}
-      <section className="py-24 bg-[#f8f9fa] relative overflow-hidden">
-        <div className="absolute -right-20 top-20 w-64 h-64 bg-orouba-blue opacity-5 rounded-full blur-3xl"></div>
-        <div className="max-w-[1400px] mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center gap-16 relative z-10">
-          <div className="w-full md:w-1/2">
-            <h2 className="text-4xl md:text-5xl font-bold text-orouba-blue mb-4">{locale === 'ar' ? 'لماذا العروبة ؟' : 'Why Orouba?'}</h2>
-            
-            {whyChooseUs && whyChooseUs.length > 0 ? (
-              <div className="space-y-6 mt-8">
-                {whyChooseUs.map((reason: any) => (
-                  <p key={reason.id} className="text-xl text-gray-600 leading-relaxed text-justify">
-                    {t(locale, reason.descriptionAr, reason.descriptionEn)}
-                  </p>
-                ))}
-              </div>
-            ) : (
-              <>
-                <h3 className="text-2xl font-bold text-gray-800 mb-8 mt-4">اكتشف الفرق في كل قضمة:</h3>
-                <p className="text-xl text-gray-600 leading-loose mb-10 text-justify">
-                  يعد اختيار العروبة هو اختيار التميز والسهولة ومتعة الطهي وذلك لإلتزامنا بالمعايير الدولية وشغفنا بالابتكار. تلبي منتجاتنا الطبيعية واللذيذة أذواقًا متنوعة، و تجعل إعداد الطعام أكثر سهولة ومتعة. ثق في العروبة لتحويل الوجبات العادية إلى تجارب غير تقليدية وإضفاء البهجة على مطبخك ومائدتك. انضم إلينا واكتشف متعة الطهي مع العروبة!!.
+        {/* Sections */}
+        {sectionTexts && sectionTexts.map((item: any) => (
+          <div key={item.id} className="mb-10 w-full" style={{ textAlign: locale === 'en' ? 'left' : 'right' }}>
+            <h3 
+              className="text-[28px] font-bold mb-4 text-[#035297]"
+            >
+              {locale === 'en' ? item.titleEn : item.titleAr}
+            </h3>
+            <div 
+              className="text-[#7a7a7a] leading-relaxed text-lg"
+              style={{ 
+                marginRight: locale === 'en' ? 'auto' : '0',
+                marginLeft: locale === 'ar' ? 'auto' : '0'
+              }}
+              dangerouslySetInnerHTML={{
+                __html: locale === 'en' ? item.textEn : item.textAr,
+              }}
+            />
+          </div>
+        ))}
+
+        {/* Buildings */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-center mt-12 mb-16">
+          {buildings && buildings.map((item: any) => (
+            <div key={item.id} className="flex gap-4 items-start text-start" style={{ textAlign: locale === 'en' ? 'left' : 'right', flexDirection: locale === 'ar' ? 'row-reverse' : 'row' }}>
+              <div>
+                <h4 className="text-[24px] text-[#035297] font-bold mb-2">
+                  {locale === 'en' ? item.titleEn : item.titleAr}
+                </h4>
+                <p className="text-[18px] text-[#7a7a7a] leading-relaxed">
+                  {locale === 'en' ? item.descriptionEn : item.descriptionAr}
                 </p>
-              </>
-            )}
+              </div>
+            </div>
+          ))}
+        </div>
 
-          </div>
-          <div className="w-full md:w-1/2 relative">
-             <div className="absolute -bottom-10 -right-10 w-full h-full bg-orouba-yellow rounded-[3rem] opacity-20 -z-10 transition-transform duration-500 hover:rotate-2"></div>
-             <img src="https://camp-coding.site/eloroba/storage/app/images/wAyRPeQNWO2V0bTsRk8tDHD2NxsesoXWWSXjqHi5.png" alt="Plates" className="w-full h-[500px] object-contain rounded-[3rem] hover:-translate-y-2 transition-transform duration-500" />
+        {/* Features / Areas */}
+        <div className="mt-16 mb-20">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-12 gap-x-8">
+            {features && features.map((item: any) => (
+              <div key={item.id} className="flex flex-col items-center text-center">
+                <img src={item.image} alt={item.titleEn} className="mb-4 max-w-full rounded-xl" />
+                <h5 className="font-bold text-[20px] text-[#035297] mb-3">
+                  <b>{locale === 'en' ? item.titleEn : item.titleAr}</b>
+                </h5>
+                <p className="w-3/4 mx-auto text-[#7a7a7a] leading-relaxed">
+                  {locale === 'en' ? item.descriptionEn : item.descriptionAr}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
-      </section>
 
-      {/* 4. Our Values */}
-      {values?.length > 0 && (
-        <section className="py-24 bg-white border-t border-gray-100">
-          <div className="max-w-[1400px] mx-auto px-4 md:px-8">
-            <h2 className="text-4xl font-bold text-center mb-16 text-orouba-blue">{locale === 'ar' ? 'قيمنا الأساسية' : 'Our Core Values'}</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {values.map((value: any) => (
-                <div key={value.id} className="p-10 border border-gray-100 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-white text-center group">
-                  {value.image ? (
-                    <div className="w-24 h-24 mx-auto bg-gray-50 rounded-full flex items-center justify-center mb-8 group-hover:bg-blue-50 transition-colors">
-                      <img src={value.image} alt={value.titleAr} className="w-14 h-14 object-contain" />
-                    </div>
-                  ) : (
-                    <div className="w-24 h-24 mx-auto bg-blue-50 rounded-full flex items-center justify-center mb-8 text-4xl text-orouba-blue">
-                      🌟
-                    </div>
-                  )}
-                  <h3 className="text-2xl font-bold text-orouba-blue mb-4">{t(locale, value.titleAr, value.titleEn)}</h3>
-                  <p className="text-gray-600 leading-relaxed">{t(locale, value.descriptionAr, value.descriptionEn)}</p>
+        {/* Production Steps */}
+        <div className="mt-20">
+          <h4 className="text-[40px] text-[#035297] font-bold mb-12" style={{ textAlign: locale === 'en' ? 'left' : 'right' }}>
+            {locale === 'ar' ? "مراحل الإنتاج" : "Production Steps"}
+          </h4>
+          <div className="flex flex-col gap-16">
+            {productionSteps && productionSteps.map((item: any, index: number) => (
+              <div key={item.id} className={`flex flex-col md:flex-row items-center gap-10 ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
+                <div className="w-full md:w-1/2">
+                  <img src={item.image} alt="Production Step" className="w-full h-auto rounded-xl shadow-sm" />
                 </div>
-              ))}
-            </div>
+                <div 
+                  className="w-full md:w-1/2 [&_b]:text-[#035297] [&_b]:text-xl [&_li]:mb-4 [&_ul]:list-none [&_ul]:p-0 [&_span]:text-[#7a7a7a] [&_span]:text-lg"
+                  style={{ textAlign: locale === 'en' ? 'left' : 'right' }}
+                  dangerouslySetInnerHTML={{
+                    __html: locale === 'ar' ? item.textAr : item.textEn,
+                  }}
+                />
+              </div>
+            ))}
           </div>
-        </section>
-      )}
+        </div>
 
-      {/* 5. Our Facilities (Buildings) */}
-      {buildings?.length > 0 && (
-        <section className="py-24 bg-gray-50">
-          <div className="max-w-[1400px] mx-auto px-4 md:px-8">
-            <h2 className="text-4xl font-bold text-center mb-16 text-orouba-blue">{locale === 'ar' ? 'منشآتنا' : 'Our Facilities'}</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              {buildings.map((building: any) => (
-                <div key={building.id} className="bg-white rounded-[2rem] overflow-hidden shadow-md flex flex-col group hover:shadow-xl transition-shadow">
-                  {building.image && (
-                    <div className="h-80 relative overflow-hidden bg-gray-200">
-                      <img src={building.image} alt={building.titleAr} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                    </div>
-                  )}
-                  <div className="p-10 flex-grow">
-                    <h3 className="text-3xl font-bold text-orouba-blue mb-4 group-hover:text-orouba-yellow transition-colors">{t(locale, building.titleAr, building.titleEn)}</h3>
-                    <p className="text-gray-600 leading-relaxed text-lg">{t(locale, building.descriptionAr, building.descriptionEn)}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+        {/* Quotation */}
+        <div className="mt-24 mb-10 flex flex-col items-center justify-center text-center">
+          {locale === 'ar' ? (
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="23" viewBox="0 0 35 23" fill="none">
+              <path d="M7.85555 12.9029L6.88235 12.8802C-3.7775 12.6992 -0.224218 -2.96249 11.1825 1.17923C19.6018 4.23461 18.0401 18.2893 9.03243 20.5978C5.04913 21.6163 0.613184 20.892 3.91751 19.7604C6.74656 18.8099 9.03243 16.0714 8.87401 13.8308C8.82874 13.3329 8.39873 12.9029 7.85555 12.9029Z" fill="#035297"/>
+              <path d="M28.6552 0.613303C38.9076 4.55134 34.7433 21.752 23.3592 22.4989C20.3944 22.7026 19.6248 22.001 21.8654 21.1636C24.0382 20.3488 26.7767 16.5013 27.0709 13.8986C27.1388 13.378 26.7315 12.948 26.2109 12.948C23.2234 12.948 21.9786 12.948 20.2359 10.549C15.9584 4.61933 21.6391 -2.07995 28.6552 0.613303Z" fill="#035297"/>
+            </svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="23" viewBox="0 0 35 23" fill="none">
+              <path d="M27.1442 12.9029L28.1174 12.8802C38.7773 12.6992 35.224 -2.96249 23.8172 1.17923C15.398 4.23461 16.9596 18.2893 25.9673 20.5978C29.9506 21.6163 34.3866 20.892 31.0822 19.7604C28.2532 18.8099 25.9673 16.0714 26.1258 13.8308C26.171 13.3329 26.601 12.9029 27.1442 12.9029Z" fill="#035297"/>
+              <path d="M6.3446 0.613303C-3.90788 4.55134 0.256468 21.752 11.6406 22.4989C14.6054 22.7026 15.3749 22.001 13.1343 21.1636C10.9616 20.3488 8.22309 16.5013 7.92886 13.8986C7.86097 13.378 8.2683 12.948 8.78885 12.948C11.7763 12.948 13.0212 12.948 14.7638 10.549C19.0414 4.61933 13.3606 -2.07995 6.3446 0.613303Z" fill="#035297"/>
+            </svg>
+          )}
 
-      {/* 6. Production Steps */}
-      {productionSteps?.length > 0 && (
-        <section className="py-24 bg-orouba-blue text-white mt-12">
-          <div className="max-w-[1400px] mx-auto px-4 md:px-8">
-            <h2 className="text-4xl font-bold text-center mb-20 text-orouba-yellow">{locale === 'ar' ? 'مراحل الإنتاج' : 'Production Steps'}</h2>
-            <div className="space-y-20 relative">
-              <div className="absolute top-0 bottom-0 right-1/2 w-1 bg-blue-800 hidden md:block rounded-full"></div>
-              {productionSteps.map((step: any, index: number) => (
-                <div key={step.id} className={`flex flex-col md:flex-row gap-16 items-center relative z-10 ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
-                  <div className="hidden md:flex absolute right-1/2 translate-x-1/2 w-12 h-12 bg-orouba-yellow text-orouba-blue font-bold text-xl rounded-full items-center justify-center border-4 border-orouba-blue z-20">
-                    {step.number}
-                  </div>
-                  
-                  {step.image && (
-                    <div className="w-full md:w-1/2 h-96 relative rounded-[2rem] overflow-hidden shadow-2xl group">
-                      <div className="absolute inset-0 bg-orouba-blue/20 group-hover:bg-transparent transition-colors duration-500 z-10"></div>
-                      <img src={step.image} alt={`Step ${step.number}`} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                    </div>
-                  )}
-                  <div className={`w-full ${step.image ? 'md:w-1/2' : ''} bg-white/10 p-10 rounded-[2rem] backdrop-blur-sm border border-white/10`}>
-                    <div className="text-orouba-yellow font-bold text-2xl mb-4 md:hidden">{locale === 'ar' ? 'الخطوة' : 'Step'} {step.number}</div>
-                    <p className="text-2xl text-white leading-relaxed font-medium">{t(locale, step.textAr, step.textEn)}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+          <p className="my-6 text-[23px] text-[#035297] leading-relaxed max-w-4xl text-center font-medium">
+            {locale === 'ar' ? quotationAr : quotationEn}
+          </p>
+
+          {locale === 'ar' ? (
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="23" viewBox="0 0 35 23" fill="none">
+              <path d="M27.1442 12.9029L28.1174 12.8802C38.7773 12.6992 35.224 -2.96249 23.8172 1.17923C15.398 4.23461 16.9596 18.2893 25.9673 20.5978C29.9506 21.6163 34.3866 20.892 31.0822 19.7604C28.2532 18.8099 25.9673 16.0714 26.1258 13.8308C26.171 13.3329 26.601 12.9029 27.1442 12.9029Z" fill="#035297"/>
+              <path d="M6.3446 0.613303C-3.90788 4.55134 0.256468 21.752 11.6406 22.4989C14.6054 22.7026 15.3749 22.001 13.1343 21.1636C10.9616 20.3488 8.22309 16.5013 7.92886 13.8986C7.86097 13.378 8.2683 12.948 8.78885 12.948C11.7763 12.948 13.0212 12.948 14.7638 10.549C19.0414 4.61933 13.3606 -2.07995 6.3446 0.613303Z" fill="#035297"/>
+            </svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="23" viewBox="0 0 35 23" fill="none">
+              <path d="M7.85555 12.9029L6.88235 12.8802C-3.7775 12.6992 -0.224218 -2.96249 11.1825 1.17923C19.6018 4.23461 18.0401 18.2893 9.03243 20.5978C5.04913 21.6163 0.613184 20.892 3.91751 19.7604C6.74656 18.8099 9.03243 16.0714 8.87401 13.8308C8.82874 13.3329 8.39873 12.9029 7.85555 12.9029Z" fill="#035297"/>
+              <path d="M28.6552 0.613303C38.9076 4.55134 34.7433 21.752 23.3592 22.4989C20.3944 22.7026 19.6248 22.001 21.8654 21.1636C24.0382 20.3488 26.7767 16.5013 27.0709 13.8986C27.1388 13.378 26.7315 12.948 26.2109 12.948C23.2234 12.948 21.9786 12.948 20.2359 10.549C15.9584 4.61933 21.6391 -2.07995 28.6552 0.613303Z" fill="#035297"/>
+            </svg>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

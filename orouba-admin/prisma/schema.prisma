@@ -213,6 +213,8 @@ model Recipe {
   videoLink     String? @db.Text
   internalImage String? @db.Text
   number        Int     @default(999)
+  tagEn         String?
+  tagAr         String?
   isHidden      Boolean @default(false)
 
   createdAt DateTime @default(now())

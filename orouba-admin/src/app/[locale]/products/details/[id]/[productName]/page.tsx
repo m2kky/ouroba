@@ -7,7 +7,7 @@ import FadeIn from "@/components/ui/FadeIn";
 import RelatedProductsSlider from "@/components/products/RelatedProductsSlider";
 import RecommendedRecipesSlider from "@/components/recipes/RecommendedRecipesSlider";
 
-export async function generateMetadata({ params }: { params: Promise<{ id: string; locale: string }> }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ id: string; productName: string; locale: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
   const product = await prisma.product.findUnique({ where: { id: resolvedParams.id } });
 
@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   };
 }
 
-export default async function ProductDetailsPage({ params }: { params: Promise<{ id: string; locale: string }> }) {
+export default async function ProductDetailsPage({ params }: { params: Promise<{ id: string; productName: string; locale: string }> }) {
   const resolvedParams = await params;
   const locale = (resolvedParams.locale as "ar" | "en") || "ar";
 
@@ -42,7 +42,7 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
     return (
       <div className="min-h-[50vh] flex flex-col items-center justify-center bg-gray-50">
         <h1 className="text-3xl font-bold text-orouba-blue mb-4">{locale === "ar" ? "المنتج غير موجود" : "Product Not Found"}</h1>
-        <Link href={`/${locale}/products`} className="text-orouba-yellow bg-orouba-blue px-6 py-2 rounded-full hover:bg-blue-800 transition-colors">
+        <Link href={`/${locale}/about/ProductType`} className="text-orouba-yellow bg-orouba-blue px-6 py-2 rounded-full hover:bg-blue-800 transition-colors">
           {locale === "ar" ? "العودة للمنتجات" : "Back to Products"}
         </Link>
       </div>
@@ -114,7 +114,7 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
           <div className={`flex items-center gap-2 font-bold text-sm md:text-base opacity-80 ${locale === "en" ? "flex-row" : "flex-row-reverse justify-end"}`} style={{ color: textColor }}>
             <Link href={`/${locale}`} className="hover:opacity-100 transition-opacity">{locale === "ar" ? "الصفحة الرئيسية" : "Home"}</Link>
             <ChevronLeft className={`w-4 h-4 mt-1 ${locale === "en" ? "rotate-180" : ""}`} />
-            <Link href={`/${locale}/products`} className="hover:opacity-100 transition-opacity">{locale === "ar" ? "المنتجات" : "Products"}</Link>
+            <Link href={`/${locale}/about/ProductType`} className="hover:opacity-100 transition-opacity">{locale === "ar" ? "المنتجات" : "Products"}</Link>
             {brand && (
               <>
                 <ChevronLeft className={`w-4 h-4 mt-1 ${locale === "en" ? "rotate-180" : ""}`} />
