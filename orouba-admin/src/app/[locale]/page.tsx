@@ -5,7 +5,7 @@ import { getSiteData, getImageUrl } from "@/lib/api-client";
 import FadeIn from "@/components/ui/FadeIn";
 import HoverCard from "@/components/ui/HoverCard";
 
-interface BannerItem { id: string; isHidden: boolean; type: string; videoLink?: string; image?: string; smallVideo?: string; smallImg?: string; }
+interface BannerItem { id: string; isHidden: boolean; type: string; videoLink?: string; videoLinkEn?: string; image?: string; imageEn?: string; smallVideo?: string; smallVideoEn?: string; smallImg?: string; smallImgEn?: string; }
 interface SectionTextItem { id: string; titleEn?: string; titleAr?: string; textEn?: string; textAr?: string; number: number; }
 interface BrandItem { id: string; nameEn?: string; nameAr?: string; image?: string; }
 interface WhyItem { id: string; descriptionEn?: string; descriptionAr: string; }
@@ -33,11 +33,17 @@ export default async function HomePage({
     ? "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/1_en.mp4"
     : "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/1.mp4";
   const isVideoDesktop = firstBanner ? firstBanner.type === "video" : true;
-  const mediaDesktop = firstBanner?.videoLink || firstBanner?.image || fallbackVideo;
+  
+  const desktopVideoToUse = isEn ? (firstBanner?.videoLinkEn || firstBanner?.videoLink) : firstBanner?.videoLink;
+  const desktopImageToUse = isEn ? (firstBanner?.imageEn || firstBanner?.image) : firstBanner?.image;
+  const mediaDesktop = desktopVideoToUse || desktopImageToUse || fallbackVideo;
   
   // Mobile Media
-  const mediaMobile = firstBanner?.smallVideo || firstBanner?.smallImg || mediaDesktop;
-  const isVideoMobile = firstBanner ? !!firstBanner.smallVideo || (!firstBanner.smallImg && isVideoDesktop) : true;
+  const mobileVideoToUse = isEn ? (firstBanner?.smallVideoEn || firstBanner?.smallVideo) : firstBanner?.smallVideo;
+  const mobileImageToUse = isEn ? (firstBanner?.smallImgEn || firstBanner?.smallImg) : firstBanner?.smallImg;
+  
+  const mediaMobile = mobileVideoToUse || mobileImageToUse || mediaDesktop;
+  const isVideoMobile = firstBanner ? !!mobileVideoToUse || (!mobileImageToUse && isVideoDesktop) : true;
 
   // Vision Section Text (Assuming number 1 or specific title)
   const visionSection = sectionTexts?.find((s: SectionTextItem) => s.titleEn?.toLowerCase().includes("vision") || s.number === 1);
