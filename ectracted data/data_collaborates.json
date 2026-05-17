@@ -1,0 +1,72 @@
+[
+  {
+    "id": "",
+    "f_name": "abdu",
+    "l_name": "ali",
+    "phone": "01276549343",
+    "email": "aa@gmail.com",
+    "request": "this is the details",
+    "created_at": "2024-05-19 19:32:06",
+    "updated_at": "2024-05-19 19:32:06"
+  },
+  {
+    "id": "",
+    "f_name": "abdu",
+    "l_name": "ali",
+    "phone": "3232",
+    "email": "email@gmail.com",
+    "request": "deelew",
+    "created_at": "2024-05-19 19:32:54",
+    "updated_at": "2024-05-19 19:32:54"
+  },
+  {
+    "id": "",
+    "f_name": "abdu",
+    "l_name": "ali",
+    "phone": "3232",
+    "email": "email#jkew",
+    "request": "ewkllwek",
+    "created_at": "2024-05-19 19:38:51",
+    "updated_at": "2024-05-19 19:38:51"
+  },
+  {
+    "id": "",
+    "f_name": "ewe",
+    "l_name": "rere",
+    "phone": "322323",
+    "email": "kewl@gmail.com",
+    "request": "klewlkew",
+    "created_at": "2024-05-19 19:40:17",
+    "updated_at": "2024-05-19 19:40:17"
+  },
+  {
+    "id": "",
+    "f_name": "weekwl",
+    "l_name": "klekl",
+    "phone": "3277832",
+    "email": "ewjwk",
+    "request": "weklew",
+    "created_at": "2024-05-19 19:45:00",
+    "updated_at": "2024-05-19 19:45:00"
+  },
+  {
+    "id": "",
+    "f_name": "Mohammed",
+    "l_name": "Reda",
+    "phone": "01212745939",
+    "email": "mmoh33650@gmail.com",
+    "request": "I want to Collaborate With you.",
+    "created_at": "2024-05-21 16:32:00",
+    "updated_at": "2024-05-21 16:32:00"
+  },
+  {
+    "id": "",
+    "f_name": "fg",
+    "l_name": "gh",
+    "phone": "6756775",
+    "email": "ghjgjg",
+    "request": "hgjgh",
+    "created_at": "2024-05-22 20:40:23",
+    "updated_at": "2024-05-22 20:40:23"
+  }
+]

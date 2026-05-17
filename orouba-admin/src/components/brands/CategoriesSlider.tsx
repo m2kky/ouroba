@@ -12,6 +12,7 @@ interface Category {
 interface CategoriesSliderProps {
   categories: Category[];
   brandId: string;
+  brandName: string;
   activeCategoryId: string;
   locale: "ar" | "en";
   brandColor?: string | null;
@@ -20,6 +21,7 @@ interface CategoriesSliderProps {
 export default function CategoriesSlider({
   categories,
   brandId,
+  brandName,
   activeCategoryId,
   locale,
   brandColor,
@@ -34,7 +36,7 @@ export default function CategoriesSlider({
           const catName = locale === "ar" ? cat.nameAr : cat.nameEn;
 
           return (
-            <Link key={cat.id} href={`/${locale}/brands/${brandId}/${cat.id}`}>
+            <Link key={cat.id} href={`/${locale}/brands/${brandName}/${brandId}/${cat.id}/${catName.replace(/\s+/g, "-")}`}>
               <motion.button
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}

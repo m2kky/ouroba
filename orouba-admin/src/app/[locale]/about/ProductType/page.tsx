@@ -37,7 +37,58 @@ export default async function ProductsPage({
   const headerImg = settings.product_type_img?.[locale] || settings.product_type_img?.ar || "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/8inON8KtTSi8Ijpf6Qa7btLtpOgyJ6YuoOw69c8E.webp";
   const headerText = locale === 'ar' 
     ? "نحن نفخر بتصنيع وتوفير المنتجات الغذائية الصحية كل يوم. جميع منتجاتنا لا تحتوي على أي إضافات لأننا نعتمد فقط على المكونات الطبيعية. لدينا خطوط إنتاج مختلفة ومجموعة كبيرة من العلامات التجارية والأنواع."
-    : "We take pride in manufacturing and supplying nutritious, healthy products every day. All our products contain no additives as we depend only on natural ingredients. We have different product lines and large portfolio of brands & types";
+    : "We take pride in manufacturing and supplying nutritious, healthy products every day. All our products contain no additives as we depend only on natural ingredients.  We have different product lines and large portfolio of brands & types";
+
+  const productTypesArray = [
+    {
+      id: "fruits",
+      titleEn: "Frozen Fruits",
+      titleAr: "الفواكة المجمدة",
+      descriptionEn: "Fresh fruits are selected and processed, then subjected to quick freezing to keep their nutrition values and attributes",
+      descriptionAr: "يتم اختيار الفواكة الطازجة وتجهيزها، ثم تخضع للتجميد السريع للاحتفاظ بخصائصها وقيمتها الغذائية.",
+      image: "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/RjhwfXqz0lYRg5WcJappDYbVqw7GxoGFpV5l7vk2.png",
+      brands: [
+        { brandId: "7", catId: "5", logo: "/UIkaE1koGECMMc616E9jBg8H27gL60D9N9c10r2q.png" }, // Farida - Frozen Fruits
+        { brandId: "5", catId: "11", logo: "/basma.png" } // Basma - Frozen Vegetables & Fruits
+      ]
+    },
+    {
+      id: "pre-fried",
+      titleEn: "Pre-Fried",
+      titleAr: "النصف مقلي",
+      descriptionEn: "We have our famous Falafel types, in addition to our original recipes of pre-fried potatoes with different ingredients and pre-fried cauliflower florets",
+      descriptionAr: "لدينا أصناف الفلافل الشهيرة الخاصة بنا، بالإضافة إلى وصفاتنا الأصلية من البطاطس النصف مقلية مع مكونات مختلفة وزهرات القرنبيط المتبلة النصف مقلية.",
+      image: "GTqYDNVWPuIlNYMzniHuxRmdwslPpj0W9bjhRGAI.webp",
+      brands: [
+        { brandId: "7", catId: "6", logo: "/UIkaE1koGECMMc616E9jBg8H27gL60D9N9c10r2q.png" }, // Farida - Frozen Falafel
+        { brandId: "5", catId: "12", logo: "/basma.png" } // Basma - Frozen Falafel
+      ]
+    },
+    {
+      id: "veg",
+      titleEn: "Frozen Vegetables",
+      titleAr: "الخضروات المجمدة",
+      descriptionEn: "All our vegetables are carefully selected. They undergo inspection and selection process, then the vegetables are washed, processed and subjected to quick freezing, We have a large variety of types to serve different needs",
+      descriptionAr: "يتم اختيار جميع خضرواتنا بعناية. تخضع الخضروات لعملية الفحص والاختيار، ثم يتم غسلها ومعالجتها ومرورها بالتجميد السريع، ولدينا مجموعة متنوعة من الأصناف لتلبية الاحتياجات المختلفة.",
+      image: "icIeuiVnOAuVtHTPzWDN8D16X8aLOQ7wpGZoRIOD.webp",
+      brands: [
+        { brandId: "7", catId: "4", logo: "/UIkaE1koGECMMc616E9jBg8H27gL60D9N9c10r2q.png" }, // Farida - Frozen Vegetables
+        { brandId: "5", catId: "11", logo: "/basma.png" } // Basma - Frozen Vegetables & Fruits
+      ]
+    },
+    {
+      id: "beans",
+      titleEn: "Frozen Beans & Grains",
+      titleAr: "البقوليات والحبوب المجمدة",
+      descriptionEn: "Our beans & grains are selected, soaked or boiled to save time and effort, Many of which are ready to eat and some take around 10 minutes of heating",
+      descriptionAr: "يتم اختيار البقوليات والحبوب، وتجهيزها وسلقها لتكون سريعة الطهى ، وهناك العديد من الأصناف جاهزة للأكل مباشرة . بعض المنتجات تستغرق حوالي ١٠ دقائق من الطهى وذلك لتوفير الوقت والجهد.",
+      image: "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/ZjhabQ8AqbF7N3nAMyekLu1DqzOfnJ6dW9tuxoor.png",
+      brands: [
+        { brandId: "7", catId: "7", logo: "/UIkaE1koGECMMc616E9jBg8H27gL60D9N9c10r2q.png" }, // Farida - Frozen Beans & Grains
+        { brandId: "5", catId: "13", logo: "/basma.png" } // Basma - Frozen Beans & Grains
+      ]
+    }
+  ];
 
   // Handle Search Results
   let searchResults: any[] = [];
@@ -102,41 +153,38 @@ export default async function ProductsPage({
       </div>
 
       <div className="max-w-[1200px] mx-auto px-4 md:px-8 relative z-10">
-        <FadeIn direction="up" className="mb-20">
-          <h1 className="text-5xl md:text-6xl font-bold text-[#004A99] mb-8">
+        <FadeIn direction="up" className="mb-20" style={{ textAlign: locale === 'en' ? 'left' : 'right' }}>
+          <h1 className="text-3xl md:text-4xl font-bold text-[#035297] mb-4">
             {locale === 'ar' ? 'أصناف المنتجات' : 'Product Types'}
           </h1>
-          <p className="text-[#002F59] text-xl md:text-2xl font-medium max-w-4xl leading-relaxed">
+          <p className="text-[#035297] text-lg font-medium max-w-4xl leading-relaxed" style={{ marginRight: locale === 'en' ? 'auto' : '0', marginLeft: locale === 'ar' ? 'auto' : '0' }}>
             {headerText}
           </p>
         </FadeIn>
 
         {/* Alternating Category Types - One by One like the original */}
-        {categoryTypes.length > 0 ? (
+        {productTypesArray.length > 0 ? (
           <div className="space-y-32 md:space-y-48 pb-20">
-            {categoryTypes.map((item: any, index: number) => {
+            {productTypesArray.map((item: any, index: number) => {
               const isEven = index % 2 === 0;
               const flexDirection = isEven ? "md:flex-row" : "md:flex-row-reverse";
 
               return (
                 <FadeIn key={item.id} direction={isEven ? "right" : "left"} className={`flex flex-col ${flexDirection} items-center gap-12 md:gap-24`}>
                   
-                  {/* Product Image - Top Down Style */}
+                  {/* Product Image - Floating Plate */}
                   <div className="w-full md:w-1/2 flex justify-center relative">
-                    {/* Decorative colored plate behind (simulated) */}
-                    <div className={`absolute inset-0 scale-90 rounded-full blur-2xl opacity-20 ${index % 4 === 0 ? 'bg-purple-500' : index % 4 === 1 ? 'bg-blue-500' : index % 4 === 2 ? 'bg-orange-500' : 'bg-green-500'}`} />
-                    
                     <div className="group relative w-72 h-72 md:w-[450px] md:h-[450px] transition-all duration-700 ease-out hover:rotate-6 hover:scale-110 hover:-translate-y-4 cursor-pointer">
                       {item.image ? (
                         <Image
-                          src={getImageUrl(item.image) || "/placeholder.png"}
-                          alt={t(locale, item.titleAr, item.titleEn)}
+                          src={item.image.startsWith("http") ? item.image : getImageUrl(item.image)}
+                          alt={locale === 'ar' ? item.titleAr : item.titleEn}
                           fill
                           className="object-contain drop-shadow-2xl group-hover:drop-shadow-[0_20px_40px_rgba(0,0,0,0.4)] transition-all duration-700"
                           unoptimized={true}
                         />
                       ) : (
-                        <div className="w-full h-full bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-[#004A99] font-bold">
+                        <div className="w-full h-full bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-[#035297] font-bold">
                           {locale === 'ar' ? 'بدون صورة' : 'No image'}
                         </div>
                       )}
@@ -144,41 +192,47 @@ export default async function ProductsPage({
                   </div>
 
                   {/* Product Text & Brand Icons */}
-                  <div className={`w-full md:w-1/2 flex flex-col ${isEven ? 'items-start' : 'items-start md:items-end md:text-right'}`}>
-                    <h2 className="text-4xl md:text-5xl font-bold text-[#004A99] mb-6">
-                      {t(locale, item.titleAr, item.titleEn)}
+                  <div className="w-full md:w-1/2 flex flex-col items-center justify-center text-center">
+                    <h2 className="text-2xl md:text-3xl font-bold text-[#035297] mb-4">
+                      {locale === 'en' ? item.titleEn : item.titleAr}
                     </h2>
-                    <p className="text-[#002F59] text-xl leading-relaxed mb-10 font-medium">
-                      {t(locale, item.descriptionAr, item.descriptionEn)}
+                    <p className="text-[#035297] text-base md:text-lg leading-relaxed mb-8 font-medium max-w-sm">
+                      {locale === 'en' ? item.descriptionEn : item.descriptionAr}
                     </p>
 
                     {/* Brand Availability Icons */}
-                    <div className="flex flex-wrap items-center gap-6">
-                      {item.categories?.map((catTypeCat: any) => {
-                        const cat = catTypeCat.category;
-                        if (!cat || !cat.brand) return null;
-                        const brandLogo = catTypeCat.image || cat.brand.imageSmallMain || cat.brand.image;
-                        const brandNameEn = cat.brand.nameEn || cat.brand.nameAr || 'brand';
+                    <div className="flex flex-wrap items-center justify-center gap-6">
+                      {item.brands.map((bInfo: any) => {
+                        const brandObj = data.brands?.find((b: any) => b.id === bInfo.brandId);
+                        if (!brandObj) return null;
+                        
+                        const catObj = brandObj.categories?.find((c: any) => c.id === bInfo.catId);
+                        const brandLogo = brandObj.imageSmallMain || brandObj.image;
+                        const brandNameEn = brandObj.nameEn || brandObj.nameAr || 'brand';
                         const slugBrandName = brandNameEn.replace(/\s+/g, '-');
+                        
+                        const linkHref = catObj 
+                          ? `/${locale}/brands/${slugBrandName}/${brandObj.id}/${catObj.id}/${(catObj.nameEn || catObj.nameAr || 'category').replace(/\s+/g, '-')}`
+                          : `/${locale}/brands/${slugBrandName}/${brandObj.id}`;
                         
                         return (
                           <Link 
-                            key={catTypeCat.id}
-                            href={`/${locale}/brands/${slugBrandName}/${cat.brand.id}/${cat.id}/${(cat.nameEn || cat.nameAr || 'category').replace(/\s+/g, '-')}`}
-                            className="group relative block w-28 h-28 bg-transparent transition-all duration-500 hover:-translate-y-3 hover:scale-110"
-                            title={`${cat.brand.nameAr} - ${cat.nameAr}`}
+                            key={bInfo.brandId}
+                            href={linkHref}
+                            className="group relative block w-24 h-16 md:w-32 md:h-20 bg-transparent transition-all duration-500 hover:-translate-y-2 hover:scale-105"
+                            title={locale === 'ar' ? brandObj.nameAr : brandObj.nameEn}
                           >
-                            {brandLogo ? (
+                            {brandLogo || bInfo.logo ? (
                               <Image 
-                                src={getImageUrl(brandLogo)}
-                                alt={locale === 'ar' ? cat.brand.nameAr : cat.brand.nameEn}
+                                src={bInfo.logo || getImageUrl(brandLogo)}
+                                alt={locale === 'ar' ? brandObj.nameAr : brandObj.nameEn}
                                 fill
                                 className="object-contain brightness-100 group-hover:brightness-110 group-hover:drop-shadow-[0_10px_20px_rgba(0,0,0,0.3)] transition-all duration-500"
                                 unoptimized={true}
                               />
                             ) : (
-                              <span className="flex items-center justify-center w-full h-full text-xs font-bold text-[#004A99]">
-                                {cat.brand.nameAr}
+                              <span className="flex items-center justify-center w-full h-full text-xs font-bold text-[#035297]">
+                                {locale === 'ar' ? brandObj.nameAr : brandObj.nameEn}
                               </span>
                             )}
                           </Link>
@@ -193,7 +247,7 @@ export default async function ProductsPage({
           </div>
         ) : (
           <div className="text-center py-40">
-            <p className="text-[#004A99] text-2xl font-bold opacity-50">
+            <p className="text-[#035297] text-2xl font-bold opacity-50">
               {locale === 'ar' ? "لا توجد أصناف متاحة حالياً." : "No categories available currently."}
             </p>
           </div>

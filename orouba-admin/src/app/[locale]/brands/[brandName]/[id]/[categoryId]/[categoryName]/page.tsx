@@ -68,6 +68,7 @@ export default async function BrandCategoryProductsPage({ params }: { params: Pr
       <CategoriesSlider 
         categories={categories}
         brandId={brand.id}
+        brandName={resolvedParams.brandName}
         activeCategoryId={resolvedParams.categoryId}
         locale={locale}
         brandColor={mainColor}

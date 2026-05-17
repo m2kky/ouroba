@@ -106,12 +106,12 @@ export default async function HomePage({
           </FadeIn>
           <FadeIn direction={isEn ? "right" : "left"} delay={0.2} className="w-full md:w-1/2">
             <h2 className="text-4xl md:text-5xl font-bold text-orouba-blue mb-8 leading-tight">
-              {isEn ? visionSection?.titleEn || "From Vision to Reality" : visionSection?.titleAr || "من الرؤية إلى الواقع"}
+              {isEn ? "From Vision to Reality" : "من الرؤية إلى الواقع"}
             </h2>
             <p className="text-base font-medium tracking-tight text-gray-700 leading-relaxed mb-8 md:mb-10 text-justify whitespace-pre-wrap">
               {isEn 
-                ? visionSection?.textEn?.trim() || "Orouba Food Industries was established in 1998, with a vision to excel in the production and innovation of high quality, quick-to-cook frozen food products for the whole world. The factory covers an area of 20,000 square meters, equipped with the latest technologies, under the supervision and management of an experienced and highly efficient team of engineers and workers to ensure high quality production in accordance with international standards."
-                : visionSection?.textAr?.trim() || "تأسست شركة العروبة لصناعة المواد الغذائية سنة ١٩٩٨، برؤية تهدف للتمييز فى انتاج و ابتكار منتجات غذائية مجمدة عالية الجودة وسريعة الطهى لجميع انحاء العالم. تبلغ مساحة المصنع ٢٠,٠٠٠ متر مربع، وهو مجهز بأحدث التقنيات، تحت إشراف وإدارة فريق من المهندسين والعامليين ذوى الخبرة والكفاءة العالية لضمان انتاج عالى الجودة وفقا للمعايير الدولية."}
+                ? "Orouba for Food industry Co. was founded in 1998, with a vision to produce premium quality frozen food products. Our 20,000 square meter factory, equipped with state of the art technology and operated by our skilled engineers, ensures top quality production. \nCommitted to consumer satisfaction, we offer a diverse range of frozen vegetables, fruits, beans, and pre-fried products, made with simple, all natural ingredients."
+                : "تأسست شركة العروبة لصناعة المواد الغذائية سنة ١٩٩٨، برؤية تهدف للتمييز فى انتاج و ابتكار منتجات غذائية مجمدة عالية الجودة وسريعة الطهى لجميع انحاء العالم. تبلغ مساحة المصنع ٢٠,٠٠٠ متر مربع،وهو مجهز بأحدث التقنيات، تحت إشراف وإدارة فريق من المهندسين والعامليين ذوى الخبرة والكفاءة العالية لضمان انتاج عالى الجودة وفقا للمعايير الدولية. حرصا منا على إرضاء عملائنا والحفاظ على ثقتهم، فإننا نقدم مجموعة كبيرة ومتنوعة من المنتجات الطازجة المجمدة من خضروات، فواكة، بقوليات، حبوب وأيضا فلافل ومنتجات نصف مقلية مجمدة يتم إنتاجها جميعا من مكونات طبيعية دون أى اضافات."}
             </p>
             <Link href={`/${locale}/about/whoWeAre`} className="inline-flex items-center justify-center gap-2 bg-orouba-yellow text-orouba-blue font-bold px-8 py-3 rounded-full text-lg hover:bg-yellow-400 transition-colors shadow-md w-fit">
               <span>{isEn ? "About Orouba" : "عن العروبة"}</span>
@@ -167,24 +167,14 @@ export default async function HomePage({
           </FadeIn>
           <FadeIn direction={isEn ? "right" : "left"} delay={0.2} className="w-full md:w-1/2">
             <h2 className="text-4xl md:text-5xl font-bold text-orouba-blue mb-4">{isEn ? "Why Orouba?" : "لماذا العروبة ؟"}</h2>
-            {whyChooseUs && whyChooseUs.length > 0 ? (
-              <div className="space-y-6 mt-8">
-                {whyChooseUs.map((reason: WhyItem) => (
-                  <p key={reason.id} className="text-xl text-gray-600 leading-relaxed text-justify">
-                    {isEn ? reason.descriptionEn || reason.descriptionAr : reason.descriptionAr}
-                  </p>
-                ))}
-              </div>
-            ) : (
-              <>
-                <h3 className="text-2xl font-bold text-gray-800 mb-8 mt-4">{isEn ? "Discover the difference in every bite:" : "اكتشف الفرق في كل قضمة:"}</h3>
-                <p className="text-xl text-gray-600 leading-loose mb-10 text-justify">
-                  {isEn 
-                    ? "Choosing Orouba means choosing excellence, convenience and the joy of cooking, due to our commitment to international standards and passion for innovation. Our natural and delicious products cater to diverse tastes, making food preparation easier and more enjoyable."
-                    : "يعد اختيار العروبة هو اختيار التميز والسهولة ومتعة الطهي وذلك لإلتزامنا بالمعايير الدولية وشغفنا بالابتكار. تلبي منتجاتنا الطبيعية واللذيذة أذواقًا متنوعة، و تجعل إعداد الطعام أكثر سهولة ومتعة. ثق في العروبة لتحويل الوجبات العادية إلى تجارب غير تقليدية وإضفاء البهجة على مطبخك ومائدتك. انضم إلينا واكتشف متعة الطهي مع العروبة!!."}
-                </p>
-              </>
-            )}
+            <div className="space-y-6 mt-8">
+              <h3 className="text-2xl font-bold text-gray-800 mb-4">{isEn ? "Discover the Difference in Every Bite:" : "اكتشف الفرق في كل قضمة:"}</h3>
+              <p className="text-xl text-gray-600 leading-relaxed text-justify whitespace-pre-line">
+                {isEn 
+                  ? "Choosing Orouba means opting for quality, convenience, and a touch of culinary delight. Our all-natural, delicious products cater to diverse tastes, making meal prep easy and fun. Trust Orouba to turn ordinary meals into extraordinary experiences and bring joy to your kitchen. Join us and discover the delight of cooking with Orouba!"
+                  : "يعد اختيار العروبة هو اختيار التميز والسهولة ومتعة الطهي وذلك لإلتزامنا بالمعايير الدولية وشغفنا بالابتكار. تلبي منتجاتنا الطبيعية واللذيذة أذواقًا متنوعة، و تجعل إعداد الطعام أكثر سهولة ومتعة. ثق في العروبة لتحويل الوجبات العادية إلى تجارب غير تقليدية وإضفاء البهجة على مطبخك ومائدتك انضم إلينا واكتشف متعة الطهي مع العروبة!!."}
+              </p>
+            </div>
           </FadeIn>
         </div>
       </section>
@@ -252,8 +242,8 @@ export default async function HomePage({
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-orouba-blue">{isEn ? "Orouba Around The World" : "العروبة حول العالم"}</h2>
             <p className="text-lg text-gray-700 leading-loose mb-10 text-justify font-medium">
               {isEn 
-                ? "Orouba is committed to expanding its global reach, providing its high-quality products to various tables around the world. Our extensive network ensures the delivery of our products all year round to more than 50 countries."
-                : "تلتزم العروبة بتوسيع نطاق انتشارها عالميًا، حيث توفر منتجاتها عالية الجودة لمختلف موائد العالم. تضمن شبكتنا الواسعة إيصال منتجاتنا طوال العام لأكثر من ٥٠ دولة حول العالم."}
+                ? "Our extensive network guarantees timely delivery to over 50 countries worldwide. Our journey began in Egypt, and now, we are present in the Middle East, Europe, Japan, USA & Australia."
+                : "تلتزم العروبة بتوسيع نطاق انتشارها عالميًا، حيث توفر منتجاتها عالية الجودة لمختلف موائد العالم. تضمن شبكتنا الواسعة إيصال منتجاتنا طوال العام لأكثر من ٥٠ دولة حول العالم. أنطلقت رحلتنا من مصر، والآن نحن نتواجد في الشرق الأوسط ،أوروبا ،اليابان ،الولايات المتحدة الأمريكية ، كندا وأستراليا، حاملين معنا نكهات استثنائية و تجارب طهى لا مثيل لها."}
             </p>
             <Link href={`/${locale}/export`} className="inline-block bg-orouba-yellow text-orouba-blue font-bold px-10 py-3 rounded-lg text-lg hover:bg-yellow-400 transition-colors shadow-sm">
               {isEn ? "More >" : "المزيد >"}

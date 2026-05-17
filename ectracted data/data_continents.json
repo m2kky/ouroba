@@ -1,0 +1,58 @@
+[
+  {
+    "id": "",
+    "name_ar": "إفريقيا",
+    "name_en": "Africa",
+    "hidden": "",
+    "created_at": "2024-05-19 18:51:58",
+    "updated_at": "2024-08-07 16:18:39"
+  },
+  {
+    "id": "",
+    "name_ar": "الشرق الأوسط والخليج",
+    "name_en": "Middle East & Gulf",
+    "hidden": "",
+    "created_at": "2024-05-19 18:54:15",
+    "updated_at": "2024-07-22 13:12:08"
+  },
+  {
+    "id": "",
+    "name_ar": "أوروبا",
+    "name_en": "Europe",
+    "hidden": "",
+    "created_at": "2024-05-19 18:55:19",
+    "updated_at": "2024-07-22 13:12:22"
+  },
+  {
+    "id": "",
+    "name_ar": "اليابان",
+    "name_en": "Japan",
+    "hidden": "",
+    "created_at": "2024-05-19 18:57:16",
+    "updated_at": "2024-07-22 13:12:36"
+  },
+  {
+    "id": "",
+    "name_ar": "أستراليا",
+    "name_en": "Australia",
+    "hidden": "",
+    "created_at": "2024-05-19 18:57:24",
+    "updated_at": "2024-07-22 13:12:58"
+  },
+  {
+    "id": "",
+    "name_ar": "الولايات المتحدة الأمريكية وكندا",
+    "name_en": "USA & Canada",
+    "hidden": "",
+    "created_at": "2024-05-19 18:57:30",
+    "updated_at": "2024-07-22 13:13:12"
+  },
+  {
+    "id": "",
+    "name_ar": "القارة القطبية الجنوبية",
+    "name_en": "Antarctica",
+    "hidden": "",
+    "created_at": "2024-07-16 17:27:21",
+    "updated_at": "2024-07-22 13:13:21"
+  }
+]

@@ -1,0 +1,114 @@
+[
+  {
+    "id": "",
+    "name_ar": "فاصوليا خضراء",
+    "name_en": "Green Beans",
+    "hidden": "",
+    "created_at": "2024-05-23 17:19:09",
+    "updated_at": "2024-05-26 11:54:21"
+  },
+  {
+    "id": "",
+    "name_ar": "بامية",
+    "name_en": "Okra",
+    "hidden": "",
+    "created_at": "2024-05-23 18:01:20",
+    "updated_at": "2024-05-26 11:52:00"
+  },
+  {
+    "id": "",
+    "name_ar": "ملوخية",
+    "name_en": "Molokhia",
+    "hidden": "",
+    "created_at": "2024-05-26 11:50:51",
+    "updated_at": "2024-05-26 11:52:21"
+  },
+  {
+    "id": "",
+    "name_ar": "بسلة",
+    "name_en": "Peas",
+    "hidden": "",
+    "created_at": "2024-05-26 11:53:49",
+    "updated_at": "2024-07-16 15:20:10"
+  },
+  {
+    "id": "",
+    "name_ar": "فول اخضر",
+    "name_en": "Green Broad Beans",
+    "hidden": "",
+    "created_at": "2024-05-26 11:56:38",
+    "updated_at": "2024-08-01 12:14:52"
+  },
+  {
+    "id": "",
+    "name_ar": "السبانخ",
+    "name_en": "Spinach",
+    "hidden": "",
+    "created_at": "2024-05-26 11:57:09",
+    "updated_at": "2024-08-08 13:03:31"
+  },
+  {
+    "id": "",
+    "name_ar": "نص مقلي",
+    "name_en": "Pre-Fried",
+    "hidden": "",
+    "created_at": "2024-05-26 12:08:45",
+    "updated_at": "2024-05-26 12:35:40"
+  },
+  {
+    "id": "",
+    "name_ar": "فاكهة",
+    "name_en": "Fruits",
+    "hidden": "",
+    "created_at": "2024-05-26 12:09:10",
+    "updated_at": "2024-08-11 15:42:20"
+  },
+  {
+    "id": "",
+    "name_ar": "خضراوات مجمدة",
+    "name_en": "Frozen Vegetables",
+    "hidden": "",
+    "created_at": "2024-05-26 12:21:24",
+    "updated_at": "2024-05-26 12:21:24"
+  },
+  {
+    "id": "",
+    "name_ar": "باببيتس",
+    "name_en": "Bap Bites",
+    "hidden": "",
+    "created_at": "2024-05-26 12:21:41",
+    "updated_at": "2024-11-11 16:49:09"
+  },
+  {
+    "id": "",
+    "name_ar": "بقوليات وحبوب",
+    "name_en": "Beans & Grains",
+    "hidden": "",
+    "created_at": "2024-05-26 12:28:42",
+    "updated_at": "2024-08-01 13:52:11"
+  },
+  {
+    "id": "",
+    "name_ar": "طماطم",
+    "name_en": "Tomato",
+    "hidden": "",
+    "created_at": "2024-06-04 12:59:59",
+    "updated_at": "2024-06-04 12:59:59"
+  },
+  {
+    "id": "",
+    "name_ar": "اساسيات المطبخ",
+    "name_en": "Kitchen Essential",
+    "hidden": "",
+    "created_at": "2024-06-05 15:41:24",
+    "updated_at": "2024-08-11 15:38:51"
+  },
+  {
+    "id": "",
+    "name_ar": "تيست",
+    "name_en": "test",
+    "hidden": "",
+    "created_at": "2024-08-07 19:26:48",
+    "updated_at": "2024-08-07 19:27:41"
+  }
+]

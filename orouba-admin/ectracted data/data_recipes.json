@@ -1,0 +1,82 @@
+[
+  {
+    "id": "",
+    "name_ar": "أطباق رئيسية",
+    "name_en": "Main Dish",
+    "image": "https://camp-coding.site/eloroba/storage/app/images/doeFMb1o6g8AFE9p0iWa6nWB8DH60XI4iqL1NDeR.jpg",
+    "hidden": "",
+    "created_at": "2024-05-15 19:32:16",
+    "updated_at": "2024-07-20 10:59:07",
+    "number": ""
+  },
+  {
+    "id": "",
+    "name_ar": "حساء",
+    "name_en": "Soup",
+    "image": "https://camp-coding.site/eloroba/storage/app/images/UO13ZZLZRGk5B6VU5dkZsLGF6yue0PJ7n8HhU6KF.jpg",
+    "hidden": "",
+    "created_at": "2024-05-15 19:33:21",
+    "updated_at": "2024-07-24 14:49:49",
+    "number": ""
+  },
+  {
+    "id": "",
+    "name_ar": "مقبلات",
+    "name_en": "Appetizers",
+    "image": "https://camp-coding.site/eloroba/storage/app/images/VtdnMGpLatiU1rN6tX9jFxEVBvkEfwenqYte2H4s.jpg",
+    "hidden": "",
+    "created_at": "2024-05-15 19:34:12",
+    "updated_at": "2024-07-24 14:50:14",
+    "number": ""
+  },
+  {
+    "id": "",
+    "name_ar": "سلطات",
+    "name_en": "Salad",
+    "image": "https://camp-coding.site/eloroba/storage/app/images/toyJYfP6GueMVjFLc9qN1ZEKqlKjEammX7LlBZww.jpg",
+    "hidden": "",
+    "created_at": "2024-05-23 15:22:15",
+    "updated_at": "2024-07-24 14:50:34",
+    "number": ""
+  },
+  {
+    "id": "",
+    "name_ar": "إيرفراير",
+    "name_en": "Airfryer",
+    "image": "https://camp-coding.site/eloroba/storage/app/images/xaj3IewEPMy8vpuqk2PUWQrxwiMrwwL4vTfXxWDb.jpg",
+    "hidden": "",
+    "created_at": "2024-05-23 15:46:30",
+    "updated_at": "2024-08-07 16:30:16",
+    "number": ""
+  },
+  {
+    "id": "",
+    "name_ar": "إفطار",
+    "name_en": "Break Fast",
+    "image": "https://camp-coding.site/eloroba/storage/app/images/pfOipgupH3p97J2qRQQ3TAVlihIgxcKQI9OPZHwU.jpg",
+    "hidden": "",
+    "created_at": "2024-05-23 15:46:57",
+    "updated_at": "2024-07-24 14:51:07",
+    "number": ""
+  },
+  {
+    "id": "",
+    "name_ar": "حلويات",
+    "name_en": "dessert",
+    "image": "https://camp-coding.site/eloroba/storage/app/images/kv4wtYPRHwA5GOpyvOBMY9HJm377uAzaOOiWwJJC.png",
+    "hidden": "",
+    "created_at": "2024-05-23 15:47:35",
+    "updated_at": "2024-07-24 14:51:25",
+    "number": ""
+  },
+  {
+    "id": "",
+    "name_ar": "مشروبات",
+    "name_en": "Drinks",
+    "image": "https://camp-coding.site/eloroba/storage/app/images/TW90WgLo6ZcOyzHlDeN37mjmp2lVB1zC7R6ecJ8C.png",
+    "hidden": "",
+    "created_at": "2024-05-23 15:48:01",
+    "updated_at": "2024-07-24 14:51:42",
+    "number": ""
+  }
+]

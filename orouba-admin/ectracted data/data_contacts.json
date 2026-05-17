@@ -1,0 +1,622 @@
+[
+  {
+    "id": "",
+    "name": "name",
+    "email": "mail@gmail.com",
+    "phone": "e;me",
+    "type_inqury": "pls",
+    "message": "message",
+    "created_at": "2024-05-20 12:40:30",
+    "updated_at": "2024-05-20 12:40:30"
+  },
+  {
+    "id": "",
+    "name": "Mohammed Reda",
+    "email": "mmoh33650@gmail.com",
+    "phone": "01212745939",
+    "type_inqury": "pls",
+    "message": "I want to Buy Basma Products",
+    "created_at": "2024-05-21 16:24:44",
+    "updated_at": "2024-05-21 16:24:44"
+  },
+  {
+    "id": "",
+    "name": "dsfsd",
+    "email": "sdfsd@dfss.com",
+    "phone": "3123123",
+    "type_inqury": "pls",
+    "message": "qwe",
+    "created_at": "2024-05-24 19:24:21",
+    "updated_at": "2024-05-24 19:24:21"
+  },
+  {
+    "id": "",
+    "name": "سشي",
+    "email": "شسي@سيزؤخة",
+    "phone": "1243123",
+    "type_inqury": "pls",
+    "message": "fd",
+    "created_at": "2024-05-24 19:31:33",
+    "updated_at": "2024-05-24 19:31:33"
+  },
+  {
+    "id": "",
+    "name": "Osama Habshy",
+    "email": "marchekerpi@gmail.com",
+    "phone": "5146065670",
+    "type_inqury": "pls",
+    "message": "Agi prime Inc., we are an import company based in Canada in Montreal\\nWe would like to import your factory products to Canada\\nWe need some details about prices and products\\nYou can contact us by email or phone\\nOsama Habshy\\n514-606-5670",
+    "created_at": "2024-06-13 23:47:16",
+    "updated_at": "2024-06-13 23:47:16"
+  },
+  {
+    "id": "",
+    "name": "Mohamed bahloul",
+    "email": "mmmbahloul@gmail.com",
+    "phone": "01061836999",
+    "type_inqury": "pls",
+    "message": "نحن أسواق الأمل شارح احمد ماهر المنصوره \\nشكوي من مدير الفرع ومدير البيع للمنطقه بعدم \\n الاهتمام وسوء التعامل وامتناع المندوب عن الحضور في الزياره الدورية \\nنرجو الاهتمام",
+    "created_at": "2024-06-23 14:49:22",
+    "updated_at": "2024-06-23 14:49:22"
+  },
+  {
+    "id": "",
+    "name": "Essam Ramadan Ali",
+    "email": "magic.coderz@gmail.com",
+    "phone": "01152254188",
+    "type_inqury": "pls",
+    "message": "مرحبا فريق Orouba\\nلدينا طلب من دولة خليجية بالحصول على منتج عالى الجودة من الخضروات المجمدة فتم ترشيح شركتكم \\nيرجى التفضل بارسال عرض سعر يشمل منتجات الخضروات المجمدة ..\\nولكم جزيل الشكر ..",
+    "created_at": "2024-07-13 22:38:13",
+    "updated_at": "2024-07-13 22:38:13"
+  },
+  {
+    "id": "",
+    "name": "عبدالرحمن",
+    "email": "a5delrahman19@gmail.com",
+    "phone": "01063044735",
+    "type_inqury": "pls",
+    "message": "كيفية التقدم لوظيفة للعمل مع حضراتكم",
+    "created_at": "2024-07-18 07:11:38",
+    "updated_at": "2024-07-18 07:11:38"
+  },
+  {
+    "id": "",
+    "name": "زياد خالد الطوي",
+    "email": "ziadkhaldaltwy575@gmail.com",
+    "phone": "01024287452",
+    "type_inqury": "pls",
+    "message": "لدي منتج ملوخيه مجففه بجوده عاليه اريد تسويقها",
+    "created_at": "2024-07-18 17:06:40",
+    "updated_at": "2024-07-18 17:06:40"
+  },
+  {
+    "id": "",
+    "name": "Nourhan abdelfattah",
+    "email": "Nourakhan22@gmail.com",
+    "phone": "01280180759",
+    "type_inqury": "pls",
+    "message": "لوسمحت كنت عايزه اسأل لو فيه نظام للجمله لجروب اونلاين حاليا وابلكيشن عن قريب",
+    "created_at": "2024-08-04 16:22:26",
+    "updated_at": "2024-08-04 16:22:26"
+  },
+  {
+    "id": "",
+    "name": "khaled",
+    "email": "kh.elsonny@gmail.com",
+    "phone": "+201099953285",
+    "type_inqury": "pls",
+    "message": "السلام عليكم ورحمه الله وبركاته لدي مساحة أرض 23 فدان أرض زراعية واريد التعاقد معكم في شراء المحصول  من الخضار  01099953285",
+    "created_at": "2024-08-13 12:35:43",
+    "updated_at": "2024-08-13 12:35:43"
+  },
+  {
+    "id": "",
+    "name": "شركة مبادرون الغربيه",
+    "email": "Mobadero2@gmail.com",
+    "phone": "0565920756",
+    "type_inqury": "pls",
+    "message": "طلب عمل مشترك كموزعين لكم في المملكة العربية السعودية لكافة التفاصيل يرجى التواصل على الرقم اعلاه",
+    "created_at": "2024-08-20 14:00:58",
+    "updated_at": "2024-08-20 14:00:58"
+  },
+  {
+    "id": "",
+    "name": "Ahmed SALAMA",
+    "email": "ahmed.s-salama@qnb.com.eg",
+    "phone": "Ahmed SALAMA",
+    "type_inqury": "pls",
+    "message": "Good DAY\\nThis is Ahmed from QNB - Credit Department\\nI would like to Contact with the Financial Manger or Authorized Person in your Company to \\noffer him QNB Credit Facilities .\\nYou can call me on 01153974738.\\nThanks and Best regards",
+    "created_at": "2024-08-28 19:56:20",
+    "updated_at": "2024-08-28 19:56:20"
+  },
+  {
+    "id": "",
+    "name": "Stella Ojelua",
+    "email": "uojelua@gmail.com",
+    "phone": "+1 431-278-2749",
+    "type_inqury": "pls",
+    "message": "I will like to purchase in wholesale price, do you have a distributor in Canada?",
+    "created_at": "2024-09-01 03:35:26",
+    "updated_at": "2024-09-01 03:35:26"
+  },
+  {
+    "id": "",
+    "name": "RAMI RAMDSON",
+    "email": "RAMI@FINPUU.COM",
+    "phone": "00971505414736",
+    "type_inqury": "pls",
+    "message": "HELLO, \\nI AM INTERESTED WITH YOUR PRODUCTS AND I WOULD LIKE TO KNOW MORE ABOUT IT IF POSSIBLE",
+    "created_at": "2024-09-01 10:29:18",
+    "updated_at": "2024-09-01 10:29:18"
+  },
+  {
+    "id": "",
+    "name": "Roqaia",
+    "email": "roqaiakhaled2511@gmail.com",
+    "phone": "01002236778",
+    "type_inqury": "pls",
+    "message": "Sweet corn isn’t available in new Damitta",
+    "created_at": "2024-09-11 16:54:12",
+    "updated_at": "2024-09-11 16:54:12"
+  },
+  {
+    "id": "",
+    "name": "Mohamad Albadie",
+    "email": "Nohabites@gmail.com",
+    "phone": "07508338745",
+    "type_inqury": "pls",
+    "message": "Hello \\nI’m emailing you from the UK. I have a shop and would like to start buying your products ( Falafel). So I’m looking for your UK branch or supplier agent so I can purchase. \\nLooking forward for your reply. \\nThanks",
+    "created_at": "2024-11-16 19:54:32",
+    "updated_at": "2024-11-16 19:54:32"
+  },
+  {
+    "id": "",
+    "name": "السيد فرحات",
+    "email": "saed.qamrat@windowslive.com",
+    "phone": "00966506771980",
+    "type_inqury": "pls",
+    "message": "ارغب في رقم مدير المبيعات لامكانية التعامل معكم لتصدير منتجاتكم الي شركتنا في السعودية علي واتس 00966506771980",
+    "created_at": "2024-11-17 16:53:23",
+    "updated_at": "2024-11-17 16:53:23"
+  },
+  {
+    "id": "",
+    "name": "صلاح حامد راشد",
+    "email": "kokorashed05@gmail.com",
+    "phone": "01060446608",
+    "type_inqury": "pls",
+    "message": "محتاج تواصل",
+    "created_at": "2024-11-26 21:47:17",
+    "updated_at": "2024-11-26 21:47:17"
+  },
+  {
+    "id": "",
+    "name": "مصطفي",
+    "email": "Noureldin_radwa@yahoo.com",
+    "phone": "01018444442",
+    "type_inqury": "pls",
+    "message": "How could i make an order",
+    "created_at": "2024-12-05 15:54:23",
+    "updated_at": "2024-12-05 15:54:23"
+  },
+  {
+    "id": "",
+    "name": "محمود عبد الحميد",
+    "email": "Mahmoud@camelliarose.co",
+    "phone": "01211117586",
+    "type_inqury": "pls",
+    "message": "أنا محمود من camellia rose Inc للاستيراد في كندا .. اريد التواصل مع قسم التصدير ان امكن",
+    "created_at": "2024-12-11 18:02:09",
+    "updated_at": "2024-12-11 18:02:09"
+  },
+  {
+    "id": "",
+    "name": "Ahmed Abdulaziz",
+    "email": "5",
+    "phone": "01020811579",
+    "type_inqury": "pls",
+    "message": "لينكدان",
+    "created_at": "2025-01-03 17:44:22",
+    "updated_at": "2025-01-03 17:44:22"
+  },
+  {
+    "id": "",
+    "name": "Muhammad Nabil",
+    "email": "mohd.nabil@egyptair.com",
+    "phone": "mohd.nabil@egyptair.com",
+    "type_inqury": "pls",
+    "message": "السلام عليكم\\nمن فضلكم محتاج اصدر طعمية مصرى مجمدة الي اليابان",
+    "created_at": "2025-01-14 17:36:37",
+    "updated_at": "2025-01-14 17:36:37"
+  },
+  {
+    "id": "",
+    "name": "Waleid Aly",
+    "email": "waleidmaly@gmail.com",
+    "phone": "01060661684",
+    "type_inqury": "pls",
+    "message": "I need information in regards of exporting your products to the USA.",
+    "created_at": "2025-02-03 13:31:33",
+    "updated_at": "2025-02-03 13:31:33"
+  },
+  {
+    "id": "",
+    "name": "Mohamed montaser",
+    "email": "Marmaragroup@hotmail.com",
+    "phone": "0090531944012",
+    "type_inqury": "pls",
+    "message": "مساء الخير. \\nنحن شركة تجاره موجوده في إسطنبول تركيا من 12عام  هل يمكن الحصول على وكالتكم في تركيا وماهي الشروط .شكرا لإهتمامكم",
+    "created_at": "2025-02-24 01:09:21",
+    "updated_at": "2025-02-24 01:09:21"
+  },
+  {
+    "id": "",
+    "name": "محمد ريحاوي",
+    "email": "S.m.r.foodsgroup@gmail.com",
+    "phone": "01271545063",
+    "type_inqury": "pls",
+    "message": "السلام عليكم\\n\\nاحنا سوبر ماركت CART MART\\n\\n اول ماركت بيفتح ضمن كمبوند وصال - مدينة الشروق\\n\\nمحتاجين حد من مندوبين الشركة يتواصل معانا عشان توريد منتجات بسمة \\n\\nوشكرا\\n\\nم. محمد",
+    "created_at": "2025-03-03 14:36:28",
+    "updated_at": "2025-03-03 14:36:28"
+  },
+  {
+    "id": "",
+    "name": "Rehab youssef",
+    "email": "rehabyousse12345@gmail.com",
+    "phone": "01007613337",
+    "type_inqury": "pls",
+    "message": "سوبر ماركت بالمعادي ومحتاجين المنتجات ش 77 مانجو ماركت جم مره واحده وبعد كدا مجوش تاني الارقام اللي معانا للمناديب مغلقه برجاء التواصل معنا لاحتياجنا للمنتجات 01007613337",
+    "created_at": "2025-03-12 18:59:00",
+    "updated_at": "2025-03-12 18:59:00"
+  },
+  {
+    "id": "",
+    "name": "زياد احمد",
+    "email": "Zyadb1221@gmail.com",
+    "phone": "01061772109",
+    "type_inqury": "pls",
+    "message": "اريد اطلب طلبية بسمه خضار كبيره",
+    "created_at": "2025-03-16 10:07:34",
+    "updated_at": "2025-03-16 10:07:34"
+  },
+  {
+    "id": "",
+    "name": "لينا احمد",
+    "email": "Glife714@yahoo.com",
+    "phone": "01288447957",
+    "type_inqury": "pls",
+    "message": "متوفر توصيل للمنازل ولا لا",
+    "created_at": "2025-03-26 01:55:48",
+    "updated_at": "2025-03-26 01:55:48"
+  },
+  {
+    "id": "",
+    "name": "Moaz",
+    "email": "Mezoelmagrabytt2005@gmail.com",
+    "phone": "01061241043",
+    "type_inqury": "pls",
+    "message": "أريد تصدير مواد غذائيه مجمدة الي فرنسا وتكون درجة أولي أريد تفاصيل بالأسعار والشحن أولا",
+    "created_at": "2025-03-29 01:08:00",
+    "updated_at": "2025-03-29 01:08:00"
+  },
+  {
+    "id": "",
+    "name": "نجلاء محمد احمد",
+    "email": "Salmatarek6666@gmail.com",
+    "phone": "01284117141",
+    "type_inqury": "pls",
+    "message": "انا ربة منزل وكنت عايزة اقدم علي شغل من البيت",
+    "created_at": "2025-04-04 18:29:16",
+    "updated_at": "2025-04-04 18:29:16"
+  },
+  {
+    "id": "",
+    "name": "Wael Badawi",
+    "email": "Waelbadawi68@gmail.com",
+    "phone": "0031647471414",
+    "type_inqury": "pls",
+    "message": "Dear sir/madam,\\nI would like to have a private label of your products to my company in Europe. I  need to know what’s the conditions to let my agent in Egypt to contact you.\\n\\nKind regards \\nWael Badawi \\nOwner of Tropical Land (The Netherlands)",
+    "created_at": "2025-05-01 02:38:20",
+    "updated_at": "2025-05-01 02:38:20"
+  },
+  {
+    "id": "",
+    "name": "ايهاب احمد",
+    "email": "hopa.info42@gmail.com",
+    "phone": "966569324719+",
+    "type_inqury": "pls",
+    "message": "اريد هاتف مباشر لخطوط الانتاج للتصدير الى المملكة العربية السعودية",
+    "created_at": "2025-05-06 13:47:55",
+    "updated_at": "2025-05-06 13:47:55"
+  },
+  {
+    "id": "",
+    "name": "دكتورة ريم",
+    "email": "reem993as@gmail.com",
+    "phone": "01552636867",
+    "type_inqury": "pls",
+    "message": "محتاجه اعرف تليفون وكيل وسط الدلتا",
+    "created_at": "2025-05-13 01:27:26",
+    "updated_at": "2025-05-13 01:27:26"
+  },
+  {
+    "id": "",
+    "name": "المستشار / عصمت عصام",
+    "email": "esmatesam81@gmail.com",
+    "phone": "01122000911",
+    "type_inqury": "pls",
+    "message": "احيطكم انه للمره الثانية نقوم بشراء فاصوليا خضراء و تكون فاسده من حيث الطعم والرائحه\\nوالعيب ليس سوء تخزين ولا انتهاء صلاحية\\nبرجاء اتخاذ اللازم مع العلم اننى فى طريقى لابلاغ جهاز حماية المستهلك",
+    "created_at": "2025-05-14 21:07:57",
+    "updated_at": "2025-05-14 21:07:57"
+  },
+  {
+    "id": "",
+    "name": "Jamal yahya",
+    "email": "banayem51@yahoo.com",
+    "phone": "+22220702262",
+    "type_inqury": "pls",
+    "message": "We sre interesting your frozen vegetables \\nPlease let me know the prices and other related information.\\n\\nBest regards \\n\\nYou can reach me to my whats app+ 22220702262",
+    "created_at": "2025-05-25 22:15:01",
+    "updated_at": "2025-05-25 22:15:01"
+  },
+  {
+    "id": "",
+    "name": "محل رائحة الزمن",
+    "email": "zaher.1970.ghazal@gmail.com",
+    "phone": "01015986554",
+    "type_inqury": "pls",
+    "message": "فاتح محل جديد واريد الاستفسار عن انواع الخضار المجمده لديكم والاسعار ودمتم بخير",
+    "created_at": "2025-07-13 16:43:55",
+    "updated_at": "2025-07-13 16:43:55"
+  },
+  {
+    "id": "",
+    "name": "حسام السوسي",
+    "email": "hossam.mohamed@hyma-plastic.com",
+    "phone": "01012222914",
+    "type_inqury": "pls",
+    "message": "حسام مدير تسويق مصنع هيما بلاستيك لمواد التعبئة والغليف\\nاريد التواصل مع مسؤول المشتريات",
+    "created_at": "2025-08-26 10:01:56",
+    "updated_at": "2025-08-26 10:01:56"
+  },
+  {
+    "id": "",
+    "name": "Mahmoud Elsayed",
+    "email": "elmandouhcc@yahoo.com",
+    "phone": "0019179246859",
+    "type_inqury": "pls",
+    "message": "مساء الخير\\nممكن من فضلك كتالوج و اسعار منتجات مصنعكم المجمده بغرض التصدير\\nو ممكن اعرف تكلفه شحن كونتير 20 و 40 قدم الي ميناء لوس انجلوس فى ولايه كاليفورنيا و مده الانتاج و الشحن ؟\\n\\nشكرا جزيلا",
+    "created_at": "2025-09-16 21:38:24",
+    "updated_at": "2025-09-16 21:38:24"
+  },
+  {
+    "id": "",
+    "name": "Yasser Ibrahim",
+    "email": "yasser_khattab@hotmail.com",
+    "phone": "01221341464",
+    "type_inqury": "pls",
+    "message": "يرجى مراسلتنا بأسعار منتجات الشركه",
+    "created_at": "2025-09-24 14:52:29",
+    "updated_at": "2025-09-24 14:52:29"
+  },
+  {
+    "id": "",
+    "name": "امجد نعمان",
+    "email": "Amgadtamgrp@gmail.com",
+    "phone": "01223482703",
+    "type_inqury": "pls",
+    "message": "اريد شراء فراوله مجمده مباشر من المصنع.. هل من الممكن؟",
+    "created_at": "2025-10-04 13:16:16",
+    "updated_at": "2025-10-04 13:16:16"
+  },
+  {
+    "id": "",
+    "name": "Mohamed Elsharkawy",
+    "email": "Hp_mohamed@hotmail.com",
+    "phone": "0096596992213",
+    "type_inqury": "pls",
+    "message": "أين يباع لديكم الثوم مكعبات مثلج في دولة الكويت",
+    "created_at": "2025-10-05 22:55:19",
+    "updated_at": "2025-10-05 22:55:19"
+  },
+  {
+    "id": "",
+    "name": "مصطفي محمد",
+    "email": "mkyfdy@gmail.com",
+    "phone": "01124040386",
+    "type_inqury": "pls",
+    "message": "ممكن رقم مدير المبيعات",
+    "created_at": "2025-10-08 01:01:16",
+    "updated_at": "2025-10-08 01:01:16"
+  },
+  {
+    "id": "",
+    "name": "رغدة محمود",
+    "email": "raghda229@gmail.com",
+    "phone": "01063067788",
+    "type_inqury": "pls",
+    "message": "سلام عليكم ورحمة الله \\nاشتريت منتج الملوخية المخروطة من سوبر ماركت في منطقة وادي حوف -حدايق حلوان \\nالملوخية كارفة طعم وريحة حاجة زاي مادة كيميائية \\nالكيس الخارجي و الداخلي كانوا سلام تمام",
+    "created_at": "2025-10-15 18:36:57",
+    "updated_at": "2025-10-15 18:36:57"
+  },
+  {
+    "id": "",
+    "name": "عبدالله حمدي حامد",
+    "email": "aaa0aaa2012@gmail.com",
+    "phone": "01555287266",
+    "type_inqury": "pls",
+    "message": "انا فاتح مول وكنت بنزل منتجات بسمه بانواعه والمندوب بطل يجي عندي وبقيت بنزل من مناديب بالتجزئة لو فيه مندوب من الشركه نفسها ياريت احصل ارقامه او يتواصل معي لاني محتاج بضاعه عندي \\nمكاني محافظة سوهاج مركز البلينا \\nاسم المول (العيسوي ماركت )",
+    "created_at": "2025-11-02 13:57:37",
+    "updated_at": "2025-11-02 13:57:37"
+  },
+  {
+    "id": "",
+    "name": "خالد",
+    "email": "خالد محمد",
+    "phone": "01031476603",
+    "type_inqury": "pls",
+    "message": "لو سمحت محتاج اسعار الانواع دي \\n\\nالباميه الممتاز \\nالباميه الزيرو بدون تخليط \\nالبسله السكري \\nفاصوليا صافي \\nخضار مشكل ٥٠/٤٠/١٠",
+    "created_at": "2025-11-03 20:24:16",
+    "updated_at": "2025-11-03 20:24:16"
+  },
+  {
+    "id": "",
+    "name": "Samy",
+    "email": "samymohamedhh890@gmail.com",
+    "phone": "01000643995",
+    "type_inqury": "pls",
+    "message": "اريد ارسال حاوية الي فلوريدا امريكا",
+    "created_at": "2025-11-06 02:58:22",
+    "updated_at": "2025-11-06 02:58:22"
+  },
+  {
+    "id": "",
+    "name": "Aswaq Almuhamal supermarket",
+    "email": "amal.mabdelaziz2016@gmail.com",
+    "phone": "00971567466102",
+    "type_inqury": "pls",
+    "message": "نحن سوبر ماركت لمنتجات المصرية في الامارات . برجاء مساعدتنا للوصول للوكيل الحصري في الامارات لمنتجات بسمة \\nاسم الشركة \\nرقم التواصل",
+    "created_at": "2025-11-15 23:34:16",
+    "updated_at": "2025-11-15 23:34:16"
+  },
+  {
+    "id": "",
+    "name": "عمرو عادل",
+    "email": "amradelelsharbiny@gmail.com",
+    "phone": "01277531917",
+    "type_inqury": "pls",
+    "message": "موزع",
+    "created_at": "2025-11-29 23:46:19",
+    "updated_at": "2025-11-29 23:46:19"
+  },
+  {
+    "id": "",
+    "name": "سول",
+    "email": "marwasolmall1979@hotmail.com",
+    "phone": "01002129427",
+    "type_inqury": "pls",
+    "message": "عزيزي السيد / السيدة,,\\n شكرا علي وقتك \\nنحنا مزراعه بالواحات البحريه ولدينا عامله كبيره ونحتاج عرض سعر للمجمدات جمله (خضروات - فاكهه) بجميع انواعها للكميات الكبيره\\nارجوا ارسال عروض السعر لجميع الاصناف في اقرب فرصه",
+    "created_at": "2025-12-16 13:04:49",
+    "updated_at": "2025-12-16 13:04:49"
+  },
+  {
+    "id": "",
+    "name": "محمد",
+    "email": "Fmuhnoor1968@gmail.com",
+    "phone": "00905382881559",
+    "type_inqury": "pls",
+    "message": "هل يوجد لديكم فرع في تركيا",
+    "created_at": "2025-12-17 20:39:07",
+    "updated_at": "2025-12-17 20:39:07"
+  },
+  {
+    "id": "",
+    "name": "shahabaz",
+    "email": "sales@mgt-uae.com",
+    "phone": "+9715409906447",
+    "type_inqury": "pls",
+    "message": "i would like to buy barhi frozen dates. Is it available in uae?.",
+    "created_at": "2025-12-18 13:21:49",
+    "updated_at": "2025-12-18 13:21:49"
+  },
+  {
+    "id": "",
+    "name": "Twinkle Khanna",
+    "email": "twinklekhanna@pursuitind.com",
+    "phone": "91 7096061308",
+    "type_inqury": "pls",
+    "message": "Pursuit Industries is the leading exporter and supplier for food additives in all over the world.\\n\\nFor more infor kindly give me call- 91 7096061308",
+    "created_at": "2025-12-22 09:31:56",
+    "updated_at": "2025-12-22 09:31:56"
+  },
+  {
+    "id": "",
+    "name": "Juan Manuel",
+    "email": "Juan.Manuel@castono.cl",
+    "phone": "990354287",
+    "type_inqury": "pls",
+    "message": "We are currently sourcing different products in bulk quantity, partnership opportunity with your company. We would appreciate you provide your product catalogue, pricing, availability and delivery details.",
+    "created_at": "2026-01-28 15:21:23",
+    "updated_at": "2026-01-28 15:21:23"
+  },
+  {
+    "id": "",
+    "name": "احمد عبد العاطي",
+    "email": "ahmed.abdelatty3030@gmail.com",
+    "phone": "01092332902",
+    "type_inqury": "pls",
+    "message": "اريد 500 كرتونة منتج ملوخية بسمة",
+    "created_at": "2026-02-05 05:43:19",
+    "updated_at": "2026-02-05 05:43:19"
+  },
+  {
+    "id": "",
+    "name": "Ahmed Kamel",
+    "email": "Ahmed.kame@foodysfoods.com",
+    "phone": "+201283858885",
+    "type_inqury": "pls",
+    "message": "We\\'re looking for a suppliers for these products \\nArtichoke \\nOkra\\nPeas\\nBroccoli \\nCauliflower \\nGreen Beans\\nMolokhia \\nSpanich\\n400gm&2.5Kg",
+    "created_at": "2026-02-16 23:16:16",
+    "updated_at": "2026-02-16 23:16:16"
+  },
+  {
+    "id": "",
+    "name": "محمد عبد الحميد خضري",
+    "email": "Mohamedkhodary61@gmail.com",
+    "phone": "01001877067",
+    "type_inqury": "pls",
+    "message": "اشتريت اليوم عبوتين من الملوخية المجمدة من ٢ سوبرماركت مختلفين في منطقة بيتشو بزهراء المعادى بالقاهرة سوبر ماركت فريدة  سوبرماركت اخر لا اتذكر اسمه وكانت العبوتين فاسدتين بالرغم من أن تاريخ الإنتاج ١ يناير ٢٠٢٦\\nارجو الاهتمام",
+    "created_at": "2026-02-19 18:54:48",
+    "updated_at": "2026-02-19 18:54:48"
+  },
+  {
+    "id": "",
+    "name": "مصطفى عصام",
+    "email": "Mesam1999y@gmail.com",
+    "phone": "01026384321",
+    "type_inqury": "pls",
+    "message": "محتاج تعامل جمله واسعار",
+    "created_at": "2026-03-03 06:47:48",
+    "updated_at": "2026-03-03 06:47:48"
+  },
+  {
+    "id": "",
+    "name": "اماني احمد",
+    "email": "Amanyalarabi24@gmail.com",
+    "phone": "01123056013",
+    "type_inqury": "pls",
+    "message": "مساء الخير \\nوكل عام وحضراتكم بخير \\nبدور علي طعمية حمص بسمة من اول رمضان وغير متوفرة في جميع ماركت أكتوبر \\nممكن تقولولي اجيبها من عند مين؟",
+    "created_at": "2026-03-06 16:25:15",
+    "updated_at": "2026-03-06 16:25:15"
+  },
+  {
+    "id": "",
+    "name": "Qusay Mandwie",
+    "email": "Qusaymandwie68@gmail.com",
+    "phone": "0402183318",
+    "type_inqury": "pls",
+    "message": "مرحبا \\nأنا قصي وساكن في استراليا حاب استفسر إذا اكدر احصل على عقد لاستيراد منتجاتكم الى استراليا سدني",
+    "created_at": "2026-03-16 13:58:17",
+    "updated_at": "2026-03-16 13:58:17"
+  },
+  {
+    "id": "",
+    "name": "محمد رشاد",
+    "email": "m.rashad3355@gmail.com",
+    "phone": "01152920140",
+    "type_inqury": "pls",
+    "message": "عندى محل جديد فى النزهة وعايز مندوب بسمة الخاص بالمنطقة ينزل منتجات بسمة",
+    "created_at": "2026-03-23 13:11:37",
+    "updated_at": "2026-03-23 13:11:37"
+  },
+  {
+    "id": "",
+    "name": "خالد عبد المجيد محمد",
+    "email": "Khaled. Abdelmgeed@yahoo.com",
+    "phone": "01282294757",
+    "type_inqury": "pls",
+    "message": "محتاج رقم  مندوب لمحافظه القليوبيه",
+    "created_at": "2026-04-10 06:46:51",
+    "updated_at": "2026-04-10 06:46:51"
+  }
+]

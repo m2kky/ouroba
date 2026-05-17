@@ -1,0 +1,50 @@
+[
+  {
+    "id": "",
+    "image": "https://camp-coding.site/eloroba/storage/app/images/icIeuiVnOAuVtHTPzWDN8D16X8aLOQ7wpGZoRIOD.png",
+    "title_ar": "الخضروات المجمدة",
+    "title_en": "Frozen Vegetables",
+    "description_ar": "يتم اختيار جميع خضرواتنا بعناية. تخضع  الخضروات لعملية الفحص والاختيار، ثم يتم غسلها ومعالجتها ومرورها بالتجميد السريع، ولدينا مجموعة متنوعة من الأصناف لتلبية الاحتياجات المختلفة.",
+    "description_en": "All our vegetables are carefully selected. They undergo inspection and selection process, then the vegetables are washed, processed and subjected to quick freezing, We have a large variety of types to serve different needs",
+    "hidden": "",
+    "created_at": "2024-05-28 12:57:44",
+    "updated_at": "2024-07-23 16:16:30",
+    "number": ""
+  },
+  {
+    "id": "",
+    "image": "https://camp-coding.site/eloroba/storage/app/images/ZjhabQ8AqbF7N3nAMyekLu1DqzOfnJ6dW9tuxoor.png",
+    "title_ar": "البقوليات والحبوب المجمدة",
+    "title_en": "Frozen Beans & Grains",
+    "description_ar": "يتم اختيار البقوليات والحبوب،  وتجهيزها وسلقها لتكون سريعة الطهى ، وهناك العديد من الأصناف جاهزة للأكل مباشرة . بعض المنتجات تستغرق حوالي 10 دقائق من الطهى وذلك لتوفير الوقت والجهد.",
+    "description_en": "Our beans & grains are selected, soaked or boiled to save time and effort, Many of which are ready to eat and some take around 10 minutes of heating",
+    "hidden": "",
+    "created_at": "2024-05-28 15:16:02",
+    "updated_at": "2024-07-23 16:17:03",
+    "number": ""
+  },
+  {
+    "id": "",
+    "image": "https://camp-coding.site/eloroba/storage/app/images/RjhwfXqz0lYRg5WcJappDYbVqw7GxoGFpV5l7vk2.png",
+    "title_ar": "الفواكة المجمدة",
+    "title_en": "Frozen Fruits",
+    "description_ar": "يتم اختيار الفواكة الطازجة وتجهيزها، ثم تخضع للتجميد السريع للاحتفاظ بخصائصها وقيمتها الغذائية.",
+    "description_en": "Fresh fruits are selected and processed, then subjected to quick freezing to keep their nutrition values and attributes",
+    "hidden": "",
+    "created_at": "2024-06-03 17:32:22",
+    "updated_at": "2024-07-23 16:15:31",
+    "number": ""
+  },
+  {
+    "id": "",
+    "image": "https://camp-coding.site/eloroba/storage/app/images/GTqYDNVWPuIlNYMzniHuxRmdwslPpj0W9bjhRGAI.png",
+    "title_ar": "النصف مقلي",
+    "title_en": "Pre-Fried",
+    "description_ar": "لدينا أصناف الفلافل الشهيرة الخاصة بنا، بالإضافة إلى وصفاتنا الأصلية من البطاطس النصف مقلية مع مكونات مختلفة وزهرات القرنبيط المتبلة النصف مقلية.",
+    "description_en": "We have our famous Falafel types, in addition to our original recipes of pre-fried potatoes with different ingredients and pre-fried cauliflower florets",
+    "hidden": "",
+    "created_at": "2024-06-03 17:45:37",
+    "updated_at": "2024-07-23 16:40:05",
+    "number": ""
+  }
+]

@@ -40,16 +40,20 @@ export default async function BrandDetailPage({ params }: { params: Promise<{ br
     "فريدة": "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/SZzjLGH7CJNvqRkaCBKfPz9AwL88wok3VELoGFTr.mp4",
   };
 
-  const videoUrl = brandVideos[brand.nameAr] || brandVideos[brand.nameEn] || null;
+  const videoUrl = brand.id === "8" 
+    ? "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/2ACCr5zYZdX2UP5fEK30Kd8Jcs0hYXCGSSqgndxG.mp4"
+    : brandVideos[brand.nameAr] || brandVideos[brand.nameEn] || null;
 
   // Dynamic colors for each brand based on its name or id
   const brandThemes: Record<string, { bgContainer: string, bgCard: string, textPrimary: string }> = {
     "بسمة": { bgContainer: "bg-[#8cc63f]", bgCard: "bg-[#9ce14b]", textPrimary: "text-[#8cc63f]" },
-    "بابيتس": { bgContainer: "bg-[#c3204e]", bgCard: "bg-[#d83463]", textPrimary: "text-[#c3204e]" },
+    "بابيتس": { bgContainer: "bg-[#c31448]", bgCard: "bg-[#d81a54]", textPrimary: "text-[#c31448]" },
     "فريدة": { bgContainer: "bg-[#0b5394]", bgCard: "bg-[#61a5e8]", textPrimary: "text-[#0b5394]" },
   };
 
-  const theme = brandThemes[brand.nameAr] || { bgContainer: "bg-[#0b5394]", bgCard: "bg-[#61a5e8]", textPrimary: "text-[#0b5394]" };
+  const theme = brand.id === "8"
+    ? { bgContainer: "bg-[#c31448]", bgCard: "bg-[#d81a54]", textPrimary: "text-[#c31448]" }
+    : brandThemes[brand.nameAr] || { bgContainer: "bg-[#0b5394]", bgCard: "bg-[#61a5e8]", textPrimary: "text-[#0b5394]" };
 
   return (
     <div className="bg-white min-h-screen pb-20 pt-32">
@@ -77,7 +81,7 @@ export default async function BrandDetailPage({ params }: { params: Promise<{ br
           </div>
 
           {/* Hero Video */}
-          <div className="relative z-10 w-full max-w-5xl mx-auto mb-12">
+          <div className="relative z-10 w-full max-w-5xl mx-auto mb-12 flex flex-col items-center">
             {videoUrl ? (
               <video 
                 src={videoUrl} 
@@ -85,7 +89,7 @@ export default async function BrandDetailPage({ params }: { params: Promise<{ br
                 loop 
                 muted 
                 playsInline
-                className="w-full h-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)]"
+                className="w-full h-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)] rounded-2xl"
               />
             ) : (
               <div className="w-full h-64 bg-white/10 rounded-2xl flex items-center justify-center">
@@ -94,6 +98,19 @@ export default async function BrandDetailPage({ params }: { params: Promise<{ br
                 ) : (
                   <h1 className="text-5xl font-bold text-white">{isEn ? brand.nameEn : brand.nameAr}</h1>
                 )}
+              </div>
+            )}
+
+            {/* BAP BITES Special View All Button */}
+            {brand.id === "8" && (
+              <div className="mt-8">
+                <Link 
+                  href={`/${locale}/brands/Basma/5/14/${isEn ? 'Frozen-Pre-Fried-Bites' : 'نصف-مقلية-مجمدة'}`} 
+                  className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-white text-orouba-blue font-bold text-lg md:text-xl rounded-full hover:bg-orouba-yellow hover:text-white transition-colors shadow-xl"
+                >
+                  {isEn ? 'View All' : 'إظهار الكل'}
+                  <span className={`transform ${isEn ? 'rotate-180' : ''}`}>{"<"}</span>
+                </Link>
               </div>
             )}
           </div>
@@ -141,13 +158,26 @@ export default async function BrandDetailPage({ params }: { params: Promise<{ br
                         </svg>
                       </div>
 
-                      {/* Product Bag Image */}
-                      <div className="h-64 w-full relative z-10 flex items-center justify-center mb-6 mt-2">
-                        {displayImage ? (
+                      {/* Product Bag Images */}
+                      <div className="h-64 w-full relative z-10 flex items-center justify-center mb-6 mt-2 group-hover:scale-105 transition-transform duration-500">
+                        {category.products && category.products.length >= 2 ? (
+                          <>
+                            <img 
+                              src={category.products[0]?.product?.images?.[0]?.url || displayImage} 
+                              alt={category.nameAr}
+                              className="absolute w-[75%] max-h-48 object-contain drop-shadow-[0_15px_15px_rgba(0,0,0,0.3)] -top-4 -left-2 -rotate-12 z-10"
+                            />
+                            <img 
+                              src={category.products[1]?.product?.images?.[0]?.url} 
+                              alt={category.nameAr}
+                              className="absolute w-[75%] max-h-48 object-contain drop-shadow-[0_20px_20px_rgba(0,0,0,0.4)] bottom-0 -right-2 rotate-12 z-20"
+                            />
+                          </>
+                        ) : displayImage ? (
                           <img 
                             src={displayImage} 
                             alt={category.nameAr}
-                            className="max-h-full max-w-full object-contain drop-shadow-[0_15px_15px_rgba(0,0,0,0.3)] group-hover:scale-105 transition-transform duration-500"
+                            className="max-h-full max-w-full object-contain drop-shadow-[0_15px_15px_rgba(0,0,0,0.3)]"
                           />
                         ) : (
                           <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center border-2 border-white/30 backdrop-blur-sm">
@@ -173,7 +203,7 @@ export default async function BrandDetailPage({ params }: { params: Promise<{ br
                   );
                 })}
               </div>
-            ) : (
+            ) : brand.id === "8" ? null : (
               <div className="text-center py-20 bg-white/10 rounded-[2rem] border border-white/20 backdrop-blur-sm">
                 <p className="text-white text-xl font-bold">{isEn ? 'No product categories available currently.' : 'لا توجد مجموعات منتجات متاحة حالياً.'}</p>
               </div>

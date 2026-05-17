@@ -1,6 +1,3 @@
-// This is your Prisma schema file
-// Configured for PostgreSQL on a VPS
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,93 +7,73 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// -----------------------------------------------------------------------------
-// Users & Authentication
-// -----------------------------------------------------------------------------
-
 model User {
-  id            String    @id @default(cuid())
+  id            String     @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?    @unique
   emailVerified DateTime?
   image         String?
   password      String?
   phone         String?
-  role          Role      @default(USER)
-  permissions   String[]  @default([])
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-
-  orders    Order[]
-  cartItems CartItem[]
+  role          Role       @default(USER)
+  permissions   String[]   @default([])
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  cartItems     CartItem[]
+  orders        Order[]
 }
-
-enum Role {
-  USER
-  ADMIN
-  EDITOR
-}
-
-// -----------------------------------------------------------------------------
-// Main Entities (Brands, Categories, Products)
-// -----------------------------------------------------------------------------
 
 model Brand {
-  id             String   @id @default(cuid())
+  id             String     @id @default(cuid())
   nameEn         String
   nameAr         String
-  number         Int      @default(999)
-  image          String? // maps to image
-  imageMain      String? // maps to imageMain / imageBrand
+  number         Int        @default(999)
+  image          String?
+  imageMain      String?
   imageSmall     String?
   imageSmallMain String?
   colorBrand     String?
   colorHover     String?
-  descriptionEn  String?  @db.Text
-  descriptionAr  String?  @db.Text
-  isHidden       Boolean  @default(false)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-
-  categories Category[]
+  descriptionEn  String?
+  descriptionAr  String?
+  isHidden       Boolean    @default(false)
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  categories     Category[]
 
   @@index([isHidden])
 }
 
 model CategoryType {
-  id            String   @id @default(cuid())
+  id            String                 @id @default(cuid())
   titleEn       String
   titleAr       String
-  descriptionEn String?  @db.Text
-  descriptionAr String?  @db.Text
+  descriptionEn String?
+  descriptionAr String?
   image         String?
-  number        Int      @default(999)
-  isHidden      Boolean  @default(false)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  categories CategoryTypeCategory[]
+  number        Int                    @default(999)
+  isHidden      Boolean                @default(false)
+  createdAt     DateTime               @default(now())
+  updatedAt     DateTime               @updatedAt
+  categories    CategoryTypeCategory[]
 
   @@index([isHidden])
 }
 
 model Category {
-  id            String  @id @default(cuid())
+  id            String                 @id @default(cuid())
   nameEn        String
   nameAr        String
-  descriptionEn String? @db.Text
-  descriptionAr String? @db.Text
+  descriptionEn String?
+  descriptionAr String?
   image         String?
   imageEn       String?
-  number        Int     @default(999)
-  isHidden      Boolean @default(false)
-
-  brandId String
-  brand   Brand  @relation(fields: [brandId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  number        Int                    @default(999)
+  isHidden      Boolean                @default(false)
+  brandId       String
+  createdAt     DateTime               @default(now())
+  updatedAt     DateTime               @updatedAt
+  brand         Brand                  @relation(fields: [brandId], references: [id], onDelete: Cascade)
   products      CategoryProduct[]
   categoryTypes CategoryTypeCategory[]
 
@@ -105,227 +82,192 @@ model Category {
 }
 
 model CategoryTypeCategory {
-  id             String  @id @default(cuid())
+  id             String       @id @default(cuid())
   categoryId     String
   categoryTypeId String
   image          String?
-  number         Int     @default(999)
-
-  category     Category     @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  categoryType CategoryType @relation(fields: [categoryTypeId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  number         Int          @default(999)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  category       Category     @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryType   CategoryType @relation(fields: [categoryTypeId], references: [id], onDelete: Cascade)
 
   @@unique([categoryId, categoryTypeId])
 }
 
 model ProductType {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   nameEn    String
   nameAr    String
-  isHidden  Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  products Product[]
+  isHidden  Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  products  Product[]
 
   @@index([isHidden])
 }
 
 model Product {
-  id            String  @id @default(cuid())
-  nameEn        String
-  nameAr        String
-  descriptionEn String? @db.Text
-  descriptionAr String? @db.Text
-  color         String  @default("#ffffff")
-  number        Int     @default(999)
-  isHidden      Boolean @default(false)
-
-  typeId String?
-  type   ProductType? @relation(fields: [typeId], references: [id], onDelete: SetNull)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  images             ProductImage[]
-  categories         CategoryProduct[]
-  recommendedRecipes RecommendedRecipe[]
+  id                 String              @id @default(cuid())
+  nameEn             String
+  nameAr             String
+  descriptionEn      String?
+  descriptionAr      String?
+  color              String              @default("#ffffff")
+  number             Int                 @default(999)
+  isHidden           Boolean             @default(false)
+  typeId             String?
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
   cartItems          CartItem[]
+  categories         CategoryProduct[]
   orderItems         OrderItem[]
+  type               ProductType?        @relation(fields: [typeId], references: [id])
+  images             ProductImage[]
   socials            ProductSocial[]
+  recommendedRecipes RecommendedRecipe[]
 
   @@index([isHidden])
   @@index([typeId])
 }
 
 model CategoryProduct {
-  id         String  @id @default(cuid())
+  id         String   @id @default(cuid())
   categoryId String
   productId  String
-  isHidden   Boolean @default(false)
-
-  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  product  Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  isHidden   Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@unique([categoryId, productId])
 }
 
 model ProductImage {
-  id        String @id @default(cuid())
+  id        String   @id @default(cuid())
   productId String
   url       String
-
-  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
-// -----------------------------------------------------------------------------
-// Recipes & Food (Cooks)
-// -----------------------------------------------------------------------------
-
 model RecipeCategory {
-  id       String  @id @default(cuid())
-  nameEn   String
-  nameAr   String
-  image    String?
-  number   Int     @default(999)
-  isHidden Boolean @default(false)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  foods RecipeCategoryFood[]
+  id        String               @id @default(cuid())
+  nameEn    String
+  nameAr    String
+  image     String?
+  number    Int                  @default(999)
+  isHidden  Boolean              @default(false)
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt
+  foods     RecipeCategoryFood[]
 }
 
 model Recipe {
-  id            String  @id @default(cuid())
-  nameEn        String?
-  nameAr        String?
-  descriptionEn String? @db.Text
-  descriptionAr String? @db.Text
-  videoLink     String? @db.Text
-  internalImage String? @db.Text
-  number        Int     @default(999)
-  tagEn         String?
-  tagAr         String?
-  isHidden      Boolean @default(false)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  id              String              @id @default(cuid())
+  nameEn          String?
+  nameAr          String?
+  descriptionEn   String?
+  descriptionAr   String?
+  videoLink       String?
+  internalImage   String?
+  number          Int                 @default(999)
+  isHidden        Boolean             @default(false)
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  tagAr           String?
+  tagEn           String?
+  foods           RecipeFood[]
   images          RecipeImage[]
   properties      RecipeProperty[]
   steps           RecipeStep[]
-  foods           RecipeFood[]
   recommendedWith RecommendedRecipe[]
 
   @@index([isHidden])
 }
 
 model RecipeImage {
-  id       String @id @default(cuid())
-  recipeId String
-  url      String @db.Text
-
-  recipe Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
-
+  id        String   @id @default(cuid())
+  recipeId  String
+  url       String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  recipe    Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
 }
 
 model RecipeProperty {
-  id       String  @id @default(cuid())
-  recipeId String
-  icon     String?
-  titleEn  String
-  titleAr  String
-  textEn   String
-  textAr   String
-
-  recipe Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
-
+  id        String   @id @default(cuid())
+  recipeId  String
+  icon      String?
+  titleEn   String
+  titleAr   String
+  textEn    String
+  textAr    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  recipe    Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
 }
 
 model RecipeStep {
-  id       String @id @default(cuid())
-  recipeId String
-  stepEn   String @db.Text
-  stepAr   String @db.Text
-
-  recipe Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
-
+  id        String   @id @default(cuid())
+  recipeId  String
+  stepEn    String
+  stepAr    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  recipe    Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
 }
 
 model Food {
-  id       String  @id @default(cuid())
-  nameEn   String?
-  nameAr   String?
-  image    String?
-  number   Int     @default(999)
-  isHidden Boolean @default(false)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  recipes          RecipeFood[]
+  id               String               @id @default(cuid())
+  nameEn           String?
+  nameAr           String?
+  image            String?
+  number           Int                  @default(999)
+  isHidden         Boolean              @default(false)
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
   recipeCategories RecipeCategoryFood[]
+  recipes          RecipeFood[]
 
   @@index([isHidden])
 }
 
 model RecipeFood {
-  id       String @id @default(cuid())
-  recipeId String
-  foodId   String
-
-  recipe Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
-  food   Food   @relation(fields: [foodId], references: [id], onDelete: Cascade)
-
+  id        String   @id @default(cuid())
+  recipeId  String
+  foodId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  food      Food     @relation(fields: [foodId], references: [id], onDelete: Cascade)
+  recipe    Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
 
   @@unique([recipeId, foodId])
 }
 
 model RecipeCategoryFood {
-  id               String @id @default(cuid())
+  id               String         @id @default(cuid())
   recipeCategoryId String
   foodId           String
-
-  recipeCategory RecipeCategory @relation(fields: [recipeCategoryId], references: [id], onDelete: Cascade)
-  food           Food           @relation(fields: [foodId], references: [id], onDelete: Cascade)
+  food             Food           @relation(fields: [foodId], references: [id], onDelete: Cascade)
+  recipeCategory   RecipeCategory @relation(fields: [recipeCategoryId], references: [id], onDelete: Cascade)
 
   @@unique([recipeCategoryId, foodId])
 }
 
 model RecommendedRecipe {
-  id        String @id @default(cuid())
+  id        String   @id @default(cuid())
   productId String
   recipeId  String
-
-  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-  recipe  Recipe  @relation(fields: [recipeId], references: [id], onDelete: Cascade)
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  recipe    Recipe   @relation(fields: [recipeId], references: [id], onDelete: Cascade)
 
   @@unique([productId, recipeId])
 }
-
-// -----------------------------------------------------------------------------
-// Site Content & Marketing
-// -----------------------------------------------------------------------------
 
 model Banner {
   id           String     @id @default(cuid())
@@ -342,16 +284,10 @@ model Banner {
   smallVideoEn String?
   number       Int        @default(999)
   isHidden     Boolean    @default(false)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
 
   @@index([isHidden])
-}
-
-enum BannerType {
-  image
-  video
 }
 
 model Certificate {
@@ -364,8 +300,8 @@ model Certificate {
 
 model Standard {
   id            String   @id @default(cuid())
-  descriptionEn String   @db.Text
-  descriptionAr String   @db.Text
+  descriptionEn String
+  descriptionAr String
   image         String?
   isHidden      Boolean  @default(false)
   createdAt     DateTime @default(now())
@@ -376,8 +312,8 @@ model Value {
   id            String   @id @default(cuid())
   titleEn       String?
   titleAr       String?
-  descriptionEn String?  @db.Text
-  descriptionAr String?  @db.Text
+  descriptionEn String?
+  descriptionAr String?
   image         String?
   isHidden      Boolean  @default(false)
   createdAt     DateTime @default(now())
@@ -386,8 +322,8 @@ model Value {
 
 model WhyChooseUs {
   id            String   @id @default(cuid())
-  descriptionEn String   @db.Text
-  descriptionAr String   @db.Text
+  descriptionEn String
+  descriptionAr String
   isHidden      Boolean  @default(false)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
@@ -397,8 +333,8 @@ model Building {
   id            String   @id @default(cuid())
   titleEn       String?
   titleAr       String?
-  descriptionEn String?  @db.Text
-  descriptionAr String?  @db.Text
+  descriptionEn String?
+  descriptionAr String?
   image         String?
   isHidden      Boolean  @default(false)
   createdAt     DateTime @default(now())
@@ -409,8 +345,8 @@ model Feature {
   id            String   @id @default(cuid())
   titleEn       String?
   titleAr       String?
-  descriptionEn String?  @db.Text
-  descriptionAr String?  @db.Text
+  descriptionEn String?
+  descriptionAr String?
   image         String?
   isHidden      Boolean  @default(false)
   createdAt     DateTime @default(now())
@@ -419,8 +355,8 @@ model Feature {
 
 model ProductionStep {
   id        String   @id @default(cuid())
-  textEn    String   @db.Text
-  textAr    String   @db.Text
+  textEn    String
+  textAr    String
   number    Int      @default(999)
   image     String?
   isHidden  Boolean  @default(false)
@@ -432,8 +368,8 @@ model SectionText {
   id        String   @id @default(cuid())
   titleEn   String?
   titleAr   String?
-  textEn    String?  @db.Text
-  textAr    String?  @db.Text
+  textEn    String?
+  textAr    String?
   number    Int      @default(999)
   isHidden  Boolean  @default(false)
   createdAt DateTime @default(now())
@@ -463,56 +399,45 @@ model ProductSocial {
   isHidden  Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 }
 
 model SiteSetting {
   id          String   @id @default(cuid())
   key         String   @unique
-  valueEn     String?  @db.Text
-  valueAr     String?  @db.Text
+  valueEn     String?
+  valueAr     String?
   description String?
   updatedAt   DateTime @updatedAt
 }
 
-// -----------------------------------------------------------------------------
-// Geography
-// -----------------------------------------------------------------------------
-
 model Continent {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   nameEn    String?
   nameAr    String?
-  isHidden  Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  isHidden  Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   countries Country[]
 }
 
 model Country {
-  id          String   @id @default(cuid())
+  id          String    @id @default(cuid())
   nameEn      String?
   nameAr      String?
   continentId String
-  isHidden    Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  continent Continent @relation(fields: [continentId], references: [id], onDelete: Cascade)
+  isHidden    Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  continent   Continent @relation(fields: [continentId], references: [id], onDelete: Cascade)
 }
-
-// -----------------------------------------------------------------------------
-// Lead Generation (Forms)
-// -----------------------------------------------------------------------------
 
 model ContactRequest {
   id        String        @id @default(cuid())
   name      String
   email     String
   phone     String?
-  message   String?       @db.Text
+  message   String?
   status    RequestStatus @default(UNREAD)
   createdAt DateTime      @default(now())
 }
@@ -523,7 +448,7 @@ model CareerRequest {
   email     String
   phone     String?
   position  String?
-  message   String?       @db.Text
+  message   String?
   resumeUrl String?
   status    RequestStatus @default(UNREAD)
   createdAt DateTime      @default(now())
@@ -536,20 +461,10 @@ model CollaborateRequest {
   name      String?
   email     String
   phone     String?
-  message   String?       @db.Text
+  message   String?
   status    RequestStatus @default(UNREAD)
   createdAt DateTime      @default(now())
 }
-
-enum RequestStatus {
-  UNREAD
-  READ
-  ARCHIVED
-}
-
-// -----------------------------------------------------------------------------
-// B2B Inquiry Models
-// -----------------------------------------------------------------------------
 
 model CartItem {
   id        String   @id @default(cuid())
@@ -559,9 +474,8 @@ model CartItem {
   quantity  Int      @default(1)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-  user    User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([sessionId, productId])
 }
@@ -573,20 +487,88 @@ model Order {
   totalAmount Float       @default(0)
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
-
-  user  User?       @relation(fields: [userId], references: [id])
-  items OrderItem[]
+  user        User?       @relation(fields: [userId], references: [id])
+  items       OrderItem[]
 }
 
 model OrderItem {
-  id        String @id @default(cuid())
+  id        String  @id @default(cuid())
   orderId   String
   productId String
   quantity  Int
-  price     Float  @default(0)
+  price     Float   @default(0)
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id])
+}
 
-  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  product Product @relation(fields: [productId], references: [id])
+model SystemLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  action    String?
+  date      String?
+  ip        String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Popup {
+  id              String    @id @default(cuid())
+  internalName    String
+  titleEn         String?
+  titleAr         String?
+  contentEn       String?
+  contentAr       String?
+  image           String?
+  type            String    @default("MODAL")
+  animation       String    @default("FADE")
+  backgroundColor String    @default("#ffffff")
+  textColor       String    @default("#000000")
+  overlayColor    String    @default("rgba(0,0,0,0.5)")
+  borderRadius    Int       @default(16)
+  maxWidth        Int       @default(500)
+  buttons         Json?
+  trigger         String    @default("ON_LOAD")
+  triggerValue    Int       @default(0)
+  conditions      Json?
+  isActive        Boolean   @default(false)
+  priority        Int       @default(0)
+  startDate       DateTime?
+  endDate         DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model ChatMenuItem {
+  id        String   @id @default(cuid())
+  labelAr   String
+  labelEn   String
+  icon      String?
+  linkUrl   String?
+  parentId  String?
+  number    Int      @default(999)
+  isHidden  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([parentId])
+  @@index([isHidden])
+}
+
+enum Role {
+  USER
+  ADMIN
+  EDITOR
+}
+
+enum BannerType {
+  image
+  video
+}
+
+enum RequestStatus {
+  UNREAD
+  READ
+  ARCHIVED
 }
 
 enum OrderStatus {
@@ -596,81 +578,3 @@ enum OrderStatus {
   DELIVERED
   CANCELLED
 }
-
-// -----------------------------------------------------------------------------
-// System
-// -----------------------------------------------------------------------------
-
-model SystemLog {
-  id        String   @id @default(cuid())
-  userId    String? // Might map to Admin ID
-  action    String?
-  date      String?
-  ip        String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-// -----------------------------------------------------------------------------
-// Popups Manager
-// -----------------------------------------------------------------------------
-
-model Popup {
-  id               String   @id @default(cuid())
-  internalName     String
-  titleEn          String?
-  titleAr          String?
-  contentEn        String?  @db.Text
-  contentAr        String?  @db.Text
-  image            String?
-
-  // Style & Animation
-  type             String   @default("MODAL")
-  animation        String   @default("FADE")
-  backgroundColor  String   @default("#ffffff")
-  textColor        String   @default("#000000")
-  overlayColor     String   @default("rgba(0,0,0,0.5)")
-  borderRadius     Int      @default(16)
-  maxWidth         Int      @default(500)
-
-  // Custom Buttons – JSON array
-  buttons          Json?
-
-  // Trigger
-  trigger          String   @default("ON_LOAD")
-  triggerValue     Int      @default(0)
-
-  // Advanced Conditions – JSON object
-  conditions       Json?
-
-  // Scheduling & Status
-  isActive         Boolean  @default(false)
-  priority         Int      @default(0)
-  startDate        DateTime?
-  endDate          DateTime?
-
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-}
-
-// -----------------------------------------------------------------------------
-// Chat Widget
-// -----------------------------------------------------------------------------
-
-model ChatMenuItem {
-  id          String  @id @default(cuid())
-  labelAr     String
-  labelEn     String
-  icon        String? // emoji or icon name
-  linkUrl     String? // internal or external link
-  parentId    String? // null = top-level, else = sub-item
-  number      Int     @default(999)
-  isHidden    Boolean @default(false)
-
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  @@index([parentId])
-  @@index([isHidden])
-}
-
