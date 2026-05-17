@@ -6,17 +6,17 @@ export default withAuth(
     const token = req.nextauth.token;
     const isAuth = !!token;
     const pathname = req.nextUrl.pathname;
-    const isAuthPage = pathname.startsWith("/admin/login");
-    const isAdminRoute = pathname.startsWith("/admin");
+    const isAuthPage = pathname.includes("/admin/login");
+    const isAdminRoute = pathname.includes("/admin");
 
-    // Locale routing for public pages
+    // Locale routing for all pages
     const locales = ['ar', 'en'];
     const pathnameHasLocale = locales.some(
       (loc) => pathname.startsWith(`/${loc}/`) || pathname === `/${loc}`
     );
     const isStaticFile = pathname.match(/\.[^/]+$/);
 
-    if (!isAdminRoute && !pathnameHasLocale && !isStaticFile) {
+    if (!pathnameHasLocale && !isStaticFile) {
       const cookieLocale = req.cookies.get('NEXT_LOCALE')?.value;
       const locale = cookieLocale === 'en' ? 'en' : 'ar';
       
@@ -33,7 +33,8 @@ export default withAuth(
 
     if (isAuthPage) {
       if (isAuth) {
-        return NextResponse.redirect(new URL("/admin", req.url));
+        const currentLocale = pathname.split('/')[1] || 'ar';
+        return NextResponse.redirect(new URL(`/${currentLocale}/admin`, req.url));
       }
       return NextResponse.next({
         request: {
@@ -48,8 +49,9 @@ export default withAuth(
         from += req.nextUrl.search;
       }
 
+      const currentLocale = pathname.split('/')[1] || 'ar';
       return NextResponse.redirect(
-        new URL(`/admin/login?from=${encodeURIComponent(from)}`, req.url)
+        new URL(`/${currentLocale}/admin/login?from=${encodeURIComponent(from)}`, req.url)
       );
     }
 

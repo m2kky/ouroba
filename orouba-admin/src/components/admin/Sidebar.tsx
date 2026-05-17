@@ -24,8 +24,10 @@ import {
   Settings,
   Users,
   Megaphone,
-  MessagesSquare
+  MessagesSquare,
+  Globe
 } from "lucide-react";
+import { useAdminTranslation } from "@/components/admin/AdminTranslationProvider";
 
 interface SidebarProps {
   userRole?: string;
@@ -33,58 +35,65 @@ interface SidebarProps {
 
 export default function Sidebar({ userRole }: SidebarProps) {
   const pathname = usePathname();
+  const { dict, locale } = useAdminTranslation();
+
+  const toggleLocale = () => {
+    const newLocale = locale === 'ar' ? 'en' : 'ar';
+    const newPath = pathname.replace(`/${locale}`, `/${newLocale}`);
+    window.location.href = newPath;
+  };
 
   const menuGroups = [
     {
-      title: "الرئيسية",
+      title: dict.sidebar.dashboard,
       items: [
-        { name: "الداشبورد", href: "/admin", icon: LayoutDashboard },
+        { name: dict.sidebar.dashboard, href: `/${locale}/admin`, icon: LayoutDashboard },
       ]
     },
     {
-      title: "إدارة المنتجات",
+      title: dict.sidebar.products,
       items: [
-        { name: "البراندات", href: "/admin/brands", icon: Store },
-        { name: "الأقسام", href: "/admin/categories", icon: Tags },
-        { name: "المنتجات", href: "/admin/products", icon: Package },
+        { name: dict.sidebar.brands, href: `/${locale}/admin/brands`, icon: Store },
+        { name: dict.sidebar.categories, href: `/${locale}/admin/categories`, icon: Tags },
+        { name: dict.sidebar.products, href: `/${locale}/admin/products`, icon: Package },
       ]
     },
     {
-      title: "إدارة الوصفات",
+      title: dict.sidebar.recipes,
       items: [
-        { name: "أقسام الوصفات", href: "/admin/recipes/categories", icon: BookOpen },
-        { name: "الوصفات", href: "/admin/recipes", icon: ChefHat },
+        { name: dict.sidebar.recipes + " Categories", href: `/${locale}/admin/recipes/categories`, icon: BookOpen },
+        { name: dict.sidebar.recipes, href: `/${locale}/admin/recipes`, icon: ChefHat },
+        { name: dict.sidebar.foods, href: `/${locale}/admin/foods`, icon: ChefHat },
       ]
     },
     {
-      title: "إدارة المحتوى",
+      title: dict.sidebar.content,
       items: [
-        { name: "البانرات", href: "/admin/banners", icon: ImageIcon },
-        { name: "الشهادات", href: "/admin/certificates", icon: Award },
-        { name: "المعايير", href: "/admin/standards", icon: CheckCircle },
-        { name: "القيم", href: "/admin/values", icon: Heart },
-        { name: "لماذا نحن", href: "/admin/why-us", icon: HelpCircle },
-        { name: "مرافق المصنع", href: "/admin/buildings", icon: Building2 },
-        { name: "المميزات", href: "/admin/features", icon: Star },
-        { name: "مناطق التصدير", href: "/admin/continents", icon: Globe2 },
-        { name: "النوافذ المنبثقة", href: "/admin/popups", icon: Megaphone },
-        { name: "قائمة الشات", href: "/admin/chat-menu", icon: MessagesSquare },
+        { name: dict.sidebar.banners, href: `/${locale}/admin/banners`, icon: ImageIcon },
+        { name: dict.sidebar.certificates, href: `/${locale}/admin/about/certificates`, icon: Award },
+        { name: dict.sidebar.standards, href: `/${locale}/admin/about/standards`, icon: CheckCircle },
+        { name: dict.sidebar.values, href: `/${locale}/admin/about/values`, icon: Heart },
+        { name: dict.sidebar.whyUs, href: `/${locale}/admin/about/why-choose-us`, icon: HelpCircle },
+        { name: dict.sidebar.facilities, href: `/${locale}/admin/about/buildings`, icon: Building2 },
+        { name: dict.sidebar.features, href: `/${locale}/admin/about/features`, icon: Star },
+        { name: dict.sidebar.export, href: `/${locale}/admin/continents`, icon: Globe2 },
+        { name: dict.sidebar.popups, href: `/${locale}/admin/popups`, icon: Megaphone },
+        { name: dict.sidebar.chatMenu, href: `/${locale}/admin/chat-menu`, icon: MessagesSquare },
       ]
     },
     {
-      title: "الطلبات والرسائل",
+      title: dict.sidebar.requests,
       items: [
-        { name: "طلبات التعاون", href: "/admin/collaborates", icon: Handshake },
-        { name: "طلبات التوظيف", href: "/admin/careers", icon: Briefcase },
-        { name: "رسائل تواصل معنا", href: "/admin/contacts", icon: MessageSquare },
+        { name: dict.sidebar.collaborates, href: `/${locale}/admin/collaborates`, icon: Handshake },
+        { name: dict.sidebar.careers, href: `/${locale}/admin/careers`, icon: Briefcase },
+        { name: dict.sidebar.contacts, href: `/${locale}/admin/contacts`, icon: MessageSquare },
       ]
     },
     {
-      title: "الإعدادات",
+      title: dict.sidebar.settings,
       items: [
-        { name: "إعدادات الموقع", href: "/admin/settings", icon: Settings },
-        // Only show Team to ADMINs
-        ...(userRole === "ADMIN" ? [{ name: "فريق العمل", href: "/admin/team", icon: Users }] : []),
+        { name: dict.sidebar.settings, href: `/${locale}/admin/settings`, icon: Settings },
+        ...(userRole === "ADMIN" ? [{ name: dict.sidebar.team, href: `/${locale}/admin/team`, icon: Users }] : []),
       ]
     }
   ];
@@ -111,7 +120,7 @@ export default function Sidebar({ userRole }: SidebarProps) {
             </h3>
             <ul className="space-y-1">
               {group.items.map((item) => {
-                const isActive = pathname === item.href || (item.href !== '/admin' && pathname.startsWith(item.href));
+                const isActive = pathname === item.href || (item.href !== `/${locale}/admin` && pathname.startsWith(item.href));
                 const Icon = item.icon;
                 
                 return (
@@ -133,6 +142,16 @@ export default function Sidebar({ userRole }: SidebarProps) {
             </ul>
           </div>
         ))}
+      </div>
+
+      <div className="p-4 border-t border-gray-100">
+        <button
+          onClick={toggleLocale}
+          className="flex items-center justify-center gap-2 w-full px-4 py-2 bg-gray-50 hover:bg-gray-100 text-gray-700 rounded-xl transition-colors font-medium text-sm"
+        >
+          <Globe className="w-4 h-4 text-gray-500" />
+          {dict.sidebar.language}
+        </button>
       </div>
     </aside>
   );
