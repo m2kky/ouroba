@@ -24,10 +24,10 @@ model User {
 }
 
 model Brand {
-  id             String     @id @default(cuid())
+  id             String        @id @default(cuid())
   nameEn         String
   nameAr         String
-  number         Int        @default(999)
+  number         Int           @default(999)
   image          String?
   imageMain      String?
   imageSmall     String?
@@ -36,10 +36,14 @@ model Brand {
   colorHover     String?
   descriptionEn  String?
   descriptionAr  String?
-  isHidden       Boolean    @default(false)
-  createdAt      DateTime   @default(now())
-  updatedAt      DateTime   @updatedAt
+  brandTextEn    String?
+  brandTextAr    String?
+  isHidden       Boolean       @default(false)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
   categories     Category[]
+  foods          Food[]
+  productTypes   ProductType[]
 
   @@index([isHidden])
 }
@@ -99,12 +103,16 @@ model ProductType {
   id        String    @id @default(cuid())
   nameEn    String
   nameAr    String
+  number    Int       @default(999)
+  brandId   String?
   isHidden  Boolean   @default(false)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+  brand     Brand?    @relation(fields: [brandId], references: [id])
   products  Product[]
 
   @@index([isHidden])
+  @@index([brandId])
 }
 
 model Product {
@@ -226,13 +234,16 @@ model Food {
   nameAr           String?
   image            String?
   number           Int                  @default(999)
+  brandId          String?
   isHidden         Boolean              @default(false)
   createdAt        DateTime             @default(now())
   updatedAt        DateTime             @updatedAt
+  brand            Brand?               @relation(fields: [brandId], references: [id])
   recipeCategories RecipeCategoryFood[]
   recipes          RecipeFood[]
 
   @@index([isHidden])
+  @@index([brandId])
 }
 
 model RecipeFood {
@@ -395,6 +406,7 @@ model SocialParent {
 model ProductSocial {
   id        String   @id @default(cuid())
   image     String?
+  action    String?
   productId String
   isHidden  Boolean  @default(false)
   createdAt DateTime @default(now())

@@ -1,0 +1,17 @@
+Banners:
+    #	
+    Number	
+    English Title	
+    Arabic Title
+     Banner type: 
+     if_video: 	
+        Banner Video Link - Enlgish
+        Banner Video Link - Arabic
+        Banner Small Video Link - English
+        Banner Small Video Link - Arabic
+     if_image: 
+        Banner Image - English
+        Banner Image - Arabic
+        Banner Small Image - English
+        Banner Small Image - Arabic 
+  

@@ -1,0 +1,391 @@
+Cooking:
+    #	
+    Number	
+    English Name	
+    Arabic Name	
+    Image	
+    Internal Image	
+    Video	
+    
+        Cooking Props:
+            #	
+            Icon	
+            English Title	
+            English Text	
+            Arabic Title	
+            Arabic Text
+            English Title
+            Level
+            Arabic Title
+            المستوى
+            English Text
+            Easy
+            Arabic Text
+            سهل
+            Image
+        
+        Cooking Steps:  //richtext editor
+            #	
+            step_en	
+            step_ar
+        
+
+
+        #	Number	English Name	Arabic Name	Image	Internal Image	Video	
+48	
+1
+Molokhia Taklia	ملوخية بالتقلية				
+Edit
+Hide
+Props
+Steps
+63	
+1
+Crispy Eggplant Fingers	أصابع باذنجان مقرمشة				
+Edit
+Hide
+Props
+Steps
+65	
+1
+Mango Juice	عصير المانجو				
+Edit
+Hide
+Props
+Steps
+67	
+1
+Mango Tart	تورتة المانجو				
+Edit
+Hide
+Props
+Steps
+10	
+2
+Vegetables Soup	شوربة الخضار				
+Edit
+Hide
+Props
+Steps
+64	
+2
+Crispy Potato Cubes	بطاطس مكعبات مقرمشة				
+Edit
+Hide
+Props
+Steps
+66	
+2
+Mango Ice Cream	آيس كريم المانجو				
+Edit
+Hide
+Props
+Steps
+19	
+3
+Fried Breaded Cauliflower	القرنبيط المقلي				
+Edit
+Hide
+Props
+Steps
+54	
+3
+Spinach Omelette	اومليت السبانخ				
+Edit
+Hide
+Props
+Steps
+68	
+3
+Barhi Dates Juice	عصير بلح برحي				
+Edit
+Hide
+Props
+Steps
+69	
+3
+Ready-to-Eat Barhi Dates	بلح برحي جاهز للأكل				
+Edit
+Hide
+Props
+Steps
+55	
+4
+Egyptian Falafel	فلافل مصرية				
+Edit
+Hide
+Props
+Steps
+59	
+5
+Strawberry Pancake	بان كيك بالفراولة				
+Edit
+Hide
+Props
+Steps
+60	
+10
+Mixed Vegetables in Airfryer	خضار مشكل فى الايرفراير				
+Edit
+Hide
+Props
+Steps
+61	
+11
+Roasted Chickpeas	حمص محمص				
+Edit
+Hide
+Props
+Steps
+62	
+12
+Stir Fry Rice Recipe with Vegetables	الأرز المقلي مع الخضار				
+Edit
+Hide
+Props
+Steps
+70	
+30
+Spiced Crispy Fries	بطاطس بهارات مقرمشة				
+Edit
+Hide
+Props
+Steps
+9	
+9999
+Artichoke Soup	شوربة خرشوف				
+Edit
+Hide
+Props
+Steps
+11	
+9999
+Creamy Vegetables Soup	شوربة خضار بالكريمة				
+Edit
+Hide
+Props
+Steps
+16	
+9999
+Mix Peas and Carrot Soup	شوربة البازلاء والجزر المشكلة				
+Edit
+Show
+Props
+Steps
+17	
+9999
+Broccoli Soup with Turmeric	شوربة بروكلى بالكركم				
+Edit
+Hide
+Props
+Steps
+23	
+9999
+.	.				
+Edit
+Show
+Props
+Steps
+25	
+9999
+Spicy Chickpeas Falafel	فلافل حمص حارة				
+Edit
+Hide
+Props
+Steps
+26	
+9999
+Potato Spinach Strips	بطاطس بالسبانخ ستريبس				
+Edit
+Hide
+Props
+Steps
+27	
+9999
+Pickled Cauliflower	قرنبيط مخلل				
+Edit
+Hide
+Props
+Steps
+28	
+9999
+Garlic Bread	خبز بالثوم محمص				
+Edit
+Hide
+Props
+Steps
+29	
+9999
+Spinach Puff Pastry	جلاش بالسبانخ				
+Edit
+Hide
+Props
+Steps
+30	
+9999
+Sweet Corn with Butter	ذرة سكرية بالزبدة				
+Edit
+Hide
+Props
+Steps
+31	
+9999
+Spinach Mushrooms Gratin	جراتان السبانخ بالمشروم				
+Edit
+Hide
+Props
+Steps
+32	
+9999
+Kunafa with Strawberry	كنافة بالفراولة				
+Edit
+Hide
+Props
+Steps
+33	
+9999
+Strawberry Cake	كيك الفراولة				
+Edit
+Hide
+Props
+Steps
+34	
+9999
+Strawberries Ice Cream	ايس كريم فراولة				
+Edit
+Hide
+Props
+Steps
+35	
+9999
+Hummus Al-Sham	حمص الشام				
+Edit
+Hide
+Props
+Steps
+36	
+9999
+Strawberry Smoothie	سموذى الفراولة				
+Edit
+Hide
+Props
+Steps
+37	
+9999
+Beetroot Salad	سلطة البنجر				
+Edit
+Hide
+Props
+Steps
+38	
+9999
+Broccoli Salad	سلطة البروكلى				
+Edit
+Hide
+Props
+Steps
+39	
+9999
+Green Beans Salad	سلطة الفاصوليا الخضراء				
+Edit
+Hide
+Props
+Steps
+40	
+9999
+Mixed Beans with Sweet Corn Salad	سلطة الفاصوليا بالذرة				
+Edit
+Hide
+Props
+Steps
+41	
+9999
+Pasta Salad with Vegetables	سلطة مكرونة بالخضار				
+Edit
+Hide
+Props
+Steps
+42	
+9999
+Russian Salad	سلطة روسية				
+Edit
+Hide
+Props
+Steps
+43	
+9999
+Artichoke Chicken Lemon & Olive Stew	الخرشوف بالفراخ				
+Edit
+Hide
+Props
+Steps
+44	
+9999
+Artichoke Bottoms with Yoghurt Sauce	خرشوف باللحمة المفرومة و الزبادى				
+Edit
+Hide
+Props
+Steps
+45	
+9999
+One Pot Black Eyed Peas with Minced Meat	لوبيا باللحمة المفرومة				
+Edit
+Hide
+Props
+Steps
+46	
+9999
+Cauliflower Gratin	قرنبيط بالبشاميل				
+Edit
+Hide
+Props
+Steps
+47	
+9999
+Lemon Pepper Glazed Cauliflower	قرنبيط بالليمون والفلفل				
+Edit
+Hide
+Props
+Steps
+49	
+9999
+Molokhia with Shrimps	ملوخية بالجمبرى				
+Edit
+Hide
+Props
+Steps
+50	
+9999
+Okra with Sautéed Vegetables in a Pan	البامية مع الخضار سوتيه في مقلاة				
+Edit
+Hide
+Props
+Steps
+51	
+9999
+Okra with Red Sauce	بامية بصلصة الطماطم				
+Edit
+Hide
+Props
+Steps
+52	
+9999
+Taro	القلقاس (بالسلق)				
+Edit
+Hide
+Props
+Steps
+53	
+9999
+Mixed Veggies with Veal	تورلى - خضار مشكل باللحم				
+Edit
+Hide
+Props
+Steps
+56	
+9999
+Chickpeas Falafel	فلافل حمص				
+Edit
+Hide
+Props
+Steps

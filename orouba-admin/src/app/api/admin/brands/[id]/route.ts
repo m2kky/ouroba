@@ -16,6 +16,8 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     const nameEn = formData.get("nameEn") as string;
     const descriptionAr = formData.get("descriptionAr") as string || "";
     const descriptionEn = formData.get("descriptionEn") as string || "";
+    const brandTextAr = formData.get("brandTextAr") as string || null;
+    const brandTextEn = formData.get("brandTextEn") as string || null;
     const colorBrand = formData.get("colorBrand") as string || "#ffffff";
     const colorHover = formData.get("colorHover") as string || "#eeeeee";
     const imageFile = formData.get("image") as File | null;
@@ -49,6 +51,8 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
         nameEn,
         descriptionAr,
         descriptionEn,
+        brandTextAr,
+        brandTextEn,
         colorBrand,
         colorHover,
         image: imageUrl,

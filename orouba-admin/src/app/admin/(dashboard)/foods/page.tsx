@@ -10,11 +10,13 @@ interface Food {
   nameAr: string;
   nameEn: string;
   image: string | null;
+  brandId: string | null;
   isHidden: boolean;
 }
 
 export default function FoodsPage() {
   const [foods, setFoods] = useState<Food[]>([]);
+  const [brands, setBrands] = useState<{id: string, nameAr: string}[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,8 +30,15 @@ export default function FoodsPage() {
   const fetchFoods = async () => {
     setIsLoading(true);
     try {
-      const res = await fetch("/api/admin/foods");
-      if (res.ok) setFoods(await res.json());
+      const [foodsRes, brandsRes] = await Promise.all([
+        fetch("/api/admin/foods"),
+        fetch("/api/admin/brands")
+      ]);
+      if (foodsRes.ok) setFoods(await foodsRes.json());
+      if (brandsRes.ok) {
+        const brandsData = await brandsRes.json();
+        setBrands(brandsData.map((b: any) => ({ id: b.id, nameAr: b.nameAr })));
+      }
     } catch (error) {
       console.error("Failed to fetch", error);
     } finally {
@@ -209,6 +218,20 @@ export default function FoodsPage() {
                     صورة حالية
                   </div>
                 )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1">البراند التابع له (اختياري)</label>
+                <select
+                  name="brandId"
+                  defaultValue={editingFood?.brandId || ""}
+                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orouba-blue/20 outline-none"
+                >
+                  <option value="">بدون براند محدد</option>
+                  {brands.map(brand => (
+                    <option key={brand.id} value={brand.id}>{brand.nameAr}</option>
+                  ))}
+                </select>
               </div>
 
               <div className="flex items-center gap-2 pt-2">

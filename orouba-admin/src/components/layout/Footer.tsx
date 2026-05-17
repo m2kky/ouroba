@@ -95,12 +95,10 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
             {/* Column 3: Quick Links */}
             <div className="text-center">
               <h3 className="text-xl font-bold mb-8 text-[#ffcc00] inline-block">{locale === "ar" ? "روابط سريعة" : "Quick Links"}</h3>
-              <ul className="space-y-6">
-                <li><Link href={`/${locale}/about/whoWeAre`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "من نحن" : "Who We Are"}</Link></li>
-                <li><Link href={`/${locale}/about/ProductType`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "العلامات التجارية" : "Brands"}</Link></li>
+                <li><Link href={`/${locale}/about/whoWeAre`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "من نحن" : "About Us"}</Link></li>
+                <li><Link href={`/${locale}/products`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "منتجاتنا" : "Our Products"}</Link></li>
                 <li><Link href={`/${locale}/recipes`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "وصفات" : "Recipes"}</Link></li>
-                <li><Link href={`/${locale}/careers`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "الوظائف" : "Careers"}</Link></li>
-              </ul>
+                <li><Link href={`/${locale}/contact`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "اتصل بنا" : "Contact Us"}</Link></li>
             </div>
 
             {/* Column 4: Contact Us */}
@@ -109,7 +107,7 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
               <ul className={`space-y-5 text-white flex flex-col w-full ${locale === "ar" ? "items-end" : "items-start"}`}>
                 <li className={`flex items-start gap-3 w-full ${locale === "ar" ? "justify-end" : "justify-start flex-row-reverse"}`}>
                   <div className={`text-sm leading-relaxed max-w-[200px] ${locale === "ar" ? "text-right" : "text-left"}`}>
-                    {settings?.address?.[locale] || (locale === "ar" ? "مدينة العبور، بلوك 12008، قسم 5، القاهرة، عرب العبور 43، مصر" : "Obour City, Block 12008, Section 5, Cairo, Arab El Obour 43, Egypt")}
+                    {settings?.location?.[locale] || (locale === "ar" ? "مدينة العبور، بلوك ١٢٠٠٨، قسم ٥، القاهرة، ص.ب: العبور ٤٢، مدينة العبور، مصر" : "Obour city, Block 12008, section 5, Cairo, P.O.Box : El Obour 42 ,El Obour City, Egypt.")}
                   </div>
                   <span className="text-[#ffcc00] mt-1 text-xl">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
@@ -117,21 +115,21 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                 </li>
 
                 <li className={`flex items-center gap-3 w-full mt-2 ${locale === "ar" ? "justify-end" : "justify-start flex-row-reverse"}`}>
-                  <span className="text-sm" dir="ltr">{settings?.phone_1?.en || "+20 22 4489 226"}</span>
+                  <span className="text-sm" dir="ltr">{settings?.phone_1?.en || "202 44890220"}</span>
                   <span className="text-[#ffcc00] text-xl">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                   </span>
                 </li>
 
                 <li className={`flex items-center gap-3 w-full mt-2 ${locale === "ar" ? "justify-end" : "justify-start flex-row-reverse"}`}>
-                  <span className="text-sm" dir="ltr">{settings?.fax?.en || "+20 22 4489 227"}</span>
+                  <span className="text-sm" dir="ltr">{settings?.phone_2?.en || "202 44890227"}</span>
                   <span className="text-[#ffcc00] text-xl">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
                   </span>
                 </li>
 
                 <li className={`flex items-center gap-3 w-full mt-2 mb-6 ${locale === "ar" ? "justify-end" : "justify-start flex-row-reverse"}`}>
-                  <a href={`mailto:${settings?.email?.en || "oroubaemail@orouba-ajwa.com"}`} className="text-sm hover:text-[#ffcc00] transition-colors">{settings?.email?.en || "oroubaemail@orouba-ajwa.com"}</a>
+                  <a href={`mailto:${settings?.email?.en || "oroubamail@orouba.ajwa.com"}`} className="text-sm hover:text-[#ffcc00] transition-colors">{settings?.email?.en || "oroubamail@orouba.ajwa.com"}</a>
                   <span className="text-[#ffcc00] text-xl">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                   </span>
@@ -248,10 +246,10 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                       className="overflow-hidden"
                     >
                       <ul className={`space-y-4 pt-6 text-xl font-medium ${locale === "ar" ? "text-right pl-10 pr-2" : "text-left pr-10 pl-2"}`}>
-                        <li><Link href={`/${locale}/about/whoWeAre`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "من نحن" : "Who We Are"}</Link></li>
-                        <li><Link href={`/${locale}/about/ProductType`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "العلامات التجارية" : "Brands"}</Link></li>
+                        <li><Link href={`/${locale}/about/whoWeAre`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "من نحن" : "About Us"}</Link></li>
+                        <li><Link href={`/${locale}/products`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "منتجاتنا" : "Our Products"}</Link></li>
                         <li><Link href={`/${locale}/recipes`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "وصفات" : "Recipes"}</Link></li>
-                        <li><Link href={`/${locale}/careers`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "الوظائف" : "Careers"}</Link></li>
+                        <li><Link href={`/${locale}/contact`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "اتصل بنا" : "Contact Us"}</Link></li>
                       </ul>
                     </motion.div>
                   )}
@@ -285,7 +283,7 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                       <ul className={`space-y-6 pt-6 text-white flex flex-col w-full ${locale === "ar" ? "items-end pl-10" : "items-start pr-10"}`}>
                         <li className={`flex items-start gap-4 w-full ${locale === "ar" ? "justify-end" : "justify-start flex-row-reverse"}`}>
                           <div className={`text-lg leading-relaxed max-w-[250px] ${locale === "ar" ? "text-right" : "text-left"}`}>
-                            {settings?.address?.[locale] || (locale === "ar" ? "مدينة العبور، بلوك 12008، قسم 5، القاهرة، عرب العبور 43، مصر" : "Obour City, Block 12008, Section 5, Cairo, Arab El Obour 43, Egypt")}
+                            {settings?.location?.[locale] || (locale === "ar" ? "مدينة العبور، بلوك ١٢٠٠٨، قسم ٥، القاهرة، ص.ب: العبور ٤٢، مدينة العبور، مصر" : "Obour city, Block 12008, section 5, Cairo, P.O.Box : El Obour 42 ,El Obour City, Egypt.")}
                           </div>
                           <span className="text-[#ffcc00] mt-1 text-2xl shrink-0">
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
@@ -293,21 +291,21 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                         </li>
  
                         <li className={`flex items-center gap-4 w-full ${locale === "ar" ? "justify-end" : "justify-start flex-row-reverse"}`}>
-                          <span className="text-lg" dir="ltr">{settings?.phone_1?.en || "+20 22 4489 226"}</span>
+                          <span className="text-lg" dir="ltr">{settings?.phone_1?.en || "202 44890220"}</span>
                           <span className="text-[#ffcc00] text-2xl shrink-0">
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                           </span>
                         </li>
  
                         <li className={`flex items-center gap-4 w-full ${locale === "ar" ? "justify-end" : "justify-start flex-row-reverse"}`}>
-                          <span className="text-lg" dir="ltr">{settings?.fax?.en || "+20 22 4489 227"}</span>
+                          <span className="text-lg" dir="ltr">{settings?.phone_2?.en || "202 44890227"}</span>
                           <span className="text-[#ffcc00] text-2xl shrink-0">
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
                           </span>
                         </li>
  
                         <li className={`flex items-center gap-4 w-full mb-6 ${locale === "ar" ? "justify-end" : "justify-start flex-row-reverse"}`}>
-                          <a href={`mailto:${settings?.email?.en || "oroubaemail@orouba-ajwa.com"}`} className="text-lg hover:text-[#ffcc00] transition-colors">{settings?.email?.en || "oroubaemail@orouba-ajwa.com"}</a>
+                          <a href={`mailto:${settings?.email?.en || "oroubamail@orouba.ajwa.com"}`} className="text-lg hover:text-[#ffcc00] transition-colors">{settings?.email?.en || "oroubamail@orouba.ajwa.com"}</a>
                           <span className="text-[#ffcc00] text-2xl shrink-0">
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                           </span>

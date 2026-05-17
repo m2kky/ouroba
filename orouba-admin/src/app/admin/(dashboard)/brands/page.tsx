@@ -11,6 +11,8 @@ interface Brand {
   nameEn: string;
   descriptionAr: string;
   descriptionEn: string;
+  brandTextAr: string | null;
+  brandTextEn: string | null;
   image: string | null;
   imageMain: string | null;
   colorBrand: string;
@@ -226,6 +228,30 @@ export default function BrandsPage() {
                     dir="ltr"
                     className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orouba-blue/20 focus:border-orouba-blue outline-none resize-none"
                     rows={3}
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1">نص تفصيلي (عربي) - اختياري</label>
+                  <textarea
+                    name="brandTextAr"
+                    defaultValue={editingBrand?.brandTextAr || ""}
+                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orouba-blue/20 focus:border-orouba-blue outline-none resize-none"
+                    rows={4}
+                    placeholder="مثل: يخزن في درجة حرارة 18- مئوية..."
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1">نص تفصيلي (إنجليزي) - اختياري</label>
+                  <textarea
+                    name="brandTextEn"
+                    defaultValue={editingBrand?.brandTextEn || ""}
+                    dir="ltr"
+                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orouba-blue/20 focus:border-orouba-blue outline-none resize-none"
+                    rows={4}
+                    placeholder="e.g., Store at -18°C..."
                   />
                 </div>
               </div>

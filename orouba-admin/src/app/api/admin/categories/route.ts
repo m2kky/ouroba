@@ -29,6 +29,8 @@ export async function POST(req: Request) {
     const brandId = formData.get("brandId") as string;
     const descriptionAr = formData.get("descriptionAr") as string || "";
     const descriptionEn = formData.get("descriptionEn") as string || "";
+    const numberStr = formData.get("number") as string;
+    const number = numberStr ? parseInt(numberStr) : 999;
     const isHidden = formData.get("isHidden") === "true";
     const imageFile = formData.get("image") as File | null;
     const imageEnFile = formData.get("imageEn") as File | null;
@@ -56,6 +58,7 @@ export async function POST(req: Request) {
         descriptionAr,
         descriptionEn,
         brandId,
+        number,
         isHidden,
         image: imageUrl,
         imageEn: imageEnUrl,

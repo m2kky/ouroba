@@ -1,0 +1,12 @@
+Recipes:
+    #	
+    Number	
+    Recipe Image	
+    Arabic Title	
+    English Title
+        Foods: //sub category	
+          #	
+          Number	
+          English Name	
+          Arabic Name	
+          Brand    

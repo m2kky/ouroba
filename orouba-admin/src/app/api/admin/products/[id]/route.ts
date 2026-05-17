@@ -19,6 +19,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     const color = formData.get("color") as string || "#ffffff";
     const typeId = formData.get("typeId") as string || null;
     const categoryIds = formData.getAll("categoryIds") as string[];
+    const recipeIds = formData.getAll("recipeIds") as string[];
     const isHidden = formData.get("isHidden") === "true";
     
     const imageFiles = formData.getAll("images") as File[];
@@ -71,6 +72,10 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
           deleteMany: {}, // remove all old mappings
           create: categoryIds.map(catId => ({ categoryId: catId })) // add new mappings
         },
+        recommendedRecipes: {
+          deleteMany: {},
+          create: recipeIds.map(recId => ({ recipeId: recId }))
+        },
         images: {
           create: imageUrls.map(url => ({ url }))
         }
@@ -79,6 +84,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
         categories: { include: { category: true } },
         images: true,
         type: true,
+        recommendedRecipes: { include: { recipe: true } },
       }
     });
 

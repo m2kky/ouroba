@@ -20,6 +20,7 @@ interface Category {
   image: string | null;
   imageEn: string | null;
   isHidden: boolean;
+  number: number;
   brandId: string;
   brand: Brand;
 }
@@ -123,6 +124,7 @@ export default function CategoriesPage() {
       label: "البراند", 
       render: (item) => <span className="px-2 py-1 bg-gray-100 rounded-md text-xs font-semibold">{item.brand.nameAr}</span> 
     },
+    { key: "number", label: "الترتيب", render: (item) => item.number },
     {
       key: "isHidden",
       label: "الحالة",
@@ -226,19 +228,30 @@ export default function CategoriesPage() {
                 </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1">البراند التابع له *</label>
-                <select
-                  name="brandId"
-                  required
-                  defaultValue={editingCategory?.brandId}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orouba-blue/20 focus:border-orouba-blue outline-none bg-white"
-                >
-                  <option value="">-- اختر البراند --</option>
-                  {brands.map(b => (
-                    <option key={b.id} value={b.id}>{b.nameAr} ({b.nameEn})</option>
-                  ))}
-                </select>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1">البراند التابع له *</label>
+                  <select
+                    name="brandId"
+                    required
+                    defaultValue={editingCategory?.brandId}
+                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orouba-blue/20 focus:border-orouba-blue outline-none bg-white"
+                  >
+                    <option value="">-- اختر البراند --</option>
+                    {brands.map(b => (
+                      <option key={b.id} value={b.id}>{b.nameAr} ({b.nameEn})</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1">الترتيب (الأقل يظهر أولاً)</label>
+                  <input
+                    type="number"
+                    name="number"
+                    defaultValue={editingCategory?.number || 999}
+                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orouba-blue/20 focus:border-orouba-blue outline-none"
+                  />
+                </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

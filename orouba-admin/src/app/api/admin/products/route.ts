@@ -11,6 +11,7 @@ export async function GET() {
         categories: { include: { category: true } },
         images: true,
         type: true,
+        recommendedRecipes: { include: { recipe: true } },
       },
       orderBy: { id: "desc" },
     });
@@ -35,6 +36,7 @@ export async function POST(req: Request) {
     const color = formData.get("color") as string || "#ffffff";
     const typeId = formData.get("typeId") as string || null;
     const categoryIds = formData.getAll("categoryIds") as string[];
+    const recipeIds = formData.getAll("recipeIds") as string[];
     const isHidden = formData.get("isHidden") === "true";
     
     // Multiple images
@@ -66,6 +68,9 @@ export async function POST(req: Request) {
         categories: {
           create: categoryIds.map(catId => ({ categoryId: catId }))
         },
+        recommendedRecipes: {
+          create: recipeIds.map(recId => ({ recipeId: recId }))
+        },
         images: {
           create: imageUrls.map(url => ({ url }))
         }
@@ -74,6 +79,7 @@ export async function POST(req: Request) {
         categories: { include: { category: true } },
         images: true,
         type: true,
+        recommendedRecipes: { include: { recipe: true } },
       }
     });
 

@@ -164,7 +164,12 @@ export default function RecipesPage() {
       setSelectedFoodIds(recipe.foods.map(f => f.food.id));
       setSelectedProductIds(recipe.recommendedWith.map(rp => rp.product.id));
     } else {
-      setProperties([]);
+      setProperties([
+        { icon: null, titleAr: "عدد الأفراد", titleEn: "Servings", textAr: "", textEn: "" },
+        { icon: null, titleAr: "وقت الطبخ", titleEn: "Cooking Time", textAr: "", textEn: "" },
+        { icon: null, titleAr: "وقت الإعداد", titleEn: "Prep Time", textAr: "", textEn: "" },
+        { icon: null, titleAr: "المستوى", titleEn: "Level", textAr: "", textEn: "" }
+      ]);
       setSteps([]);
       setSelectedFoodIds([]);
       setSelectedProductIds([]);

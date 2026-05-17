@@ -24,6 +24,12 @@ interface ProductType {
   nameEn: string;
 }
 
+interface BasicRecipe {
+  id: string;
+  nameAr: string;
+  nameEn: string;
+}
+
 interface Product {
   id: string;
   nameAr: string;
@@ -36,6 +42,7 @@ interface Product {
   type: ProductType | null;
   images: ProductImage[];
   categories: CategoryProduct[];
+  recommendedRecipes: { recipe: BasicRecipe }[];
 }
 
 interface Category {
@@ -49,6 +56,7 @@ export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [types, setTypes] = useState<ProductType[]>([]);
+  const [recipes, setRecipes] = useState<BasicRecipe[]>([]);
   
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -58,6 +66,7 @@ export default function ProductsPage() {
   const [isSaving, setIsSaving] = useState(false);
   
   const [selectedCategoryIds, setSelectedCategoryIds] = useState<string[]>([]);
+  const [selectedRecipeIds, setSelectedRecipeIds] = useState<string[]>([]);
   const [deletedImageIds, setDeletedImageIds] = useState<string[]>([]);
 
   useEffect(() => {
@@ -67,16 +76,20 @@ export default function ProductsPage() {
   const fetchData = async () => {
     setIsLoading(true);
     try {
-      const [prodRes, catRes, typesRes] = await Promise.all([
+      const [prodRes, catRes, typesRes, recipesRes] = await Promise.all([
         fetch("/api/admin/products"),
         fetch("/api/admin/categories"),
-        fetch("/api/admin/product-types")
+        fetch("/api/admin/product-types"),
+        fetch("/api/admin/recipes")
       ]);
       
-      if (prodRes.ok && catRes.ok && typesRes.ok) {
+      if (prodRes.ok && catRes.ok && typesRes.ok && recipesRes.ok) {
         setProducts(await prodRes.json());
         setCategories(await catRes.json());
         setTypes(await typesRes.json());
+        
+        const allRecipes = await recipesRes.json();
+        setRecipes(allRecipes.map((r: any) => ({ id: r.id, nameAr: r.nameAr, nameEn: r.nameEn })));
       }
     } catch (error) {
       console.error("Failed to fetch data", error);
@@ -113,6 +126,10 @@ export default function ProductsPage() {
       formData.append("categoryIds", catId);
     });
 
+    selectedRecipeIds.forEach(recId => {
+      formData.append("recipeIds", recId);
+    });
+
     // Add deleted images
     deletedImageIds.forEach(imgId => {
       formData.append("deletedImageIds", imgId);
@@ -128,6 +145,7 @@ export default function ProductsPage() {
         setIsModalOpen(false);
         setEditingProduct(null);
         setSelectedCategoryIds([]);
+        setSelectedRecipeIds([]);
         setDeletedImageIds([]);
         fetchData();
       } else {
@@ -148,6 +166,12 @@ export default function ProductsPage() {
     );
   };
 
+  const toggleRecipe = (id: string) => {
+    setSelectedRecipeIds(prev => 
+      prev.includes(id) ? prev.filter(r => r !== id) : [...prev, id]
+    );
+  };
+
   const toggleDeleteImage = (id: string) => {
     setDeletedImageIds(prev => 
       prev.includes(id) ? prev.filter(img => img !== id) : [...prev, id]
@@ -157,6 +181,7 @@ export default function ProductsPage() {
   const openModal = (product: Product | null) => {
     setEditingProduct(product);
     setSelectedCategoryIds(product ? product.categories.map(c => c.category.id) : []);
+    setSelectedRecipeIds(product ? (product.recommendedRecipes || []).map(r => r.recipe.id) : []);
     setDeletedImageIds([]);
     setIsModalOpen(true);
   };
@@ -415,6 +440,29 @@ export default function ProductsPage() {
                     multiple
                     className="w-full text-sm text-gray-500 file:mr-4 file:py-3 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-orouba-blue/10 file:text-orouba-blue hover:file:bg-orouba-blue/20 border-2 border-dashed border-gray-300 rounded-2xl p-4 text-center cursor-pointer"
                   />
+                </div>
+              </div>
+
+              {/* Recommended Recipes Selection */}
+              <div className="space-y-4 pt-4">
+                <h4 className="text-lg font-bold text-gray-800 border-b pb-2">الوصفات المقترحة مع هذا المنتج (اختياري)</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 max-h-48 overflow-y-auto p-2 border border-gray-100 rounded-xl bg-gray-50/50 hide-scrollbar">
+                  {recipes.map(recipe => (
+                    <label key={recipe.id} className={`flex items-center gap-2 p-3 border rounded-xl cursor-pointer transition-colors bg-white ${selectedRecipeIds.includes(recipe.id) ? 'border-orouba-blue ring-1 ring-orouba-blue' : 'border-gray-200 hover:border-gray-300'}`}>
+                      <input
+                        type="checkbox"
+                        checked={selectedRecipeIds.includes(recipe.id)}
+                        onChange={() => toggleRecipe(recipe.id)}
+                        className="w-4 h-4 text-orouba-blue rounded border-gray-300 focus:ring-orouba-blue"
+                      />
+                      <div className="text-sm font-semibold text-gray-700 truncate">
+                        {recipe.nameAr}
+                      </div>
+                    </label>
+                  ))}
+                  {recipes.length === 0 && (
+                    <div className="col-span-full text-sm text-gray-500 py-2">لا توجد وصفات مضافة حالياً.</div>
+                  )}
                 </div>
               </div>
 
