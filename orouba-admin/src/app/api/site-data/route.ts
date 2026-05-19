@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { apiSuccess, apiError } from "@/lib/api-helpers";
 
+import { NextRequest } from "next/server";
+
 /**
  * GET /api/site-data
  * 
@@ -10,8 +12,13 @@ import { apiSuccess, apiError } from "@/lib/api-helpers";
  * 
  * This replaces the old Laravel fetchSiteData() pattern.
  */
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
+    const { searchParams } = request.nextUrl;
+    const localeParam = searchParams.get("locale");
+    const referer = request.headers.get("referer") || "";
+    const isEn = localeParam === "en" || referer.includes("/en/") || referer.endsWith("/en");
+
     const [
       brands,
       banners,
@@ -88,11 +95,43 @@ export async function GET() {
       prisma.sectionText.findMany({ where: { isHidden: false }, orderBy: { number: "asc" } })
     ]);
 
+    // Sort category products by number (asc) first, then alphabetically (asc) based on active locale
+    brands.forEach((brand: any) => {
+      brand.categories.forEach((category: any) => {
+        if (category.products) {
+          category.products.sort((a: any, b: any) => {
+            const numA = a.product?.number ?? 999;
+            const numB = b.product?.number ?? 999;
+            if (numA !== numB) {
+              return numA - numB;
+            }
+            const nameA = (isEn ? a.product?.nameEn : a.product?.nameAr) || "";
+            const nameB = (isEn ? b.product?.nameEn : b.product?.nameAr) || "";
+            return nameA.localeCompare(nameB, isEn ? "en" : "ar");
+          });
+        }
+      });
+    });
+
     // Transform settings to key-value map
     const settings = siteSettings.reduce((acc: Record<string, { en: string | null; ar: string | null }>, s: { key: string; valueEn: string | null; valueAr: string | null }) => {
       acc[s.key] = { en: s.valueEn, ar: s.valueAr };
       return acc;
     }, {});
+
+    // Ensure aliases for footer/frontend compatibility
+    if (settings.address && !settings.location) {
+      settings.location = settings.address;
+    }
+    if (settings.location && !settings.address) {
+      settings.address = settings.location;
+    }
+    if (settings.phone && !settings.phone_1) {
+      settings.phone_1 = settings.phone;
+    }
+    if (settings.phone_1 && !settings.phone) {
+      settings.phone = settings.phone_1;
+    }
 
     return apiSuccess({
       brands,

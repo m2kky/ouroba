@@ -1,4 +1,6 @@
 "use client";
+import AdminPageInfo from "@/components/admin/AdminPageInfo";
+
 
 import { useState, useEffect } from "react";
 import DataTable, { Column } from "@/components/admin/DataTable";
@@ -131,6 +133,19 @@ export default function TeamPage() {
 
   return (
     <div className="space-y-6">
+      <AdminPageInfo 
+        titleAr="إدارة الفريق (Team/Directors)" 
+        titleEn="Board & Team Directors"
+        descriptionAr="إضافة وتعديل بيانات أعضاء مجلس الإدارة أو فريق العمل." 
+        descriptionEn="Manage administrative board members and team highlights."
+        prereq1Ar="تُعرض هذه البيانات في قسم التعرف على الشركة." 
+        prereq1En="Displays portraits and roles under the 'Our Team' web layout."
+        prereq2Ar="يمكن إضافة الاسم، المنصب، وصورة شخصية لكل عضو كخطوة مستقلة." 
+        prereq2En="Upload name, position title, and professional photo individually."
+      />
+
+      
+
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">فريق العمل (Team)</h1>

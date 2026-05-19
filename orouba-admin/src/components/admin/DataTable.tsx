@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Search } from "lucide-react";
 
 export interface Column<T> {
@@ -22,8 +22,48 @@ export default function DataTable<T extends { id: string | number }>({
   searchPlaceholder = "بحث...",
   onSearch,
 }: DataTableProps<T>) {
+  const [hoveredImg, setHoveredImg] = useState<{ src: string; alt: string; x: number; y: number } | null>(null);
+
+  const handleMouseOver = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (target.tagName === "IMG") {
+      const img = target as HTMLImageElement;
+      // Only trigger preview for small thumbnails to avoid hovering over large images
+      if (img.clientWidth <= 80) {
+        setHoveredImg({
+          src: img.src,
+          alt: img.alt || "",
+          x: e.clientX + 15,
+          y: e.clientY + 15
+        });
+      }
+    }
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (hoveredImg) {
+      setHoveredImg(prev => prev ? {
+        ...prev,
+        x: e.clientX + 15,
+        y: e.clientY + 15
+      } : null);
+    }
+  };
+
+  const handleMouseOut = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (target.tagName === "IMG") {
+      setHoveredImg(null);
+    }
+  };
+
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+    <div 
+      className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden relative"
+      onMouseOver={handleMouseOver}
+      onMouseMove={handleMouseMove}
+      onMouseOut={handleMouseOut}
+    >
       {/* Table Header & Search */}
       <div className="p-4 border-b border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-4">
         {onSearch && (
@@ -37,6 +77,9 @@ export default function DataTable<T extends { id: string | number }>({
             <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
           </div>
         )}
+        <div className="text-sm font-semibold text-gray-600 bg-gray-50/80 px-3 py-2 rounded-xl border border-gray-200 shadow-sm whitespace-nowrap">
+          إجمالي العدد: <span className="text-orouba-blue font-bold ml-1">{data.length}</span>
+        </div>
       </div>
 
       {/* Table Content */}
@@ -81,6 +124,31 @@ export default function DataTable<T extends { id: string | number }>({
           </tbody>
         </table>
       </div>
+
+      {/* Floating Preview Zoom Popover */}
+      {hoveredImg && (
+        <div 
+          className="fixed z-50 pointer-events-none p-2 bg-white/95 backdrop-blur-md border border-gray-200 rounded-2xl shadow-2xl animate-fade-in scale-in"
+          style={{
+            left: `${hoveredImg.x}px`,
+            top: `${hoveredImg.y}px`,
+            transform: "translate(0, 0)",
+          }}
+        >
+          <div className="relative overflow-hidden rounded-xl border border-gray-100 bg-white">
+            <img 
+              src={hoveredImg.src} 
+              alt={hoveredImg.alt} 
+              className="object-cover w-48 h-48"
+            />
+            {hoveredImg.alt && (
+              <div className="bg-gray-950/80 text-white text-xs font-semibold px-3 py-1.5 absolute bottom-0 left-0 right-0 text-center truncate">
+                {hoveredImg.alt}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

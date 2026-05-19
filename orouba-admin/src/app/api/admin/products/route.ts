@@ -4,8 +4,13 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { uploadFile } from "@/lib/upload";
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const localeParam = searchParams.get("locale");
+    const referer = request.headers.get("referer") || "";
+    const isEn = localeParam === "en" || referer.includes("/en/") || referer.includes("/en");
+
     const products = await prisma.product.findMany({
       include: {
         categories: { include: { category: true } },
@@ -13,7 +18,10 @@ export async function GET() {
         type: true,
         recommendedRecipes: { include: { recipe: true } },
       },
-      orderBy: { id: "desc" },
+      orderBy: [
+        { number: "asc" },
+        isEn ? { nameEn: "asc" } : { nameAr: "asc" }
+      ],
     });
     return NextResponse.json(products);
   } catch (error) {
@@ -35,8 +43,7 @@ export async function POST(req: Request) {
     const descriptionEn = formData.get("descriptionEn") as string || "";
     const color = formData.get("color") as string || "#ffffff";
     const typeId = formData.get("typeId") as string || null;
-    const categoryIds = formData.getAll("categoryIds") as string[];
-    const recipeIds = formData.getAll("recipeIds") as string[];
+    const number = parseInt(formData.get("number") as string || "999", 10);
     const isHidden = formData.get("isHidden") === "true";
     
     // Multiple images
@@ -64,13 +71,8 @@ export async function POST(req: Request) {
         descriptionEn,
         color,
         isHidden,
+        number,
         typeId: typeId || null,
-        categories: {
-          create: categoryIds.map(catId => ({ categoryId: catId }))
-        },
-        recommendedRecipes: {
-          create: recipeIds.map(recId => ({ recipeId: recId }))
-        },
         images: {
           create: imageUrls.map(url => ({ url }))
         }

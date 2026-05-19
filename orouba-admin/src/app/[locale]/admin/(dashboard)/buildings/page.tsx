@@ -1,4 +1,6 @@
 "use client";
+import AdminPageInfo from "@/components/admin/AdminPageInfo";
+
 import { useState, useEffect } from "react";
 import DataTable, { Column } from "@/components/admin/DataTable";
 import { Trash2, Edit, Plus, Eye, EyeOff } from "lucide-react";
@@ -23,18 +25,68 @@ export default function BuildingsPage() {
     try { const r = await fetch("/api/admin/buildings", { method: editItem ? "PUT" : "POST", body: fd }); if (r.ok) { fetchItems(); setShowModal(false); setEditItem(null); } } catch (e) { console.error(e); }
   };
 
-  const handleDelete = async (id: string) => { if (!confirm("هل أنت متأكد؟")) return; try { const r = await fetch(`/api/admin/buildings?id=${id}`, { method: "DELETE" }); if (r.ok) setItems(items.filter(i => i.id !== id)); } catch (e) { console.error(e); } };
+  const handleDelete = async (id: string) => { if (!confirm("هل أنت متأكد؟")) return; try { const r = await fetch(`/api/admin/buildings?id=${id}`, { method: "DELETE" }); if (r.ok) setItems(items.filter(i => i.id !== id)); } catch (e) { console.error(e); } }
+
+  const handleToggleVisibility = async (id: string, currentStatus: boolean) => {
+    try {
+      const res = await fetch('/api/admin/toggle-visibility', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ model: 'building', id, isHidden: !currentStatus })
+      });
+      if (res.ok) {
+        fetchItems();
+      } else {
+        alert("حدث خطأ أثناء التحديث");
+      }
+    } catch (error) {
+      console.error("Failed to toggle visibility", error);
+    }
+  };;
 
   const filtered = items.filter(i => (i.titleAr || "").includes(search) || (i.titleEn || "").toLowerCase().includes(search.toLowerCase()));
   const columns: Column<Building>[] = [
     { key: "titleAr", label: "العنوان (عربي)", render: (i) => <span>{i.titleAr || "—"}</span> },
     { key: "titleEn", label: "العنوان (إنجليزي)", render: (i) => <span>{i.titleEn || "—"}</span> },
     { key: "image", label: "الصورة", render: (i) => i.image ? <img src={i.image} alt="" className="w-12 h-12 rounded object-cover" /> : <span className="text-gray-400">—</span> },
-    { key: "isHidden", label: "الحالة", render: (i) => i.isHidden ? <span className="text-red-500 flex items-center gap-1"><EyeOff className="w-4 h-4" /> مخفي</span> : <span className="text-green-600 flex items-center gap-1"><Eye className="w-4 h-4" /> ظاهر</span> },
+    {
+      key: "isHidden",
+      label: "الحالة",
+      render: (item) => (
+        <button
+          onClick={() => handleToggleVisibility(item.id, item.isHidden)}
+          className={`px-2.5 py-1 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer shadow-sm hover:scale-105 active:scale-95 flex items-center gap-1 ${
+            item.isHidden 
+              ? "bg-red-50 text-red-600 border border-red-200 hover:bg-red-100/70" 
+              : "bg-green-50 text-green-600 border border-green-200 hover:bg-green-100/70"
+          }`}
+          title={(item.isHidden ? "تغيير إلى ظاهر" : "تغيير إلى مخفي")}
+        >
+          {item.isHidden ? (
+            <><EyeOff className="w-3.5 h-3.5" /> مخفي</>
+          ) : (
+            <><Eye className="w-3.5 h-3.5" /> ظاهر</>
+          )}
+        </button>
+      )
+    },
   ];
 
   return (
     <div className="space-y-6">
+      <AdminPageInfo 
+        titleAr="إدارة المنشآت (Facilities)" 
+        titleEn="Facilities & Buildings"
+        descriptionAr="إدارة صور ومقاطع فيديو لمصانع ومنشآت الشركة." 
+        descriptionEn="Manage photos and videos showcasing company manufacturing facilities."
+        prereq1Ar="تُعرض هذه المنشآت في صفحة 'عن الشركة' لإبراز القدرة التصنيعية." 
+        prereq1En="Showcased on the 'About' page to convey corporate industrial capacity."
+        prereq2Ar="الترتيب المقترح: يفضل إضافتها عند كتابة نبذة 'عن الشركة' (About)." 
+        prereq2En="Suggested order: Complete when customizing corporate introduction texts."
+      />
+
+      
+
       <div className="flex justify-between items-center">
         <div><h1 className="text-2xl font-bold text-gray-900">مرافق المصنع</h1><p className="text-gray-500 mt-1">إدارة مرافق ومباني المصنع</p></div>
         <button onClick={() => { setEditItem(null); setShowModal(true); }} className="flex items-center gap-2 bg-orouba-blue text-white px-5 py-2.5 rounded-xl font-bold hover:bg-blue-800"><Plus className="w-5 h-5" /> إضافة</button>

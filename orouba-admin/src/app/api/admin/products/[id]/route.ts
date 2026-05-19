@@ -4,7 +4,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { uploadFile, deleteFile } from "@/lib/upload";
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const session = await getServerSession(authOptions);
   if (!session || (session.user as any).role !== "ADMIN") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -18,8 +19,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     const descriptionEn = formData.get("descriptionEn") as string || "";
     const color = formData.get("color") as string || "#ffffff";
     const typeId = formData.get("typeId") as string || null;
-    const categoryIds = formData.getAll("categoryIds") as string[];
-    const recipeIds = formData.getAll("recipeIds") as string[];
+    const number = parseInt(formData.get("number") as string || "999", 10);
     const isHidden = formData.get("isHidden") === "true";
     
     const imageFiles = formData.getAll("images") as File[];
@@ -29,13 +29,13 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    const existingProduct = await prisma.product.findUnique({ where: { id: params.id } });
+    const existingProduct = await prisma.product.findUnique({ where: { id } });
     if (!existingProduct) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
     // Handle deleted images
     if (deletedImageIds.length > 0) {
       const imagesToDelete = await prisma.productImage.findMany({
-        where: { id: { in: deletedImageIds }, productId: params.id }
+        where: { id: { in: deletedImageIds }, productId: id }
       });
       
       for (const img of imagesToDelete) {
@@ -59,7 +59,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 
     // Update product and relations
     const product = await prisma.product.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         nameAr,
         nameEn,
@@ -67,15 +67,8 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
         descriptionEn,
         color,
         isHidden,
+        number,
         typeId: typeId || null,
-        categories: {
-          deleteMany: {}, // remove all old mappings
-          create: categoryIds.map(catId => ({ categoryId: catId })) // add new mappings
-        },
-        recommendedRecipes: {
-          deleteMany: {},
-          create: recipeIds.map(recId => ({ recipeId: recId }))
-        },
         images: {
           create: imageUrls.map(url => ({ url }))
         }
@@ -95,7 +88,8 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
   }
 }
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const session = await getServerSession(authOptions);
   if (!session || (session.user as any).role !== "ADMIN") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -103,7 +97,7 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
 
   try {
     const existingProduct = await prisma.product.findUnique({ 
-      where: { id: params.id },
+      where: { id },
       include: { images: true }
     });
     if (!existingProduct) return NextResponse.json({ error: "Not found" }, { status: 404 });
@@ -113,7 +107,7 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
       await deleteFile(img.url);
     }
 
-    await prisma.product.delete({ where: { id: params.id } });
+    await prisma.product.delete({ where: { id } });
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error deleting product:", error);

@@ -4,13 +4,14 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { uploadFile, deleteFile } from "@/lib/upload";
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session || (session.user as any).role !== "ADMIN") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   try {
+    const resolvedParams = await params;
     const formData = await req.formData();
     const nameAr = formData.get("nameAr") as string;
     const nameEn = formData.get("nameEn") as string;
@@ -20,14 +21,18 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     const brandTextEn = formData.get("brandTextEn") as string || null;
     const colorBrand = formData.get("colorBrand") as string || "#ffffff";
     const colorHover = formData.get("colorHover") as string || "#eeeeee";
+    const number = parseInt(formData.get("number") as string || "999", 10);
+    const isHidden = formData.get("isHidden") === "on";
     const imageFile = formData.get("image") as File | null;
     const imageMainFile = formData.get("imageMain") as File | null;
+    const videoFile = formData.get("videoFile") as File | null;
+    const videoFileEn = formData.get("videoFileEn") as File | null;
 
     if (!nameAr || !nameEn) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    const existingBrand = await prisma.brand.findUnique({ where: { id: params.id } });
+    const existingBrand = await prisma.brand.findUnique({ where: { id: resolvedParams.id } });
     if (!existingBrand) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
     let imageUrl = existingBrand.image;
@@ -44,8 +49,22 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
       imageMainUrl = await uploadFile(buffer, imageMainFile.name, "brands");
     }
 
+    let videoUrl = existingBrand.videoUrl;
+    if (videoFile && videoFile.size > 0) {
+      if (existingBrand.videoUrl) await deleteFile(existingBrand.videoUrl);
+      const buffer = Buffer.from(await videoFile.arrayBuffer());
+      videoUrl = await uploadFile(buffer, videoFile.name, "brands");
+    }
+
+    let videoUrlEn = existingBrand.videoUrlEn;
+    if (videoFileEn && videoFileEn.size > 0) {
+      if (existingBrand.videoUrlEn) await deleteFile(existingBrand.videoUrlEn);
+      const buffer = Buffer.from(await videoFileEn.arrayBuffer());
+      videoUrlEn = await uploadFile(buffer, videoFileEn.name, "brands");
+    }
+
     const brand = await prisma.brand.update({
-      where: { id: params.id },
+      where: { id: resolvedParams.id },
       data: {
         nameAr,
         nameEn,
@@ -55,8 +74,12 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
         brandTextEn,
         colorBrand,
         colorHover,
+        number,
+        isHidden,
         image: imageUrl,
         imageMain: imageMainUrl,
+        videoUrl,
+        videoUrlEn,
       },
     });
 
@@ -67,20 +90,23 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
   }
 }
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session || (session.user as any).role !== "ADMIN") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   try {
-    const existingBrand = await prisma.brand.findUnique({ where: { id: params.id } });
+    const resolvedParams = await params;
+    const existingBrand = await prisma.brand.findUnique({ where: { id: resolvedParams.id } });
     if (!existingBrand) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
     if (existingBrand.image) await deleteFile(existingBrand.image);
     if (existingBrand.imageMain) await deleteFile(existingBrand.imageMain);
+    if (existingBrand.videoUrl) await deleteFile(existingBrand.videoUrl);
+    if (existingBrand.videoUrlEn) await deleteFile(existingBrand.videoUrlEn);
 
-    await prisma.brand.delete({ where: { id: params.id } });
+    await prisma.brand.delete({ where: { id: resolvedParams.id } });
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error deleting brand:", error);

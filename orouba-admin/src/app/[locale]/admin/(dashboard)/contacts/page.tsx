@@ -1,4 +1,6 @@
 "use client";
+import AdminPageInfo from "@/components/admin/AdminPageInfo";
+
 
 import { useState, useEffect } from "react";
 import DataTable, { Column } from "@/components/admin/DataTable";
@@ -72,6 +74,19 @@ export default function ContactsPage() {
 
   return (
     <div className="space-y-6">
+      <AdminPageInfo 
+        titleAr="رسائل التواصل (Contact Messages)" 
+        titleEn="Contact Messages"
+        descriptionAr="استعراض الرسائل والاستفسارات الواردة من صفحة 'اتصل بنا'." 
+        descriptionEn="View and answer direct support or info requests from visitors."
+        prereq1Ar="يمكنك متابعة استفسارات العملاء العاديين والتواصل معهم." 
+        prereq1En="Easily follow up with visitors and direct inquiries."
+        prereq2Ar="جدول استعراضي فقط للرسائل الواردة." 
+        prereq2En="View-only messages table."
+      />
+
+      
+
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">{dict.sidebar.contacts}</h1>

@@ -1,4 +1,6 @@
 "use client";
+import AdminPageInfo from "@/components/admin/AdminPageInfo";
+
 
 import { useEffect, useState, useCallback } from "react";
 import { Plus, Trash2, Save, GripVertical, ChevronDown, ChevronUp, Eye, EyeOff } from "lucide-react";
@@ -94,6 +96,17 @@ export default function ChatMenuPage() {
 
   return (
     <div className="space-y-6" dir="rtl">
+      <AdminPageInfo 
+        titleAr="إدارة قائمة المحادثة (Chat Menu)" 
+        titleEn="Chat Menu & Widgets"
+        descriptionAr="إدارة الروابط وأرقام التواصل التي تظهر في القائمة العائمة أسفل الموقع." 
+        descriptionEn="Manage quick contact options displaying on the bottom floating bar."
+        prereq1Ar="هذه الخطوة مستقلة تماماً، وتؤثر على زر التواصل العائم (Float Button)." 
+        prereq1En="Standalone widget affecting floating communication prompts."
+        prereq2Ar="يمكنك وضع روابط واتساب أو فيسبوك ماسنجر مع تحديد أيقوناتها." 
+        prereq2En="Supports setting up WhatsApp and Messenger links with custom icons."
+      />
+
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-800">إدارة قائمة الشات</h1>

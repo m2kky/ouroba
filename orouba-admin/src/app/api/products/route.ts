@@ -30,10 +30,17 @@ export async function GET(request: NextRequest) {
       };
     }
 
+    const localeParam = searchParams.get("locale");
+    const referer = request.headers.get("referer") || "";
+    const isEn = localeParam === "en" || referer.includes("/en/") || referer.endsWith("/en");
+
     const [products, total] = await Promise.all([
       prisma.product.findMany({
         where,
-        orderBy: { number: "asc" },
+        orderBy: [
+          { number: "asc" },
+          isEn ? { nameEn: "asc" } : { nameAr: "asc" }
+        ],
         skip,
         take: limit,
         include: {

@@ -1,4 +1,6 @@
 "use client";
+import AdminPageInfo from "@/components/admin/AdminPageInfo";
+
 
 import { useState, useEffect } from "react";
 import DataTable, { Column } from "@/components/admin/DataTable";
@@ -86,6 +88,19 @@ export default function CareersPage() {
 
   return (
     <div className="space-y-6">
+      <AdminPageInfo 
+        titleAr="طلبات التوظيف (Careers)" 
+        titleEn="Careers & Applications"
+        descriptionAr="استعراض ومتابعة طلبات التوظيف المُقدمة من خلال الموقع." 
+        descriptionEn="Review and manage job applications submitted by job seekers via the site."
+        prereq1Ar="يمكنك قراءة تفاصيل الطلبات، وتحميل السير الذاتية (CVs)." 
+        prereq1En="Allows reading applicant details and downloading uploaded resumes."
+        prereq2Ar="هذا الجدول للاستعراض فقط وتستقبل بياناته من زوار الموقع." 
+        prereq2En="View-only table populated by user submissions."
+      />
+
+      
+
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">{dict.sidebar.careers}</h1>

@@ -6,6 +6,7 @@ import GlobalPopupManager from "@/components/ui/GlobalPopupManager";
 import ChatWidget from "@/components/ui/ChatWidget";
 import PageTransitionLoader from "@/components/ui/PageTransitionLoader";
 import { Metadata } from "next";
+import { headers } from "next/headers";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -39,16 +40,22 @@ export default async function PublicLayout({
   const brands = data?.brands || [];
   const socials = data?.socials || [];
 
-  return (
-    <SmoothScroll>
+  const headersList = await headers();
+  const pathname = headersList.get('x-pathname') || "/";
+  const isAdminRoute = pathname.includes('/admin');
+
+  const content = (
+    <>
       <PageTransitionLoader />
-      <Navbar settings={settings} brands={brands} />
+      {!isAdminRoute && <Navbar settings={settings} brands={brands} />}
       <main className="flex-grow">
         {children}
       </main>
-      <Footer settings={settings} socials={socials} brands={brands} />
-      <GlobalPopupManager />
-      <ChatWidget />
-    </SmoothScroll>
+      {!isAdminRoute && <Footer settings={settings} socials={socials} brands={brands} />}
+      {!isAdminRoute && <GlobalPopupManager />}
+      {!isAdminRoute && <ChatWidget />}
+    </>
   );
+
+  return isAdminRoute ? content : <SmoothScroll>{content}</SmoothScroll>;
 }

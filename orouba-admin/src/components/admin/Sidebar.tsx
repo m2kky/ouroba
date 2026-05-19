@@ -48,6 +48,7 @@ export default function Sidebar({ userRole }: SidebarProps) {
       title: dict.sidebar.dashboard,
       items: [
         { name: dict.sidebar.dashboard, href: `/${locale}/admin`, icon: LayoutDashboard },
+        { name: locale === 'ar' ? 'دليل الاستخدام' : 'User Guide', href: `/${locale}/admin/docs`, icon: HelpCircle },
       ]
     },
     {

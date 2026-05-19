@@ -41,7 +41,16 @@ export default async function BrandCategoryProductsPage({ params }: { params: Pr
   ]);
 
   const activeCategory = categories.find(c => c.id === resolvedParams.categoryId);
-  const products = categoryProducts.map(cp => cp.product);
+  const products = categoryProducts.map(cp => cp.product).sort((a, b) => {
+    const numA = a.number ?? 999;
+    const numB = b.number ?? 999;
+    if (numA !== numB) {
+      return numA - numB;
+    }
+    const nameA = (isEn ? a.nameEn : a.nameAr) || "";
+    const nameB = (isEn ? b.nameEn : b.nameAr) || "";
+    return nameA.localeCompare(nameB, isEn ? "en" : "ar");
+  });
 
   if (!brand) {
     return (

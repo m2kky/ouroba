@@ -182,6 +182,7 @@ export default function GlobalPopupManager() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          data-lenis-prevent
           className="fixed inset-0 z-[9999] flex items-center justify-center"
           style={{ backgroundColor: popup.overlayColor }}
           onClick={(e) => { if (e.target === e.currentTarget) close(); }}

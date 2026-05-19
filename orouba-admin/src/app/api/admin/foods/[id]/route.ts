@@ -15,6 +15,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     const nameAr = formData.get("nameAr") as string;
     const nameEn = formData.get("nameEn") as string;
     const brandId = formData.get("brandId") as string || null;
+    const number = parseInt(formData.get("number") as string || "999", 10);
     const isHidden = formData.get("isHidden") === "true";
     const imageFile = formData.get("image") as File | null;
 
@@ -38,6 +39,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
         nameAr,
         nameEn,
         brandId,
+        number,
         isHidden,
         image: imageUrl,
       },

@@ -1,4 +1,6 @@
 "use client";
+import AdminPageInfo from "@/components/admin/AdminPageInfo";
+
 
 import { useState, useEffect } from "react";
 import DataTable, { Column } from "@/components/admin/DataTable";
@@ -53,7 +55,24 @@ export default function StandardsPage() {
       const res = await fetch(`/api/admin/standards?id=${id}`, { method: "DELETE" });
       if (res.ok) setItems(items.filter(i => i.id !== id));
     } catch (e) { console.error(e); }
-  };
+  }
+
+  const handleToggleVisibility = async (id: string, currentStatus: boolean) => {
+    try {
+      const res = await fetch('/api/admin/toggle-visibility', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ model: 'standard', id, isHidden: !currentStatus })
+      });
+      if (res.ok) {
+        fetchItems();
+      } else {
+        alert("حدث خطأ أثناء التحديث");
+      }
+    } catch (error) {
+      console.error("Failed to toggle visibility", error);
+    }
+  };;
 
   const filtered = items.filter(i =>
     i.descriptionAr?.toLowerCase().includes(search.toLowerCase()) ||
@@ -64,11 +83,44 @@ export default function StandardsPage() {
     { key: "descriptionAr", label: "الوصف (عربي)", render: (item) => <span className="line-clamp-2">{item.descriptionAr}</span> },
     { key: "descriptionEn", label: "الوصف (إنجليزي)", render: (item) => <span className="line-clamp-2">{item.descriptionEn}</span> },
     { key: "image", label: "الصورة", render: (item) => item.image ? <img src={item.image} alt="" className="w-12 h-12 rounded object-cover" /> : <span className="text-gray-400">—</span> },
-    { key: "isHidden", label: "الحالة", render: (item) => item.isHidden ? <span className="text-red-500 flex items-center gap-1"><EyeOff className="w-4 h-4" /> مخفي</span> : <span className="text-green-600 flex items-center gap-1"><Eye className="w-4 h-4" /> ظاهر</span> },
+    {
+      key: "isHidden",
+      label: "الحالة",
+      render: (item) => (
+        <button
+          onClick={() => handleToggleVisibility(item.id, item.isHidden)}
+          className={`px-2.5 py-1 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer shadow-sm hover:scale-105 active:scale-95 flex items-center gap-1 ${
+            item.isHidden 
+              ? "bg-red-50 text-red-600 border border-red-200 hover:bg-red-100/70" 
+              : "bg-green-50 text-green-600 border border-green-200 hover:bg-green-100/70"
+          }`}
+          title={(item.isHidden ? "تغيير إلى ظاهر" : "تغيير إلى مخفي")}
+        >
+          {item.isHidden ? (
+            <><EyeOff className="w-3.5 h-3.5" /> مخفي</>
+          ) : (
+            <><Eye className="w-3.5 h-3.5" /> ظاهر</>
+          )}
+        </button>
+      )
+    },
   ];
 
   return (
     <div className="space-y-6">
+      <AdminPageInfo 
+        titleAr="معايير الجودة (Standards)" 
+        titleEn="Quality Standards"
+        descriptionAr="إدارة المعايير والمقاييس التي تعتمد عليها الشركة في التصنيع." 
+        descriptionEn="Manage health, safety, and operational standards of Orouba factories."
+        prereq1Ar="توضح للعملاء الالتزام العالي بالصحة والسلامة." 
+        prereq1En="Demonstrates rigorous safety guidelines and export compliance."
+        prereq2Ar="خطوة مستقلة تُعرض كجزء من صفحة نبذة عن الشركة." 
+        prereq2En="Renders as stylized features list in company profile pages."
+      />
+
+      
+
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">المعايير</h1>

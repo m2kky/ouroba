@@ -62,14 +62,25 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
     take: 10
   });
 
-  // Deduplicate related products
+  // Deduplicate and sort related products
   const relatedProductsMap = new Map();
   relatedCategoryProducts.forEach(cp => {
     if (!relatedProductsMap.has(cp.product.id)) {
       relatedProductsMap.set(cp.product.id, cp.product);
     }
   });
-  const relatedProducts = Array.from(relatedProductsMap.values());
+  
+  const isEn = locale === "en";
+  const relatedProducts = Array.from(relatedProductsMap.values()).sort((a: any, b: any) => {
+    const numA = a.number ?? 999;
+    const numB = b.number ?? 999;
+    if (numA !== numB) {
+      return numA - numB;
+    }
+    const nameA = (isEn ? a.nameEn : a.nameAr) || "";
+    const nameB = (isEn ? b.nameEn : b.nameAr) || "";
+    return nameA.localeCompare(nameB, isEn ? "en" : "ar");
+  });
 
   const recipes = product.recommendedRecipes.map(rr => rr.recipe);
   const primaryCategory = product.categories[0]?.category;

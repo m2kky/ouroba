@@ -42,6 +42,7 @@ export async function POST(req: Request) {
     const videoLink = formData.get("videoLink") as string || null;
     const tagEn = formData.get("tagEn") as string || null;
     const tagAr = formData.get("tagAr") as string || null;
+    const number = parseInt(formData.get("number") as string || "999", 10);
     const internalImageFile = formData.get("internalImage") as File | null;
     const isHidden = formData.get("isHidden") === "true";
     
@@ -49,8 +50,6 @@ export async function POST(req: Request) {
     const imageFiles = formData.getAll("images") as File[];
     
     // Arrays sent as JSON strings
-    const properties = JSON.parse(formData.get("properties") as string || "[]");
-    const steps = JSON.parse(formData.get("steps") as string || "[]");
     const foodIds = JSON.parse(formData.get("foods") as string || "[]");
     const recommendedProductIds = JSON.parse(formData.get("recommendedWith") as string || "[]");
 
@@ -82,25 +81,11 @@ export async function POST(req: Request) {
         videoLink,
         tagEn,
         tagAr,
+        number,
         internalImage: internalImageUrl,
         isHidden,
         images: {
           create: imageUrls.map(url => ({ url }))
-        },
-        properties: {
-          create: properties.map((prop: any) => ({
-            icon: prop.icon || null,
-            titleAr: prop.titleAr,
-            titleEn: prop.titleEn,
-            textAr: prop.textAr,
-            textEn: prop.textEn,
-          }))
-        },
-        steps: {
-          create: steps.map((step: any) => ({
-            stepAr: step.stepAr,
-            stepEn: step.stepEn,
-          }))
         },
         foods: {
           create: foodIds.map((fid: string) => ({ foodId: fid }))

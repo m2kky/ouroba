@@ -1,8 +1,9 @@
 "use client";
 
+import AdminPageInfo from "@/components/admin/AdminPageInfo";
 import { useState, useEffect } from "react";
 import DataTable, { Column } from "@/components/admin/DataTable";
-import { Trash2, Edit, Plus, Image as ImageIcon, PlusCircle, X } from "lucide-react";
+import { Trash2, Edit, Plus, Image as ImageIcon, PlusCircle, X, Eye, EyeOff } from "lucide-react";
 import Image from "next/image";
 import { useAdminTranslation } from "@/components/admin/AdminTranslationProvider";
 
@@ -45,10 +46,9 @@ interface Recipe {
   videoLink: string | null;
   tagEn: string | null;
   tagAr: string | null;
+  number: number;
   isHidden: boolean;
   images: RecipeImage[];
-  properties: RecipeProperty[];
-  steps: RecipeStep[];
   foods: { food: Food }[];
   recommendedWith: { product: Product }[];
 }
@@ -67,8 +67,6 @@ export default function RecipesPage() {
   const [isSaving, setIsSaving] = useState(false);
 
   // Form State
-  const [properties, setProperties] = useState<RecipeProperty[]>([]);
-  const [steps, setSteps] = useState<RecipeStep[]>([]);
   const [selectedFoodIds, setSelectedFoodIds] = useState<string[]>([]);
   const [selectedProductIds, setSelectedProductIds] = useState<string[]>([]);
   const [deletedImageIds, setDeletedImageIds] = useState<string[]>([]);
@@ -128,8 +126,6 @@ export default function RecipesPage() {
     formData.set("isHidden", (formData.get("isHidden") === "on").toString());
     
     // Add JSON stringified arrays
-    formData.append("properties", JSON.stringify(properties));
-    formData.append("steps", JSON.stringify(steps));
     formData.append("foods", JSON.stringify(selectedFoodIds));
     formData.append("recommendedWith", JSON.stringify(selectedProductIds));
 
@@ -162,48 +158,14 @@ export default function RecipesPage() {
   const openModal = (recipe: Recipe | null) => {
     setEditingRecipe(recipe);
     if (recipe) {
-      setProperties(recipe.properties);
-      setSteps(recipe.steps);
       setSelectedFoodIds(recipe.foods.map(f => f.food.id));
       setSelectedProductIds(recipe.recommendedWith.map(rp => rp.product.id));
     } else {
-      setProperties([
-        { icon: null, titleAr: "عدد الأفراد", titleEn: "Servings", textAr: "", textEn: "" },
-        { icon: null, titleAr: "وقت الطبخ", titleEn: "Cooking Time", textAr: "", textEn: "" },
-        { icon: null, titleAr: "وقت الإعداد", titleEn: "Prep Time", textAr: "", textEn: "" },
-        { icon: null, titleAr: "المستوى", titleEn: "Level", textAr: "", textEn: "" }
-      ]);
-      setSteps([]);
       setSelectedFoodIds([]);
       setSelectedProductIds([]);
     }
     setDeletedImageIds([]);
     setIsModalOpen(true);
-  };
-
-  // Array Handlers
-  const addProperty = () => {
-    setProperties([...properties, { icon: "", titleAr: "", titleEn: "", textAr: "", textEn: "" }]);
-  };
-  const updateProperty = (index: number, field: keyof RecipeProperty, value: string) => {
-    const newProps = [...properties];
-    newProps[index] = { ...newProps[index], [field]: value };
-    setProperties(newProps);
-  };
-  const removeProperty = (index: number) => {
-    setProperties(properties.filter((_, i) => i !== index));
-  };
-
-  const addStep = () => {
-    setSteps([...steps, { stepAr: "", stepEn: "" }]);
-  };
-  const updateStep = (index: number, field: keyof RecipeStep, value: string) => {
-    const newSteps = [...steps];
-    newSteps[index] = { ...newSteps[index], [field]: value };
-    setSteps(newSteps);
-  };
-  const removeStep = (index: number) => {
-    setSteps(steps.filter((_, i) => i !== index));
   };
 
   const toggleFood = (id: string) => {
@@ -218,12 +180,35 @@ export default function RecipesPage() {
     setDeletedImageIds(prev => prev.includes(id) ? prev.filter(img => img !== id) : [...prev, id]);
   };
 
+  const handleToggleVisibility = async (id: string, currentStatus: boolean) => {
+    try {
+      const res = await fetch('/api/admin/toggle-visibility', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ model: 'recipe', id, isHidden: !currentStatus })
+      });
+      if (res.ok) {
+        fetchData();
+      } else {
+        alert(dict.common.error);
+      }
+    } catch (error) {
+      console.error("Failed to toggle visibility", error);
+    }
+  };
+
   const filteredRecipes = recipes.filter(r => 
     r.nameAr.toLowerCase().includes(search.toLowerCase()) || 
     r.nameEn.toLowerCase().includes(search.toLowerCase())
   );
 
   const columns: Column<Recipe>[] = [
+    { 
+      key: "index", 
+      label: "#", 
+      render: (_, index) => <span className="text-gray-500 font-medium">{(index ?? 0) + 1}</span> 
+    },
+    { key: "number", label: t("الترتيب", "Order"), render: (item) => item.number },
     { 
       key: "images", 
       label: dict.common.image, 
@@ -240,14 +225,39 @@ export default function RecipesPage() {
     {
       key: "isHidden",
       label: dict.common.status,
-      render: (item) => item.isHidden 
-        ? <span className="text-red-500 font-semibold text-sm">{dict.common.hidden}</span> 
-        : <span className="text-green-500 font-semibold text-sm">{dict.common.visible}</span>
+      render: (item) => (
+        <button
+          onClick={() => handleToggleVisibility(item.id, item.isHidden)}
+          className={`px-2.5 py-1 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer shadow-sm hover:scale-105 active:scale-95 flex items-center gap-1 ${
+            item.isHidden 
+              ? "bg-red-50 text-red-600 border border-red-200 hover:bg-red-100/70" 
+              : "bg-green-50 text-green-600 border border-green-200 hover:bg-green-100/70"
+          }`}
+          title={item.isHidden ? t("تغيير إلى ظاهر", "Change to Visible") : t("تغيير إلى مخفي", "Change to Hidden")}
+        >
+          {item.isHidden ? (
+            <><EyeOff className="w-3.5 h-3.5" /> {dict.common.hidden}</>
+          ) : (
+            <><Eye className="w-3.5 h-3.5" /> {dict.common.visible}</>
+          )}
+        </button>
+      )
     }
   ];
 
   return (
     <div className="space-y-6">
+      <AdminPageInfo 
+        titleAr="إدارة الوصفات (Recipes)" 
+        titleEn="Recipes Directory"
+        descriptionAr="عرض وتعديل وصفات الطبخ وربطها بمنتجات العروبة." 
+        descriptionEn="Manage recipes, preparation instructions, and recommended Orouba products."
+        prereq1Ar="⚠️ تنبيه هام: يجب إضافة (المكونات Foods) و (المنتجات Products) أولاً لتتمكن من ربط الوصفة بهم." 
+        prereq1En="⚠️ Required first: Ingredient items (Foods) and Products must be created first."
+        prereq2Ar="بعد حفظ الوصفة، يمكنك استخدام الأزرار الجانبية لإدارة الخصائص (Props) وخطوات التحضير (Steps)." 
+        prereq2En="Use side-action buttons to configure individual Steps and Properties."
+      />
+
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">{dict.sidebar.recipes}</h1>
@@ -274,6 +284,19 @@ export default function RecipesPage() {
           searchPlaceholder={dict.common.search}
           actions={(item) => (
             <>
+              <button 
+                onClick={() => handleToggleVisibility(item.id, item.isHidden)}
+                className={`p-2 rounded-lg transition-colors flex items-center gap-1 text-xs font-bold ${item.isHidden ? 'text-green-600 hover:bg-green-50' : 'text-orange-600 hover:bg-orange-50'}`}
+                title={item.isHidden ? t("إظهار", "Show") : t("إخفاء", "Hide")}
+              >
+                {item.isHidden ? t("إظهار", "Show") : t("إخفاء", "Hide")}
+              </button>
+              <a href={`/admin/recipes/${item.id}/props`} className="p-2 text-purple-600 hover:bg-purple-50 rounded-lg text-xs font-bold flex items-center gap-1 transition-colors">
+                {t("الخصائص", "Props")}
+              </a>
+              <a href={`/admin/recipes/${item.id}/steps`} className="p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg text-xs font-bold flex items-center gap-1 transition-colors">
+                {t("الخطوات", "Steps")}
+              </a>
               <button onClick={() => openModal(item)} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg" title={dict.common.edit}>
                 <Edit className="w-4 h-4" />
               </button>
@@ -377,49 +400,12 @@ export default function RecipesPage() {
                 </div>
               </div>
 
-              {/* Properties */}
-              <div className="space-y-4 pt-4">
-                <div className="flex justify-between items-center border-b pb-2">
-                  <h4 className="text-lg font-bold text-orouba-blue">{t("خصائص الوصفة (Properties)", "Recipe Properties")}</h4>
-                  <button type="button" onClick={addProperty} className="text-sm flex items-center gap-1 text-orouba-blue hover:text-blue-700 bg-blue-50 px-3 py-1 rounded-full font-bold">
-                    <PlusCircle className="w-4 h-4" /> {t("إضافة خاصية", "Add Property")}
-                  </button>
+              {/* Order Number */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1">{t("الترتيب", "Order")}</label>
+                  <input type="number" name="number" defaultValue={editingRecipe?.number || 999} className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orouba-blue/20 outline-none" />
                 </div>
-                {properties.map((prop, idx) => (
-                  <div key={idx} className="flex gap-2 items-start bg-gray-50 p-3 rounded-xl border border-gray-100">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 flex-1">
-                      <input type="text" placeholder="العنوان (عربي) مثال: وقت التحضير" value={prop.titleAr} onChange={(e) => updateProperty(idx, "titleAr", e.target.value)} className="col-span-1 px-3 py-2 border rounded-lg text-sm" />
-                      <input type="text" placeholder="Title (English)" value={prop.titleEn} dir="ltr" onChange={(e) => updateProperty(idx, "titleEn", e.target.value)} className="col-span-1 px-3 py-2 border rounded-lg text-sm" />
-                      <input type="text" placeholder="القيمة (عربي) مثال: 15 دقيقة" value={prop.textAr} onChange={(e) => updateProperty(idx, "textAr", e.target.value)} className="col-span-1 px-3 py-2 border rounded-lg text-sm" />
-                      <input type="text" placeholder="Value (English)" value={prop.textEn} dir="ltr" onChange={(e) => updateProperty(idx, "textEn", e.target.value)} className="col-span-1 px-3 py-2 border rounded-lg text-sm" />
-                    </div>
-                    <button type="button" onClick={() => removeProperty(idx)} className="p-2 text-red-500 hover:bg-red-50 rounded-lg">
-                      <Trash2 className="w-5 h-5" />
-                    </button>
-                  </div>
-                ))}
-              </div>
-
-              {/* Steps */}
-              <div className="space-y-4 pt-4">
-                <div className="flex justify-between items-center border-b pb-2">
-                  <h4 className="text-lg font-bold text-orouba-blue">{t("خطوات التحضير (Steps)", "Preparation Steps")}</h4>
-                  <button type="button" onClick={addStep} className="text-sm flex items-center gap-1 text-orouba-blue hover:text-blue-700 bg-blue-50 px-3 py-1 rounded-full font-bold">
-                    <PlusCircle className="w-4 h-4" /> {t("إضافة خطوة", "Add Step")}
-                  </button>
-                </div>
-                {steps.map((step, idx) => (
-                  <div key={idx} className="flex gap-2 items-start bg-gray-50 p-3 rounded-xl border border-gray-100">
-                    <div className="bg-orouba-blue text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shrink-0 mt-1">{idx + 1}</div>
-                    <div className="grid grid-cols-2 gap-2 flex-1">
-                      <textarea placeholder="وصف الخطوة (عربي)" value={step.stepAr} onChange={(e) => updateStep(idx, "stepAr", e.target.value)} className="px-3 py-2 border rounded-lg text-sm resize-none" rows={2} />
-                      <textarea placeholder="Step description (English)" value={step.stepEn} dir="ltr" onChange={(e) => updateStep(idx, "stepEn", e.target.value)} className="px-3 py-2 border rounded-lg text-sm resize-none" rows={2} />
-                    </div>
-                    <button type="button" onClick={() => removeStep(idx)} className="p-2 text-red-500 hover:bg-red-50 rounded-lg mt-1">
-                      <Trash2 className="w-5 h-5" />
-                    </button>
-                  </div>
-                ))}
               </div>
 
               {/* Foods and Recommended Products */}

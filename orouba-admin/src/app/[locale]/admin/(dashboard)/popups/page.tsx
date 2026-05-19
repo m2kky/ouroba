@@ -1,4 +1,6 @@
 "use client";
+import AdminPageInfo from "@/components/admin/AdminPageInfo";
+
 
 import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
@@ -132,6 +134,16 @@ export default function PopupsPage() {
 
   return (
     <div className="space-y-6" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+      <AdminPageInfo 
+        titleAr="النوافذ المنبثقة (Marketing Popups)" 
+        titleEn="Marketing Popups"
+        descriptionAr="إدارة النوافذ المنبثقة (Popups) التي تظهر لزوار الموقع." 
+        descriptionEn="Configure responsive promotional overlay cards for web visitors."
+        prereq1Ar="أداة تسويقية مستقلة لتنبيه الزوار بخصومات أو رسائل هامة." 
+        prereq1En="Independent marketing prompt to notify users of seasonal discounts."
+        prereq2Ar="لا يوجد متطلبات مسبقة، يمكنك إنشاء البوب آب في أي وقت." 
+        prereq2En="Optional helper: Works on schedule, configure at any time."
+      />
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>

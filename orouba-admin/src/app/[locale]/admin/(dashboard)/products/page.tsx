@@ -1,8 +1,10 @@
 "use client";
+import AdminPageInfo from "@/components/admin/AdminPageInfo";
+
 
 import { useState, useEffect } from "react";
 import DataTable, { Column } from "@/components/admin/DataTable";
-import { Trash2, Edit, Plus, Image as ImageIcon, X } from "lucide-react";
+import { Trash2, Edit, Plus, Image as ImageIcon, X, Eye, EyeOff } from "lucide-react";
 import Image from "next/image";
 import { useAdminTranslation } from "@/components/admin/AdminTranslationProvider";
 
@@ -42,8 +44,7 @@ interface Product {
   typeId: string | null;
   type: ProductType | null;
   images: ProductImage[];
-  categories: CategoryProduct[];
-  recommendedRecipes: { recipe: BasicRecipe }[];
+  number: number;
 }
 
 interface Category {
@@ -56,9 +57,7 @@ interface Category {
 export default function ProductsPage() {
   const { t, dict } = useAdminTranslation();
   const [products, setProducts] = useState<Product[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
   const [types, setTypes] = useState<ProductType[]>([]);
-  const [recipes, setRecipes] = useState<BasicRecipe[]>([]);
   
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -67,8 +66,6 @@ export default function ProductsPage() {
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   
-  const [selectedCategoryIds, setSelectedCategoryIds] = useState<string[]>([]);
-  const [selectedRecipeIds, setSelectedRecipeIds] = useState<string[]>([]);
   const [deletedImageIds, setDeletedImageIds] = useState<string[]>([]);
 
   useEffect(() => {
@@ -78,20 +75,14 @@ export default function ProductsPage() {
   const fetchData = async () => {
     setIsLoading(true);
     try {
-      const [prodRes, catRes, typesRes, recipesRes] = await Promise.all([
+      const [prodRes, typesRes] = await Promise.all([
         fetch("/api/admin/products"),
-        fetch("/api/admin/categories"),
-        fetch("/api/admin/product-types"),
-        fetch("/api/admin/recipes")
+        fetch("/api/admin/product-types")
       ]);
       
-      if (prodRes.ok && catRes.ok && typesRes.ok && recipesRes.ok) {
+      if (prodRes.ok && typesRes.ok) {
         setProducts(await prodRes.json());
-        setCategories(await catRes.json());
         setTypes(await typesRes.json());
-        
-        const allRecipes = await recipesRes.json();
-        setRecipes(allRecipes.map((r: any) => ({ id: r.id, nameAr: r.nameAr, nameEn: r.nameEn })));
       }
     } catch (error) {
       console.error("Failed to fetch data", error);
@@ -113,6 +104,23 @@ export default function ProductsPage() {
     }
   };
 
+  const handleToggleVisibility = async (id: string, currentStatus: boolean) => {
+    try {
+      const res = await fetch('/api/admin/toggle-visibility', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ model: 'product', id, isHidden: !currentStatus })
+      });
+      if (res.ok) {
+        fetchData();
+      } else {
+        alert(dict.common.error);
+      }
+    } catch (error) {
+      console.error("Failed to toggle visibility", error);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSaving(true);
@@ -123,15 +131,6 @@ export default function ProductsPage() {
 
     formData.set("isHidden", (formData.get("isHidden") === "on").toString());
     
-    // Add multiple category selections
-    selectedCategoryIds.forEach(catId => {
-      formData.append("categoryIds", catId);
-    });
-
-    selectedRecipeIds.forEach(recId => {
-      formData.append("recipeIds", recId);
-    });
-
     // Add deleted images
     deletedImageIds.forEach(imgId => {
       formData.append("deletedImageIds", imgId);
@@ -146,8 +145,6 @@ export default function ProductsPage() {
       if (res.ok) {
         setIsModalOpen(false);
         setEditingProduct(null);
-        setSelectedCategoryIds([]);
-        setSelectedRecipeIds([]);
         setDeletedImageIds([]);
         fetchData();
       } else {
@@ -162,18 +159,6 @@ export default function ProductsPage() {
     }
   };
 
-  const toggleCategory = (id: string) => {
-    setSelectedCategoryIds(prev => 
-      prev.includes(id) ? prev.filter(c => c !== id) : [...prev, id]
-    );
-  };
-
-  const toggleRecipe = (id: string) => {
-    setSelectedRecipeIds(prev => 
-      prev.includes(id) ? prev.filter(r => r !== id) : [...prev, id]
-    );
-  };
-
   const toggleDeleteImage = (id: string) => {
     setDeletedImageIds(prev => 
       prev.includes(id) ? prev.filter(img => img !== id) : [...prev, id]
@@ -182,8 +167,6 @@ export default function ProductsPage() {
 
   const openModal = (product: Product | null) => {
     setEditingProduct(product);
-    setSelectedCategoryIds(product ? product.categories.map(c => c.category.id) : []);
-    setSelectedRecipeIds(product ? (product.recommendedRecipes || []).map(r => r.recipe.id) : []);
     setDeletedImageIds([]);
     setIsModalOpen(true);
   };
@@ -194,6 +177,12 @@ export default function ProductsPage() {
   );
 
   const columns: Column<Product>[] = [
+    { 
+      key: "index", 
+      label: "#", 
+      render: (_, index) => <span className="text-gray-500 font-medium">{(index ?? 0) + 1}</span> 
+    },
+    { key: "number", label: t("الترتيب", "Order") },
     { 
       key: "images", 
       label: dict.common.image, 
@@ -209,30 +198,43 @@ export default function ProductsPage() {
       render: (item) => item.type ? <span className="text-gray-600">{t(item.type.nameAr, item.type.nameEn)}</span> : "—"
     },
     {
-      key: "categories",
-      label: dict.sidebar.categories,
-      render: (item) => (
-        <div className="flex flex-wrap gap-1">
-          {item.categories.slice(0, 2).map((c, idx) => (
-            <span key={idx} className="px-2 py-0.5 bg-gray-100 rounded text-xs">{c.category.nameAr}</span>
-          ))}
-          {item.categories.length > 2 && (
-            <span className="px-2 py-0.5 bg-gray-50 text-gray-500 rounded text-xs">+{item.categories.length - 2}</span>
-          )}
-        </div>
-      )
-    },
-    {
       key: "isHidden",
       label: dict.common.status,
-      render: (item) => item.isHidden 
-        ? <span className="text-red-500 font-semibold text-sm">{dict.common.hidden}</span> 
-        : <span className="text-green-500 font-semibold text-sm">{dict.common.visible}</span>
+      render: (item) => (
+        <button
+          onClick={() => handleToggleVisibility(item.id, item.isHidden)}
+          className={`px-2.5 py-1 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer shadow-sm hover:scale-105 active:scale-95 flex items-center gap-1 ${
+            item.isHidden 
+              ? "bg-red-50 text-red-600 border border-red-200 hover:bg-red-100/70" 
+              : "bg-green-50 text-green-600 border border-green-200 hover:bg-green-100/70"
+          }`}
+          title={item.isHidden ? t("تغيير إلى ظاهر", "Change to Visible") : t("تغيير إلى مخفي", "Change to Hidden")}
+        >
+          {item.isHidden ? (
+            <><EyeOff className="w-3.5 h-3.5" /> {dict.common.hidden}</>
+          ) : (
+            <><Eye className="w-3.5 h-3.5" /> {dict.common.visible}</>
+          )}
+        </button>
+      )
     }
   ];
 
   return (
     <div className="space-y-6">
+      <AdminPageInfo 
+        titleAr="إدارة المنتجات (Products)" 
+        titleEn="Products Catalog"
+        descriptionAr="التحكم الكامل في جميع منتجات الشركة المعروضة على الموقع." 
+        descriptionEn="Full CRUD management over Orouba food product listings."
+        prereq1Ar="⚠️ تنبيه هام: يجب أن تكون قد أضفت (الأقسام، العلامات التجارية، والمميزات) أولاً قبل إضافة المنتجات." 
+        prereq1En="⚠️ Required first: Ensure Categories, Brands, and Features exist before listing products."
+        prereq2Ar="ستقوم هنا باختيار التصنيف الذي ينتمي له المنتج والمميزات التي تمت إضافتها سابقاً." 
+        prereq2En="You will bind items to their parent category, brand, and toggle features."
+      />
+
+      
+
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">{dict.sidebar.products}</h1>
@@ -259,6 +261,27 @@ export default function ProductsPage() {
           searchPlaceholder={dict.common.search}
           actions={(item) => (
             <>
+              <a 
+                href={`/admin/products/${item.id}/categories`}
+                className="p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors flex items-center gap-1 text-xs font-bold"
+                title={dict.sidebar.categories}
+              >
+                {dict.sidebar.categories}
+              </a>
+              <a 
+                href={`/admin/products/${item.id}/recipes`}
+                className="p-2 text-purple-600 hover:bg-purple-50 rounded-lg transition-colors flex items-center gap-1 text-xs font-bold"
+                title={dict.sidebar.recipes}
+              >
+                {dict.sidebar.recipes}
+              </a>
+              <button 
+                onClick={() => handleToggleVisibility(item.id, item.isHidden)}
+                className={`p-2 rounded-lg transition-colors flex items-center gap-1 text-xs font-bold ${item.isHidden ? 'text-green-600 hover:bg-green-50' : 'text-orange-600 hover:bg-orange-50'}`}
+                title={item.isHidden ? t("إظهار", "Show") : t("إخفاء", "Hide")}
+              >
+                {item.isHidden ? t("إظهار", "Show") : t("إخفاء", "Hide")}
+              </button>
               <button 
                 onClick={() => openModal(item)}
                 className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
@@ -383,28 +406,17 @@ export default function ProductsPage() {
                 </div>
               </div>
 
-              {/* Categories Selection */}
-              <div className="space-y-4 pt-4">
-                <h4 className="text-lg font-bold text-gray-800 border-b pb-2">{dict.sidebar.categories}</h4>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                  {categories.map(cat => (
-                    <label key={cat.id} className={`flex items-center gap-2 p-3 border rounded-xl cursor-pointer transition-colors ${selectedCategoryIds.includes(cat.id) ? 'border-orouba-blue bg-blue-50' : 'border-gray-200 hover:bg-gray-50'}`}>
-                      <input
-                        type="checkbox"
-                        checked={selectedCategoryIds.includes(cat.id)}
-                        onChange={() => toggleCategory(cat.id)}
-                        className="w-4 h-4 text-orouba-blue rounded border-gray-300 focus:ring-orouba-blue"
-                      />
-                      <div className="text-xs font-semibold text-gray-700">
-                        <span className="block text-orouba-blue mb-0.5">{t(cat.brand.nameAr, (cat.brand as any)?.nameEn || cat.brand.nameAr)}</span>
-                        {t(cat.nameAr, cat.nameEn)}
-                      </div>
-                    </label>
-                  ))}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1">{t("الترتيب", "Order")} *</label>
+                  <input
+                    type="number"
+                    name="number"
+                    required
+                    defaultValue={editingProduct?.number ?? 999}
+                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orouba-blue/20 outline-none"
+                  />
                 </div>
-                {selectedCategoryIds.length === 0 && (
-                  <p className="text-xs text-red-500">{t("يجب اختيار قسم واحد على الأقل ليظهر المنتج في الموقع", "Select at least one category")}</p>
-                )}
               </div>
 
               {/* Images */}
@@ -445,29 +457,6 @@ export default function ProductsPage() {
                 </div>
               </div>
 
-              {/* Recommended Recipes Selection */}
-              <div className="space-y-4 pt-4">
-                <h4 className="text-lg font-bold text-gray-800 border-b pb-2">{t("الوصفات المقترحة مع هذا المنتج (اختياري)", "Recommended Recipes (Optional)")}</h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 max-h-48 overflow-y-auto p-2 border border-gray-100 rounded-xl bg-gray-50/50 hide-scrollbar">
-                  {recipes.map(recipe => (
-                    <label key={recipe.id} className={`flex items-center gap-2 p-3 border rounded-xl cursor-pointer transition-colors bg-white ${selectedRecipeIds.includes(recipe.id) ? 'border-orouba-blue ring-1 ring-orouba-blue' : 'border-gray-200 hover:border-gray-300'}`}>
-                      <input
-                        type="checkbox"
-                        checked={selectedRecipeIds.includes(recipe.id)}
-                        onChange={() => toggleRecipe(recipe.id)}
-                        className="w-4 h-4 text-orouba-blue rounded border-gray-300 focus:ring-orouba-blue"
-                      />
-                      <div className="text-sm font-semibold text-gray-700 truncate">
-                        {t(recipe.nameAr, recipe.nameEn)}
-                      </div>
-                    </label>
-                  ))}
-                  {recipes.length === 0 && (
-                    <div className="col-span-full text-sm text-gray-500 py-2">{t("لا توجد وصفات مضافة حالياً.", "No recipes found.")}</div>
-                  )}
-                </div>
-              </div>
-
               <div className="flex items-center gap-2 pt-4">
                 <input
                   type="checkbox"
@@ -492,7 +481,7 @@ export default function ProductsPage() {
                 </button>
                 <button
                   type="submit"
-                  disabled={isSaving || selectedCategoryIds.length === 0}
+                  disabled={isSaving}
                   className="px-8 py-2 bg-orouba-blue text-white rounded-xl font-medium hover:bg-orouba-blue/90 transition-colors shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSaving ? dict.common.saving : dict.common.save}

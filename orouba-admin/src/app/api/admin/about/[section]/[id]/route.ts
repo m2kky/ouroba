@@ -15,17 +15,18 @@ const sectionToModel: Record<string, string> = {
   "section-texts": "sectionText"
 };
 
-export async function PUT(req: Request, { params }: { params: { section: string, id: string } }) {
+export async function PUT(req: Request, { params }: { params: Promise<{ section: string, id: string }> }) {
+  const resolvedParams = await params;
   const session = await getServerSession(authOptions);
   if (!session || (session.user as any).role !== "ADMIN") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const modelName = sectionToModel[params.section];
+  const modelName = sectionToModel[resolvedParams.section];
   if (!modelName) return NextResponse.json({ error: "Invalid section" }, { status: 400 });
 
   try {
-    const existing = await (prisma as any)[modelName].findUnique({ where: { id: params.id } });
+    const existing = await (prisma as any)[modelName].findUnique({ where: { id: resolvedParams.id } });
     if (!existing) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
     const formData = await req.formData();
@@ -53,39 +54,40 @@ export async function PUT(req: Request, { params }: { params: { section: string,
     if (imageFile && imageFile.size > 0) {
       if (existing.image) await deleteFile(existing.image);
       const buffer = Buffer.from(await imageFile.arrayBuffer());
-      data.image = await uploadFile(buffer, imageFile.name, `about-${params.section}`);
+      data.image = await uploadFile(buffer, imageFile.name, `about-${resolvedParams.section}`);
     }
 
     const item = await (prisma as any)[modelName].update({
-      where: { id: params.id },
+      where: { id: resolvedParams.id },
       data
     });
     return NextResponse.json(item);
   } catch (error) {
-    console.error(`Error updating ${params.section}:`, error);
+    console.error(`Error updating ${resolvedParams.section}:`, error);
     return NextResponse.json({ error: "Failed to update item" }, { status: 500 });
   }
 }
 
-export async function DELETE(req: Request, { params }: { params: { section: string, id: string } }) {
+export async function DELETE(req: Request, { params }: { params: Promise<{ section: string, id: string }> }) {
+  const resolvedParams = await params;
   const session = await getServerSession(authOptions);
   if (!session || (session.user as any).role !== "ADMIN") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const modelName = sectionToModel[params.section];
+  const modelName = sectionToModel[resolvedParams.section];
   if (!modelName) return NextResponse.json({ error: "Invalid section" }, { status: 400 });
 
   try {
-    const existing = await (prisma as any)[modelName].findUnique({ where: { id: params.id } });
+    const existing = await (prisma as any)[modelName].findUnique({ where: { id: resolvedParams.id } });
     if (!existing) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
     if (existing.image) await deleteFile(existing.image);
 
-    await (prisma as any)[modelName].delete({ where: { id: params.id } });
+    await (prisma as any)[modelName].delete({ where: { id: resolvedParams.id } });
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error(`Error deleting ${params.section}:`, error);
+    console.error(`Error deleting ${resolvedParams.section}:`, error);
     return NextResponse.json({ error: "Failed to delete item" }, { status: 500 });
   }
 }

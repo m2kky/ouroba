@@ -155,102 +155,138 @@ export default async function ProductsPage({
       <div className="max-w-[1200px] mx-auto px-4 md:px-8 relative z-10">
         <FadeIn direction="up" className="mb-20" style={{ textAlign: locale === 'en' ? 'left' : 'right' }}>
           <h1 className="text-3xl md:text-4xl font-bold text-[#035297] mb-4">
-            {locale === 'ar' ? 'أصناف المنتجات' : 'Product Types'}
+            {q ? (
+              locale === 'ar' ? `نتائج البحث عن: "${q}"` : `Search results for: "${q}"`
+            ) : (
+              locale === 'ar' ? 'أصناف المنتجات' : 'Product Types'
+            )}
           </h1>
-          <p className="text-[#035297] text-lg font-medium max-w-4xl leading-relaxed" style={{ marginRight: locale === 'en' ? 'auto' : '0', marginLeft: locale === 'ar' ? 'auto' : '0' }}>
-            {headerText}
-          </p>
+          {!q && (
+            <p className="text-[#035297] text-lg font-medium max-w-4xl leading-relaxed" style={{ marginRight: locale === 'en' ? 'auto' : '0', marginLeft: locale === 'ar' ? 'auto' : '0' }}>
+              {headerText}
+            </p>
+          )}
         </FadeIn>
 
-        {/* Alternating Category Types - One by One like the original */}
-        {productTypesArray.length > 0 ? (
-          <div className="space-y-32 md:space-y-48 pb-20">
-            {productTypesArray.map((item: any, index: number) => {
-              const isEven = index % 2 === 0;
-              const flexDirection = isEven ? "md:flex-row" : "md:flex-row-reverse";
-
-              return (
-                <FadeIn key={item.id} direction={isEven ? "right" : "left"} className={`flex flex-col ${flexDirection} items-center gap-12 md:gap-24`}>
-                  
-                  {/* Product Image - Floating Plate */}
-                  <div className="w-full md:w-1/2 flex justify-center relative">
-                    <div className="group relative w-72 h-72 md:w-[450px] md:h-[450px] transition-all duration-700 ease-out hover:rotate-6 hover:scale-110 hover:-translate-y-4 cursor-pointer">
-                      {item.image ? (
-                        <Image
-                          src={item.image.startsWith("http") ? item.image : getImageUrl(item.image)}
-                          alt={locale === 'ar' ? item.titleAr : item.titleEn}
-                          fill
-                          className="object-contain drop-shadow-2xl group-hover:drop-shadow-[0_20px_40px_rgba(0,0,0,0.4)] transition-all duration-700"
-                          unoptimized={true}
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-[#035297] font-bold">
-                          {locale === 'ar' ? 'بدون صورة' : 'No image'}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Product Text & Brand Icons */}
-                  <div className="w-full md:w-1/2 flex flex-col items-center justify-center text-center">
-                    <h2 className="text-2xl md:text-3xl font-bold text-[#035297] mb-4">
-                      {locale === 'en' ? item.titleEn : item.titleAr}
-                    </h2>
-                    <p className="text-[#035297] text-base md:text-lg leading-relaxed mb-8 font-medium max-w-sm">
-                      {locale === 'en' ? item.descriptionEn : item.descriptionAr}
-                    </p>
-
-                    {/* Brand Availability Icons */}
-                    <div className="flex flex-wrap items-center justify-center gap-6">
-                      {item.brands.map((bInfo: any) => {
-                        const brandObj = data.brands?.find((b: any) => b.id === bInfo.brandId);
-                        if (!brandObj) return null;
-                        
-                        const catObj = brandObj.categories?.find((c: any) => c.id === bInfo.catId);
-                        const brandLogo = brandObj.imageSmallMain || brandObj.image;
-                        const brandNameEn = brandObj.nameEn || brandObj.nameAr || 'brand';
-                        const slugBrandName = brandNameEn.replace(/\s+/g, '-');
-                        
-                        const linkHref = catObj 
-                          ? `/${locale}/brands/${slugBrandName}/${brandObj.id}/${catObj.id}/${(catObj.nameEn || catObj.nameAr || 'category').replace(/\s+/g, '-')}`
-                          : `/${locale}/brands/${slugBrandName}/${brandObj.id}`;
-                        
-                        return (
-                          <Link 
-                            key={bInfo.brandId}
-                            href={linkHref}
-                            className="group relative block w-24 h-16 md:w-32 md:h-20 bg-transparent transition-all duration-500 hover:-translate-y-2 hover:scale-105"
-                            title={locale === 'ar' ? brandObj.nameAr : brandObj.nameEn}
-                          >
-                            {brandLogo || bInfo.logo ? (
-                              <Image 
-                                src={bInfo.logo || getImageUrl(brandLogo)}
-                                alt={locale === 'ar' ? brandObj.nameAr : brandObj.nameEn}
-                                fill
-                                className="object-contain brightness-100 group-hover:brightness-110 group-hover:drop-shadow-[0_10px_20px_rgba(0,0,0,0.3)] transition-all duration-500"
-                                unoptimized={true}
-                              />
-                            ) : (
-                              <span className="flex items-center justify-center w-full h-full text-xs font-bold text-[#035297]">
-                                {locale === 'ar' ? brandObj.nameAr : brandObj.nameEn}
-                              </span>
-                            )}
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  </div>
-                  
-                </FadeIn>
-              );
-            })}
-          </div>
+        {q ? (
+          searchResults.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 pb-20 justify-items-center">
+              {searchResults.map((product: any) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  brand={{
+                    id: product.brandId,
+                    hoverColor: product.hoverColor
+                  }}
+                  locale={locale}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-40">
+              <p className="text-[#035297] text-2xl font-bold opacity-60 mb-6">
+                {locale === 'ar' ? "لم يتم العثور على منتجات تطابق بحثك." : "No products matched your search."}
+              </p>
+              <Link 
+                href={`/${locale}/about/ProductType`}
+                className="inline-block bg-[#035297] hover:bg-blue-800 text-white font-bold px-8 py-3 rounded-full shadow-lg transition-all transform hover:-translate-y-1 hover:scale-105"
+              >
+                {locale === 'ar' ? "عرض كل الأصناف" : "View All Categories"}
+              </Link>
+            </div>
+          )
         ) : (
-          <div className="text-center py-40">
-            <p className="text-[#035297] text-2xl font-bold opacity-50">
-              {locale === 'ar' ? "لا توجد أصناف متاحة حالياً." : "No categories available currently."}
-            </p>
-          </div>
+          /* Alternating Category Types - One by One like the original */
+          productTypesArray.length > 0 ? (
+            <div className="space-y-32 md:space-y-48 pb-20">
+              {productTypesArray.map((item: any, index: number) => {
+                const isEven = index % 2 === 0;
+                const flexDirection = isEven ? "md:flex-row" : "md:flex-row-reverse";
+
+                return (
+                  <FadeIn key={item.id} direction={isEven ? "right" : "left"} className={`flex flex-col ${flexDirection} items-center gap-12 md:gap-24`}>
+                    
+                    {/* Product Image - Floating Plate */}
+                    <div className="w-full md:w-1/2 flex justify-center relative">
+                      <div className="group relative w-72 h-72 md:w-[450px] md:h-[450px] transition-all duration-700 ease-out hover:rotate-6 hover:scale-110 hover:-translate-y-4 cursor-pointer">
+                        {item.image ? (
+                          <Image
+                            src={item.image.startsWith("http") ? item.image : getImageUrl(item.image)}
+                            alt={locale === 'ar' ? item.titleAr : item.titleEn}
+                            fill
+                            className="object-contain drop-shadow-2xl group-hover:drop-shadow-[0_20px_40px_rgba(0,0,0,0.4)] transition-all duration-700"
+                            unoptimized={true}
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-[#035297] font-bold">
+                            {locale === 'ar' ? 'بدون صورة' : 'No image'}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Product Text & Brand Icons */}
+                    <div className="w-full md:w-1/2 flex flex-col items-center justify-center text-center">
+                      <h2 className="text-2xl md:text-3xl font-bold text-[#035297] mb-4">
+                        {locale === 'en' ? item.titleEn : item.titleAr}
+                      </h2>
+                      <p className="text-[#035297] text-base md:text-lg leading-relaxed mb-8 font-medium max-w-sm">
+                        {locale === 'en' ? item.descriptionEn : item.descriptionAr}
+                      </p>
+
+                      {/* Brand Availability Icons */}
+                      <div className="flex flex-wrap items-center justify-center gap-6">
+                        {item.brands.map((bInfo: any) => {
+                          const brandObj = data.brands?.find((b: any) => b.id === bInfo.brandId);
+                          if (!brandObj) return null;
+                          
+                          const catObj = brandObj.categories?.find((c: any) => c.id === bInfo.catId);
+                          const brandLogo = brandObj.imageSmallMain || brandObj.image;
+                          const brandNameEn = brandObj.nameEn || brandObj.nameAr || 'brand';
+                          const slugBrandName = brandNameEn.replace(/\s+/g, '-');
+                          
+                          const linkHref = catObj 
+                            ? `/${locale}/brands/${slugBrandName}/${brandObj.id}/${catObj.id}/${(catObj.nameEn || catObj.nameAr || 'category').replace(/\s+/g, '-')}`
+                            : `/${locale}/brands/${slugBrandName}/${brandObj.id}`;
+                          
+                          return (
+                            <Link 
+                              key={bInfo.brandId}
+                              href={linkHref}
+                              className="group relative block w-24 h-16 md:w-32 md:h-20 bg-transparent transition-all duration-500 hover:-translate-y-2 hover:scale-105"
+                              title={locale === 'ar' ? brandObj.nameAr : brandObj.nameEn}
+                            >
+                              {brandLogo || bInfo.logo ? (
+                                <Image 
+                                  src={bInfo.logo || getImageUrl(brandLogo)}
+                                  alt={locale === 'ar' ? brandObj.nameAr : brandObj.nameEn}
+                                  fill
+                                  className="object-contain brightness-100 group-hover:brightness-110 group-hover:drop-shadow-[0_10px_20px_rgba(0,0,0,0.3)] transition-all duration-500"
+                                  unoptimized={true}
+                                />
+                              ) : (
+                                <span className="flex items-center justify-center w-full h-full text-xs font-bold text-[#035297]">
+                                  {locale === 'ar' ? brandObj.nameAr : brandObj.nameEn}
+                                </span>
+                              )}
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </div>
+                    
+                  </FadeIn>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="text-center py-40">
+              <p className="text-[#035297] text-2xl font-bold opacity-50">
+                {locale === 'ar' ? "لا توجد أصناف متاحة حالياً." : "No categories available currently."}
+              </p>
+            </div>
+          )
         )}
       </div>
     </div>

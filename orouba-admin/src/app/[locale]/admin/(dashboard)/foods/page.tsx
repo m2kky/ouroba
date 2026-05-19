@@ -1,8 +1,10 @@
 "use client";
+import AdminPageInfo from "@/components/admin/AdminPageInfo";
+
 
 import { useState, useEffect } from "react";
 import DataTable, { Column } from "@/components/admin/DataTable";
-import { Trash2, Edit, Plus, Image as ImageIcon } from "lucide-react";
+import { Trash2, Edit, Plus, Image as ImageIcon, Eye, EyeOff } from "lucide-react";
 import Image from "next/image";
 import { useAdminTranslation } from "@/components/admin/AdminTranslationProvider";
 
@@ -61,6 +63,23 @@ export default function FoodsPage() {
     }
   };
 
+  const handleToggleVisibility = async (id: string, currentStatus: boolean) => {
+    try {
+      const res = await fetch('/api/admin/toggle-visibility', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ model: 'food', id, isHidden: !currentStatus })
+      });
+      if (res.ok) {
+        fetchFoods();
+      } else {
+        alert(dict.common.error);
+      }
+    } catch (error) {
+      console.error("Failed to toggle visibility", error);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSaving(true);
@@ -111,14 +130,41 @@ export default function FoodsPage() {
     {
       key: "isHidden",
       label: dict.common.status,
-      render: (item) => item.isHidden 
-        ? <span className="text-red-500 font-semibold text-sm">{dict.common.hidden}</span> 
-        : <span className="text-green-500 font-semibold text-sm">{dict.common.visible}</span>
+      render: (item) => (
+        <button
+          onClick={() => handleToggleVisibility(item.id, item.isHidden)}
+          className={`px-2.5 py-1 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer shadow-sm hover:scale-105 active:scale-95 flex items-center gap-1 ${
+            item.isHidden 
+              ? "bg-red-50 text-red-600 border border-red-200 hover:bg-red-100/70" 
+              : "bg-green-50 text-green-600 border border-green-200 hover:bg-green-100/70"
+          }`}
+          title={item.isHidden ? t("تغيير إلى ظاهر", "Change to Visible") : t("تغيير إلى مخفي", "Change to Hidden")}
+        >
+          {item.isHidden ? (
+            <><EyeOff className="w-3.5 h-3.5" /> {dict.common.hidden}</>
+          ) : (
+            <><Eye className="w-3.5 h-3.5" /> {dict.common.visible}</>
+          )}
+        </button>
+      )
     }
   ];
 
   return (
     <div className="space-y-6">
+      <AdminPageInfo 
+        titleAr="المكونات الأساسية (Foods/Ingredients)" 
+        titleEn="Base Ingredients (Foods)"
+        descriptionAr="إدارة قائمة المكونات التي تستخدم في تحضير الوصفات." 
+        descriptionEn="Manage core ingredient lists used to formulate delicious cooking recipes."
+        prereq1Ar="الخطوة السابقة للوصفات: يجب إضافة جميع المكونات (مثل: طماطم، دجاج) هنا أولاً." 
+        prereq1En="⚠️ Required for recipes: Create ingredient items (e.g. Tomatoes, Spices) first."
+        prereq2Ar="عند إضافة وصفة، ستقوم بربط المكونات التي تمت إضافتها في هذا الجدول بالوصفة." 
+        prereq2En="Allows mapping ingredient checkboxes inside recipe editor."
+      />
+
+      
+
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">{dict.sidebar.foods}</h1>

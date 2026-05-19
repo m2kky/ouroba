@@ -1,8 +1,10 @@
 "use client";
+import AdminPageInfo from "@/components/admin/AdminPageInfo";
+
 
 import { useState, useEffect, useRef } from "react";
 import DataTable, { Column } from "@/components/admin/DataTable";
-import { Trash2, Edit, Plus, Image as ImageIcon } from "lucide-react";
+import { Trash2, Edit, Plus, Image as ImageIcon, Eye, EyeOff } from "lucide-react";
 import Image from "next/image";
 import { useAdminTranslation } from "@/components/admin/AdminTranslationProvider";
 
@@ -16,8 +18,9 @@ interface Brand {
   brandTextEn: string | null;
   image: string | null;
   imageMain: string | null;
-  colorBrand: string;
   colorHover: string;
+  number: number;
+  isHidden: boolean;
 }
 
 export default function BrandsPage() {
@@ -61,6 +64,23 @@ export default function BrandsPage() {
     }
   };
 
+  const handleToggleVisibility = async (id: string, currentStatus: boolean) => {
+    try {
+      const res = await fetch('/api/admin/toggle-visibility', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ model: 'brand', id, isHidden: !currentStatus })
+      });
+      if (res.ok) {
+        fetchBrands();
+      } else {
+        alert(dict.common.error);
+      }
+    } catch (error) {
+      console.error("Failed to toggle visibility", error);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSaving(true);
@@ -98,6 +118,12 @@ export default function BrandsPage() {
 
   const columns: Column<Brand>[] = [
     { 
+      key: "index", 
+      label: "#", 
+      render: (_, index) => <span className="text-gray-500 font-medium">{(index ?? 0) + 1}</span> 
+    },
+    { key: "number", label: t("الترتيب", "Order") },
+    { 
       key: "image", 
       label: dict.common.image, 
       render: (item) => item.image ? (
@@ -116,10 +142,44 @@ export default function BrandsPage() {
         </div>
       ) 
     },
+    {
+      key: "isHidden",
+      label: dict.common.status,
+      render: (item) => (
+        <button
+          onClick={() => handleToggleVisibility(item.id, item.isHidden)}
+          className={`px-2.5 py-1 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer shadow-sm hover:scale-105 active:scale-95 flex items-center gap-1 ${
+            item.isHidden 
+              ? "bg-red-50 text-red-600 border border-red-200 hover:bg-red-100/70" 
+              : "bg-green-50 text-green-600 border border-green-200 hover:bg-green-100/70"
+          }`}
+          title={item.isHidden ? t("تغيير إلى ظاهر", "Change to Visible") : t("تغيير إلى مخفي", "Change to Hidden")}
+        >
+          {item.isHidden ? (
+            <><EyeOff className="w-3.5 h-3.5" /> {dict.common.hidden}</>
+          ) : (
+            <><Eye className="w-3.5 h-3.5" /> {dict.common.visible}</>
+          )}
+        </button>
+      )
+    }
   ];
 
   return (
     <div className="space-y-6">
+      <AdminPageInfo 
+        titleAr="إدارة العلامات التجارية (Brands)" 
+        titleEn="Brands Management"
+        descriptionAr="إضافة وإدارة العلامات التجارية التي تملكها الشركة (مثل: العروبة، الخ)." 
+        descriptionEn="Add and manage brand names belonging to Orouba (e.g. Orouba Foods, etc)."
+        prereq1Ar="تعتبر هذه من أولى خطوات بناء المتجر، حيث سترتبط بها الأنواع والمنتجات لاحقاً." 
+        prereq1En="This is one of the initial catalog steps; all products and types will link to these brands."
+        prereq2Ar="خطوة مطلوبة أولاً: يرجى إضافة العلامات التجارية قبل إضافة أي أنواع (Types) أو منتجات." 
+        prereq2En="⚠️ Required first: Please configure Brands before adding Types or Products."
+      />
+
+      
+
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">{dict.sidebar.brands}</h1>
@@ -149,6 +209,20 @@ export default function BrandsPage() {
           searchPlaceholder={dict.common.search}
           actions={(item) => (
             <>
+              <a 
+                href={`/admin/brands/${item.id}/categories`}
+                className="p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors flex items-center gap-1 text-xs font-bold"
+                title={t("الأقسام", "Categories")}
+              >
+                {t("الأقسام", "Categories")}
+              </a>
+              <button 
+                onClick={() => handleToggleVisibility(item.id, item.isHidden)}
+                className={`p-2 rounded-lg transition-colors flex items-center gap-1 text-xs font-bold ${item.isHidden ? 'text-green-600 hover:bg-green-50' : 'text-orange-600 hover:bg-orange-50'}`}
+                title={item.isHidden ? t("إظهار", "Show") : t("إخفاء", "Hide")}
+              >
+                {item.isHidden ? t("إظهار", "Show") : t("إخفاء", "Hide")}
+              </button>
               <button 
                 onClick={() => {
                   setEditingBrand(item);
@@ -209,6 +283,32 @@ export default function BrandsPage() {
                     dir="ltr"
                     className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orouba-blue/20 focus:border-orouba-blue outline-none"
                   />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1">{t("الترتيب", "Order")} *</label>
+                  <input
+                    type="number"
+                    name="number"
+                    required
+                    defaultValue={editingBrand?.number ?? 999}
+                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orouba-blue/20 outline-none"
+                  />
+                </div>
+                <div className="flex flex-col justify-end">
+                  <label className="flex items-center gap-2 cursor-pointer mb-2">
+                    <input
+                      type="checkbox"
+                      name="isHidden"
+                      defaultChecked={editingBrand?.isHidden}
+                      className="w-5 h-5 text-orouba-blue border-gray-300 rounded focus:ring-orouba-blue"
+                    />
+                    <span className="text-sm font-semibold text-gray-700">
+                      {t("إخفاء هذا البراند من الموقع", "Hide this brand")}
+                    </span>
+                  </label>
                 </div>
               </div>
 
@@ -328,6 +428,37 @@ export default function BrandsPage() {
                   />
                   {editingBrand?.imageMain && (
                     <div className="mt-2 text-xs text-gray-500">{t("صورة رئيسية موجودة", "Current main image exists")}</div>
+                  )}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1">
+                    {t("فيديو البراند بالعربية (Video Ar)", "Brand Video (Arabic)")}
+                  </label>
+                  <input
+                    type="file"
+                    name="videoFile"
+                    accept="video/*"
+                    className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 border border-gray-200 rounded-lg p-1"
+                  />
+                  {editingBrand?.videoUrl && (
+                    <div className="mt-2 text-xs text-gray-500">{t("يوجد فيديو حالي", "Current video exists")}</div>
+                  )}
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1">
+                    {t("فيديو البراند بالإنجليزية (Video En)", "Brand Video (English)")}
+                  </label>
+                  <input
+                    type="file"
+                    name="videoFileEn"
+                    accept="video/*"
+                    className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 border border-gray-200 rounded-lg p-1"
+                  />
+                  {editingBrand?.videoUrlEn && (
+                    <div className="mt-2 text-xs text-gray-500">{t("يوجد فيديو حالي", "Current video exists")}</div>
                   )}
                 </div>
               </div>

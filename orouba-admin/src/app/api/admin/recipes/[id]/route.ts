@@ -19,6 +19,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     const videoLink = formData.get("videoLink") as string || null;
     const tagEn = formData.get("tagEn") as string || null;
     const tagAr = formData.get("tagAr") as string || null;
+    const number = parseInt(formData.get("number") as string || "999", 10);
     const internalImageFile = formData.get("internalImage") as File | null;
     const isHidden = formData.get("isHidden") === "true";
     
@@ -27,8 +28,6 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     const deletedImageIds = formData.getAll("deletedImageIds") as string[];
     
     // Arrays sent as JSON strings
-    const properties = JSON.parse(formData.get("properties") as string || "[]");
-    const steps = JSON.parse(formData.get("steps") as string || "[]");
     const foodIds = JSON.parse(formData.get("foods") as string || "[]");
     const recommendedProductIds = JSON.parse(formData.get("recommendedWith") as string || "[]");
 
@@ -80,27 +79,11 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
         videoLink,
         tagEn,
         tagAr,
+        number,
         internalImage: internalImageUrl,
         isHidden,
         images: {
           create: imageUrls.map(url => ({ url }))
-        },
-        properties: {
-          deleteMany: {},
-          create: properties.map((prop: any) => ({
-            icon: prop.icon || null,
-            titleAr: prop.titleAr,
-            titleEn: prop.titleEn,
-            textAr: prop.textAr,
-            textEn: prop.textEn,
-          }))
-        },
-        steps: {
-          deleteMany: {},
-          create: steps.map((step: any) => ({
-            stepAr: step.stepAr,
-            stepEn: step.stepEn,
-          }))
         },
         foods: {
           deleteMany: {},
@@ -113,8 +96,6 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
       },
       include: {
         images: true,
-        properties: true,
-        steps: true,
         foods: { include: { food: true } },
         recommendedWith: { include: { product: true } }
       }

@@ -1,4 +1,6 @@
 "use client";
+import AdminPageInfo from "@/components/admin/AdminPageInfo";
+
 
 import { useState, useEffect } from "react";
 import DataTable, { Column } from "@/components/admin/DataTable";
@@ -72,6 +74,19 @@ export default function CollaboratesPage() {
 
   return (
     <div className="space-y-6">
+      <AdminPageInfo 
+        titleAr="طلبات التعاون والتصدير (B2B Leads)" 
+        titleEn="B2B Leads & Collaborations"
+        descriptionAr="متابعة طلبات التعاون التجاري والتصدير المقدمة من الشركات والأفراد." 
+        descriptionEn="Track commercial distribution and export inquiries from business entities."
+        prereq1Ar="تعرض هذه الصفحة جميع تفاصيل الشركات الراغبة في التعاون." 
+        prereq1En="Contains business lead profiles, requirements, and corporate contact info."
+        prereq2Ar="جدول استعراضي يعرض ما يرسله العملاء من صفحة B2B." 
+        prereq2En="Lead generation review pipeline."
+      />
+
+      
+
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">{dict.sidebar.collaborates}</h1>

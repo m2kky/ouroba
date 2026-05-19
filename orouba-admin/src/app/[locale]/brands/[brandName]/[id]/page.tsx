@@ -34,15 +34,7 @@ export default async function BrandDetailPage({ params }: { params: Promise<{ br
     );
   }
 
-  const brandVideos: Record<string, string> = {
-    "بسمة": "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/yaDeQPeAbx9rXc1VrhlsVXAtHfcEAsqUCH8ifzk3.mp4",
-    "بابيتس": "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/2ACCr5zYZdX2UP5fEK30Kd8Jcs0hYXCGSSqgndxG.mp4",
-    "فريدة": "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/SZzjLGH7CJNvqRkaCBKfPz9AwL88wok3VELoGFTr.mp4",
-  };
-
-  const videoUrl = brand.id === "8" 
-    ? "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/2ACCr5zYZdX2UP5fEK30Kd8Jcs0hYXCGSSqgndxG.mp4"
-    : brandVideos[brand.nameAr] || brandVideos[brand.nameEn] || null;
+  const videoUrl = isEn ? brand.videoUrlEn || brand.videoUrl : brand.videoUrl || brand.videoUrlEn;
 
   // Dynamic colors for each brand based on its name or id
   const brandThemes: Record<string, { bgContainer: string, bgCard: string, textPrimary: string }> = {

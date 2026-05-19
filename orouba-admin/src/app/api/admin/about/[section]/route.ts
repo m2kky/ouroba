@@ -15,8 +15,9 @@ const sectionToModel: Record<string, string> = {
   "section-texts": "sectionText"
 };
 
-export async function GET(req: Request, { params }: { params: { section: string } }) {
-  const modelName = sectionToModel[params.section];
+export async function GET(req: Request, { params }: { params: Promise<{ section: string }> }) {
+  const resolvedParams = await params;
+  const modelName = sectionToModel[resolvedParams.section];
   if (!modelName) return NextResponse.json({ error: "Invalid section" }, { status: 400 });
 
   try {
@@ -29,13 +30,14 @@ export async function GET(req: Request, { params }: { params: { section: string 
   }
 }
 
-export async function POST(req: Request, { params }: { params: { section: string } }) {
+export async function POST(req: Request, { params }: { params: Promise<{ section: string }> }) {
+  const resolvedParams = await params;
   const session = await getServerSession(authOptions);
   if (!session || (session.user as any).role !== "ADMIN") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const modelName = sectionToModel[params.section];
+  const modelName = sectionToModel[resolvedParams.section];
   if (!modelName) return NextResponse.json({ error: "Invalid section" }, { status: 400 });
 
   try {
@@ -63,13 +65,13 @@ export async function POST(req: Request, { params }: { params: { section: string
     const imageFile = formData.get("image") as File | null;
     if (imageFile && imageFile.size > 0) {
       const buffer = Buffer.from(await imageFile.arrayBuffer());
-      data.image = await uploadFile(buffer, imageFile.name, `about-${params.section}`);
+      data.image = await uploadFile(buffer, imageFile.name, `about-${resolvedParams.section}`);
     }
 
     const item = await (prisma as any)[modelName].create({ data });
     return NextResponse.json(item);
   } catch (error) {
-    console.error(`Error creating ${params.section}:`, error);
+    console.error(`Error creating ${resolvedParams.section}:`, error);
     return NextResponse.json({ error: "Failed to create item" }, { status: 500 });
   }
 }

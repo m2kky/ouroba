@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import DataTable, { Column } from "@/components/admin/DataTable";
-import { Trash2, Edit, Plus, Image as ImageIcon } from "lucide-react";
+import { Trash2, Edit, Plus, Image as ImageIcon, Eye, EyeOff } from "lucide-react";
 import Image from "next/image";
 import { useAdminTranslation } from "@/components/admin/AdminTranslationProvider";
 
@@ -100,9 +100,10 @@ const getSectionConfigs = (t: any): Record<SectionType, SectionConfig> => ({
   }
 });
 
-export default function DynamicAboutPage({ params }: { params: { section: string } }) {
+export default function DynamicAboutPage({ params }: { params: Promise<{ section: string }> }) {
   const { t, dict, locale } = useAdminTranslation();
-  const section = params.section as SectionType;
+  const resolvedParams = React.use(params);
+  const section = resolvedParams.section as SectionType;
   const config = getSectionConfigs(t)[section];
 
   const [items, setItems] = useState<any[]>([]);
@@ -143,7 +144,38 @@ export default function DynamicAboutPage({ params }: { params: { section: string
     } catch (error) {
       console.error("Failed to delete", error);
     }
-  };
+  }
+
+  const handleToggleVisibility = async (id: string, currentStatus: boolean) => {
+    // Map section type to allowed model names
+    const sectionToModel = {
+      certificates: 'certificate',
+      standards: 'standard',
+      values: 'value',
+      'why-choose-us': 'whyChooseUs',
+      buildings: 'building',
+      features: 'feature',
+      'production-steps': 'productionStep',
+      'section-texts': 'sectionText'
+    };
+    const model = sectionToModel[section];
+    if (!model) return;
+
+    try {
+      const res = await fetch('/api/admin/toggle-visibility', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ model, id, isHidden: !currentStatus })
+      });
+      if (res.ok) {
+        fetchItems();
+      } else {
+        alert(dict.common.error);
+      }
+    } catch (error) {
+      console.error("Failed to toggle visibility", error);
+    }
+  };;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -219,9 +251,23 @@ export default function DynamicAboutPage({ params }: { params: { section: string
     cols.push({
       key: "isHidden",
       label: dict.common.status,
-      render: (item) => item.isHidden 
-        ? <span className="text-red-500 font-semibold text-sm">{dict.common.hidden}</span> 
-        : <span className="text-green-500 font-semibold text-sm">{dict.common.visible}</span>
+      render: (item) => (
+        <button
+          onClick={() => handleToggleVisibility(item.id, item.isHidden)}
+          className={`px-2.5 py-1 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer shadow-sm hover:scale-105 active:scale-95 flex items-center gap-1 ${
+            item.isHidden 
+              ? "bg-red-50 text-red-600 border border-red-200 hover:bg-red-100/70" 
+              : "bg-green-50 text-green-600 border border-green-200 hover:bg-green-100/70"
+          }`}
+          title={item.isHidden ? t("تغيير إلى ظاهر", "Change to Visible") : t("تغيير إلى مخفي", "Change to Hidden")}
+        >
+          {item.isHidden ? (
+            <><EyeOff className="w-3.5 h-3.5" /> {dict.common.hidden}</>
+          ) : (
+            <><Eye className="w-3.5 h-3.5" /> {dict.common.visible}</>
+          )}
+        </button>
+      )
     });
 
     return cols;

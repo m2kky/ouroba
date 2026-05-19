@@ -4,9 +4,13 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { uploadFile } from "@/lib/upload";
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
+    const { searchParams } = new URL(req.url);
+    const brandId = searchParams.get("brandId");
+
     const categories = await prisma.category.findMany({
+      where: brandId ? { brandId } : undefined,
       include: { brand: true },
       orderBy: { id: "desc" },
     });

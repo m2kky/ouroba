@@ -1,4 +1,6 @@
 "use client";
+import AdminPageInfo from "@/components/admin/AdminPageInfo";
+
 import { useState, useEffect } from "react";
 import DataTable, { Column } from "@/components/admin/DataTable";
 import { Trash2, Edit, Plus, Eye, EyeOff } from "lucide-react";
@@ -24,18 +26,68 @@ export default function ContinentsPage() {
     try { const r = await fetch("/api/admin/continents", { method: editItem ? "PUT" : "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }); if (r.ok) { fetchItems(); setShowModal(false); setEditItem(null); } } catch (e) { console.error(e); }
   };
 
-  const handleDelete = async (id: string) => { if (!confirm(dict.common.confirmDelete)) return; try { const r = await fetch(`/api/admin/continents?id=${id}`, { method: "DELETE" }); if (r.ok) setItems(items.filter(i => i.id !== id)); } catch (e) { console.error(e); } };
+  const handleDelete = async (id: string) => { if (!confirm(dict.common.confirmDelete)) return; try { const r = await fetch(`/api/admin/continents?id=${id}`, { method: "DELETE" }); if (r.ok) setItems(items.filter(i => i.id !== id)); } catch (e) { console.error(e); } }
+
+  const handleToggleVisibility = async (id: string, currentStatus: boolean) => {
+    try {
+      const res = await fetch('/api/admin/toggle-visibility', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ model: 'continent', id, isHidden: !currentStatus })
+      });
+      if (res.ok) {
+        fetchItems();
+      } else {
+        alert("حدث خطأ أثناء التحديث");
+      }
+    } catch (error) {
+      console.error("Failed to toggle visibility", error);
+    }
+  };;
 
   const filtered = items.filter(i => i.nameAr?.includes(search) || i.nameEn?.toLowerCase().includes(search.toLowerCase()));
   const columns: Column<Continent>[] = [
     { key: "nameAr", label: t("الاسم (عربي)", "Name (Arabic)") },
     { key: "nameEn", label: t("الاسم (إنجليزي)", "Name (English)") },
     { key: "countries", label: t("عدد الدول", "Countries Count"), render: (i) => <span className="font-bold text-orouba-blue">{i.countries?.length || 0}</span> },
-    { key: "isHidden", label: dict.common.status, render: (i) => i.isHidden ? <span className="text-red-500 flex items-center gap-1"><EyeOff className="w-4 h-4" /> {dict.common.hidden}</span> : <span className="text-green-600 flex items-center gap-1"><Eye className="w-4 h-4" /> {dict.common.visible}</span> },
+    {
+      key: "isHidden",
+      label: dict.common.status,
+      render: (item) => (
+        <button
+          onClick={() => handleToggleVisibility(item.id, item.isHidden)}
+          className={`px-2.5 py-1 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer shadow-sm hover:scale-105 active:scale-95 flex items-center gap-1 ${
+            item.isHidden 
+              ? "bg-red-50 text-red-600 border border-red-200 hover:bg-red-100/70" 
+              : "bg-green-50 text-green-600 border border-green-200 hover:bg-green-100/70"
+          }`}
+          title={item.isHidden ? dict.common.hidden : dict.common.visible}
+        >
+          {item.isHidden ? (
+            <><EyeOff className="w-3.5 h-3.5" /> {dict.common.hidden}</>
+          ) : (
+            <><Eye className="w-3.5 h-3.5" /> {dict.common.visible}</>
+          )}
+        </button>
+      )
+    },
   ];
 
   return (
     <div className="space-y-6">
+      <AdminPageInfo 
+        titleAr="خريطة التصدير (Export Map)" 
+        titleEn="Export Geography Map"
+        descriptionAr="إدارة القارات والدول التي يتم تصدير المنتجات إليها." 
+        descriptionEn="Manage continents and countries Orouba exports products to."
+        prereq1Ar="خطوة أساسية أولاً: يجب إضافة القارة (مثل أفريقيا) قبل التمكن من إضافة دول بداخلها (مثل مصر)." 
+        prereq1En="⚠️ Required first: Add Continents (e.g. Europe) before attaching export countries."
+        prereq2Ar="تستخدم هذه البيانات لبناء خريطة التصدير التفاعلية في الموقع." 
+        prereq2En="Supplies interactive markers on the global export map."
+      />
+
+      
+
       <div className="flex justify-between items-center">
         <div><h1 className="text-2xl font-bold text-gray-900">{dict.sidebar.export}</h1><p className="text-gray-500 mt-1">{t("إدارة القارات ودول التصدير", "Manage continents and export countries")}</p></div>
         <button onClick={() => { setEditItem(null); setShowModal(true); }} className="flex items-center gap-2 bg-orouba-blue text-white px-5 py-2.5 rounded-xl font-bold hover:bg-blue-800"><Plus className="w-5 h-5" /> {dict.common.add}</button>

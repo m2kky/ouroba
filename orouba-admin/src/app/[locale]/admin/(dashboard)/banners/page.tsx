@@ -1,8 +1,10 @@
 "use client";
+import AdminPageInfo from "@/components/admin/AdminPageInfo";
+
 
 import { useState, useEffect } from "react";
 import DataTable, { Column } from "@/components/admin/DataTable";
-import { Trash2, Edit, Plus, Image as ImageIcon, Video } from "lucide-react";
+import { Trash2, Edit, Plus, Image as ImageIcon, Video, Eye, EyeOff } from "lucide-react";
 import Image from "next/image";
 import { useAdminTranslation } from "@/components/admin/AdminTranslationProvider";
 
@@ -58,6 +60,23 @@ export default function BannersPage() {
       }
     } catch (error) {
       console.error("Failed to delete", error);
+    }
+  };
+
+  const handleToggleVisibility = async (id: string, currentStatus: boolean) => {
+    try {
+      const res = await fetch('/api/admin/toggle-visibility', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ model: 'banner', id, isHidden: !currentStatus })
+      });
+      if (res.ok) {
+        fetchBanners();
+      } else {
+        alert(dict.common.error);
+      }
+    } catch (error) {
+      console.error("Failed to toggle visibility", error);
     }
   };
 
@@ -124,14 +143,41 @@ export default function BannersPage() {
     {
       key: "isHidden",
       label: dict.common.status,
-      render: (item) => item.isHidden 
-        ? <span className="text-red-500 font-semibold text-sm">{dict.common.hidden}</span> 
-        : <span className="text-green-500 font-semibold text-sm">{dict.common.visible}</span>
+      render: (item) => (
+        <button
+          onClick={() => handleToggleVisibility(item.id, item.isHidden)}
+          className={`px-2.5 py-1 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer shadow-sm hover:scale-105 active:scale-95 flex items-center gap-1 ${
+            item.isHidden 
+              ? "bg-red-50 text-red-600 border border-red-200 hover:bg-red-100/70" 
+              : "bg-green-50 text-green-600 border border-green-200 hover:bg-green-100/70"
+          }`}
+          title={item.isHidden ? t("تغيير إلى ظاهر", "Change to Visible") : t("تغيير إلى مخفي", "Change to Hidden")}
+        >
+          {item.isHidden ? (
+            <><EyeOff className="w-3.5 h-3.5" /> {dict.common.hidden}</>
+          ) : (
+            <><Eye className="w-3.5 h-3.5" /> {dict.common.visible}</>
+          )}
+        </button>
+      )
     }
   ];
 
   return (
     <div className="space-y-6">
+      <AdminPageInfo 
+        titleAr="إدارة البانرات (Main Banners)" 
+        titleEn="Main Banners"
+        descriptionAr="إضافة وإدارة صور وفيديوهات السلايدر الرئيسي في الصفحة الرئيسية للموقع." 
+        descriptionEn="Add and manage main slider images and videos on the homepage."
+        prereq1Ar="يمكنك رفع صور أو وضع روابط فيديوهات لتعمل كبانر رئيسي." 
+        prereq1En="Upload slider graphics or embed promo videos."
+        prereq2Ar="خطوة اختيارية: يمكنك التعديل عليها في أي وقت ولا تعتمد على جداول أخرى." 
+        prereq2En="Optional step: Works independently, update anytime."
+      />
+
+      
+
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">{dict.sidebar.banners}</h1>
@@ -162,6 +208,13 @@ export default function BannersPage() {
           searchPlaceholder={dict.common.search}
           actions={(item) => (
             <>
+              <button 
+                onClick={() => handleToggleVisibility(item.id, item.isHidden)}
+                className={`p-2 rounded-lg transition-colors flex items-center gap-1 text-xs font-bold ${item.isHidden ? 'text-green-600 hover:bg-green-50' : 'text-orange-600 hover:bg-orange-50'}`}
+                title={item.isHidden ? t("إظهار", "Show") : t("إخفاء", "Hide")}
+              >
+                {item.isHidden ? t("إظهار", "Show") : t("إخفاء", "Hide")}
+              </button>
               <button 
                 onClick={() => {
                   setEditingBanner(item);
@@ -258,6 +311,21 @@ export default function BannersPage() {
                   <h4 className="font-bold text-orouba-blue border-b pb-2">{t("روابط الفيديو (YouTube, Vimeo, MP4)", "Video Links (YouTube, Vimeo, MP4)")}</h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1">{t("رفع فيديو أساسي - عربي", "Upload Main Video - Arabic")}</label>
+                      <input type="file" name="videoFile" accept="video/*" className="w-full text-sm border border-gray-200 rounded-lg p-1" />
+                      {editingBanner?.videoLink && <div className="mt-2 text-xs text-green-600">{t("يوجد فيديو حالي (مرفوع أو رابط)", "Current video exists (uploaded or link)")}</div>}
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1">{t("رفع فيديو أساسي - إنجليزي", "Upload Main Video - English")}</label>
+                      <input type="file" name="videoFileEn" accept="video/*" className="w-full text-sm border border-gray-200 rounded-lg p-1" />
+                      {editingBanner?.videoLinkEn && <div className="mt-2 text-xs text-green-600">{t("يوجد فيديو حالي (مرفوع أو رابط)", "Current video exists (uploaded or link)")}</div>}
+                    </div>
+                  </div>
+                  
+                  <div className="text-center text-sm font-bold text-gray-500 my-2">{t("أو أدخل رابطاً مباشراً", "OR Enter direct link")}</div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-1">{t("رابط الفيديو الأساسي - عربي", "Main Video Link - Arabic")}</label>
                       <input type="url" name="videoLink" defaultValue={editingBanner?.videoLink || ""} dir="ltr" className="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none" />
                     </div>
@@ -267,6 +335,19 @@ export default function BannersPage() {
                     </div>
                   </div>
                   
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1">{t("رفع فيديو موبايل - عربي (اختياري)", "Upload Mobile Video - Arabic (Optional)")}</label>
+                      <input type="file" name="smallVideoFile" accept="video/*" className="w-full text-sm border border-gray-200 rounded-lg p-1" />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1">{t("رفع فيديو موبايل - إنجليزي (اختياري)", "Upload Mobile Video - English (Optional)")}</label>
+                      <input type="file" name="smallVideoFileEn" accept="video/*" className="w-full text-sm border border-gray-200 rounded-lg p-1" />
+                    </div>
+                  </div>
+
+                  <div className="text-center text-sm font-bold text-gray-500 my-2">{t("أو أدخل رابطاً مباشراً", "OR Enter direct link")}</div>
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-1">{t("رابط فيديو الموبايل - عربي (اختياري)", "Mobile Video Link - Arabic (Optional)")}</label>

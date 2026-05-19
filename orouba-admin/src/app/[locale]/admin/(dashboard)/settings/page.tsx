@@ -1,4 +1,6 @@
 "use client";
+import AdminPageInfo from "@/components/admin/AdminPageInfo";
+
 
 import { useState, useEffect } from "react";
 import { Save, Plus, Trash2 } from "lucide-react";
@@ -25,7 +27,43 @@ export default function SettingsPage() {
     setIsLoading(true);
     try {
       const res = await fetch("/api/admin/settings");
-      if (res.ok) setSettings(await res.json());
+      if (res.ok) {
+        const loaded: SiteSetting[] = await res.json();
+        
+        // Define standard default settings keys that are either active or needed by the frontend
+        const defaultKeysToEnsure = [
+          { key: "site_title", desc: t("عنوان الموقع", "Site Title"), valAr: "العروبة للأغذية", valEn: "Orouba Foods" },
+          { key: "site_description", desc: t("وصف الموقع لمحركات البحث", "Site Description"), valAr: "شركة رائدة في صناعة الغذاء", valEn: "Leading food industry company" },
+          { key: "about_text", desc: t("نص من نحن المختصر", "Short About Text"), valAr: "العروبة لصناعة الغذاء هي إحدى الشركات الرائدة...", valEn: "Orouba for Food Industry is one of the leading..." },
+          { key: "phone", desc: t("رقم الهاتف الأساسي", "Primary Phone"), valAr: "202 44890220", valEn: "202 44890220" },
+          { key: "phone_2", desc: t("رقم الهاتف البديل", "Alternate Phone"), valAr: "202 44890227", valEn: "202 44890227" },
+          { key: "email", desc: t("البريد الإلكتروني للدعم", "Support Email"), valAr: "info@oroubafoods.com", valEn: "info@oroubafoods.com" },
+          { key: "address", desc: t("العنوان الرئيسي", "Main Address"), valAr: "مدينة العاشر من رمضان، مصر", valEn: "10th of Ramadan City, Egypt" },
+          { key: "facebook_url", desc: t("رابط فيسبوك", "Facebook URL"), valAr: "", valEn: "" },
+          { key: "instagram_url", desc: t("رابط إنستجرام", "Instagram URL"), valAr: "", valEn: "" },
+          { key: "linkedin_url", desc: t("رابط لينكد إن", "LinkedIn URL"), valAr: "", valEn: "" },
+          { key: "whatsapp_number", desc: t("رقم واتساب", "WhatsApp Number"), valAr: "", valEn: "" },
+        ];
+
+        const merged = [...loaded];
+        defaultKeysToEnsure.forEach(dk => {
+          if (!merged.some(s => s.key === dk.key)) {
+            merged.push({
+              key: dk.key,
+              valueAr: dk.valAr,
+              valueEn: dk.valEn,
+              description: dk.desc
+            });
+          } else {
+            const existing = merged.find(s => s.key === dk.key);
+            if (existing && !existing.description) {
+              existing.description = dk.desc;
+            }
+          }
+        });
+
+        setSettings(merged);
+      }
     } catch (error) {
       console.error("Failed to fetch", error);
     } finally {
@@ -90,6 +128,19 @@ export default function SettingsPage() {
 
   return (
     <div className="space-y-6">
+      <AdminPageInfo 
+        titleAr="إعدادات الموقع (Site Settings)" 
+        titleEn="Global Site Settings"
+        descriptionAr="إدارة الإعدادات العامة للموقع مثل بيانات التواصل وروابط السوشيال ميديا." 
+        descriptionEn="Configure contact profiles, email alerts, social media links, and logos."
+        prereq1Ar="يفضل تعبئة هذا القسم في أول استخدام للوحة التحكم لضمان عمل أرقام التواصل في الموقع." 
+        prereq1En="Highly recommended to fill this out first so floating contacts function properly."
+        prereq2Ar="يؤثر هذا القسم على الفوتر (Footer) والتواصل السريع." 
+        prereq2En="Binds footer navigation details, emails, and phone hotlines."
+      />
+
+      
+
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">{dict.sidebar.settings}</h1>

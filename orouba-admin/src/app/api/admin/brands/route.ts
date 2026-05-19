@@ -31,8 +31,12 @@ export async function POST(req: Request) {
     const brandTextEn = formData.get("brandTextEn") as string || null;
     const colorBrand = formData.get("colorBrand") as string || "#ffffff";
     const colorHover = formData.get("colorHover") as string || "#eeeeee";
+    const number = parseInt(formData.get("number") as string || "999", 10);
+    const isHidden = formData.get("isHidden") === "on";
     const imageFile = formData.get("image") as File | null;
     const imageMainFile = formData.get("imageMain") as File | null;
+    const videoFile = formData.get("videoFile") as File | null;
+    const videoFileEn = formData.get("videoFileEn") as File | null;
 
     if (!nameAr || !nameEn) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
@@ -50,6 +54,18 @@ export async function POST(req: Request) {
       imageMainUrl = await uploadFile(buffer, imageMainFile.name, "brands");
     }
 
+    let videoUrl = null;
+    if (videoFile && videoFile.size > 0) {
+      const buffer = Buffer.from(await videoFile.arrayBuffer());
+      videoUrl = await uploadFile(buffer, videoFile.name, "brands");
+    }
+
+    let videoUrlEn = null;
+    if (videoFileEn && videoFileEn.size > 0) {
+      const buffer = Buffer.from(await videoFileEn.arrayBuffer());
+      videoUrlEn = await uploadFile(buffer, videoFileEn.name, "brands");
+    }
+
     const brand = await prisma.brand.create({
       data: {
         nameAr,
@@ -60,8 +76,12 @@ export async function POST(req: Request) {
         brandTextEn,
         colorBrand,
         colorHover,
+        number,
+        isHidden,
         image: imageUrl,
         imageMain: imageMainUrl,
+        videoUrl,
+        videoUrlEn,
       },
     });
 

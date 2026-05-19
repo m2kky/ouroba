@@ -28,10 +28,10 @@ export async function POST(req: Request) {
     const type = formData.get("type") as "image" | "video";
     const isHidden = formData.get("isHidden") === "true";
 
-    const videoLink = formData.get("videoLink") as string || null;
-    const videoLinkEn = formData.get("videoLinkEn") as string || null;
-    const smallVideo = formData.get("smallVideo") as string || null;
-    const smallVideoEn = formData.get("smallVideoEn") as string || null;
+    let videoLink = formData.get("videoLink") as string || null;
+    let videoLinkEn = formData.get("videoLinkEn") as string || null;
+    let smallVideo = formData.get("smallVideo") as string || null;
+    let smallVideoEn = formData.get("smallVideoEn") as string || null;
 
     if (!titleAr || !titleEn) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
@@ -50,6 +50,18 @@ export async function POST(req: Request) {
     const imageEn = await processUpload("imageEn");
     const smallImg = await processUpload("smallImg");
     const smallImgEn = await processUpload("smallImgEn");
+
+    const uploadedVideoLink = await processUpload("videoFile");
+    if (uploadedVideoLink) videoLink = uploadedVideoLink;
+
+    const uploadedVideoLinkEn = await processUpload("videoFileEn");
+    if (uploadedVideoLinkEn) videoLinkEn = uploadedVideoLinkEn;
+
+    const uploadedSmallVideo = await processUpload("smallVideoFile");
+    if (uploadedSmallVideo) smallVideo = uploadedSmallVideo;
+
+    const uploadedSmallVideoEn = await processUpload("smallVideoFileEn");
+    if (uploadedSmallVideoEn) smallVideoEn = uploadedSmallVideoEn;
 
     const banner = await prisma.banner.create({
       data: {

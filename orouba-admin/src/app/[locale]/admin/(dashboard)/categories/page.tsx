@@ -1,8 +1,10 @@
 "use client";
+import AdminPageInfo from "@/components/admin/AdminPageInfo";
+
 
 import { useState, useEffect } from "react";
 import DataTable, { Column } from "@/components/admin/DataTable";
-import { Trash2, Edit, Plus, Image as ImageIcon } from "lucide-react";
+import { Trash2, Edit, Plus, Image as ImageIcon, Eye, EyeOff } from "lucide-react";
 import Image from "next/image";
 import { useAdminTranslation } from "@/components/admin/AdminTranslationProvider";
 
@@ -72,6 +74,23 @@ export default function CategoriesPage() {
     }
   };
 
+  const handleToggleVisibility = async (id: string, currentStatus: boolean) => {
+    try {
+      const res = await fetch('/api/admin/toggle-visibility', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ model: 'category', id, isHidden: !currentStatus })
+      });
+      if (res.ok) {
+        fetchData();
+      } else {
+        alert(dict.common.error);
+      }
+    } catch (error) {
+      console.error("Failed to toggle visibility", error);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSaving(true);
@@ -130,14 +149,41 @@ export default function CategoriesPage() {
     {
       key: "isHidden",
       label: dict.common.status,
-      render: (item) => item.isHidden 
-        ? <span className="text-red-500 font-semibold text-sm">{dict.common.hidden}</span> 
-        : <span className="text-green-500 font-semibold text-sm">{dict.common.visible}</span>
+      render: (item) => (
+        <button
+          onClick={() => handleToggleVisibility(item.id, item.isHidden)}
+          className={`px-2.5 py-1 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer shadow-sm hover:scale-105 active:scale-95 flex items-center gap-1 ${
+            item.isHidden 
+              ? "bg-red-50 text-red-600 border border-red-200 hover:bg-red-100/70" 
+              : "bg-green-50 text-green-600 border border-green-200 hover:bg-green-100/70"
+          }`}
+          title={item.isHidden ? t("تغيير إلى ظاهر", "Change to Visible") : t("تغيير إلى مخفي", "Change to Hidden")}
+        >
+          {item.isHidden ? (
+            <><EyeOff className="w-3.5 h-3.5" /> {dict.common.hidden}</>
+          ) : (
+            <><Eye className="w-3.5 h-3.5" /> {dict.common.visible}</>
+          )}
+        </button>
+      )
     }
   ];
 
   return (
     <div className="space-y-6">
+      <AdminPageInfo 
+        titleAr="إدارة الأقسام (Categories)" 
+        titleEn="Categories"
+        descriptionAr="إنشاء الأقسام الرئيسية للمنتجات (مثل: توابل، بقوليات، إلخ)." 
+        descriptionEn="Configure main product categories (e.g., Spices, Legumes, Oils)."
+        prereq1Ar="تعتبر هذه خطوة أساسية ومبكرة جداً في النظام." 
+        prereq1En="Fundamental taxonomy step required early in setup."
+        prereq2Ar="خطوة مطلوبة أولاً: يجب إضافة الأقسام هنا قبل البدء في إضافة 'المنتجات' لتتمكن من تصنيفها." 
+        prereq2En="⚠️ Required first: Configure Categories here before adding Products to allow correct routing."
+      />
+
+      
+
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">{dict.sidebar.categories}</h1>
@@ -167,6 +213,13 @@ export default function CategoriesPage() {
           searchPlaceholder={dict.common.search}
           actions={(item) => (
             <>
+              <button 
+                onClick={() => handleToggleVisibility(item.id, item.isHidden)}
+                className={`p-2 rounded-lg transition-colors flex items-center gap-1 text-xs font-bold ${item.isHidden ? 'text-green-600 hover:bg-green-50' : 'text-orange-600 hover:bg-orange-50'}`}
+                title={item.isHidden ? t("إظهار", "Show") : t("إخفاء", "Hide")}
+              >
+                {item.isHidden ? t("إظهار", "Show") : t("إخفاء", "Hide")}
+              </button>
               <button 
                 onClick={() => {
                   setEditingCategory(item);
