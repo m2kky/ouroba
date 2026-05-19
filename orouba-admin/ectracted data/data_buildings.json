@@ -1,26 +1,26 @@
 [
   {
-    "id": "",
+    "id": "1",
     "image": "https://camp-coding.site/eloroba/storage/app/images/8i67NCFvZYWRKodPyfmWsvSSSyy4LDjV2ODGurIS.png",
     "title_ar": "مبنى أ",
     "title_en": "building A",
     "description_ar": "مبنى إداري يتكون من ثلاثة طوابق ليستضيف كافة أقسام المصنع.",
     "description_en": "Administrative building comprising three floors to host all the factory departments.",
-    "hidden": "",
+    "hidden": "0",
     "created_at": "2024-05-20 13:51:42",
     "updated_at": "2024-07-16 17:08:50",
-    "image_en": ""
+    "image_en": null
   },
   {
-    "id": "",
+    "id": "2",
     "image": "https://camp-coding.site/eloroba/storage/app/images/8JqKWNdDhrMk9kXaClFvz9fXGTuokbvvj2R3qShZ.png",
     "title_ar": "مبنى ب",
     "title_en": "building B",
     "description_ar": "مبنى المصنع مكون من طابقين، الدور الأرضي لاستقبال تجهيز المواد الخام. مجموعة من السيور ومضخات الرفع لرفع المواد الخام إلى الطابق التالي لتصنيعها.",
     "description_en": "Factory building comprising two floors The ground floor for raw materials receiving and preparation. group of belts and lift pumps uplifts the raw materials to the following floor for processing..",
-    "hidden": "",
+    "hidden": "0",
     "created_at": "2024-05-20 13:53:20",
     "updated_at": "2024-07-16 17:09:22",
-    "image_en": ""
+    "image_en": null
   }
 ]

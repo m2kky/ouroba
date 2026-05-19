@@ -65,7 +65,7 @@ def parse_sql(filename):
                 
     return tables
 
-tables = parse_sql(r'..\campcod3_eloroba.sql')
+tables = parse_sql(r'fresh_dump_utf8.sql')
 
 # Clean out old data if user asks for specific tables
 target_tables = [

@@ -44,6 +44,8 @@ def extract_table(filename, table_name):
                     current_char = []
                 elif c == "'":
                     in_string = True
+                else:
+                    current_char.append(c)
             else:
                 if escape:
                     current_char.append(c)
@@ -74,11 +76,24 @@ def extract_table(filename, table_name):
                 res.append(cleaned_row)
     return res
 
-filename = r'..\campcod3_eloroba.sql'
-for t in ['recipe_foods', 'food_cooks']:
+filename = r'D:\Codes_Projects\oruba rep\campcod3_eloroba.sql'
+import os
+out_dir = 'ectracted data'
+os.makedirs(out_dir, exist_ok=True)
+
+target_tables = [
+    'brands', 'types', 'products', 'recipes', 'category_types', 'banners',
+    'certifications', 'standers', 'values', 'why_chooses', 'buildings',
+    'features', 'continents', 'collaborates', 'joins', 'contacts',
+    'site_infos', 'socials', 'production_steps', 'section_texts',
+    'product_images', 'categories', 'category_products', 'cooks', 'food', 
+    'food_steps', 'cook_props', 'cook_images', 'food_cooks', 'category_type_categories', 'social_parents', 'contiries'
+]
+
+for t in target_tables:
     data = extract_table(filename, t)
     if data:
-        with open(f'data_{t}.json', 'w', encoding='utf-8') as f:
+        with open(os.path.join(out_dir, f'data_{t}.json'), 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
         print(f"Extracted {len(data)} rows for {t}")
     else:

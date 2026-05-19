@@ -1,34 +1,34 @@
 [
   {
-    "id": "",
+    "id": "3",
     "title_ar": "هدفنا",
     "title_en": "Our Purpose",
     "text_ar": "<p class=\\\"ql-direction-rtl ql-align-justify\\\">إيمانا منا بأن الطعام وسيلة لجمع الناس معا، نقدم مجموعة كبيرة ومتنوعة من المنتجات الطازجة المجمدة من خضروات وفواكة وبقوليات وحبوب وفلافل ومقبلات لذيذة تجعل تجربة إعداد الطعام سهلة، سريعة و ممتعة. نحن نبتكردائما لتقديم خيارات جديدة مختلفة من مكونات بسيطة وطبيعية بالكامل.&nbsp; هدفنا هو نشر البهجة والمتعة مع كل وجبة ومساعدتك على مشاركة &nbsp;سحر الطعام مع أحبائك.</p>",
     "text_en": "<p>We believe food brings people together. That’s why we offer a wide range of delicious frozen products, from fresh veggies, fruits, and beans to flavorful falafel and appetizers. We\\'re always innovating to offer exciting new choices made with simple, all-natural ingredients. We make in-the- kitchen experiences easy, quick and fun for everyone. Our aim is to inspire joyful mealtimes and help you share the magic of food with your loved ones.</p>",
-    "hidden": "",
-    "number": "",
+    "hidden": "0",
+    "number": "2",
     "created_at": "2024-06-04 15:02:36",
     "updated_at": "2024-07-16 16:01:41"
   },
   {
-    "id": "",
+    "id": "4",
     "title_ar": "مصنعنا",
     "title_en": "Our Factory",
     "text_ar": "<p class=\\\"ql-align-right ql-direction-rtl\\\">تم إنشاء المصنع على مساحة إجمالية تبلغ <span style=\\\"color: rgb(33, 37, 41);\\\">20,000 </span>&nbsp;متر مربع في المنطقة الصناعية الأولى - مدينة العبور الصناعية، ويتكون المصنع من المرافق التالية:</p>",
     "text_en": "<p>Constructed over an area of 20,000 square meters in the first industrial zone - El- Obour industrial city the factory consists of the following facilities:</p>",
-    "hidden": "",
-    "number": "",
+    "hidden": "0",
+    "number": "3",
     "created_at": "2024-06-04 15:16:33",
     "updated_at": "2024-07-16 16:02:39"
   },
   {
-    "id": "",
+    "id": "5",
     "title_ar": "من نحن",
     "title_en": "About Us",
     "text_ar": "<p class=\\\"ql-direction-rtl ql-align-right\\\">منذ أن بدأنا سنة 1998 وحتى الآن، تعتبر منتجات العروبة الطبيعية والصحية عالية الجودة من أهم العناصر الأساسية والمفضلة في المطبخ المصري. إبتكاراتنا المستمرة تلهم الابداع فى الطهى حول العالم. شغفنا بالطعام وإيماننا بأنه وسيلة لجمع الأسرة والأصدقاء، جعلنا نحرص دائماً على تحويل الوجبات اليومية إلى تجارب ممتعة ونشر السعادة مع كل مذاق&nbsp; لذيذ. شاركنا في بث السعادة في مطبخك.</p>",
     "text_en": "<p>At Orouba, we\\'re all about turning everyday meals into delightful experiences. Since 1998, we\\'ve been a beloved staple in Egyptian kitchens, cherished for our premium-quality, nutritious, and all-natural frozen food products. Our passion for food and commitment to quality inspires creativity in kitchens everywhere, bringing people together and spreading happiness with every delicious bite. Join us in making every meal a special memory.</p>",
-    "hidden": "",
-    "number": "",
+    "hidden": "0",
+    "number": "1",
     "created_at": "2024-06-04 15:22:26",
     "updated_at": "2024-08-01 11:21:03"
   }

@@ -1,11 +1,29 @@
 [
   {
-    "id": "",
+    "id": "1",
     "image": "https://camp-coding.site/eloroba/storage/app/images/3nq19YDPThQSGLb0sOWTIA8uuDqf1ZT5ac9UmVPn.png",
     "description_ar": "جميع المنتجات خالية من أي مواد حافظة أو مواد كيماوية",
     "description_en": "All products are free from any preservatives or chemical substances",
-    "hidden": "",
+    "hidden": "0",
     "created_at": "2024-05-15 19:11:05",
     "updated_at": "2024-07-16 15:46:45"
+  },
+  {
+    "id": "2",
+    "image": "https://camp-coding.site/eloroba/storage/app/images/MEOFLDVy7A38ucOwWmYJQizRa4M6R34dRZIv7Wy9.png",
+    "description_ar": "تخضع جميع المنتجات لعملية انتقاء وتحليل; حيث يتم اختيار أفضل المنتجات الطازجة وعالية الجودة فقط",
+    "description_en": "All products undergo a selection, analysis process to choose the best and high-quality fresh produce only",
+    "hidden": "0",
+    "created_at": "2024-05-15 19:12:10",
+    "updated_at": "2024-07-16 15:47:12"
+  },
+  {
+    "id": "3",
+    "image": "https://camp-coding.site/eloroba/storage/app/images/cPJEb5JaiuY0RT3yxSS1O3i7Bvr5EGMf7xER1WBy.png",
+    "description_ar": "يتم تجميد المنتجات اثناء التصنيع على انفاق تجميد سريعة IQF\\nتخزن المنتجات فى غرف التجميد عند (-18 درجة مئوية) صفر فهرنهايت.",
+    "description_en": "Quick freezing through IQF tunnels. \\nDeep –freeze compartment or freezer at (-18 C)  0 F.",
+    "hidden": "0",
+    "created_at": "2024-05-15 19:13:16",
+    "updated_at": "2024-08-08 15:54:03"
   }
 ]

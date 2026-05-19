@@ -1,138 +1,522 @@
 [
   {
-    "id": "",
+    "id": "12",
     "step_ar": "Add the chicken broth and bouillon to a large pot. Heat on high until boiling",
     "step_en": "Add the chicken broth and bouillon to a large pot. Heat on high until boiling",
-    "cook_id": "",
+    "cook_id": "15",
     "created_at": "2024-05-23 01:18:35",
     "updated_at": "2024-05-23 01:18:35"
   },
   {
-    "id": "",
+    "id": "13",
     "step_ar": "Mix and allow the leaves to melt completely and come to a boil again",
     "step_en": "Mix and allow the leaves to melt completely and come to a boil again",
-    "cook_id": "",
+    "cook_id": "15",
     "created_at": "2024-05-23 01:18:45",
     "updated_at": "2024-05-23 01:18:45"
   },
   {
-    "id": "",
+    "id": "14",
     "step_ar": "In a small frying pan, melt the butter on medium heat\\n",
     "step_en": "In a small frying pan, melt the butter on medium heat",
-    "cook_id": "",
+    "cook_id": "15",
     "created_at": "2024-05-23 01:18:56",
     "updated_at": "2024-05-23 01:18:56"
   },
   {
-    "id": "",
+    "id": "15",
     "step_ar": "Add the minced garlic, salt and pepper. Fry the garlic in the butter for about 2-3 minutes until lightly browned",
     "step_en": "Add the minced garlic, salt and pepper. Fry the garlic in the butter for about 2-3 minutes until lightly browned",
-    "cook_id": "",
+    "cook_id": "15",
     "created_at": "2024-05-23 01:19:08",
     "updated_at": "2024-05-23 01:19:08"
   },
   {
-    "id": "",
+    "id": "16",
     "step_ar": "Pour the garlic mixture into the pot with the molokhia",
     "step_en": "Pour the garlic mixture into the pot with the molokhia",
-    "cook_id": "",
+    "cook_id": "15",
     "created_at": "2024-05-23 01:19:17",
     "updated_at": "2024-05-23 01:19:17"
   },
   {
-    "id": "",
+    "id": "17",
     "step_ar": "Mix well and let the molokhia boil for another 2-3 minutes before turning off heat",
     "step_en": "Mix well and let the molokhia boil for another 2-3 minutes before turning off heat",
-    "cook_id": "",
+    "cook_id": "15",
     "created_at": "2024-05-23 01:19:28",
     "updated_at": "2024-05-23 01:19:28"
   },
   {
-    "id": "",
+    "id": "18",
     "step_ar": "Serve with rice and chicken. Enjoy!",
     "step_en": "Serve with rice and chicken. Enjoy!",
-    "cook_id": "",
+    "cook_id": "15",
     "created_at": "2024-05-23 01:19:38",
     "updated_at": "2024-05-23 01:19:38"
   },
   {
-    "id": "",
+    "id": "19",
     "step_ar": "Add the chicken broth and bouillon to a large pot. Heat on high until boiling",
     "step_en": "Add the chicken broth and bouillon to a large pot. Heat on high until boiling",
-    "cook_id": "",
+    "cook_id": "16",
     "created_at": "2024-05-23 01:20:20",
     "updated_at": "2024-05-23 01:20:20"
   },
   {
-    "id": "",
+    "id": "20",
     "step_ar": "Add the frozen molokhia leaves to the boiling pot",
     "step_en": "Add the frozen molokhia leaves to the boiling pot",
-    "cook_id": "",
+    "cook_id": "16",
     "created_at": "2024-05-23 01:20:29",
     "updated_at": "2024-05-23 01:20:29"
   },
   {
-    "id": "",
+    "id": "21",
     "step_ar": "Mix and allow the leaves to melt completely and come to a boil again",
     "step_en": "Mix and allow the leaves to melt completely and come to a boil again",
-    "cook_id": "",
+    "cook_id": "16",
     "created_at": "2024-05-23 01:20:41",
     "updated_at": "2024-05-23 01:20:41"
   },
   {
-    "id": "",
+    "id": "22",
     "step_ar": "In a small frying pan, melt the butter on medium heat",
     "step_en": "In a small frying pan, melt the butter on medium heat",
-    "cook_id": "",
+    "cook_id": "16",
     "created_at": "2024-05-23 01:20:51",
     "updated_at": "2024-05-23 01:20:51"
   },
   {
-    "id": "",
+    "id": "23",
     "step_ar": "Add the minced garlic, salt and pepper. Fry the garlic in the butter for about 2-3 minutes until lightly browned",
     "step_en": "Add the minced garlic, salt and pepper. Fry the garlic in the butter for about 2-3 minutes until lightly browned",
-    "cook_id": "",
+    "cook_id": "16",
     "created_at": "2024-05-23 01:21:05",
     "updated_at": "2024-05-23 01:21:05"
   },
   {
-    "id": "",
+    "id": "24",
     "step_ar": "Pour the garlic mixture into the pot with the molokhia",
     "step_en": "Pour the garlic mixture into the pot with the molokhia",
-    "cook_id": "",
+    "cook_id": "16",
     "created_at": "2024-05-23 01:21:17",
     "updated_at": "2024-05-23 01:21:17"
   },
   {
-    "id": "",
+    "id": "25",
     "step_ar": "Mix well and let the molokhia boil for another 2-3 minutes before turning off heat",
     "step_en": "Mix well and let the molokhia boil for another 2-3 minutes before turning off heat",
-    "cook_id": "",
+    "cook_id": "16",
     "created_at": "2024-05-23 01:21:27",
     "updated_at": "2024-05-23 01:21:27"
   },
   {
-    "id": "",
+    "id": "26",
     "step_ar": "Serve with rice and chicken. Enjoy!",
     "step_en": "Serve with rice and chicken. Enjoy!",
-    "cook_id": "",
+    "cook_id": "16",
     "created_at": "2024-05-23 01:21:37",
     "updated_at": "2024-05-23 01:21:37"
   },
   {
-    "id": "",
+    "id": "27",
     "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كيس بروكلي مجمد</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة كبيرة زبدة</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة كبيرة زيت نباتي</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 مكعب ثوم مفروم مجمد</li><li class=\\\"ql-align-right ql-direction-rtl\\\">4 أكواب من المرق/ الشوربة</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كوب كريمة الطبخ</li><li class=\\\"ql-align-right ql-direction-rtl\\\">ملح الطعام وفلفل أسود</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة كبيرة كركم</li></ul>",
     "step_en": "<ul><li>1 pack of frozen Broccoli</li><li>1 table spoons of butter</li><li>1 table spoon of vegetables oil</li><li>1 frozen minced garlic cubes</li><li>4 cups of Broth</li><li>1 cup of cooking cream</li><li>Table salt and pepper</li><li>1 table spoons of turmeric</li></ul>",
-    "cook_id": "",
+    "cook_id": "17",
     "created_at": "2024-05-23 14:21:15",
     "updated_at": "2024-07-21 17:48:59"
   },
   {
-    "id": "",
+    "id": "28",
     "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كيس خرشوف مجمد</li><li class=\\\"ql-align-right ql-direction-rtl\\\">2/1 كيس بصل مبشور مجمد</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة كبيرة زبدة</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة كبيرة زيت نباتي</li><li class=\\\"ql-align-right ql-direction-rtl\\\">2 ملعقة كبيرة من الدقيق</li><li class=\\\"ql-align-right ql-direction-rtl\\\">2 ملعقة كبيرة عصير ليمون</li><li class=\\\"ql-align-right ql-direction-rtl\\\">4 أكواب مرقة/ شوربة</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كوب كريمة طهى</li><li class=\\\"ql-align-right ql-direction-rtl\\\">ملح</li><li class=\\\"ql-align-right ql-direction-rtl\\\">فلفل أسود</li></ul>",
     "step_en": "<ul><li>1 pack of frozen artichoke</li><li>½ pack of frozen grated onion</li><li>1 table spoons of butter</li><li>1 table spoon of vegetable oil</li><li>2 table spoons of flour</li><li>2 table spoons of lemon juice</li><li>4 cups of broth</li><li>1 cup of cooking cream</li><li>Salt</li><li>Pepper</li></ul>",
-    "cook_id": "",
+    "cook_id": "9",
     "created_at": "2024-05-23 14:29:31",
     "updated_at": "2024-08-06 16:27:32"
+  },
+  {
+    "id": "29",
+    "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كيس خضروات مشكلة مجمدة لشوربة الخضار </li><li class=\\\"ql-align-right ql-direction-rtl\\\">معلقة كبيرة زيت نباتى</li><li class=\\\"ql-align-right ql-direction-rtl\\\">2/1 كيس بصل مبشور مجمد</li><li class=\\\"ql-align-right ql-direction-rtl\\\">4 كوب مرقة/ شوربة&nbsp; </li><li class=\\\"ql-align-right ql-direction-rtl\\\">ملح وفلقل حسب الرغبة</li></ul>",
+    "step_en": "<ul><li>1 pack of Frozen mixed vegetables for soup</li><li>1 tablespoon of oil</li><li>½ pack of frozen grated onion </li><li>4 cups of broth </li><li>Table salt and pepper as desired</li></ul>",
+    "cook_id": "10",
+    "created_at": "2024-05-23 14:36:32",
+    "updated_at": "2024-08-06 16:28:51"
+  },
+  {
+    "id": "30",
+    "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كيس خضروات مشكلة لشوربة الخضار مجمد </li><li class=\\\"ql-align-right ql-direction-rtl\\\">2 معلقة كبيرة زبدة</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة كبيرة زيت</li><li class=\\\"ql-align-right ql-direction-rtl\\\">2/1 كيس بصل مفروم مجمد</li><li class=\\\"ql-align-right ql-direction-rtl\\\">4 أكواب مرق / شوربة</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كوب كريمة الطهى</li><li class=\\\"ql-align-right ql-direction-rtl\\\">ملح طعام وفلفل أسود حسب الرغبة</li></ul>",
+    "step_en": "<ul><li>1 pack of Frozen mixed vegetables for soup</li><li>2 table spoons of butter</li><li>1 table spoon of oil</li><li>½ pack of frozen grated onion </li><li>4 cups of broth </li><li>1 cup of cooking cream</li><li>Table salt and pepper as desire</li></ul>",
+    "cook_id": "11",
+    "created_at": "2024-05-23 14:51:42",
+    "updated_at": "2024-08-07 16:04:52"
+  },
+  {
+    "id": "31",
+    "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\">كيس قرنبيط نصف مقلى مجمد </li></ul>",
+    "step_en": "<ul><li>1 pack of frozen pre-fried cauliflower</li></ul>",
+    "cook_id": "19",
+    "created_at": "2024-05-23 16:52:21",
+    "updated_at": "2024-06-06 12:31:40"
+  },
+  {
+    "id": "32",
+    "step_ar": "المكونات\\nكيس فلافل حمص حارة باببيتس",
+    "step_en": "Ingredients:\\n1 pack of frozen pre-fried spicy chickpeas falafel",
+    "cook_id": "23",
+    "created_at": "2024-05-24 14:50:48",
+    "updated_at": "2024-05-24 15:27:52"
+  },
+  {
+    "id": "33",
+    "step_ar": "<p class=\\\"ql-direction-rtl ql-align-right\\\"><br></p><p class=\\\"ql-direction-rtl ql-align-right\\\"><br></p><ul><li class=\\\"ql-direction-rtl ql-align-right\\\">1 كيس بطاطس بالسبانخ ستريبس نصف مقلية مجمدة&nbsp;</li></ul>",
+    "step_en": "<ul><li>1 pack of frozen pre-fried potato &amp; spinach strips</li></ul>",
+    "cook_id": "26",
+    "created_at": "2024-05-24 18:40:16",
+    "updated_at": "2024-07-21 18:10:30"
+  },
+  {
+    "id": "34",
+    "step_ar": "<ul><li class=\\\"ql-direction-rtl ql-align-right\\\">1 كيس ذرة سكرية  (حبوب) مجمدة</li><li class=\\\"ql-direction-rtl ql-align-right\\\">4/1 ملعقة صغيرة من الملح</li><li class=\\\"ql-direction-rtl ql-align-right\\\">4/1 ملعقة صغيرة من الفلفل الأسود</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 ملعقة كبيرة عصير ليمون</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 ملعقة كبيرة زبدة</li></ul>",
+    "step_en": "<ul><li><span style=\\\"color: rgb(5, 5, 5);\\\">1 pack of frozen sweet corn</span></li><li><span style=\\\"color: rgb(5, 5, 5);\\\">¼ teaspoon of salt</span></li><li><span style=\\\"color: rgb(5, 5, 5);\\\">¼ teaspoon of pepper</span></li><li><span style=\\\"color: rgb(5, 5, 5);\\\">1 table spoon of lemon juice</span></li><li><span style=\\\"color: rgb(5, 5, 5);\\\">1 table spoon of butter</span></li></ul>",
+    "cook_id": "30",
+    "created_at": "2024-05-24 19:10:57",
+    "updated_at": "2024-08-06 16:43:48"
+  },
+  {
+    "id": "56",
+    "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كيس سبانخ مقطعة مجمدة</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 علبة مشروم أو 1 طبق مشروم طازج (مغسول ومقطع).</li><li class=\\\"ql-align-right ql-direction-rtl\\\">3 ملاعق كبيرة من الزبدة</li><li class=\\\"ql-align-right ql-direction-rtl\\\">2 ملعقة كبيرة زيت نباتي</li><li class=\\\"ql-align-right ql-direction-rtl\\\">2 ملعقة كبيرة دقيق لجميع الأغراض</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كوب مرق / شوربة</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كوب من اللبن</li><li class=\\\"ql-align-right ql-direction-rtl\\\">ملح</li><li class=\\\"ql-align-right ql-direction-rtl\\\">فلفل أسود</li><li class=\\\"ql-align-right ql-direction-rtl\\\">كريمة طهى</li><li class=\\\"ql-align-right ql-direction-rtl\\\">4/3 كوب من جبنة الموزاريلا المبشورة</li><li class=\\\"ql-align-right ql-direction-rtl\\\">4/1 كوب جبنة شيدر مبشورة</li></ul>",
+    "step_en": "<ul><li>1 pack of frozen cut spinach</li><li>1 can of mushrooms or 1 plate of fresh mushrooms (washed and cut).</li><li>3 tbsp of butter</li><li>2 tbsp of vegetables oil</li><li>2 tbsp of all purpose flour</li><li>1 cup of broth</li><li>1 cup of milk</li><li>Salt </li><li>pepper cooking cream</li><li>¾ cup of mozzarella cheese shredded</li><li>¼ cup cheddar cheese shredded </li></ul>",
+    "cook_id": "31",
+    "created_at": "2024-05-24 20:34:28",
+    "updated_at": "2024-08-06 16:46:24"
+  },
+  {
+    "id": "58",
+    "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\"><span style=\\\"color: rgb(5, 5, 5);\\\">كيس فانيليا</span></li><li class=\\\"ql-align-right ql-direction-rtl\\\"><span style=\\\"color: rgb(5, 5, 5);\\\">⁠ كيس فراولة مجمدة</span></li><li class=\\\"ql-align-right ql-direction-rtl\\\"><span style=\\\"color: rgb(5, 5, 5);\\\">⁠ كريمة خفق</span></li><li class=\\\"ql-align-right ql-direction-rtl\\\"><span style=\\\"color: rgb(5, 5, 5);\\\">چيلي بالفراولة</span></li><li class=\\\"ql-direction-rtl ql-align-right\\\"><span style=\\\"color: rgb(5, 5, 5);\\\">سكر حسب الرغبة</span></li></ul>",
+    "step_en": "<ul><li>1 pouch of vanilla</li><li>1 pack of frozen strawberry</li><li>Whipping cream</li><li>Strawberry jelly</li><li>Sugar as desire</li><li>Vanilla cake</li></ul>",
+    "cook_id": "33",
+    "created_at": "2024-05-24 20:57:12",
+    "updated_at": "2024-07-08 10:55:35"
+  },
+  {
+    "id": "59",
+    "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كيس فراولة مجمدة</li><li class=\\\"ql-align-right ql-direction-rtl\\\">2 ملعقة كبيرة عسل</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كوب زبادي</li></ul>",
+    "step_en": "<ul><li>1 pack of frozen strawberries </li><li>2 table spoon of Honey </li><li>1 cups of yoghurt</li></ul>",
+    "cook_id": "34",
+    "created_at": "2024-05-24 21:35:28",
+    "updated_at": "2024-07-22 13:54:05"
+  },
+  {
+    "id": "60",
+    "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كيس حمص مجمد مسلوق</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 لتر من الماء</li><li class=\\\"ql-align-right ql-direction-rtl\\\">2 ملعقة كبيرة صلصة الطماطم</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 مكعب ثوم مفروم مجمد</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 بصلة مقطعة إلى أربع قطع</li><li class=\\\"ql-align-right ql-direction-rtl\\\">ملح</li><li class=\\\"ql-align-right ql-direction-rtl\\\">كمون</li><li class=\\\"ql-align-right ql-direction-rtl\\\">فلفل أسود حسب الرغبة</li><li class=\\\"ql-align-right ql-direction-rtl\\\">شطة حسب الرغبة</li></ul>",
+    "step_en": "<ul><li>1 pack of frozen boiled chickpeas</li><li>1 litre of water</li><li>2 table spoon of tomato paste</li><li>1 cube of frozen crushed garlic</li><li>1 onion cut to four pieces </li><li>Salt </li><li>Cumin </li><li>Pepper as desire</li><li>chili pepper powder as desire </li></ul>",
+    "cook_id": "35",
+    "created_at": "2024-05-24 21:39:48",
+    "updated_at": "2024-07-22 14:08:45"
+  },
+  {
+    "id": "61",
+    "step_ar": "<ul><li class=\\\"ql-direction-rtl ql-align-right\\\">كوب من الفراولة المجمدة (1/2 كيس)</li><li class=\\\"ql-direction-rtl ql-align-right\\\">4 - 6 أوراق من النعناع الطازج</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2/1  كوب من اللبن</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 ملعقة عسل حسب الرغبة</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2-3 مكعبات ثلج</li></ul>",
+    "step_en": "<ul><li>I cup of frozen strawberries (1/2 pack)</li><li>4- 6 leaves of fresh mint</li><li>½ cup of milk</li><li>1 spoon of honey as desire</li><li>2-3 ice cubes</li></ul>",
+    "cook_id": "36",
+    "created_at": "2024-05-24 21:44:01",
+    "updated_at": "2024-08-06 17:03:47"
+  },
+  {
+    "id": "62",
+    "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كيس بنجر مكعبات مسلوق مجمد</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة كبيرة من الخل</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة كبيرة من عصير الليمون</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة صغيرة ثوم بودر</li><li class=\\\"ql-align-right ql-direction-rtl\\\">2 ملعقة كبيرة زيت زيتون</li><li class=\\\"ql-align-right ql-direction-rtl\\\">ملح وفلفل أسود</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة كبيرة عسل نحل</li><li class=\\\"ql-align-right ql-direction-rtl\\\">بقدونس مفروم للتزيين</li></ul>",
+    "step_en": "<ul><li>1 pack of frozen beetroot (boiled – cubes)</li><li>1 table spoon of vinegar</li><li>I table spoon of lemon juice</li><li>1 tea spoon of garlic powder</li><li>2 table spoon of olive oil</li><li>Salt and pepper</li><li>1 table spoon of honey</li><li>Chopped Parsley for garnishing </li></ul>",
+    "cook_id": "37",
+    "created_at": "2024-05-25 19:46:55",
+    "updated_at": "2024-07-22 14:23:40"
+  },
+  {
+    "id": "63",
+    "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كيس بروكلي مجمد</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 بصلة صغيرة مقطعة إلى مكعبات</li><li class=\\\"ql-align-right ql-direction-rtl\\\">200 جرام جبن شيدر مقطع (مكعبات)</li><li class=\\\"ql-align-right ql-direction-rtl\\\">بيف بيكون</li><li class=\\\"ql-align-right ql-direction-rtl\\\">زبيب</li><li class=\\\"ql-align-right ql-direction-rtl\\\">مستردة</li><li class=\\\"ql-align-right ql-direction-rtl\\\">ملح وفلفل أسود</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة كبيرة خل تفاح</li></ul>",
+    "step_en": "<ul><li>1 pack of frozen Broccoli</li><li>1 small onion cut to cubes</li><li>200 gms of cheddar cheese (cubes)</li><li>Beef Bacon</li><li>Raisins</li><li>Mustard</li><li>Salt and pepper</li><li>1 table spoon of Apple cedar vinegar</li></ul>",
+    "cook_id": "38",
+    "created_at": "2024-05-25 19:53:34",
+    "updated_at": "2024-07-22 14:31:04"
+  },
+  {
+    "id": "64",
+    "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كيس فاصوليا خضراء مجمدة</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كوب ذرة سكرية مجمدة</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 بصل (مكعبات أو شرائح)</li><li class=\\\"ql-align-right ql-direction-rtl\\\">فلفل أحمر حلو</li><li class=\\\"ql-align-right ql-direction-rtl\\\">فلفل أسود</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة كبيرة زيت زيتون</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة كبيرة من الخل</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة ملح</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 معلقة سكر</li></ul>",
+    "step_en": "<ul><li>1 pack of frozen green beans</li><li>1 cup of sweet corn</li><li>1 onion &nbsp;(cubes or slices)</li><li>Red bell</li><li>pepper</li><li>1 table spoon of olive oil</li><li>1 table spoon of vinegar</li><li>1 tea spoon of salt</li><li>1 tea spoon of sugar</li></ul>",
+    "cook_id": "39",
+    "created_at": "2024-05-25 19:56:28",
+    "updated_at": "2024-07-22 14:40:38"
+  },
+  {
+    "id": "65",
+    "step_ar": "<ul><li class=\\\"ql-direction-rtl ql-align-right\\\">2/1 كيس فاصوليا خضراء مجمدة</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2/1 كيس فاصوليا بيضاء مجمدة</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2/1 كوب من الذرة السكرية المجمدة</li><li class=\\\"ql-direction-rtl ql-align-right\\\">3 ملعقة كبيرة من الفاصوليا الحمراء</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1  حبة بصل أحمر مقطع شرائح</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 ملعقة كبيرة عسل </li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 عصير ليمون</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 ملعقة كبيرة من خل التفاح</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2 ملعقة كبيرة زيت زيتون</li><li class=\\\"ql-direction-rtl ql-align-right\\\">ملح الطعام</li><li class=\\\"ql-direction-rtl ql-align-right\\\">فلفل أسود</li></ul>",
+    "step_en": "<ul><li>½ pack of frozen green beans</li><li>½ pack of frozen white beans</li><li>½ cup of frozen sweet corn</li><li>3 table spoons of red kidney beans </li><li>1 Sliced red onion</li><li>1 Table spoon of Honey&nbsp;</li><li>1 Lemon juice </li><li>1 table spoon of apple cider vinegar </li><li>2 table spoons of olive oil</li><li>Table salt</li><li>pepper</li></ul>",
+    "cook_id": "40",
+    "created_at": "2024-05-25 20:00:24",
+    "updated_at": "2024-08-06 16:51:40"
+  },
+  {
+    "id": "66",
+    "step_ar": "<ul><li class=\\\"ql-direction-rtl ql-align-right\\\">1 كيس خضار مشكل بالذرة السكرية مجمد</li><li class=\\\"ql-direction-rtl ql-align-right\\\">مكرونة مسلوقة ومصفاة</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2 بصل أخضر مقطع</li><li class=\\\"ql-direction-rtl ql-align-right\\\">3 ملعقة كبيرة بقدونس مقطع</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 حبة فلفل أحمر حلو مكعبات</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2/1 ملعقة صغيرة ملح طعام (للتتبيلة)</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 مكعب ثوم مفروم مجمد (للتتبيلة )</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2 ملعقة كبيرة زيت زيتون (للتتبيلة)</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2/1 ملعقة صغيرة فلفل أسود (للتتبيلة)</li><li class=\\\"ql-direction-rtl ql-align-right\\\">عصير ليمون (للتتبيلة)</li></ul>",
+    "step_en": "<ul><li>1 pack of frozen mixed vegetables with Sweet corn</li><li>Boiled and drained pasta</li><li>2 chopped green onions</li><li>3 table spoons of chopped parsley </li><li>I red bell pepper cubes</li><li>½ tea spoon of table salt (dressing)</li><li>1 cube of crushed frozen garlic (dressing)</li><li>2 tablespoons of olive oil (dressing)</li><li>Half a teaspoon of black pepper (dressing)</li><li>Lemon juice (dressing)</li></ul>",
+    "cook_id": "41",
+    "created_at": "2024-05-25 20:21:26",
+    "updated_at": "2024-08-06 16:52:45"
+  },
+  {
+    "id": "67",
+    "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\">&nbsp;كيس بسلة بالجزر مجمدة</li><li class=\\\"ql-align-right ql-direction-rtl\\\">مكعبات بطاطس مسلوقة</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كوب زبادي</li><li class=\\\"ql-align-right ql-direction-rtl\\\">عصير ليمون</li><li class=\\\"ql-align-right ql-direction-rtl\\\">5 ملعقة كبيرة زيت نباتي</li><li class=\\\"ql-align-right ql-direction-rtl\\\">5 ملعقة كبيرة من المايونيز</li><li class=\\\"ql-align-right ql-direction-rtl\\\">2 ملعقة كبيرة من الخل</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 مكعب ثوم مفروم مجمد</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة صغيرة زعتر مجفف مطحون</li><li class=\\\"ql-direction-rtl ql-align-right\\\">ملح وفلفل أسود</li></ul>",
+    "step_en": "<ul><li>Pack of frozen peas and carrots</li><li>Boiled potatoes cubes</li><li>I cup of Yoghurt</li><li>Lemon juice</li><li>5 table spoons of vegetable oil</li><li>5 table spoons of mayonnaise </li><li>2 table spoons of vinegar</li><li>1 cube of frozen crushed garlic</li><li>1 teaspoon of&nbsp; grounded dried thymes </li><li>Salt and pepper</li></ul>",
+    "cook_id": "42",
+    "created_at": "2024-05-25 20:24:51",
+    "updated_at": "2024-07-22 15:32:46"
+  },
+  {
+    "id": "70",
+    "step_ar": "<ul><li class=\\\"ql-direction-rtl ql-align-right\\\"><span style=\\\"color: rgb(5, 5, 5);\\\"><span class=\\\"ql-cursor\\\">﻿</span>1 كيس خرشوف مجمد</span></li><li class=\\\"ql-direction-rtl ql-align-right\\\"><span style=\\\"color: rgb(5, 5, 5);\\\">1 ملعقة كبيرة ثوم بودر (مجقف ومطحون)</span></li><li class=\\\"ql-direction-rtl ql-align-right\\\"><span style=\\\"color: rgb(5, 5, 5);\\\">1 ملعقة صغيرة ملح </span></li><li class=\\\"ql-direction-rtl ql-align-right\\\"><span style=\\\"color: rgb(5, 5, 5);\\\">1 ملعقة صغيرة اوريجانو مجفف</span></li><li class=\\\"ql-direction-rtl ql-align-right\\\"><span style=\\\"color: rgb(5, 5, 5);\\\">1 كيلو تقريبا من أوراك الدجاج بالعظم والجلد</span></li><li class=\\\"ql-direction-rtl ql-align-right\\\"><span style=\\\"color: rgb(5, 5, 5);\\\">2 ملعقة كبيرة سمن أو زيت زيتون</span></li><li class=\\\"ql-direction-rtl ql-align-right\\\">2/1<span style=\\\"color: rgb(5, 5, 5);\\\">  بصلة حمراء، مقشرة، ومقطعة</span></li><li class=\\\"ql-direction-rtl ql-align-right\\\"><span style=\\\"color: rgb(5, 5, 5);\\\">1 مكعب ثوم مفروم  مجمد أو 2 فص ثوم، مفروم </span></li><li class=\\\"ql-direction-rtl ql-align-right\\\"><span style=\\\"color: rgb(5, 5, 5);\\\">1/4 كوب قبار/كبر فى محلول ملحى</span></li><li class=\\\"ql-direction-rtl ql-align-right\\\">2/1<span style=\\\"color: rgb(5, 5, 5);\\\">  ليمونة، مقطعة إلى شرائح رفيعة</span></li><li class=\\\"ql-direction-rtl ql-align-right\\\"><span style=\\\"color: rgb(5, 5, 5);\\\">3 أكواب مرقة/شوربة الدجاج</span></li><li class=\\\"ql-direction-rtl ql-align-right\\\"><span style=\\\"color: rgb(5, 5, 5);\\\">2 كوب قلوب الخرشوف المعلبة</span></li><li class=\\\"ql-direction-rtl ql-align-right\\\"><span style=\\\"color: rgb(5, 5, 5);\\\">1 كوب زيتون كالاماتا</span></li><li class=\\\"ql-direction-rtl ql-align-right\\\">2/1<span style=\\\"color: rgb(5, 5, 5);\\\"> ملعقة صغيرة من الأوريجانو الطازج المفروم</span></li><li class=\\\"ql-direction-rtl ql-align-right\\\"><span style=\\\"color: rgb(5, 5, 5);\\\">4/1 كوب ماء</span></li></ul>",
+    "step_en": "<ul><li>1 pack of frozen artichoke</li><li>1 tablespoon granulated garlic</li><li>1 teaspoon sea salt</li><li>1 teaspoon dried oregano</li><li>2 pounds bone-in, skin-on chicken thighs</li><li>2 tablespoons ghee or olive oil</li><li>1/2 red onion, peeled, and chopped</li><li>2 garlic cloves, minced</li><li>1/4 cup capers with brine</li><li>1/2 lemon, thinly sliced</li><li>3 cups Chicken Bone Broth</li><li>2 cups canned artichoke hearts</li><li>1 cup Kalamata olives</li><li>1/2 teaspoons chopped fresh oregano</li><li>1/4 cup of water</li></ul>",
+    "cook_id": "43",
+    "created_at": "2024-05-25 20:31:21",
+    "updated_at": "2024-08-06 16:16:33"
+  },
+  {
+    "id": "73",
+    "step_ar": "<ul><li class=\\\"ql-direction-rtl ql-align-right\\\">1 كيس خرشوف مجمد</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2/1 كيس بصل مبشور مجمد</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 مكعب ثوم مفروم مجمد</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2/1 كيلو لحمة مفرومة </li><li class=\\\"ql-direction-rtl ql-align-right\\\">زبادي كبيرة حوالي 500 جم </li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 بيضة</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2 معلقة كبيرة نشا</li><li class=\\\"ql-direction-rtl ql-align-right\\\">4/1 كوب سماق</li><li class=\\\"ql-direction-rtl ql-align-right\\\">زيت زيتون</li><li class=\\\"ql-direction-rtl ql-align-right\\\">زبدة</li><li class=\\\"ql-direction-rtl ql-align-right\\\">ملح</li><li class=\\\"ql-direction-rtl ql-align-right\\\">رشة جوزة الطيب</li><li class=\\\"ql-direction-rtl ql-align-right\\\">فلفل أسود </li><li class=\\\"ql-direction-rtl ql-align-right\\\">4/1 كوب صنوبر</li></ul>",
+    "step_en": "<ul><li>1 pack of frozen artichoke bottoms </li><li>½ pack of frozen grated onion</li><li>500 gms of minced meat </li><li>1 cube of frozen crushed garlic</li><li>500 gms of yoghurt </li><li>1 egg</li><li>2 tbsp of cornstarch &nbsp;</li><li>1/4 cup of&nbsp;suma</li><li>Butter</li><li>Olive oil</li><li>Salt , pepper and nutmeg</li><li>1/4 cup of pine nuts</li></ul>",
+    "cook_id": "44",
+    "created_at": "2024-05-25 20:36:18",
+    "updated_at": "2024-08-06 16:17:40"
+  },
+  {
+    "id": "74",
+    "step_ar": "<ul><li class=\\\"ql-direction-rtl ql-align-right\\\">1 كيس لوبيا مسلوقة مجمدة</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2/1 كيلو لحم مفروم</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2/1 كيس بصل مبشور  مجمد</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 مكعب من الثوم المفروم مجمد</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 كيس طماطم مفرومة مصفاه مجمدة</li><li class=\\\"ql-direction-rtl ql-align-right\\\">ملح</li><li class=\\\"ql-direction-rtl ql-align-right\\\">فلفل أسود</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2 كوب مرق/ شوربة</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2 ملعقة كبيرة زبدة/ زيت نباتي</li></ul>",
+    "step_en": "<ul><li>1 pack of frozen boiled black-eyed peas</li><li>½ kilo of minced meat</li><li>½ pack of frozen grated onion </li><li>1 cube of frozen crushed garlic</li><li>1 pack of chopped tomato (sifted) </li><li>Salt</li><li>Pepper</li><li>2 cups of broth</li><li>2 tbsp of butter/ vegetable oil</li></ul>",
+    "cook_id": "45",
+    "created_at": "2024-05-25 20:46:06",
+    "updated_at": "2024-08-06 16:20:38"
+  },
+  {
+    "id": "75",
+    "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كيس قرنبيط مجمد.</li><li class=\\\"ql-align-right ql-direction-rtl\\\">3 ملاعق كبيرة زبدة</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة كبيرة زيت نباتي</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1/2 كيس بصل مبشور مجمد</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 مكعب من ثوم مفروم مجمد</li><li class=\\\"ql-align-right ql-direction-rtl\\\">4 ملاعق كبيرة من الدقيق </li><li class=\\\"ql-align-right ql-direction-rtl\\\">ملح وفلفل أسود </li><li class=\\\"ql-align-right ql-direction-rtl\\\">قليل من جوزة الطيب </li><li class=\\\"ql-align-right ql-direction-rtl\\\">4 أكواب من الحليب </li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كوب جبنة موزاريلا و ½ كوب جبنة بارميزان (مبشورة)</li></ul>",
+    "step_en": "<ul><li><span style=\\\"color: rgb(0, 41, 102);\\\">1 pack of frozen cauliflower.</span></li><li>3 tbsp butter</li><li>1 tbsp of vegetable oil</li><li>½ pack of frozen grated onion</li><li>1 cube of frozen crushed garlic</li><li>4 tbsp of all-purpose flour</li><li>salt and pepper&nbsp;</li><li>a pinch of nutmeg&nbsp; </li><li>4 cups of milk&nbsp;</li><li>1 cup Mozzarella cheese&nbsp;and ½ cup parmesan cheese&nbsp;(shredded)</li></ul>",
+    "cook_id": "46",
+    "created_at": "2024-05-25 21:27:21",
+    "updated_at": "2024-07-22 16:20:35"
+  },
+  {
+    "id": "76",
+    "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كيس قرنبيط مجمد</li><li class=\\\"ql-align-right ql-direction-rtl\\\">زيت نباتي للتحمير</li><li class=\\\"ql-align-right ql-direction-rtl\\\">ريحان مفروم للتزيين (اختياري)</li></ul><p class=\\\"ql-align-right ql-direction-rtl\\\"><strong>الصوص/ الجليز</strong></p><ul><li class=\\\"ql-align-right ql-direction-rtl\\\">عصير ليمون من 1و 1/2 ليمونة</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1/4 كوب شراب القيقب (ميبل سيرب) أو أي شراب مُحلي آخر حسب درجة الحلاوة المرغوبه (أو عسل نحل)</li><li class=\\\"ql-align-right ql-direction-rtl\\\">2 ملعقة صغيرة فلفل أسود </li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة كبيرة صويا صوص</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1/2 ملعقة كبيرة نشا الذرة(خليط النشا)</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة كبيرة ماء بدرجة حرارة الغرفة (خليط النشا)</li></ul><p class=\\\"ql-align-right ql-direction-rtl\\\"><strong>خليط طبقة التحمير</strong></p><ul><li class=\\\"ql-align-right ql-direction-rtl\\\">1/2 كوب دقيق متعدد الأغراض</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة كبيرة نشا الذرة</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة صغيرة بيكينج بودر</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة صغيرة ملح</li><li class=\\\"ql-align-right ql-direction-rtl\\\">3/4 كوب ماء بدرجة حرارة الغرفة</li></ul><p class=\\\"ql-align-right ql-direction-rtl\\\"><strong>طبقة البقسماط الأخيرة</strong></p><ul><li class=\\\"ql-align-right ql-direction-rtl\\\">2 كوب بقسماط ناعم</li></ul>",
+    "step_en": "<ul><li>1 pack of frozen cauliflower </li><li> Vegetable oil for frying</li><li>Chopped basil for garnishing (optional)</li></ul><p><strong>Glaze</strong></p><p><br></p><ul><li>lemon juice&nbsp;from 1 1/2 lemon </li><li>1/4&nbsp;cup&nbsp;maple syrup or other liquid sweetener&nbsp;adjust according to desired sweetness (or honey)</li><li>2&nbsp;tsp&nbsp;crushed black pepper</li><li>1&nbsp;tbsp&nbsp;<span style=\\\"color: windowtext;\\\">soy sauce</span></li><li>1/2&nbsp;tbsp&nbsp;<span style=\\\"color: windowtext;\\\">cornstarch</span> ( for slurry)</li><li>1&nbsp;tbsp&nbsp;room temp water (for slurry)</li></ul><p><strong>Batter</strong></p><p><br></p><ul><li>1/2&nbsp;cup&nbsp;<span style=\\\"color: windowtext;\\\">all-purpose flour</span></li><li>1&nbsp;tbsp&nbsp;<span style=\\\"color: windowtext;\\\">cornstarch</span></li><li>1&nbsp;tsp&nbsp;<span style=\\\"color: windowtext;\\\">baking powder</span></li><li> 1&nbsp;tsp&nbsp;<span style=\\\"color: windowtext;\\\">salt</span></li><li>3/4 cup of water room temperature</li></ul><p><strong>Breading</strong></p><p><br></p><ul><li>2&nbsp;cups&nbsp;<span style=\\\"color: windowtext;\\\">bread crumbs</span></li></ul>",
+    "cook_id": "47",
+    "created_at": "2024-05-25 21:33:13",
+    "updated_at": "2024-07-22 16:32:25"
+  },
+  {
+    "id": "77",
+    "step_ar": "<p class=\\\"ql-direction-rtl ql-align-right\\\">مقادير الملوخية&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><ul><li class=\\\"ql-direction-rtl ql-align-right\\\">1 كيس ملوخية خضراء مخروطة مجمدة &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 مكعب ثوم مفروم مجمد </li><li class=\\\"ql-direction-rtl ql-align-right\\\">1/2&nbsp; ملعقة كزبرة ناشفة مطحونة&nbsp;&nbsp;&nbsp;</li><li class=\\\"ql-direction-rtl ql-align-right\\\">3 كوب شورية </li></ul><p class=\\\"ql-direction-rtl ql-align-right\\\"><br></p><p class=\\\"ql-direction-rtl ql-align-right\\\">مقادير التقلية &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><ul><li class=\\\"ql-direction-rtl ql-align-right\\\">1 و1/2 &nbsp;مكعب ثوم مجمد</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة كزبرة ناشفة مطحونة</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 معلقة كبيرة زبدة&nbsp;</li></ul>",
+    "step_en": "<ul><li>1 pack of minced green molokhia</li><li>1 cube of frozen crushed garlic</li><li>½ spoon of ground coriander</li><li>3 cups of broth</li></ul><p>Taklia ingredients</p><ul><li>1&amp; 1/2 cubes of frozen crushed garlic</li><li>1 spoon of ground coriander</li><li>1 table spoon of butter</li></ul>",
+    "cook_id": "48",
+    "created_at": "2024-05-25 21:43:59",
+    "updated_at": "2024-07-10 14:45:38"
+  },
+  {
+    "id": "79",
+    "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كيس ملوخية خضراء مخروطة مجمدة </li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 معلقة كبيرة زبدة </li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 مكعب ثوم مفروم مجمد</li><li class=\\\"ql-align-right ql-direction-rtl\\\">جمبري</li><li class=\\\"ql-align-right ql-direction-rtl\\\">⁠شوربة جمبري</li></ul><p class=\\\"ql-align-right ql-direction-rtl\\\"><strong>مقادير التقلية</strong></p><ul><li class=\\\"ql-align-right ql-direction-rtl\\\">1 معلقة زبدة كبيرة </li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 مكعب ثوم مفروم مجمد</li><li class=\\\"ql-align-right ql-direction-rtl\\\">كزبرة ناشفة مطحونة</li></ul>",
+    "step_en": "<ul><li>1 pack of frozen minced molokhia</li><li>I table spoon of butter</li><li>1 cube of frozen crushed garlic</li><li>Shrimps </li><li>Shrimps soup</li></ul><p>For Taklia ingredients:</p><ul><li>1 table spoon of butter </li><li>1 cube of frozen crushed garlic</li><li><span style=\\\"color: rgb(5, 5, 5);\\\">Dry grounded coriander.</span></li></ul>",
+    "cook_id": "49",
+    "created_at": "2024-05-25 21:48:09",
+    "updated_at": "2024-07-22 16:44:07"
+  },
+  {
+    "id": "80",
+    "step_ar": "<ul><li class=\\\"ql-direction-rtl ql-align-right\\\">1 كيس بامية مجمدة  </li><li class=\\\"ql-direction-rtl ql-align-right\\\">4/1 كوب ذره سكرية مجمدة</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2/1  كوب كيزان الذره الصغيرة</li><li class=\\\"ql-direction-rtl ql-align-right\\\">فلفل هالبينو أحمر مقطع حسب الرغبة (اختياري)</li><li class=\\\"ql-direction-rtl ql-align-right\\\">4/1 حبة فلفل أحمر حلو مقطع شرائح (اختياري)</li><li class=\\\"ql-direction-rtl ql-align-right\\\">4/1 حبة فلفل أصفر مقطعة شرائح (اختياري)</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 بصل احمر مقطع شرائح</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 مكعب ثوم مفروم مجمد</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 برطمان طماطم مجففة </li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 ملعقة كبيرة عصير ليمون (حسب الرغبة)</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 ملعقة كبيرة من الريحان المفروم</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 معلقة كبيرة زيت زيتون</li><li class=\\\"ql-direction-rtl ql-align-right\\\">ملح</li><li class=\\\"ql-direction-rtl ql-align-right\\\">فلفل اسود </li></ul>",
+    "step_en": "<ul><li>1 pack of frozen okra</li><li>¼cup of frozen&nbsp; sweet corn</li><li>½&nbsp; cup of baby corn</li><li>Chopped jalapeno red pepper to taste (optional)</li><li>¼ Sliced red bell pepper (optional)</li><li>¼ sliced yellow bell pepper (optional)</li><li>1 sliced red onion</li><li>1 cube of frozen crushed garlic </li><li>1 can of sun dried tomatoes </li><li>1 Tbsp of lemon juice (to taste)</li><li>1 Tbsp of chopped basil</li><li>1 Tbsp of olive oil</li><li>Salt</li><li>pepper</li></ul>",
+    "cook_id": "50",
+    "created_at": "2024-05-25 21:52:18",
+    "updated_at": "2024-08-06 16:05:45"
+  },
+  {
+    "id": "81",
+    "step_ar": "<ul><li class=\\\"ql-direction-rtl ql-align-right\\\">1 كيس بامية مجمدة</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 مكعب ثوم مفروم مجمد</li><li class=\\\"ql-direction-rtl ql-align-right\\\">500 جرام من لحم المقطع إلى مكعبات</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2 ملعقة كبيرة زيت</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2 ملعقة كبيرة زبدة</li><li class=\\\"ql-direction-rtl ql-align-right\\\">ملح  حسب الرغبة</li><li class=\\\"ql-direction-rtl ql-align-right\\\">فلفل أسود حسب الرغبة</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2/1 ملعقة كزبرة جافة مطحونة</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2/1 ملعقة كمون مطحون</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2/1 كيس بصل مبشور مجمد</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 كيس طماطم مفرومة مجمدة</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2 كوب ماء</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 ملعقة كبيرة زيت</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 ملعقة كبيرة من الزبدة</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 فلفل حار ، مقطع إلى شرائح رفيعة (اختياري)</li></ul>",
+    "step_en": "<ul><li>1 pack of frozen okra</li><li>1 cube of frozen crushed garlic</li><li>500 gms of veal cut into cubes</li><li>2 table spoons of oil</li><li>2 table spoons of butter</li><li>Salt to taste</li><li>Pepper to taste</li><li>½ spoon of dry ground coriander</li><li>½ spoon of ground Cumin</li><li>½ pack of frozen grated onion</li><li>1 pack of frozen minced tomato (sifted)</li><li>2 cups of water</li><li>Table spoon of oil</li><li>Table spoon of butter</li><li>1 jalapeno pepper, thinly sliced (optional)</li></ul>",
+    "cook_id": "51",
+    "created_at": "2024-05-25 21:57:15",
+    "updated_at": "2024-08-06 16:08:08"
+  },
+  {
+    "id": "82",
+    "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كيس قلقاس مع السلق والكزبرة</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 مكعب من ثوم مفروم مجمد </li><li class=\\\"ql-align-right ql-direction-rtl\\\">2 كوب مرق</li><li class=\\\"ql-align-right ql-direction-rtl\\\">ملح وفلفل أسود حسب الذوق</li><li class=\\\"ql-align-right ql-direction-rtl\\\">زيت نباتي أو زبدة</li></ul>",
+    "step_en": "<ul><li>1 pack of Taro with Swiss chard</li><li>1 cube of frozen crushed garlic</li><li>2 cups of broth</li><li>Salt and pepper to taste</li><li>Vegetable oil or butter</li></ul>",
+    "cook_id": "52",
+    "created_at": "2024-05-25 22:01:52",
+    "updated_at": "2024-08-06 15:19:08"
+  },
+  {
+    "id": "83",
+    "step_ar": "<ul><li class=\\\"ql-direction-rtl ql-align-right\\\">1 كيس خضار مشكل مجمد</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2/1 كيس قرنبيط مجمد</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 كيلو لحم مكعبات </li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 حبة بطاطس مقطعة مكعبات</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 حبة باذنجان رومى صغير مقطع إلى مكعبات</li><li class=\\\"ql-direction-rtl ql-align-right\\\">½  كيس بصل مبشور مجمد  </li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 مكعب ثوم مفروم مجمد</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 كيس طماطم مفرومة مصفاه مجمدة </li><li class=\\\"ql-direction-rtl ql-align-right\\\">2 ملعقة كبيرة زيت نباتي</li><li class=\\\"ql-direction-rtl ql-align-right\\\">ملح</li><li class=\\\"ql-direction-rtl ql-align-right\\\">فلفل أسود</li><li class=\\\"ql-direction-rtl ql-align-right\\\">سماق</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 إلى 2 كوب من الماء</li></ul>",
+    "step_en": "<ul><li>1 pack of frozen mixed vegetables</li><li>½ pack of frozen cauliflower</li><li>1 kilo of veal cubes</li><li>1 potato cut cubes</li><li>1 eggplant cut to cubes</li><li>½ pack of frozen grated onion</li><li>1 cube of frozen crushed garlic</li><li>1 pack of chopped tomato (sifted) </li><li>2 tbsp of vegetable oil</li><li>Salt</li><li>Pepper </li><li>Sumac</li><li>1 to 2 cups of water</li></ul>",
+    "cook_id": "53",
+    "created_at": "2024-05-25 22:06:57",
+    "updated_at": "2024-08-06 16:13:57"
+  },
+  {
+    "id": "84",
+    "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كيس فلافل حمص نصف مقلية مجمدة</li></ul>",
+    "step_en": "<ul><li>1 pack of frozen pre-fried chickpeas falafel</li></ul>",
+    "cook_id": "56",
+    "created_at": "2024-05-26 22:37:52",
+    "updated_at": "2024-07-22 17:16:01"
+  },
+  {
+    "id": "85",
+    "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\">قرنبيط مجمد</li><li class=\\\"ql-align-right ql-direction-rtl\\\">بنجر مجمد</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 لتر من الماء المغلي</li><li class=\\\"ql-align-right ql-direction-rtl\\\">4 ملاعق كبيرة من الملح</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة كبيرة سكر</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة كبيرة من الخل</li></ul>",
+    "step_en": "<ul><li>Frozen cauliflower </li><li>Frozen beetroot</li><li> 1 litre of boiled water</li><li> 4 table spoons of salt </li><li>1 table spoon of sugar </li><li>1 table spoon of vinegar</li></ul>",
+    "cook_id": "27",
+    "created_at": "2024-05-28 15:36:22",
+    "updated_at": "2024-07-21 18:46:08"
+  },
+  {
+    "id": "87",
+    "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\"><span style=\\\"color: rgb(32, 33, 36);\\\">١</span> كيس فلافل حمص حار نصف مقلية مجمدة&nbsp;</li></ul>",
+    "step_en": "<ul><li>1 pack of frozen pre-fried spicy chickpeas falafel&nbsp;</li></ul>",
+    "cook_id": "25",
+    "created_at": "2024-05-28 16:07:46",
+    "updated_at": "2024-08-06 11:08:57"
+  },
+  {
+    "id": "88",
+    "step_ar": "<ul><li class=\\\"ql-direction-rtl ql-align-right\\\">450 جرام خبز باجيت (فرنسى)</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2/1  كوب من الزبدة غير المملحة</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 مكعب من الثوم المفروم المجمد</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 ملعقة كبيرة من البقدونس المفروم</li><li class=\\\"ql-direction-rtl ql-align-right\\\">¼ كوب من جبنة البارميزان المبشورة </li></ul>",
+    "step_en": "<ul><li>450 gms of baguettes </li><li>½ cup of unsalted butter</li><li>1 cube of frozen crushed garlic</li><li>1 tablespoon of chopped parsley </li><li>¼ &nbsp;cup of grated parmesan cheese&nbsp;</li></ul>",
+    "cook_id": "28",
+    "created_at": "2024-05-28 16:18:03",
+    "updated_at": "2024-08-06 16:42:45"
+  },
+  {
+    "id": "89",
+    "step_ar": "<ul><li class=\\\"ql-direction-rtl ql-align-right\\\">1 كيس سبانخ خضراء مجمدة (مقطعة)</li><li class=\\\"ql-direction-rtl ql-align-right\\\">جلاش (رقائق باف باسترى)</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2 ملعقة كبيرة زيت زيتون</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 مكعب من الثوم المفروم المجمد</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 بيضة</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2/1 ملعقة صغيرة من الملح</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2/1 ملعقة صغيرة من الفلفل الأسود</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2/1 كوب من جبنة الموزاريلا</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2/1 كوب من جبنة البارميزان</li><li class=\\\"ql-direction-rtl ql-align-right\\\">250 جرامً من جبنة الريكوتا</li><li class=\\\"ql-direction-rtl ql-align-right\\\">سمسم حسب الرغبة</li><li class=\\\"ql-direction-rtl ql-align-right\\\">حبة البركة حسب الرغبة</li></ul>",
+    "step_en": "<ul><li>1 pack of frozen green spinach (cut)</li><li>Puff pastry sheets</li><li>2 table spoons of olive oil</li><li>1 cube of frozen crushed garlic</li><li>1 egg</li><li>½ teaspoon of salt</li><li>½ teaspoon of pepper</li><li>½ cup of mozzarella cheese</li><li>½ cup of parmesan cheese</li><li>250 gms of ricotta cheese </li><li>Sesame as desired</li><li>Black seed as desired </li></ul>",
+    "cook_id": "29",
+    "created_at": "2024-05-28 16:22:18",
+    "updated_at": "2024-08-06 16:45:15"
+  },
+  {
+    "id": "91",
+    "step_ar": "<ul><li class=\\\"ql-direction-rtl ql-align-right\\\">1 كوب كنافة</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2/1 كوب زبدة</li><li class=\\\"ql-direction-rtl ql-align-right\\\">(شربات) شراب محلى</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 كيس فراولة مجمدة</li></ul><p class=\\\"ql-direction-rtl ql-align-right\\\"><strong>لتحضير البودينغ</strong></p><ul><li class=\\\"ql-direction-rtl ql-align-right\\\">2 كوب لبن</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2 ملاعق نشا</li><li class=\\\"ql-direction-rtl ql-align-right\\\">4 ملاعق صغيرة من السكر</li><li class=\\\"ql-direction-rtl ql-align-right\\\">فانيلا</li></ul>",
+    "step_en": "<ul><li>cup of kunafa</li><li>½ cup butter</li><li>(sherbet)&nbsp;Syrup</li><li>1 pack of frozen strawberries</li></ul><p><strong>For pudding preparation</strong></p><ul><li>2 cups of milk</li><li>2 spoons of starch</li><li>4 teaspoons of sugar</li><li>Vanilla</li></ul>",
+    "cook_id": "32",
+    "created_at": "2024-05-28 17:21:14",
+    "updated_at": "2024-08-06 17:02:06"
+  },
+  {
+    "id": "92",
+    "step_ar": "<p class=\\\"ql-align-right ql-direction-rtl\\\"><br></p><ul><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كوب دقيق الشوفان/دقيق القمح الكامل&nbsp;&nbsp;</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كوب لبن خالي الدسم&nbsp;&nbsp;&nbsp;</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 بيضة</li><li class=\\\"ql-align-right ql-direction-rtl\\\">4/3 ملاعق كبيرة محلي/سكر/عسل&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li><li class=\\\"ql-align-right ql-direction-rtl\\\">قليل من الفانيليا</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة صغيرة بيكنج بودر</li><li class=\\\"ql-align-right ql-direction-rtl\\\">زيت نباتى/زبدة</li></ul><p class=\\\"ql-align-right ql-direction-rtl\\\">مكونات الصوص:</p><ul><li class=\\\"ql-align-right ql-direction-rtl\\\"> فراولة مجمدة</li><li class=\\\"ql-align-right ql-direction-rtl\\\"> عسل</li></ul>",
+    "step_en": "<ul><li><span style=\\\"color: inherit;\\\">1 cup oat flour/whole wheat flour</span></li><li><span style=\\\"color: inherit;\\\">1 cup skim milk</span></li><li><span style=\\\"color: inherit;\\\">1 egg</span></li><li><span style=\\\"color: inherit;\\\">3-4 tbsp sweetener/sugar/honey</span></li><li><span style=\\\"color: inherit;\\\"> A pinch of vanilla</span></li><li><span style=\\\"color: inherit;\\\">1 tsp baking powder</span></li><li>vegetable oil/butter</li></ul><p><span style=\\\"color: inherit;\\\">Sauce Ingredients:</span></p><ul><li><span style=\\\"color: inherit;\\\">Frozen strawberries</span></li><li><span style=\\\"color: inherit;\\\">Honey</span></li></ul>",
+    "cook_id": "59",
+    "created_at": "2024-06-04 19:42:34",
+    "updated_at": "2024-08-06 16:56:33"
+  },
+  {
+    "id": "93",
+    "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\"><span style=\\\"color: rgb(5, 5, 5);\\\">1 كوب سبانخ مجمدة&nbsp;</span></li><li class=\\\"ql-align-right ql-direction-rtl\\\"><span style=\\\"color: rgb(5, 5, 5);\\\">1 مكعب ثوم مفروم مجمد</span></li><li class=\\\"ql-align-right ql-direction-rtl\\\"><span style=\\\"color: rgb(5, 5, 5);\\\">1 ملعقة كبيرة زبدة</span></li><li class=\\\"ql-align-right ql-direction-rtl\\\"><span style=\\\"color: rgb(5, 5, 5);\\\">2 بيضة</span></li><li class=\\\"ql-align-right ql-direction-rtl\\\"><span style=\\\"color: rgb(5, 5, 5);\\\">1 ملعقة كبيرة لبن</span></li><li class=\\\"ql-align-right ql-direction-rtl\\\"><span style=\\\"color: rgb(5, 5, 5);\\\">ملح للتذوق</span></li><li class=\\\"ql-align-right ql-direction-rtl\\\"><span style=\\\"color: rgb(5, 5, 5);\\\">1 ملعقة صغيرة زيت زيتون</span></li><li class=\\\"ql-align-right ql-direction-rtl\\\"><span style=\\\"color: rgb(5, 5, 5);\\\">2 ملعقة كبيرة جبنة بارميزان أو شيدر</span></li></ul><p class=\\\"ql-align-right ql-direction-rtl\\\"><span style=\\\"color: rgb(5, 5, 5);\\\">مبشورة</span></p>",
+    "step_en": "<p>•\t1 cup frozen spinach&nbsp;</p><p>•\t1 cube of frozen crushed garlic</p><p>•\t1 table spoon of butter</p><p>•\t2 eggs</p><p>•\t1 tablespoon milk&nbsp;</p><p>•\tsalt to taste</p><p>•\t1 teaspoon olive oil</p><p>•\t2 table spoons Parmesan or cheddar cheese grated</p>",
+    "cook_id": "54",
+    "created_at": "2024-06-06 12:40:08",
+    "updated_at": "2024-08-06 16:59:30"
+  },
+  {
+    "id": "94",
+    "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كيس فلافل نصف مقلية مجمدة</li></ul>",
+    "step_en": "<ul><li>1 pack of frozen pre-fried Falafel</li></ul>",
+    "cook_id": "55",
+    "created_at": "2024-06-06 12:42:57",
+    "updated_at": "2024-07-14 14:39:51"
+  },
+  {
+    "id": "95",
+    "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\">1كيس خضار مشكل بالذرة السكرية مجمد.</li><li class=\\\"ql-align-right ql-direction-rtl\\\">¼ كيس فاصوليا بيضاء مجمدة (مسلوقة).</li><li class=\\\"ql-align-right ql-direction-rtl\\\">2 ملعقة كبيرة زيت زيتون</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة صغيرة من ثوم بودر (حسب الرغبة)</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 ملعقة صغيرة من بصل بودر (حسب الرغبة)</li><li class=\\\"ql-align-right ql-direction-rtl\\\">ملح وفلفل أسود (حسب الرغبة)</li></ul>",
+    "step_en": "<ul><li>1Pack of frozen mixed vegetables with sweet corn.</li><li>1/4 pack of frozen white beans (boiled).</li><li>2 tbsp of olive oil</li><li>1 tsp of garlic powder (to taste)</li><li>1 tsp of onion powder (to taste)</li><li>Salt &amp; pepper (to taste)</li></ul>",
+    "cook_id": "60",
+    "created_at": "2024-06-06 14:53:13",
+    "updated_at": "2024-07-21 17:25:16"
+  },
+  {
+    "id": "96",
+    "step_ar": "<ul><li class=\\\"ql-direction-rtl ql-align-right\\\">1 كيس حمص مجمد (مسلوق)</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2 ملعقة كبيرة زيت زيتون</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2/1 ملعقة صغيرة كاري (حسب الرغبة)</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 ملعقة صغيرة بابريكا</li><li class=\\\"ql-direction-rtl ql-align-right\\\">ملح (للتذوق)</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 ملعقة صغيرة كمون</li><li class=\\\"ql-direction-rtl ql-align-right\\\">2/1 ملعقة صغيرة فلفل أسود</li><li class=\\\"ql-direction-rtl ql-align-right\\\">1 ملعقة صغيرة من بصل بودر</li><li class=\\\"ql-direction-rtl ql-align-right\\\">4/3 ملعقة صغيرة من ثوم بودر</li><li class=\\\"ql-direction-rtl ql-align-right\\\">شطة (اختياري حسب الرغبة)</li></ul>",
+    "step_en": "<ol><li>1 pack of frozen chickpeas (boiled)</li><li>2 tbsp of olive oil</li><li>½ tsp of curry (to taste)</li><li>1 tsp of paprika </li><li>Salt (to taste)</li><li>1 tsp of cumin</li><li>½ tsp of pepper</li><li>1 tsp of onion powder</li><li>¾ tsp of garlic powder</li><li>Chili pepper (optional to taste)</li></ol>",
+    "cook_id": "61",
+    "created_at": "2024-06-06 15:11:32",
+    "updated_at": "2024-08-06 16:48:41"
+  },
+  {
+    "id": "97",
+    "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\">2/1  كيس بسلة بالجزر مجمد</li><li class=\\\"ql-align-right ql-direction-rtl\\\">2 ملعقة كبيرة زيت نباتي</li><li class=\\\"ql-align-right ql-direction-rtl\\\">2 ملعقة كبيرة صوص الصويا (حسب الرغبة)</li><li class=\\\"ql-align-right ql-direction-rtl\\\"> 2/1 بصله صغيرة مقطعة مكعبات </li><li class=\\\"ql-align-right ql-direction-rtl\\\">3 فصوص من الثوم</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 بيضة</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كوب أرز مسلوق</li><li class=\\\"ql-align-right ql-direction-rtl\\\">ملح (للتذوق)</li><li class=\\\"ql-align-right ql-direction-rtl\\\">فلفل (للتذوق)</li><li class=\\\"ql-align-right ql-direction-rtl\\\">1 بصل أخضر للتزيين </li></ul>",
+    "step_en": "<ul><li>1/2&nbsp;pack of frozen peas and carrots</li><li>2 tbsp of vegetable oil</li><li>2 tbsp of Soya sauce (to taste)</li><li>½ a small onion cubes</li><li>3 cloves of garlic</li><li>1 egg</li><li>1 cup of boiled rice </li><li>Salt (to taste)</li><li>Pepper (to taste)</li><li>Green onions for garnishing&nbsp;</li></ul>",
+    "cook_id": "62",
+    "created_at": "2024-06-06 15:30:22",
+    "updated_at": "2024-08-06 16:19:30"
+  },
+  {
+    "id": "98",
+    "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كيس أصابع باذنجان مقرمشة نصف مقلية مجمدة </li></ul>",
+    "step_en": "<ul><li>1 pack of frozen pre-fried crispy eggplant fingers</li></ul>",
+    "cook_id": "63",
+    "created_at": "2024-12-02 16:11:14",
+    "updated_at": "2024-12-09 14:53:34"
+  },
+  {
+    "id": "99",
+    "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كيس بطاطس مقرمشة نصف مقلية مجمدة&nbsp;</li></ul>",
+    "step_en": "<ul><li>1 pack of frozen pre-fried crispy spuds</li></ul>",
+    "cook_id": "64",
+    "created_at": "2024-12-02 16:24:05",
+    "updated_at": "2024-12-08 15:30:38"
+  },
+  {
+    "id": "100",
+    "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\"><span style=\\\"background-color: transparent;\\\">1 كوب من شرائح المانجو المجمدة (مُذابة).</span></li><li class=\\\"ql-align-right ql-direction-rtl\\\">½ كوب من الحليب البارد - اختياري (يمكن استخدام حليب نباتي مثل حليب جوز الهند أو اللوز)</li><li class=\\\"ql-align-right ql-direction-rtl\\\"><span style=\\\"background-color: transparent;\\\">1 -</span><span style=\\\"background-color: transparent; color: rgb(255, 0, 0);\\\"> </span><span style=\\\"background-color: transparent;\\\">2 ملعقة كبيرة من العسل أو السكر (حسب الرغبة)</span></li><li class=\\\"ql-align-right ql-direction-rtl\\\"><span style=\\\"background-color: transparent;\\\">¼ كوب من الماء البارد أو مكعبات الثلج</span></li><li class=\\\"ql-align-right ql-direction-rtl\\\"><span style=\\\"background-color: transparent;\\\">&nbsp;&nbsp;&nbsp;رشة من الفانيليا (اختياري)</span></li></ul><p class=\\\"ql-align-right ql-direction-rtl\\\"><br></p>",
+    "step_en": "<ul><li><strong style=\\\"background-color: transparent;\\\">1 cup frozen mango slices (partially thawed)</strong></li><li><strong style=\\\"background-color: transparent;\\\">½ cup cold milk - optional (you can use plant-based milk like coconut or almond milk)</strong></li><li><strong style=\\\"background-color: transparent;\\\">1 - 2 tablespoons honey or sugar (to taste)</strong></li><li><strong style=\\\"background-color: transparent;\\\">¼ cup cold water or ice cubes</strong></li><li><strong style=\\\"background-color: transparent;\\\">A pinch of vanilla (optional)</strong></li></ul>",
+    "cook_id": "65",
+    "created_at": "2025-04-27 00:28:36",
+    "updated_at": "2025-04-29 13:39:53"
+  },
+  {
+    "id": "101",
+    "step_ar": "<ul><li class=\\\"ql-direction-rtl ql-align-right\\\"><strong style=\\\"background-color: transparent;\\\">2 كوب من شرائح المانجو المجمدة</strong></li><li class=\\\"ql-direction-rtl ql-align-right\\\"><strong style=\\\"background-color: transparent;\\\">½ كوب من الزبادي اليوناني (أو الزبادي العادي)</strong></li><li class=\\\"ql-direction-rtl ql-align-right\\\"><strong style=\\\"background-color: transparent;\\\">2 - 3 ملاعق كبيرة من العسل أو السكر (حسب الرغبة)</strong></li><li class=\\\"ql-direction-rtl ql-align-right\\\"><strong style=\\\"background-color: transparent;\\\">&nbsp;1 ملعقة صغيرة من عصير الليمون (اختياري لتعزيز النكهة)</strong></li></ul>",
+    "step_en": "<ul><li><strong style=\\\"background-color: transparent;\\\">2 cups of frozen mango slices</strong></li><li><strong style=\\\"background-color: transparent;\\\">½ cup Greek yoghurt (or regular yoghurt)</strong></li><li><strong style=\\\"background-color: transparent;\\\">2–3 tablespoons honey or sugar (to taste)</strong></li><li><strong style=\\\"background-color: transparent;\\\">1 teaspoon lemon juice (optional, to enhance the flavor)</strong></li></ul>",
+    "cook_id": "66",
+    "created_at": "2025-04-27 00:41:38",
+    "updated_at": "2025-04-29 02:56:12"
+  },
+  {
+    "id": "102",
+    "step_ar": "<p class=\\\"ql-direction-rtl ql-align-right\\\"><strong style=\\\"background-color: transparent;\\\">للقاعدة (الطبقة السفلية):</strong></p><ul><li class=\\\"ql-direction-rtl ql-align-right\\\"><strong style=\\\"background-color: transparent;\\\">200 جرام بسكويت سادة مطحون</strong></li><li class=\\\"ql-direction-rtl ql-align-right\\\"><strong style=\\\"background-color: transparent;\\\">100 جرام زبدة مذابة</strong></li></ul><p class=\\\"ql-direction-rtl ql-align-right\\\"><strong style=\\\"background-color: transparent;\\\">للحشوة:</strong></p><ul><li class=\\\"ql-direction-rtl ql-align-right\\\"><strong style=\\\"background-color: transparent;\\\">2 كوب من شرائح المانجو المجمدة (يُفضل إذابتها جزئيًا)</strong></li><li class=\\\"ql-direction-rtl ql-align-right\\\"><strong style=\\\"background-color: transparent;\\\">1 كوب كريمة خفق باردة</strong></li><li class=\\\"ql-direction-rtl ql-align-right\\\"><strong style=\\\"background-color: transparent;\\\">½ كوب زبادي يوناني أو لبن زبادي</strong></li><li class=\\\"ql-direction-rtl ql-align-right\\\"><strong style=\\\"background-color: transparent;\\\">3 ملاعق كبيرة سكر (أو حسب الرغبة)</strong></li><li class=\\\"ql-direction-rtl ql-align-right\\\"><strong style=\\\"background-color: transparent;\\\">2 ملعقة صغيرة جيلاتين بودرة</strong></li><li class=\\\"ql-direction-rtl ql-align-right\\\"><strong style=\\\"background-color: transparent;\\\">3 ملاعق كبيرة ماء ساخن (لإذابة الجيلاتين)</strong></li></ul><p class=\\\"ql-direction-rtl ql-align-right\\\"><strong style=\\\"background-color: transparent;\\\">للتزيين (اختياري):</strong></p><ul><li class=\\\"ql-direction-rtl ql-align-right\\\"><strong style=\\\"background-color: transparent;\\\">شرائح مانجو طازجة أو مجمدة</strong></li><li class=\\\"ql-direction-rtl ql-align-right\\\"><strong style=\\\"background-color: transparent;\\\">كريمة مخفوقة</strong></li><li class=\\\"ql-direction-rtl ql-align-right\\\"><strong style=\\\"background-color: transparent;\\\">نعناع طازج أو رشة جوز هند</strong></li></ul>",
+    "step_en": "<h4><strong style=\\\"background-color: transparent;\\\">For the Crust (Bottom Layer):</strong></h4><ul><li><strong style=\\\"background-color: transparent;\\\">200g plain crushed biscuits (graham crackers or digestive work well)</strong></li><li><strong style=\\\"background-color: transparent;\\\">100g melted butter</strong></li></ul><h4><strong style=\\\"background-color: transparent;\\\">For the Filling:</strong></h4><ul><li><strong style=\\\"background-color: transparent;\\\">2 cups frozen mango slices (preferably partially thawed)</strong></li><li><strong style=\\\"background-color: transparent;\\\">1 cup cold whipping cream</strong></li><li><strong style=\\\"background-color: transparent;\\\">½ cup Greek yoghurt or plain yoghurt</strong></li><li><strong style=\\\"background-color: transparent;\\\">3 tablespoons sugar (or to taste)</strong></li><li><strong style=\\\"background-color: transparent;\\\">2 teaspoons powdered gelatin</strong></li><li><strong style=\\\"background-color: transparent;\\\">3 tablespoons hot water (to dissolve the gelatin)</strong></li></ul><h4><strong style=\\\"background-color: transparent;\\\">For Decoration (Optional):</strong></h4><ul><li><strong style=\\\"background-color: transparent;\\\">Fresh or frozen mango slices</strong></li><li><strong style=\\\"background-color: transparent;\\\">Whipped cream</strong></li><li><strong style=\\\"background-color: transparent;\\\">Fresh mint or a sprinkle of shredded coconut</strong></li></ul>",
+    "cook_id": "67",
+    "created_at": "2025-04-27 00:51:12",
+    "updated_at": "2025-04-29 03:08:43"
+  },
+  {
+    "id": "103",
+    "step_ar": "<ul><li class=\\\"ql-align-right ql-direction-rtl\\\">1 كيس بلح برحي مجمد</li><li class=\\\"ql-align-right ql-direction-rtl\\\">4 كوب لبن </li><li class=\\\"ql-align-right ql-direction-rtl\\\">فانليا (اختيارى)&nbsp;&nbsp;</li></ul>",
+    "step_en": "<ul><li>1 pack of frozen Barhi dates</li><li>4 cups of milk</li><li> vanilla (optional)</li></ul>",
+    "cook_id": "68",
+    "created_at": "2025-12-02 16:54:09",
+    "updated_at": "2025-12-02 19:00:28"
+  },
+  {
+    "id": "104",
+    "step_ar": "<ul><li class=\\\"ql-direction-rtl ql-align-right\\\">١ كيس بلح برحي مجمد</li></ul>",
+    "step_en": "<ul><li>1 pack of frozen Barhi dates</li></ul>",
+    "cook_id": "69",
+    "created_at": "2025-12-02 17:28:30",
+    "updated_at": "2025-12-02 19:03:23"
+  },
+  {
+    "id": "105",
+    "step_ar": "<ul><li class=\\\"ql-direction-rtl ql-align-right\\\">١ كيس بطاطس بهارات مقرمشة نصف مقلية مجمد</li></ul>",
+    "step_en": "<ul><li>1 pack of frozen pre-fried spiced crispy fries </li></ul>",
+    "cook_id": "70",
+    "created_at": "2025-12-04 15:19:06",
+    "updated_at": "2025-12-11 15:45:19"
   }
 ]

@@ -1,74 +1,74 @@
 [
   {
-    "id": "",
-    "category_id": "",
-    "category_type_id": "",
+    "id": "131",
+    "category_id": "11",
+    "category_type_id": "14",
     "image": "https://camp-coding.site/eloroba/storage/app/images/NMXpsKHpHAfWxvd0L57UCTFD6rWYZy78LbwNW6aV.png",
     "created_at": "2024-07-30 10:38:53",
     "updated_at": "2024-07-30 10:38:53",
-    "number": ""
+    "number": "12"
   },
   {
-    "id": "",
-    "category_id": "",
-    "category_type_id": "",
+    "id": "132",
+    "category_id": "5",
+    "category_type_id": "14",
     "image": "https://camp-coding.site/eloroba/storage/app/images/3D55RDdZIeXWiT1KBVokZnhnS0syC2RqS2cFIVSU.png",
     "created_at": "2024-07-30 10:38:53",
     "updated_at": "2024-07-30 10:38:53",
-    "number": ""
+    "number": "2"
   },
   {
-    "id": "",
-    "category_id": "",
-    "category_type_id": "",
+    "id": "133",
+    "category_id": "11",
+    "category_type_id": "1",
     "image": "https://camp-coding.site/eloroba/storage/app/images/EcfaswHAGS7Tz4hSFBS31te0pqTb2gdjZsLGz06b.png",
     "created_at": "2024-07-30 10:39:21",
     "updated_at": "2024-07-30 10:39:21",
-    "number": ""
+    "number": "122"
   },
   {
-    "id": "",
-    "category_id": "",
-    "category_type_id": "",
+    "id": "134",
+    "category_id": "4",
+    "category_type_id": "1",
     "image": "https://camp-coding.site/eloroba/storage/app/images/WVa6j0fAFrsyaXvYNeZYCtvvQxpAdW78lfUT5wC1.png",
     "created_at": "2024-07-30 10:39:21",
     "updated_at": "2024-07-30 10:39:21",
-    "number": ""
+    "number": "22"
   },
   {
-    "id": "",
-    "category_id": "",
-    "category_type_id": "",
+    "id": "135",
+    "category_id": "6",
+    "category_type_id": "15",
     "image": "https://camp-coding.site/eloroba/storage/app/images/Q3H7puxAiE0uHWz8G6mUmJPlddfOtOOrXoXzaYAT.png",
     "created_at": "2024-07-30 10:39:55",
     "updated_at": "2024-07-30 10:39:55",
-    "number": ""
+    "number": "22"
   },
   {
-    "id": "",
-    "category_id": "",
-    "category_type_id": "",
+    "id": "136",
+    "category_id": "14",
+    "category_type_id": "15",
     "image": "https://camp-coding.site/eloroba/storage/app/images/5xHIpsTlPyi5YcPl8avBA5zavgQ8gh1UvkLwvzO9.png",
     "created_at": "2024-07-30 10:39:55",
     "updated_at": "2024-07-30 10:39:55",
-    "number": ""
+    "number": "1"
   },
   {
-    "id": "",
-    "category_id": "",
-    "category_type_id": "",
+    "id": "137",
+    "category_id": "7",
+    "category_type_id": "2",
     "image": "https://camp-coding.site/eloroba/storage/app/images/UIkaE1koGECMMc616E9jBg8H27gL60D9N9c10r2q.png",
     "created_at": "2024-07-30 10:40:30",
     "updated_at": "2024-07-30 10:40:30",
-    "number": ""
+    "number": "212"
   },
   {
-    "id": "",
-    "category_id": "",
-    "category_type_id": "",
+    "id": "138",
+    "category_id": "13",
+    "category_type_id": "2",
     "image": "https://camp-coding.site/eloroba/storage/app/images/femAZcCAMx6fa4tvdsyyORG5Oxx4P14WBgR8MAMS.png",
     "created_at": "2024-07-30 10:40:30",
     "updated_at": "2024-07-30 10:40:30",
-    "number": ""
+    "number": "1"
   }
 ]
