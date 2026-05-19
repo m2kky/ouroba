@@ -45,57 +45,77 @@ export default async function RecipeDetailPage({ params }: { params: Promise<{ i
     );
   }
 
-  // Extract metadata properties safely
-  const timeProp = recipe.properties?.find(p => p.titleEn.toLowerCase().includes('time'))?.textAr;
-  const personProp = recipe.properties?.find(p => p.titleEn.toLowerCase().includes('person'))?.textAr;
+  // Sort properties so they appear in a consistent order if needed
+  const cookingProps = recipe.properties || [];
+
+  // Filter out empty steps (some legacy data has empty step rows)
+  const validSteps = recipe.steps?.filter((step: any) => {
+    const text = isEn ? step.stepEn : step.stepAr;
+    const cleanText = text ? text.replace(/<[^>]*>?/gm, '').trim() : '';
+    return cleanText.length > 0;
+  }) || [];
+
+  const mainImage = recipe.internalImage || recipe.images?.[0]?.url;
 
   return (
-    <div className="bg-gray-50 min-h-screen py-16">
+    <div className="bg-gray-50 min-h-screen pb-16 pt-32">
       <div className="max-w-4xl mx-auto px-4 md:px-8">
         
         {/* Breadcrumb */}
         <div className={`flex items-center gap-2 text-sm text-gray-500 mb-8 font-medium ${isEn ? 'flex-row' : 'flex-row'}`}>
           <Link href={`/${locale}/recipes`} className="hover:text-orouba-blue transition-colors">{isEn ? 'Recipes' : 'وصفات الطبخ'}</Link>
           <span className={isEn ? '' : 'rotate-180'}>/</span>
-          <span className="text-orouba-blue">{isEn ? recipe.nameEn : recipe.nameAr}</span>
+          <span className="text-orouba-blue font-bold">{isEn ? recipe.nameEn : recipe.nameAr}</span>
         </div>
 
         {/* Hero */}
-        <div className="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 mb-12 relative">
-          {recipe.images?.[0]?.url && (
-            <div className="h-96 w-full relative overflow-hidden">
+        <div className="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 mb-8 relative">
+          {mainImage ? (
+            <div className="h-64 md:h-96 w-full relative overflow-hidden">
               <img 
-                src={recipe.images[0].url} 
+                src={mainImage.startsWith('http') ? mainImage : `https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/${mainImage.split('/').pop()}`} 
                 alt={recipe.nameAr || undefined} 
                 className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-700" 
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
             </div>
+          ) : (
+            <div className="h-32 bg-blue-50 w-full"></div>
           )}
-          <div className="p-8 md:p-12 text-center relative z-10 -mt-24 bg-white mx-4 rounded-3xl shadow-lg">
-            <h1 className="text-4xl md:text-5xl font-bold text-orouba-blue mb-6">{isEn ? recipe.nameEn : recipe.nameAr}</h1>
-            {(isEn ? recipe.descriptionEn : recipe.descriptionAr) && (
+          <div className={`p-8 md:p-12 text-center relative z-10 ${mainImage ? '-mt-24 mx-4 rounded-3xl shadow-lg' : ''} bg-white`}>
+            <h1 className="text-4xl md:text-5xl font-bold text-orouba-blue mb-8">{isEn ? recipe.nameEn : recipe.nameAr}</h1>
+            
+            {/* Cooking Properties Grid (Moved to top inside Hero) */}
+            {cookingProps.length > 0 && (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                {cookingProps.map((prop: any) => (
+                  <div key={prop.id} className="bg-gray-50 rounded-3xl p-6 shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center gap-3 hover:shadow-md transition-shadow">
+                    {prop.icon ? (
+                      <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center p-3 mb-2 shadow-sm">
+                        <img src={prop.icon} alt={isEn ? prop.titleEn : prop.titleAr} className="w-full h-full object-contain" />
+                      </div>
+                    ) : (
+                      <div className="w-16 h-16 bg-white text-orouba-blue rounded-full flex items-center justify-center mb-2 shadow-sm">
+                        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                      </div>
+                    )}
+                    <span className="text-gray-500 text-sm font-bold uppercase tracking-wider">{isEn ? prop.titleEn : prop.titleAr}</span>
+                    <span className="text-orouba-blue text-xl font-black">{isEn ? prop.textEn : prop.textAr}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+            
+            {/* Description only if steps exist, otherwise description is used as steps */}
+            {(validSteps.length > 0) && (isEn ? recipe.descriptionEn : recipe.descriptionAr) && (
               <div 
-                className="text-xl text-gray-600 max-w-2xl mx-auto mb-8 leading-relaxed prose prose-lg"
+                className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed prose prose-lg"
                 dangerouslySetInnerHTML={{ __html: sanitizeHtml((isEn ? recipe.descriptionEn : recipe.descriptionAr) || '') }}
               />
             )}
-            <div className={`flex flex-wrap justify-center gap-6 text-sm font-bold text-gray-500 ${isEn ? 'flex-row' : ''}`}>
-              {timeProp && (
-                <div className="flex items-center gap-2 bg-blue-50 text-orouba-blue px-6 py-3 rounded-full shadow-sm">
-                  <span>⏱</span>
-                  <span>{timeProp}</span>
-                </div>
-              )}
-              {personProp && (
-                <div className="flex items-center gap-2 bg-blue-50 text-orouba-blue px-6 py-3 rounded-full shadow-sm">
-                  <span>👥</span>
-                  <span>{personProp} {isEn ? 'Persons' : 'أشخاص'}</span>
-                </div>
-              )}
-            </div>
           </div>
         </div>
+
 
         {/* Details Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -125,24 +145,6 @@ export default async function RecipeDetailPage({ params }: { params: Promise<{ i
               </div>
             )}
 
-            {/* Other Ingredients (Properties) */}
-            {recipe.properties?.length > 0 && (
-              <div className="bg-white rounded-[2rem] p-8 border border-gray-100 shadow-sm">
-                <h3 className="text-2xl font-bold text-orouba-blue mb-6 border-b border-gray-100 pb-4">{isEn ? 'Ingredients' : 'المقادير'}</h3>
-                <ul className="space-y-4">
-                  {recipe.properties.map((prop: any) => {
-                    // Skip time and person as they are displayed in header
-                    if (prop.titleEn.toLowerCase().includes('time') || prop.titleEn.toLowerCase().includes('person')) return null;
-                    return (
-                      <li key={prop.id} className="flex items-center gap-3 text-gray-700 font-medium">
-                        <span className="w-2 h-2 rounded-full bg-orouba-yellow flex-shrink-0"></span>
-                        <span>{isEn ? prop.textEn : prop.textAr} {(isEn ? prop.titleEn : prop.titleAr) && <span className="text-gray-400">({isEn ? prop.titleEn : prop.titleAr})</span>}</span>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            )}
           </div>
 
           {/* Steps */}
@@ -150,20 +152,26 @@ export default async function RecipeDetailPage({ params }: { params: Promise<{ i
             <div className="bg-white rounded-[2rem] p-8 md:p-10 border border-gray-100 shadow-sm">
               <h3 className="text-3xl font-bold text-orouba-blue mb-10 border-b border-gray-100 pb-6">{isEn ? 'Preparation' : 'طريقة التحضير'}</h3>
               <div className="space-y-10">
-                {recipe.steps?.map((step: any, idx: number) => (
-                  <div key={step.id} className="flex gap-6 relative">
-                    {/* Line connector */}
-                    {idx !== recipe.steps.length - 1 && (
-                      <div className={`absolute top-14 bottom-[-40px] w-0.5 bg-gray-100 ${isEn ? 'left-6' : 'right-6'}`}></div>
-                    )}
-                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-orouba-blue text-orouba-yellow flex items-center justify-center font-bold text-xl shadow-md z-10">
-                      {idx + 1}
+                {validSteps.length > 0 ? (
+                  validSteps.map((step: any, idx: number) => (
+                    <div key={step.id} className="flex gap-6 relative">
+                      {/* Line connector */}
+                      {idx !== validSteps.length - 1 && (
+                        <div className={`absolute top-14 bottom-[-40px] w-0.5 bg-gray-100 ${isEn ? 'left-6' : 'right-6'}`}></div>
+                      )}
+                      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-orouba-blue text-orouba-yellow flex items-center justify-center font-bold text-xl shadow-md z-10">
+                        {idx + 1}
+                      </div>
+                      <div className="pt-2 bg-gray-50 rounded-2xl p-6 flex-grow border border-gray-100 hover:shadow-md transition-shadow">
+                        <div className="text-lg text-gray-700 leading-loose prose" dangerouslySetInnerHTML={{ __html: isEn ? step.stepEn : step.stepAr }} />
+                      </div>
                     </div>
-                    <div className="pt-2 bg-gray-50 rounded-2xl p-6 flex-grow border border-gray-100 hover:shadow-md transition-shadow">
-                      <div className="text-lg text-gray-700 leading-loose prose" dangerouslySetInnerHTML={{ __html: sanitizeHtml(isEn ? step.stepEn : step.stepAr) }} />
-                    </div>
+                  ))
+                ) : (
+                  <div className="pt-2 bg-gray-50 rounded-2xl p-6 md:p-8 flex-grow border border-gray-100">
+                    <div className="text-lg text-gray-700 leading-loose prose" dangerouslySetInnerHTML={{ __html: isEn ? (recipe.descriptionEn || '') : (recipe.descriptionAr || '') }} />
                   </div>
-                ))}
+                )}
               </div>
             </div>
           </div>

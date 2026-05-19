@@ -30,13 +30,6 @@ export function getImageUrl(url: string | null | undefined): string {
     // Strip query params if any
     filename = filename.split('?')[0];
     
-    // Replace any existing extension with .webp, or append .webp if there is no extension
-    if (filename.includes('.')) {
-      filename = filename.replace(/\.[^/.]+$/, ".webp");
-    } else {
-      filename = filename + ".webp";
-    }
-    
     return `${r2Url}/${filename}`;
   }
   

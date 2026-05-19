@@ -11,7 +11,10 @@ import { headers } from "next/headers";
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   return {
-    title: locale === 'en' ? "Orouba Foods | Fresh Taste" : "العروبة للصناعات الغذائية | Orouba Foods",
+    title: {
+      template: locale === 'en' ? "%s | Orouba Foods" : "%s | العروبة للصناعات الغذائية",
+      default: locale === 'en' ? "Orouba Foods | Fresh Taste" : "العروبة للصناعات الغذائية | Orouba Foods",
+    },
     description: locale === 'en' 
       ? "Taste the fresh food with Orouba Food Industries products" 
       : "تذوق الطعم الطازج مع منتجات العروبة للصناعات الغذائية",

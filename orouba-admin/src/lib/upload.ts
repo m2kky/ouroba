@@ -2,7 +2,7 @@ import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client
 import path from "path";
 
 // File upload constraints
-const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+const MAX_FILE_SIZE = 200 * 1024 * 1024; // 200MB
 const ALLOWED_EXTENSIONS = [".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg", ".mp4", ".pdf", ".doc", ".docx"];
 
 // Initialize S3 Client for Cloudflare R2
@@ -22,6 +22,7 @@ const getS3Client = () => {
       accessKeyId,
       secretAccessKey,
     },
+    forcePathStyle: true,
   });
 };
 

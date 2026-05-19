@@ -24,6 +24,9 @@ export default async function AboutPage({
 
   const data = await getSiteData();
   const { settings, buildings, productionSteps, sectionTexts, features } = data;
+  
+  // Filter section texts to only show those meant for the About page (e.g., Vision, Mission, etc. numbers 1 to 4)
+  const aboutSections = sectionTexts?.filter((s: any) => s.number >= 1 && s.number <= 4) || [];
 
   const aboutImage = settings?.about_image?.en || settings?.about_image?.ar || "pZHaEck6Myx1R5XKJTICq0AZFn15lMRTC6kT1Yp0.webp";
   const smallAboutImage = settings?.small_about_img?.en || settings?.small_about_img?.ar || aboutImage;
@@ -73,7 +76,7 @@ export default async function AboutPage({
         </div>
 
         {/* Sections */}
-        {sectionTexts && sectionTexts.map((item: any) => (
+        {aboutSections && aboutSections.map((item: any) => (
           <div key={item.id} className="mb-10 w-full" style={{ textAlign: locale === 'en' ? 'left' : 'right' }}>
             <h3 
               className="text-[32px] md:text-[40px] font-bold mb-6 text-[#035297]"

@@ -51,3 +51,10 @@ coolify_key
 *.key
 *.pem
 file.enc
+# Migration Scripts & Data
+data_*.json
+processed_media/
+test_*.ts
+check_*.ts
+count_*.py
+extract_*.py
