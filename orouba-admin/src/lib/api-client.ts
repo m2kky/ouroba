@@ -23,17 +23,32 @@ export function getImageUrl(url: string | null | undefined): string {
     return url;
   }
 
-  // Extract the filename from the URL, regardless of what domain or path it had before
-  let filename = url.split('/').pop();
-  
-  if (filename) {
-    // Strip query params if any
-    filename = filename.split('?')[0];
+  // If the url is already an absolute R2 URL, return it as-is
+  if (url.startsWith("http://") || url.startsWith("https://")) {
+    const isR2Host = url.includes("pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev") || 
+                     (process.env.NEXT_PUBLIC_R2_URL && url.includes(process.env.NEXT_PUBLIC_R2_URL.replace(/^https?:\/\//, "")));
+    if (isR2Host) {
+      return url;
+    }
     
-    return `${r2Url}/${filename}`;
+    // For legacy URLs from camp-coding.site:
+    const filename = url.split('/').pop()?.split('?')[0];
+    if (filename) {
+      if (url.includes("/storage/app/images/")) {
+        return `${r2Url}/products/${filename}`;
+      }
+      return `${r2Url}/${filename}`;
+    }
   }
-  
-  return url;
+
+  // If it's a relative path like "brands/abc.webp" or "products/xyz.webp", prepend R2 base URL
+  if (url.includes("/")) {
+    const cleanPath = url.startsWith("/") ? url.substring(1) : url;
+    return `${r2Url}/${cleanPath}`;
+  }
+
+  // Default fallback
+  return `${r2Url}/${url}`;
 }
 
 export async function getSiteData() {

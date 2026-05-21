@@ -135,22 +135,65 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                   </span>
                 </li>
 
-                {/* Social Media Links */}
-                <li className={`flex flex-col gap-3 w-full mt-4 ${locale === "ar" ? "justify-end" : "justify-start"}`}>
-                  {brands?.slice(0, 3).map((brand) => (
-                    <div key={brand.id} className={`flex items-center gap-3 ${locale === "ar" ? "justify-end" : "justify-start flex-row-reverse"}`}>
-                      <div className="flex gap-2">
-                        {socials?.filter((s) => !s.isHidden).map((social) => (
-                          <a key={social.id} href={social.link} target="_blank" rel="noreferrer" className="w-6 h-6 rounded-full bg-white flex items-center justify-center overflow-hidden hover:scale-110 transition-transform">
-                            {social.image ? <img src={getImageUrl(social.image)} alt="social" className="w-full h-full object-cover" /> : <span className="text-blue-600 text-xs font-bold">@</span>}
-                          </a>
-                        ))}
-                      </div>
-                      <Link href={`/${locale}/brands/${((brand as any).nameEn || (brand as any).nameAr || 'brand').replace(/\s+/g, '-')}/${brand.id}`}>
-                        <img src={getImageUrl(brand.image) || "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png"} alt={brand.nameAr} className="w-12 h-12 object-contain bg-white rounded-md p-1" />
-                      </Link>
+                {/* Social Media Links (Basma and Bap Bites) */}
+                <li className={`flex flex-col gap-4 w-full mt-4 ${locale === "ar" ? "items-end" : "items-start"}`}>
+                  
+                  {/* Basma Row */}
+                  <div className={`flex items-center gap-3 ${locale === "ar" ? "justify-end" : "justify-start flex-row-reverse"}`}>
+                    <div className="flex gap-2 items-center">
+                      <a href="https://www.facebook.com/BasmaVegetables" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
+                        <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+                          <circle cx="12" cy="12" r="12" fill="#1877F2" />
+                          <path d="M14.5 12h-2v7h-3v-7h-1.5v-2.5h1.5v-1.636C9.5 5.742 10.662 4.5 12.827 4.5c1.037 0 2.127.185 2.127.185v2.337h-1.198c-1.127 0-1.478.7-1.478 1.417v1.56h2.619L14.5 12z" fill="white" />
+                        </svg>
+                      </a>
+                      <a href="https://www.instagram.com/basmavegetables" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
+                        <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+                          <defs>
+                            <radialGradient id="instaGradBasma" cx="30%" cy="107%" r="130%">
+                              <stop offset="0%" stopColor="#fdf497" />
+                              <stop offset="5%" stopColor="#fdf497" />
+                              <stop offset="45%" stopColor="#fd5949" />
+                              <stop offset="60%" stopColor="#d6249f" />
+                              <stop offset="90%" stopColor="#285AEB" />
+                            </radialGradient>
+                          </defs>
+                          <rect width="24" height="24" rx="5" fill="url(#instaGradBasma)" />
+                          <path fillRule="evenodd" clipRule="evenodd" d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8.2c-1.77 0-3.2-1.43-3.2-3.2s1.43-3.2 3.2-3.2 3.2 1.43 3.2 3.2-1.43 3.2-3.2 3.2zM16.7 8.4c.61 0 1.1-.49 1.1-1.1s-.49-1.1-1.1-1.1-1.1.49-1.1 1.1.49 1.1 1.1 1.1zM12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 4c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8z" fill="white" />
+                        </svg>
+                      </a>
                     </div>
-                  ))}
+                    <img src="/basma.png" alt="Basma" className="w-16 h-16 object-contain" />
+                  </div>
+
+                  {/* Bap Bites Row */}
+                  <div className={`flex items-center gap-3 ${locale === "ar" ? "justify-end" : "justify-start flex-row-reverse"}`}>
+                    <div className="flex gap-2 items-center">
+                      <a href="https://www.facebook.com/profile.php?id=61551777392870" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
+                        <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+                          <circle cx="12" cy="12" r="12" fill="#1877F2" />
+                          <path d="M14.5 12h-2v7h-3v-7h-1.5v-2.5h1.5v-1.636C9.5 5.742 10.662 4.5 12.827 4.5c1.037 0 2.127.185 2.127.185v2.337h-1.198c-1.127 0-1.478.7-1.478 1.417v1.56h2.619L14.5 12z" fill="white" />
+                        </svg>
+                      </a>
+                      <a href="https://www.instagram.com/bap.bites" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
+                        <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+                          <defs>
+                            <radialGradient id="instaGradBap" cx="30%" cy="107%" r="130%">
+                              <stop offset="0%" stopColor="#fdf497" />
+                              <stop offset="5%" stopColor="#fdf497" />
+                              <stop offset="45%" stopColor="#fd5949" />
+                              <stop offset="60%" stopColor="#d6249f" />
+                              <stop offset="90%" stopColor="#285AEB" />
+                            </radialGradient>
+                          </defs>
+                          <rect width="24" height="24" rx="5" fill="url(#instaGradBap)" />
+                          <path fillRule="evenodd" clipRule="evenodd" d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8.2c-1.77 0-3.2-1.43-3.2-3.2s1.43-3.2 3.2-3.2 3.2 1.43 3.2 3.2-1.43 3.2-3.2 3.2zM16.7 8.4c.61 0 1.1-.49 1.1-1.1s-.49-1.1-1.1-1.1-1.1.49-1.1 1.1.49 1.1 1.1 1.1zM12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 4c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8z" fill="white" />
+                        </svg>
+                      </a>
+                    </div>
+                    <img src="/vm0x6DYiCFTgbVkAekwe2SBVAyMnx1MrvLAziapn.png" alt="Bap Bites" className="w-16 h-16 object-contain" />
+                  </div>
+
                 </li>
 
               </ul>
@@ -313,20 +356,63 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
 
                         {/* Social Media Links for Mobile */}
                         <li className={`flex flex-col gap-4 w-full mt-4 ${locale === "ar" ? "items-end" : "items-start"}`}>
-                          {brands?.slice(0, 3).map((brand) => (
-                            <div key={brand.id} className={`flex items-center gap-4 ${locale === "ar" ? "justify-end" : "justify-start flex-row-reverse"}`}>
-                              <div className="flex gap-2">
-                                {socials?.filter((s) => !s.isHidden).map((social) => (
-                                  <a key={social.id} href={social.link} target="_blank" rel="noreferrer" className="w-8 h-8 rounded-full bg-white flex items-center justify-center overflow-hidden hover:scale-110 transition-transform">
-                                    {social.image ? <img src={getImageUrl(social.image)} alt="social" className="w-full h-full object-cover" /> : <span className="text-blue-600 text-sm font-bold">@</span>}
-                                  </a>
-                                ))}
-                              </div>
-                              <Link href={`/${locale}/brands/${(brand as any).nameEn || "Brand"}/${brand.id}`}>
-                                <img src={getImageUrl(brand.image) || "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png"} alt={brand.nameAr} className="w-14 h-14 object-contain bg-white rounded-md p-1" />
-                              </Link>
+                          
+                          {/* Basma Row */}
+                          <div className={`flex items-center gap-4 ${locale === "ar" ? "justify-end" : "justify-start flex-row-reverse"}`}>
+                            <div className="flex gap-2 items-center">
+                              <a href="https://www.facebook.com/BasmaVegetables" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
+                                <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+                                  <circle cx="12" cy="12" r="12" fill="#1877F2" />
+                                  <path d="M14.5 12h-2v7h-3v-7h-1.5v-2.5h1.5v-1.636C9.5 5.742 10.662 4.5 12.827 4.5c1.037 0 2.127.185 2.127.185v2.337h-1.198c-1.127 0-1.478.7-1.478 1.417v1.56h2.619L14.5 12z" fill="white" />
+                                </svg>
+                              </a>
+                              <a href="https://www.instagram.com/basmavegetables" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
+                                <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+                                  <defs>
+                                    <radialGradient id="instaGradBasmaMobile" cx="30%" cy="107%" r="130%">
+                                      <stop offset="0%" stopColor="#fdf497" />
+                                      <stop offset="5%" stopColor="#fdf497" />
+                                      <stop offset="45%" stopColor="#fd5949" />
+                                      <stop offset="60%" stopColor="#d6249f" />
+                                      <stop offset="90%" stopColor="#285AEB" />
+                                    </radialGradient>
+                                  </defs>
+                                  <rect width="24" height="24" rx="5" fill="url(#instaGradBasmaMobile)" />
+                                  <path fillRule="evenodd" clipRule="evenodd" d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8.2c-1.77 0-3.2-1.43-3.2-3.2s1.43-3.2 3.2-3.2 3.2 1.43 3.2 3.2-1.43 3.2-3.2 3.2zM16.7 8.4c.61 0 1.1-.49 1.1-1.1s-.49-1.1-1.1-1.1-1.1.49-1.1 1.1.49 1.1 1.1 1.1zM12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 4c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8z" fill="white" />
+                                </svg>
+                              </a>
                             </div>
-                          ))}
+                            <img src="/basma.png" alt="Basma" className="w-16 h-16 object-contain" />
+                          </div>
+
+                          {/* Bap Bites Row */}
+                          <div className={`flex items-center gap-4 ${locale === "ar" ? "justify-end" : "justify-start flex-row-reverse"}`}>
+                            <div className="flex gap-2 items-center">
+                              <a href="https://www.facebook.com/profile.php?id=61551777392870" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
+                                <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+                                  <circle cx="12" cy="12" r="12" fill="#1877F2" />
+                                  <path d="M14.5 12h-2v7h-3v-7h-1.5v-2.5h1.5v-1.636C9.5 5.742 10.662 4.5 12.827 4.5c1.037 0 2.127.185 2.127.185v2.337h-1.198c-1.127 0-1.478.7-1.478 1.417v1.56h2.619L14.5 12z" fill="white" />
+                                </svg>
+                              </a>
+                              <a href="https://www.instagram.com/bap.bites" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
+                                <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+                                  <defs>
+                                    <radialGradient id="instaGradBapMobile" cx="30%" cy="107%" r="130%">
+                                      <stop offset="0%" stopColor="#fdf497" />
+                                      <stop offset="5%" stopColor="#fdf497" />
+                                      <stop offset="45%" stopColor="#fd5949" />
+                                      <stop offset="60%" stopColor="#d6249f" />
+                                      <stop offset="90%" stopColor="#285AEB" />
+                                    </radialGradient>
+                                  </defs>
+                                  <rect width="24" height="24" rx="5" fill="url(#instaGradBapMobile)" />
+                                  <path fillRule="evenodd" clipRule="evenodd" d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8.2c-1.77 0-3.2-1.43-3.2-3.2s1.43-3.2 3.2-3.2 3.2 1.43 3.2 3.2-1.43 3.2-3.2 3.2zM16.7 8.4c.61 0 1.1-.49 1.1-1.1s-.49-1.1-1.1-1.1-1.1.49-1.1 1.1.49 1.1 1.1 1.1zM12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 4c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8z" fill="white" />
+                                </svg>
+                              </a>
+                            </div>
+                            <img src="/vm0x6DYiCFTgbVkAekwe2SBVAyMnx1MrvLAziapn.png" alt="Bap Bites" className="w-16 h-16 object-contain" />
+                          </div>
+
                         </li>
                       </ul>
                     </motion.div>

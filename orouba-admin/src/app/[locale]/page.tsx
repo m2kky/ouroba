@@ -171,21 +171,11 @@ export default async function HomePage({
             <div className="space-y-6 mt-8">
               <h3 className="text-2xl font-bold text-gray-800 mb-4">{isEn ? "Discover the Difference in Every Bite:" : "اكتشف الفرق في كل قضمة:"}</h3>
               <div className="text-xl text-gray-600 leading-relaxed text-justify whitespace-pre-line space-y-4">
-                {whyChooseUs && whyChooseUs.length > 0 ? (
-                  <ul className="list-disc pl-5 pr-5 space-y-3">
-                    {whyChooseUs.map((item: WhyItem) => (
-                      <li key={item.id} className="marker:text-orouba-yellow">
-                        {isEn ? item.descriptionEn || item.descriptionAr : item.descriptionAr}
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p>
-                    {isEn 
-                      ? "Choosing Orouba means opting for quality, convenience, and a touch of culinary delight. Our all-natural, delicious products cater to diverse tastes, making meal prep easy and fun. Trust Orouba to turn ordinary meals into extraordinary experiences and bring joy to your kitchen. Join us and discover the delight of cooking with Orouba!"
-                      : "يعد اختيار العروبة هو اختيار التميز والسهولة ومتعة الطهي وذلك لإلتزامنا بالمعايير الدولية وشغفنا بالابتكار. تلبي منتجاتنا الطبيعية واللذيذة أذواقًا متنوعة، و تجعل إعداد الطعام أكثر سهولة ومتعة. ثق في العروبة لتحويل الوجبات العادية إلى تجارب غير تقليدية وإضفاء البهجة على مطبخك ومائدتك انضم إلينا واكتشف متعة الطهي مع العروبة!!."}
-                  </p>
-                )}
+                <p>
+                  {isEn 
+                    ? "Choosing Orouba means opting for quality, convenience, and a touch of culinary delight. Our all-natural, delicious products cater to diverse tastes, making meal prep easy and fun. Trust Orouba to turn ordinary meals into extraordinary experiences and bring joy to your kitchen. Join us and discover the delight of cooking with Orouba!"
+                    : "يعد اختيار العروبة هو اختيار التميز والسهولة ومتعة الطهي وذلك لإلتزامنا بالمعايير الدولية وشغفنا بالابتكار. تلبي منتجاتنا الطبيعية واللذيذة أذواقًا متنوعة، و تجعل إعداد الطعام أكثر سهولة ومتعة. ثق في العروبة لتحويل الوجبات العادية إلى تجارب غير تقليدية وإضفاء البهجة على مطبخك ومائدتك انضم إلينا واكتشف متعة الطهي مع العروبة!!"}
+                </p>
               </div>
             </div>
           </FadeIn>
