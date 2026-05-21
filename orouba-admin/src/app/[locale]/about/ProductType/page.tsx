@@ -46,7 +46,7 @@ export default async function ProductsPage({
       titleAr: "الفواكة المجمدة",
       descriptionEn: "Fresh fruits are selected and processed, then subjected to quick freezing to keep their nutrition values and attributes",
       descriptionAr: "يتم اختيار الفواكة الطازجة وتجهيزها، ثم تخضع للتجميد السريع للاحتفاظ بخصائصها وقيمتها الغذائية.",
-      image: "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/RjhwfXqz0lYRg5WcJappDYbVqw7GxoGFpV5l7vk2.png",
+      image: settings.product_type_fruits_image?.en || settings.product_type_fruits_image?.ar || "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/RjhwfXqz0lYRg5WcJappDYbVqw7GxoGFpV5l7vk2.png",
       brands: [
         { brandId: "7", catId: "5", logo: "/UIkaE1koGECMMc616E9jBg8H27gL60D9N9c10r2q.png" }, // Farida - Frozen Fruits
         { brandId: "5", catId: "11", logo: "/basma.png" } // Basma - Frozen Vegetables & Fruits
@@ -58,7 +58,7 @@ export default async function ProductsPage({
       titleAr: "النصف مقلي",
       descriptionEn: "We have our famous Falafel types, in addition to our original recipes of pre-fried potatoes with different ingredients and pre-fried cauliflower florets",
       descriptionAr: "لدينا أصناف الفلافل الشهيرة الخاصة بنا، بالإضافة إلى وصفاتنا الأصلية من البطاطس النصف مقلية مع مكونات مختلفة وزهرات القرنبيط المتبلة النصف مقلية.",
-      image: "GTqYDNVWPuIlNYMzniHuxRmdwslPpj0W9bjhRGAI.webp",
+      image: settings.product_type_prefried_image?.en || settings.product_type_prefried_image?.ar || "GTqYDNVWPuIlNYMzniHuxRmdwslPpj0W9bjhRGAI.webp",
       brands: [
         { brandId: "7", catId: "6", logo: "/UIkaE1koGECMMc616E9jBg8H27gL60D9N9c10r2q.png" }, // Farida - Frozen Falafel
         { brandId: "5", catId: "12", logo: "/basma.png" } // Basma - Frozen Falafel
@@ -70,7 +70,7 @@ export default async function ProductsPage({
       titleAr: "الخضروات المجمدة",
       descriptionEn: "All our vegetables are carefully selected. They undergo inspection and selection process, then the vegetables are washed, processed and subjected to quick freezing, We have a large variety of types to serve different needs",
       descriptionAr: "يتم اختيار جميع خضرواتنا بعناية. تخضع الخضروات لعملية الفحص والاختيار، ثم يتم غسلها ومعالجتها ومرورها بالتجميد السريع، ولدينا مجموعة متنوعة من الأصناف لتلبية الاحتياجات المختلفة.",
-      image: "icIeuiVnOAuVtHTPzWDN8D16X8aLOQ7wpGZoRIOD.webp",
+      image: settings.product_type_veg_image?.en || settings.product_type_veg_image?.ar || "icIeuiVnOAuVtHTPzWDN8D16X8aLOQ7wpGZoRIOD.webp",
       brands: [
         { brandId: "7", catId: "4", logo: "/UIkaE1koGECMMc616E9jBg8H27gL60D9N9c10r2q.png" }, // Farida - Frozen Vegetables
         { brandId: "5", catId: "11", logo: "/basma.png" } // Basma - Frozen Vegetables & Fruits
@@ -82,7 +82,7 @@ export default async function ProductsPage({
       titleAr: "البقوليات والحبوب المجمدة",
       descriptionEn: "Our beans & grains are selected, soaked or boiled to save time and effort, Many of which are ready to eat and some take around 10 minutes of heating",
       descriptionAr: "يتم اختيار البقوليات والحبوب، وتجهيزها وسلقها لتكون سريعة الطهى ، وهناك العديد من الأصناف جاهزة للأكل مباشرة . بعض المنتجات تستغرق حوالي ١٠ دقائق من الطهى وذلك لتوفير الوقت والجهد.",
-      image: "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/ZjhabQ8AqbF7N3nAMyekLu1DqzOfnJ6dW9tuxoor.png",
+      image: settings.product_type_beans_image?.en || settings.product_type_beans_image?.ar || "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/ZjhabQ8AqbF7N3nAMyekLu1DqzOfnJ6dW9tuxoor.png",
       brands: [
         { brandId: "7", catId: "7", logo: "/UIkaE1koGECMMc616E9jBg8H27gL60D9N9c10r2q.png" }, // Farida - Frozen Beans & Grains
         { brandId: "5", catId: "13", logo: "/basma.png" } // Basma - Frozen Beans & Grains

@@ -95,16 +95,18 @@ export default function Navbar({ settings, brands: brandsProp }: { settings?: Re
     { label: locale === "ar" ? "اتصل بنا" : "Contact Us", href: `/${locale}/contact` },
   ];
 
+  const mainLogo = settings?.main_logo?.en || settings?.main_logo?.ar || "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png";
+
   return (
     <nav className="bg-orouba-blue sticky top-0 z-50 text-white shadow-md relative">
       <div className="max-w-[1400px] mx-auto px-4 md:px-8">
-        <div className="flex justify-between items-center h-20 md:h-24">
+        <div className="flex justify-between items-center h-28 md:h-24">
           
           {/* Logo (Right in RTL) */}
           <Link href={`/${locale}`} className="flex-shrink-0 flex items-center z-50 h-full relative group">
             <div className="w-auto h-24 md:h-32 absolute top-0 right-0 transform translate-y-2 md:translate-y-4 bg-white rounded-full p-2 shadow-lg border-4 border-[#1e4a8c] group-hover:scale-105 transition-transform duration-300">
               <img 
-                src="https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png" 
+                src={mainLogo} 
                 alt="Orouba Foods" 
                 className="w-full h-full object-contain" 
               />
@@ -224,7 +226,7 @@ export default function Navbar({ settings, brands: brandsProp }: { settings?: Re
             </div>
             
             {/* Globe Icon & Language Dropdown */}
-            <div className="relative group flex items-center h-20 md:h-24">
+            <div className="relative group flex items-center h-28 md:h-24">
               <button 
                 onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
                 className="p-1 hover:text-orouba-yellow transition-colors cursor-pointer"

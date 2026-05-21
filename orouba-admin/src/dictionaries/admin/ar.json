@@ -45,6 +45,12 @@
     "chatMenu": "قائمة الشات",
     "collaborates": "طلبات التعاون",
     "careers": "طلبات التوظيف",
-    "team": "فريق العمل"
+    "team": "فريق العمل",
+    "aboutSection": "صفحة من نحن",
+    "siteSection": "الموقع العام",
+    "productTypes": "أنواع المنتجات",
+    "recipeCategories": "تصنيفات الوصفات",
+    "productionSteps": "خطوات الإنتاج",
+    "sectionTexts": "نصوص الأقسام"
   }
 }

@@ -24,6 +24,8 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
     setOpenSection(openSection === section ? null : section);
   };
 
+  const mainLogo = settings?.main_logo?.en || settings?.main_logo?.ar || "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png";
+
   return (
     <footer className="bg-[#1e4a8c] text-white pt-16 mt-20 rounded-t-[40px] relative overflow-hidden">
         {/* Faint Background Shapes */}
@@ -59,7 +61,7 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
             <div className={`flex flex-col items-start lg:items-center justify-start`}>
               <Link href={`/${locale}`} className="inline-block mt-4">
                 <img 
-                  src="https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png" 
+                  src={mainLogo} 
                   alt="Orouba Foods" 
                   className="w-44 h-44 object-contain" 
                 />
@@ -67,7 +69,7 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
             </div>
 
             {/* Column 2: Our Brands */}
-            <div className="text-center">
+            <div className={`${locale === "ar" ? "text-right" : "text-left"}`}>
               <h3 className="text-xl font-bold mb-8 text-[#ffcc00] inline-block">{locale === "ar" ? "العلامات التجارية" : "Brands"}</h3>
               <ul className="space-y-6">
                 {(brands && brands.length > 0) ? (
@@ -93,19 +95,21 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
             </div>
 
             {/* Column 3: Quick Links */}
-            <div className="text-center">
+            <div className={`${locale === "ar" ? "text-right" : "text-left"}`}>
               <h3 className="text-xl font-bold mb-8 text-[#ffcc00] inline-block">{locale === "ar" ? "روابط سريعة" : "Quick Links"}</h3>
+              <ul className="space-y-6">
                 <li><Link href={`/${locale}/about/whoWeAre`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "من نحن" : "About Us"}</Link></li>
-                <li><Link href={`/${locale}/products`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "منتجاتنا" : "Our Products"}</Link></li>
+                <li><Link href={`/${locale}/about/ProductType`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "منتجاتنا" : "Our Products"}</Link></li>
                 <li><Link href={`/${locale}/recipes`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "وصفات" : "Recipes"}</Link></li>
                 <li><Link href={`/${locale}/contact`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "اتصل بنا" : "Contact Us"}</Link></li>
+              </ul>
             </div>
 
             {/* Column 4: Contact Us */}
             <div className={`flex flex-col ${locale === "ar" ? "items-end text-right" : "items-start text-left"}`}>
               <h3 className="text-xl font-bold mb-8 text-[#ffcc00]">{locale === "ar" ? "اتصل بنا" : "Contact Us"}</h3>
               <ul className={`space-y-5 text-white flex flex-col w-full ${locale === "ar" ? "items-end" : "items-start"}`}>
-                <li className={`flex items-start gap-3 w-full ${locale === "ar" ? "justify-end" : "justify-start flex-row-reverse"}`}>
+                <li className={`flex items-start gap-3 w-full ${locale === "ar" ? "justify-end" : "justify-end flex-row-reverse"}`}>
                   <div className={`text-sm leading-relaxed max-w-[200px] ${locale === "ar" ? "text-right" : "text-left"}`}>
                     {settings?.location?.[locale] || (locale === "ar" ? "مدينة العبور، بلوك ١٢٠٠٨، قسم ٥، القاهرة، ص.ب: العبور ٤٢، مدينة العبور، مصر" : "Obour city, Block 12008, section 5, Cairo, P.O.Box : El Obour 42 ,El Obour City, Egypt.")}
                   </div>
@@ -114,21 +118,21 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                   </span>
                 </li>
 
-                <li className={`flex items-center gap-3 w-full mt-2 ${locale === "ar" ? "justify-end" : "justify-start flex-row-reverse"}`}>
+                <li className={`flex items-center gap-3 w-full mt-2 ${locale === "ar" ? "justify-end" : "justify-end flex-row-reverse"}`}>
                   <span className="text-sm" dir="ltr">{settings?.phone_1?.en || "202 44890220"}</span>
                   <span className="text-[#ffcc00] text-xl">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                   </span>
                 </li>
 
-                <li className={`flex items-center gap-3 w-full mt-2 ${locale === "ar" ? "justify-end" : "justify-start flex-row-reverse"}`}>
+                <li className={`flex items-center gap-3 w-full mt-2 ${locale === "ar" ? "justify-end" : "justify-end flex-row-reverse"}`}>
                   <span className="text-sm" dir="ltr">{settings?.phone_2?.en || "202 44890227"}</span>
                   <span className="text-[#ffcc00] text-xl">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
                   </span>
                 </li>
 
-                <li className={`flex items-center gap-3 w-full mt-2 mb-6 ${locale === "ar" ? "justify-end" : "justify-start flex-row-reverse"}`}>
+                <li className={`flex items-center gap-3 w-full mt-2 mb-6 ${locale === "ar" ? "justify-end" : "justify-end flex-row-reverse"}`}>
                   <a href={`mailto:${settings?.email?.en || "oroubamail@orouba.ajwa.com"}`} className="text-sm hover:text-[#ffcc00] transition-colors">{settings?.email?.en || "oroubamail@orouba.ajwa.com"}</a>
                   <span className="text-[#ffcc00] text-xl">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
@@ -139,7 +143,7 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                 <li className={`flex flex-col gap-4 w-full mt-4 ${locale === "ar" ? "items-end" : "items-start"}`}>
                   
                   {/* Basma Row */}
-                  <div className={`flex items-center gap-3 ${locale === "ar" ? "justify-end" : "justify-start flex-row-reverse"}`}>
+                  <div className={`flex items-center gap-3 ${locale === "ar" ? "justify-end" : "justify-end flex-row-reverse"}`}>
                     <div className="flex gap-2 items-center">
                       <a href="https://www.facebook.com/BasmaVegetables" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
                         <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
@@ -167,7 +171,7 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                   </div>
 
                   {/* Bap Bites Row */}
-                  <div className={`flex items-center gap-3 ${locale === "ar" ? "justify-end" : "justify-start flex-row-reverse"}`}>
+                  <div className={`flex items-center gap-3 ${locale === "ar" ? "justify-end" : "justify-end flex-row-reverse"}`}>
                     <div className="flex gap-2 items-center">
                       <a href="https://www.facebook.com/profile.php?id=61551777392870" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
                         <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
@@ -203,14 +207,12 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
           {/* MOBILE ACCORDION LAYOUT */}
           <div className="block md:hidden mb-12" dir={locale === "ar" ? "rtl" : "ltr"}>
             {/* Mobile Logo */}
-            <div className={`flex mb-12 ${locale === "ar" ? "justify-start" : "justify-end"}`}>
-              <Link href={`/${locale}`}>
-                <img 
-                  src="https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png" 
-                  alt="Orouba Foods" 
-                  className="w-32 h-32 object-contain" 
-                />
-              </Link>
+            <div className="flex justify-center mt-12 mb-8 border-t border-white/20 pt-8">
+              <img 
+                src={mainLogo} 
+                alt="Orouba Foods" 
+                className="w-40 h-40 object-contain" 
+              />
             </div>
 
             <div className="space-y-6">

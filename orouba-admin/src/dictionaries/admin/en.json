@@ -45,6 +45,12 @@
     "chatMenu": "Chat Menu",
     "collaborates": "Collaborate Requests",
     "careers": "Job Applications",
-    "team": "Team Management"
+    "team": "Team Management",
+    "aboutSection": "About Us Page",
+    "siteSection": "Global Site",
+    "productTypes": "Product Types",
+    "recipeCategories": "Recipe Categories",
+    "productionSteps": "Production Steps",
+    "sectionTexts": "Section Texts"
   }
 }

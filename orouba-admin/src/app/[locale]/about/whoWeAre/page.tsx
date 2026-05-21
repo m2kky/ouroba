@@ -96,8 +96,10 @@ export default async function AboutPage({
           </div>
         ))}
 
+
+
         {/* Buildings */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-center mt-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-center mb-16">
           {buildings && buildings.map((item: any) => (
             <div key={item.id} className="flex gap-4 items-start text-start" style={{ textAlign: locale === 'en' ? 'left' : 'right', flexDirection: locale === 'ar' ? 'row-reverse' : 'row' }}>
               <div>
