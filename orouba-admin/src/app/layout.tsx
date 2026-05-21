@@ -23,6 +23,8 @@ const tajawal = Tajawal({
   weight: ["400", "500", "700", "800"],
 });
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata(): Promise<Metadata> {
   let favicon = "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png";
   try {
