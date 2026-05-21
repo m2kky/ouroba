@@ -13,6 +13,7 @@ interface ProductCardProps {
     id: string;
     nameAr: string;
     nameEn: string;
+    color?: string;
     images: { url: string }[];
   };
   brand: {
@@ -24,7 +25,8 @@ interface ProductCardProps {
 
 export default function ProductCard({ product, brand, locale }: ProductCardProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const hoverColor = brand.hoverColor || "#facc15"; // Fallback color
+  // Prioritize product color for hover effect, then brand color, then default
+  const hoverColor = product.color && product.color !== "#ffffff" ? product.color : (brand.hoverColor || "#facc15");
   const productName = locale === "ar" ? product.nameAr : product.nameEn;
 
   // Calculate if the hover color is light or dark to determine text color
@@ -46,7 +48,7 @@ export default function ProductCard({ product, brand, locale }: ProductCardProps
   return (
     <Link href={`/${locale}/products/details/${product.id}/${slugProductName}`}>
       <motion.div
-        className="relative flex flex-col items-center justify-between rounded-[2.5rem] overflow-hidden cursor-pointer w-full max-w-[300px] mx-auto h-[380px] shadow-sm hover:shadow-2xl transition-all duration-500 group"
+        className="relative flex flex-col items-center justify-between rounded-[2.5rem] overflow-hidden cursor-pointer w-full max-w-[300px] mx-auto min-h-[420px] h-full shadow-sm hover:shadow-2xl transition-all duration-500 group"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         initial={{ opacity: 0, y: 20 }}
@@ -81,8 +83,9 @@ export default function ProductCard({ product, brand, locale }: ProductCardProps
           }}
         >
           <h4
-            className="text-xl font-bold mb-3 transition-colors duration-500"
+            className="text-xl font-bold mb-3 transition-colors duration-500 line-clamp-3"
             style={{ color: isHovered ? hoverTextColor : "#1e4a8c" }}
+            title={productName}
           >
             {productName}
           </h4>

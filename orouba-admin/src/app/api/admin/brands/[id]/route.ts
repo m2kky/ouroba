@@ -49,16 +49,19 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
       imageMainUrl = await uploadFile(buffer, imageMainFile.name, "brands");
     }
 
-    let videoUrl = existingBrand.videoUrl;
+    const videoUrlInput = formData.get("videoUrl") as string | null;
+    const videoUrlEnInput = formData.get("videoUrlEn") as string | null;
+
+    let videoUrl = videoUrlInput === "" ? null : (videoUrlInput || existingBrand.videoUrl);
     if (videoFile && videoFile.size > 0) {
-      if (existingBrand.videoUrl) await deleteFile(existingBrand.videoUrl);
+      if (existingBrand.videoUrl && !existingBrand.videoUrl.startsWith("http")) await deleteFile(existingBrand.videoUrl);
       const buffer = Buffer.from(await videoFile.arrayBuffer());
       videoUrl = await uploadFile(buffer, videoFile.name, "brands");
     }
 
-    let videoUrlEn = existingBrand.videoUrlEn;
+    let videoUrlEn = videoUrlEnInput === "" ? null : (videoUrlEnInput || existingBrand.videoUrlEn);
     if (videoFileEn && videoFileEn.size > 0) {
-      if (existingBrand.videoUrlEn) await deleteFile(existingBrand.videoUrlEn);
+      if (existingBrand.videoUrlEn && !existingBrand.videoUrlEn.startsWith("http")) await deleteFile(existingBrand.videoUrlEn);
       const buffer = Buffer.from(await videoFileEn.arrayBuffer());
       videoUrlEn = await uploadFile(buffer, videoFileEn.name, "brands");
     }

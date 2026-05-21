@@ -21,6 +21,8 @@ interface Brand {
   colorHover: string;
   number: number;
   isHidden: boolean;
+  videoUrl: string | null;
+  videoUrlEn: string | null;
 }
 
 export default function BrandsPage() {
@@ -356,7 +358,36 @@ export default function BrandsPage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-4 border-t pt-4">
+                <h4 className="font-bold text-orouba-blue border-b pb-2">{t("فيديو البراند (اختياري)", "Brand Video (Optional)")}</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1">{t("رفع فيديو - عربي", "Upload Video - Arabic")}</label>
+                    <input type="file" name="videoFile" accept="video/*" className="w-full text-sm border border-gray-200 rounded-lg p-1" />
+                    {editingBrand?.videoUrl && <div className="mt-2 text-xs text-green-600">{t("يوجد فيديو حالي", "Current video exists")}</div>}
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1">{t("رفع فيديو - إنجليزي", "Upload Video - English")}</label>
+                    <input type="file" name="videoFileEn" accept="video/*" className="w-full text-sm border border-gray-200 rounded-lg p-1" />
+                    {editingBrand?.videoUrlEn && <div className="mt-2 text-xs text-green-600">{t("يوجد فيديو حالي", "Current video exists")}</div>}
+                  </div>
+                </div>
+                
+                <div className="text-center text-sm font-bold text-gray-500 my-2">{t("أو أدخل رابطاً مباشراً (R2 أو YouTube)", "OR Enter direct link (R2 or YouTube)")}</div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1">{t("رابط الفيديو - عربي", "Video Link - Arabic")}</label>
+                    <input type="url" name="videoUrl" defaultValue={editingBrand?.videoUrl || ""} dir="ltr" className="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1">{t("رابط الفيديو - إنجليزي", "Video Link - English")}</label>
+                    <input type="url" name="videoUrlEn" defaultValue={editingBrand?.videoUrlEn || ""} dir="ltr" className="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t pt-4">
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-1">{t("لون البراند الأساسي", "Primary Brand Color")}</label>
                   <div className="flex gap-2">

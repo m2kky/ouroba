@@ -54,13 +54,16 @@ export async function POST(req: Request) {
       imageMainUrl = await uploadFile(buffer, imageMainFile.name, "brands");
     }
 
-    let videoUrl = null;
+    const videoUrlInput = formData.get("videoUrl") as string | null;
+    const videoUrlEnInput = formData.get("videoUrlEn") as string | null;
+
+    let videoUrl = videoUrlInput === "" ? null : videoUrlInput;
     if (videoFile && videoFile.size > 0) {
       const buffer = Buffer.from(await videoFile.arrayBuffer());
       videoUrl = await uploadFile(buffer, videoFile.name, "brands");
     }
 
-    let videoUrlEn = null;
+    let videoUrlEn = videoUrlEnInput === "" ? null : videoUrlEnInput;
     if (videoFileEn && videoFileEn.size > 0) {
       const buffer = Buffer.from(await videoFileEn.arrayBuffer());
       videoUrlEn = await uploadFile(buffer, videoFileEn.name, "brands");

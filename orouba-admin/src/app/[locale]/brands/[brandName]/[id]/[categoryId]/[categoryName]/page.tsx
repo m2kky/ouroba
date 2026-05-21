@@ -107,6 +107,7 @@ export default async function BrandCategoryProductsPage({ params }: { params: Pr
                   id: product.id,
                   nameAr: product.nameAr,
                   nameEn: product.nameEn,
+                  color: product.color,
                   images: product.images
                 }}
                 brand={{
