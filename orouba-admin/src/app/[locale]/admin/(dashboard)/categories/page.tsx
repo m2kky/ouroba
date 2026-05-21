@@ -132,6 +132,11 @@ export default function CategoriesPage() {
 
   const columns: Column<Category>[] = [
     { 
+      key: "index", 
+      label: "#", 
+      render: (_, index) => <span className="text-gray-500 font-medium">{(index ?? 0) + 1}</span> 
+    },
+    { 
       key: "image", 
       label: dict.common.image, 
       render: (item) => item.image ? (

@@ -4,7 +4,7 @@ import { Search } from "lucide-react";
 export interface Column<T> {
   key: string;
   label: string;
-  render?: (item: T) => React.ReactNode;
+  render?: (item: T, index: number) => React.ReactNode;
 }
 
 interface DataTableProps<T> {
@@ -97,11 +97,11 @@ export default function DataTable<T extends { id: string | number }>({
           </thead>
           <tbody className="divide-y divide-gray-100">
             {data.length > 0 ? (
-              data.map((item) => (
+              data.map((item, rowIndex) => (
                 <tr key={item.id} className="hover:bg-gray-50/50 transition-colors">
                   {columns.map((col) => (
                     <td key={`${item.id}-${col.key}`} className="px-6 py-4">
-                      {col.render ? col.render(item) : (item as any)[col.key] || "—"}
+                      {col.render ? col.render(item, rowIndex) : (item as any)[col.key] || "—"}
                     </td>
                   ))}
                   {actions && (

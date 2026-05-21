@@ -41,6 +41,18 @@ export default async function ProductsPage({
 
   const productTypesArray = [
     {
+      id: "veg",
+      titleEn: "Frozen Vegetables",
+      titleAr: "الخضروات المجمدة",
+      descriptionEn: "All our vegetables are carefully selected. They undergo inspection and selection process, then the vegetables are washed, processed and subjected to quick freezing, We have a large variety of types to serve different needs",
+      descriptionAr: "يتم اختيار جميع خضرواتنا بعناية. تخضع الخضروات لعملية الفحص والاختيار، ثم يتم غسلها ومعالجتها ومرورها بالتجميد السريع، ولدينا مجموعة متنوعة من الأصناف لتلبية الاحتياجات المختلفة.",
+      image: settings.product_type_veg_image?.en || settings.product_type_veg_image?.ar || "icIeuiVnOAuVtHTPzWDN8D16X8aLOQ7wpGZoRIOD.webp",
+      brands: [
+        { brandId: "7", catId: "4", logo: "/UIkaE1koGECMMc616E9jBg8H27gL60D9N9c10r2q.png" }, // Farida - Frozen Vegetables
+        { brandId: "5", catId: "11", logo: "/basma.png" } // Basma - Frozen Vegetables & Fruits
+      ]
+    },
+    {
       id: "fruits",
       titleEn: "Frozen Fruits",
       titleAr: "الفواكة المجمدة",
@@ -62,18 +74,6 @@ export default async function ProductsPage({
       brands: [
         { brandId: "7", catId: "6", logo: "/UIkaE1koGECMMc616E9jBg8H27gL60D9N9c10r2q.png" }, // Farida - Frozen Falafel
         { brandId: "5", catId: "12", logo: "/basma.png" } // Basma - Frozen Falafel
-      ]
-    },
-    {
-      id: "veg",
-      titleEn: "Frozen Vegetables",
-      titleAr: "الخضروات المجمدة",
-      descriptionEn: "All our vegetables are carefully selected. They undergo inspection and selection process, then the vegetables are washed, processed and subjected to quick freezing, We have a large variety of types to serve different needs",
-      descriptionAr: "يتم اختيار جميع خضرواتنا بعناية. تخضع الخضروات لعملية الفحص والاختيار، ثم يتم غسلها ومعالجتها ومرورها بالتجميد السريع، ولدينا مجموعة متنوعة من الأصناف لتلبية الاحتياجات المختلفة.",
-      image: settings.product_type_veg_image?.en || settings.product_type_veg_image?.ar || "icIeuiVnOAuVtHTPzWDN8D16X8aLOQ7wpGZoRIOD.webp",
-      brands: [
-        { brandId: "7", catId: "4", logo: "/UIkaE1koGECMMc616E9jBg8H27gL60D9N9c10r2q.png" }, // Farida - Frozen Vegetables
-        { brandId: "5", catId: "11", logo: "/basma.png" } // Basma - Frozen Vegetables & Fruits
       ]
     },
     {
