@@ -143,7 +143,7 @@ export default async function ProductsPage({
 
       {/* Breadcrumbs */}
       <div className="max-w-[1400px] mx-auto px-4 md:px-8 mb-12 relative z-10">
-        <div className={`flex items-center gap-2 font-bold text-lg md:text-xl text-[#004A99] ${locale === 'en' ? "flex-row" : "flex-row-reverse justify-end"}`}>
+        <div className="flex flex-wrap items-center gap-2 font-bold text-lg md:text-xl text-[#004A99]">
           <Link href={`/${locale}`} className="hover:text-white transition-colors">{locale === 'ar' ? 'الصفحة الرئيسية' : 'Home'}</Link>
           <ChevronLeft className={`w-5 h-5 mt-1 ${locale === 'en' ? 'rotate-180' : ''}`} />
           <Link href={`/${locale}/about/whoWeAre`} className="hover:text-white transition-colors">{locale === 'ar' ? 'عن العروبة' : 'About Orouba'}</Link>

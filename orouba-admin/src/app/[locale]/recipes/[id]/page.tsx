@@ -55,6 +55,48 @@ export default async function RecipeDetailPage({ params }: { params: Promise<{ i
     return cleanText.length > 0;
   }) || [];
 
+  let rawDescription = isEn ? (recipe.descriptionEn || '') : (recipe.descriptionAr || '');
+  let extractedIngredients = '';
+  let extractedSteps = rawDescription;
+
+  const splitKeyword = isEn ? 'Steps:\n' : 'الخطوات:\n';
+  const fallbackSplitKeyword = isEn ? 'Steps:' : 'الخطوات:';
+
+  if (rawDescription.includes(splitKeyword)) {
+    const parts = rawDescription.split(splitKeyword);
+    let ingPart = parts[0];
+    extractedSteps = parts[1];
+    
+    const ingKeyword = isEn ? 'Ingredients:\n' : 'المكونات:\n';
+    if (ingPart.includes(ingKeyword)) {
+      extractedIngredients = ingPart.split(ingKeyword)[1].trim();
+    } else {
+      extractedIngredients = ingPart.trim();
+    }
+  } else if (rawDescription.includes(fallbackSplitKeyword)) {
+     const parts = rawDescription.split(fallbackSplitKeyword);
+     let ingPart = parts[0];
+     extractedSteps = parts[1].replace(/^<\/p>/, '').trim();
+
+     const ingKeyword = isEn ? 'Ingredients:' : 'المكونات:';
+     if (ingPart.includes(ingKeyword)) {
+       extractedIngredients = ingPart.split(ingKeyword)[1].replace(/^<\/p>/, '').trim();
+     } else {
+       extractedIngredients = ingPart.replace(/<p>\s*$/, '').trim();
+     }
+  }
+
+  // Format extracted ingredients if they are simple text dashes
+  if (extractedIngredients && !extractedIngredients.includes('<li') && extractedIngredients.includes('-')) {
+    const items = extractedIngredients.split('\n').filter(line => line.trim().startsWith('-') || line.trim().length > 0);
+    extractedIngredients = `<ul class="list-disc ${isEn ? 'pl-5' : 'pr-5'} space-y-2 marker:text-orouba-blue">` + 
+      items.map(i => {
+        const text = i.replace(/^- /, '').trim();
+        return text ? `<li class="text-gray-800 font-medium">${text}</li>` : '';
+      }).join('') + 
+    `</ul>`;
+  }
+
   const mainImage = recipe.internalImage || recipe.images?.[0]?.url;
 
   return (
@@ -107,10 +149,10 @@ export default async function RecipeDetailPage({ params }: { params: Promise<{ i
             )}
             
             {/* Description only if steps exist, otherwise description is used as steps */}
-            {(validSteps.length > 0) && (isEn ? recipe.descriptionEn : recipe.descriptionAr) && (
+            {(validSteps.length > 0) && extractedSteps && (
               <div 
                 className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed prose prose-lg"
-                dangerouslySetInnerHTML={{ __html: sanitizeHtml((isEn ? recipe.descriptionEn : recipe.descriptionAr) || '') }}
+                dangerouslySetInnerHTML={{ __html: sanitizeHtml(extractedSteps) }}
               />
             )}
           </div>
@@ -122,54 +164,64 @@ export default async function RecipeDetailPage({ params }: { params: Promise<{ i
           
           {/* Ingredients */}
           <div className="md:col-span-1 space-y-8">
-            {/* Orouba Products Used */}
-            {recipe.foods?.length > 0 && (
+            {(recipe.foods?.length > 0 || extractedIngredients) && (
               <div className="bg-blue-50 rounded-[2rem] p-8 border border-blue-100 shadow-sm">
                 <h3 className="text-2xl font-bold text-orouba-blue mb-6 border-b border-blue-200 pb-4">{isEn ? 'Our Ingredients' : 'مكوناتنا'}</h3>
-                <div className="space-y-4">
-                  {recipe.foods.map((rf: any) => (
-                    <div key={rf.id} className="flex items-center gap-4 group cursor-default">
-                      <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center p-2 border border-blue-200 shadow-sm transition-colors group-hover:border-orouba-yellow">
-                        {rf.food?.image ? (
-                          <img src={rf.food.image} alt={isEn ? rf.food.nameEn : rf.food.nameAr} className="w-full h-full object-contain" />
-                        ) : (
-                          <span className="text-xl">🥗</span>
-                        )}
+                
+                {/* Orouba Products Used */}
+                {recipe.foods?.length > 0 && (
+                  <div className={`space-y-4 ${extractedIngredients ? 'mb-8 border-b border-blue-200 pb-6' : ''}`}>
+                    {recipe.foods.map((rf: any) => (
+                      <div key={rf.id} className="flex items-center gap-4 group cursor-default">
+                        <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center p-2 border border-blue-200 shadow-sm transition-colors group-hover:border-orouba-yellow">
+                          {rf.food?.image ? (
+                            <img src={rf.food.image} alt={isEn ? rf.food.nameEn : rf.food.nameAr} className="w-full h-full object-contain" />
+                          ) : (
+                            <span className="text-xl">🥗</span>
+                          )}
+                        </div>
+                        <span className="font-bold text-orouba-blue group-hover:text-blue-800 transition-colors">
+                          {isEn ? rf.food?.nameEn : rf.food?.nameAr}
+                        </span>
                       </div>
-                      <span className="font-bold text-orouba-blue group-hover:text-blue-800 transition-colors">
-                        {isEn ? rf.food?.nameEn : rf.food?.nameAr}
-                      </span>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Textual Ingredients Extracted from Description */}
+                {extractedIngredients && (
+                  <div 
+                    className="text-lg leading-loose prose prose-blue"
+                    dangerouslySetInnerHTML={{ __html: sanitizeHtml(extractedIngredients) }}
+                  />
+                )}
               </div>
             )}
-
           </div>
 
           {/* Steps */}
           <div className="md:col-span-2">
-            <div className="bg-white rounded-[2rem] p-8 md:p-10 border border-gray-100 shadow-sm">
-              <h3 className="text-3xl font-bold text-orouba-blue mb-10 border-b border-gray-100 pb-6">{isEn ? 'Preparation' : 'طريقة التحضير'}</h3>
+            <div className="bg-white rounded-[2rem] p-8 md:p-10 border-2 border-orouba-blue shadow-lg">
+              <h3 className="text-3xl font-bold text-orouba-blue mb-10 border-b border-gray-200 pb-6">{isEn ? 'Preparation' : 'طريقة التحضير'}</h3>
               <div className="space-y-10">
                 {validSteps.length > 0 ? (
                   validSteps.map((step: any, idx: number) => (
                     <div key={step.id} className="flex gap-6 relative">
                       {/* Line connector */}
                       {idx !== validSteps.length - 1 && (
-                        <div className={`absolute top-14 bottom-[-40px] w-0.5 bg-gray-100 ${isEn ? 'left-6' : 'right-6'}`}></div>
+                        <div className={`absolute top-14 bottom-[-40px] w-0.5 bg-gray-200 ${isEn ? 'left-6' : 'right-6'}`}></div>
                       )}
                       <div className="flex-shrink-0 w-12 h-12 rounded-full bg-orouba-blue text-orouba-yellow flex items-center justify-center font-bold text-xl shadow-md z-10">
                         {idx + 1}
                       </div>
-                      <div className="pt-2 bg-gray-50 rounded-2xl p-6 flex-grow border border-gray-100 hover:shadow-md transition-shadow">
-                        <div className="text-lg text-gray-700 leading-loose prose" dangerouslySetInnerHTML={{ __html: isEn ? step.stepEn : step.stepAr }} />
+                      <div className="pt-2 bg-white rounded-2xl p-6 flex-grow border border-gray-200 shadow-md hover:shadow-lg transition-shadow">
+                        <div className="text-lg text-gray-900 font-medium leading-loose prose" dangerouslySetInnerHTML={{ __html: isEn ? step.stepEn : step.stepAr }} />
                       </div>
                     </div>
                   ))
                 ) : (
-                  <div className="pt-2 bg-gray-50 rounded-2xl p-6 md:p-8 flex-grow border border-gray-100">
-                    <div className="text-lg text-gray-700 leading-loose prose" dangerouslySetInnerHTML={{ __html: isEn ? (recipe.descriptionEn || '') : (recipe.descriptionAr || '') }} />
+                  <div className="pt-2 bg-white rounded-2xl p-6 md:p-8 flex-grow border border-gray-200 shadow-md hover:shadow-lg transition-shadow">
+                    <div className="text-lg text-gray-900 font-medium leading-loose prose" dangerouslySetInnerHTML={{ __html: sanitizeHtml(extractedSteps) }} />
                   </div>
                 )}
               </div>

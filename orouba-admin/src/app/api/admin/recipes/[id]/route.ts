@@ -4,13 +4,16 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { uploadFile, deleteFile } from "@/lib/upload";
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session || (session.user as any).role !== "ADMIN") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   try {
+    const resolvedParams = await params;
+    const recipeId = resolvedParams.id;
+
     const formData = await req.formData();
     const nameAr = formData.get("nameAr") as string;
     const nameEn = formData.get("nameEn") as string;
@@ -35,7 +38,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    const existingRecipe = await prisma.recipe.findUnique({ where: { id: params.id } });
+    const existingRecipe = await prisma.recipe.findUnique({ where: { id: recipeId } });
     if (!existingRecipe) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
     let internalImageUrl = existingRecipe.internalImage;
@@ -48,7 +51,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     // Handle deleted images
     if (deletedImageIds.length > 0) {
       const imagesToDelete = await prisma.recipeImage.findMany({
-        where: { id: { in: deletedImageIds }, recipeId: params.id }
+        where: { id: { in: deletedImageIds }, recipeId: recipeId }
       });
       
       for (const img of imagesToDelete) {
@@ -70,7 +73,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     }
 
     const recipe = await prisma.recipe.update({
-      where: { id: params.id },
+      where: { id: recipeId },
       data: {
         nameAr,
         nameEn,
@@ -108,15 +111,18 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
   }
 }
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await getServerSession(authOptions);
   if (!session || (session.user as any).role !== "ADMIN") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   try {
+    const resolvedParams = await params;
+    const recipeId = resolvedParams.id;
+
     const existingRecipe = await prisma.recipe.findUnique({ 
-      where: { id: params.id },
+      where: { id: recipeId },
       include: { images: true }
     });
     if (!existingRecipe) return NextResponse.json({ error: "Not found" }, { status: 404 });
@@ -126,7 +132,7 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
       await deleteFile(img.url);
     }
 
-    await prisma.recipe.delete({ where: { id: params.id } });
+    await prisma.recipe.delete({ where: { id: recipeId } });
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error deleting recipe:", error);

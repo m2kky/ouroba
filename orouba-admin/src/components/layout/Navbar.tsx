@@ -45,7 +45,7 @@ export default function Navbar({ settings, brands: brandsProp }: { settings?: Re
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      window.location.href = `/${locale}/about/ProductType?q=${encodeURIComponent(searchQuery.trim())}`;
+      window.location.href = `/${locale}/search?q=${encodeURIComponent(searchQuery.trim())}`;
       setIsSearchOpen(false);
     }
   };
@@ -83,7 +83,7 @@ export default function Navbar({ settings, brands: brandsProp }: { settings?: Re
       ]
     },
     { 
-      label: locale === "ar" ? "العلامات التجارية" : "Brands", 
+      label: locale === "ar" ? "المنتجات" : "Brands", 
       href: `#`,
       children: brandChildren.length > 0 ? brandChildren : [
         { label: locale === "ar" ? "عرض الكل" : "View All", href: `/${locale}/brands` },
@@ -104,7 +104,7 @@ export default function Navbar({ settings, brands: brandsProp }: { settings?: Re
           
           {/* Logo (Right in RTL) */}
           <Link href={`/${locale}`} className="flex-shrink-0 flex items-center z-50 h-full relative group">
-            <div className="w-auto h-24 md:h-32 absolute top-0 right-0 transform translate-y-2 md:translate-y-4 bg-white rounded-full p-2 shadow-lg border-4 border-[#1e4a8c] group-hover:scale-105 transition-transform duration-300">
+            <div className="w-auto h-24 md:h-32 absolute top-0 right-0 transform translate-y-2 md:translate-y-4 group-hover:scale-105 transition-transform duration-300">
               <img 
                 src={mainLogo} 
                 alt="Orouba Foods" 
@@ -146,7 +146,9 @@ export default function Navbar({ settings, brands: brandsProp }: { settings?: Re
                         <li key={index}>
                           <Link 
                             href={child.href}
-                            className="block w-full text-center py-4 text-orouba-blue font-bold hover:text-orouba-yellow hover:bg-blue-50 transition-colors rounded-xl mx-2"
+                            className={`block w-full text-center py-4 font-bold hover:text-orouba-blue hover:bg-blue-50 transition-colors rounded-xl mx-2 ${
+                              pathname === child.href ? "text-orouba-blue bg-blue-50" : "text-black"
+                            }`}
                           >
                             {child.label}
                           </Link>
@@ -241,7 +243,7 @@ export default function Navbar({ settings, brands: brandsProp }: { settings?: Re
                   <li>
                     <button 
                       onClick={() => handleLanguageSwitch('ar')}
-                      className={`block w-full py-3 text-black font-medium hover:text-orouba-yellow hover:bg-gray-50 transition-colors text-lg cursor-pointer ${locale === 'ar' ? 'bg-gray-50 text-orouba-yellow' : ''}`}
+                      className={`block w-full py-3 text-black font-medium hover:text-orouba-blue hover:bg-gray-50 transition-colors text-lg cursor-pointer ${locale === 'ar' ? 'bg-gray-50 text-orouba-blue' : ''}`}
                     >
                       العربية
                     </button>
@@ -249,7 +251,7 @@ export default function Navbar({ settings, brands: brandsProp }: { settings?: Re
                   <li>
                     <button 
                       onClick={() => handleLanguageSwitch('en')}
-                      className={`block w-full py-3 text-black font-medium hover:text-orouba-yellow hover:bg-gray-50 transition-colors text-lg cursor-pointer ${locale === 'en' ? 'bg-gray-50 text-orouba-yellow' : ''}`}
+                      className={`block w-full py-3 text-black font-medium hover:text-orouba-blue hover:bg-gray-50 transition-colors text-lg cursor-pointer ${locale === 'en' ? 'bg-gray-50 text-orouba-blue' : ''}`}
                     >
                       English
                     </button>

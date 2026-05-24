@@ -123,7 +123,7 @@ export default async function ProductDetailsPage({ params }: { params: Promise<{
 
         {/* Breadcrumbs */}
         <div className="max-w-[1400px] mx-auto px-4 md:px-8 mt-6 mb-8 relative z-10">
-          <div className={`flex items-center gap-2 font-bold text-sm md:text-base opacity-80 ${locale === "en" ? "flex-row" : "flex-row-reverse justify-end"}`} style={{ color: textColor }}>
+          <div className="flex flex-wrap items-center gap-2 font-bold text-sm md:text-base opacity-80" style={{ color: textColor }}>
             <Link href={`/${locale}`} className="hover:opacity-100 transition-opacity">{locale === "ar" ? "الصفحة الرئيسية" : "Home"}</Link>
             <ChevronLeft className={`w-4 h-4 mt-1 ${locale === "en" ? "rotate-180" : ""}`} />
             <Link href={`/${locale}/about/ProductType`} className="hover:opacity-100 transition-opacity">{locale === "ar" ? "المنتجات" : "Products"}</Link>

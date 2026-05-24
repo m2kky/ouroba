@@ -102,13 +102,13 @@ export default async function HomePage({
               muted 
               playsInline
               preload="auto"
-              className="w-full h-[60vh] md:h-[90vh] object-cover z-0 block"
+              className="w-full h-auto max-h-[90vh] object-cover z-0 block"
             />
           ) : (
             <img 
               src={mediaDesktop} 
               alt="Hero Banner"
-              className="w-full h-[60vh] md:h-[90vh] object-cover z-0 block"
+              className="w-full h-auto max-h-[90vh] object-cover z-0 block"
             />
           )}
         </div>

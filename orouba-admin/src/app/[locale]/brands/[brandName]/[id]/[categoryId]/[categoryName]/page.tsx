@@ -85,7 +85,7 @@ export default async function BrandCategoryProductsPage({ params }: { params: Pr
 
       {/* Breadcrumbs */}
       <div className="max-w-[1400px] mx-auto px-4 md:px-8 mb-8">
-        <div className={`flex items-center justify-center gap-2 font-bold text-base md:text-lg text-gray-500 ${isEn ? 'flex-row' : 'flex-row-reverse'}`}>
+        <div className="flex flex-wrap items-center justify-center gap-2 font-bold text-base md:text-lg text-gray-500">
           <Link href={`/${locale}`} className="hover:text-black transition-colors">{locale === 'ar' ? 'الصفحة الرئيسية' : 'Home'}</Link>
           <ChevronLeft className={`w-4 h-4 mt-1 ${isEn ? 'rotate-180' : ''}`} />
           <Link href={`/${locale}/about/ProductType`} className="hover:text-black transition-colors">{locale === 'ar' ? 'المنتجات' : 'Products'}</Link>

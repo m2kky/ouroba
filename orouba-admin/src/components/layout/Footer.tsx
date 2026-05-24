@@ -24,6 +24,13 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
     setOpenSection(openSection === section ? null : section);
   };
 
+  const formatPhone = (phone: string) => {
+    if (locale === 'ar') {
+      return phone.replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[parseInt(d)]);
+    }
+    return phone;
+  };
+
   const mainLogo = settings?.main_logo?.en || settings?.main_logo?.ar || "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png";
 
   return (
@@ -106,44 +113,53 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
             </div>
 
             {/* Column 4: Contact Us */}
-            <div className={`flex flex-col ${locale === "ar" ? "items-end text-right" : "items-start text-left"}`}>
+            <div className={`flex flex-col items-start ${locale === "ar" ? "text-right" : "text-left"}`}>
               <h3 className="text-xl font-bold mb-8 text-[#ffcc00]">{locale === "ar" ? "اتصل بنا" : "Contact Us"}</h3>
-              <ul className={`space-y-5 text-white flex flex-col w-full ${locale === "ar" ? "items-end" : "items-start"}`}>
-                <li className={`flex items-start gap-3 w-full ${locale === "ar" ? "justify-end" : "justify-end flex-row-reverse"}`}>
+              <ul className="space-y-5 text-white flex flex-col w-full items-start">
+                <li className="flex items-start gap-3 w-full justify-start">
+                  <span className="text-[#ffcc00] mt-1 text-xl shrink-0">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                  </span>
                   <div className={`text-sm leading-relaxed max-w-[200px] ${locale === "ar" ? "text-right" : "text-left"}`}>
                     {settings?.location?.[locale] || (locale === "ar" ? "مدينة العبور، بلوك ١٢٠٠٨، قسم ٥، القاهرة، ص.ب: العبور ٤٢، مدينة العبور، مصر" : "Obour city, Block 12008, section 5, Cairo, P.O.Box : El Obour 42 ,El Obour City, Egypt.")}
                   </div>
-                  <span className="text-[#ffcc00] mt-1 text-xl">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
-                  </span>
                 </li>
 
-                <li className={`flex items-center gap-3 w-full mt-2 ${locale === "ar" ? "justify-end" : "justify-end flex-row-reverse"}`}>
-                  <span className="text-sm" dir="ltr">{settings?.phone_1?.en || "202 44890220"}</span>
-                  <span className="text-[#ffcc00] text-xl">
+                <li className="flex items-center gap-3 w-full mt-2 justify-start">
+                  <span className="text-[#ffcc00] text-xl shrink-0">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                   </span>
+                  <div className="flex flex-row items-center gap-1 text-sm" dir="ltr">
+                    {(settings?.phone_1?.en || "202 44890220").split(' ').map((part, i) => (
+                      <span key={i}>{formatPhone(part)}</span>
+                    ))}
+                  </div>
                 </li>
 
-                <li className={`flex items-center gap-3 w-full mt-2 ${locale === "ar" ? "justify-end" : "justify-end flex-row-reverse"}`}>
-                  <span className="text-sm" dir="ltr">{settings?.phone_2?.en || "202 44890227"}</span>
-                  <span className="text-[#ffcc00] text-xl">
+                <li className="flex items-center gap-3 w-full mt-2 justify-start">
+                  <span className="text-[#ffcc00] text-xl shrink-0">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
                   </span>
+                  <div className="flex flex-row items-center gap-1 text-sm" dir="ltr">
+                    {(settings?.phone_2?.en || "202 44890227").split(' ').map((part, i) => (
+                      <span key={i}>{formatPhone(part)}</span>
+                    ))}
+                  </div>
                 </li>
 
-                <li className={`flex items-center gap-3 w-full mt-2 mb-6 ${locale === "ar" ? "justify-end" : "justify-end flex-row-reverse"}`}>
-                  <a href={`mailto:${settings?.email?.en || "oroubamail@orouba.ajwa.com"}`} className="text-sm hover:text-[#ffcc00] transition-colors">{settings?.email?.en || "oroubamail@orouba.ajwa.com"}</a>
-                  <span className="text-[#ffcc00] text-xl">
+                <li className="flex items-center gap-3 w-full mt-2 mb-6 justify-start">
+                  <span className="text-[#ffcc00] text-xl shrink-0">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                   </span>
+                  <a href={`mailto:${settings?.email?.en || "oroubamail@orouba.ajwa.com"}`} className="text-sm hover:text-[#ffcc00] transition-colors">{settings?.email?.en || "oroubamail@orouba.ajwa.com"}</a>
                 </li>
 
                 {/* Social Media Links (Basma and Bap Bites) */}
-                <li className={`flex flex-col gap-4 w-full mt-4 ${locale === "ar" ? "items-end" : "items-start"}`}>
+                <li className="flex flex-col gap-4 w-full mt-4 items-start">
                   
                   {/* Basma Row */}
-                  <div className={`flex items-center gap-3 ${locale === "ar" ? "justify-end" : "justify-end flex-row-reverse"}`}>
+                  <div className="flex items-center gap-3 justify-start">
+                    <img src="/basma.png" alt="Basma" className="w-16 h-16 object-contain" />
                     <div className="flex gap-2 items-center">
                       <a href="https://www.facebook.com/BasmaVegetables" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
                         <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
@@ -167,11 +183,11 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                         </svg>
                       </a>
                     </div>
-                    <img src="/basma.png" alt="Basma" className="w-16 h-16 object-contain" />
                   </div>
 
                   {/* Bap Bites Row */}
-                  <div className={`flex items-center gap-3 ${locale === "ar" ? "justify-end" : "justify-end flex-row-reverse"}`}>
+                  <div className="flex items-center gap-3 justify-start">
+                    <img src="/vm0x6DYiCFTgbVkAekwe2SBVAyMnx1MrvLAziapn.png" alt="Bap Bites" className="w-16 h-16 object-contain" />
                     <div className="flex gap-2 items-center">
                       <a href="https://www.facebook.com/profile.php?id=61551777392870" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
                         <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
@@ -195,7 +211,6 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                         </svg>
                       </a>
                     </div>
-                    <img src="/vm0x6DYiCFTgbVkAekwe2SBVAyMnx1MrvLAziapn.png" alt="Bap Bites" className="w-16 h-16 object-contain" />
                   </div>
 
                 </li>
@@ -207,7 +222,7 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
           {/* MOBILE ACCORDION LAYOUT */}
           <div className="block md:hidden mb-12" dir={locale === "ar" ? "rtl" : "ltr"}>
             {/* Mobile Logo */}
-            <div className="flex justify-center mt-12 mb-8 border-t border-white/20 pt-8">
+            <div className="flex justify-center mt-12 mb-8 border-t border-[#2a68a8] pt-8">
               <img 
                 src={mainLogo} 
                 alt="Orouba Foods" 
@@ -217,7 +232,7 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
 
             <div className="space-y-6">
               {/* Products Accordion */}
-              <div className="border-b border-blue-800/30 pb-4">
+              <div className="border-b border-[#2a68a8] pb-4">
                 <button 
                   onClick={() => toggleSection('products')}
                   className={`w-full flex items-center gap-4 ${locale === "ar" ? "justify-end text-right" : "justify-start text-left"}`}
@@ -267,7 +282,7 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
               </div>
 
               {/* Quick Links Accordion */}
-              <div className="border-b border-blue-800/30 pb-4">
+              <div className="border-b border-[#2a68a8] pb-4">
                 <button 
                   onClick={() => toggleSection('links')}
                   className={`w-full flex items-center gap-4 ${locale === "ar" ? "justify-end text-right" : "justify-start text-left"}`}
@@ -302,7 +317,7 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
               </div>
 
               {/* Contact Us Accordion */}
-              <div className="border-b border-blue-800/30 pb-4">
+              <div className="border-b border-[#2a68a8] pb-4">
                 <button 
                   onClick={() => toggleSection('contact')}
                   className={`w-full flex items-center gap-4 ${locale === "ar" ? "justify-end text-right" : "justify-start text-left"}`}
@@ -325,42 +340,51 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                       exit={{ height: 0, opacity: 0 }}
                       className="overflow-hidden"
                     >
-                      <ul className={`space-y-6 pt-6 text-white flex flex-col w-full ${locale === "ar" ? "items-end pl-10" : "items-start pr-10"}`}>
-                        <li className={`flex items-start gap-4 w-full ${locale === "ar" ? "justify-end" : "justify-start flex-row-reverse"}`}>
-                          <div className={`text-lg leading-relaxed max-w-[250px] ${locale === "ar" ? "text-right" : "text-left"}`}>
-                            {settings?.location?.[locale] || (locale === "ar" ? "مدينة العبور، بلوك ١٢٠٠٨، قسم ٥، القاهرة، ص.ب: العبور ٤٢، مدينة العبور، مصر" : "Obour city, Block 12008, section 5, Cairo, P.O.Box : El Obour 42 ,El Obour City, Egypt.")}
-                          </div>
+                      <ul className="space-y-6 pt-6 text-white flex flex-col w-full items-start px-10">
+                        <li className="flex items-start gap-4 w-full justify-start">
                           <span className="text-[#ffcc00] mt-1 text-2xl shrink-0">
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
                           </span>
+                          <div className={`text-lg leading-relaxed max-w-[250px] ${locale === "ar" ? "text-right" : "text-left"}`}>
+                            {settings?.location?.[locale] || (locale === "ar" ? "مدينة العبور، بلوك ١٢٠٠٨، قسم ٥، القاهرة، ص.ب: العبور ٤٢، مدينة العبور، مصر" : "Obour city, Block 12008, section 5, Cairo, P.O.Box : El Obour 42 ,El Obour City, Egypt.")}
+                          </div>
                         </li>
  
-                        <li className={`flex items-center gap-4 w-full ${locale === "ar" ? "justify-end" : "justify-start flex-row-reverse"}`}>
-                          <span className="text-lg" dir="ltr">{settings?.phone_1?.en || "202 44890220"}</span>
+                        <li className="flex items-center gap-4 w-full justify-start">
                           <span className="text-[#ffcc00] text-2xl shrink-0">
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                           </span>
+                          <div className="flex flex-row items-center gap-1 text-lg" dir="ltr">
+                            {(settings?.phone_1?.en || "202 44890220").split(' ').map((part, i) => (
+                              <span key={i}>{formatPhone(part)}</span>
+                            ))}
+                          </div>
                         </li>
  
-                        <li className={`flex items-center gap-4 w-full ${locale === "ar" ? "justify-end" : "justify-start flex-row-reverse"}`}>
-                          <span className="text-lg" dir="ltr">{settings?.phone_2?.en || "202 44890227"}</span>
+                        <li className="flex items-center gap-4 w-full justify-start">
                           <span className="text-[#ffcc00] text-2xl shrink-0">
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
                           </span>
+                          <div className="flex flex-row items-center gap-1 text-lg" dir="ltr">
+                            {(settings?.phone_2?.en || "202 44890227").split(' ').map((part, i) => (
+                              <span key={i}>{formatPhone(part)}</span>
+                            ))}
+                          </div>
                         </li>
  
-                        <li className={`flex items-center gap-4 w-full mb-6 ${locale === "ar" ? "justify-end" : "justify-start flex-row-reverse"}`}>
-                          <a href={`mailto:${settings?.email?.en || "oroubamail@orouba.ajwa.com"}`} className="text-lg hover:text-[#ffcc00] transition-colors">{settings?.email?.en || "oroubamail@orouba.ajwa.com"}</a>
+                        <li className="flex items-center gap-4 w-full mb-6 justify-start">
                           <span className="text-[#ffcc00] text-2xl shrink-0">
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                           </span>
+                          <a href={`mailto:${settings?.email?.en || "oroubamail@orouba.ajwa.com"}`} className="text-lg hover:text-[#ffcc00] transition-colors">{settings?.email?.en || "oroubamail@orouba.ajwa.com"}</a>
                         </li>
 
                         {/* Social Media Links for Mobile */}
-                        <li className={`flex flex-col gap-4 w-full mt-4 ${locale === "ar" ? "items-end" : "items-start"}`}>
+                        <li className="flex flex-col gap-4 w-full mt-4 items-start">
                           
                           {/* Basma Row */}
-                          <div className={`flex items-center gap-4 ${locale === "ar" ? "justify-end" : "justify-start flex-row-reverse"}`}>
+                          <div className="flex items-center gap-4 justify-start">
+                            <img src="/basma.png" alt="Basma" className="w-16 h-16 object-contain" />
                             <div className="flex gap-2 items-center">
                               <a href="https://www.facebook.com/BasmaVegetables" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
                                 <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
@@ -384,11 +408,11 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                                 </svg>
                               </a>
                             </div>
-                            <img src="/basma.png" alt="Basma" className="w-16 h-16 object-contain" />
                           </div>
 
                           {/* Bap Bites Row */}
-                          <div className={`flex items-center gap-4 ${locale === "ar" ? "justify-end" : "justify-start flex-row-reverse"}`}>
+                          <div className="flex items-center gap-4 justify-start">
+                            <img src="/vm0x6DYiCFTgbVkAekwe2SBVAyMnx1MrvLAziapn.png" alt="Bap Bites" className="w-16 h-16 object-contain" />
                             <div className="flex gap-2 items-center">
                               <a href="https://www.facebook.com/profile.php?id=61551777392870" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
                                 <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
@@ -412,7 +436,6 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                                 </svg>
                               </a>
                             </div>
-                            <img src="/vm0x6DYiCFTgbVkAekwe2SBVAyMnx1MrvLAziapn.png" alt="Bap Bites" className="w-16 h-16 object-contain" />
                           </div>
 
                         </li>

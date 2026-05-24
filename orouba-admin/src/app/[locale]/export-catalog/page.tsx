@@ -27,7 +27,7 @@ export default async function ExportCatalogPage({ params }: { params: Promise<{ 
       
       {/* Breadcrumbs */}
       <div className="max-w-[1400px] mx-auto px-4 md:px-8 mb-8">
-        <div className={`flex items-center gap-2 font-bold text-lg md:text-xl text-orouba-blue ${isEn ? 'flex-row' : 'flex-row-reverse justify-end'}`}>
+        <div className="flex flex-wrap items-center gap-2 font-bold text-lg md:text-xl text-orouba-blue">
           <Link href={`/${locale}`} className="hover:text-orouba-yellow transition-colors">{isEn ? 'Home' : 'الرئيسية'}</Link>
           <span className="text-gray-400 mx-1">{'>'}</span>
           <span>{isEn ? 'Export Catalogue' : 'كتالوج التصدير'}</span>

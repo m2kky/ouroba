@@ -51,10 +51,10 @@ export default async function BrandDetailPage({ params }: { params: Promise<{ br
     <div className="bg-white min-h-screen pb-20 pt-32">
       {/* Breadcrumbs */}
       <div className="max-w-[1400px] mx-auto px-4 md:px-8 mb-4">
-        <div className={`flex items-center gap-2 font-bold text-lg md:text-xl ${theme.textPrimary} ${isEn ? "flex-row" : "flex-row-reverse justify-end"}`}>
-          <Link href={`/${locale}`} className="hover:text-orouba-yellow transition-colors">{locale === 'ar' ? 'الصفحة الرئيسية' : 'Home'}</Link>
+        <div className={`flex flex-wrap items-center gap-2 font-bold text-lg md:text-xl ${theme.textPrimary}`}>
+          <Link href={`/${locale}`} className="hover:text-black transition-colors">{locale === 'ar' ? 'الصفحة الرئيسية' : 'Home'}</Link>
           <ChevronLeft className={`w-5 h-5 mt-1 ${isEn ? 'rotate-180' : ''}`} />
-          <Link href={`/${locale}/about/ProductType`} className="hover:text-orouba-yellow transition-colors">{locale === 'ar' ? 'المنتجات' : 'Products'}</Link>
+          <Link href={`/${locale}/about/ProductType`} className="hover:text-black transition-colors">{locale === 'ar' ? 'المنتجات' : 'Products'}</Link>
           <ChevronLeft className={`w-5 h-5 mt-1 ${isEn ? 'rotate-180' : ''}`} />
           <span>{t(locale, brand.nameAr, brand.nameEn)}</span>
         </div>
@@ -101,7 +101,7 @@ export default async function BrandDetailPage({ params }: { params: Promise<{ br
                   className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-white text-orouba-blue font-bold text-lg md:text-xl rounded-full hover:bg-orouba-yellow hover:text-white transition-colors shadow-xl"
                 >
                   {isEn ? 'View All' : 'إظهار الكل'}
-                  <span className={`transform ${isEn ? 'rotate-180' : ''}`}>{"<"}</span>
+                  <span dir="ltr">{isEn ? ">" : "<"}</span>
                 </Link>
               </div>
             )}
@@ -133,48 +133,88 @@ export default async function BrandDetailPage({ params }: { params: Promise<{ br
             {brand.categories?.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                 {brand.categories.map((category: any) => {
-                  const displayImage = category.image || category.products?.[0]?.product?.images?.[0]?.url;
+                  const getCategoryStaticImage = (nameAr: string, nameEn: string, brandId: string) => {
+                    const lowerName = `${nameAr || ''} ${nameEn || ''}`.toLowerCase();
+                    if (brandId === "7") {
+                      if (lowerName.includes("خضار") || lowerName.includes("veg")) return "/categories/farida-veg.jpg";
+                      if (lowerName.includes("فواكه") || lowerName.includes("fruit")) return "/categories/farida-fruits.jpg";
+                      if (lowerName.includes("بقوليات") || lowerName.includes("حبوب") || lowerName.includes("legume") || lowerName.includes("bean") || lowerName.includes("حمص")) return "/categories/farida-legumes.png";
+                      if (lowerName.includes("فلافل") || lowerName.includes("falafel") || lowerName.includes("نصف مقلية")) return "/categories/farida-falafel.jpg";
+                    } else {
+                      if (lowerName.includes("خضار") || lowerName.includes("فواكه") || lowerName.includes("veg") || lowerName.includes("fruit")) return "/categories/veg-fruits.jpg";
+                      if (lowerName.includes("بابيتس") || lowerName.includes("bap") || lowerName.includes("bite")) return "/categories/bap-bites.jpg";
+                      if (lowerName.includes("بقوليات") || lowerName.includes("حبوب") || lowerName.includes("legume") || lowerName.includes("bean") || lowerName.includes("حمص")) return "/categories/legumes.jpg";
+                      if (lowerName.includes("فلافل") || lowerName.includes("falafel") || lowerName.includes("نصف مقلية")) return "/categories/falafel.jpg";
+                    }
+                    return null;
+                  };
+
+                  const staticImage = getCategoryStaticImage(category.nameAr, category.nameEn, brand.id);
+                  const displayImage = staticImage || category.image || category.products?.[0]?.product?.images?.[0]?.url;
+
                   return (
                     <div key={category.id} className={`${theme.bgCard} rounded-[2rem] p-6 flex flex-col items-center relative overflow-hidden group shadow-lg border border-white/20 h-full transition-colors duration-500`}>
                       
-                      {/* Doodles/Abstract Background for card */}
-                      <div className="absolute inset-0 pointer-events-none opacity-20">
-                        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                          <circle cx="20" cy="30" r="4" fill="white" />
-                          <circle cx="90%" cy="20" r="3" fill="none" stroke="white" strokeWidth="2" />
-                          <circle cx="80%" cy="80%" r="5" fill="none" stroke="white" strokeWidth="2" />
-                          <circle cx="10%" cy="70%" r="6" fill="white" />
-                          <path d="M 10 90 Q 30 70 50 90 T 90 90" fill="none" stroke="white" strokeWidth="2" strokeDasharray="5,5" />
-                          <path d="M 80% 40% Q 90% 50% 80% 60%" fill="none" stroke="white" strokeWidth="3" />
-                          <path d="M 20% 50% Q 10% 40% 20% 30%" fill="none" stroke="white" strokeWidth="3" />
-                        </svg>
-                      </div>
-
-                      {/* Product Bag Images */}
-                      <div className="h-64 w-full relative z-10 flex items-center justify-center mb-6 mt-2 group-hover:scale-105 transition-transform duration-500">
-                        {category.products && category.products.length >= 2 ? (
-                          <>
-                            <img 
-                              src={category.products[0]?.product?.images?.[0]?.url || displayImage} 
-                              alt={category.nameAr}
-                              className="absolute w-[75%] max-h-48 object-contain drop-shadow-[0_15px_15px_rgba(0,0,0,0.3)] -top-4 -left-2 -rotate-12 z-10"
-                            />
-                            <img 
-                              src={category.products[1]?.product?.images?.[0]?.url} 
-                              alt={category.nameAr}
-                              className="absolute w-[75%] max-h-48 object-contain drop-shadow-[0_20px_20px_rgba(0,0,0,0.4)] bottom-0 -right-2 rotate-12 z-20"
-                            />
-                          </>
-                        ) : displayImage ? (
+                      {staticImage ? (
+                        <div className="absolute inset-0 w-full h-full z-0">
                           <img 
-                            src={displayImage} 
+                            src={staticImage} 
                             alt={category.nameAr}
-                            className="max-h-full max-w-full object-contain drop-shadow-[0_15px_15px_rgba(0,0,0,0.3)]"
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                           />
-                        ) : (
-                          <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center border-2 border-white/30 backdrop-blur-sm">
-                            <span className="text-white font-bold text-sm">{isEn ? 'No Image' : 'بدون صورة'}</span>
+                        </div>
+                      ) : (
+                        <>
+                          {/* Doodles/Abstract Background for dynamic card */}
+                          <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[2rem] z-0">
+                            <div className="absolute -bottom-16 -right-16 w-64 h-64 bg-white opacity-10 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] blur-xl transform rotate-45"></div>
+                            <div className="absolute -top-12 -left-12 w-48 h-48 bg-black opacity-5 rounded-[60%_40%_30%_70%/60%_30%_70%_40%] blur-lg transform -rotate-12"></div>
+                            
+                            <svg className="absolute w-full h-full opacity-40" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M 80% 20% C 82% 18% 85% 18% 86% 22% C 84% 25% 81% 25% 80% 20% Z M 88% 18% C 90% 16% 93% 16% 94% 20% C 92% 23% 89% 23% 88% 18% Z" fill="white" opacity="0.8" />
+                              <path d="M 10% 20% Q 15% 10% 20% 20% T 30% 20%" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" opacity="0.7" />
+                              <path d="M 90% 60% Q 85% 70% 90% 80% T 85% 95%" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+                              <path d="M 15% 50% Q 5% 55% 15% 65%" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" opacity="0.5" />
+                              <circle cx="15" cy="40" r="4" fill="none" stroke="white" strokeWidth="2.5" opacity="0.8" />
+                              <circle cx="85%" cy="35%" r="3" fill="white" opacity="0.9" />
+                              <circle cx="75%" cy="85%" r="5" fill="none" stroke="white" strokeWidth="2" opacity="0.6" />
+                              <circle cx="25%" cy="80%" r="2" fill="white" opacity="0.5" />
+                              <path d="M 30% 85% Q 40% 90% 50% 85%" fill="none" stroke="white" strokeWidth="2" strokeDasharray="6,6" strokeLinecap="round" opacity="0.5" />
+                              <path d="M 70% 15% Q 60% 10% 50% 15%" fill="none" stroke="white" strokeWidth="2" strokeDasharray="4,6" strokeLinecap="round" opacity="0.4" />
+                              <line x1="8%" y1="12%" x2="12%" y2="16%" stroke="white" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+                              <line x1="12%" y1="12%" x2="8%" y2="16%" stroke="white" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+                            </svg>
                           </div>
+                        </>
+                      )}
+
+                      {/* Spacer for static image, or Product Bag Images for dynamic */}
+                      <div className="h-64 w-full relative z-10 flex items-center justify-center mb-6 mt-2">
+                        {!staticImage && (
+                          category.products && category.products.length >= 2 ? (
+                            <>
+                              <img 
+                                src={category.products[0]?.product?.images?.[0]?.url || displayImage} 
+                                alt={category.nameAr}
+                                className="absolute w-[75%] max-h-48 object-contain drop-shadow-[0_15px_15px_rgba(0,0,0,0.3)] -top-4 -left-2 -rotate-12 z-10"
+                              />
+                              <img 
+                                src={category.products[1]?.product?.images?.[0]?.url} 
+                                alt={category.nameAr}
+                                className="absolute w-[75%] max-h-48 object-contain drop-shadow-[0_20px_20px_rgba(0,0,0,0.4)] bottom-0 -right-2 rotate-12 z-20"
+                              />
+                            </>
+                          ) : displayImage ? (
+                            <img 
+                              src={displayImage} 
+                              alt={category.nameAr}
+                              className="max-h-full max-w-full object-contain drop-shadow-[0_15px_15px_rgba(0,0,0,0.3)] hover:scale-105 transition-transform duration-500"
+                            />
+                          ) : (
+                            <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center border-2 border-white/30 backdrop-blur-sm">
+                              <span className="text-white font-bold text-sm">{isEn ? 'No Image' : 'بدون صورة'}</span>
+                            </div>
+                          )
                         )}
                       </div>
                       
@@ -188,7 +228,7 @@ export default async function BrandDetailPage({ params }: { params: Promise<{ br
                           className="text-white hover:text-orouba-yellow font-bold text-lg flex items-center justify-center gap-2 transition-all group-hover:gap-3"
                         >
                           <span className="drop-shadow-sm text-sm md:text-base">{isEn ? 'Show All' : 'إظهار الكل'}</span>
-                          <span className={`text-lg drop-shadow-sm transform ${isEn ? 'rotate-180' : ''}`}>{"<"}</span>
+                          <span className="text-lg drop-shadow-sm" dir="ltr">{isEn ? ">" : "<"}</span>
                         </Link>
                       </div>
                     </div>
