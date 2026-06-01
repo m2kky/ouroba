@@ -89,6 +89,7 @@ export default async function ExportPage({ params }: { params: Promise<{ locale:
               {standards.map((standard: StandardItem, idx: number) => (
                 <FadeIn key={standard.id} direction="up" delay={0.1 * (idx + 1)} className="h-full">
                   <div className="bg-[#245b95] p-6 rounded-xl text-white aspect-square flex flex-col items-center justify-center hover:shadow-xl hover:-translate-y-1 transition-all relative overflow-hidden group">
+                    <div className="absolute inset-0 opacity-20 bg-[url('/ar7.png')] bg-cover bg-center bg-no-repeat transition-transform duration-700 group-hover:scale-110"></div>
                     <div className="absolute inset-0 bg-blue-900/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     {standard.image ? (
                       <div className="w-24 h-24 mb-6 relative z-10 flex items-center justify-center">
@@ -105,9 +106,10 @@ export default async function ExportPage({ params }: { params: Promise<{ locale:
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-12 max-w-5xl mx-auto">
               <FadeIn direction="up" delay={0.1} className="h-full">
-                <div className="bg-[#245b95] p-6 rounded-xl text-white aspect-square flex flex-col items-center justify-center hover:shadow-xl hover:-translate-y-1 transition-all">
-                  <div className="text-5xl mb-6">✨</div>
-                  <p className="text-sm font-bold text-center">{isEn ? 'All products are free of any preservatives or chemicals' : 'جميع المنتجات خالية من أي مواد حافظة أو مواد كيماوية'}</p>
+                <div className="bg-[#245b95] p-6 rounded-xl text-white aspect-square flex flex-col items-center justify-center hover:shadow-xl hover:-translate-y-1 transition-all relative overflow-hidden group">
+                  <div className="absolute inset-0 opacity-20 bg-[url('/ar7.png')] bg-cover bg-center bg-no-repeat transition-transform duration-700 group-hover:scale-110"></div>
+                  <div className="relative z-10 text-5xl mb-6">✨</div>
+                  <p className="relative z-10 text-sm font-bold text-center">{isEn ? 'All products are free of any preservatives or chemicals' : 'جميع المنتجات خالية من أي مواد حافظة أو مواد كيماوية'}</p>
                 </div>
               </FadeIn>
             </div>

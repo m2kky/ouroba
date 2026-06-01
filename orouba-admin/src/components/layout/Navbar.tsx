@@ -50,6 +50,16 @@ export default function Navbar({ settings, brands: brandsProp }: { settings?: Re
     }
   };
 
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -91,8 +101,8 @@ export default function Navbar({ settings, brands: brandsProp }: { settings?: Re
     },
     { label: locale === "ar" ? "التصدير" : "Export", href: `/${locale}/export` },
     { label: locale === "ar" ? "الوصفات" : "Recipes", href: `/${locale}/recipes` },
-    { label: locale === "ar" ? "الوظائف" : "Careers", href: `/${locale}/careers` },
     { label: locale === "ar" ? "اتصل بنا" : "Contact Us", href: `/${locale}/contact` },
+    { label: locale === "ar" ? "وظائف" : "Careers", href: `/${locale}/careers` },
   ];
 
   const mainLogo = settings?.main_logo?.en || settings?.main_logo?.ar || "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png";
@@ -140,27 +150,22 @@ export default function Navbar({ settings, brands: brandsProp }: { settings?: Re
 
                 {/* Dropdown Menu */}
                 {link.children && link.children.length > 0 && (
-                  <div className="absolute top-[140px] right-1/2 translate-x-1/2 w-56 bg-white opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl rounded-t-3xl z-50">
-                    <ul className="flex flex-col py-4 relative z-10">
-                      {link.children.map((child, index) => (
-                        <li key={index}>
-                          <Link 
-                            href={child.href}
-                            className={`block w-full text-center py-4 font-bold hover:text-orouba-blue hover:bg-blue-50 transition-colors rounded-xl mx-2 ${
-                              pathname === child.href ? "text-orouba-blue bg-blue-50" : "text-black"
-                            }`}
-                          >
-                            {child.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                    {/* Wavy bottom for dropdown */}
-                    <div className="absolute top-[99%] left-0 right-0 w-full overflow-hidden leading-none pointer-events-none">
-                      <svg viewBox="0 0 200 20" preserveAspectRatio="none" className="w-full h-[20px] block">
-                        <path fill="white" d="M0,0 Q100,20 200,0 L200,0 L0,0 Z"></path>
-                        <path fill="none" stroke="#facc15" strokeWidth="4" d="M0,0 Q100,20 200,0"></path>
-                      </svg>
+                  <div className="absolute top-full right-1/2 translate-x-1/2 pt-6 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                    <div className="bg-white rounded-xl shadow-xl overflow-hidden py-2 border border-gray-100">
+                      <ul className="flex flex-col relative z-10">
+                        {link.children.map((child, index) => (
+                          <li key={index}>
+                            <Link 
+                              href={child.href}
+                              className={`block w-full text-center py-3 px-4 font-bold hover:text-orouba-blue hover:bg-blue-50 transition-colors ${
+                                pathname === child.href ? "text-orouba-blue bg-blue-50" : "text-gray-700"
+                              }`}
+                            >
+                              {child.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
                 )}
@@ -202,27 +207,22 @@ export default function Navbar({ settings, brands: brandsProp }: { settings?: Re
               </button>
 
               {/* Search Dropdown */}
-              <div className={`absolute top-full right-0 mt-4 w-72 md:w-80 bg-white shadow-2xl p-4 z-50 transition-all duration-300 rounded-t-3xl md:translate-x-1/4 ${isSearchOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}>
-                <form onSubmit={handleSearch} className="flex items-center gap-2 relative z-10">
-                  <input 
-                    type="text" 
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder={locale === 'ar' ? "ابحث عن منتج..." : "Search product..."}
-                    className="w-full text-black px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-orouba-blue text-sm"
-                  />
-                  <button type="submit" className="bg-orouba-blue text-white p-3 rounded-xl hover:bg-blue-800">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                  </button>
-                </form>
-                {/* Wavy bottom for dropdown */}
-                <div className="absolute top-[99%] left-0 right-0 w-full overflow-hidden leading-none pointer-events-none">
-                  <svg viewBox="0 0 200 20" preserveAspectRatio="none" className="w-full h-[20px] block">
-                    <path fill="white" d="M0,0 Q100,20 200,0 L200,0 L0,0 Z"></path>
-                    <path fill="none" stroke="#facc15" strokeWidth="4" d="M0,0 Q100,20 200,0"></path>
-                  </svg>
+              <div className={`absolute top-full right-0 pt-6 w-72 md:w-80 z-50 transition-all duration-300 md:translate-x-1/4 ${isSearchOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}>
+                <div className="bg-white rounded-xl shadow-xl overflow-hidden p-4 border border-gray-100">
+                  <form onSubmit={handleSearch} className="flex items-center gap-2 relative z-10">
+                    <input 
+                      type="text" 
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder={locale === 'ar' ? "ابحث عن منتج..." : "Search product..."}
+                      className="w-full text-black px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-orouba-blue text-sm"
+                    />
+                    <button type="submit" className="bg-orouba-blue text-white p-3 rounded-xl hover:bg-blue-800">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                      </svg>
+                    </button>
+                  </form>
                 </div>
               </div>
             </div>
@@ -238,31 +238,26 @@ export default function Navbar({ settings, brands: brandsProp }: { settings?: Re
                 </svg>
               </button>
               
-              <div className={`absolute top-full right-0 mt-4 w-48 bg-white shadow-2xl text-center z-50 rounded-t-3xl transition-all duration-300 ${isLangMenuOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2 lg:group-hover:opacity-100 lg:group-hover:visible'}`}>
-                <ul className="flex flex-col py-4 relative z-10">
-                  <li>
-                    <button 
-                      onClick={() => handleLanguageSwitch('ar')}
-                      className={`block w-full py-3 text-black font-medium hover:text-orouba-blue hover:bg-gray-50 transition-colors text-lg cursor-pointer ${locale === 'ar' ? 'bg-gray-50 text-orouba-blue' : ''}`}
-                    >
-                      العربية
-                    </button>
-                  </li>
-                  <li>
-                    <button 
-                      onClick={() => handleLanguageSwitch('en')}
-                      className={`block w-full py-3 text-black font-medium hover:text-orouba-blue hover:bg-gray-50 transition-colors text-lg cursor-pointer ${locale === 'en' ? 'bg-gray-50 text-orouba-blue' : ''}`}
-                    >
-                      English
-                    </button>
-                  </li>
-                </ul>
-                {/* Wavy bottom for dropdown */}
-                <div className="absolute top-[99%] left-0 right-0 w-full overflow-hidden leading-none pointer-events-none">
-                  <svg viewBox="0 0 200 20" preserveAspectRatio="none" className="w-full h-[20px] block">
-                    <path fill="white" d="M0,0 Q100,20 200,0 L200,0 L0,0 Z"></path>
-                    <path fill="none" stroke="#facc15" strokeWidth="4" d="M0,0 Q100,20 200,0"></path>
-                  </svg>
+              <div className={`absolute top-full right-0 pt-6 w-48 text-center z-50 transition-all duration-300 ${isLangMenuOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2 lg:group-hover:opacity-100 lg:group-hover:visible lg:translate-y-0'}`}>
+                <div className="bg-white rounded-xl shadow-xl overflow-hidden py-2 border border-gray-100">
+                  <ul className="flex flex-col relative z-10">
+                    <li>
+                      <button 
+                        onClick={() => handleLanguageSwitch('ar')}
+                        className={`block w-full py-3 px-4 text-gray-700 font-bold hover:text-orouba-blue hover:bg-gray-50 transition-colors text-lg cursor-pointer ${locale === 'ar' ? 'bg-gray-50 text-orouba-blue' : ''}`}
+                      >
+                        العربية
+                      </button>
+                    </li>
+                    <li>
+                      <button 
+                        onClick={() => handleLanguageSwitch('en')}
+                        className={`block w-full py-3 px-4 text-gray-700 font-bold hover:text-orouba-blue hover:bg-gray-50 transition-colors text-lg cursor-pointer ${locale === 'en' ? 'bg-gray-50 text-orouba-blue' : ''}`}
+                      >
+                        English
+                      </button>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -270,7 +265,7 @@ export default function Navbar({ settings, brands: brandsProp }: { settings?: Re
             {/* Export Catalog (Desktop Only) */}
             <Link 
               href={`/${locale}/export-catalog`}
-              className="hidden lg:inline-block bg-orouba-yellow text-orouba-blue font-bold px-6 py-2 rounded-full hover:bg-yellow-400 transition-colors shadow-sm whitespace-nowrap"
+              className="hidden lg:inline-block bg-white text-orouba-blue font-bold px-6 py-2 rounded-full hover:bg-orouba-dark hover:text-white transition-colors shadow-sm whitespace-nowrap"
             >
               {locale === "ar" ? "تحميل الكتالوج" : "Download Catalog"}
             </Link>
@@ -278,17 +273,7 @@ export default function Navbar({ settings, brands: brandsProp }: { settings?: Re
         </div>
       </div>
 
-      {/* Decorative Wave at the bottom of the Navbar */}
-      <div className="absolute top-[99%] left-0 right-0 w-full overflow-hidden leading-none pointer-events-none z-0">
-        <svg viewBox="0 0 1440 100" preserveAspectRatio="none" className="w-full h-[40px] md:h-[60px] block">
-          {/* Main Blue Background */}
-          <path fill="#1e4a8c" d="M0,0 C320,60 420,60 720,30 C1020,0 1120,0 1440,45 L1440,0 L0,0 Z"></path>
-          {/* Yellow Wave Stroke */}
-          <path fill="none" stroke="#facc15" strokeWidth="8" d="M0,0 C320,60 420,60 720,30 C1020,0 1120,0 1440,45"></path>
-          {/* Light Blue / White Wave Stroke */}
-          <path fill="none" stroke="#3b82f6" strokeWidth="3" opacity="0.5" d="M0,8 C320,68 420,68 720,38 C1020,8 1120,8 1440,53"></path>
-        </svg>
-      </div>
+
 
       {/* Mobile Menu - flows inside nav as natural extension */}
       <AnimatePresence>
@@ -372,7 +357,7 @@ export default function Navbar({ settings, brands: brandsProp }: { settings?: Re
               <div className="pt-4">
                 <Link
                   href={`/${locale}/export-catalog`}
-                  className="block mx-auto max-w-[200px] py-3 text-lg font-bold text-[#1e4a8c] text-center bg-orouba-yellow rounded-full transition-colors shadow-lg"
+                  className="block mx-auto max-w-[200px] py-3 text-lg font-bold text-orouba-blue text-center bg-white rounded-full hover:bg-orouba-dark hover:text-white transition-colors shadow-lg"
                 >
                   {locale === "ar" ? "تحميل الكتالوج" : "Download Catalog"}
                 </Link>

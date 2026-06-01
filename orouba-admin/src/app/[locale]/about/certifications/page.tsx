@@ -112,7 +112,7 @@ export default function CertificationsPage() {
               <FadeIn key={idx} delay={idx * 0.1}>
                 <div className="bg-orouba-blue rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group text-center flex flex-col items-center w-[280px] min-h-[380px] relative overflow-hidden">
                   {/* Subtle Map Silhouette Background */}
-                  <div className="absolute inset-0 opacity-10 bg-[url('https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg')] bg-cover bg-center bg-no-repeat transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 opacity-20 bg-[url('/ar7.png')] bg-cover bg-center bg-no-repeat transition-transform duration-700 group-hover:scale-110" />
                   
                   <div className="relative z-10 flex flex-col items-center w-full h-full">
                     <div className="w-20 h-20 mb-6 relative">

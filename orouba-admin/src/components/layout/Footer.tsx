@@ -34,7 +34,7 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
   const mainLogo = settings?.main_logo?.en || settings?.main_logo?.ar || "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png";
 
   return (
-    <footer className="bg-[#1e4a8c] text-white pt-16 mt-20 rounded-t-[40px] relative overflow-hidden">
+    <footer className="bg-orouba-blue text-white pt-16 mt-20 relative overflow-hidden">
         {/* Faint Background Shapes */}
         <div className="absolute right-20 top-40 opacity-10 pointer-events-none">
            {/* Pea Pod SVG approximation */}
@@ -77,7 +77,7 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
 
             {/* Column 2: Our Brands */}
             <div className={`${locale === "ar" ? "text-right" : "text-left"}`}>
-              <h3 className="text-xl font-bold mb-8 text-[#ffcc00] inline-block">{locale === "ar" ? "العلامات التجارية" : "Brands"}</h3>
+              <h3 className="text-xl font-bold mb-8 text-orouba-yellow inline-block">{locale === "ar" ? "العلامات التجارية" : "Brands"}</h3>
               <ul className="space-y-6">
                 {(brands && brands.length > 0) ? (
                   brands.slice(0, 3).map((brand) => {
@@ -85,7 +85,7 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                     const slug = ((brand as any).nameEn || (brand as any).nameAr || 'brand').replace(/\s+/g, '-');
                     return (
                       <li key={brand.id}>
-                        <Link href={`/${locale}/brands/${slug}/${brand.id}`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">
+                        <Link href={`/${locale}/brands/${slug}/${brand.id}`} className="text-white hover:text-orouba-yellow transition-colors text-lg font-medium">
                           {brandName}
                         </Link>
                       </li>
@@ -93,9 +93,9 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                   })
                 ) : (
                   <>
-                    <li><Link href={`/${locale}/brands/Basma/5`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "بسمة" : "Basma"}</Link></li>
-                    <li><Link href={`/${locale}/brands/Farida/7`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "فريدة" : "Farida"}</Link></li>
-                    <li><Link href={`/${locale}/brands/Babits/8`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "بابيتس" : "Babits"}</Link></li>
+                    <li><Link href={`/${locale}/brands/Basma/5`} className="text-white hover:text-orouba-yellow transition-colors text-lg font-medium">{locale === "ar" ? "بسمة" : "Basma"}</Link></li>
+                    <li><Link href={`/${locale}/brands/Farida/7`} className="text-white hover:text-orouba-yellow transition-colors text-lg font-medium">{locale === "ar" ? "فريدة" : "Farida"}</Link></li>
+                    <li><Link href={`/${locale}/brands/Babits/8`} className="text-white hover:text-orouba-yellow transition-colors text-lg font-medium">{locale === "ar" ? "بابيتس" : "Babits"}</Link></li>
                   </>
                 )}
               </ul>
@@ -103,21 +103,21 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
 
             {/* Column 3: Quick Links */}
             <div className={`${locale === "ar" ? "text-right" : "text-left"}`}>
-              <h3 className="text-xl font-bold mb-8 text-[#ffcc00] inline-block">{locale === "ar" ? "روابط سريعة" : "Quick Links"}</h3>
+              <h3 className="text-xl font-bold mb-8 text-orouba-yellow inline-block">{locale === "ar" ? "روابط سريعة" : "Quick Links"}</h3>
               <ul className="space-y-6">
-                <li><Link href={`/${locale}/about/whoWeAre`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "من نحن" : "About Us"}</Link></li>
-                <li><Link href={`/${locale}/about/ProductType`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "منتجاتنا" : "Our Products"}</Link></li>
-                <li><Link href={`/${locale}/recipes`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "وصفات" : "Recipes"}</Link></li>
-                <li><Link href={`/${locale}/contact`} className="text-white hover:text-[#ffcc00] transition-colors text-lg font-medium">{locale === "ar" ? "اتصل بنا" : "Contact Us"}</Link></li>
+                <li><Link href={`/${locale}/about/whoWeAre`} className="text-white hover:text-orouba-yellow transition-colors text-lg font-medium">{locale === "ar" ? "من نحن" : "About Us"}</Link></li>
+                <li><Link href={`/${locale}/about/ProductType`} className="text-white hover:text-orouba-yellow transition-colors text-lg font-medium">{locale === "ar" ? "منتجاتنا" : "Our Products"}</Link></li>
+                <li><Link href={`/${locale}/recipes`} className="text-white hover:text-orouba-yellow transition-colors text-lg font-medium">{locale === "ar" ? "وصفات" : "Recipes"}</Link></li>
+                <li><Link href={`/${locale}/contact`} className="text-white hover:text-orouba-yellow transition-colors text-lg font-medium">{locale === "ar" ? "اتصل بنا" : "Contact Us"}</Link></li>
               </ul>
             </div>
 
             {/* Column 4: Contact Us */}
             <div className={`flex flex-col items-start ${locale === "ar" ? "text-right" : "text-left"}`}>
-              <h3 className="text-xl font-bold mb-8 text-[#ffcc00]">{locale === "ar" ? "اتصل بنا" : "Contact Us"}</h3>
+              <h3 className="text-xl font-bold mb-8 text-orouba-yellow">{locale === "ar" ? "اتصل بنا" : "Contact Us"}</h3>
               <ul className="space-y-5 text-white flex flex-col w-full items-start">
                 <li className="flex items-start gap-3 w-full justify-start">
-                  <span className="text-[#ffcc00] mt-1 text-xl shrink-0">
+                  <span className="text-orouba-yellow mt-1 text-xl shrink-0">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
                   </span>
                   <div className={`text-sm leading-relaxed max-w-[200px] ${locale === "ar" ? "text-right" : "text-left"}`}>
@@ -126,7 +126,7 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                 </li>
 
                 <li className="flex items-center gap-3 w-full mt-2 justify-start">
-                  <span className="text-[#ffcc00] text-xl shrink-0">
+                  <span className="text-orouba-yellow text-xl shrink-0">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                   </span>
                   <div className="flex flex-row items-center gap-1 text-sm" dir="ltr">
@@ -137,7 +137,7 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                 </li>
 
                 <li className="flex items-center gap-3 w-full mt-2 justify-start">
-                  <span className="text-[#ffcc00] text-xl shrink-0">
+                  <span className="text-orouba-yellow text-xl shrink-0">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
                   </span>
                   <div className="flex flex-row items-center gap-1 text-sm" dir="ltr">
@@ -148,10 +148,10 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                 </li>
 
                 <li className="flex items-center gap-3 w-full mt-2 mb-6 justify-start">
-                  <span className="text-[#ffcc00] text-xl shrink-0">
+                  <span className="text-orouba-yellow text-xl shrink-0">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                   </span>
-                  <a href={`mailto:${settings?.email?.en || "oroubamail@orouba.ajwa.com"}`} className="text-sm hover:text-[#ffcc00] transition-colors">{settings?.email?.en || "oroubamail@orouba.ajwa.com"}</a>
+                  <a href={`mailto:${settings?.email?.en || "oroubamail@orouba.ajwa.com"}`} className="text-sm hover:text-orouba-yellow transition-colors">{settings?.email?.en || "oroubamail@orouba.ajwa.com"}</a>
                 </li>
 
                 {/* Social Media Links (Basma and Bap Bites) */}
@@ -222,7 +222,7 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
           {/* MOBILE ACCORDION LAYOUT */}
           <div className="block md:hidden mb-12" dir={locale === "ar" ? "rtl" : "ltr"}>
             {/* Mobile Logo */}
-            <div className="flex justify-center mt-12 mb-8 border-t border-[#2a68a8] pt-8">
+            <div className="flex justify-center mt-12 mb-8 border-t border-orouba-blue pt-8">
               <img 
                 src={mainLogo} 
                 alt="Orouba Foods" 
@@ -232,16 +232,16 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
 
             <div className="space-y-6">
               {/* Products Accordion */}
-              <div className="border-b border-[#2a68a8] pb-4">
+              <div className="border-b border-orouba-blue pb-4">
                 <button 
                   onClick={() => toggleSection('products')}
                   className={`w-full flex items-center gap-4 ${locale === "ar" ? "justify-end text-right" : "justify-start text-left"}`}
                 >
-                  <h3 className="text-3xl font-bold text-[#ffcc00]">{locale === "ar" ? "العلامات التجارية" : "Brands"}</h3>
+                  <h3 className="text-3xl font-bold text-orouba-yellow">{locale === "ar" ? "العلامات التجارية" : "Brands"}</h3>
                   <motion.svg 
                     animate={{ rotate: openSection === 'products' ? (locale === "ar" ? 90 : -90) : 0 }}
                     transition={{ duration: 0.2 }}
-                    className={`w-6 h-6 text-[#ffcc00] ${locale === "ar" ? "" : "order-first rotate-180"}`} 
+                    className={`w-6 h-6 text-orouba-yellow ${locale === "ar" ? "" : "order-first rotate-180"}`} 
                     fill="none" viewBox="0 0 24 24" stroke="currentColor"
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -262,7 +262,7 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                             const slug = ((brand as any).nameEn || (brand as any).nameAr || 'brand').replace(/\s+/g, '-');
                             return (
                               <li key={brand.id}>
-                                <Link href={`/${locale}/brands/${slug}/${brand.id}`} className="text-white hover:text-[#ffcc00] transition-colors">
+                                <Link href={`/${locale}/brands/${slug}/${brand.id}`} className="text-white hover:text-orouba-yellow transition-colors">
                                   {brandName}
                                 </Link>
                               </li>
@@ -270,9 +270,9 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                           })
                         ) : (
                           <>
-                            <li><Link href={`/${locale}/brands/Basma/5`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "بسمة" : "Basma"}</Link></li>
-                            <li><Link href={`/${locale}/brands/Farida/7`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "فريدة" : "Farida"}</Link></li>
-                            <li><Link href={`/${locale}/brands/Babits/8`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "بابيتس" : "Babits"}</Link></li>
+                            <li><Link href={`/${locale}/brands/Basma/5`} className="text-white hover:text-orouba-yellow transition-colors">{locale === "ar" ? "بسمة" : "Basma"}</Link></li>
+                            <li><Link href={`/${locale}/brands/Farida/7`} className="text-white hover:text-orouba-yellow transition-colors">{locale === "ar" ? "فريدة" : "Farida"}</Link></li>
+                            <li><Link href={`/${locale}/brands/Babits/8`} className="text-white hover:text-orouba-yellow transition-colors">{locale === "ar" ? "بابيتس" : "Babits"}</Link></li>
                           </>
                         )}
                       </ul>
@@ -282,16 +282,16 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
               </div>
 
               {/* Quick Links Accordion */}
-              <div className="border-b border-[#2a68a8] pb-4">
+              <div className="border-b border-orouba-blue pb-4">
                 <button 
                   onClick={() => toggleSection('links')}
                   className={`w-full flex items-center gap-4 ${locale === "ar" ? "justify-end text-right" : "justify-start text-left"}`}
                 >
-                  <h3 className="text-3xl font-bold text-[#ffcc00]">{locale === "ar" ? "روابط سريعة" : "Quick Links"}</h3>
+                  <h3 className="text-3xl font-bold text-orouba-yellow">{locale === "ar" ? "روابط سريعة" : "Quick Links"}</h3>
                   <motion.svg 
                     animate={{ rotate: openSection === 'links' ? (locale === "ar" ? 90 : -90) : 0 }}
                     transition={{ duration: 0.2 }}
-                    className={`w-6 h-6 text-[#ffcc00] ${locale === "ar" ? "" : "order-first rotate-180"}`} 
+                    className={`w-6 h-6 text-orouba-yellow ${locale === "ar" ? "" : "order-first rotate-180"}`} 
                     fill="none" viewBox="0 0 24 24" stroke="currentColor"
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -306,10 +306,10 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                       className="overflow-hidden"
                     >
                       <ul className={`space-y-4 pt-6 text-xl font-medium ${locale === "ar" ? "text-right pl-10 pr-2" : "text-left pr-10 pl-2"}`}>
-                        <li><Link href={`/${locale}/about/whoWeAre`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "من نحن" : "About Us"}</Link></li>
-                        <li><Link href={`/${locale}/products`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "منتجاتنا" : "Our Products"}</Link></li>
-                        <li><Link href={`/${locale}/recipes`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "وصفات" : "Recipes"}</Link></li>
-                        <li><Link href={`/${locale}/contact`} className="text-white hover:text-[#ffcc00] transition-colors">{locale === "ar" ? "اتصل بنا" : "Contact Us"}</Link></li>
+                        <li><Link href={`/${locale}/about/whoWeAre`} className="text-white hover:text-orouba-yellow transition-colors">{locale === "ar" ? "من نحن" : "About Us"}</Link></li>
+                        <li><Link href={`/${locale}/products`} className="text-white hover:text-orouba-yellow transition-colors">{locale === "ar" ? "منتجاتنا" : "Our Products"}</Link></li>
+                        <li><Link href={`/${locale}/recipes`} className="text-white hover:text-orouba-yellow transition-colors">{locale === "ar" ? "وصفات" : "Recipes"}</Link></li>
+                        <li><Link href={`/${locale}/contact`} className="text-white hover:text-orouba-yellow transition-colors">{locale === "ar" ? "اتصل بنا" : "Contact Us"}</Link></li>
                       </ul>
                     </motion.div>
                   )}
@@ -317,16 +317,16 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
               </div>
 
               {/* Contact Us Accordion */}
-              <div className="border-b border-[#2a68a8] pb-4">
+              <div className="border-b border-orouba-blue pb-4">
                 <button 
                   onClick={() => toggleSection('contact')}
                   className={`w-full flex items-center gap-4 ${locale === "ar" ? "justify-end text-right" : "justify-start text-left"}`}
                 >
-                  <h3 className="text-3xl font-bold text-[#ffcc00]">{locale === "ar" ? "اتصل بنا" : "Contact Us"}</h3>
+                  <h3 className="text-3xl font-bold text-orouba-yellow">{locale === "ar" ? "اتصل بنا" : "Contact Us"}</h3>
                   <motion.svg 
                     animate={{ rotate: openSection === 'contact' ? (locale === "ar" ? 90 : -90) : 0 }}
                     transition={{ duration: 0.2 }}
-                    className={`w-6 h-6 text-[#ffcc00] ${locale === "ar" ? "" : "order-first rotate-180"}`} 
+                    className={`w-6 h-6 text-orouba-yellow ${locale === "ar" ? "" : "order-first rotate-180"}`} 
                     fill="none" viewBox="0 0 24 24" stroke="currentColor"
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -342,7 +342,7 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                     >
                       <ul className="space-y-6 pt-6 text-white flex flex-col w-full items-start px-10">
                         <li className="flex items-start gap-4 w-full justify-start">
-                          <span className="text-[#ffcc00] mt-1 text-2xl shrink-0">
+                          <span className="text-orouba-yellow mt-1 text-2xl shrink-0">
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
                           </span>
                           <div className={`text-lg leading-relaxed max-w-[250px] ${locale === "ar" ? "text-right" : "text-left"}`}>
@@ -351,7 +351,7 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                         </li>
  
                         <li className="flex items-center gap-4 w-full justify-start">
-                          <span className="text-[#ffcc00] text-2xl shrink-0">
+                          <span className="text-orouba-yellow text-2xl shrink-0">
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                           </span>
                           <div className="flex flex-row items-center gap-1 text-lg" dir="ltr">
@@ -362,7 +362,7 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                         </li>
  
                         <li className="flex items-center gap-4 w-full justify-start">
-                          <span className="text-[#ffcc00] text-2xl shrink-0">
+                          <span className="text-orouba-yellow text-2xl shrink-0">
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
                           </span>
                           <div className="flex flex-row items-center gap-1 text-lg" dir="ltr">
@@ -373,10 +373,10 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                         </li>
  
                         <li className="flex items-center gap-4 w-full mb-6 justify-start">
-                          <span className="text-[#ffcc00] text-2xl shrink-0">
+                          <span className="text-orouba-yellow text-2xl shrink-0">
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                           </span>
-                          <a href={`mailto:${settings?.email?.en || "oroubamail@orouba.ajwa.com"}`} className="text-lg hover:text-[#ffcc00] transition-colors">{settings?.email?.en || "oroubamail@orouba.ajwa.com"}</a>
+                          <a href={`mailto:${settings?.email?.en || "oroubamail@orouba.ajwa.com"}`} className="text-lg hover:text-orouba-yellow transition-colors">{settings?.email?.en || "oroubamail@orouba.ajwa.com"}</a>
                         </li>
 
                         {/* Social Media Links for Mobile */}
@@ -448,13 +448,13 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
           </div>
 
           {/* Bottom Bar: Copyright */}
-          <div className="border-t border-[#2a68a8] pt-8 pb-4 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="border-t border-orouba-blue pt-8 pb-4 flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-white text-base md:text-lg font-medium text-center order-2 md:order-1">
               {locale === "ar" ? "جميع الحقوق محفوظة لدى © 2026 العروبة." : "© 2026 Orouba. All Rights Reserved."}
             </div>
             <div className="text-white text-base md:text-lg font-medium text-center order-1 md:order-2">
               {locale === "ar" ? "تم التطوير بواسطة " : "Developed by "}
-              <a href="https://valueims.com" target="_blank" rel="noopener noreferrer" className="text-[#ffcc00] hover:underline font-bold">ValueIMS</a>
+              <a href="https://valueims.com" target="_blank" rel="noopener noreferrer" className="text-orouba-yellow hover:underline font-bold">ValueIMS</a>
             </div>
           </div>
         </div>

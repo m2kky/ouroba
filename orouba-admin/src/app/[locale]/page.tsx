@@ -149,7 +149,7 @@ export default async function HomePage({
             <p className="text-lg font-medium text-gray-700 leading-relaxed mb-8 md:mb-10 text-justify whitespace-pre-wrap">
               {visionText}
             </p>
-            <Link href={`/${locale}/about/whoWeAre`} className="inline-flex items-center justify-center gap-2 bg-orouba-yellow text-orouba-blue font-bold px-8 py-3 rounded-full text-lg hover:bg-yellow-400 transition-colors shadow-md w-fit">
+            <Link href={`/${locale}/about/whoWeAre`} className="inline-flex items-center justify-center gap-2 bg-orouba-yellow text-orouba-dark font-bold px-8 py-3 rounded-full text-lg hover:bg-yellow-400 transition-colors shadow-md w-fit">
               <span>{isEn ? "About Orouba" : "عن العروبة"}</span>
               <ChevronLeft className={`w-5 h-5 stroke-[3] ${isEn ? "rotate-180" : ""}`} />
             </Link>
@@ -230,13 +230,8 @@ export default async function HomePage({
               {standards.map((standard: StandardItem, idx: number) => (
                 <FadeIn key={standard.id} direction="up" delay={0.1 * (idx + 1)} className="w-[70vw] sm:w-[45vw] md:w-auto flex-shrink-0 snap-start">
                   <div className="bg-[#1e4a8c] p-6 md:p-6 rounded-[2rem] text-white h-[320px] md:h-[300px] flex flex-col items-center justify-center shadow-xl relative overflow-hidden group">
-                    {/* Abstract Wave Background Texture */}
-                    <div className="absolute inset-0 opacity-[0.06] pointer-events-none transition-transform duration-700 group-hover:scale-110">
-                      <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full fill-current">
-                        <path d="M0,0 C30,40 70,0 100,20 L100,100 L0,100 Z" />
-                        <path d="M0,100 C30,60 70,100 100,80 L100,0 L0,0 Z" className="opacity-50" />
-                      </svg>
-                    </div>
+                    {/* Subtle Map Silhouette Background */}
+                    <div className="absolute inset-0 opacity-20 bg-[url('/ar7.png')] bg-cover bg-center bg-no-repeat transition-transform duration-700 group-hover:scale-110 pointer-events-none" />
                     
                     {/* Subtle hover overlay */}
                     <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -279,7 +274,7 @@ export default async function HomePage({
             <p className="text-lg font-medium text-gray-700 leading-relaxed mb-10 text-justify">
               {worldText}
             </p>
-            <Link href={`/${locale}/export`} className="inline-block bg-orouba-yellow text-orouba-blue font-bold px-10 py-3 rounded-lg text-lg hover:bg-yellow-400 transition-colors shadow-sm">
+            <Link href={`/${locale}/export`} className="inline-block bg-orouba-yellow text-orouba-dark font-bold px-10 py-3 rounded-lg text-lg hover:bg-yellow-400 transition-colors shadow-sm">
               {isEn ? "More >" : "المزيد >"}
             </Link>
           </FadeIn>

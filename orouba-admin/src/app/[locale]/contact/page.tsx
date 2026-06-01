@@ -1,7 +1,8 @@
 import { getSiteData } from "@/lib/api-client";
 import { Metadata } from "next";
 import ContactForms from "./ContactForms";
-import { getServerLocale } from "@/lib/server-locale";
+import Link from "next/link";
+import { ChevronLeft } from "lucide-react";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -20,68 +21,87 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
   const { settings } = data;
 
   return (
-    <div className="bg-gray-50 min-h-screen pb-20">
-      {/* Hero */}
-      <section className="py-24 bg-orouba-blue text-white text-center relative">
-        <div className="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]" />
-        <div className="max-w-4xl mx-auto px-4 md:px-8 relative z-10">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-orouba-yellow">{locale === 'ar' ? 'تواصل معنا' : 'Contact Us'}</h1>
-          <div className="w-24 h-1 bg-orouba-yellow mx-auto rounded-full mb-8" />
-          <p className="text-xl text-blue-50 leading-relaxed font-medium">
-            {locale === 'ar' ? 'سواء كان لديك استفسار عن منتجاتنا، أو تود الانضمام لفريقنا، أو تبحث عن فرص للشراكة، يسعدنا تواصلك معنا دائماً.' : 'Whether you have an inquiry about our products, want to join our team, or looking for partnership opportunities, we are always happy to hear from you.'}
-          </p>
+    <div className="bg-white min-h-screen pb-20 pt-32">
+      
+      {/* Breadcrumbs */}
+      <div className="max-w-[1400px] mx-auto px-4 md:px-8 mb-8">
+        <div className="flex items-center gap-2 font-bold text-lg md:text-xl text-[#0b5394]">
+          <Link href={`/${locale}`} className="hover:text-orouba-yellow transition-colors">{locale === 'ar' ? 'الرئيسية' : 'Home'}</Link>
+          <ChevronLeft className={`w-5 h-5 mt-1 ${locale === 'en' ? 'rotate-180' : ''}`} />
+          <span>{locale === 'ar' ? 'تواصل معنا' : 'ContactUs'}</span>
         </div>
-      </section>
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 -mt-12 relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
-        {/* Contact Info Card */}
-        <div className="bg-white rounded-[2rem] shadow-lg border border-gray-100 p-8 lg:col-span-1 h-fit">
-          <h2 className="text-2xl font-bold text-orouba-blue mb-8 border-b border-gray-100 pb-4">{locale === 'ar' ? 'معلومات الاتصال' : 'Contact Info'}</h2>
-          <div className="space-y-6">
-            {settings?.address?.ar && (
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-2xl">📍</span>
-                </div>
-                <div>
-                  <h4 className="font-bold text-orouba-blue mb-1">{locale === 'ar' ? 'المكتب الرئيسي' : 'Head Office'}</h4>
-                  <p className="text-gray-600 leading-relaxed font-medium">{locale === 'ar' ? settings.address.ar : (settings.address.en || settings.address.ar)}</p>
-                </div>
-              </div>
-            )}
+      <div className="max-w-[1400px] mx-auto px-4 md:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 border border-gray-100 shadow-[0_10px_40px_rgba(0,0,0,0.08)] overflow-hidden rounded-[2.5rem]">
+          
+          {/* Left Column (Yellow: Map + Info) */}
+          <div className="bg-[#fff44f] flex flex-col p-6 md:p-10 relative">
+            {/* Subtle Texture Overlay */}
+            <div className="absolute inset-0 opacity-10 bg-[url('/ar7.png')] bg-cover bg-center mix-blend-overlay pointer-events-none" />
             
-            {settings?.phone_1?.en && (
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-2xl">📞</span>
-                </div>
-                <div className="flex flex-col">
-                  <h4 className="font-bold text-orouba-blue mb-1">{locale === 'ar' ? 'الهاتف' : 'Phone'}</h4>
-                  <p dir="ltr" className="text-gray-600 leading-relaxed font-medium text-right">{settings.phone_1.en}</p>
-                </div>
-              </div>
-            )}
+            <div className="relative z-10 w-full mb-8">
+              <iframe 
+                src={`https://maps.google.com/maps?q=30.199778,31.451475&t=m&z=17&output=embed&hl=${locale}`}
+                width="100%" 
+                height="350" 
+                style={{ border: 0 }} 
+                allowFullScreen 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Orouba Foods Location"
+                className="rounded-lg shadow-sm"
+              ></iframe>
+            </div>
 
-            {settings?.email?.en && (
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-2xl">✉️</span>
+            <div className="relative z-10 flex flex-col gap-6 text-[#0b5394] font-bold text-lg md:text-xl">
+              {settings?.address?.ar && (
+                <div className="flex items-start gap-3">
+                  <span className="shrink-0 mt-1">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                  </span>
+                  <span className="leading-relaxed">{locale === 'ar' ? settings.address.ar : (settings.address.en || settings.address.ar)}</span>
                 </div>
-                <div>
-                  <h4 className="font-bold text-orouba-blue mb-1">{locale === 'ar' ? 'البريد الإلكتروني' : 'Email'}</h4>
-                  <a href={`mailto:${settings.email.en}`} className="text-blue-600 hover:text-orouba-yellow font-medium transition-colors leading-relaxed">
-                    {settings.email.en}
-                  </a>
+              )}
+              
+              {settings?.phone_1?.en && (
+                <div className="flex items-center gap-3">
+                  <span className="shrink-0">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                  </span>
+                  <span dir="ltr">{settings.phone_1.en}</span>
                 </div>
-              </div>
-            )}
+              )}
+
+              {settings?.phone_2?.en && (
+                <div className="flex items-center gap-3">
+                  <span className="shrink-0">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
+                  </span>
+                  <span dir="ltr">{settings.phone_2.en}</span>
+                </div>
+              )}
+
+              {settings?.email?.en && (
+                <div className="flex items-center gap-3">
+                  <span className="shrink-0">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                  </span>
+                  <a href={`mailto:${settings.email.en}`} className="hover:text-black transition-colors">{settings.email.en}</a>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
 
-        {/* Forms Container */}
-        <div className="bg-white rounded-[2rem] shadow-lg border border-gray-100 p-8 lg:col-span-2">
-          <ContactForms locale={locale as "ar"|"en"} />
+          {/* Right Column (Form) */}
+          <div className="bg-white p-6 md:p-10 flex flex-col justify-center">
+            <h1 className="text-4xl font-extrabold text-orouba-blue mb-2">{locale === 'ar' ? 'تواصل معنا' : 'Contact Us'}</h1>
+            <p className="text-orouba-blue font-bold text-lg mb-8">
+              {locale === 'ar' ? 'املأ النموذج وسيقوم فريقنا بالرد عليك.' : 'Fill up the form and our team will get back to you.'}
+            </p>
+            <ContactForms locale={locale as "ar"|"en"} />
+          </div>
+
         </div>
       </div>
     </div>

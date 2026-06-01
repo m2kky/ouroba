@@ -2,11 +2,8 @@
 
 import { useState } from "react";
 
-type Tab = "contact" | "career" | "collaborate";
-
 export default function ContactForms({ locale }: { locale: "ar" | "en" }) {
   const isEn = locale === "en";
-  const [activeTab, setActiveTab] = useState<Tab>("contact");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
@@ -20,11 +17,8 @@ export default function ContactForms({ locale }: { locale: "ar" | "en" }) {
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
 
-    // Map the endpoint based on active tab
-    const endpoint = `/api/${activeTab}s`;
-
     try {
-      const res = await fetch(endpoint, {
+      const res = await fetch("/api/contacts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -43,34 +37,6 @@ export default function ContactForms({ locale }: { locale: "ar" | "en" }) {
 
   return (
     <div>
-      {/* Tabs */}
-      <div className="flex border-b border-gray-200 mb-8 overflow-x-auto">
-        <button
-          onClick={() => { setActiveTab("contact"); setSuccess(false); setError(""); }}
-          className={`pb-4 px-6 font-bold whitespace-nowrap transition-colors border-b-2 ${
-            activeTab === "contact" ? "border-orouba-blue text-orouba-blue" : "border-transparent text-gray-400 hover:text-gray-700"
-          }`}
-        >
-          {isEn ? "General Inquiry" : "استفسار عام"}
-        </button>
-        <button
-          onClick={() => { setActiveTab("career"); setSuccess(false); setError(""); }}
-          className={`pb-4 px-6 font-bold whitespace-nowrap transition-colors border-b-2 ${
-            activeTab === "career" ? "border-orouba-blue text-orouba-blue" : "border-transparent text-gray-400 hover:text-gray-700"
-          }`}
-        >
-          {isEn ? "Careers" : "التوظيف"}
-        </button>
-        <button
-          onClick={() => { setActiveTab("collaborate"); setSuccess(false); setError(""); }}
-          className={`pb-4 px-6 font-bold whitespace-nowrap transition-colors border-b-2 ${
-            activeTab === "collaborate" ? "border-orouba-blue text-orouba-blue" : "border-transparent text-gray-400 hover:text-gray-700"
-          }`}
-        >
-          {isEn ? "Partnerships" : "التعاون والشراكات"}
-        </button>
-      </div>
-
       {success && (
         <div className="bg-green-50 text-green-700 p-4 rounded-xl mb-6 border border-green-200 font-medium">
           {isEn ? "Your request has been sent successfully! We will contact you soon." : "تم إرسال طلبك بنجاح! سنتواصل معك في أقرب وقت."}
@@ -84,59 +50,36 @@ export default function ContactForms({ locale }: { locale: "ar" | "en" }) {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Name / Names */}
-        {activeTab === "collaborate" ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-bold text-orouba-blue mb-2">{isEn ? "First Name" : "الاسم الأول"}</label>
-              <input required name="firstName" type="text" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orouba-yellow" />
-            </div>
-            <div>
-              <label className="block text-sm font-bold text-orouba-blue mb-2">{isEn ? "Last Name" : "اسم العائلة"}</label>
-              <input required name="lastName" type="text" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orouba-yellow" />
-            </div>
-            {/* hidden generic name field to satisfy API requirements if needed */}
-            <input type="hidden" name="name" value="Collaborator" />
-          </div>
-        ) : (
-          <div>
-            <label className="block text-sm font-bold text-orouba-blue mb-2">{isEn ? "Full Name" : "الاسم بالكامل"}</label>
-            <input required name="name" type="text" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orouba-yellow" />
-          </div>
-        )}
+        <div>
+          <label className="block text-sm font-bold text-orouba-blue mb-2">{isEn ? "Your Name" : "اسمك بالكامل"}</label>
+          <input required name="name" type="text" placeholder={isEn ? "Ex. Rick Jourden" : "مثال: أحمد محمد"} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orouba-yellow" />
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-bold text-orouba-blue mb-2">{isEn ? "Email" : "البريد الإلكتروني"}</label>
-            <input required name="email" type="email" dir="ltr" className={`w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orouba-yellow ${isEn ? 'text-left' : 'text-right'}`} />
+            <label className="block text-sm font-bold text-orouba-blue mb-2">{isEn ? "Your Mail" : "بريدك الإلكتروني"}</label>
+            <input required name="email" type="email" dir="ltr" placeholder={isEn ? "Ex. example@gmail.com" : "مثال: example@gmail.com"} className={`w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orouba-yellow ${isEn ? 'text-left' : 'text-right'}`} />
           </div>
           <div>
-            <label className="block text-sm font-bold text-orouba-blue mb-2">{isEn ? "Phone" : "رقم الهاتف"}</label>
-            <input name="phone" type="tel" dir="ltr" className={`w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orouba-yellow ${isEn ? 'text-left' : 'text-right'}`} />
+            <label className="block text-sm font-bold text-orouba-blue mb-2">{isEn ? "Your Number" : "رقم هاتفك"}</label>
+            <input name="phone" type="tel" dir="ltr" placeholder={isEn ? "Enter your number" : "أدخل رقمك"} className={`w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orouba-yellow ${isEn ? 'text-left' : 'text-right'}`} />
           </div>
         </div>
 
-        {/* Tab specific fields */}
-        {activeTab === "career" && (
-          <>
-            <div>
-              <label className="block text-sm font-bold text-orouba-blue mb-2">{isEn ? "Position Applied For" : "المسمى الوظيفي المتقدم له"}</label>
-              <input required name="position" type="text" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orouba-yellow" />
-            </div>
-            <div>
-              <label className="block text-sm font-bold text-orouba-blue mb-2">{isEn ? "CV URL" : "رابط السيرة الذاتية (CV)"}</label>
-              <input name="resumeUrl" type="url" dir="ltr" placeholder="https://..." className={`w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orouba-yellow ${isEn ? 'text-left' : 'text-right'}`} />
-            </div>
-          </>
-        )}
+        <div>
+          <label className="block text-sm font-bold text-orouba-blue mb-2">{isEn ? "Type Of Inquiry" : "نوع الاستفسار"}</label>
+          <select required name="inquiryType" className={`w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orouba-yellow ${isEn ? 'text-left' : 'text-right'}`}>
+            <option value="">{isEn ? "-Please choose an option-" : "-الرجاء اختيار نوع الاستفسار-"}</option>
+            <option value="general">{isEn ? "General Inquiry" : "استفسار عام"}</option>
+            <option value="sales">{isEn ? "Sales & Partnerships" : "المبيعات والشراكات"}</option>
+            <option value="support">{isEn ? "Support" : "الدعم الفني"}</option>
+          </select>
+        </div>
 
-        {/* Generic Message (for contact or collaborate) */}
-        {activeTab !== "career" && (
-          <div>
-            <label className="block text-sm font-bold text-orouba-blue mb-2">{isEn ? "Message" : "الرسالة"}</label>
-            <textarea required={activeTab === "contact"} name="message" rows={5} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orouba-yellow resize-none"></textarea>
-          </div>
-        )}
+        <div>
+          <label className="block text-sm font-bold text-orouba-blue mb-2">{isEn ? "Your Message" : "رسالتك"}</label>
+          <textarea required name="message" rows={5} placeholder={isEn ? "Type your message here" : "اكتب رسالتك هنا"} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orouba-yellow resize-none"></textarea>
+        </div>
 
         <button 
           type="submit" 

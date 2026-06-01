@@ -58,75 +58,77 @@ export default function CareersForm({ locale }: { locale: "ar" | "en" }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <input
-          required
-          type="text"
-          value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          placeholder={locale === "ar" ? "الاسم بالكامل" : "Full Name"}
-          className="w-full px-6 py-4 bg-[#f8f9fa] rounded-[2rem] border border-gray-100 focus:outline-none focus:border-orouba-yellow focus:ring-1 focus:ring-orouba-yellow transition-all"
-        />
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <input
           required
           type="email"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          placeholder={locale === "ar" ? "البريد الإلكتروني" : "Email Address"}
-          className="w-full px-6 py-4 bg-[#f8f9fa] rounded-[2rem] border border-gray-100 focus:outline-none focus:border-orouba-yellow focus:ring-1 focus:ring-orouba-yellow transition-all"
+          placeholder={locale === "ar" ? "بريدك الإلكتروني" : "Your Email"}
+          className="w-full px-4 py-3 bg-white rounded-lg border border-transparent focus:outline-none focus:ring-2 focus:ring-orouba-blue transition-all font-medium text-gray-700"
+        />
+        <input
+          required
+          type="text"
+          value={formData.name}
+          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          placeholder={locale === "ar" ? "اسمك بالكامل" : "Your Full Name"}
+          className="w-full px-4 py-3 bg-white rounded-lg border border-transparent focus:outline-none focus:ring-2 focus:ring-orouba-blue transition-all font-medium text-gray-700"
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <input
           type="tel"
           value={formData.phone}
           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-          placeholder={locale === "ar" ? "رقم الهاتف" : "Phone Number"}
-          className="w-full px-6 py-4 bg-[#f8f9fa] rounded-[2rem] border border-gray-100 focus:outline-none focus:border-orouba-yellow focus:ring-1 focus:ring-orouba-yellow transition-all"
+          placeholder={locale === "ar" ? "رقم هاتفك" : "Your Number"}
+          dir="ltr"
+          className={`w-full px-4 py-3 bg-white rounded-lg border border-transparent focus:outline-none focus:ring-2 focus:ring-orouba-blue transition-all font-medium text-gray-700 ${locale === 'ar' ? 'text-right' : 'text-left'}`}
         />
         <input
           type="text"
           value={formData.position}
           onChange={(e) => setFormData({ ...formData, position: e.target.value })}
-          placeholder={locale === "ar" ? "الوظيفة المتقدم إليها" : "Position Applied For"}
-          className="w-full px-6 py-4 bg-[#f8f9fa] rounded-[2rem] border border-gray-100 focus:outline-none focus:border-orouba-yellow focus:ring-1 focus:ring-orouba-yellow transition-all"
+          placeholder={locale === "ar" ? "الوظيفة" : "Position"}
+          className="w-full px-4 py-3 bg-white rounded-lg border border-transparent focus:outline-none focus:ring-2 focus:ring-orouba-blue transition-all font-medium text-gray-700"
         />
       </div>
 
-      <div className="w-full bg-[#f8f9fa] p-4 rounded-[2rem] border border-gray-100 flex items-center justify-between">
-        <span className="text-gray-500 px-4 font-medium">
-          {file ? file.name : (locale === "ar" ? "إرفاق السيرة الذاتية (CV)" : "Upload Resume (CV)")}
-        </span>
-        <label className="cursor-pointer bg-orouba-blue text-white px-6 py-2 rounded-full hover:bg-blue-800 transition-colors text-sm font-bold whitespace-nowrap">
-          {locale === "ar" ? "اختر ملف" : "Choose File"}
-          <input
-            type="file"
-            className="hidden"
-            onChange={(e) => setFile(e.target.files?.[0] || null)}
-          />
-        </label>
+      <div className="flex flex-col gap-2 mt-2">
+        <label className="font-bold text-[#002f59] text-sm">{locale === "ar" ? "أضف السيرة الذاتية" : "Add Cover Letter"}</label>
+        <div className="flex items-center gap-4">
+          <label className="cursor-pointer bg-[#e0e3e5] text-[#002f59] px-6 py-2 rounded-lg hover:bg-gray-300 transition-colors text-sm font-bold whitespace-nowrap">
+            {locale === "ar" ? "اختر ملف" : "Choose file"}
+            <input
+              type="file"
+              className="hidden"
+              onChange={(e) => setFile(e.target.files?.[0] || null)}
+            />
+          </label>
+          {file && <span className="text-sm font-medium text-[#002f59] truncate max-w-[200px]">{file.name}</span>}
+        </div>
       </div>
 
       <textarea
         value={formData.message}
         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-        placeholder={locale === "ar" ? "رسالة تعريفية (اختياري)" : "Cover Letter / Message"}
-        rows={4}
-        className="w-full px-6 py-4 bg-[#f8f9fa] rounded-[2rem] border border-gray-100 focus:outline-none focus:border-orouba-yellow focus:ring-1 focus:ring-orouba-yellow transition-all resize-none"
+        placeholder={locale === "ar" ? "رسالتك" : "Your Message"}
+        rows={5}
+        className="w-full px-4 py-3 bg-white rounded-lg border border-transparent focus:outline-none focus:ring-2 focus:ring-orouba-blue transition-all resize-none mt-2 font-medium text-gray-700"
       ></textarea>
 
-      {successMsg && <p className="text-green-600 font-medium text-center">{successMsg}</p>}
-      {errorMsg && <p className="text-red-600 font-medium text-center">{errorMsg}</p>}
+      {successMsg && <p className="text-green-700 font-bold bg-green-50 p-3 rounded-lg text-center">{successMsg}</p>}
+      {errorMsg && <p className="text-red-700 font-bold bg-red-50 p-3 rounded-lg text-center">{errorMsg}</p>}
 
       <button
         type="submit"
         disabled={loading}
-        className="w-full md:w-auto px-12 py-4 bg-orouba-yellow text-orouba-blue rounded-full font-bold text-lg hover:bg-yellow-400 transition-colors shadow-md disabled:opacity-70 flex justify-center items-center gap-2"
+        className="w-full py-4 bg-orouba-blue text-white rounded-lg font-bold text-lg hover:bg-blue-800 transition-colors shadow-sm disabled:opacity-70 flex justify-center items-center gap-2 mt-2"
       >
         {loading && <Loader2 className="w-5 h-5 animate-spin" />}
-        {locale === "ar" ? "إرسال الطلب" : "Submit Application"}
+        {locale === "ar" ? "إرسال" : "Send"}
       </button>
     </form>
   );

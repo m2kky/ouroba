@@ -1,0 +1,55 @@
+{
+  "navData": {
+    "bg": "#000000",
+    "color": "#212529",
+    "links": [
+      {
+        "text": "Home",
+        "color": "#ffffff",
+        "bg": "#000000"
+      },
+      {
+        "text": "About Us",
+        "color": "#ffffff",
+        "bg": "#000000"
+      },
+      {
+        "text": "Who We Are",
+        "color": "#000000",
+        "bg": "#000000"
+      },
+      {
+        "text": "Certificates",
+        "color": "#000000",
+        "bg": "#000000"
+      },
+      {
+        "text": "Product Types",
+        "color": "#000000",
+        "bg": "#000000"
+      }
+    ]
+  },
+  "btnData": [
+    {
+      "text": "Export Catalogue",
+      "bg": "#ffffff",
+      "color": "#035297"
+    },
+    {
+      "text": "About Us",
+      "bg": "#fff100",
+      "color": "#002f59"
+    },
+    {
+      "text": "Learn More",
+      "bg": "#fff100",
+      "color": "#002f59"
+    },
+    {
+      "text": "Learn More",
+      "bg": "#fff100",
+      "color": "#002f59"
+    }
+  ]
+}
