@@ -9,8 +9,8 @@ async function main() {
     data: {
       titleEn: 'Who We Are',
       titleAr: 'من نحن',
-      textEn: 'Since we started in 1998 until now, Orouba natural and healthy products of high quality are considered among the most important basic and favorite elements in the Egyptian kitchen...',
-      textAr: 'منذ أن بدأنا سنة ١٩٩٨ وحتى الآن، تعتبر منتجات العروبة الطبيعية والصحية عالية الجودة من أهم العناصر الأساسية والمفضلة في المطبخ المصري. إبتكاراتنا المستمرة تلهم الابداع فى الطهى حول العالم. شغفنا بالطعام وإيماننا بأنه وسيلة لجمع الأسرة والأصدقاء، جعلنا نحرص دائماً على تحويل الوجبات اليومية إلى تجارب ممتعة ونشر السعادة مع كل مذاق لذيذ. شاركنا في بث السعادة في مطبخك.',
+      textEn: 'Orouba for Food industry Co. was founded in 1998, with a vision to produce premium quality frozen food products. Our 20,000 square meter factory, equipped with state of the art technology and operated by our skilled engineers, ensures top quality production. Committed to consumer satisfaction, we offer a diverse range of frozen vegetables, fruits, beans, and pre-fried products, made with simple, all natural ingredients.',
+      textAr: 'تأسست شركة العروبة لصناعة المواد الغذائية سنة ١٩٩٨، برؤية تهدف للتمييز فى انتاج و ابتكار منتجات غذائية مجمدة عالية الجودة وسريعة الطهى لجميع انحاء العالم. تبلغ مساحة المصنع ٢٠,٠٠٠ متر مربع،وهو مجهز بأحدث التقنيات، تحت إشراف وإدارة فريق من المهندسين والعامليين ذوى الخبرة والكفاءة العالية لضمان انتاج عالى الجودة وفقا للمعايير الدولية. حرصا منا على إرضاء عملائنا والحفاظ على ثقتهم، فإننا نقدم مجموعة كبيرة ومتنوعة من المنتجات الطازجة المجمدة من خضروات، فواكة، بقوليات، حبوب وأيضا فلافل ومنتجات نصف مقلية مجمدة يتم إنتاجها جميعا من مكونات طبيعية دون أى اضافات.',
     }
   });
 

@@ -77,7 +77,7 @@ export default async function HomePage({
 
   const standardsTitle = s("home_standards_title", isEn ? "Our Standards" : "معاييرنا");
   const standardsText = s("home_standards_text", isEn 
-    ? "At Orouba, we adhere to the highest quality standards to ensure every product we offer meets your needs and exceeds expectations."
+    ? "At Orouba, we hold ourselves to the highest standards to ensure that every product."
     : "نلتزم في العروبة بأعلى معايير الجودة لضمان أن كل منتج نقدمه يلبي احتياجاتك ويتجاوز توقعاتك.");
 
   const worldImage = s("home_world_image", "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/9GWFp84wGE40aoJaGczEwt15qAjnjKtjAlQvqKNz.webp");
