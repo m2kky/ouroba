@@ -35,10 +35,8 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
       <div className="max-w-[1400px] mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 border border-gray-100 shadow-[0_10px_40px_rgba(0,0,0,0.08)] overflow-hidden rounded-[2.5rem]">
           
-          {/* Left Column (Yellow: Map + Info) */}
-          <div className="bg-[#fff44f] flex flex-col p-6 md:p-10 relative">
-            {/* Subtle Texture Overlay */}
-            <div className="absolute inset-0 opacity-10 bg-[url('/ar7.png')] bg-cover bg-center mix-blend-overlay pointer-events-none" />
+          {/* Left Column (Image: Map + Info) */}
+          <div className="bg-[url('/backsd.jpg')] bg-cover bg-center flex flex-col p-6 md:p-10 relative">
             
             <div className="relative z-10 w-full mb-8">
               <iframe 

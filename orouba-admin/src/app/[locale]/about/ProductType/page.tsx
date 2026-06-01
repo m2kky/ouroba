@@ -125,21 +125,7 @@ export default async function ProductsPage({
   }
 
   return (
-    <div className="bg-[#F2E900] min-h-screen pb-20 pt-32 relative overflow-hidden">
-      {/* Background Pattern - Production Style */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03]" 
-        style={{ 
-          backgroundImage: `url('${headerImg}')`,
-          backgroundRepeat: 'repeat',
-          backgroundSize: '400px'
-        }} 
-      />
-      
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/handmade-paper.png')] opacity-10" />
-        <div className="absolute top-10 left-10 w-32 h-32 bg-[url('https://oroubafoods.com/assets/img/elements/star.png')] bg-no-repeat opacity-20" />
-        <div className="absolute bottom-20 right-10 w-40 h-40 bg-[url('https://oroubafoods.com/assets/img/elements/circle.png')] bg-no-repeat opacity-20" />
-      </div>
+    <div className="bg-[url('/product_type.jpg')] bg-cover bg-center bg-fixed min-h-screen pb-20 pt-32 relative overflow-hidden">
 
       {/* Breadcrumbs */}
       <div className="max-w-[1400px] mx-auto px-4 md:px-8 mb-12 relative z-10">
