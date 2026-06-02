@@ -21,11 +21,21 @@ export default async function BrandMainPage({
     notFound();
   }
 
-  // The legacy BrandCategoryData view fetched brand details which contained brand info.
-  // Recipes related to this brand and WhyUs data.
-  // We will format the data as expected.
+  // Fetch related categories for the brand (legacy $relatedCats)
+  const relatedCatsData = await db.query.categories.findMany({
+    where: (categories, { and, eq }) => and(eq(categories.brandId, brandId), eq(categories.isHidden, false)),
+    orderBy: (categories, { asc }) => [asc(categories.number)],
+  });
+
+  const formattedCats = relatedCatsData.map((cat) => ({
+    ...cat,
+    name_ar: cat.nameAr,
+    name_en: cat.nameEn,
+  }));
+
   const data = {
     brand: brandData,
+    relatedCats: formattedCats,
   };
 
   return <BrandCategoryDataView data={resolveMediaTree(data)} id={brandId} />;

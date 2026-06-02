@@ -11,18 +11,16 @@ function WhyUs({ data, id }) {
   const { language } = UseGeneral();
   return (
     <div className="hero_section d-flex flex-column justify-content-between align-items-center w-full rowDiv why_us_section brands_section">
-      {data?.brand?.imageMain?.split(".")[
-        data?.brand?.imageMain?.split(".")?.length - 1
-      ] != "mp4" ? (
-        <img src={data?.brand?.imageMain} />
-      ) : (
+      {data?.brand?.videoUrl || (data?.brand?.imageMain && data?.brand?.imageMain?.split(".").pop() === "mp4") ? (
         <video
           style={{ width: "100%", margin: "auto" }}
-          src={data?.brand?.imageMain}
+          src={language === "ar" ? (data?.brand?.videoUrl || data?.brand?.imageMain) : (data?.brand?.videoUrlEn || data?.brand?.videoUrl || data?.brand?.imageMain)}
           muted
           autoPlay
           loop
         ></video>
+      ) : (
+        <img src={data?.brand?.imageMain} />
       )}
       <p style={{ color: "white" }}>
         {language == "ar"

@@ -60,7 +60,8 @@ async function getAboutData(): Promise<AboutData> {
       features,
       siteInfo,
     };
-  } catch {
+  } catch (error) {
+    console.error("Error fetching about data:", error);
     return emptyAboutData;
   }
 }
