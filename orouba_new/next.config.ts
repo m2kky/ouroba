@@ -32,11 +32,6 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: "/:lang/Brands",
-        destination: "/:lang/brands",
-        permanent: true,
-      },
-      {
         source: "/:lang/ExportCatalog",
         destination: "/:lang/export_cat",
         permanent: true,
@@ -44,11 +39,6 @@ const nextConfig: NextConfig = {
       {
         source: "/:lang/Reciepe",
         destination: "/:lang/recipes",
-        permanent: true,
-      },
-      {
-        source: "/:lang/ContactUs",
-        destination: "/:lang/contactus",
         permanent: true,
       },
       {
