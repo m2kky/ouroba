@@ -75,21 +75,21 @@ function WhyUs({ data, id }) {
         </svg>}
         <> {language == 'ar' ? (
                data?.brand?.brandTextAr && data?.brand?.brandTextAr ? (
-                <p
+                <div
                 className="whyUs-text"
                 style={{textAlign:"center"}}
                   dangerouslySetInnerHTML={{
                     __html:  data?.brand?.brandTextAr,
                   }}
-                ></p>
+                ></div>
               ) : null
             ) :  data?.brand?.brandTextEn &&  data?.brand?.brandTextEn?.length ? (
-              <p
+              <div
               style={{textAlign:"center"}}
                 dangerouslySetInnerHTML={{
                   __html:  data?.brand?.brandTextEn,
                 }}
-              ></p>
+              ></div>
             ) : null}</>
         
         {language == "ar" ?<svg
