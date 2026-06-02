@@ -11,14 +11,14 @@ function WhyUs({ data, id }) {
   const { language } = UseGeneral();
   return (
     <div className="hero_section d-flex flex-column justify-content-between align-items-center w-full rowDiv why_us_section brands_section">
-      {data?.brand?.main_image?.split(".")[
-        data?.brand?.main_image?.split(".")?.length - 1
+      {data?.brand?.imageMain?.split(".")[
+        data?.brand?.imageMain?.split(".")?.length - 1
       ] != "mp4" ? (
-        <img src={data?.brand?.main_image} />
+        <img src={data?.brand?.imageMain} />
       ) : (
         <video
           style={{ width: "100%", margin: "auto" }}
-          src={data?.brand?.main_image}
+          src={data?.brand?.imageMain}
           muted
           autoPlay
           loop
@@ -26,8 +26,8 @@ function WhyUs({ data, id }) {
       )}
       <p style={{ color: "white" }}>
         {language == "ar"
-          ? data?.brand?.description_ar
-          : data?.brand?.description_en}
+          ? data?.brand?.descriptionAr
+          : data?.brand?.descriptionEn}
       </p>
       <center
         className="rowDiv"
@@ -76,20 +76,20 @@ function WhyUs({ data, id }) {
           />
         </svg>}
         <> {language == 'ar' ? (
-               data?.brand?.brand_text_ar && data?.brand?.brand_text_ar ? (
+               data?.brand?.brandTextAr && data?.brand?.brandTextAr ? (
                 <p
                 className="whyUs-text"
                 style={{textAlign:"center"}}
                   dangerouslySetInnerHTML={{
-                    __html:  data?.brand?.brand_text_ar,
+                    __html:  data?.brand?.brandTextAr,
                   }}
                 ></p>
               ) : null
-            ) :  data?.brand?.brand_text_en &&  data?.brand?.brand_text_en?.length ? (
+            ) :  data?.brand?.brandTextEn &&  data?.brand?.brandTextEn?.length ? (
               <p
               style={{textAlign:"center"}}
                 dangerouslySetInnerHTML={{
-                  __html:  data?.brand?.brand_text_en,
+                  __html:  data?.brand?.brandTextEn,
                 }}
               ></p>
             ) : null}</>

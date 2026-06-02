@@ -37,6 +37,7 @@ export default async function ProductTypesPage({
       name_ar: cattype.category?.nameAr,
       name_en: cattype.category?.nameEn,
       image: cattype.category?.image,
+      image_en: cattype.category?.imageEn,
     })),
   }));
 

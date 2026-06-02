@@ -87,7 +87,7 @@ function ProductType({ types, pageDataObj }) {
                             return (
                               <Link href={url} key={indCat}>
                                 <img
-                                  src={itCat?.image}
+                                  src={language === "ar" ? itCat?.image : (itCat?.image_en || itCat?.image)}
                                   alt={language == "ar" ? "صورة المنتج" : "Product Image"}
                                   style={{ cursor: "pointer" }}
                                 />

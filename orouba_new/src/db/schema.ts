@@ -331,7 +331,7 @@ export const categoryTypeCategoryRelations = relations(categoryTypeCategories, (
   category: one(categories, { fields: [categoryTypeCategories.categoryId], references: [categories.id] }),
   categoryType: one(categoryTypes, { fields: [categoryTypeCategories.categoryTypeId], references: [categoryTypes.id] }),
 }));
-export const aboutSections = pgTable('AboutSection', {
+export const aboutSections = pgTable('SectionText', {
   id: text('id').primaryKey(),
   titleEn: text('titleEn').notNull(),
   titleAr: text('titleAr').notNull(),
@@ -342,7 +342,7 @@ export const aboutSections = pgTable('AboutSection', {
   updatedAt: timestamp('updatedAt').defaultNow(),
 });
 
-export const aboutBuildings = pgTable('AboutBuilding', {
+export const aboutBuildings = pgTable('Building', {
   id: text('id').primaryKey(),
   titleEn: text('titleEn').notNull(),
   titleAr: text('titleAr').notNull(),
@@ -354,7 +354,7 @@ export const aboutBuildings = pgTable('AboutBuilding', {
   updatedAt: timestamp('updatedAt').defaultNow(),
 });
 
-export const aboutProductionSteps = pgTable('AboutProductionStep', {
+export const aboutProductionSteps = pgTable('ProductionStep', {
   id: text('id').primaryKey(),
   textEn: text('textEn').notNull(),
   textAr: text('textAr').notNull(),
@@ -364,7 +364,7 @@ export const aboutProductionSteps = pgTable('AboutProductionStep', {
   updatedAt: timestamp('updatedAt').defaultNow(),
 });
 
-export const aboutFeatures = pgTable('AboutFeature', {
+export const aboutFeatures = pgTable('Feature', {
   id: text('id').primaryKey(),
   titleEn: text('titleEn').notNull(),
   titleAr: text('titleAr').notNull(),
@@ -375,7 +375,7 @@ export const aboutFeatures = pgTable('AboutFeature', {
   createdAt: timestamp('createdAt').defaultNow(),
   updatedAt: timestamp('updatedAt').defaultNow(),
 });
-export const certificateValues = pgTable('CertificateValue', {
+export const certificateValues = pgTable('Value', {
   id: text('id').primaryKey(),
   titleEn: text('titleEn').notNull(),
   titleAr: text('titleAr').notNull(),
