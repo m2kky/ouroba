@@ -34,15 +34,11 @@ async function getAboutData(): Promise<AboutData> {
         db.query.aboutSections.findMany({
           orderBy: (sections, { asc }) => [asc(sections.number)],
         }),
-        db.query.aboutBuildings.findMany({
-          orderBy: (buildings, { asc }) => [asc(buildings.number)],
-        }),
+        db.query.aboutBuildings.findMany(),
         db.query.aboutProductionSteps.findMany({
           orderBy: (steps, { asc }) => [asc(steps.number)],
         }),
-        db.query.aboutFeatures.findMany({
-          orderBy: (features, { asc }) => [asc(features.number)],
-        }),
+        db.query.aboutFeatures.findMany(),
         db.query.siteSettings.findMany({
           where: inArray(siteSettings.key, settingsKeys),
         }),

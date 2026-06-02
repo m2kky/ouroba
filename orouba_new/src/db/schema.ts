@@ -171,50 +171,12 @@ export const siteSettings = pgTable('SiteSetting', {
 });
 
 // Relationships
-export const productRelations = relations(products, ({ many, one }) => ({
-  images: many(productImages),
-  categories: many(categoryProducts),
-  type: one(productTypes, {
-    fields: [products.typeId],
-    references: [productTypes.id],
-  }),
-  recommendedRecipes: many(recommendedRecipes),
-}));
 
-export const productImageRelations = relations(productImages, ({ one }) => ({
-  product: one(products, {
-    fields: [productImages.productId],
-    references: [products.id],
-  }),
-}));
 
-export const recipeRelations = relations(recipes, ({ many }) => ({
-  images: many(recipeImages),
-  foods: many(recipeFoods),
-  properties: many(recipeProperties),
-  steps: many(recipeSteps),
-  recommendedWith: many(recommendedRecipes),
-}));
 
-export const recipeImageRelations = relations(recipeImages, ({ one }) => ({
-  recipe: one(recipes, {
-    fields: [recipeImages.recipeId],
-    references: [recipes.id],
-  }),
-}));
 
-export const brandRelations = relations(brands, ({ many }) => ({
-  categories: many(categories),
-  productTypes: many(productTypes),
-}));
 
-export const categoryRelations = relations(categories, ({ one, many }) => ({
-  brand: one(brands, {
-    fields: [categories.brandId],
-    references: [brands.id],
-  }),
-  products: many(categoryProducts),
-}));
+
 export const foods = pgTable('Food', {
   id: text('id').primaryKey(),
   nameEn: text('nameEn'),
@@ -241,23 +203,8 @@ export const recipeCategoryFoods = pgTable('RecipeCategoryFood', {
   foodId: text('foodId').references(() => foods.id, { onDelete: 'cascade' }),
 });
 
-export const foodRelations = relations(foods, ({ many }) => ({
-  recipes: many(recipeFoods),
-  recipeCategories: many(recipeCategoryFoods),
-}));
 
-export const recipeFoodRelations = relations(recipeFoods, ({ one }) => ({
-  recipe: one(recipes, { fields: [recipeFoods.recipeId], references: [recipes.id] }),
-  food: one(foods, { fields: [recipeFoods.foodId], references: [foods.id] }),
-}));
 
-export const recipeCategoryFoodRelations = relations(recipeCategoryFoods, ({ one }) => ({
-  recipeCategory: one(recipeCategories, { fields: [recipeCategoryFoods.recipeCategoryId], references: [recipeCategories.id] }),
-  food: one(foods, { fields: [recipeCategoryFoods.foodId], references: [foods.id] }),
-}));
-export const recipeCategoryRelations = relations(recipeCategories, ({ many }) => ({
-  foods: many(recipeCategoryFoods),
-}));
 export const recipeProperties = pgTable('RecipeProperty', {
   id: text('id').primaryKey(),
   recipeId: text('recipeId').references(() => recipes.id, { onDelete: 'cascade' }),
@@ -279,13 +226,7 @@ export const recipeSteps = pgTable('RecipeStep', {
   updatedAt: timestamp('updatedAt').defaultNow(),
 });
 
-export const recipePropertyRelations = relations(recipeProperties, ({ one }) => ({
-  recipe: one(recipes, { fields: [recipeProperties.recipeId], references: [recipes.id] }),
-}));
 
-export const recipeStepRelations = relations(recipeSteps, ({ one }) => ({
-  recipe: one(recipes, { fields: [recipeSteps.recipeId], references: [recipes.id] }),
-}));
 
 export const recommendedRecipes = pgTable('RecommendedRecipe', {
   id: text('id').primaryKey(),
@@ -295,10 +236,6 @@ export const recommendedRecipes = pgTable('RecommendedRecipe', {
   updatedAt: timestamp('updatedAt').defaultNow(),
 });
 
-export const recommendedRecipeRelations = relations(recommendedRecipes, ({ one }) => ({
-  product: one(products, { fields: [recommendedRecipes.productId], references: [products.id] }),
-  recipe: one(recipes, { fields: [recommendedRecipes.recipeId], references: [recipes.id] }),
-}));
 
 export const categoryTypes = pgTable('CategoryType', {
   id: text('id').primaryKey(),
@@ -323,14 +260,7 @@ export const categoryTypeCategories = pgTable('CategoryTypeCategory', {
   updatedAt: timestamp('updatedAt').defaultNow(),
 });
 
-export const categoryTypeRelations = relations(categoryTypes, ({ many }) => ({
-  categories: many(categoryTypeCategories),
-}));
 
-export const categoryTypeCategoryRelations = relations(categoryTypeCategories, ({ one }) => ({
-  category: one(categories, { fields: [categoryTypeCategories.categoryId], references: [categories.id] }),
-  categoryType: one(categoryTypes, { fields: [categoryTypeCategories.categoryTypeId], references: [categoryTypes.id] }),
-}));
 export const aboutSections = pgTable('SectionText', {
   id: text('id').primaryKey(),
   titleEn: text('titleEn').notNull(),
@@ -349,7 +279,7 @@ export const aboutBuildings = pgTable('Building', {
   descriptionEn: text('descriptionEn'),
   descriptionAr: text('descriptionAr'),
   image: text('image'),
-  number: integer('number').default(999),
+  isHidden: boolean('isHidden').default(false),
   createdAt: timestamp('createdAt').defaultNow(),
   updatedAt: timestamp('updatedAt').defaultNow(),
 });
@@ -371,7 +301,7 @@ export const aboutFeatures = pgTable('Feature', {
   descriptionEn: text('descriptionEn'),
   descriptionAr: text('descriptionAr'),
   image: text('image'),
-  number: integer('number').default(999),
+  isHidden: boolean('isHidden').default(false),
   createdAt: timestamp('createdAt').defaultNow(),
   updatedAt: timestamp('updatedAt').defaultNow(),
 });
@@ -414,16 +344,7 @@ export const contacts = pgTable('Contact', {
   message: text('message').notNull(),
   createdAt: timestamp('createdAt').defaultNow(),
 });
-export const socialParentsRelations = relations(socialParents, ({ many }) => ({
-  socials: many(socials),
-}));
 
-export const socialsRelations = relations(socials, ({ one }) => ({
-  parent: one(socialParents, {
-    fields: [socials.parentId],
-    references: [socialParents.id],
-  }),
-}));
 export const exportContinents = pgTable('ExportContinent', {
   id: text('id').primaryKey(),
   nameEn: text('nameEn').notNull(),
@@ -452,3 +373,95 @@ export const collaborates = pgTable('Collaborate', {
   request: text('request').notNull(),
   createdAt: timestamp('createdAt').defaultNow(),
 });
+
+// Relations
+export const productRelations = relations(products, ({ many, one }) => ({
+  images: many(productImages),
+  categories: many(categoryProducts),
+  type: one(productTypes, {
+    fields: [products.typeId],
+    references: [productTypes.id],
+  }),
+  recommendedRecipes: many(recommendedRecipes),
+}));
+export const productImageRelations = relations(productImages, ({ one }) => ({
+  product: one(products, {
+    fields: [productImages.productId],
+    references: [products.id],
+  }),
+}));
+export const recipeRelations = relations(recipes, ({ many }) => ({
+  images: many(recipeImages),
+  foods: many(recipeFoods),
+  properties: many(recipeProperties),
+  steps: many(recipeSteps),
+  recommendedWith: many(recommendedRecipes),
+}));
+export const recipeImageRelations = relations(recipeImages, ({ one }) => ({
+  recipe: one(recipes, {
+    fields: [recipeImages.recipeId],
+    references: [recipes.id],
+  }),
+}));
+export const brandRelations = relations(brands, ({ many }) => ({
+  categories: many(categories),
+  productTypes: many(productTypes),
+}));
+export const categoryRelations = relations(categories, ({ one, many }) => ({
+  brand: one(brands, {
+    fields: [categories.brandId],
+    references: [brands.id],
+  }),
+  products: many(categoryProducts),
+}));
+export const categoryProductRelations = relations(categoryProducts, ({ one }) => ({
+  product: one(products, {
+    fields: [categoryProducts.productId],
+    references: [products.id],
+  }),
+  category: one(categories, {
+    fields: [categoryProducts.categoryId],
+    references: [categories.id],
+  }),
+}));
+export const foodRelations = relations(foods, ({ many }) => ({
+  recipes: many(recipeFoods),
+  recipeCategories: many(recipeCategoryFoods),
+}));
+export const recipeFoodRelations = relations(recipeFoods, ({ one }) => ({
+  recipe: one(recipes, { fields: [recipeFoods.recipeId], references: [recipes.id] }),
+  food: one(foods, { fields: [recipeFoods.foodId], references: [foods.id] }),
+}));
+export const recipeCategoryFoodRelations = relations(recipeCategoryFoods, ({ one }) => ({
+  recipeCategory: one(recipeCategories, { fields: [recipeCategoryFoods.recipeCategoryId], references: [recipeCategories.id] }),
+  food: one(foods, { fields: [recipeCategoryFoods.foodId], references: [foods.id] }),
+}));
+export const recipeCategoryRelations = relations(recipeCategories, ({ many }) => ({
+  foods: many(recipeCategoryFoods),
+}));
+export const recipePropertyRelations = relations(recipeProperties, ({ one }) => ({
+  recipe: one(recipes, { fields: [recipeProperties.recipeId], references: [recipes.id] }),
+}));
+export const recipeStepRelations = relations(recipeSteps, ({ one }) => ({
+  recipe: one(recipes, { fields: [recipeSteps.recipeId], references: [recipes.id] }),
+}));
+export const recommendedRecipeRelations = relations(recommendedRecipes, ({ one }) => ({
+  product: one(products, { fields: [recommendedRecipes.productId], references: [products.id] }),
+  recipe: one(recipes, { fields: [recommendedRecipes.recipeId], references: [recipes.id] }),
+}));
+export const categoryTypeRelations = relations(categoryTypes, ({ many }) => ({
+  categories: many(categoryTypeCategories),
+}));
+export const categoryTypeCategoryRelations = relations(categoryTypeCategories, ({ one }) => ({
+  category: one(categories, { fields: [categoryTypeCategories.categoryId], references: [categories.id] }),
+  categoryType: one(categoryTypes, { fields: [categoryTypeCategories.categoryTypeId], references: [categoryTypes.id] }),
+}));
+export const socialParentsRelations = relations(socialParents, ({ many }) => ({
+  socials: many(socials),
+}));
+export const socialsRelations = relations(socials, ({ one }) => ({
+  parent: one(socialParents, {
+    fields: [socials.parentId],
+    references: [socialParents.id],
+  }),
+}));
