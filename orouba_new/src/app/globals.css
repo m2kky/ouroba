@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-cairo), ui-sans-serif, system-ui, sans-serif;
+  --font-cairo: var(--font-cairo);
+  
+  --color-orouba-blue: #035297;
+  --color-orouba-dark: #002f59;
+  --color-orouba-yellow: #fff100;
+  --color-orouba-basma: #7cb021;
+
+  --color-brand: var(--brand-color);
+  --color-brand-light: var(--brand-light);
+  --color-card-bg: var(--card-bg);
+  --color-card-ring: var(--card-ring);
+  --color-card-hoverRing: var(--card-hover-ring);
+  
+  --shadow-card: 0px 14px 34px 0px rgba(0, 0, 0, 0.08);
+}
+
+:root {
+  /* ألوان الوضع النهاري (Light Mode) */
+  --background: #f9fafb; /* Gray-50 */
+  --foreground: #000000; /* Black */
+  
+  --brand-color: #FF2D20;
+  --brand-light: rgb(255 45 32 / 0.1);
+  
+  --card-bg: #ffffff;
+  --card-ring: rgb(255 255 255 / 0.05);
+  --card-hover-ring: rgb(0 0 0 / 0.2);
+}
+
+/* الوضع الليلي (Dark Mode) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000000; /* Black */
+    --foreground: #ffffff; /* White */
+    
+    --brand-color: #FF2D20;
+    --brand-light: rgb(255 45 32 / 0.1);
+    
+    --card-bg: #18181b; /* zinc-900 */
+    --card-ring: #27272a; /* zinc-800 */
+    --card-hover-ring: #3f3f46; /* zinc-700 */
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+body[dir="ltr"] {
+  font-family: var(--font-amaranth), sans-serif !important;
+}
+
+body[dir="ltr"] * {
+  font-family: var(--font-amaranth), sans-serif;
+}
+
+body[dir="rtl"] {
+  font-family: var(--font-tajawal), sans-serif;
+}
+
+body[dir="rtl"] h1, 
+body[dir="rtl"] h2, 
+body[dir="rtl"] h3, 
+body[dir="rtl"] h4, 
+body[dir="rtl"] h5, 
+body[dir="rtl"] h6,
+body[dir="rtl"] nav,
+body[dir="rtl"] nav * {
+  font-family: var(--font-baloo), sans-serif !important;
+}
+
+html {
+  overflow-x: clip;
+  max-width: 100vw;
+}
+
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+.header,
+.headerBackground,
+.HeaderIcons,
+.HeaderIcons .menuToggle,
+.HeaderIcons .menuLabel {
+  position: relative;
+  z-index: 1000;
+}
+
+.HeaderIcons .menu {
+  z-index: 2000 !important;
+}
+
+.bannerDiv,
+.banner,
+.banner video {
+  position: relative;
+  z-index: 0;
+}
+
+/* Logo Loader Animations */
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.animate-bounce-slow {
+  animation: bounce-slow 2s ease-in-out infinite;
+}
+
+/* Shimmer skeleton animation */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.animate-shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* Logo pulse ring */
+@keyframes logo-ping {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+.animate-logo-ping {
+  animation: logo-ping 1.5s ease-out infinite;
+}
+
+/* Modals Overlay Scrolling & Centering Fix */
+div.fixed.inset-0.bg-black\/50,
+div.fixed.inset-0.bg-black\/40 {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  overflow-y: auto !important;
+  padding: 2rem 1rem !important;
+}
+
+/* Modal Content Centering & Scrolling margins */
+div.fixed.inset-0.bg-black\/50 > div,
+div.fixed.inset-0.bg-black\/40 > div {
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  flex-shrink: 0 !important;
+}
+
+@media (max-height: 800px) {
+  div.fixed.inset-0.bg-black\/50 > div,
+  div.fixed.inset-0.bg-black\/40 > div {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+}
+
+/* Zoom Lens Popover Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { transform: scale(0.95); }
+  to { transform: scale(1); }
+}
+.animate-fade-in {
+  animation: fadeIn 0.15s ease-out forwards;
+}
+.scale-in {
+  animation: scaleIn 0.15s ease-out forwards;
+}
+
+@layer components {
+  .card {
+    @apply flex items-start gap-4 rounded-lg bg-(--card-bg) p-6 shadow-card ring-1 ring-(--card-ring) transition duration-300 hover:text-black/70 hover:ring-(--card-hoverRing) focus:outline-none focus-visible:ring-brand lg:pb-10 dark:hover:text-white/70;
+  }
+
+  .icon-box {
+    @apply flex size-12 shrink-0 items-center justify-center rounded-full bg-brand-light sm:size-16;
+  }
+  
+  .nav-link {
+    @apply rounded-md px-3 py-2 text-foreground/50 ring-1 ring-transparent transition hover:text-foreground focus:outline-none focus-visible:ring-brand;
+  }
+}

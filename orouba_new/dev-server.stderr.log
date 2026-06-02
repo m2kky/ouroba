@@ -1,0 +1,1330 @@
+Each child in a list should have a unique "key" prop.
+
+Check the render method of `Brands`. See https://react.dev/link/warning-keys for more information.
+Each child in a list should have a unique "key" prop.
+
+Check the render method of `Standards`. See https://react.dev/link/warning-keys for more information.
+Each child in a list should have a unique "key" prop.
+
+Check the render method of `Brands`. See https://react.dev/link/warning-keys for more information.
+Each child in a list should have a unique "key" prop.
+
+Check the render method of `Standards`. See https://react.dev/link/warning-keys for more information.
+[browser] Each child in a list should have a unique "key" prop.
+
+Check the render method of `Brands`. See https://react.dev/link/warning-keys for more information. 
+    at <unknown> (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:15127:29)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at warnForMissingKey (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:15126:17)
+    at warnOnInvalidKey (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:4091:21)
+    at reconcileChildrenArray (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:4129:160)
+    at reconcileChildFibersImpl (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:4236:51)
+    at <unknown> (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:4261:39)
+    at reconcileChildren (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:5898:51)
+    at beginWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6758:1573)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at performUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9555:97)
+    at workLoopConcurrentByScheduler (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64) (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:15127:29)
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RenderFromTemplateContext>
+      <ScrollAndMaybeFocusHandler cacheNode={{rsc:{...}, ...}}>
+        <InnerScrollAndFocusHandlerOld focusAndScrollRef={{scrollRef:null, ...}} cacheNode={{rsc:{...}, ...}}>
+          <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+            <LoadingBoundary name="/" loading={null}>
+              <HTTPAccessFallbackBoundary notFound={{...}} forbidden={undefined} unauthorized={undefined}>
+                <HTTPAccessFallbackErrorBoundary pathname="/ar" notFound={{...}} forbidden={undefined} ...>
+                  <RedirectBoundary>
+                    <RedirectErrorBoundary router={{...}}>
+                      <InnerLayoutRouter url="/ar" tree={[...]} params={{lang:"ar"}} cacheNode={{rsc:{...}, ...}} ...>
+                        <SegmentViewNode type="layout" pagePath="[lang]/lay...">
+                          <SegmentTrieNode>
+                          <link>
+                          <script>
+                          <script>
+                          <script>
+                          <script>
+                          <script>
+                          <script>
+                          <script>
+                          <script>
+                          <script>
+                          <RootLayout>
+                            <html lang="ar" dir="rtl">
+                              <head>
+                              <body
+-                               inject_vt_svd="true"
+                              >
+                      ...
+          ...
+ 
+    at <unknown> (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3439:25)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at emitPendingHydrationWarnings (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3438:13)
+    at completeWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6885:102)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:131)
+    at completeUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64) (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3439:25)
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RenderFromTemplateContext>
+      <ScrollAndMaybeFocusHandler cacheNode={{rsc:{...}, ...}}>
+        <InnerScrollAndFocusHandlerOld focusAndScrollRef={{scrollRef:null, ...}} cacheNode={{rsc:{...}, ...}}>
+          <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+            <LoadingBoundary name="/" loading={null}>
+              <HTTPAccessFallbackBoundary notFound={{...}} forbidden={undefined} unauthorized={undefined}>
+                <HTTPAccessFallbackErrorBoundary pathname="/en" notFound={{...}} forbidden={undefined} ...>
+                  <RedirectBoundary>
+                    <RedirectErrorBoundary router={{...}}>
+                      <InnerLayoutRouter url="/en" tree={[...]} params={{lang:"en"}} cacheNode={{rsc:{...}, ...}} ...>
+                        <SegmentViewNode type="layout" pagePath="[lang]/lay...">
+                          <SegmentTrieNode>
+                          <link>
+                          <script>
+                          <script>
+                          <script>
+                          <script>
+                          <script>
+                          <script>
+                          <script>
+                          <script>
+                          <script>
+                          <RootLayout>
+                            <html lang="en" dir="ltr">
+                              <head>
+                              <body
+-                               inject_vt_svd="true"
+                              >
+                      ...
+          ...
+ 
+    at <unknown> (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3439:25)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at emitPendingHydrationWarnings (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3438:13)
+    at completeWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6885:102)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:131)
+    at completeUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64) (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3439:25)
+[browser] Uncaught Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RenderFromTemplateContext>
+      <ScrollAndMaybeFocusHandler cacheNode={{rsc:{...}, ...}}>
+        <InnerScrollAndFocusHandlerOld focusAndScrollRef={{scrollRef:null, ...}} cacheNode={{rsc:{...}, ...}}>
+          <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+            <LoadingBoundary name="/" loading={null}>
+              <HTTPAccessFallbackBoundary notFound={{...}} forbidden={undefined} unauthorized={undefined}>
+                <HTTPAccessFallbackErrorBoundary pathname="/ar" notFound={{...}} forbidden={undefined} ...>
+                  <RedirectBoundary>
+                    <RedirectErrorBoundary router={{...}}>
+                      <InnerLayoutRouter url="/ar" tree={[...]} params={{lang:"ar"}} cacheNode={{rsc:{...}, ...}} ...>
+                        <SegmentViewNode type="layout" pagePath="[lang]/lay...">
+                          <SegmentTrieNode>
+                          <link>
+                          <script>
+                          <script>
+                          <script>
+                          <script>
+                          <script>
+                          <script>
+                          <script>
+                          <script>
+                          <script>
+                          <RootLayout>
+                            <html lang="ar" dir="rtl">
+                              <head>
+                              <body
+-                               inject_vt_svd="true"
+                              >
+                                ...
+                                  <div className="rowDiv">
+                                    <div>
+                                    <BottomHeader>
+                                    <HeaderIcons show={false} setShow={function bound dispatchSetState}>
+                                      <div className="HeaderIcons">
+                                        <button className="hoverable" onClick={function onClick}>
++                                         تحميل الكتالوج
+-                                         Export Catalogue
+                                        ...
+                                    ...
+                      ...
+          ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3318:56)
+    at prepareToHydrateHostInstance (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3372:23)
+    at completeWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6922:60)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at completeUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64)
+    at button (<anonymous>)
+    at HeaderIcons (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:3816:215)
+    at TopHeader (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:4374:215)
+    at Header (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:4494:225)
+    at RootLayout (src\app\[lang]\layout.tsx:45:13)
+  43 |         <StoreProvider>
+  44 |           <div className="defaultLayout">
+> 45 |             <Header />
+     |             ^
+  46 |             <main>{children}</main>
+  47 |             <Footer />
+  48 |           </div>
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/brands/5" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="__next_bui...">
+                      <SegmentTrieNode>
+                      <script>
+                      <script>
+                      <DefaultLayout>
+                        <html>
+                          <body
+-                           inject_vt_svd="true"
+                          >
+                  ...
+ 
+    at <unknown> (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3439:25)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at emitPendingHydrationWarnings (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3438:13)
+    at completeWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6885:102)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:131)
+    at completeUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64) (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3439:25)
+[browser] Uncaught Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <SegmentViewNode type="layout" pagePath="[lang]/lay...">
+      <SegmentTrieNode>
+      <link>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <RootLayout>
+        <html lang="ar" dir="rtl">
+          <head>
+          <body>
+            <StoreProvider>
+              <Provider store={{...}}>
+                <div className="defaultLayout">
+                  <Header>
+                    <header className={"header "}>
+                      <div className="headerBack...">
+                        <TopHeader data={null}>
+                          <div className="rowDiv">
+                            <div>
+                            <BottomHeader>
+                            <HeaderIcons show={false} setShow={function bound dispatchSetState}>
+                              <div className="HeaderIcons">
+                                <button className="hoverable" onClick={function onClick}>
++                                 تحميل الكتالوج
+-                                 Export Catalogue
+                                ...
+                            ...
+                  ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3318:56)
+    at prepareToHydrateHostInstance (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3372:23)
+    at completeWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6922:60)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at completeUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64)
+    at button (<anonymous>)
+    at HeaderIcons (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:3816:215)
+    at TopHeader (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:4374:215)
+    at Header (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:4494:225)
+    at RootLayout (src\app\[lang]\layout.tsx:45:13)
+  43 |         <StoreProvider>
+  44 |           <div className="defaultLayout">
+> 45 |             <Header />
+     |             ^
+  46 |             <main>{children}</main>
+  47 |             <Footer />
+  48 |           </div>
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/about/who..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="__next_bui...">
+                      <SegmentTrieNode>
+                      <script>
+                      <script>
+                      <DefaultLayout>
+                        <html>
+                          <body
+-                           inject_vt_svd="true"
+                          >
+                  ...
+ 
+    at <unknown> (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3439:25)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at emitPendingHydrationWarnings (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3438:13)
+    at completeWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6885:102)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:131)
+    at completeUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64) (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3439:25)
+[browser] Uncaught Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <SegmentViewNode type="layout" pagePath="[lang]/lay...">
+      <SegmentTrieNode>
+      <link>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <RootLayout>
+        <html lang="ar" dir="rtl">
+          <head>
+          <body>
+            <StoreProvider>
+              <Provider store={{...}}>
+                <div className="defaultLayout">
+                  <Header>
+                    <header className={"header "}>
+                      <div className="headerBack...">
+                        <TopHeader data={null}>
+                          <div className="rowDiv">
+                            <div>
+                            <BottomHeader>
+                            <HeaderIcons show={false} setShow={function bound dispatchSetState}>
+                              <div className="HeaderIcons">
+                                <button className="hoverable" onClick={function onClick}>
++                                 تحميل الكتالوج
+-                                 Export Catalogue
+                                ...
+                            ...
+                  ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3318:56)
+    at prepareToHydrateHostInstance (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3372:23)
+    at completeWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6922:60)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at completeUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64)
+    at button (<anonymous>)
+    at HeaderIcons (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:3816:215)
+    at TopHeader (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:4374:215)
+    at Header (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:4494:225)
+    at RootLayout (src\app\[lang]\layout.tsx:45:13)
+  43 |         <StoreProvider>
+  44 |           <div className="defaultLayout">
+> 45 |             <Header />
+     |             ^
+  46 |             <main>{children}</main>
+  47 |             <Footer />
+  48 |           </div>
+[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477:13)
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/about/Pro..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="__next_bui...">
+                      <SegmentTrieNode>
+                      <script>
+                      <script>
+                      <DefaultLayout>
+                        <html>
+                          <body
+-                           inject_vt_svd="true"
+                          >
+                  ...
+ 
+    at <unknown> (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3439:25)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at emitPendingHydrationWarnings (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3438:13)
+    at completeWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6885:102)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:131)
+    at completeUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64) (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3439:25)
+[browser] Uncaught Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <SegmentViewNode type="layout" pagePath="[lang]/lay...">
+      <SegmentTrieNode>
+      <link>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <RootLayout>
+        <html lang="about" dir="ltr">
+          <head>
+          <body>
+            <StoreProvider>
+              <Provider store={{...}}>
+                <div className="defaultLayout">
+                  <Header>
+                    <header className={"header "}>
+                      <div className="headerBack...">
+                        <TopHeader data={null}>
+                          <div className="rowDiv">
+                            <div>
+                            <BottomHeader>
+                            <HeaderIcons show={false} setShow={function bound dispatchSetState}>
+                              <div className="HeaderIcons">
+                                <button className="hoverable" onClick={function onClick}>
++                                 تحميل الكتالوج
+-                                 Export Catalogue
+                                ...
+                            ...
+                  ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3318:56)
+    at prepareToHydrateHostInstance (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3372:23)
+    at completeWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6922:60)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at completeUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64)
+    at button (<anonymous>)
+    at HeaderIcons (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:3816:215)
+    at TopHeader (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:4374:215)
+    at Header (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:4494:225)
+    at RootLayout (src\app\[lang]\layout.tsx:45:13)
+  43 |         <StoreProvider>
+  44 |           <div className="defaultLayout">
+> 45 |             <Header />
+     |             ^
+  46 |             <main>{children}</main>
+  47 |             <Footer />
+  48 |           </div>
+[browser] Uncaught Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RenderFromTemplateContext>
+      <ScrollAndMaybeFocusHandler cacheNode={{rsc:{...}, ...}}>
+        <InnerScrollAndFocusHandlerOld focusAndScrollRef={{scrollRef:null, ...}} cacheNode={{rsc:{...}, ...}}>
+          <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+            <LoadingBoundary name="/" loading={null}>
+              <HTTPAccessFallbackBoundary notFound={{...}} forbidden={undefined} unauthorized={undefined}>
+                <HTTPAccessFallbackErrorBoundary pathname="/ar" notFound={{...}} forbidden={undefined} ...>
+                  <RedirectBoundary>
+                    <RedirectErrorBoundary router={{...}}>
+                      <InnerLayoutRouter url="/ar" tree={[...]} params={{lang:"ar"}} cacheNode={{rsc:{...}, ...}} ...>
+                        <SegmentViewNode type="layout" pagePath="[lang]/lay...">
+                          <SegmentTrieNode>
+                          <link>
+                          <script>
+                          <script>
+                          <script>
+                          <script>
+                          <script>
+                          <script>
+                          <script>
+                          <script>
+                          <script>
+                          <RootLayout>
+                            <html lang="ar" dir="rtl">
+                              <head>
+                              <body
+-                               inject_vt_svd="true"
+                              >
+                                ...
+                                  <div className="rowDiv">
+                                    <div>
+                                    <BottomHeader>
+                                    <HeaderIcons show={false} setShow={function bound dispatchSetState}>
+                                      <div className="HeaderIcons">
+                                        <button className="hoverable" onClick={function onClick}>
++                                         تحميل الكتالوج
+-                                         Export Catalogue
+                                        ...
+                                    ...
+                      ...
+          ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3318:56)
+    at prepareToHydrateHostInstance (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3372:23)
+    at completeWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6922:60)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at completeUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64)
+    at button (<anonymous>)
+    at HeaderIcons (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:3816:215)
+    at TopHeader (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:4374:215)
+    at Header (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:4494:225)
+    at RootLayout (src\app\[lang]\layout.tsx:45:13)
+  43 |         <StoreProvider>
+  44 |           <div className="defaultLayout">
+> 45 |             <Header />
+     |             ^
+  46 |             <main>{children}</main>
+  47 |             <Footer />
+  48 |           </div>
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/about/who..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="__next_bui...">
+                      <SegmentTrieNode>
+                      <script>
+                      <script>
+                      <DefaultLayout>
+                        <html>
+                          <body
+-                           inject_vt_svd="true"
+                          >
+                  ...
+ 
+    at <unknown> (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3439:25)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at emitPendingHydrationWarnings (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3438:13)
+    at completeWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6885:102)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:131)
+    at completeUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64) (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3439:25)
+[browser] Uncaught Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <SegmentViewNode type="layout" pagePath="[lang]/lay...">
+      <SegmentTrieNode>
+      <link>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <RootLayout>
+        <html lang="ar" dir="rtl">
+          <head>
+          <body>
+            <StoreProvider>
+              <Provider store={{...}}>
+                <div className="defaultLayout">
+                  <Header>
+                    <header className={"header "}>
+                      <div className="headerBack...">
+                        <TopHeader data={null}>
+                          <div className="rowDiv">
+                            <div>
+                            <BottomHeader>
+                            <HeaderIcons show={false} setShow={function bound dispatchSetState}>
+                              <div className="HeaderIcons">
+                                <button className="hoverable" onClick={function onClick}>
++                                 تحميل الكتالوج
+-                                 Export Catalogue
+                                ...
+                            ...
+                  ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3318:56)
+    at prepareToHydrateHostInstance (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3372:23)
+    at completeWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6922:60)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at completeUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64)
+    at button (<anonymous>)
+    at HeaderIcons (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:3816:215)
+    at TopHeader (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:4374:215)
+    at Header (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:4494:225)
+    at RootLayout (src\app\[lang]\layout.tsx:45:13)
+  43 |         <StoreProvider>
+  44 |           <div className="defaultLayout">
+> 45 |             <Header />
+     |             ^
+  46 |             <main>{children}</main>
+  47 |             <Footer />
+  48 |           </div>
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/brands/8" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="__next_bui...">
+                      <SegmentTrieNode>
+                      <script>
+                      <script>
+                      <DefaultLayout>
+                        <html>
+                          <body
+-                           inject_vt_svd="true"
+                          >
+                  ...
+ 
+    at <unknown> (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3439:25)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at emitPendingHydrationWarnings (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3438:13)
+    at completeWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6885:102)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:131)
+    at completeUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64) (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3439:25)
+[browser] Uncaught Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <SegmentViewNode type="layout" pagePath="[lang]/lay...">
+      <SegmentTrieNode>
+      <link>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <RootLayout>
+        <html lang="ar" dir="rtl">
+          <head>
+          <body>
+            <StoreProvider>
+              <Provider store={{...}}>
+                <div className="defaultLayout">
+                  <Header>
+                    <header className={"header "}>
+                      <div className="headerBack...">
+                        <TopHeader data={null}>
+                          <div className="rowDiv">
+                            <div>
+                            <BottomHeader>
+                            <HeaderIcons show={false} setShow={function bound dispatchSetState}>
+                              <div className="HeaderIcons">
+                                <button className="hoverable" onClick={function onClick}>
++                                 تحميل الكتالوج
+-                                 Export Catalogue
+                                ...
+                            ...
+                  ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3318:56)
+    at prepareToHydrateHostInstance (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3372:23)
+    at completeWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6922:60)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at completeUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64)
+    at button (<anonymous>)
+    at HeaderIcons (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:3816:215)
+    at TopHeader (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:4374:215)
+    at Header (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:4494:225)
+    at RootLayout (src\app\[lang]\layout.tsx:45:13)
+  43 |         <StoreProvider>
+  44 |           <div className="defaultLayout">
+> 45 |             <Header />
+     |             ^
+  46 |             <main>{children}</main>
+  47 |             <Footer />
+  48 |           </div>
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/brands/7" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="__next_bui...">
+                      <SegmentTrieNode>
+                      <script>
+                      <script>
+                      <DefaultLayout>
+                        <html>
+                          <body
+-                           inject_vt_svd="true"
+                          >
+                  ...
+ 
+    at <unknown> (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3439:25)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at emitPendingHydrationWarnings (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3438:13)
+    at completeWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6885:102)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:131)
+    at completeUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64) (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3439:25)
+[browser] Uncaught Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <SegmentViewNode type="layout" pagePath="[lang]/lay...">
+      <SegmentTrieNode>
+      <link>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <RootLayout>
+        <html lang="ar" dir="rtl">
+          <head>
+          <body>
+            <StoreProvider>
+              <Provider store={{...}}>
+                <div className="defaultLayout">
+                  <Header>
+                    <header className={"header "}>
+                      <div className="headerBack...">
+                        <TopHeader data={null}>
+                          <div className="rowDiv">
+                            <div>
+                            <BottomHeader>
+                            <HeaderIcons show={false} setShow={function bound dispatchSetState}>
+                              <div className="HeaderIcons">
+                                <button className="hoverable" onClick={function onClick}>
++                                 تحميل الكتالوج
+-                                 Export Catalogue
+                                ...
+                            ...
+                  ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3318:56)
+    at prepareToHydrateHostInstance (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3372:23)
+    at completeWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6922:60)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at completeUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64)
+    at button (<anonymous>)
+    at HeaderIcons (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:3816:215)
+    at TopHeader (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:4374:215)
+    at Header (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:4494:225)
+    at RootLayout (src\app\[lang]\layout.tsx:45:13)
+  43 |         <StoreProvider>
+  44 |           <div className="defaultLayout">
+> 45 |             <Header />
+     |             ^
+  46 |             <main>{children}</main>
+  47 |             <Footer />
+  48 |           </div>
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/about/who..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="__next_bui...">
+                      <SegmentTrieNode>
+                      <script>
+                      <script>
+                      <DefaultLayout>
+                        <html>
+                          <body
+-                           inject_vt_svd="true"
+                          >
+                  ...
+ 
+    at <unknown> (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3439:25)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at emitPendingHydrationWarnings (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3438:13)
+    at completeWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6885:102)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:131)
+    at completeUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64) (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3439:25)
+[browser] Uncaught Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <SegmentViewNode type="layout" pagePath="[lang]/lay...">
+      <SegmentTrieNode>
+      <link>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <RootLayout>
+        <html lang="ar" dir="rtl">
+          <head>
+          <body>
+            <StoreProvider>
+              <Provider store={{...}}>
+                <div className="defaultLayout">
+                  <Header>
+                    <header className={"header "}>
+                      <div className="headerBack...">
+                        <TopHeader data={null}>
+                          <div className="rowDiv">
+                            <div>
+                            <BottomHeader>
+                            <HeaderIcons show={false} setShow={function bound dispatchSetState}>
+                              <div className="HeaderIcons">
+                                <button className="hoverable" onClick={function onClick}>
++                                 تحميل الكتالوج
+-                                 Export Catalogue
+                                ...
+                            ...
+                  ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3318:56)
+    at prepareToHydrateHostInstance (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3372:23)
+    at completeWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6922:60)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at completeUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64)
+    at button (<anonymous>)
+    at HeaderIcons (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:3816:215)
+    at TopHeader (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:4374:215)
+    at Header (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:4494:225)
+    at RootLayout (src\app\[lang]\layout.tsx:45:13)
+  43 |         <StoreProvider>
+  44 |           <div className="defaultLayout">
+> 45 |             <Header />
+     |             ^
+  46 |             <main>{children}</main>
+  47 |             <Footer />
+  48 |           </div>
+[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477:13)
+[browser] Uncaught Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <SegmentViewNode type="layout" pagePath="[lang]/lay...">
+      <SegmentTrieNode>
+      <link>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <RootLayout>
+        <html lang="ar" dir="rtl">
+          <head>
+          <body>
+            <StoreProvider>
+              <Provider store={{...}}>
+                <div className="defaultLayout">
+                  <Header>
+                    <header className={"header "}>
+                      <div className="headerBack...">
+                        <TopHeader data={null}>
+                          <div className="rowDiv">
+                            <div>
+                            <BottomHeader>
+                            <HeaderIcons show={false} setShow={function bound dispatchSetState}>
+                              <div className="HeaderIcons">
+                                <button className="hoverable" onClick={function onClick}>
++                                 تحميل الكتالوج
+-                                 Export Catalogue
+                                ...
+                            ...
+                  ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3318:56)
+    at prepareToHydrateHostInstance (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3372:23)
+    at completeWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6922:60)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at completeUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64)
+    at button (<anonymous>)
+    at HeaderIcons (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:3816:215)
+    at TopHeader (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:4374:215)
+    at Header (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:4494:225)
+    at RootLayout (src\app\[lang]\layout.tsx:45:13)
+  43 |         <StoreProvider>
+  44 |           <div className="defaultLayout">
+> 45 |             <Header />
+     |             ^
+  46 |             <main>{children}</main>
+  47 |             <Footer />
+  48 |           </div>
+⨯ Error: Failed query: select "id", "titleEn", "titleAr", "type", "image", "imageEn", "videoLink", "videoLinkEn", "smallImg", "smallImgEn", "smallVideo", "smallVideoEn", "number", "isHidden", "createdAt", "updatedAt" from "Banner" order by "Banner"."number" asc
+params: 
+    at async HomePage (src\app\[lang]\page.tsx:7:22)
+   5 |
+   6 | export default async function HomePage() {
+>  7 |   const allBanners = await db.select().from(banners).orderBy(asc(banners.number));
+     |                      ^
+   8 |   const allBrands = await db.select().from(brands).orderBy(asc(brands.number));
+   9 |   const latestRecipes = await db.query.recipes.findMany({
+  10 |     orderBy: (recipes, { desc }) => [desc(recipes.createdAt)], {
+  query: 'select "id", "titleEn", "titleAr", "type", "image", "imageEn", "videoLink", "videoLinkEn", "smallImg", "smallImgEn", "smallVideo", "smallVideoEn", "number", "isHidden", "createdAt", "updatedAt" from "Banner" order by "Banner"."number" asc',
+  params: [],
+  digest: '3113408784',
+  [cause]: Error: read ECONNRESET
+      at ignore-listed frames {
+    errno: -4077,
+    code: 'ECONNRESET',
+    syscall: 'read'
+  }
+}
+[browser] Uncaught Error: Failed query: select "id", "titleEn", "titleAr", "type", "image", "imageEn", "videoLink", "videoLinkEn", "smallImg", "smallImgEn", "smallVideo", "smallVideoEn", "number", "isHidden", "createdAt", "updatedAt" from "Banner" order by "Banner"."number" asc
+params: 
+    at  HomePage (src\app\[lang]\page.tsx:7:22)
+    at resolveErrorDev (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js:1919:150)
+    at processFullStringRow (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js:2434:29)
+    at processFullBinaryRow (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js:2393:9)
+    at processBinaryChunk (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js:2502:221)
+    at progress (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-server-dom-turbopack_164kp-6._.js:2689:13)
+   5 |
+   6 | export default async function HomePage() {
+>  7 |   const allBanners = await db.select().from(banners).orderBy(asc(banners.number));
+     |                      ^
+   8 |   const allBrands = await db.select().from(brands).orderBy(asc(brands.number));
+   9 |   const latestRecipes = await db.query.recipes.findMany({
+  10 |     orderBy: (recipes, { desc }) => [desc(recipes.createdAt)],
+[browser] Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477:13)
+[browser] Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477:13)
+[browser] Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477:13)
+[browser] Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477:13)
+[browser] Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477:13)
+[browser] Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477:13)
+[browser] Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477:13)
+[browser] Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477:13)
+[browser] Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477:13)
+[browser] Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477:13)
+[browser] Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477:13)
+[browser] Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477:13)
+[browser] Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477:13)
+[browser] Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477:13)
+[browser] Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477:13)
+[browser] Uncaught Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <SegmentViewNode type="layout" pagePath="[lang]/lay...">
+      <SegmentTrieNode>
+      <link>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <script>
+      <RootLayout>
+        <html lang="ar" dir="rtl">
+          <head>
+          <body>
+            <StoreProvider>
+              <Provider store={{...}}>
+                <div className="defaultLayout">
+                  <Header>
+                    <header className={"header "}>
+                      <div className="headerBack...">
+                        <TopHeader data={null}>
+                          <div className="rowDiv">
+                            <div>
+                            <BottomHeader>
+                            <HeaderIcons show={false} setShow={function bound dispatchSetState}>
+                              <div className="HeaderIcons">
+                                <button className="hoverable" onClick={function onClick}>
++                                 تحميل الكتالوج
+-                                 Export Catalogue
+                                ...
+                            ...
+                  ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3318:56)
+    at prepareToHydrateHostInstance (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:3372:23)
+    at completeWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:6922:60)
+    at runWithFiberInDEV (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:965:74)
+    at completeUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9622:23)
+    at performUnitOfWork (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9551:58)
+    at renderRootConcurrent (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9534:71)
+    at performWorkOnRoot (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js:2647:64)
+    at button (<anonymous>)
+    at HeaderIcons (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:3816:215)
+    at TopHeader (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:4374:215)
+    at Header (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js:4494:225)
+    at RootLayout (src\app\[lang]\layout.tsx:45:13)
+  43 |         <StoreProvider>
+  44 |           <div className="defaultLayout">
+> 45 |             <Header />
+     |             ^
+  46 |             <main>{children}</main>
+  47 |             <Footer />
+  48 |           </div>
+[browser] Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477:13)
+[browser] Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477:13)
+[browser] Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477:13)
+[browser] Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477:13)
+⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+[browser] Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477:13)
+[browser] Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters (file://D:/Codes_Projects/oruba rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477:13)

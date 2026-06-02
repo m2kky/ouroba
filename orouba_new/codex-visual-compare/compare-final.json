@@ -1,0 +1,542 @@
+{
+  "desktop": {
+    "original": {
+      "screenshot": "D:\\Codes_Projects\\oruba rep\\orouba_new\\codex-visual-compare\\desktop-original-final.png",
+      "logs": [
+        {
+          "type": "warning",
+          "text": "Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled and not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters"
+        },
+        {
+          "type": "warning",
+          "text": "Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled and not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters"
+        },
+        {
+          "type": "warning",
+          "text": "Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled and not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 ()"
+        },
+        {
+          "type": "warning",
+          "text": "Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled and not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters"
+        }
+      ],
+      "probe": {
+        "url": "https://oroubafoods.com/ar",
+        "title": "Home",
+        "htmlDir": null,
+        "bodyClass": "enVersion",
+        "sheets": [
+          "https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap",
+          "https://oroubafoods.com/static/css/main.56115a45.css"
+        ],
+        "header": {
+          "text": "HomeAbout UsWho We AreCertificatesProduct TypesBrands Basma Bap Bites FaridaExpo",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 1440,
+            "h": 131
+          },
+          "color": "rgb(33, 37, 41)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "16px",
+          "fw": "400",
+          "display": "block"
+        },
+        "logo": {
+          "text": "",
+          "rect": {
+            "x": 101,
+            "y": 54,
+            "w": 112,
+            "h": 108
+          },
+          "color": "rgb(33, 37, 41)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "16px",
+          "fw": "400",
+          "display": "inline"
+        },
+        "banner": {
+          "text": "",
+          "rect": {
+            "x": 0,
+            "y": 107,
+            "w": 1440,
+            "h": 600
+          },
+          "color": "rgb(33, 37, 41)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "16px",
+          "fw": "400",
+          "display": "flex"
+        },
+        "bannerMedia": {
+          "text": "",
+          "rect": {
+            "x": 0,
+            "y": 107,
+            "w": 1440,
+            "h": 600
+          },
+          "color": "rgb(33, 37, 41)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "16px",
+          "fw": "400",
+          "display": "block"
+        },
+        "hero": {
+          "text": "FromVision to RealityOrouba for Food industry Co. was founded in 1998, with a vi",
+          "rect": {
+            "x": 101,
+            "y": 771,
+            "w": 1238,
+            "h": 352
+          },
+          "color": "rgb(33, 37, 41)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "16px",
+          "fw": "400",
+          "display": "flex"
+        },
+        "heroText": {
+          "text": "FromVision to RealityOrouba for Food industry Co. was founded in 1998, with a vi",
+          "rect": {
+            "x": 645,
+            "y": 771,
+            "w": 600,
+            "h": 352
+          },
+          "color": "rgb(33, 37, 41)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "16px",
+          "fw": "400",
+          "display": "flex"
+        },
+        "button": {
+          "text": "About Us",
+          "rect": {
+            "x": 645,
+            "y": 1051,
+            "w": 193,
+            "h": 52
+          },
+          "color": "rgb(0, 47, 89)",
+          "bg": "rgb(255, 241, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "18px",
+          "fw": "700",
+          "display": "flex"
+        }
+      }
+    },
+    "local": {
+      "screenshot": "D:\\Codes_Projects\\oruba rep\\orouba_new\\codex-visual-compare\\desktop-local-final.png",
+      "logs": [
+        {
+          "type": "warning",
+          "text": "Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters"
+        },
+        {
+          "type": "warning",
+          "text": "Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters"
+        }
+      ],
+      "probe": {
+        "url": "http://localhost:3001/ar?pw_final_visual=1780400256513",
+        "title": "Orouba Foods",
+        "htmlDir": null,
+        "bodyClass": "enVersion",
+        "sheets": [
+          "http://localhost:3001/_next/static/chunks/_1-bb-8j._.css",
+          "http://localhost:3001/_next/static/chunks/node_modules_swiper_swiper_11798_p.css",
+          "https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap",
+          "https://oroubafoods.com/static/css/main.56115a45.css"
+        ],
+        "header": {
+          "text": "HomeAbout UsWho We AreCertificatesProduct TypesBrands Basma Bap Bites FaridaExpo",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 1440,
+            "h": 131
+          },
+          "color": "rgb(33, 37, 41)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "16px",
+          "fw": "400",
+          "display": "block"
+        },
+        "logo": {
+          "text": "",
+          "rect": {
+            "x": 101,
+            "y": 54,
+            "w": 112,
+            "h": 108
+          },
+          "color": "rgb(33, 37, 41)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "16px",
+          "fw": "400",
+          "display": "block"
+        },
+        "banner": {
+          "text": "",
+          "rect": {
+            "x": 0,
+            "y": 107,
+            "w": 1440,
+            "h": 600
+          },
+          "color": "rgb(33, 37, 41)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "16px",
+          "fw": "400",
+          "display": "flex"
+        },
+        "bannerMedia": {
+          "text": "",
+          "rect": {
+            "x": 0,
+            "y": 107,
+            "w": 1440,
+            "h": 600
+          },
+          "color": "rgb(33, 37, 41)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "16px",
+          "fw": "400",
+          "display": "block"
+        },
+        "hero": {
+          "text": "FromVision to RealityOrouba for Food industry Co. was founded in 1998, with a vi",
+          "rect": {
+            "x": 101,
+            "y": 771,
+            "w": 1238,
+            "h": 352
+          },
+          "color": "rgb(33, 37, 41)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "16px",
+          "fw": "400",
+          "display": "flex"
+        },
+        "heroText": {
+          "text": "FromVision to RealityOrouba for Food industry Co. was founded in 1998, with a vi",
+          "rect": {
+            "x": 645,
+            "y": 771,
+            "w": 600,
+            "h": 352
+          },
+          "color": "rgb(33, 37, 41)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "16px",
+          "fw": "400",
+          "display": "flex"
+        },
+        "button": {
+          "text": "About Us",
+          "rect": {
+            "x": 645,
+            "y": 1051,
+            "w": 193,
+            "h": 52
+          },
+          "color": "rgb(0, 47, 89)",
+          "bg": "rgb(255, 241, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "18px",
+          "fw": "700",
+          "display": "flex"
+        }
+      }
+    }
+  },
+  "mobile": {
+    "original": {
+      "screenshot": "D:\\Codes_Projects\\oruba rep\\orouba_new\\codex-visual-compare\\mobile-original-final.png",
+      "logs": [
+        {
+          "type": "warning",
+          "text": "Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled and not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters"
+        },
+        {
+          "type": "warning",
+          "text": "Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled and not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 ()"
+        },
+        {
+          "type": "warning",
+          "text": "Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled and not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters"
+        }
+      ],
+      "probe": {
+        "url": "https://oroubafoods.com/ar",
+        "title": "Home",
+        "htmlDir": null,
+        "bodyClass": "enVersion",
+        "sheets": [
+          "https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap",
+          "https://oroubafoods.com/static/css/main.56115a45.css"
+        ],
+        "header": {
+          "text": "HomeAbout UsWho We AreCertificatesProduct TypesBrands Basma Bap Bites FaridaExpo",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 423,
+            "h": 137
+          },
+          "color": "rgb(33, 37, 41)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "16px",
+          "fw": "400",
+          "display": "block"
+        },
+        "logo": {
+          "text": "",
+          "rect": {
+            "x": 97,
+            "y": 37,
+            "w": 65,
+            "h": 63
+          },
+          "color": "rgb(33, 37, 41)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "16px",
+          "fw": "400",
+          "display": "block"
+        },
+        "banner": {
+          "text": "",
+          "rect": {
+            "x": 0,
+            "y": 113,
+            "w": 423,
+            "h": 277
+          },
+          "color": "rgb(33, 37, 41)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "16px",
+          "fw": "400",
+          "display": "flex"
+        },
+        "bannerMedia": {
+          "text": "",
+          "rect": {
+            "x": 0,
+            "y": 113,
+            "w": 423,
+            "h": 277
+          },
+          "color": "rgb(33, 37, 41)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "16px",
+          "fw": "400",
+          "display": "block"
+        },
+        "hero": {
+          "text": "FromVision to RealityOrouba for Food industry Co. was founded in 1998, with a vi",
+          "rect": {
+            "x": 0,
+            "y": 413,
+            "w": 423,
+            "h": 520
+          },
+          "color": "rgb(33, 37, 41)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "16px",
+          "fw": "400",
+          "display": "flex"
+        },
+        "heroText": {
+          "text": "FromVision to RealityOrouba for Food industry Co. was founded in 1998, with a vi",
+          "rect": {
+            "x": 52,
+            "y": 620,
+            "w": 320,
+            "h": 304
+          },
+          "color": "rgb(33, 37, 41)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "16px",
+          "fw": "400",
+          "display": "flex"
+        },
+        "button": {
+          "text": "About Us",
+          "rect": {
+            "x": 52,
+            "y": 892,
+            "w": 120,
+            "h": 31
+          },
+          "color": "rgb(0, 47, 89)",
+          "bg": "rgb(255, 241, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "14px",
+          "fw": "400",
+          "display": "flex"
+        }
+      }
+    },
+    "local": {
+      "screenshot": "D:\\Codes_Projects\\oruba rep\\orouba_new\\codex-visual-compare\\mobile-local-final.png",
+      "logs": [
+        {
+          "type": "warning",
+          "text": "Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters"
+        },
+        {
+          "type": "warning",
+          "text": "Swiper Loop Warning: The number of slides is not enough for loop mode, it will be disabled or not function properly. You need to add more slides (or make duplicates) or lower the values of slidesPerView and slidesPerGroup parameters"
+        }
+      ],
+      "probe": {
+        "url": "http://localhost:3001/ar?pw_final_visual=1780400256513",
+        "title": "Orouba Foods",
+        "htmlDir": null,
+        "bodyClass": "enVersion",
+        "sheets": [
+          "http://localhost:3001/_next/static/chunks/_1-bb-8j._.css",
+          "http://localhost:3001/_next/static/chunks/node_modules_swiper_swiper_11798_p.css",
+          "https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap",
+          "https://oroubafoods.com/static/css/main.56115a45.css"
+        ],
+        "header": {
+          "text": "HomeAbout UsWho We AreCertificatesProduct TypesBrands Basma Bap Bites FaridaExpo",
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "w": 423,
+            "h": 137
+          },
+          "color": "rgb(33, 37, 41)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "16px",
+          "fw": "400",
+          "display": "block"
+        },
+        "logo": {
+          "text": "",
+          "rect": {
+            "x": 97,
+            "y": 37,
+            "w": 65,
+            "h": 63
+          },
+          "color": "rgb(33, 37, 41)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "16px",
+          "fw": "400",
+          "display": "block"
+        },
+        "banner": {
+          "text": "",
+          "rect": {
+            "x": 0,
+            "y": 113,
+            "w": 423,
+            "h": 277
+          },
+          "color": "rgb(33, 37, 41)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "16px",
+          "fw": "400",
+          "display": "flex"
+        },
+        "bannerMedia": {
+          "text": "",
+          "rect": {
+            "x": 0,
+            "y": 113,
+            "w": 423,
+            "h": 277
+          },
+          "color": "rgb(33, 37, 41)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "16px",
+          "fw": "400",
+          "display": "block"
+        },
+        "hero": {
+          "text": "FromVision to RealityOrouba for Food industry Co. was founded in 1998, with a vi",
+          "rect": {
+            "x": 0,
+            "y": 413,
+            "w": 423,
+            "h": 520
+          },
+          "color": "rgb(33, 37, 41)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "16px",
+          "fw": "400",
+          "display": "flex"
+        },
+        "heroText": {
+          "text": "FromVision to RealityOrouba for Food industry Co. was founded in 1998, with a vi",
+          "rect": {
+            "x": 52,
+            "y": 620,
+            "w": 320,
+            "h": 304
+          },
+          "color": "rgb(33, 37, 41)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "16px",
+          "fw": "400",
+          "display": "flex"
+        },
+        "button": {
+          "text": "About Us",
+          "rect": {
+            "x": 52,
+            "y": 892,
+            "w": 120,
+            "h": 31
+          },
+          "color": "rgb(0, 47, 89)",
+          "bg": "rgb(255, 241, 0)",
+          "ff": "Amaranth, sans-serif",
+          "fs": "14px",
+          "fw": "400",
+          "display": "flex"
+        }
+      }
+    }
+  }
+}

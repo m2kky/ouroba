@@ -1,0 +1,565 @@
+Console Error
+
+
+
+An empty string ("") was passed to the src attribute. This may cause the browser to download the whole page again over the network. To fix this, either do not render the element at all or pass null to src instead of an empty string.
+src\app\[lang]\layout.tsx (36:13) @ RootLayout
+
+
+  34 |         <StoreProvider>
+  35 |           <div className="defaultLayout">
+> 36 |             <Header />
+     |             ^
+  37 |             <main>{children}</main>
+  38 |             <Footer />
+  39 |           </div>
+Call Stack
+16
+
+createConsoleError
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js (2379:71)
+handleConsoleError
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js (3165:54)
+console.error
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js (3312:57)
+diffHydratedProperties
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js (11574:51)
+beginWork
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js (6758:454)
+runWithFiberInDEV
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js (965:74)
+performUnitOfWork
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js (9555:97)
+workLoopConcurrentByScheduler
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js (9551:58)
+renderRootConcurrent
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js (9534:71)
+performWorkOnRoot
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js (9061:150)
+performWorkOnRootViaSchedulerTask
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js (10255:9)
+MessagePort.performWorkUntilDeadline
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js (2647:64)
+img
+<anonymous>
+TopHeader
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js (4345:237)
+Header
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js (4493:225)
+RootLayout
+src\app\[lang]\layout.tsx (36:13)
+
+Show more
+1:21 PM
+
+
+Worked for 7m 4s
+Fixed the empty src warning from Header.
+
+I changed topHeader/index.js (line 16) so the logo <img> only renders when siteData.logo is a non-empty string. I also guarded the same kind of rendered empty image placeholders in the footer, standards, export banner/catalog, and removed the empty share icon placeholder.
+
+Verification:
+
+npm run build passed.
+Browser check on http://localhost:3001/en: emptySrcLogCount: 0
+DOM check: img[src=""] count is 0
+One note: npm run lint still fails, but on existing unrelated issues like codemod require() imports, any types, hook lint rules, and missing Link imports. The empty src console error is gone.
+
+
+Edited 6 files
++40
+-22
+Undo
+Review
+
+src/components/header/topHeader/index.js
++7
+-4
+
+src/components/standards/index.js
++9
+-3
+
+src/layouts/footer/index.js
++14
+-8
+
+Show 3 more files
+
+
+
+
+1:29 PM
+
+Pasted text.txt
+(No content)
+
+Worked for 2m 17s
+I fixed the npm install failure.
+
+react-share-social@0.1.60 required React 18, but this app uses React 19. I replaced it with direct react-share@5.3.0, which supports React 19, and updated the recipe share popup in RecipeBanner.jsx (line 5).
+
+Verification:
+
+npm install now succeeds.
+npm ls react-share react-share-social shows only react-share@5.3.0.
+npm run build passes.
+Also, your dev server is already running at http://localhost:3001/en with PID 6424. The 3002 message happened because you tried to start another dev server while this one was already active. The pasted browser console error text should not be typed into Command Prompt; it’s just diagnostic text from the browser.
+
+
+Web preview
+Website
+Open in
+
+Edited 2 files
++47
+-14
+Undo
+Review
+
+package.json
++1
+-1
+
+src/views/RecipeDetails/RecipeBanner/RecipeBanner.jsx
++46
+-13
+
+
+
+
+1:33 PM
+Console Error
+
+
+
+Received false for a non-boolean attribute className.
+
+If you want to write it to the DOM, pass a string instead: className="false" or className={value.toString()}.
+
+If you used to conditionally omit it with className={condition && value}, pass className={condition ? value : undefined} instead.
+src\app\[lang]\layout.tsx (36:13) @ RootLayout
+
+
+  34 |         <StoreProvider>
+  35 |           <div className="defaultLayout">
+> 36 |             <Header />
+     |             ^
+  37 |             <main>{children}</main>
+  38 |             <Footer />
+  39 |           </div>
+Call Stack
+21
+
+createConsoleError
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js (2379:71)
+handleConsoleError
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js (3165:54)
+console.error
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_1ybzpk2._.js (3312:57)
+validateProperty
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js (2155:236)
+warnUnknownProperties
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js (2203:26)
+validatePropertiesInDevelopment
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js (10679:66)
+prepareToHydrateHostInstance
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js (3326:9)
+completeWork
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js (6922:60)
+runWithFiberInDEV
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js (965:74)
+completeUnitOfWork
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js (9622:23)
+performUnitOfWork
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js (9557:28)
+workLoopConcurrentByScheduler
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js (9551:58)
+renderRootConcurrent
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js (9534:71)
+performWorkOnRoot
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js (9061:150)
+performWorkOnRootViaSchedulerTask
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js (10255:9)
+MessagePort.performWorkUntilDeadline
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/node_modules_next_dist_compiled_1amofcm._.js (2647:64)
+li
+<anonymous>
+HeaderIcons
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js (3848:241)
+TopHeader
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js (4373:215)
+Header
+file:///D:/Codes_Projects/oruba%20rep/orouba_new/.next/dev/static/chunks/src_0wjesrp._.js (4493:225)
+RootLayout
+src\app\[lang]\layout.tsx (36:13)
+
+Show more
+1:33 PM
+
+
+Worked for 1m 21s
+Fixed this console error in headerIcons/index.js (line 38).
+
+Changed:
+
+className={language == "ar"}
+to:
+
+className={language == "ar" ? "active" : undefined}
+Verification:
+
+npm run build passes.
+Fresh browser check on http://localhost:3001/ar: classNameFalseLogCount: 0.
+There are still separate console warnings on the page, mostly invalid SVG/DOM prop naming, but this false className error is gone.
+
+
+Web preview
+Website
+Open in
+
+Edited index.js
++1
+-1
+Undo
+Review
+
+
+
+
+1:34 PM
+RUN SERVWEERR AND OOK AT ALL ERRORS AND FIX IT
+1:35 PM
+
+
+Worked for 18m 26s
+Fixed the console/build errors and left the dev server running at http://localhost:3001/ar.
+
+What I fixed:
+
+Empty src and className={false} React warnings in header/footer/image render paths.
+Bad Link usage, to={...} props, Swiper breakPoints, raw SVG JSX attrs, and controlled checkbox warnings.
+Build crashes from missing/mismatched CMS DB tables in about, certifications, contactus, and export.
+/ar/undefined and /en/undefined requests from the product types background image in productType.js.
+Dynamic recipe/category slider issues in receips/index.js.
+Replaced react-share-social with compatible direct react-share.
+Verification:
+
+npm run build passes.
+Browser sweep across /ar, /en, about, certifications, contactus, export, export_cat, and product_types returned zero console warnings/errors.
+Server is still listening on port 3001 with PID 10312.
+
+Edited 14 files
++234
+-141
+Undo
+Review
+
+src/app/[lang]/about/page.tsx
++64
+-29
+
+src/app/[lang]/certifications/page.tsx
++28
+-12
+
+src/app/[lang]/contactus/page.tsx
++44
+-18
+
+Show 11 more files
+
+
+
+
+1:54 PM
+التنسيق و الالوان باظت 
+دة الموقع الاصلي 
+https://oroubafoods.com/ar
+إستخدم Playwright او puppter و هات نسخة طبق الاصل من التصميم و الخطوط و الـ wight 
+
+2:21 PM
+
+
+Worked for 28m 51s
+تمام، رجّعت التصميم والخطوط والألوان زي الأصل باستخدام Playwright للمقارنة.
+
+عملت الآتي:
+
+رجّعت CSS والخطوط الأصلية من oroubafoods.com.
+رجّعت assets الهيدر واللوجو.
+خليت الهوم يقرأ نفس API بتاع الموقع الأصلي بدل الداتا الناقصة.
+صلحت src="" و className={false} و undefined.
+صلحت hydration mismatch في /ar بخلي اللغة تبدأ من route نفسه.
+شلت شارة Next من dev preview.
+صلحت Swiper warnings.
+التحقق النهائي:
+
+npm run build نجح.
+Playwright على http://localhost:3001/ar:
+0 console errors, 0 warnings, 0 page errors, 0 bad responses, ومفيش undefined/null/NaN.
+السيرفر شغال حاليًا على http://localhost:3001/ar.
+لقطات بعد الإصلاح:
+
+Desktop Arabic
+Mobile Arabic
+
+
+desktop-local-ar-clean.png
+Image · PNG
+Open in
+
+mobile-local-ar-clean.png
+Open preview
+Open in
+
+Edited 12 files
++156
+-59
+Undo
+Review
+
+next.config.ts
++1
+-0
+
+src/app/[lang]/layout.tsx
++12
+-4
+
+src/app/[lang]/page.tsx
++58
+-6
+
+Show 9 more files
+
+
+
+
+2:50 PM
+وكمان احنا عندنا لغتين 
+ar - en 
+
+ودي بيانات r2 
+فيه صور الموقع القديم بس فيه حجات مفقودة 
+هتلاقي كل حاجة بنفس اسمها الاساسي من الكود القديم بس امتداد الصور webp
+
+
+R2_ACCOUNT_ID=bbaa9c7731052070a06ea5c14d029691
+R2_ACCESS_KEY_ID=aefdf27bec690e4c91f3c99a56d606ea
+R2_SECRET_ACCESS_KEY=ee5fd68a6430224c326bf8ad3e63b7b6875c2b58776e091f5a353d34c43dd59c
+R2_BUCKET_NAME=orouba-media
+R2_PUBLIC_URL=https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev
+2:50 PM
+
+
+Worked for 56m 36s
+تمام، خلصت.
+
+عملت الآتي:
+
+دعمت اللغتين ar و en فعليًا في الروابط والتنقل.
+حولت صور الموقع من الـ API القديم إلى R2 تلقائيًا عن طريق manifest public فقط.
+لم أخزن مفاتيح R2 في الكود.
+أضفت fallback ذكي: لو صورة لها نسخة R2 يستخدمها، ولو مفيش يسيب القديم.
+صلحت روابط الهيدر/الفوتر/الهوم/الوصفات/المنتجات.
+أضفت route للـ Careers: /ar/careers و /en/careers.
+خلت زر الكتالوج يروح لـ /ar/export_cat أو /en/export_cat.
+فتحت التاب الداخلي على النسخة النهائية: http://localhost:3001/ar
+التحقق النهائي:
+
+npm run build نجح.
+Playwright فحص ar و en:
+0 console errors
+0 page errors
+0 bad responses
+0 broken images
+oldStorageCount: 0
+r2Count: 24 في الهوم لكل لغة
+لقطات نهائية:
+
+Arabic R2 final
+English R2 final
+
+
+ar-r2-final-clean.png
+Image · PNG
+Open in
+
+en-r2-final-clean.png
+Image · PNG
+Open in
+
+Edited 39 files
++499
+-146
+Undo
+Review
+
+src/Axios/index.js
++2
+-1
+
+src/app/[lang]/about/page.tsx
++2
+-1
+
+src/app/[lang]/brands/[brandId]/categories/[categoryId]/page.tsx
++4
+-3
+
+src/app/[lang]/brands/[brandId]/page.tsx
++2
+-1
+
+src/app/[lang]/careers/page.tsx
++11
+-0
+
+src/app/[lang]/certifications/page.tsx
++2
+-1
+
+src/app/[lang]/contactus/page.tsx
++2
+-1
+
+src/app/[lang]/export/page.tsx
++2
+-1
+
+src/app/[lang]/export_cat/page.tsx
++2
+-1
+
+src/app/[lang]/layout.tsx
++1
+-1
+
+src/app/[lang]/page.tsx
++3
+-2
+
+src/app/[lang]/product_types/page.tsx
++2
+-1
+
+src/app/[lang]/products/[id]/page.tsx
++4
+-3
+
+src/app/[lang]/recipe_details/[id]/page.tsx
++2
+-1
+
+src/app/[lang]/recipes/page.tsx
++2
+-1
+
+src/app/globals.css
++21
+-1
+
+src/components/BreadCumbsLinks/index.js
++8
+-1
+
+src/components/header/bottomHeader/index.js
++6
+-5
+
+src/components/header/headerIcons/index.js
++46
+-14
+
+src/components/header/searchBox/index.js
++9
+-31
+
+src/components/header/topHeader/index.js
++8
+-4
+
+src/components/sectionTitle/index.js
++2
+-1
+
+src/layouts/footer/index.js
++14
+-12
+
+src/layouts/header/index.js
++2
+-1
+
+src/layouts/home/brands/index.js
++4
+-1
+
+src/layouts/home/heroSection/index.js
++4
+-1
+
+src/layouts/home/mapSection/index.js
++4
+-1
+
+src/layouts/home/receips/index.js
++13
+-12
+
+src/layouts/home/receips/productTypeSmallSlider.js
++14
+-32
+
+src/layouts/home/whyUs/index.js
++4
+-1
+
+src/layouts/reciepe/categories/brands.js
++2
+-1
+
+src/utils/media.js
++89
+-0
+
+src/utils/routes.js
++38
+-0
+
+src/views/Careers/Careers.jsx
++4
+-3
+
+src/views/Careers/Careers.module.css
++152
+-0
+
+src/views/Export/ExportCertificatios/ExportCertificatios.jsx
++2
+-1
+
+src/views/brands/index.js
++3
+-2
+
+src/views/productType/productType.js
++5
+-1
+
+src/views/reciepe/index.js
++2
+-1
+
+Collapse files
+
+
+
+
+3:47 PM
+كمان لسة فيه صفحات مفقودة بتجيب 404
+3:47 PM
+
+
+You've hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at 6:22 PM.

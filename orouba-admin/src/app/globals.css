@@ -1,19 +1,37 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-cairo), ui-sans-serif, system-ui, sans-serif;
-  --font-cairo: var(--font-cairo);
+  --font-amaranth: var(--font-amaranth);
+  --font-baloo: var(--font-baloo);
   
   --color-orouba-blue: #035297;
   --color-orouba-dark: #002f59;
   --color-orouba-yellow: #fff100;
   --color-orouba-basma: #7cb021;
+
+  --color-brand: var(--brand-color);
+  --color-brand-light: var(--brand-light);
+  --color-card-bg: var(--card-bg);
+  --color-card-ring: var(--card-ring);
+  --color-card-hoverRing: var(--card-hover-ring);
+  
+  --shadow-card: 0px 14px 34px 0px rgba(0, 0, 0, 0.08);
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ألوان الوضع النهاري (Light Mode) */
+  --background: #f9fafb; /* Gray-50 */
+  --foreground: #000000; /* Black */
+  
+  --brand-color: #FF2D20;
+  --brand-light: rgb(255 45 32 / 0.1);
+  
+  --card-bg: #ffffff;
+  --card-ring: rgb(255 255 255 / 0.05);
+  --card-hover-ring: rgb(0 0 0 / 0.2);
 }
+
+
 
 @theme inline {
   --color-background: var(--background);
@@ -28,26 +46,11 @@ body {
 }
 
 body[dir="ltr"] {
-  font-family: var(--font-amaranth), sans-serif !important;
-}
-
-body[dir="ltr"] * {
-  font-family: var(--font-amaranth), sans-serif;
+  --font-sans: var(--font-amaranth, ui-sans-serif, system-ui, sans-serif);
 }
 
 body[dir="rtl"] {
-  font-family: var(--font-tajawal), sans-serif;
-}
-
-body[dir="rtl"] h1, 
-body[dir="rtl"] h2, 
-body[dir="rtl"] h3, 
-body[dir="rtl"] h4, 
-body[dir="rtl"] h5, 
-body[dir="rtl"] h6,
-body[dir="rtl"] nav,
-body[dir="rtl"] nav * {
-  font-family: var(--font-baloo), sans-serif !important;
+  --font-sans: var(--font-baloo, ui-sans-serif, system-ui, sans-serif);
 }
 
 html {
@@ -129,4 +132,18 @@ div.fixed.inset-0.bg-black\/40 > div {
 }
 .scale-in {
   animation: scaleIn 0.15s ease-out forwards;
+}
+
+@layer components {
+  .card {
+    @apply flex items-start gap-4 rounded-lg bg-(--card-bg) p-6 shadow-card ring-1 ring-(--card-ring) transition duration-300 hover:text-black/70 hover:ring-(--card-hoverRing) focus:outline-none focus-visible:ring-brand lg:pb-10 dark:hover:text-white/70;
+  }
+
+  .icon-box {
+    @apply flex size-12 shrink-0 items-center justify-center rounded-full bg-brand-light sm:size-16;
+  }
+  
+  .nav-link {
+    @apply rounded-md px-3 py-2 text-foreground/50 ring-1 ring-transparent transition hover:text-foreground focus:outline-none focus-visible:ring-brand;
+  }
 }

@@ -1,0 +1,152 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.careerForm {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.careerContent {
+  width: min(100%, 920px);
+}
+
+.careerTitle {
+  text-align: center;
+  color: #035297;
+  margin-bottom: 28px;
+}
+
+.careerTitle h2 {
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.careerTitle p {
+  color: #002f59;
+  line-height: 1.8;
+  margin: 0 auto;
+  max-width: 760px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.inputGroup {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.form input,
+.form textarea {
+  width: 100%;
+  border: 1px solid rgba(3, 82, 151, 0.2);
+  border-radius: 6px;
+  color: #002f59;
+  padding: 14px 16px;
+  outline: none;
+}
+
+.form textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.coverLetter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  color: #002f59;
+}
+
+.coverLetter p {
+  margin: 0;
+  font-weight: 700;
+}
+
+.chooseFile,
+.submitBtn {
+  border: 0;
+  border-radius: 8px;
+  background: #fff100;
+  color: #005097;
+  cursor: pointer;
+  font-weight: 800;
+  padding: 12px 24px;
+}
+
+.submitBtn {
+  align-self: center;
+  min-width: 160px;
+}
+
+.chooses {
+  width: 100%;
+}
+
+.chooseUsTitle {
+  color: #035297;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.chooseUsTitle p {
+  color: #002f59;
+  margin: 0 auto;
+  max-width: 760px;
+}
+
+.boxContainer {
+  gap: 16px;
+}
+
+.choosesBoxes {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.box {
+  align-items: center;
+  border: 1px solid rgba(3, 82, 151, 0.14);
+  border-radius: 8px;
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+}
+
+.box div {
+  align-items: center;
+  background: #035297;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  flex: 0 0 36px;
+  font-weight: 800;
+  height: 36px;
+  justify-content: center;
+}
+
+.box p {
+  color: #002f59;
+  margin: 0;
+}
+
+@media (max-width: 700px) {
+  .inputGroup {
+    grid-template-columns: 1fr;
+  }
+
+  .coverLetter {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}

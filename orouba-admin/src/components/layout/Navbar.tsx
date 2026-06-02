@@ -108,7 +108,7 @@ export default function Navbar({ settings, brands: brandsProp }: { settings?: Re
   const mainLogo = settings?.main_logo?.en || settings?.main_logo?.ar || "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png";
 
   return (
-    <nav className="bg-orouba-blue sticky top-0 z-50 text-white shadow-md relative">
+    <nav className="bg-orouba-blue bg-[url('/nav-lines.png')] bg-no-repeat ltr:bg-left rtl:bg-right bg-contain sticky top-0 z-50 text-white shadow-md relative rounded-b-[2rem] md:rounded-b-[3rem]">
       <div className="max-w-[1400px] mx-auto px-4 md:px-8">
         <div className="flex justify-between items-center h-28 md:h-24">
           

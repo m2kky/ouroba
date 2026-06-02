@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Amaranth, Tajawal, Baloo_Bhaijaan_2 } from "next/font/google";
+import { Amaranth, Baloo_Bhaijaan_2 } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -17,11 +17,6 @@ const amaranth = Amaranth({
   weight: ["400", "700"],
 });
 
-const tajawal = Tajawal({
-  variable: "--font-tajawal",
-  subsets: ["arabic", "latin"],
-  weight: ["400", "500", "700", "800"],
-});
 
 const baloo = Baloo_Bhaijaan_2({
   variable: "--font-baloo",
@@ -63,7 +58,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} dir={dir} suppressHydrationWarning>
       <body
-        className={`${amaranth.variable} ${tajawal.variable} ${baloo.variable} antialiased min-h-screen flex flex-col overflow-x-clip w-full`}
+        className={`${amaranth.variable} ${baloo.variable} font-sans antialiased min-h-screen flex flex-col overflow-x-clip w-full`}
         suppressHydrationWarning
       >
         <LocaleProvider>
