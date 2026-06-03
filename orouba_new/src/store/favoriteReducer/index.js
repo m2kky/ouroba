@@ -1,9 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const storage =
+  typeof window !== "undefined"
+    ? localStorage
+    : { getItem: () => null, setItem: () => {}, removeItem: () => {} };
+
+const getStoredJson = (key, fallback = []) => {
+  const value = storage.getItem(key);
+  if (!value || value === "null" || value === "undefined") {
+    return fallback;
+  }
+
+  try {
+    return JSON.parse(value);
+  } catch {
+    storage.removeItem(key);
+    return fallback;
+  }
+};
+
 const initialState = {
-  favoriteItems: (typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).getItem("favoriteItems")
-    ? JSON.parse((typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).getItem("favoriteItems"))
-    : [],
+  favoriteItems: getStoredJson("favoriteItems", []),
 };
 
 const favoriteSlice = createSlice({
@@ -14,7 +31,7 @@ const favoriteSlice = createSlice({
       const newItem = action.payload;
       state.favoriteItems.push(newItem);
       console.log("newItem", newItem);
-      (typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).setItem(
+      storage.setItem(
         "favoriteItems",
         JSON.stringify(
           state.favoriteItems && Array.isArray(state.favoriteItems)
@@ -29,7 +46,7 @@ const favoriteSlice = createSlice({
       state.favoriteItems = state.favoriteItems.filter(
         (item) => item?.id !== itemIdToRemove
       );
-      (typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).setItem(
+      storage.setItem(
         "favoriteItems",
         JSON.stringify(
           state.favoriteItems && Array.isArray(state.favoriteItems)

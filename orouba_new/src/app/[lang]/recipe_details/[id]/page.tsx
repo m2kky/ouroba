@@ -10,7 +10,7 @@ export default async function RecipeDetailsPage({
 }: {
   params: Promise<{ lang: string; id: string }>;
 }) {
-  const { lang, id } = await params;
+  const { id } = await params;
 
   // 1. Fetch Recipe details by ID with properties and steps
   const recipeDetails = await db.query.recipes.findFirst({

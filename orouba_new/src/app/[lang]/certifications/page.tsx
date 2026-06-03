@@ -1,5 +1,7 @@
 import CertificationsView from "@/views/Certifications/Certifications";
 import { db } from "@/db";
+import { certificates, certificateValues } from "@/db/schema";
+import { eq } from "drizzle-orm";
 import { resolveMediaTree } from "@/utils/media";
 
 type CertificationsData = {
@@ -10,8 +12,11 @@ type CertificationsData = {
 async function getCertificationsData(): Promise<CertificationsData> {
   try {
     const [certifications, values] = await Promise.all([
-      db.query.certificates.findMany(),
+      db.query.certificates.findMany({
+        where: eq(certificates.isHidden, false),
+      }),
       db.query.certificateValues.findMany({
+        where: eq(certificateValues.isHidden, false),
         orderBy: (values, { asc }) => [asc(values.number)],
       }),
     ]);

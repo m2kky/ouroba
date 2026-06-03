@@ -1,14 +1,113 @@
 "use client";
 import { useEffect, useState } from "react";
-const WhoWeAreImg = '/missing-image.png';
 import Breadcrumb from "../../components/BreadCumbsLinks";
 import UseGeneral from "../../hooks/useGeneral";
+
+const FEATURE_ORDER = [
+  "area",
+  "employees",
+  "capacity",
+  "capacity for pre-fried products",
+  "overall cold store capacity",
+];
+
+const getLocalizedValue = (item, enKey, arKey, language) =>
+  language == "en" ? item?.[enKey] : item?.[arKey];
+
+const normalizeText = (value) =>
+  String(value || "")
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .trim();
+
+const featureRank = (item) => {
+  const title = normalizeText(item?.titleEn || item?.title_en);
+  const rank = FEATURE_ORDER.indexOf(title);
+  return rank === -1 ? FEATURE_ORDER.length : rank;
+};
+
+const sortedVisibleItems = (items, sorter) => {
+  const safeItems = Array.isArray(items) ? items : [];
+  return safeItems
+    .filter((item) => !item?.isHidden && !item?.hidden)
+    .slice()
+    .sort(sorter);
+};
+
+const escapeHtml = (value) =>
+  String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+const hasHtml = (value) => /<[a-z][\s\S]*>/i.test(String(value || ""));
+
+const stepTextToHtml = (value) => {
+  const text = String(value || "").trim();
+  if (!text) {
+    return "";
+  }
+  if (hasHtml(text)) {
+    return text;
+  }
+
+  const colonIndex = text.indexOf(":");
+  if (colonIndex > -1) {
+    const title = escapeHtml(text.slice(0, colonIndex + 1));
+    const body = escapeHtml(text.slice(colonIndex + 1).trim());
+    return `<p><strong>${title}</strong> ${body}</p>`;
+  }
+
+  return `<p>${escapeHtml(text)}</p>`;
+};
+
+const productionGroups = (steps) => {
+  const sortedSteps = sortedVisibleItems(
+    steps,
+    (a, b) => (a?.number ?? 999) - (b?.number ?? 999)
+  );
+
+  if (sortedSteps.length <= 2) {
+    return sortedSteps.map((step) => [step]);
+  }
+
+  const midpoint = Math.ceil(sortedSteps.length / 2);
+  return [sortedSteps.slice(0, midpoint), sortedSteps.slice(midpoint)].filter(
+    (group) => group.length > 0
+  );
+};
+
+const groupImage = (group) => group.find((step) => step?.image)?.image;
+
+const groupHtml = (group, language) =>
+  group
+    .map((step) =>
+      stepTextToHtml(
+        getLocalizedValue(step, "textEn", "textAr", language) ||
+          getLocalizedValue(step, "text_en", "text_ar", language)
+      )
+    )
+    .filter(Boolean)
+    .join("");
 
 
 export default function WhoWeAre({ aboutData }) {
   const { language } = UseGeneral();
   const { sections, buildings, productionSteps, features, siteInfo: siteData } = aboutData;
   const [isSmaller, setIsSmaller] = useState(false);
+  const visibleSections = sortedVisibleItems(
+    sections,
+    (a, b) => (a?.number ?? 999) - (b?.number ?? 999)
+  );
+  const visibleBuildings = sortedVisibleItems(buildings, () => 0);
+  const orderedFeatures = sortedVisibleItems(
+    features,
+    (a, b) => featureRank(a) - featureRank(b)
+  );
+  const productionStepGroups = productionGroups(productionSteps);
+  const heroImage = isSmaller ? siteData?.small_about_img : siteData?.about_image;
 
   useEffect(() => {
     const updateMenuHeights = () => {
@@ -48,15 +147,17 @@ export default function WhoWeAre({ aboutData }) {
       >
         <div className={`row ${"Pagerow"} whowearestyles`}>
           <div className="col">
-            <img
-              src={isSmaller ? siteData?.small_about_img : siteData?.about_image}
-              alt="who we are image"
-              className={`${"img"} whowearestylesimg`}
-            />
+            {heroImage ? (
+              <img
+                src={heroImage}
+                alt="who we are image"
+                className={`${"img"} whowearestylesimg`}
+              />
+            ) : null}
           </div>
         </div>
-        {sections &&
-          sections.map((item, index) => {
+        {visibleSections &&
+          visibleSections.map((item) => {
             return (
               <div key={item.id} className={"label" + " whowearestyleslabel"}>
                 <h3
@@ -87,8 +188,8 @@ export default function WhoWeAre({ aboutData }) {
         <div
           className={`row text-center mt-4 ${"buildingsContainer"} buildingsContainer`}
         >
-          {buildings &&
-            buildings.map((item, index) => {
+          {visibleBuildings &&
+            visibleBuildings.map((item) => {
               return (
                 <div key={item.id} className={`col d-flex gap-2 ${"buildingRow"}`}>
                   <div>
@@ -111,13 +212,13 @@ export default function WhoWeAre({ aboutData }) {
           >
             {Array.from(
               {
-                length: Math.ceil(features?.length / 3),
+                length: Math.ceil(orderedFeatures.length / 3),
               },
               (_, index) => (
                 <div style={{ flexWrap: "wrap" }} key={index} className="row">
-                  {features.slice(index * 3, (index + 1) * 3).map((item) => (
+                  {orderedFeatures.slice(index * 3, (index + 1) * 3).map((item) => (
                     <div key={item.id} className={`col ${"imgContainer"} imgContainer`}>
-                      <img src={item.image} alt="Area Img" />
+                      {item.image ? <img src={item.image} alt="Area Img" /> : null}
                       <h5>
                         <b>{language == "en" ? item?.titleEn : item?.titleAr}</b>
                       </h5>
@@ -139,38 +240,32 @@ export default function WhoWeAre({ aboutData }) {
             {language == "ar" ? "مراحل الإنتاج" : "Production Steps"}
           </h4>
           <div className="pord_steps_content">
-            {productionSteps &&
-              productionSteps.map((item, index) => {
+            {productionStepGroups &&
+              productionStepGroups.map((group, index) => {
+                const image = groupImage(group);
+                const html = groupHtml(group, language);
                 return (
-                  <div key={item.id}>
-                    {index % 2 == 0 ? (
-                      <div className="even">
-                        <div className="img">
-                          <img src={item.image} alt="" />
-                        </div>
-                        <div
-                          className="rich_text"
-                          dangerouslySetInnerHTML={{
-                            __html:
-                              language == "ar" ? item.textAr : item.textEn,
-                          }}
-                        ></div>
+                  index % 2 == 0 ? (
+                    <div key={group.map((item) => item.id).join("-")} className="even">
+                      <div className="img">
+                        {image ? <img src={image} alt="" /> : null}
                       </div>
-                    ) : (
-                      <div className="odd">
-                        <div
-                          className="rich_text"
-                          dangerouslySetInnerHTML={{
-                            __html:
-                              language == "ar" ? item.textAr : item.textEn,
-                          }}
-                        ></div>
-                        <div className="img">
-                          <img src={item.image} alt="" />
-                        </div>
+                      <div
+                        className="rich_text"
+                        dangerouslySetInnerHTML={{ __html: html }}
+                      ></div>
+                    </div>
+                  ) : (
+                    <div key={group.map((item) => item.id).join("-")} className="odd">
+                      <div
+                        className="rich_text"
+                        dangerouslySetInnerHTML={{ __html: html }}
+                      ></div>
+                      <div className="img">
+                        {image ? <img src={image} alt="" /> : null}
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  )
                 );
               })}
           </div>

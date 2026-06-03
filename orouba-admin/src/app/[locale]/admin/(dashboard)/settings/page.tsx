@@ -67,6 +67,21 @@ export default function SettingsPage() {
           { key: "product_type_prefried_image", desc: t("صورة صنف النصف مقلي", "Pre-Fried Category Image"), valAr: "", valEn: "" },
           { key: "product_type_veg_image", desc: t("صورة صنف الخضروات", "Vegetables Category Image"), valAr: "", valEn: "" },
           { key: "product_type_beans_image", desc: t("صورة صنف البقوليات", "Beans Category Image"), valAr: "", valEn: "" },
+          // Export Page
+          { key: "exportTitle", desc: t("عنوان صفحة التصدير", "Export page title"), valAr: "نحن نصدر إلى جميع أنحاء العالم", valEn: "We Export To All Over The World" },
+          { key: "exportDescription", desc: t("وصف صفحة التصدير", "Export page description"), valAr: "", valEn: "" },
+          { key: "exportImage", desc: t("صورة بانر صفحة التصدير", "Export banner image"), valAr: "", valEn: "" },
+          { key: "exportMap", desc: t("صورة خريطة التصدير", "Export map image"), valAr: "", valEn: "" },
+          { key: "exportStandardsTitle", desc: t("عنوان معايير التصدير", "Export standards title"), valAr: "معاييرنا", valEn: "Our Standards" },
+          { key: "exportStandardsText", desc: t("نص معايير التصدير", "Export standards text"), valAr: "", valEn: "" },
+          { key: "exportCertificationsTitle", desc: t("عنوان شهادات التصدير", "Export certifications title"), valAr: "الشهادات الحاصلة عليها العروبة", valEn: "Orouba Certifications" },
+          { key: "exportCatalogButtonText", desc: t("نص زر كتالوج التصدير", "Export catalog button text"), valAr: "تحميل الكتالوج", valEn: "Export Catalogue" },
+          { key: "catalogTitle", desc: t("عنوان صفحة كتالوج التصدير", "Export catalog page title"), valAr: "مرحبا بكم في تصدير الكتالوج", valEn: "Welcome To Export Catalogue" },
+          { key: "catalogButtonText", desc: t("نص زر تحميل كتالوج التصدير", "Export catalog download button text"), valAr: "تحميل الكتالوج", valEn: "Download Catalogue" },
+          { key: "catalogAr", desc: t("نص كتالوج التصدير بالعربية", "Export catalog Arabic text"), valAr: "", valEn: "" },
+          { key: "catalogEn", desc: t("نص كتالوج التصدير بالإنجليزية", "Export catalog English text"), valAr: "", valEn: "" },
+          { key: "catalogImage", desc: t("صورة كتالوج التصدير", "Export catalog image"), valAr: "", valEn: "" },
+          { key: "catalogFile", desc: t("رابط ملف كتالوج التصدير", "Export catalog file URL"), valAr: "", valEn: "" },
         ];
 
         const merged = [...loaded];
@@ -188,6 +203,20 @@ export default function SettingsPage() {
     { key: "home_world_text", desc: t("نص خريطة العالم", "Homepage World Text") },
     { key: "about_image", desc: t("صورة صفحة من نحن الرئيسية", "About Us Main Image") },
     { key: "small_about_img", desc: t("صورة صفحة من نحن للموبايل", "About Us Mobile Image") },
+    { key: "exportTitle", desc: t("عنوان صفحة التصدير", "Export page title") },
+    { key: "exportDescription", desc: t("وصف صفحة التصدير", "Export page description") },
+    { key: "exportImage", desc: t("صورة بانر صفحة التصدير", "Export banner image") },
+    { key: "exportMap", desc: t("صورة خريطة التصدير", "Export map image") },
+    { key: "exportStandardsTitle", desc: t("عنوان معايير التصدير", "Export standards title") },
+    { key: "exportStandardsText", desc: t("نص معايير التصدير", "Export standards text") },
+    { key: "exportCertificationsTitle", desc: t("عنوان شهادات التصدير", "Export certifications title") },
+    { key: "exportCatalogButtonText", desc: t("نص زر كتالوج التصدير", "Export catalog button text") },
+    { key: "catalogTitle", desc: t("عنوان صفحة كتالوج التصدير", "Export catalog page title") },
+    { key: "catalogButtonText", desc: t("نص زر تحميل كتالوج التصدير", "Export catalog download button text") },
+    { key: "catalogAr", desc: t("نص كتالوج التصدير بالعربية", "Export catalog Arabic text") },
+    { key: "catalogEn", desc: t("نص كتالوج التصدير بالإنجليزية", "Export catalog English text") },
+    { key: "catalogImage", desc: t("صورة كتالوج التصدير", "Export catalog image") },
+    { key: "catalogFile", desc: t("رابط ملف كتالوج التصدير", "Export catalog file URL") },
   ];
 
   const addDefaultKey = (k: string, desc: string) => {
@@ -260,7 +289,12 @@ export default function SettingsPage() {
               </div>
             ) : (
               settings.map((setting, idx) => {
-                const isImageKey = setting.key.toLowerCase().includes("image") || setting.key.toLowerCase().includes("img") || setting.key.toLowerCase().includes("logo");
+                const normalizedKey = setting.key.toLowerCase();
+                const isImageKey =
+                  normalizedKey.includes("image") ||
+                  normalizedKey.includes("img") ||
+                  normalizedKey.includes("logo") ||
+                  normalizedKey.includes("map");
                 return (
                 <div key={idx} className="grid grid-cols-12 gap-4 items-start bg-gray-50 p-2 rounded-xl">
                   <div className="col-span-3 space-y-2">

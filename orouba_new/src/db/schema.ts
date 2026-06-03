@@ -268,6 +268,7 @@ export const aboutSections = pgTable('SectionText', {
   textEn: text('textEn').notNull(),
   textAr: text('textAr').notNull(),
   number: integer('number').default(999),
+  isHidden: boolean('isHidden').default(false),
   createdAt: timestamp('createdAt').defaultNow(),
   updatedAt: timestamp('updatedAt').defaultNow(),
 });
@@ -290,6 +291,7 @@ export const aboutProductionSteps = pgTable('ProductionStep', {
   textAr: text('textAr').notNull(),
   image: text('image'),
   number: integer('number').default(999),
+  isHidden: boolean('isHidden').default(false),
   createdAt: timestamp('createdAt').defaultNow(),
   updatedAt: timestamp('updatedAt').defaultNow(),
 });
@@ -313,6 +315,7 @@ export const certificateValues = pgTable('Value', {
   descriptionAr: text('descriptionAr'),
   image: text('image'),
   number: integer('number').default(999),
+  isHidden: boolean('isHidden').default(false),
   createdAt: timestamp('createdAt').defaultNow(),
   updatedAt: timestamp('updatedAt').defaultNow(),
 });
@@ -345,23 +348,23 @@ export const contacts = pgTable('Contact', {
   createdAt: timestamp('createdAt').defaultNow(),
 });
 
-export const exportContinents = pgTable('ExportContinent', {
+export const exportContinents = pgTable('Continent', {
   id: text('id').primaryKey(),
-  nameEn: text('nameEn').notNull(),
-  nameAr: text('nameAr').notNull(),
-  hidden: integer('hidden').default(0),
-  number: integer('number').default(999),
+  nameEn: text('nameEn'),
+  nameAr: text('nameAr'),
+  isHidden: boolean('isHidden').default(false),
   createdAt: timestamp('createdAt').defaultNow(),
+  updatedAt: timestamp('updatedAt').defaultNow(),
 });
 
-export const exportStandards = pgTable('ExportStandard', {
+export const exportStandards = pgTable('Standard', {
   id: text('id').primaryKey(),
-  title: text('title').notNull(),
-  descriptionEn: text('descriptionEn'),
-  descriptionAr: text('descriptionAr'),
+  descriptionEn: text('descriptionEn').notNull(),
+  descriptionAr: text('descriptionAr').notNull(),
   image: text('image'),
-  number: integer('number').default(999),
+  isHidden: boolean('isHidden').default(false),
   createdAt: timestamp('createdAt').defaultNow(),
+  updatedAt: timestamp('updatedAt').defaultNow(),
 });
 export const collaborates = pgTable('Collaborate', {
   id: text('id').primaryKey(),
@@ -464,4 +467,4 @@ export const socialsRelations = relations(socials, ({ one }) => ({
     fields: [socials.parentId],
     references: [socialParents.id],
   }),
-}));
+}));

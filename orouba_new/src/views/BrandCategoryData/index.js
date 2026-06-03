@@ -7,6 +7,7 @@ import Recips from './../../layouts/BrandCategoryData/receips/index';
 
 const BrandCategoryData = ({ data, id }) => {
   const { language } = UseGeneral();
+  const brandColor = data?.brand?.colorBrand || data?.brand?.color || "#fff";
 
   const breadCrumbsArray = [
     { name: language == "ar" ? "الصفحةالرئيسية" : "Home", route: "/" },
@@ -26,7 +27,7 @@ const BrandCategoryData = ({ data, id }) => {
         <Breadcrumb links={breadCrumbsArray} />
         <div
           className="boxShadowSection BrandsShadowSection"
-          style={{ background: data?.brand?.color }}
+          style={{ background: brandColor }}
         >
           <WhyUs data={data} id={id}/>
           <Recips data={data} type={"brands"} />

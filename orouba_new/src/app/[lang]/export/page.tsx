@@ -1,6 +1,8 @@
 import ExportView from "@/views/Export/Export";
 import { db } from "@/db";
+import { certificates, exportContinents, exportStandards } from "@/db/schema";
 import { resolveMediaTree } from "@/utils/media";
+import { eq } from "drizzle-orm";
 
 type ExportData = {
   siteinfo: Record<string, string | null | undefined>;
@@ -31,12 +33,17 @@ async function getExportData(): Promise<ExportData> {
   try {
     const [continents, standers, certifications] = await Promise.all([
       db.query.exportContinents.findMany({
-        orderBy: (continents, { asc }) => [asc(continents.number)],
+        where: eq(exportContinents.isHidden, false),
+        orderBy: (continents, { asc }) => [asc(continents.createdAt)],
       }),
       db.query.exportStandards.findMany({
-        orderBy: (standers, { asc }) => [asc(standers.number)],
+        where: eq(exportStandards.isHidden, false),
+        orderBy: (standers, { asc }) => [asc(standers.createdAt)],
       }),
-      db.query.certificates.findMany(),
+      db.query.certificates.findMany({
+        where: eq(certificates.isHidden, false),
+        orderBy: (certificates, { asc }) => [asc(certificates.createdAt)],
+      }),
     ]);
 
     return {

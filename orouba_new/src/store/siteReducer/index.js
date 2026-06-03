@@ -3,6 +3,25 @@ import {  Axios  } from '@/Axios';
 import {  BASE_URL  } from '@/Axios/base_url';
 import {  base_url  } from '@/consts';
 
+const storage =
+  typeof window !== "undefined"
+    ? localStorage
+    : { getItem: () => null, setItem: () => {}, removeItem: () => {} };
+
+const getStoredJson = (key, fallback = null) => {
+  const value = storage.getItem(key);
+  if (!value || value === "null" || value === "undefined") {
+    return fallback;
+  }
+
+  try {
+    return JSON.parse(value);
+  } catch {
+    storage.removeItem(key);
+    return fallback;
+  }
+};
+
 // Thunk action to fetch site data asynchronously
 export const fetchSiteData = createAsyncThunk(
   "site/fetchSiteData",
@@ -24,13 +43,7 @@ export const fetchSiteData = createAsyncThunk(
 const siteSlice = createSlice({
   name: "site",
   initialState: {
-    siteData:
-      (typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).getItem("ouroubaSiteData") &&
-      (typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).getItem("ouroubaSiteData") != "null" &&
-      (typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).getItem("ouroubaSiteData") != "undefined" &&
-      (typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).getItem("ouroubaSiteData") != undefined
-        ? JSON.parse((typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).getItem("ouroubaSiteData"))
-        : null,
+    siteData: getStoredJson("ouroubaSiteData"),
     status: "idle", // Possible states: 'idle', 'loading', 'succeeded', 'failed'
     error: null,
   },
@@ -48,7 +61,7 @@ const siteSlice = createSlice({
       .addCase(fetchSiteData.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.siteData = action.payload;
-        (typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).setItem(
+        storage.setItem(
           "ouroubaSiteData",
           JSON.stringify(action.payload)
         );

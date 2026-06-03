@@ -1,11 +1,29 @@
-import { createSlice } from "@reduxjs/toolkit";
+﻿import { createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
-let localCart=(typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).getItem('local_cart');
-let cartData=localCart&&JSON.parse(localCart);
+const storage =
+  typeof window !== "undefined"
+    ? localStorage
+    : { getItem: () => null, setItem: () => {}, removeItem: () => {} };
+
+const safeJsonParse = (value, fallback = []) => {
+  if (!value || value === "null" || value === "undefined") {
+    return fallback;
+  }
+
+  try {
+    return JSON.parse(value);
+  } catch {
+    storage.removeItem("local_cart");
+    return fallback;
+  }
+};
+
+let localCart=storage.getItem('local_cart');
+let cartData=safeJsonParse(localCart);
 // console.log(cartData,"cartData")
-if(cartData==null){
-  (typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).setItem('local_cart',JSON.stringify([]))
+if(!localCart){
+  storage.setItem('local_cart',JSON.stringify([]))
   // state.items=[];
 }
 const initialState = {
@@ -57,8 +75,8 @@ const offlineCartSlice = createSlice({
       );
       state.totalPrice = totalPrice;
       state.totalQuantity = totalQuantity;
-      let localCart=(typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).getItem('local_cart');
-      let cartData=localCart&&JSON.parse(localCart);
+      let localCart=storage.getItem('local_cart');
+      let cartData=safeJsonParse(localCart);
       let pushedCart=[]
       if(cartData.length==0){
         pushedCart.push({...newItem,uiid:cartData.length})
@@ -75,7 +93,7 @@ const offlineCartSlice = createSlice({
           }
         }
       }
-      (typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).setItem('local_cart',JSON.stringify(pushedCart))
+      storage.setItem('local_cart',JSON.stringify(pushedCart))
       state.items=[...pushedCart]
     },
     updateQuantity(state, action) {
@@ -101,14 +119,14 @@ const offlineCartSlice = createSlice({
       const { totalPrice, totalQuantity } = calculateTotalPriceAndQuantity(
         state.items
       );
-      let localCart=(typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).getItem('local_cart');
-      let cartData=localCart&&JSON.parse(localCart);
+      let localCart=storage.getItem('local_cart');
+      let cartData=safeJsonParse(localCart);
       console.log(cartData)
       let pushedCart=cartData.filter(item=>item.uiid!=itemIdToRemove)
       // console.log(pushedCart)
       // return
       state.items=[...pushedCart]
-      (typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).setItem('local_cart',JSON.stringify(pushedCart));
+      storage.setItem('local_cart',JSON.stringify(pushedCart));
       state.totalPrice = totalPrice;
       state.totalQuantity = totalQuantity;
     },
@@ -121,8 +139,8 @@ const offlineCartSlice = createSlice({
       const { totalPrice, totalQuantity } = calculateTotalPriceAndQuantity(
         state.items
       );
-      let localCart=(typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).getItem('local_cart');
-      let cartData=localCart&&JSON.parse(localCart);
+      let localCart=storage.getItem('local_cart');
+      let cartData=safeJsonParse(localCart);
       let pushedCart=[];
       for(let i=0;i<cartData.length;i++){
         if(cartData[i].weight!=weight&&cartData[i].id!=itemIdToRemove){
@@ -143,7 +161,7 @@ const offlineCartSlice = createSlice({
       // console.log(pushedCart)
       // return
       state.items=[...pushedCart]
-      (typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).setItem('local_cart',JSON.stringify(pushedCart));
+      storage.setItem('local_cart',JSON.stringify(pushedCart));
       state.totalPrice = totalPrice;
       state.totalQuantity = totalQuantity;
     },
@@ -182,8 +200,8 @@ const offlineCartSlice = createSlice({
         );
       state.totalPrice = totalPrice;
       state.totalQuantity = totalQuantity;
-      let localCart=(typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).getItem('local_cart');
-      let cartData=localCart&&JSON.parse(localCart);
+      let localCart=storage.getItem('local_cart');
+      let cartData=safeJsonParse(localCart);
       let pushedCard=[];
       for(let i=0;i<cartData.length;i++){
         let obj={
@@ -194,7 +212,7 @@ const offlineCartSlice = createSlice({
         }
         pushedCard.push(obj)
       }
-      (typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).setItem('local_cart',JSON.stringify(pushedCard));
+      storage.setItem('local_cart',JSON.stringify(pushedCard));
       state.items=[...pushedCard]
       console.log(pushedCard)
       // return state;
@@ -230,8 +248,8 @@ const offlineCartSlice = createSlice({
       state.totalPrice = totalPrice;
       state.totalQuantity = totalQuantity;
       console.log(state.items)
-      let localCart=(typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).getItem('local_cart');
-      let cartData=localCart&&JSON.parse(localCart);
+      let localCart=storage.getItem('local_cart');
+      let cartData=safeJsonParse(localCart);
       let pushedCard=[];
       for(let i=0;i<cartData.length;i++){
         let obj={
@@ -242,15 +260,15 @@ const offlineCartSlice = createSlice({
         }
         pushedCard.push(obj)
       }
-      (typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).setItem('local_cart',JSON.stringify(pushedCard));
+      storage.setItem('local_cart',JSON.stringify(pushedCard));
       state.items=[...pushedCard]
       console.log(pushedCard)
       // return state;
     },
     decrement2(state,action){
     console.log(action.payload.id)
-    let localCart=(typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).getItem('local_cart');
-    let cartData=localCart&&JSON.parse(localCart);
+    let localCart=storage.getItem('local_cart');
+    let cartData=safeJsonParse(localCart);
     console.log(cartData)
     let pushedCard=[];
     for(let i=0;i<cartData.length;i++){
@@ -273,15 +291,15 @@ const offlineCartSlice = createSlice({
         pushedCard.push(obj)
       }
     }
-    (typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).setItem('local_cart',JSON.stringify(pushedCard));
+    storage.setItem('local_cart',JSON.stringify(pushedCard));
     console.log(pushedCard)
     state.items=[...pushedCard]
     },
     decrementQuantity(state, action) {
       console.log('check')
       const itemIdToDecrement = action.payload?.itemIdToIncrement;
-      let localCart=(typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).getItem('local_cart');
-      let cartData=localCart&&JSON.parse(localCart);
+      let localCart=storage.getItem('local_cart');
+      let cartData=safeJsonParse(localCart);
       console.log(cartData)
       let pushedCard=[];
       for(let i=0;i<cartData.length;i++){
@@ -304,7 +322,7 @@ const offlineCartSlice = createSlice({
           pushedCard.push(obj)
         }
       }
-      (typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).setItem('local_cart',JSON.stringify(pushedCard));
+      storage.setItem('local_cart',JSON.stringify(pushedCard));
       console.log(pushedCard)
       state.items=[...pushedCard]
       console.log(pushedCard)
@@ -345,19 +363,19 @@ const offlineCartSlice = createSlice({
         return {...item,uiid:index}
       })
       state.items=[...lastPushed]
-      (typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).setItem('local_cart',JSON.stringify(lastPushed))
+      storage.setItem('local_cart',JSON.stringify(lastPushed))
     },
     emptyCart(state,action){
       let pushedCart=[];
-      (typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).setItem('local_cart',JSON.stringify(pushedCart));
+      storage.setItem('local_cart',JSON.stringify(pushedCart));
       state.items=[]
     },
     decrementWeightQuantity(state, action) {
       console.log('check')
       const itemIdToDecrement = action.payload?.itemIdToIncrement;
       const weight = action.payload?.weight;
-      let localCart=(typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).getItem('local_cart');
-      let cartData=localCart&&JSON.parse(localCart);
+      let localCart=storage.getItem('local_cart');
+      let cartData=safeJsonParse(localCart);
       console.log(cartData)
       let pushedCard=[];
       for(let i=0;i<cartData.length;i++){
@@ -380,7 +398,7 @@ const offlineCartSlice = createSlice({
           pushedCard.push(obj)
         }
       }
-      (typeof window !== 'undefined' ? localStorage : { getItem: ()=>null, setItem: ()=>{}, removeItem: ()=>{} }).setItem('local_cart',JSON.stringify(pushedCard));
+      storage.setItem('local_cart',JSON.stringify(pushedCard));
       console.log(pushedCard)
       state.items=[...pushedCard]
       console.log(pushedCard)
@@ -433,3 +451,4 @@ export const {
 } = offlineCartSlice.actions;
 
 export default offlineCartSlice.reducer;
+

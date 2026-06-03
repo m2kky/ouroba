@@ -1,27 +1,50 @@
 "use client";
 import React from "react";
 import UseGeneral from "../../../hooks/useGeneral";
-import Link from 'next/link';
-import {
-  WhiteArrowLeft,
-  arrowLeft,
-  arrowLeftBrand,
-} from "../../../assets/svgIcons";
+import Link from "next/link";
+import { WhiteArrowLeft } from "../../../assets/svgIcons";
+import { localizedPath } from "@/utils/routes";
+
+const isVideoMedia = (src) =>
+  typeof src === "string" && /\.(mp4|webm|ogg|mov|m4v)(\?|#|$)/i.test(src);
+
+const pickBrandMedia = (brand, language) => {
+  const candidates =
+    language === "ar"
+      ? [
+          brand?.videoUrl,
+          brand?.videoUrlEn,
+          brand?.imageMain,
+          brand?.imageSmallMain,
+          brand?.imageSmall,
+        ]
+      : [
+          brand?.videoUrlEn,
+          brand?.videoUrl,
+          brand?.imageMain,
+          brand?.imageSmallMain,
+          brand?.imageSmall,
+        ];
+
+  return candidates.find((src) => typeof src === "string" && src.trim()) || null;
+};
+
 function WhyUs({ data, id }) {
   const { language } = UseGeneral();
+  const mediaSrc = pickBrandMedia(data?.brand, language);
   return (
     <div className="hero_section d-flex flex-column justify-content-between align-items-center w-full rowDiv why_us_section brands_section">
-      {data?.brand?.videoUrl || (data?.brand?.imageMain && data?.brand?.imageMain?.split(".").pop() === "mp4") ? (
+      {mediaSrc && isVideoMedia(mediaSrc) ? (
         <video
           style={{ width: "100%", margin: "auto" }}
-          src={language === "ar" ? (data?.brand?.videoUrl || data?.brand?.imageMain) : (data?.brand?.videoUrlEn || data?.brand?.videoUrl || data?.brand?.imageMain)}
+          src={mediaSrc}
           muted
           autoPlay
           loop
         ></video>
-      ) : (
-        <img src={data?.brand?.imageMain} />
-      )}
+      ) : mediaSrc ? (
+        <img src={mediaSrc} alt={language === "ar" ? data?.brand?.nameAr : data?.brand?.nameEn} />
+      ) : null}
       <p style={{ color: "white" }}>
         {language == "ar"
           ? data?.brand?.descriptionAr
@@ -124,10 +147,10 @@ function WhyUs({ data, id }) {
           />
         </svg>}
       </center>
-      {id == 8 ? (
+      {String(id) === "8" ? (
         <Link
           className="btn btn-primary viewAllBtn"
-          href={"/Brands/Basma/5/14/Frozen Pre-Fried Bites?q=14"}
+          href={localizedPath("/brands/5/categories/14?q=14", language)}
           style={{ marginBottom: "113px" }}
         >
           <span>{language != "ar" ? "View All" : "إظهار الكل"}</span>

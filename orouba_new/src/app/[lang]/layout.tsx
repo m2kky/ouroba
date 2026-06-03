@@ -23,6 +23,7 @@ export default async function RootLayout({
   params: Promise<{ lang: string }>;
 }>) {
   const { lang } = await params;
+  const languageClass = lang === "ar" ? "arVersion" : "enVersion";
 
   return (
     <html lang={lang} data-scroll-behavior="smooth">
@@ -38,7 +39,7 @@ export default async function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>
+      <body className={languageClass}>
         <StoreProvider initialLanguage={lang}>
           <div className="defaultLayout">
             <Header />

@@ -1,0 +1,152 @@
+﻿[
+    {
+        "Path":  "/ar",
+        "Status":  200,
+        "Location":  "",
+        "Error":  ""
+    },
+    {
+        "Path":  "/en",
+        "Status":  200,
+        "Location":  "",
+        "Error":  ""
+    },
+    {
+        "Path":  "/ar/about",
+        "Status":  200,
+        "Location":  "",
+        "Error":  ""
+    },
+    {
+        "Path":  "/en/about",
+        "Status":  200,
+        "Location":  "",
+        "Error":  ""
+    },
+    {
+        "Path":  "/ar/certifications",
+        "Status":  200,
+        "Location":  "",
+        "Error":  ""
+    },
+    {
+        "Path":  "/en/certifications",
+        "Status":  200,
+        "Location":  "",
+        "Error":  ""
+    },
+    {
+        "Path":  "/ar/product_types",
+        "Status":  200,
+        "Location":  "",
+        "Error":  ""
+    },
+    {
+        "Path":  "/en/product_types",
+        "Status":  200,
+        "Location":  "",
+        "Error":  ""
+    },
+    {
+        "Path":  "/ar/brands",
+        "Status":  307,
+        "Location":  "/ar/brands/5",
+        "Error":  ""
+    },
+    {
+        "Path":  "/en/brands",
+        "Status":  307,
+        "Location":  "/en/brands/5",
+        "Error":  ""
+    },
+    {
+        "Path":  "/ar/brands/5",
+        "Status":  200,
+        "Location":  "",
+        "Error":  ""
+    },
+    {
+        "Path":  "/en/brands/5",
+        "Status":  200,
+        "Location":  "",
+        "Error":  ""
+    },
+    {
+        "Path":  "/ar/export",
+        "Status":  200,
+        "Location":  "",
+        "Error":  ""
+    },
+    {
+        "Path":  "/en/export",
+        "Status":  200,
+        "Location":  "",
+        "Error":  ""
+    },
+    {
+        "Path":  "/ar/export_cat",
+        "Status":  200,
+        "Location":  "",
+        "Error":  ""
+    },
+    {
+        "Path":  "/en/export_cat",
+        "Status":  200,
+        "Location":  "",
+        "Error":  ""
+    },
+    {
+        "Path":  "/ar/recipes",
+        "Status":  200,
+        "Location":  "",
+        "Error":  ""
+    },
+    {
+        "Path":  "/en/recipes",
+        "Status":  200,
+        "Location":  "",
+        "Error":  ""
+    },
+    {
+        "Path":  "/ar/contactus",
+        "Status":  200,
+        "Location":  "",
+        "Error":  ""
+    },
+    {
+        "Path":  "/en/contactus",
+        "Status":  200,
+        "Location":  "",
+        "Error":  ""
+    },
+    {
+        "Path":  "/ar/careers",
+        "Status":  200,
+        "Location":  "",
+        "Error":  ""
+    },
+    {
+        "Path":  "/en/careers",
+        "Status":  200,
+        "Location":  "",
+        "Error":  ""
+    },
+    {
+        "Path":  "/ar/about/whoWeAre",
+        "Status":  308,
+        "Location":  "/ar/about",
+        "Error":  ""
+    },
+    {
+        "Path":  "/en/about/whoWeAre",
+        "Status":  308,
+        "Location":  "/en/about",
+        "Error":  ""
+    },
+    {
+        "Path":  "/about/whoWeAre",
+        "Status":  404,
+        "Location":  "",
+        "Error":  "The remote server returned an error: (404) Not Found."
+    }
+]

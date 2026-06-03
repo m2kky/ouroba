@@ -1,23 +1,35 @@
 "use client";
-import React from 'react';
-import Breadcrumb from '../../components/BreadCumbsLinks';
-import ExportForm from '../Export/ExportForm/ExportForm';
-import UseGeneral from '../../hooks/useGeneral';
+import React from "react";
+import Breadcrumb from "../../components/BreadCumbsLinks";
+import ExportForm from "../Export/ExportForm/ExportForm";
+import UseGeneral from "../../hooks/useGeneral";
+
+const localizedSetting = (settings, key, language) => {
+  const value =
+    language === "ar"
+      ? settings?.[`${key}Ar`] || settings?.[key]
+      : settings?.[`${key}En`] || settings?.[key];
+
+  return typeof value === "string" ? value : "";
+};
 
 const ExportCatalog = ({ exportCatData }) => {
-  const {language} = UseGeneral();
+  const { language } = UseGeneral();
+  const title = localizedSetting(exportCatData, "catalogTitle", language);
+  const text = localizedSetting(exportCatData, "catalog", language);
+  const buttonText = localizedSetting(exportCatData, "catalogButtonText", language);
 
   const pages = [
     {
-      name: language == "ar" ? 'الرئيسية' : 'Home',
-      title_ar: 'الرئيسية',
-      title_en: 'Home',
-      route: '/',
+      name: language == "ar" ? "الصفحة الرئيسية" : "Home",
+      title_ar: "الصفحة الرئيسية",
+      title_en: "Home",
+      route: "/",
     },
     {
-      name: language == "ar" ? 'التصدير' : 'Export Catalogue',
-      title_ar: 'التصدير',
-      title_en: 'Export Catalogue',
+      name: language == "ar" ? "كتالوج التصدير" : "Export Catalogue",
+      title_ar: "كتالوج التصدير",
+      title_en: "Export Catalogue",
       active: true,
     },
   ];
@@ -27,19 +39,21 @@ const ExportCatalog = ({ exportCatData }) => {
       <Breadcrumb links={pages} />
       <div className="cat_expo_ban rowDiv">
         <div className="left">
-          <h5>{language == "ar" ? "مرحبا بكم في تصدير الكتالوج":"Welcome To Export Catalogue"}</h5>
-          <p>{language == "en" ? exportCatData?.catalogEn: exportCatData?.catalogAr}</p>
-          <em
-            className="btn btn-primary"
-            onClick={() => window.open(exportCatData?.catalogFile, "_blank")}
-            style={{ background: "var(--main-color)" }}
-          >
-            {language == "ar" ? "تحميل الكتالوج":"Download Catalogue"}
-          </em>
+          {title ? <h5>{title}</h5> : null}
+          {text ? <p>{text}</p> : null}
+          {exportCatData?.catalogFile && buttonText ? (
+            <em
+              className="btn btn-primary"
+              onClick={() => window.open(exportCatData.catalogFile, "_blank")}
+              style={{ background: "var(--main-color)" }}
+            >
+              {buttonText}
+            </em>
+          ) : null}
         </div>
         <div className="right">
           {exportCatData?.catalogImage ? (
-            <img src={exportCatData.catalogImage} alt="" />
+            <img src={exportCatData.catalogImage} alt={title || ""} />
           ) : null}
         </div>
       </div>

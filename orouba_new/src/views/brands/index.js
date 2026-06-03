@@ -13,7 +13,7 @@ const StyledDiv = styled.div`
   color: white;
 
   &:hover {
-    background-color: ${(props) => props.hoverColor};
+    background-color: ${(props) => props.$hoverColor};
   }
 `;
 
@@ -57,7 +57,7 @@ const Brands = ({ data, brandData, products, categoryId, brandId }) => {
                 <StyledDiv
                   key={item.id}
                   className="receipe_block brand_block"
-                  hoverColor={brandData?.colorHover}
+                  $hoverColor={brandData?.colorHover}
                   onMouseEnter={() => setHoveredItem(index)}
                   onMouseLeave={() => setHoveredItem(null)}
                   onClick={() => router.push(localizedPath(`/products/${item.id}`, language))}

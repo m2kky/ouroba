@@ -1,7 +1,7 @@
 import BrandCategoryDataView from "@/views/BrandCategoryData/index";
 import { db } from "@/db";
 import { brands } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import { resolveMediaTree } from "@/utils/media";
 
@@ -10,11 +10,11 @@ export default async function BrandMainPage({
 }: {
   params: Promise<{ lang: string; brandId: string }>;
 }) {
-  const { lang, brandId } = await params;
+  const { brandId } = await params;
 
   // Fetch Brand Data
   const brandData = await db.query.brands.findFirst({
-    where: eq(brands.id, brandId),
+    where: and(eq(brands.id, brandId), eq(brands.isHidden, false)),
   });
 
   if (!brandData) {
@@ -34,7 +34,10 @@ export default async function BrandMainPage({
   }));
 
   const data = {
-    brand: brandData,
+    brand: {
+      ...brandData,
+      color: brandData.colorBrand,
+    },
     relatedCats: formattedCats,
   };
 

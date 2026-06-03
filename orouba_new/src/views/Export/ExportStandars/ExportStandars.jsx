@@ -1,67 +1,55 @@
 "use client";
-import React, { useEffect, useState } from 'react';
-// import { standersData } from './data';
-import UseGeneral from '../../../hooks/useGeneral';
-import Standard from '../../../components/standards';
-import Link from 'next/link';
-import { arrowLeft } from '../../../assets/svgIcons';
-const ExportStandars = ({ standersData }) => {
+import React from "react";
+import UseGeneral from "../../../hooks/useGeneral";
+import Standard from "../../../components/standards";
+
+const localizedSetting = (settings, key, language) => {
+  const value =
+    language === "ar"
+      ? settings?.[`${key}Ar`] || settings?.[key]
+      : settings?.[`${key}En`] || settings?.[key];
+
+  return typeof value === "string" ? value : "";
+};
+
+const ExportStandars = ({ exportData, standersData = [] }) => {
   const { language } = UseGeneral();
-  const [standars, setStanders] = useState([]);
-  const eqData = () => {
-    setStanders(standersData);
-  }
-  useEffect(() => {
-    eqData()
-  }, []);
+  const title =
+    localizedSetting(exportData, "exportStandardsTitle", language) ||
+    localizedSetting(exportData, "home_standards_title", language);
+  const text =
+    localizedSetting(exportData, "exportStandardsText", language) ||
+    localizedSetting(exportData, "home_standards_text", language);
+  const standars = Array.isArray(standersData)
+    ? standersData.filter((item) => !item?.isHidden)
+    : [];
+
   return (
     <div className="export_standars">
-      <h4>
-        {language == 'ar' ? (
-          <>
-            <span>معاييرنا</span>
-          </>
-        ) : (
-          <>
-            <span>Our</span>
-            <span>Standards</span>
-          </>
-        )}
-      </h4>
-      <p style={{ textAlign: "center" }}>
-        {language == "ar"
-          ? "نلتزم في العروبة بأعلى معايير الجودة لضمان أن كل منتج نقدمه يلبي احتياجاتك ويتجاوز توقعاتك."
-          : `At Orouba, we hold ourselves to the highest standards to ensure that
-        every product we deliver meets and exceeds your expectations.`}</p>
+      {title ? (
+        <h4>
+          <span>{title}</span>
+        </h4>
+      ) : null}
+      {text ? (
+        <p
+          style={{ textAlign: "center" }}
+          dangerouslySetInnerHTML={{ __html: text }}
+        />
+      ) : null}
       <div className="standardsImages d-flex my-3 justify-content-between">
-        {standars &&
-          standars.map((item, index) => {
-            return ( 
-              <Standard
-                title={item?.title}
-                description={
-                  language == "ar" ? item?.description_ar : item?.description_en
-                }
-                icon={item?.image}
-              // backgroundInternal={true}
-              />
-
-            );
-          })}
+        {standars.map((item) => (
+          <Standard
+            key={item.id}
+            description={
+              language == "ar"
+                ? item?.descriptionAr || item?.description_ar
+                : item?.descriptionEn || item?.description_en
+            }
+            icon={item?.image}
+          />
+        ))}
       </div>
-      {/* <div className="hero_section standard_section d-flex justify-content-between flex-column w-full homeStandard rowDiv">
-      <Link href="/export">
-        <span>{language == "ar" ? "المزيد" : "Learn More"}</span>
-        <span
-          style={{
-            rotate: language == "ar" ? "180deg" : "0",
-            display: "inline-block",
-          }}
-        >
-          {arrowLeft}
-        </span>
-      </Link>
-    </div> */}
     </div>
   );
 };

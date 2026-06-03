@@ -1,7 +1,13 @@
 import WhoWeAreView from "@/views/WhoWeAre/WhoWeAre";
 import { db } from "@/db";
-import { siteSettings } from "@/db/schema";
-import { inArray } from "drizzle-orm";
+import {
+  aboutBuildings,
+  aboutFeatures,
+  aboutProductionSteps,
+  aboutSections,
+  siteSettings,
+} from "@/db/schema";
+import { eq, inArray } from "drizzle-orm";
 import { resolveMediaTree } from "@/utils/media";
 
 type AboutData = {
@@ -32,13 +38,19 @@ async function getAboutData(): Promise<AboutData> {
     const [sections, buildings, productionSteps, features, settingsData] =
       await Promise.all([
         db.query.aboutSections.findMany({
+          where: eq(aboutSections.isHidden, false),
           orderBy: (sections, { asc }) => [asc(sections.number)],
         }),
-        db.query.aboutBuildings.findMany(),
+        db.query.aboutBuildings.findMany({
+          where: eq(aboutBuildings.isHidden, false),
+        }),
         db.query.aboutProductionSteps.findMany({
+          where: eq(aboutProductionSteps.isHidden, false),
           orderBy: (steps, { asc }) => [asc(steps.number)],
         }),
-        db.query.aboutFeatures.findMany(),
+        db.query.aboutFeatures.findMany({
+          where: eq(aboutFeatures.isHidden, false),
+        }),
         db.query.siteSettings.findMany({
           where: inArray(siteSettings.key, settingsKeys),
         }),

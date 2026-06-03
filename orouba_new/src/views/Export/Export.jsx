@@ -35,7 +35,11 @@ const Export = ({ exportPage }) => {
         <ExportBanner exportData={exportPage?.siteinfo} />
 
         <div className=" rowDiv">
-          <ExportContries continentsData={exportPage?.continents?.filter(item => item?.hidden == 0)} />
+          <ExportContries
+            continentsData={exportPage?.continents?.filter(
+              (item) => !item?.isHidden && item?.hidden !== 1
+            )}
+          />
           <div className="map">
             {exportPage?.siteinfo?.exportMap ? (
               <img
@@ -45,8 +49,15 @@ const Export = ({ exportPage }) => {
               />
             ) : null}
           </div>
-          <ExportStandars standersData={exportPage?.standers} />
-          <ExportCertificatios certificationsData={exportPage?.certifications} showTit={true} />
+          <ExportStandars
+            exportData={exportPage?.siteinfo}
+            standersData={exportPage?.standers}
+          />
+          <ExportCertificatios
+            exportData={exportPage?.siteinfo}
+            certificationsData={exportPage?.certifications}
+            showTit={true}
+          />
           <ExportForm />
         </div>
       </div>
