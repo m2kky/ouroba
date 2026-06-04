@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Loader2 } from "lucide-react";
 
 export default function CareersForm({ locale }: { locale: "ar" | "en" }) {
@@ -15,6 +15,7 @@ export default function CareersForm({ locale }: { locale: "ar" | "en" }) {
   const [loading, setLoading] = useState(false);
   const [successMsg, setSuccessMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,6 +44,7 @@ export default function CareersForm({ locale }: { locale: "ar" | "en" }) {
         setSuccessMsg(locale === "ar" ? "تم إرسال طلبك بنجاح. سنتواصل معك قريباً." : "Your application has been sent successfully.");
         setFormData({ name: "", email: "", phone: "", position: "", message: "" });
         setFile(null);
+        if (fileInputRef.current) fileInputRef.current.value = "";
       } else {
         setErrorMsg(data.message || (locale === "ar" ? "حدث خطأ أثناء الإرسال." : "Failed to submit."));
       }
@@ -97,12 +99,14 @@ export default function CareersForm({ locale }: { locale: "ar" | "en" }) {
       </div>
 
       <div className="flex flex-col gap-2 mt-2">
-        <label className="font-bold text-[#002f59] text-sm">{locale === "ar" ? "أضف السيرة الذاتية" : "Add Cover Letter"}</label>
+        <label className="font-bold text-[#002f59] text-sm">{locale === "ar" ? "أضف السيرة الذاتية" : "Add Resume / CV"}</label>
         <div className="flex items-center gap-4">
           <label className="cursor-pointer bg-[#e0e3e5] text-[#002f59] px-6 py-2 rounded-lg hover:bg-gray-300 transition-colors text-sm font-bold whitespace-nowrap">
             {locale === "ar" ? "اختر ملف" : "Choose file"}
             <input
+              ref={fileInputRef}
               type="file"
+              accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
               className="hidden"
               onChange={(e) => setFile(e.target.files?.[0] || null)}
             />

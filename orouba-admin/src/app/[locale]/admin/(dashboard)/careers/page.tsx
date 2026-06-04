@@ -12,6 +12,8 @@ interface Career {
   name: string;
   phone: string;
   email: string;
+  position: string | null;
+  message: string | null;
   resumeUrl: string | null;
   createdAt: string;
 }
@@ -58,12 +60,15 @@ export default function CareersPage() {
   const filteredCareers = careers.filter(c => 
     c.name.toLowerCase().includes(search.toLowerCase()) || 
     c.email.toLowerCase().includes(search.toLowerCase()) ||
-    c.phone.includes(search)
+    (c.phone || "").includes(search) ||
+    (c.position || "").toLowerCase().includes(search.toLowerCase()) ||
+    (c.message || "").toLowerCase().includes(search.toLowerCase())
   );
 
   const columns: Column<Career>[] = [
     { key: "name", label: t("الاسم", "Name") },
     { key: "email", label: t("البريد الإلكتروني", "Email") },
+    { key: "position", label: t("الوظيفة", "Position"), render: (item) => item.position || <span className="text-gray-400">{t("غير محدد", "Not specified")}</span> },
     { key: "phone", label: t("رقم الهاتف", "Phone"), render: (item) => <span dir="ltr">{item.phone}</span> },
     { 
       key: "resumeUrl", 
@@ -169,6 +174,16 @@ export default function CareersPage() {
                 <div>
                   <p className="text-sm text-gray-500 mb-1">{t("رقم الهاتف", "Phone")}</p>
                   <p className="font-semibold text-gray-800" dir="ltr">{selectedCareer.phone}</p>
+                </div>
+                <div className="col-span-2">
+                  <p className="text-sm text-gray-500 mb-1">{t("الوظيفة", "Position")}</p>
+                  <p className="font-semibold text-gray-800">{selectedCareer.position || t("غير محدد", "Not specified")}</p>
+                </div>
+                <div className="col-span-2">
+                  <p className="text-sm text-gray-500 mb-1">{t("الرسالة", "Message")}</p>
+                  <p className="font-semibold text-gray-800 whitespace-pre-wrap leading-relaxed">
+                    {selectedCareer.message || t("لا توجد رسالة", "No message")}
+                  </p>
                 </div>
               </div>
               
