@@ -51,6 +51,7 @@ export default async function ExportPage({ params }: { params: Promise<{ locale:
   );
   const certificatesTitle = localizedSetting(settings, locale, ["exportCertificationsTitle"], isEn ? "Our Certifications" : "الشهادات الحاصلة عليها العروبة");
   const catalogButtonText = localizedSetting(settings, locale, ["exportCatalogButtonText", "catalogButtonText"], isEn ? "Download Catalog" : "تحميل الكتالوج");
+  const visibleCertificates = (certificates || []).filter((cert: any) => Boolean(cert.image));
   const continentNames = continents
     .map((continent: any) => localize(locale, continent.nameAr, continent.nameEn))
     .filter(Boolean);
@@ -157,11 +158,15 @@ export default async function ExportPage({ params }: { params: Promise<{ locale:
           </FadeIn>
           
           <FadeIn direction="up" delay={0.2}>
-            {certificates && certificates.length > 0 ? (
+            {visibleCertificates.length > 0 ? (
               <div className="flex flex-wrap justify-center items-center gap-12 md:gap-16 max-w-5xl mx-auto mb-16">
-                {certificates.map((cert: any) => (
+                {visibleCertificates.map((cert: any) => (
                   <div key={cert.id} className="transition-transform hover:scale-105">
-                    <img src={getImageUrl(cert.image)} alt={isEn ? cert.titleEn : cert.titleAr} className="h-28 md:h-32 object-contain" />
+                    <img
+                      src={getImageUrl(cert.image)}
+                      alt={localize(locale, cert.titleAr, cert.titleEn) || (isEn ? "Orouba certificate" : "شهادة العروبة")}
+                      className="h-28 md:h-32 object-contain"
+                    />
                   </div>
                 ))}
               </div>

@@ -40,7 +40,7 @@ export default async function AboutPage({
   const productionNote = localizedSetting(
     settings,
     locale,
-    ["quotation"],
+    ["about_production_note", "quotation"],
     locale === "ar"
       ? "بعض الخطوات تتم لأنواع محددة فقط، مثل: فصل الحجم حسب الدرجات للبامية. الفرم والتصفية للطماطم. التقطيع لبعض المنتجات. بشر وفرم بعض المنتجات مثل البصل والثوم"
       : "Some steps are done for specific types only, like: size separation by grades for okra. Chopping and sifting for tomatoes. Cutting for some products. Grating and crushing some products like onion and garlic."

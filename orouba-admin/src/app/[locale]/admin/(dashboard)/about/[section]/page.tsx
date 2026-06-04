@@ -5,6 +5,7 @@ import DataTable, { Column } from "@/components/admin/DataTable";
 import { Trash2, Edit, Plus, Image as ImageIcon, Eye, EyeOff } from "lucide-react";
 import Image from "next/image";
 import { useAdminTranslation } from "@/components/admin/AdminTranslationProvider";
+import { getImageUrl } from "@/lib/api-client";
 
 type SectionType = "certificates" | "standards" | "values" | "why-choose-us" | "buildings" | "features" | "production-steps" | "section-texts";
 
@@ -211,11 +212,13 @@ export default function DynamicAboutPage({ params }: { params: Promise<{ section
 
   const filteredItems = items.filter(item => {
     const s = search.toLowerCase();
+    if (!s) return true;
     return (
       (item.titleAr && item.titleAr.toLowerCase().includes(s)) ||
       (item.titleEn && item.titleEn.toLowerCase().includes(s)) ||
       (item.descriptionAr && item.descriptionAr.toLowerCase().includes(s)) ||
-      (item.textAr && item.textAr.toLowerCase().includes(s))
+      (item.textAr && item.textAr.toLowerCase().includes(s)) ||
+      (item.image && item.image.toLowerCase().includes(s))
     );
   });
 
@@ -227,7 +230,7 @@ export default function DynamicAboutPage({ params }: { params: Promise<{ section
         key: "image", 
         label: dict.common.image, 
         render: (item) => item.image ? (
-          <Image src={item.image} alt="img" width={40} height={40} className="rounded object-cover" />
+          <Image src={getImageUrl(item.image)} alt="img" width={40} height={40} className="rounded object-cover" unoptimized />
         ) : <ImageIcon className="w-8 h-8 text-gray-300" />
       });
     }
@@ -342,7 +345,7 @@ export default function DynamicAboutPage({ params }: { params: Promise<{ section
                         />
                         {editingItem?.[field.key] && (
                           <div className="mt-2 text-xs text-green-600 flex items-center gap-2">
-                            <Image src={editingItem[field.key]} alt="current" width={40} height={40} className="rounded object-cover" />
+                            <Image src={getImageUrl(editingItem[field.key])} alt="current" width={40} height={40} className="rounded object-cover" unoptimized />
                             {t("صورة حالية مرفوعة", "Current image uploaded")}
                           </div>
                         )}

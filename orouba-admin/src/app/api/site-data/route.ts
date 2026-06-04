@@ -167,6 +167,7 @@ export async function GET(request: NextRequest) {
     alias("home_world_image", ["map"]);
     alias("home_world_text", ["world_text", "export_world"]);
     alias("home_standards_text", ["stander"]);
+    alias("about_production_note", ["quotation"]);
     alias("product_type_text", ["product_type_text"]);
     alias("exportDescription", ["export_world"]);
     alias("exportMap", ["map", "home_world_image"]);

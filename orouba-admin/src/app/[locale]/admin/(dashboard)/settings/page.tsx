@@ -18,6 +18,8 @@ export default function SettingsPage() {
   const [settings, setSettings] = useState<SiteSetting[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
+  const productionNoteAr = "بعض الخطوات تتم لأنواع محددة فقط، مثل: فصل الحجم حسب الدرجات للبامية. الفرم والتصفية للطماطم. التقطيع لبعض المنتجات. بشر وفرم بعض المنتجات مثل البصل والثوم";
+  const productionNoteEn = "Some steps are done for specific types only, like: size separation by grades for okra. Chopping and sifting for tomatoes. Cutting for some products. Grating and crushing some products like onion and garlic.";
 
   useEffect(() => {
     fetchSettings();
@@ -62,7 +64,8 @@ export default function SettingsPage() {
           { key: "about_image", desc: t("صورة صفحة من نحن الرئيسية", "About Us Main Image"), valAr: "", valEn: "" },
           { key: "small_about_img", desc: t("صورة صفحة من نحن للموبايل", "About Us Mobile Image"), valAr: "", valEn: "" },
           { key: "how_we_are", desc: t("النص التعريفي أعلى صفحة من نحن", "Who We Are intro text"), valAr: "", valEn: "" },
-          { key: "quotation", desc: t("ملاحظة مراحل الإنتاج أسفل صفحة من نحن", "Production steps note on About page"), valAr: "", valEn: "" },
+          { key: "about_production_note", desc: t("ملاحظة أسفل مراحل الإنتاج في صفحة من نحن", "Note below production steps on About page"), valAr: productionNoteAr, valEn: productionNoteEn },
+          { key: "quotation", desc: t("ملاحظة مراحل الإنتاج القديمة (تعمل كاحتياطي)", "Legacy production steps note fallback"), valAr: productionNoteAr, valEn: productionNoteEn },
           { key: "production_steps_title", desc: t("عنوان مراحل الإنتاج", "Production steps title"), valAr: "مراحل الإنتاج", valEn: "Production Steps" },
           // ── Global Assets ──
           { key: "main_logo", desc: t("اللوجو الأساسي (الهيدر والفوتر)", "Main Logo (Header & Footer)"), valAr: "", valEn: "" },
@@ -219,7 +222,8 @@ export default function SettingsPage() {
     { key: "about_image", desc: t("صورة صفحة من نحن الرئيسية", "About Us Main Image") },
     { key: "small_about_img", desc: t("صورة صفحة من نحن للموبايل", "About Us Mobile Image") },
     { key: "how_we_are", desc: t("النص التعريفي أعلى صفحة من نحن", "Who We Are intro text") },
-    { key: "quotation", desc: t("ملاحظة مراحل الإنتاج", "Production steps note") },
+    { key: "about_production_note", desc: t("ملاحظة أسفل مراحل الإنتاج", "Production steps bottom note") },
+    { key: "quotation", desc: t("ملاحظة مراحل الإنتاج القديمة", "Legacy production steps note") },
     { key: "production_steps_title", desc: t("عنوان مراحل الإنتاج", "Production steps title") },
     { key: "product_type_img", desc: t("صورة بانر أصناف المنتجات", "Product types banner image") },
     { key: "product_type_text", desc: t("نص مقدمة أصناف المنتجات", "Product types intro text") },

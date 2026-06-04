@@ -20,7 +20,7 @@ import { useState } from "react";
 
 export default function DocsPage() {
   const { locale, t } = useAdminTranslation();
-  const [activeTab, setActiveTab] = useState<"workflow" | "tables">("workflow");
+  const [activeTab, setActiveTab] = useState<"workflow" | "tables" | "pages">("workflow");
 
   const workflowSteps = [
     {
@@ -88,8 +88,8 @@ export default function DocsPage() {
       icon: Megaphone,
       color: "bg-rose-500",
       description: t(
-        "خطوات تجميلية وتسويقية اختيارية لإبراز قوة الشركة والتفاعل مع الزوار وتفعيل نوافذ الخصومات والإعلانات.",
-        "Marketing and presentation steps to build brand authority, configure banners, popups, and certificates."
+        "محتوى الصفحات العامة مهم مثل المنتجات تماماً: البانرات، الشهادات، نصوص من نحن، صور التصدير، الكتالوج، والنوافذ المنبثقة.",
+        "Public page content is as important as products: banners, certificates, About copy, export images, catalog assets, and popups."
       ),
       tables: [
         { name: t("البانرات الرئيسية (Banners)", "Banners"), link: "banners" },
@@ -161,10 +161,101 @@ export default function DocsPage() {
         },
         {
           name: t("شهادات ومعايير الجودة", "Certificates & Quality"),
-          desc: t("إضافة معايير التصنيع وشهادات الجودة (مثل HACCP, ISO) لثقة المستوردين.", "Add quality standards and certificates to build export credibility."),
-          prereq: t("لا يوجد.", "No prerequisites.")
+          desc: t("إضافة معايير التصنيع وشهادات الجودة. صور الشهادات التي تظهر في صفحة التصدير تتحكم فيها من صفحة شهادات الجودة داخل قسم About.", "Add quality standards and certificates. Certificate images shown on Export are controlled from About Certificates."),
+          prereq: t("صور الشهادات: /admin/about/certificates", "Certificate images: /admin/about/certificates")
         }
       ]
+    }
+  ];
+
+  const publicPagesGuide = [
+    {
+      title: t("الصفحة الرئيسية", "Homepage"),
+      path: `/${locale}`,
+      icon: Store,
+      controls: [
+        t("السلايدر الرئيسي: من /admin/banners، ويفضل ترتيب الصور والفيديوهات برقم واضح.", "Main slider: /admin/banners. Use clear ordering numbers for images and videos."),
+        t("قسم الرؤية ولماذا العروبة ومعاييرنا وحول العالم: من /admin/settings باستخدام مفاتيح home_vision_* و home_why_* و home_standards_* و home_world_*.", "Vision, Why Orouba, Standards, and Around the World sections: /admin/settings using home_vision_*, home_why_*, home_standards_*, and home_world_* keys."),
+        t("البراندات والمنتجات والوصفات الظاهرة في الرئيسية تأتي من Brands وProducts وRecipes بعد ضبط الإظهار والترتيب.", "Homepage brands, products, and recipes come from Brands, Products, and Recipes after visibility and ordering are set.")
+      ],
+      settings: ["home_vision_title", "home_vision_text", "home_why_title", "home_why_text", "home_standards_text", "home_world_text"]
+    },
+    {
+      title: t("من نحن", "About / Who We Are"),
+      path: `/${locale}/about/whoWeAre`,
+      icon: FileText,
+      controls: [
+        t("صورة ونص مقدمة من نحن: من /admin/settings عبر about_image و small_about_img و how_we_are.", "Intro image and copy: /admin/settings via about_image, small_about_img, and how_we_are."),
+        t("مراحل الإنتاج نفسها: من /admin/about/production-steps، ويمكن ترتيب كل خطوة برقم وإضافة صورة لها.", "Production steps: /admin/about/production-steps. Each step can be ordered and given an image."),
+        t("الكوت أسفل مراحل الإنتاج: من /admin/settings بالمفتاح about_production_note، والمفتاح القديم quotation يعمل كاحتياطي.", "Bottom quote below production steps: /admin/settings with about_production_note. Legacy quotation remains a fallback.")
+      ],
+      settings: ["about_image", "small_about_img", "how_we_are", "production_steps_title", "about_production_note", "quotation"]
+    },
+    {
+      title: t("أصناف المنتجات", "Product Types"),
+      path: `/${locale}/about/ProductType`,
+      icon: Tags,
+      controls: [
+        t("نص وصورة مقدمة الصفحة: من /admin/settings عبر product_type_text و product_type_img.", "Page intro text and image: /admin/settings via product_type_text and product_type_img."),
+        t("الأصناف والكروت: من /admin/types، واربط كل نوع بالبراندات والأقسام المناسبة.", "Type cards: /admin/types. Link each type to the relevant brands and categories."),
+        t("صور أصناف ثابتة مثل الفواكه والخضار يمكن تغييرها من مفاتيح product_type_*_image في الإعدادات.", "Fixed category images can be changed from product_type_*_image settings keys.")
+      ],
+      settings: ["product_type_text", "product_type_img", "product_type_fruits_image", "product_type_veg_image", "product_type_beans_image"]
+    },
+    {
+      title: t("الشهادات", "Certifications"),
+      path: `/${locale}/about/certifications`,
+      icon: Award,
+      controls: [
+        t("نص مقدمة صفحة الشهادات وصورة البانر: من /admin/settings عبر certificationText و certification_image.", "Intro copy and hero image: /admin/settings via certificationText and certification_image."),
+        t("صور الشهادات نفسها: من /admin/about/certificates. نفس الصور تظهر أيضاً في صفحة التصدير.", "Certificate images: /admin/about/certificates. The same images also appear on Export."),
+        t("القيم ومعايير الجودة الداعمة: من /admin/about/values و /admin/about/standards.", "Supporting values and standards: /admin/about/values and /admin/about/standards.")
+      ],
+      settings: ["certificationText", "certification_image"]
+    },
+    {
+      title: t("التصدير", "Export"),
+      path: `/${locale}/export`,
+      icon: Map,
+      controls: [
+        t("عنوان ووصف وصور صفحة التصدير: من /admin/settings عبر exportTitle و exportDescription و exportImage و exportMap.", "Export title, copy, and images: /admin/settings via exportTitle, exportDescription, exportImage, and exportMap."),
+        t("الدول والقارات: من /admin/continents، وتظهر كأسماء مناطق وخريطة تصدير.", "Countries and continents: /admin/continents. They appear as export regions and map context."),
+        t("معايير التصدير: من /admin/about/standards. صور الشهادات: من /admin/about/certificates.", "Export standards: /admin/about/standards. Certificate images: /admin/about/certificates.")
+      ],
+      settings: ["exportTitle", "exportDescription", "exportImage", "exportMap", "exportStandardsText", "exportCertificationsTitle", "exportCatalogButtonText"]
+    },
+    {
+      title: t("كتالوج التصدير", "Export Catalog"),
+      path: `/${locale}/export-catalog`,
+      icon: Package,
+      controls: [
+        t("عنوان ونص وصورة الكتالوج: من /admin/settings عبر catalogTitle و catalogText و catalogImage.", "Catalog title, copy, and image: /admin/settings via catalogTitle, catalogText, and catalogImage."),
+        t("ملف التحميل أو الرابط: من catalogFile، ونص الزر من catalogButtonText.", "Download file or URL: catalogFile. Button text: catalogButtonText."),
+        t("يمكن استخدام catalogAr و catalogEn لو محتاج نص مختلف لكل لغة.", "Use catalogAr and catalogEn if each language needs separate catalog copy.")
+      ],
+      settings: ["catalogTitle", "catalogText", "catalogAr", "catalogEn", "catalogImage", "catalogFile", "catalogButtonText"]
+    },
+    {
+      title: t("التواصل والفوتر والهيدر", "Contact, Footer & Header"),
+      path: `/${locale}/contact`,
+      icon: Settings,
+      controls: [
+        t("بيانات التواصل: من /admin/settings عبر contact_title و contact_intro و address و phone_1 و phone_2 و email و map_url.", "Contact data: /admin/settings via contact_title, contact_intro, address, phone_1, phone_2, email, and map_url."),
+        t("اللوجو والفافيكون وحقوق الملكية: من main_logo و favicon_logo و copy_right.", "Logo, favicon, and copyright: main_logo, favicon_logo, and copy_right."),
+        t("روابط السوشيال وواتساب: من facebook_url و instagram_url و linkedin_url و whatsapp_number.", "Social and WhatsApp links: facebook_url, instagram_url, linkedin_url, and whatsapp_number.")
+      ],
+      settings: ["contact_title", "contact_intro", "address", "phone_1", "phone_2", "email", "map_url", "main_logo", "copy_right"]
+    },
+    {
+      title: t("الوصفات والمحتوى التفاعلي", "Recipes & Interactive Content"),
+      path: `/${locale}/recipes`,
+      icon: ChefHat,
+      controls: [
+        t("أقسام الوصفات: من /admin/recipes/categories، والوصفات نفسها من /admin/recipes.", "Recipe categories: /admin/recipes/categories. Recipes: /admin/recipes."),
+        t("المكونات المستخدمة في الوصفات: من /admin/foods، ثم يتم ربطها داخل الوصفة.", "Recipe ingredients: /admin/foods, then linked inside each recipe."),
+        t("النوافذ المنبثقة وقائمة المحادثة: من /admin/popups و /admin/chat-menu.", "Popups and chat menu: /admin/popups and /admin/chat-menu.")
+      ],
+      settings: []
     }
   ];
 
@@ -188,7 +279,7 @@ export default function DocsPage() {
         </div>
 
         {/* Tab Switcher */}
-        <div className="flex gap-4 mt-8 border-t border-blue-600/40 pt-6">
+        <div className="flex flex-wrap gap-4 mt-8 border-t border-blue-600/40 pt-6">
           <button 
             onClick={() => setActiveTab("workflow")}
             className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${activeTab === "workflow" ? "bg-white text-blue-900 shadow" : "bg-blue-600/30 text-white hover:bg-blue-600/50"}`}
@@ -200,6 +291,12 @@ export default function DocsPage() {
             className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${activeTab === "tables" ? "bg-white text-blue-900 shadow" : "bg-blue-600/30 text-white hover:bg-blue-600/50"}`}
           >
             {t("تفاصيل الجداول والعلاقات", "Detailed Tables Guide")}
+          </button>
+          <button
+            onClick={() => setActiveTab("pages")}
+            className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${activeTab === "pages" ? "bg-white text-blue-900 shadow" : "bg-blue-600/30 text-white hover:bg-blue-600/50"}`}
+          >
+            {t("تحكم صفحات الموقع", "Public Pages Control")}
           </button>
         </div>
       </div>
@@ -263,7 +360,7 @@ export default function DocsPage() {
             })}
           </div>
         </div>
-      ) : (
+      ) : activeTab === "tables" ? (
         /* Detailed Table Guide */
         <div className="grid grid-cols-1 gap-8">
           {tableDetails.map((cat, idx) => (
@@ -286,6 +383,71 @@ export default function DocsPage() {
               </div>
             </div>
           ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 gap-6">
+          <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm">
+            <h2 className="text-xl font-bold text-gray-800 mb-2">
+              {t("كل صفحة في الموقع تتحكم فيها منين؟", "Where do you control each public page?")}
+            </h2>
+            <p className="text-gray-500 text-sm leading-relaxed">
+              {t(
+                "استخدم هذا التبويب عند مراجعة أي صفحة عامة. كل كارت يوضح رابط الصفحة، مكان التحكم في محتواها، وأهم مفاتيح الإعدادات التي تؤثر عليها.",
+                "Use this tab when reviewing any public page. Each card shows the page URL, the dashboard controls, and the key settings that affect it."
+              )}
+            </p>
+          </div>
+
+          {publicPagesGuide.map((page) => {
+            const Icon = page.icon;
+            return (
+              <div key={page.path} className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm space-y-5">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-gray-50 pb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-xl bg-blue-50 text-orouba-blue">
+                      <Icon className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-extrabold text-gray-900">{page.title}</h3>
+                      <a href={page.path} className="text-xs font-semibold text-blue-600 hover:text-blue-800">
+                        {page.path}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-5">
+                  <div className="space-y-3">
+                    {page.controls.map((control, i) => (
+                      <div key={i} className="flex items-start gap-2 text-sm text-gray-700 leading-relaxed">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                        <span>{control}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="bg-gray-50 rounded-2xl border border-gray-100 p-4">
+                    <h4 className="text-xs font-extrabold text-gray-500 uppercase mb-3">
+                      {t("مفاتيح الإعدادات المهمة", "Important Settings Keys")}
+                    </h4>
+                    {page.settings.length ? (
+                      <div className="flex flex-wrap gap-2">
+                        {page.settings.map((setting) => (
+                          <span key={setting} className="px-2.5 py-1 rounded-lg bg-white border border-gray-100 text-xs font-semibold text-gray-700">
+                            {setting}
+                          </span>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="text-xs text-gray-500">
+                        {t("هذه الصفحة تعتمد أساساً على الجداول وليس مفاتيح الإعدادات.", "This page mainly depends on tables rather than settings keys.")}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       )}
     </div>
