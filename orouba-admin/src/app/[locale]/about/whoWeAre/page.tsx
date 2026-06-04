@@ -1,8 +1,8 @@
 import { getSiteData, getImageUrl } from "@/lib/api-client";
 import { Metadata } from "next";
 import Link from "next/link";
-import { t } from "@/lib/server-locale";
 import { sanitizeHtml } from "@/lib/sanitize";
+import { localizedSetting, type Locale } from "@/lib/site-content";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -20,7 +20,7 @@ export default async function AboutPage({
   params: Promise<{ locale: string }>;
 }) {
   const resolvedParams = await params;
-  const locale = resolvedParams.locale;
+  const locale: Locale = resolvedParams.locale === "en" ? "en" : "ar";
 
   const data = await getSiteData();
   const { settings, buildings, productionSteps, sectionTexts, features } = data;
@@ -30,6 +30,21 @@ export default async function AboutPage({
 
   const aboutImage = settings?.about_image?.en || settings?.about_image?.ar || "pZHaEck6Myx1R5XKJTICq0AZFn15lMRTC6kT1Yp0.webp";
   const smallAboutImage = settings?.small_about_img?.en || settings?.small_about_img?.ar || aboutImage;
+  const introText = localizedSetting(settings, locale, ["how_we_are", "about_text"]);
+  const productionTitle = localizedSetting(
+    settings,
+    locale,
+    ["production_steps_title"],
+    locale === "ar" ? "مراحل الإنتاج" : "Production Steps"
+  );
+  const productionNote = localizedSetting(
+    settings,
+    locale,
+    ["quotation"],
+    locale === "ar"
+      ? "بعض الخطوات تتم لأنواع محددة فقط، مثل: فصل الحجم حسب الدرجات للبامية. الفرم والتصفية للطماطم. التقطيع لبعض المنتجات. بشر وفرم بعض المنتجات مثل البصل والثوم"
+      : "Some steps are done for specific types only, like: size separation by grades for okra. Chopping and sifting for tomatoes. Cutting for some products. Grating and crushing some products like onion and garlic."
+  );
 
   return (
     <div className="bg-white min-h-screen pb-20">
@@ -74,6 +89,14 @@ export default async function AboutPage({
             </picture>
           </div>
         </div>
+
+        {introText && (
+          <div className="mb-12 w-full" style={{ textAlign: locale === 'en' ? 'left' : 'right' }}>
+            <p className="text-[#035297] leading-loose text-lg md:text-xl font-medium whitespace-pre-line">
+              {introText}
+            </p>
+          </div>
+        )}
 
         {/* Sections */}
         {aboutSections && aboutSections.map((item: any) => (
@@ -136,7 +159,7 @@ export default async function AboutPage({
         {/* Production Steps */}
         <div className="mt-20">
           <h4 className="text-[40px] text-[#035297] font-bold mb-12" style={{ textAlign: locale === 'en' ? 'left' : 'right' }}>
-            {locale === 'ar' ? "مراحل الإنتاج" : "Production Steps"}
+            {productionTitle}
           </h4>
           <div className="space-y-24">
             {(() => {
@@ -184,9 +207,7 @@ export default async function AboutPage({
             })()}
           </div>
           <p className="mt-12 text-[18px] md:text-[20px] text-[#035297] font-medium leading-relaxed" style={{ textAlign: locale === 'en' ? 'left' : 'right' }}>
-            {locale === 'ar' 
-              ? "بعض الخطوات تتم لأنواع محددة فقط، مثل: فصل الحجم حسب الدرجات للبامية. الفرم والتصفية للطماطم. التقطيع لبعض المنتجات. بشر وفرم بعض المنتجات مثل البصل والثوم" 
-              : "Some steps are done for specific types only, like :Size separation by grades for okra. Chopping & sifting, for tomatoes. Cutting for some products. Grating and crushing some products like onion and garlic."}
+            {productionNote}
           </p>
         </div>
       </div>

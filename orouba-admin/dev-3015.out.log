@@ -1,0 +1,97 @@
+
+> orouba-admin@0.1.0 dev
+> next dev --turbopack --port 3015
+
+   ▲ Next.js 15.5.15 (Turbopack)
+   - Local:        http://localhost:3015
+   - Network:      http://172.31.144.1:3015
+   - Environments: .env
+
+ ✓ Starting...
+ ○ Compiling middleware ...
+ ✓ Compiled middleware in 1420ms
+ ✓ Ready in 5.7s
+ ○ Compiling /[locale] ...
+ ✓ Compiled /[locale] in 13.5s
+ ○ Compiling /api/site-data ...
+ ✓ Compiled /api/site-data in 688ms
+ GET /api/site-data 200 in 2752ms
+ GET /ar 200 in 19224ms
+ GET /api/site-data 200 in 2001ms
+ GET /ar 200 in 4646ms
+ ○ Compiling /api/popups ...
+ ✓ Compiled /api/popups in 4.6s
+ GET /api/popups 200 in 6244ms
+ GET /api/chat-menu 200 in 6438ms
+ ○ Compiling /[locale]/export ...
+ ✓ Compiled /[locale]/export in 3.1s
+ GET /api/site-data 200 in 2383ms
+ GET /ar/export 200 in 10057ms
+ GET /api/popups 200 in 2309ms
+ GET /api/chat-menu 200 in 2404ms
+ ○ Compiling /[locale]/export-catalog ...
+ ✓ Compiled /[locale]/export-catalog in 2.1s
+ GET /api/site-data 200 in 1868ms
+ GET /ar/export-catalog 200 in 7608ms
+ GET /api/popups 200 in 2386ms
+ GET /api/chat-menu 200 in 2381ms
+ ○ Compiling /[locale]/about/ProductType ...
+ ✓ Compiled /[locale]/about/ProductType in 4.8s
+ GET /api/site-data 200 in 1505ms
+ GET /ar/about/ProductType 200 in 10235ms
+ GET /api/popups 200 in 3631ms
+ GET /api/chat-menu 200 in 3634ms
+ ✓ Compiled in 1216ms
+ ✓ Compiled /[locale]/about/ProductType in 193ms
+ GET /ar/about/ProductType 200 in 1491ms
+ GET /api/site-data 200 in 1452ms
+ GET /ar/about/ProductType 200 in 3918ms
+ GET /api/popups 200 in 2182ms
+ GET /api/chat-menu 200 in 2279ms
+ ○ Compiling /[locale]/contact ...
+ ✓ Compiled /[locale]/contact in 3s
+ GET /api/site-data 200 in 2251ms
+ GET /ar/contact 200 in 9470ms
+ GET /api/popups 200 in 2987ms
+ GET /api/chat-menu 200 in 3240ms
+ GET /api/site-data 200 in 1685ms
+ GET /ar 200 in 3699ms
+ GET /api/popups 200 in 3523ms
+ GET /api/chat-menu 200 in 3852ms
+ GET /api/site-data 200 in 2517ms
+ GET /api/site-data 200 in 1233ms
+ ✓ Compiled in 2.3s
+ ○ Compiling /[locale] ...
+ ✓ Compiled /[locale] in 979ms
+ GET /ar 200 in 2866ms
+ GET /api/site-data 200 in 1795ms
+ GET /ar 200 in 5338ms
+ GET /api/chat-menu 200 in 2570ms
+ GET /api/popups 200 in 2601ms
+ ✓ Compiled in 922ms
+ ○ Compiling /[locale] ...
+ ✓ Compiled /[locale] in 526ms
+ GET /ar 200 in 2293ms
+ GET /api/site-data 200 in 2279ms
+ GET /ar 200 in 4603ms
+ GET /api/popups 200 in 2116ms
+ GET /api/chat-menu 200 in 2157ms
+ GET /api/site-data 200 in 1835ms
+ GET /ar 200 in 2886ms
+ GET /api/popups 200 in 1947ms
+ GET /api/chat-menu 200 in 1963ms
+ GET /api/site-data 200 in 1608ms
+ GET /ar/export 200 in 2935ms
+ GET /api/popups 200 in 1429ms
+ GET /api/chat-menu 200 in 1428ms
+ GET /api/site-data 200 in 1982ms
+ GET /ar/about/ProductType 200 in 4024ms
+ GET /api/popups 200 in 1952ms
+ GET /api/chat-menu 200 in 1977ms
+ ✓ Compiled in 482ms
+ ✓ Compiled /[locale]/about/ProductType in 235ms
+ GET /ar/about/ProductType 200 in 1531ms
+ GET /api/site-data 200 in 2032ms
+ GET /ar/about/ProductType 200 in 4083ms
+ GET /api/popups 200 in 1523ms
+ GET /api/chat-menu 200 in 1532ms

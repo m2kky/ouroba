@@ -24,6 +24,14 @@ interface HeroCarouselProps {
 }
 
 export default function HeroCarousel({ banners, isEn }: HeroCarouselProps) {
+  const visibleBanners = banners.filter((banner) => {
+    const hasDesktopVideo = !!(banner.videoLink || banner.videoLinkEn);
+    const hasDesktopImage = !!(banner.image || banner.imageEn);
+    const hasMobileVideo = !!(banner.smallVideo || banner.smallVideoEn);
+    const hasMobileImage = !!(banner.smallImg || banner.smallImgEn);
+    return hasDesktopVideo || hasDesktopImage || hasMobileVideo || hasMobileImage;
+  });
+
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     Autoplay({ delay: 5000, stopOnInteraction: false }),
   ]);
@@ -41,36 +49,31 @@ export default function HeroCarousel({ banners, isEn }: HeroCarouselProps) {
     emblaApi.on("reInit", onSelect);
   }, [emblaApi, onSelect]);
 
-  if (!banners || banners.length === 0) return null;
-
-  const fallbackVideoAr =
-    "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/1.mp4";
-  const fallbackVideoEn =
-    "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/1_en.mp4";
+  if (visibleBanners.length === 0) return null;
 
   return (
     <div className="relative w-full overflow-hidden" ref={emblaRef}>
       <div className="flex touch-pan-y">
-        {banners.map((banner) => {
+        {visibleBanners.map((banner) => {
           // Desktop Media
           const isVideoDesktop = banner.type === "video";
           const desktopVideoToUse = isEn
-            ? banner.videoLinkEn || fallbackVideoEn
-            : banner.videoLink || fallbackVideoAr;
+            ? banner.videoLinkEn || banner.videoLink
+            : banner.videoLink || banner.videoLinkEn;
           const desktopImageToUse = isEn
             ? banner.imageEn || banner.image
-            : banner.image;
+            : banner.image || banner.imageEn;
           const mediaDesktop = isVideoDesktop
             ? desktopVideoToUse
-            : desktopImageToUse || (isEn ? fallbackVideoEn : fallbackVideoAr);
+            : desktopImageToUse;
 
           // Mobile Media
           const mobileVideoToUse = isEn
-            ? banner.smallVideoEn || banner.smallVideo
-            : banner.smallVideo;
+            ? banner.smallVideoEn || banner.smallVideo || desktopVideoToUse
+            : banner.smallVideo || banner.smallVideoEn || desktopVideoToUse;
           const mobileImageToUse = isEn
-            ? banner.smallImgEn || banner.smallImg
-            : banner.smallImg;
+            ? banner.smallImgEn || banner.smallImg || desktopImageToUse
+            : banner.smallImg || banner.smallImgEn || desktopImageToUse;
           const isVideoMobile =
             !!mobileVideoToUse || (!mobileImageToUse && isVideoDesktop);
           const mediaMobile =
@@ -126,9 +129,9 @@ export default function HeroCarousel({ banners, isEn }: HeroCarouselProps) {
       </div>
 
       {/* Pagination Dots */}
-      {banners.length > 1 && (
+      {visibleBanners.length > 1 && (
         <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-3 z-20">
-          {banners.map((_, idx) => (
+          {visibleBanners.map((_, idx) => (
             <button
               key={idx}
               onClick={() => emblaApi?.scrollTo(idx)}

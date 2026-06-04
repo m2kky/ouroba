@@ -41,6 +41,16 @@ export function getImageUrl(url: string | null | undefined): string {
     }
   }
 
+  if (url.startsWith("/storage/app/images/")) {
+    const filename = url.split('/').pop()?.split('?')[0];
+    return filename ? `${r2Url}/products/${filename}` : "";
+  }
+
+  // Public assets served by Next.js should remain local paths.
+  if (url.startsWith("/")) {
+    return url;
+  }
+
   // If it's a relative path like "brands/abc.webp" or "products/xyz.webp", prepend R2 base URL
   if (url.includes("/")) {
     const cleanPath = url.startsWith("/") ? url.substring(1) : url;

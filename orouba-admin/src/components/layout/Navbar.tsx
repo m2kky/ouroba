@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocale } from "@/lib/locale-context";
+import { getImageUrl } from "@/lib/api-client";
+import { localizedSetting, type Locale } from "@/lib/site-content";
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -18,6 +20,7 @@ export default function Navbar({ settings, brands: brandsProp }: { settings?: Re
   const searchParams = useSearchParams();
   const router = useRouter();
   const { locale, setLocale } = useLocale();
+  const currentLocale: Locale = locale === "en" ? "en" : "ar";
 
   const handleLanguageSwitch = (targetLocale: 'en' | 'ar') => {
     setIsLangMenuOpen(false);
@@ -105,7 +108,8 @@ export default function Navbar({ settings, brands: brandsProp }: { settings?: Re
     { label: locale === "ar" ? "وظائف" : "Careers", href: `/${locale}/careers` },
   ];
 
-  const mainLogo = settings?.main_logo?.en || settings?.main_logo?.ar || "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png";
+  const mainLogo = getImageUrl(localizedSetting(settings, currentLocale, ["main_logo", "logo"], "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png"));
+  const catalogButtonText = localizedSetting(settings, currentLocale, ["exportCatalogButtonText", "catalogButtonText"], locale === "ar" ? "تحميل الكتالوج" : "Download Catalog");
 
   return (
     <nav className="bg-orouba-blue bg-[url('/nav-lines.png')] bg-no-repeat ltr:bg-left rtl:bg-right bg-contain sticky top-0 z-50 text-white shadow-md relative rounded-b-[2rem] md:rounded-b-[3rem]">
@@ -267,7 +271,7 @@ export default function Navbar({ settings, brands: brandsProp }: { settings?: Re
               href={`/${locale}/export-catalog`}
               className="hidden lg:inline-block bg-white text-orouba-blue font-bold px-6 py-2 rounded-full hover:bg-orouba-dark hover:text-white transition-colors shadow-sm whitespace-nowrap"
             >
-              {locale === "ar" ? "تحميل الكتالوج" : "Download Catalog"}
+              {catalogButtonText}
             </Link>
           </div>
         </div>
@@ -359,7 +363,7 @@ export default function Navbar({ settings, brands: brandsProp }: { settings?: Re
                   href={`/${locale}/export-catalog`}
                   className="block mx-auto max-w-[200px] py-3 text-lg font-bold text-orouba-blue text-center bg-white rounded-full hover:bg-orouba-dark hover:text-white transition-colors shadow-lg"
                 >
-                  {locale === "ar" ? "تحميل الكتالوج" : "Download Catalog"}
+                  {catalogButtonText}
                 </Link>
               </div>
             </div>

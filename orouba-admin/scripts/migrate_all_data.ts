@@ -871,19 +871,54 @@ async function main() {
   // 29. Site Settings
   console.log('\n--- Migrating Site Settings ---');
   const siteInfos = loadJson('data_site_infos.json');
+  const ignoredSiteInfoKeys = new Set(['id', 'created_at', 'updated_at']);
+  const normalizedSiteSettings = new Map<string, { valueAr?: string | null; valueEn?: string | null; description?: string | null }>();
+
+  const setSiteSetting = (key: string, values: { valueAr?: any; valueEn?: any; description?: any }) => {
+    const current = normalizedSiteSettings.get(key) || {};
+    normalizedSiteSettings.set(key, {
+      valueAr: values.valueAr !== undefined ? String(values.valueAr ?? '') : current.valueAr,
+      valueEn: values.valueEn !== undefined ? String(values.valueEn ?? '') : current.valueEn,
+      description: values.description !== undefined ? String(values.description ?? '') : current.description,
+    });
+  };
+
   for (const si of siteInfos) {
-    if (!si.key) continue;
-    await prisma.siteSetting.upsert({
-      where: { key: si.key },
-      update: {
+    if (si.key) {
+      setSiteSetting(si.key, {
         valueAr: si.value_ar,
         valueEn: si.value_en,
         description: si.description,
+      });
+      continue;
+    }
+
+    for (const [rawKey, rawValue] of Object.entries(si)) {
+      if (ignoredSiteInfoKeys.has(rawKey) || rawValue === null || rawValue === undefined || rawValue === '') continue;
+
+      if (rawKey.endsWith('_ar')) {
+        setSiteSetting(rawKey.slice(0, -3), { valueAr: rawValue });
+      } else if (rawKey.endsWith('_en')) {
+        setSiteSetting(rawKey.slice(0, -3), { valueEn: rawValue });
+      } else {
+        setSiteSetting(rawKey, { valueAr: rawValue, valueEn: rawValue });
+      }
+    }
+  }
+
+  for (const [key, si] of normalizedSiteSettings) {
+    if (!key) continue;
+    await prisma.siteSetting.upsert({
+      where: { key },
+      update: {
+        valueAr: si.valueAr,
+        valueEn: si.valueEn,
+        description: si.description,
       },
       create: {
-        key: si.key,
-        valueAr: si.value_ar,
-        valueEn: si.value_en,
+        key,
+        valueAr: si.valueAr,
+        valueEn: si.valueEn,
         description: si.description,
       }
     });

@@ -5,7 +5,8 @@ import { Metadata } from "next";
 import { ChevronLeft } from "lucide-react";
 import FadeIn from "@/components/ui/FadeIn";
 import ProductCard from "@/components/products/ProductCard";
-import { getServerLocale, t, type Locale } from "@/lib/server-locale";
+import type { Locale } from "@/lib/server-locale";
+import { localizedSetting } from "@/lib/site-content";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -31,64 +32,82 @@ export default async function ProductsPage({
   const q = resolvedSearch?.q?.toLowerCase().trim() || "";
   
   const data = await getSiteData();
-  const categoryTypes = (data.categoryTypes || []).sort((a: any, b: any) => (a.number || 999) - (b.number || 999));
+  const categoryTypes = (data.categoryTypes || [])
+    .filter((type: any) => !String(type.image || "").toLowerCase().includes("cooking-method.png"))
+    .sort((a: any, b: any) => (a.number || 999) - (b.number || 999));
   const settings = data.settings || {};
 
-  const headerImg = settings.product_type_img?.[locale] || settings.product_type_img?.ar || "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/8inON8KtTSi8Ijpf6Qa7btLtpOgyJ6YuoOw69c8E.webp";
-  const headerText = locale === 'ar' 
-    ? "نحن نفخر بتصنيع وتوفير المنتجات الغذائية الصحية كل يوم. جميع منتجاتنا لا تحتوي على أي إضافات لأننا نعتمد فقط على المكونات الطبيعية. لدينا خطوط إنتاج مختلفة ومجموعة كبيرة من العلامات التجارية والأنواع."
-    : "We take pride in manufacturing and supplying nutritious, healthy products every day. All our products contain no additives as we depend only on natural ingredients.  We have different product lines and large portfolio of brands & types";
+  const headerImg = localizedSetting(
+    settings,
+    locale,
+    ["product_type_img"],
+    "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/8inON8KtTSi8Ijpf6Qa7btLtpOgyJ6YuoOw69c8E.webp"
+  );
+  const headerText = localizedSetting(
+    settings,
+    locale,
+    ["product_type_text"],
+    locale === "ar"
+      ? "نحن نفخر بتصنيع وتوفير المنتجات الغذائية الصحية كل يوم. جميع منتجاتنا لا تحتوي على أي إضافات لأننا نعتمد فقط على المكونات الطبيعية. لدينا خطوط إنتاج مختلفة ومجموعة كبيرة من العلامات التجارية والأنواع."
+      : "We take pride in manufacturing and supplying nutritious, healthy products every day. All our products contain no additives as we depend only on natural ingredients. We have different product lines and large portfolio of brands & types."
+  );
 
-  const productTypesArray = [
+  const fallbackProductTypesArray = [
     {
       id: "veg",
       titleEn: "Frozen Vegetables",
       titleAr: "الخضروات المجمدة",
-      descriptionEn: "All our vegetables are carefully selected. They undergo inspection and selection process, then the vegetables are washed, processed and subjected to quick freezing, We have a large variety of types to serve different needs",
-      descriptionAr: "يتم اختيار جميع خضرواتنا بعناية. تخضع الخضروات لعملية الفحص والاختيار، ثم يتم غسلها ومعالجتها ومرورها بالتجميد السريع، ولدينا مجموعة متنوعة من الأصناف لتلبية الاحتياجات المختلفة.",
-      image: settings.product_type_veg_image?.en || settings.product_type_veg_image?.ar || "icIeuiVnOAuVtHTPzWDN8D16X8aLOQ7wpGZoRIOD.webp",
-      brands: [
-        { brandId: "7", catId: "4", logo: "/UIkaE1koGECMMc616E9jBg8H27gL60D9N9c10r2q.png" }, // Farida - Frozen Vegetables
-        { brandId: "5", catId: "11", logo: "/basma.png" } // Basma - Frozen Vegetables & Fruits
-      ]
+      descriptionEn: "All our vegetables are carefully selected, washed, processed, and quick frozen to serve different needs.",
+      descriptionAr: "يتم اختيار جميع خضرواتنا بعناية ثم غسلها ومعالجتها ومرورها بالتجميد السريع لتلبية الاحتياجات المختلفة.",
+      image: localizedSetting(settings, locale, ["product_type_veg_image"], "icIeuiVnOAuVtHTPzWDN8D16X8aLOQ7wpGZoRIOD.webp"),
+      brands: [],
     },
     {
       id: "fruits",
       titleEn: "Frozen Fruits",
-      titleAr: "الفواكة المجمدة",
-      descriptionEn: "Fresh fruits are selected and processed, then subjected to quick freezing to keep their nutrition values and attributes",
-      descriptionAr: "يتم اختيار الفواكة الطازجة وتجهيزها، ثم تخضع للتجميد السريع للاحتفاظ بخصائصها وقيمتها الغذائية.",
-      image: settings.product_type_fruits_image?.en || settings.product_type_fruits_image?.ar || "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/RjhwfXqz0lYRg5WcJappDYbVqw7GxoGFpV5l7vk2.png",
-      brands: [
-        { brandId: "7", catId: "5", logo: "/UIkaE1koGECMMc616E9jBg8H27gL60D9N9c10r2q.png" }, // Farida - Frozen Fruits
-        { brandId: "5", catId: "11", logo: "/basma.png" } // Basma - Frozen Vegetables & Fruits
-      ]
+      titleAr: "الفواكه المجمدة",
+      descriptionEn: "Fresh fruits are selected and quick frozen to keep their nutrition values and attributes.",
+      descriptionAr: "يتم اختيار الفواكه الطازجة وتجهيزها ثم تخضع للتجميد السريع للاحتفاظ بقيمتها الغذائية.",
+      image: localizedSetting(settings, locale, ["product_type_fruits_image"], "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/RjhwfXqz0lYRg5WcJappDYbVqw7GxoGFpV5l7vk2.png"),
+      brands: [],
     },
     {
       id: "pre-fried",
       titleEn: "Pre-Fried",
       titleAr: "النصف مقلي",
-      descriptionEn: "We have our famous Falafel types, in addition to our original recipes of pre-fried potatoes with different ingredients and pre-fried cauliflower florets",
-      descriptionAr: "لدينا أصناف الفلافل الشهيرة الخاصة بنا، بالإضافة إلى وصفاتنا الأصلية من البطاطس النصف مقلية مع مكونات مختلفة وزهرات القرنبيط المتبلة النصف مقلية.",
-      image: settings.product_type_prefried_image?.en || settings.product_type_prefried_image?.ar || "GTqYDNVWPuIlNYMzniHuxRmdwslPpj0W9bjhRGAI.webp",
-      brands: [
-        { brandId: "7", catId: "6", logo: "/UIkaE1koGECMMc616E9jBg8H27gL60D9N9c10r2q.png" }, // Farida - Frozen Falafel
-        { brandId: "5", catId: "12", logo: "/basma.png" } // Basma - Frozen Falafel
-      ]
+      descriptionEn: "Our famous falafel and pre-fried recipes are made for quick, easy preparation.",
+      descriptionAr: "لدينا أصناف الفلافل الشهيرة ووصفاتنا النصف مقلية لتجهيز سريع وسهل.",
+      image: localizedSetting(settings, locale, ["product_type_prefried_image"], "GTqYDNVWPuIlNYMzniHuxRmdwslPpj0W9bjhRGAI.webp"),
+      brands: [],
     },
     {
       id: "beans",
       titleEn: "Frozen Beans & Grains",
       titleAr: "البقوليات والحبوب المجمدة",
-      descriptionEn: "Our beans & grains are selected, soaked or boiled to save time and effort, Many of which are ready to eat and some take around 10 minutes of heating",
-      descriptionAr: "يتم اختيار البقوليات والحبوب، وتجهيزها وسلقها لتكون سريعة الطهى ، وهناك العديد من الأصناف جاهزة للأكل مباشرة . بعض المنتجات تستغرق حوالي ١٠ دقائق من الطهى وذلك لتوفير الوقت والجهد.",
-      image: settings.product_type_beans_image?.en || settings.product_type_beans_image?.ar || "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/ZjhabQ8AqbF7N3nAMyekLu1DqzOfnJ6dW9tuxoor.png",
-      brands: [
-        { brandId: "7", catId: "7", logo: "/UIkaE1koGECMMc616E9jBg8H27gL60D9N9c10r2q.png" }, // Farida - Frozen Beans & Grains
-        { brandId: "5", catId: "13", logo: "/basma.png" } // Basma - Frozen Beans & Grains
-      ]
-    }
+      descriptionEn: "Beans and grains are selected and prepared to save time and effort.",
+      descriptionAr: "يتم اختيار البقوليات والحبوب وتجهيزها لتوفير الوقت والجهد.",
+      image: localizedSetting(settings, locale, ["product_type_beans_image"], "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/ZjhabQ8AqbF7N3nAMyekLu1DqzOfnJ6dW9tuxoor.png"),
+      brands: [],
+    },
   ];
+
+  const productTypesArray = categoryTypes.length
+    ? categoryTypes.map((type: any) => ({
+        id: type.id,
+        titleEn: type.titleEn,
+        titleAr: type.titleAr,
+        descriptionEn: type.descriptionEn,
+        descriptionAr: type.descriptionAr,
+        image: getImageUrl(type.image),
+        brands: (type.categories || [])
+          .map((item: any) => ({
+            brandId: item.category?.brand?.id,
+            catId: item.category?.id,
+            logo: item.category?.brand?.imageSmallMain || item.category?.brand?.image || item.image || item.category?.image,
+          }))
+          .filter((item: any) => item.brandId),
+      }))
+    : fallbackProductTypesArray;
 
   // Handle Search Results
   let searchResults: any[] = [];
@@ -139,7 +158,7 @@ export default async function ProductsPage({
       </div>
 
       <div className="max-w-[1200px] mx-auto px-4 md:px-8 relative z-10">
-        <FadeIn direction="up" className="mb-20" style={{ textAlign: locale === 'en' ? 'left' : 'right' }}>
+        <FadeIn direction="up" className={`mb-20 ${locale === 'en' ? 'text-left' : 'text-right'}`}>
           <h1 className="text-3xl md:text-4xl font-bold text-[#035297] mb-4">
             {q ? (
               locale === 'ar' ? `نتائج البحث عن: "${q}"` : `Search results for: "${q}"`
@@ -223,7 +242,7 @@ export default async function ProductsPage({
 
                       {/* Brand Availability Icons */}
                       <div className="flex flex-wrap items-center justify-center gap-6">
-                        {item.brands.map((bInfo: any) => {
+                        {item.brands.map((bInfo: any, brandIndex: number) => {
                           const brandObj = data.brands?.find((b: any) => b.id === bInfo.brandId);
                           if (!brandObj) return null;
                           
@@ -238,14 +257,14 @@ export default async function ProductsPage({
                           
                           return (
                             <Link 
-                              key={bInfo.brandId}
+                              key={`${bInfo.brandId}-${bInfo.catId}-${brandIndex}`}
                               href={linkHref}
                               className="group relative block w-24 h-16 md:w-32 md:h-20 bg-transparent transition-all duration-500 hover:-translate-y-2 hover:scale-105"
                               title={locale === 'ar' ? brandObj.nameAr : brandObj.nameEn}
                             >
                               {brandLogo || bInfo.logo ? (
                                 <Image 
-                                  src={bInfo.logo || getImageUrl(brandLogo)}
+                                  src={getImageUrl(brandLogo || bInfo.logo)}
                                   alt={locale === 'ar' ? brandObj.nameAr : brandObj.nameEn}
                                   fill
                                   className="object-contain brightness-100 group-hover:brightness-110 group-hover:drop-shadow-[0_10px_20px_rgba(0,0,0,0.3)] transition-all duration-500"

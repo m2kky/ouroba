@@ -1,8 +1,8 @@
-import { getSiteData } from "@/lib/api-client";
+import { getImageUrl, getSiteData } from "@/lib/api-client";
 import { Metadata } from "next";
 import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
 import CollaborateForm from "@/components/export/CollaborateForm";
+import { localizedSetting, type Locale } from "@/lib/site-content";
 
 export const metadata: Metadata = {
   title: "تحميل الكتالوج | العروبة",
@@ -12,15 +12,27 @@ export const metadata: Metadata = {
 export default async function ExportCatalogPage({ params }: { params: Promise<{ locale: string }> }) {
   const data = await getSiteData();
   const resolvedParams = await params;
-  const locale = resolvedParams.locale;
+  const locale: Locale = resolvedParams.locale === "en" ? "en" : "ar";
   const isEn = locale === 'en';
   const settings = data.settings || {};
 
-  // Find the catalogue link and image if they exist in settings, or use fallbacks
-  // From old site: exportCatData?.catalog_file, catalog_image, catalog_ar, catalog_en
-  const catalogFile = "https://drive.google.com/file/d/1oB1YdeeB4RK1IObDKL4j7aH61Lk9yQqp/view";
-  const catalogImage = "/nxt722V09sW2i5Cc6bsw4RBLaCeaSahztSVo2H3g.png";
-  const catalogText = (isEn ? settings.catalog_text?.en : settings.catalog_text?.ar) || (isEn ? "Explore Our Products: Discover Orouba's world of premium frozen products meticulously crafted for global markets. Our catalogue offers a diverse range of frozen products and brands to meet your business requirements." : "استكشف منتجاتنا: اكتشف عالم العروبة من المنتجات المجمدة الممتازة المصنوعة بعناية للأسواق العالمية. يقدم الكتالوج الخاص بنا مجموعة متنوعة من المنتجات والعلامات التجارية المجمدة لتلبية متطلبات عملك.");
+  const catalogFile = localizedSetting(
+    settings,
+    locale,
+    ["catalogFile", "catalog_file"],
+    "https://drive.google.com/file/d/1oB1YdeeB4RK1IObDKL4j7aH61Lk9yQqp/view"
+  );
+  const catalogImage = localizedSetting(settings, locale, ["catalogImage", "catalog_image"], "/nxt722V09sW2i5Cc6bsw4RBLaCeaSahztSVo2H3g.png");
+  const catalogText = localizedSetting(
+    settings,
+    locale,
+    ["catalogText", "catalog", "catalog_text", isEn ? "catalogEn" : "catalogAr"],
+    isEn
+      ? "Explore Our Products: Discover Orouba's world of premium frozen products meticulously crafted for global markets. Our catalogue offers a diverse range of frozen products and brands to meet your business requirements."
+      : "استكشف منتجاتنا: اكتشف عالم العروبة من المنتجات المجمدة الممتازة المصنوعة بعناية للأسواق العالمية. يقدم الكتالوج الخاص بنا مجموعة متنوعة من المنتجات والعلامات التجارية المجمدة لتلبية متطلبات عملك."
+  );
+  const catalogTitle = localizedSetting(settings, locale, ["catalogTitle"], isEn ? "Welcome To Export Catalogue" : "مرحباً بكم في كتالوج التصدير");
+  const catalogButtonText = localizedSetting(settings, locale, ["catalogButtonText"], isEn ? "Download Catalogue" : "تحميل الكتالوج");
 
   return (
     <div className="bg-white min-h-screen pb-20 pt-32" dir={isEn ? "ltr" : "rtl"}>
@@ -40,7 +52,7 @@ export default async function ExportCatalogPage({ params }: { params: Promise<{ 
           
           <div className="w-full md:w-1/2">
             <h1 className="text-2xl md:text-3xl font-bold text-orouba-blue mb-4">
-              {isEn ? 'Welcome To Export Catalogue' : 'مرحباً بكم في كتالوج التصدير'}
+              {catalogTitle}
             </h1>
             <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-8 max-w-xl">
               {catalogText}
@@ -51,14 +63,14 @@ export default async function ExportCatalogPage({ params }: { params: Promise<{ 
               rel="noopener noreferrer"
               className="inline-block bg-[#1E4E8C] text-white font-medium px-8 py-2.5 rounded-lg text-sm hover:bg-blue-800 transition-colors shadow-sm text-center"
             >
-              {isEn ? 'Download Catalogue' : 'تحميل الكتالوج'}
+              {catalogButtonText}
             </a>
           </div>
 
           <div className="w-full md:w-1/2 flex items-center justify-center">
             <div className="relative w-full max-w-lg">
               <img 
-                src={catalogImage} 
+                src={getImageUrl(catalogImage)}
                 alt={isEn ? "Orouba Catalog" : "كتالوج العروبة"} 
                 className="w-full h-auto object-contain"
               />

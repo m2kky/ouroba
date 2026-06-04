@@ -119,19 +119,64 @@ export async function GET(request: NextRequest) {
       return acc;
     }, {});
 
-    // Ensure aliases for footer/frontend compatibility
-    if (settings.address && !settings.location) {
-      settings.location = settings.address;
-    }
-    if (settings.location && !settings.address) {
-      settings.address = settings.location;
-    }
-    if (settings.phone && !settings.phone_1) {
-      settings.phone_1 = settings.phone;
-    }
-    if (settings.phone_1 && !settings.phone) {
-      settings.phone = settings.phone_1;
-    }
+    const firstExisting = (keys: string[]) => keys.map((key) => settings[key]).find(Boolean);
+    const alias = (target: string, sources: string[]) => {
+      if (!settings[target]) {
+        const source = firstExisting(sources);
+        if (source) settings[target] = source;
+      }
+    };
+    const languagePair = (target: string, arKey = `${target}_ar`, enKey = `${target}_en`) => {
+      if (settings[target]) return;
+      const ar = settings[arKey]?.ar || settings[arKey]?.en || null;
+      const en = settings[enKey]?.en || settings[enKey]?.ar || null;
+      if (ar || en) settings[target] = { ar, en };
+    };
+
+    [
+      "site_name",
+      "vision",
+      "world_text",
+      "export_world",
+      "certification_text",
+      "catalog",
+      "why_choose",
+      "how_we_are",
+      "production_steps",
+      "quotation",
+      "product_type_text",
+      "stander",
+      "purposal",
+      "why_orouba",
+      "copy_right",
+    ].forEach((key) => languagePair(key));
+
+    // Ensure aliases for old Laravel siteinfo fields and current frontend names.
+    alias("site_title", ["site_name"]);
+    alias("main_logo", ["logo"]);
+    alias("favicon_logo", ["logo", "main_logo"]);
+    alias("location", ["address", "location"]);
+    alias("address", ["location", "address"]);
+    alias("phone_1", ["service_phone", "phone"]);
+    alias("phone", ["phone_1", "service_phone"]);
+    alias("phone_2", ["phone"]);
+    alias("home_vision_image", ["vision_image", "hero_img"]);
+    alias("home_vision_text", ["vision"]);
+    alias("home_why_image", ["why_orouba_img", "why_choose_img"]);
+    alias("home_why_text", ["why_orouba"]);
+    alias("home_world_image", ["map"]);
+    alias("home_world_text", ["world_text", "export_world"]);
+    alias("home_standards_text", ["stander"]);
+    alias("product_type_text", ["product_type_text"]);
+    alias("exportDescription", ["export_world"]);
+    alias("exportMap", ["map", "home_world_image"]);
+    alias("exportStandardsText", ["stander", "home_standards_text"]);
+    alias("catalogImage", ["catalog_image"]);
+    alias("catalogFile", ["catalog_file"]);
+    languagePair("catalogText", "catalogAr", "catalogEn");
+    alias("catalogText", ["catalog"]);
+    alias("certificationText", ["certification_text"]);
+    alias("copyrightText", ["copy_right"]);
 
     return apiSuccess({
       brands,
