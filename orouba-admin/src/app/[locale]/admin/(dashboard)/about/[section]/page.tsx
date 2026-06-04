@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import DataTable, { Column } from "@/components/admin/DataTable";
-import { Trash2, Edit, Plus, Image as ImageIcon, Eye, EyeOff } from "lucide-react";
+import { Trash2, Edit, Plus, Image as ImageIcon, Eye, EyeOff, Info } from "lucide-react";
 import Image from "next/image";
 import { useAdminTranslation } from "@/components/admin/AdminTranslationProvider";
 import { getImageUrl } from "@/lib/api-client";
@@ -294,6 +294,44 @@ export default function DynamicAboutPage({ params }: { params: Promise<{ section
           {dict.common.add}
         </button>
       </div>
+
+      {section === "certificates" && (
+        <div className="rounded-2xl border border-blue-100 bg-blue-50/70 p-4 text-sm text-blue-950">
+          <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+            <div className="flex gap-3">
+              <Info className="mt-0.5 h-5 w-5 shrink-0 text-orouba-blue" />
+              <div className="space-y-1 leading-relaxed">
+                <p className="font-extrabold">
+                  {t("هذه هي شاشة التحكم الأساسية في صور الشهادات.", "This is the main control screen for certificate images.")}
+                </p>
+                <p>
+                  {t(
+                    "أي صورة تضيفها هنا وهي ظاهرة ستظهر في صفحة الشهادات وصفحة التصدير. استخدم زر الإخفاء لإزالة الشهادة من الموقع مؤقتاً، أو زر الحذف لإزالتها نهائياً.",
+                    "Any visible image added here appears on both Certifications and Export. Use Hide to remove it temporarily from the site, or Delete to remove it permanently."
+                  )}
+                </p>
+                <p>
+                  {t(
+                    "نص صفحة الشهادات وصورة البانر من الإعدادات: certificationText و certification_image. عنوان شهادات التصدير من exportCertificationsTitle.",
+                    "Certifications page copy and hero image are controlled from settings: certificationText and certification_image. Export certificates title is exportCertificationsTitle."
+                  )}
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-2 md:justify-end">
+              <a href={`/${locale}/about/certifications`} className="rounded-lg bg-white px-3 py-1.5 font-bold text-orouba-blue shadow-sm hover:bg-blue-100">
+                {t("عرض صفحة الشهادات", "View Certifications")}
+              </a>
+              <a href={`/${locale}/export`} className="rounded-lg bg-white px-3 py-1.5 font-bold text-orouba-blue shadow-sm hover:bg-blue-100">
+                {t("عرض صفحة التصدير", "View Export")}
+              </a>
+              <a href={`/${locale}/admin/settings`} className="rounded-lg bg-orouba-blue px-3 py-1.5 font-bold text-white shadow-sm hover:bg-blue-800">
+                {t("تعديل النصوص", "Edit Copy")}
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
 
       {isLoading ? (
         <div className="flex justify-center items-center py-20">

@@ -68,7 +68,8 @@ export default async function CertificationsPage({
   const data = await getSiteData();
   const settings = data?.settings || {};
   const values = data?.values?.length ? data.values : fallbackValues;
-  const certificates = data?.certificates?.length ? data.certificates : fallbackCertificates.map((image, idx) => ({ id: `fallback-${idx}`, image }));
+  const visibleCertificates = (data?.certificates || []).filter((cert: any) => Boolean(cert.image));
+  const certificates = visibleCertificates.length ? visibleCertificates : fallbackCertificates.map((image, idx) => ({ id: `fallback-${idx}`, image }));
   const certificationText = localizedSetting(
     settings,
     locale,
@@ -186,7 +187,7 @@ export default async function CertificationsPage({
                 <div className="w-32 h-32 md:w-48 md:h-48 relative bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-orouba-blue/20 transition-all duration-300 p-4 flex items-center justify-center group hover:-translate-y-2">
                   <Image
                     src={getImageUrl(cert.image)}
-                    alt={`ISO Certificate ${idx + 1}`}
+                    alt={localize(locale, cert.titleAr, cert.titleEn) || (isEn ? `Orouba certificate ${idx + 1}` : `شهادة العروبة ${idx + 1}`)}
                     fill
                     className="object-contain p-6 transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0"
                     unoptimized

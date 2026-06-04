@@ -7,7 +7,10 @@ import { authOptions } from "@/lib/auth";
 // GET /api/certificates — Public: read-only
 export async function GET() {
   try {
-    const certificates = await prisma.certificate.findMany({ where: { isHidden: false } });
+    const certificates = await prisma.certificate.findMany({
+      where: { isHidden: false },
+      orderBy: { createdAt: "desc" },
+    });
     return apiSuccess(certificates);
   } catch (error) {
     return apiError("Failed to fetch certificates", 500);

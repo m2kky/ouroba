@@ -59,7 +59,7 @@ export async function GET(request: NextRequest) {
         },
       }),
       prisma.banner.findMany({ where: { isHidden: false }, orderBy: { number: "asc" } }),
-      prisma.certificate.findMany({ where: { isHidden: false } }),
+      prisma.certificate.findMany({ where: { isHidden: false }, orderBy: { createdAt: "desc" } }),
       prisma.standard.findMany({ where: { isHidden: false } }),
       prisma.value.findMany({ where: { isHidden: false } }),
       prisma.whyChooseUs.findMany({ where: { isHidden: false } }),
