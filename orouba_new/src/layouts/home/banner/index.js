@@ -86,8 +86,12 @@ const Banner = ({ data }) => {
           // effect={"cube"}
           modules={[FreeMode, Pagination, Autoplay]}
           // pagination={true}
-          pagination={{ clickable: true }}
+          pagination={{ clickable: false }}
           autoplay={{ delay: 5000 }}
+          allowTouchMove={false}
+          simulateTouch={false}
+          noSwiping={true}
+          noSwipingClass="swiper-no-swiping"
           loop={bannerCount > 1}
           // dir={language != "en" ? "rtl" : "ltr"}
           key={language != "en"}
