@@ -5,11 +5,18 @@ import "../globals.css";
 import StoreProvider from "@/components/StoreProvider";
 import Header from "@/layouts/header";
 import Footer from "@/layouts/footer";
+import {
+  dashboardSettingsToSiteinfo,
+  getDashboardSiteData,
+} from "@/lib/dashboard-data";
+import { resolveMediaTree } from "@/utils/media";
 
 export const metadata: Metadata = {
   title: "Orouba Foods",
   description: "Orouba Foods Official Website",
 };
+
+export const dynamic = "force-dynamic";
 
 export async function generateStaticParams() {
   return [{ lang: "en" }, { lang: "ar" }];
@@ -24,6 +31,38 @@ export default async function RootLayout({
 }>) {
   const { lang } = await params;
   const languageClass = lang === "ar" ? "arVersion" : "enVersion";
+  let layoutData = {
+    siteinfo: {} as Record<string, string>,
+    brands: [] as any[],
+    socialParents: [] as any[],
+  };
+
+  try {
+    const data = await getDashboardSiteData(lang);
+    const socials = Array.isArray(data.socials) ? data.socials : [];
+    const parents = Array.isArray(data.socialParents) ? data.socialParents : [];
+
+    layoutData = {
+      siteinfo: dashboardSettingsToSiteinfo(data.settings, lang),
+      brands: (Array.isArray(data.brands) ? data.brands : []).map((brand: any) => ({
+        ...brand,
+        name_ar: brand?.nameAr || brand?.name_ar,
+        name_en: brand?.nameEn || brand?.name_en,
+      })),
+      socialParents: parents.map((parent: any) => ({
+        ...parent,
+        socials: socials.filter((social: any) => social?.parentId === parent?.id),
+      })),
+    };
+  } catch {
+    layoutData = {
+      siteinfo: {},
+      brands: [],
+      socialParents: [],
+    };
+  }
+
+  const resolvedLayoutData = resolveMediaTree(layoutData);
 
   return (
     <html lang={lang} data-scroll-behavior="smooth">
@@ -42,9 +81,13 @@ export default async function RootLayout({
       <body className={languageClass}>
         <StoreProvider initialLanguage={lang}>
           <div className="defaultLayout">
-            <Header />
+            <Header brands={resolvedLayoutData.brands} siteinfo={resolvedLayoutData.siteinfo} />
             <main>{children}</main>
-            <Footer />
+            <Footer
+              brands={resolvedLayoutData.brands}
+              siteinfo={resolvedLayoutData.siteinfo}
+              socialParents={resolvedLayoutData.socialParents}
+            />
           </div>
         </StoreProvider>
       </body>

@@ -7,6 +7,8 @@ import Image from "next/image";
 import { useAdminTranslation } from "@/components/admin/AdminTranslationProvider";
 import { getImageUrl } from "@/lib/api-client";
 
+const PUBLIC_SITE_URL = process.env.NEXT_PUBLIC_PUBLIC_SITE_URL || "https://oroubafoods.com";
+
 type SectionType = "certificates" | "standards" | "values" | "why-choose-us" | "buildings" | "features" | "production-steps" | "section-texts";
 
 interface SectionConfig {
@@ -306,8 +308,8 @@ export default function DynamicAboutPage({ params }: { params: Promise<{ section
                 </p>
                 <p>
                   {t(
-                    "أي صورة تضيفها هنا وهي ظاهرة ستظهر في صفحة الشهادات وصفحة التصدير. استخدم زر الإخفاء لإزالة الشهادة من الموقع مؤقتاً، أو زر الحذف لإزالتها نهائياً.",
-                    "Any visible image added here appears on both Certifications and Export. Use Hide to remove it temporarily from the site, or Delete to remove it permanently."
+                    "أي صورة تضيفها هنا وهي ظاهرة ستظهر في الفرونت الجديدة في صفحة الشهادات وصفحة التصدير. استخدم زر الإخفاء لإزالة الشهادة من الموقع مؤقتاً، أو زر الحذف لإزالتها نهائياً.",
+                    "Any visible image added here appears in the new frontend on both Certifications and Export. Use Hide to remove it temporarily from the site, or Delete to remove it permanently."
                   )}
                 </p>
                 <p>
@@ -319,10 +321,10 @@ export default function DynamicAboutPage({ params }: { params: Promise<{ section
               </div>
             </div>
             <div className="flex flex-wrap gap-2 md:justify-end">
-              <a href={`/${locale}/about/certifications`} className="rounded-lg bg-white px-3 py-1.5 font-bold text-orouba-blue shadow-sm hover:bg-blue-100">
+              <a href={`${PUBLIC_SITE_URL}/${locale}/certifications`} target="_blank" rel="noreferrer" className="rounded-lg bg-white px-3 py-1.5 font-bold text-orouba-blue shadow-sm hover:bg-blue-100">
                 {t("عرض صفحة الشهادات", "View Certifications")}
               </a>
-              <a href={`/${locale}/export`} className="rounded-lg bg-white px-3 py-1.5 font-bold text-orouba-blue shadow-sm hover:bg-blue-100">
+              <a href={`${PUBLIC_SITE_URL}/${locale}/export`} target="_blank" rel="noreferrer" className="rounded-lg bg-white px-3 py-1.5 font-bold text-orouba-blue shadow-sm hover:bg-blue-100">
                 {t("عرض صفحة التصدير", "View Export")}
               </a>
               <a href={`/${locale}/admin/settings`} className="rounded-lg bg-orouba-blue px-3 py-1.5 font-bold text-white shadow-sm hover:bg-blue-800">

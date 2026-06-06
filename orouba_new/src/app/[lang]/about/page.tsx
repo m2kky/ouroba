@@ -1,14 +1,11 @@
 import WhoWeAreView from "@/views/WhoWeAre/WhoWeAre";
-import { db } from "@/db";
-import {
-  aboutBuildings,
-  aboutFeatures,
-  aboutProductionSteps,
-  aboutSections,
-  siteSettings,
-} from "@/db/schema";
-import { eq, inArray } from "drizzle-orm";
 import { resolveMediaTree } from "@/utils/media";
+import {
+  dashboardSettingsToSiteinfo,
+  getDashboardSiteData,
+} from "@/lib/dashboard-data";
+
+export const dynamic = "force-dynamic";
 
 type AboutData = {
   sections: unknown[];
@@ -26,47 +23,16 @@ const emptyAboutData: AboutData = {
   siteInfo: {},
 };
 
-async function getAboutData(): Promise<AboutData> {
+async function getAboutData(locale: string): Promise<AboutData> {
   try {
-    const settingsKeys = [
-      "small_about_img",
-      "about_image",
-      "quotation_en",
-      "quotation_ar",
-    ];
-
-    const [sections, buildings, productionSteps, features, settingsData] =
-      await Promise.all([
-        db.query.aboutSections.findMany({
-          where: eq(aboutSections.isHidden, false),
-          orderBy: (sections, { asc }) => [asc(sections.number)],
-        }),
-        db.query.aboutBuildings.findMany({
-          where: eq(aboutBuildings.isHidden, false),
-        }),
-        db.query.aboutProductionSteps.findMany({
-          where: eq(aboutProductionSteps.isHidden, false),
-          orderBy: (steps, { asc }) => [asc(steps.number)],
-        }),
-        db.query.aboutFeatures.findMany({
-          where: eq(aboutFeatures.isHidden, false),
-        }),
-        db.query.siteSettings.findMany({
-          where: inArray(siteSettings.key, settingsKeys),
-        }),
-      ]);
-
-    const siteInfo: AboutData["siteInfo"] = {};
-    settingsData.forEach((setting) => {
-      siteInfo[setting.key] = setting.valueEn || setting.valueAr;
-    });
+    const data = await getDashboardSiteData(locale);
 
     return {
-      sections,
-      buildings,
-      productionSteps,
-      features,
-      siteInfo,
+      sections: Array.isArray(data.sectionTexts) ? data.sectionTexts : [],
+      buildings: Array.isArray(data.buildings) ? data.buildings : [],
+      productionSteps: Array.isArray(data.productionSteps) ? data.productionSteps : [],
+      features: Array.isArray(data.features) ? data.features : [],
+      siteInfo: dashboardSettingsToSiteinfo(data.settings, locale),
     };
   } catch (error) {
     console.error("Error fetching about data:", error);
@@ -79,8 +45,8 @@ export default async function AboutPage({
 }: {
   params: Promise<{ lang: string }>;
 }) {
-  await params;
-  const aboutData = await getAboutData();
+  const { lang } = await params;
+  const aboutData = await getAboutData(lang);
 
   return <WhoWeAreView aboutData={resolveMediaTree(aboutData)} />;
 }

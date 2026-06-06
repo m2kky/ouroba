@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import UseGeneral from "../../hooks/useGeneral";
 import Link from 'next/link';
 import { MdOutlineMailOutline } from "react-icons/md";
@@ -11,46 +11,27 @@ import {
   Printer,
   SupportIcon,
 } from "../../assets/svgIcons";
-import axios from "axios";
-import {  base_url  } from '@/consts';
-import { resolveMediaTree } from "@/utils/media";
 import { localizedPath } from "@/utils/routes";
 
-const Footer = () => {
-  const [pageData, setPageData] = useState({});
+const Footer = ({ siteinfo = {}, socialParents = [], brands = [] }) => {
+  const pageData = siteinfo || {};
   const { language, data } = UseGeneral();
-  const footerLogoSrc = [pageData?.logo, data?.logo].find(
+  const footerLogoSrc = [pageData?.main_logo, pageData?.logo, data?.logo].find(
     (src) => typeof src === "string" && src.trim()
   );
   const [openedMenu, setOpenedMenu] = useState(null);
-  const [socials, setSocials] = useState([]);
-  const [parents, setParents] = useState([]);
   const [menus, setMenus] = useState(["brandatna", "linkatna", "baynatna"]);
-  const getContactData = () => {
-    // setPageLoading(true)
-    axios
-      .get(base_url + `pages/contact_page`)
-      .then((res) => {
-        const result = resolveMediaTree(res.data.result);
-        if (res.data.status == "success") {
-          setPageData(result.site_info);
-          if (Array.isArray(result.socials)) {
-            setSocials(result.socials);
-          }
-
-          if (Array.isArray(result.parents)) {
-            setParents(result.parents);
-          }
-        }
-      })
-      .catch((e) => console.log(e))
-      .finally(() => {
-        // setPageLoading(false)
-      });
-  };
-  useEffect(() => {
-    getContactData();
-  }, []);
+  const footerBrands = useMemo(
+    () =>
+      Array.isArray(brands) && brands.length
+        ? brands
+        : [
+            { id: "5", nameAr: "بسمة", nameEn: "Basma" },
+            { id: "7", nameAr: "فريدة", nameEn: "Farida" },
+            { id: "8", nameAr: "باببيتس", nameEn: "Bap Bites" },
+          ],
+    [brands]
+  );
   const arabicDigits = {
     0: "٠",
     1: "١",
@@ -149,21 +130,15 @@ const Footer = () => {
                 </svg>
               </h4>
               <ul id="ul_brandatna">
-                <li>
-                  <Link href={localizedPath("/brands/5", language)}>
-                    {language == "ar" ? "بسمة" : "Basma"}
-                  </Link>
-                </li>
-                <li>
-                  <Link href={localizedPath("/brands/7", language)}>
-                    {language == "ar" ? "فريدة" : "Farida"}
-                  </Link>
-                </li>
-                <li>
-                  <Link href={localizedPath("/brands/8", language)}>
-                    {language == "ar" ? "باببيتس" : "Bap Bites"}
-                  </Link>
-                </li>
+                {footerBrands.map((brand) => (
+                  <li key={brand.id}>
+                    <Link href={localizedPath(`/brands/${brand.id}`, language)}>
+                      {language == "ar"
+                        ? brand.nameAr || brand.name_ar
+                        : brand.nameEn || brand.name_en}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
@@ -263,32 +238,32 @@ const Footer = () => {
                   <div className="icon">{HouseIcon}</div>
                   <div className="info">
                     {language == "ar"
-                      ? pageData?.location_ar
-                      : pageData?.location_en}
+                      ? pageData?.location_ar || pageData?.address_ar
+                      : pageData?.location_en || pageData?.address_en}
                   </div>
                 </div>
                 <div className="contact_info_row">
                   <div className="icon">{SupportIcon}</div>
                   <div className="info">
                     {language == "ar"
-                      ? pageData?.service_phone
+                      ? (pageData?.service_phone || pageData?.phone_1 || pageData?.phone)
                           ?.replace(/\d/g, (digit) => arabicDigits[digit])
                           ?.split(" ")
                           ?.reverse()
                           ?.join(" ")
-                      : pageData?.service_phone}
+                      : pageData?.service_phone || pageData?.phone_1 || pageData?.phone}
                   </div>
                 </div>
                 <div className="contact_info_row">
                   <div className="icon">{Printer}</div>
                   <div className="info">
                     {language == "ar"
-                      ? pageData?.phone
+                      ? (pageData?.phone_2 || pageData?.phone)
                           ?.replace(/\d/g, (digit) => arabicDigits[digit])
                           ?.split(" ")
                           ?.reverse()
                           ?.join(" ")
-                      : pageData?.phone}
+                      : pageData?.phone_2 || pageData?.phone}
                   </div>
                 </div>
                 <div className="contact_info_row">
@@ -298,8 +273,8 @@ const Footer = () => {
                   />
                   <div className="info">{pageData?.email}</div>
                 </div>
-                {parents &&
-                  parents.map((itParent, indParent) => {
+                {socialParents &&
+                  socialParents.map((itParent, indParent) => {
                     return (
                       <div className="parent_social" key={indParent}>
                         <img src={itParent?.image} alt="" />

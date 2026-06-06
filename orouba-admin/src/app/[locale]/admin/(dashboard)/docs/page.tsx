@@ -204,11 +204,12 @@ export default function DocsPage() {
     },
     {
       title: t("الشهادات", "Certifications"),
-      path: `/${locale}/about/certifications`,
+      path: `/${locale}/certifications`,
       icon: Award,
       controls: [
+        t("الفرونت الجديدة orouba_new تقرأ هذه الصفحة من /api/site-data مباشرة؛ أي تعديل محفوظ هنا يظهر في /certifications.", "The new orouba_new frontend reads this page from /api/site-data directly; saved changes appear on /certifications."),
         t("نص مقدمة صفحة الشهادات وصورة البانر: من /admin/settings عبر certificationText و certification_image.", "Intro copy and hero image: /admin/settings via certificationText and certification_image."),
-        t("صور الشهادات نفسها: من /admin/about/certificates. نفس الصور تظهر أيضاً في صفحة التصدير.", "Certificate images: /admin/about/certificates. The same images also appear on Export."),
+        t("صور الشهادات نفسها: من /admin/about/certificates. نفس الصور تظهر أيضاً في صفحة التصدير /export.", "Certificate images: /admin/about/certificates. The same images also appear on /export."),
         t("القيم ومعايير الجودة الداعمة: من /admin/about/values و /admin/about/standards.", "Supporting values and standards: /admin/about/values and /admin/about/standards.")
       ],
       settings: ["certificationText", "certification_image"]
@@ -226,9 +227,10 @@ export default function DocsPage() {
     },
     {
       title: t("كتالوج التصدير", "Export Catalog"),
-      path: `/${locale}/export-catalog`,
+      path: `/${locale}/export_cat`,
       icon: Package,
       controls: [
+        t("صفحة الكتالوج في orouba_new تقرأ من نفس إعدادات الداشبورد عبر /api/site-data.", "The orouba_new catalog page reads from the same dashboard settings via /api/site-data."),
         t("عنوان ونص وصورة الكتالوج: من /admin/settings عبر catalogTitle و catalogText و catalogImage.", "Catalog title, copy, and image: /admin/settings via catalogTitle, catalogText, and catalogImage."),
         t("ملف التحميل أو الرابط: من catalogFile، ونص الزر من catalogButtonText.", "Download file or URL: catalogFile. Button text: catalogButtonText."),
         t("يمكن استخدام catalogAr و catalogEn لو محتاج نص مختلف لكل لغة.", "Use catalogAr and catalogEn if each language needs separate catalog copy.")

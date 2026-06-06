@@ -1,6 +1,11 @@
 import ExportCatalogView from "@/views/ExportCatalog/ExportCatalog";
-import { db } from "@/db";
 import { resolveMediaTree } from "@/utils/media";
+import {
+  dashboardSettingsToSiteinfo,
+  getDashboardSiteData,
+} from "@/lib/dashboard-data";
+
+export const dynamic = "force-dynamic";
 
 export default async function ExportCatalogPage({
   params,
@@ -9,14 +14,14 @@ export default async function ExportCatalogPage({
 }) {
   const { lang } = await params;
 
-  // Fetch site setting
-  const settings = await db.query.siteSettings.findMany();
-  const siteSetting = settings.reduce((acc: any, curr) => {
-    acc[curr.key] = curr.valueEn;
-    acc[`${curr.key}Ar`] = curr.valueAr;
-    acc[`${curr.key}En`] = curr.valueEn;
-    return acc;
-  }, {});
+  let siteSetting: Record<string, string> = {};
+
+  try {
+    const data = await getDashboardSiteData(lang);
+    siteSetting = dashboardSettingsToSiteinfo(data.settings, lang);
+  } catch {
+    siteSetting = {};
+  }
 
   return <ExportCatalogView exportCatData={resolveMediaTree(siteSetting)} />;
 }

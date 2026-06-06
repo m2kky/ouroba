@@ -2,12 +2,8 @@
 import React, { useRef, useState } from "react";
 import { removeFromCart, searchIcon } from "../../../assets/svgIcons";
 import UseGeneral from "../../../hooks/useGeneral";
-import {  Axios  } from '@/Axios';
-import {  BASE_URL  } from '@/Axios/base_url';
 import { useRouter } from 'next/navigation';
 import { Loader } from "rsuite";
-import axios from "axios";
-import {  base_url  } from '@/consts';
 import { resolveMediaTree } from "@/utils/media";
 import { localizedPath } from "@/utils/routes";
 
@@ -21,53 +17,29 @@ const SearchBox = ({ setShowSearchModal, searchModal }) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const search = (value) => {
-    console.log(value);
-
+  const search = async (value) => {
     if (!value || !value?.length) {
       setSearchResult([]);
+      setProducts([]);
+      setCooks([]);
       return;
     }
-    const data_send = {
-      search_txt: value,
-    };
+
     setLoading(true);
-    axios
-      .post(base_url + `pages/search_products`, data_send)
-      .then((res) => {
-        const result = resolveMediaTree(res.data.result);
-        if (Array.isArray(result?.products)) {
-          setProducts(result.products);
-        }
-        if (Array.isArray(result?.cooks)) {
-          setCooks(result.cooks);
-        }
-      })
-      .catch((e) => console.log(e))
-      .finally(() => {
-        setLoading(false);
-      });
-
-    // setLoading(true);
-    // Axios({
-    //   url: BASE_URL + `homepage/search_products`,
-    //   method: "post",
-    //   data: {
-    //     search_txt: value,
-    //   },
-    // })
-    //   .then((response) => {
-
-    //     if (response?.result?.products && response?.result?.products?.length)
-    //       setSearchResult(response?.result?.products);
-    //     else {
-    //       setSearchResult([]);
-    //     }
-    //   })
-    //   .catch((err) => console.error(err))
-    //   .finally(() => {
-    //     setLoading(false);
-    //   });
+    try {
+      const response = await fetch(
+        `/api/search?q=${encodeURIComponent(value)}&locale=${language === "ar" ? "ar" : "en"}`
+      );
+      const data = await response.json();
+      const result = resolveMediaTree(data?.result || {});
+      setProducts(Array.isArray(result?.products) ? result.products : []);
+      setCooks(Array.isArray(result?.cooks) ? result.cooks : []);
+    } catch {
+      setProducts([]);
+      setCooks([]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

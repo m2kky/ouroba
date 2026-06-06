@@ -4,6 +4,8 @@ import { recipeCategories, recipeCategoryFoods, recipeFoods } from "@/db/schema"
 import { eq } from "drizzle-orm";
 import { resolveMediaTree } from "@/utils/media";
 
+export const dynamic = "force-dynamic";
+
 type LegacyNamed = {
   id: string;
   nameAr?: string | null;

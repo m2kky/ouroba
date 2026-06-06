@@ -108,6 +108,10 @@ export default function WhoWeAre({ aboutData }) {
   );
   const productionStepGroups = productionGroups(productionSteps);
   const heroImage = isSmaller ? siteData?.small_about_img : siteData?.about_image;
+  const productionNote =
+    language == "ar"
+      ? siteData?.about_production_note_ar || siteData?.quotation_ar
+      : siteData?.about_production_note_en || siteData?.quotation_en;
 
   useEffect(() => {
     const updateMenuHeights = () => {
@@ -317,7 +321,7 @@ export default function WhoWeAre({ aboutData }) {
               </svg>}
 
             <p className="rowDiv centeralized" style={{ textAlign: "center" }}>
-              {language == "ar" ? siteData?.quotation_ar : siteData?.quotation_en}
+              {productionNote}
             </p>
 
             {language == "ar" ? <svg

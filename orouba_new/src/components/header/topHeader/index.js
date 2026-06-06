@@ -15,15 +15,19 @@ const headerLeft =
 const headerRight =
   "https://oroubafoods.com/static/media/headerRigh1.4eaddc7ebf9f04965208.png";
 
-const TopHeader = ({ data }) => {
+const TopHeader = ({ data, siteinfo = {} }) => {
   const router = useRouter();
   const [show, setShow] = useState(false);
   const { language, data: siteData } = UseGeneral();
   const logoSrc =
     resolveMediaUrl(
-      typeof siteData?.logo === "string" && siteData.logo.trim()
-        ? siteData.logo
-        : fallbackLogo
+      [
+        siteinfo?.main_logo,
+        siteinfo?.logo,
+        siteinfo?.favicon_logo,
+        siteData?.logo,
+      ].find((src) => typeof src === "string" && src.trim())
+        || fallbackLogo
     );
 
   return (

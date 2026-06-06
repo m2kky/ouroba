@@ -16,8 +16,12 @@ const localizedSetting = (settings, key, language) => {
 const ExportCatalog = ({ exportCatData }) => {
   const { language } = UseGeneral();
   const title = localizedSetting(exportCatData, "catalogTitle", language);
-  const text = localizedSetting(exportCatData, "catalog", language);
-  const buttonText = localizedSetting(exportCatData, "catalogButtonText", language);
+  const text =
+    localizedSetting(exportCatData, "catalog", language) ||
+    localizedSetting(exportCatData, "catalogText", language);
+  const buttonText =
+    localizedSetting(exportCatData, "catalogButtonText", language) ||
+    localizedSetting(exportCatData, "exportCatalogButtonText", language);
 
   const pages = [
     {

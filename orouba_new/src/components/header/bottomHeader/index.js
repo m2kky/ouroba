@@ -150,7 +150,9 @@ const BottomHeader = ({ show, setShow, data }) => {
                     >
                       <span>
                         {" "}
-                        {language == "ar" ? item.name_ar : item?.name_en}
+                        {language == "ar"
+                          ? item.nameAr || item.name_ar
+                          : item?.nameEn || item?.name_en}
                       </span>
                     </Link>
                   </li>

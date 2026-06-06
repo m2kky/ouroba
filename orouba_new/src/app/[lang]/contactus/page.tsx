@@ -2,6 +2,8 @@ import ContactUsView from "@/views/contactUs/index";
 import { db } from "@/db";
 import { resolveMediaTree } from "@/utils/media";
 
+export const dynamic = "force-dynamic";
+
 type ContactData = {
   siteSetting: Record<string, string | null | undefined>;
   socials: unknown[];

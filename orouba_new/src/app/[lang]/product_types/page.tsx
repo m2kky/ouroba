@@ -4,6 +4,8 @@ import { categoryTypes, siteSettings } from "@/db/schema";
 import { eq, inArray } from "drizzle-orm";
 import { resolveMediaTree } from "@/utils/media";
 
+export const dynamic = "force-dynamic";
+
 export default async function ProductTypesPage({
   params,
 }: {

@@ -1,12 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import TopHeader from "../../components/header/topHeader";
-import {  base_url  } from '@/consts';
-import axios from "axios";
-import toast from "react-hot-toast";
-import { resolveMediaTree } from "@/utils/media";
 
-const Header = () => {
+const Header = ({ brands = [], siteinfo = {} }) => {
   const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
@@ -26,24 +22,10 @@ const Header = () => {
   }, []);
 
 
-  const [data, setData] = useState(null);
-  const getData = async () => {
-    try {
-      const homePageData = await axios.get(base_url + "brands/get_for_user");
-      setData(resolveMediaTree(homePageData?.data?.result));
-    } catch (err) {
-      setData({});
-      toast.error("Error Get Data");
-    }
-  };
-  useEffect(() => {
-    getData();
-  }, []);
-
   return (
     <header className={`header ${isSticky ? "sticky" : ""}`}>
       <div className="headerBackground">
-        <TopHeader data={data}/>
+        <TopHeader data={brands} siteinfo={siteinfo}/>
       </div>
     </header>
   );

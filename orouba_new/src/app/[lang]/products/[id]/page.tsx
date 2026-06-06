@@ -5,6 +5,8 @@ import { eq, inArray, and, asc } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import { resolveMediaTree } from "@/utils/media";
 
+export const dynamic = "force-dynamic";
+
 export default async function ProductDetailsPage({
   params,
 }: {

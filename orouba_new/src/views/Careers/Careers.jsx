@@ -3,12 +3,9 @@ import { useEffect, useState } from "react";
 import UseGeneral from "../../hooks/useGeneral";
 import styles from "./Careers.module.css";
 import Breadcrumb from "../../components/BreadCumbsLinks";
-import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
-import {  base_url  } from '@/consts';
-import { resolveMediaTree } from "@/utils/media";
 
-export default function Careers() {
+export default function Careers({ careerData }) {
   const { language } = UseGeneral();
   const [joinData, setJoinData] = useState({
     name: "",
@@ -22,9 +19,8 @@ export default function Careers() {
   const [joinLoading, setJoinLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [sucMess, setSucMess] = useState("");
-  const [joinD, setJoinD] = useState({});
-  const [WhyData, setWhyData] = useState([]);
-  const [pageLoading, setPageLoading] = useState(false);
+  const WhyData = Array.isArray(careerData?.whyChooseUs) ? careerData.whyChooseUs : [];
+
   useEffect(() => {
     if (sucMess == true || sucMess == false) {
       setTimeout(() => {
@@ -33,70 +29,55 @@ export default function Careers() {
       }, 2000);
     }
   }, [sucMess]);
-  const joinPageData = () => {
-    setPageLoading(true);
-    axios
-      .get(base_url + "pages/join_page")
-      .then((res) => {
-        const result = resolveMediaTree(res.data.result);
-        setJoinD(result);
-        setWhyData(result.chooses);
-      })
-      .catch((e) => console.log(e))
-      .finally(() => {
-        setPageLoading(false);
-      });
-  };
-  const join = (e) => {
+  const join = async (e) => {
     e.preventDefault();
     setJoinLoading(true);
-    // if(file==null){
-    //   setSucMess(true);
-    //   setMessage('Enter File');
-    //   return
-    // }
-    const formData = new FormData();
-    formData.append("image", file);
-    axios
-      .post(base_url + `img_upload`, formData)
-      .then((res) => {
-        console.log(res.data);
-        if (res.data.status == "success") {
-          const data_send = {
-            cover_letter: res.data.result.image,
-            ...joinData,
-          };
-          axios
-            .post(base_url + `joins/add_new`, data_send)
-            .then((res2) => {
-              if (res2.data.status) {
-                setSucMess(true);
-                setMessage(res2.data.message);
-              } else if (res2.data.status == "faild") {
-                setSucMess(false);
-                setMessage(res2.data.message);
-              } else {
-                setSucMess(false);
-                setMessage("Not Added");
-              }
-            })
-            .catch((e) => console.log(e))
-            .finally(() => {
-              setJoinLoading(false);
-            });
-        } else if (res.data.status == "faild") {
-          setSucMess(false);
-          setMessage(res.data.message);
-        } else {
-          setSucMess(false);
-          setMessage("Image Not Uploaded");
-        }
-      })
-      .catch((e) => console.log(e));
+
+    try {
+      const formData = new FormData();
+      formData.append("name", joinData.name);
+      formData.append("email", joinData.email);
+      formData.append("phone", joinData.phone);
+      formData.append("position", joinData.position);
+      formData.append("message", joinData.message);
+      if (file) {
+        formData.append("file", file);
+      }
+
+      const response = await fetch("/api/careers", {
+        method: "POST",
+        body: formData,
+      });
+      const result = await response.json().catch(() => ({}));
+
+      if (response.ok && result?.success !== false) {
+        setSucMess(true);
+        setMessage(
+          language == "en"
+            ? "Your application has been submitted."
+            : "تم إرسال طلب التوظيف بنجاح."
+        );
+        setJoinData({
+          name: "",
+          email: "",
+          phone: "",
+          position: "",
+          cover_letter: "",
+          message: "",
+        });
+        setFile(null);
+      } else {
+        setSucMess(false);
+        setMessage(result?.error || result?.message || (language == "en" ? "Request failed." : "تعذر إرسال الطلب."));
+      }
+    } catch {
+      setSucMess(false);
+      setMessage(language == "en" ? "Request failed." : "تعذر إرسال الطلب.");
+    } finally {
+      setJoinLoading(false);
+    }
   };
-  useEffect(() => {
-    joinPageData();
-  }, []);
+
   return (
     <>
       <div
@@ -127,9 +108,9 @@ export default function Careers() {
                   }}
                   value={joinData.name}
                   placeholder={
-                    language == "en" ? "Your Email" : "بريدك الالكتروني"
+                    language == "en" ? "Full Name" : "اسمك بالكامل"
                   }
-                  type="email"
+                  type="text"
                 />
                 <input
                   onChange={(e) => {
@@ -137,9 +118,9 @@ export default function Careers() {
                   }}
                   value={joinData.email}
                   placeholder={
-                    language == "en" ? "Your Fall Name" : "اسمك بالكامل"
+                    language == "en" ? "Email" : "البريد الإلكتروني"
                   }
-                  type="text"
+                  type="email"
                 />
               </div>
 
@@ -163,7 +144,7 @@ export default function Careers() {
 
               <div className={styles.coverLetter}>
                 <p>
-                  {language == "en" ? "Add Cover Letter" : "أضف خطاب تعريفي"}
+                  {language == "en" ? "Upload CV" : "ارفع السيرة الذاتية"}
                 </p>
                 <input
                   onChange={(e) => {
@@ -172,10 +153,11 @@ export default function Careers() {
                   style={{ display: "none" }}
                   id="cover_file"
                   type="file"
+                  accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                   className={styles.cover_file}
                 />
                 <label htmlFor="cover_file" className={styles.chooseFile}>
-                  {language == "en" ? "Choose file" : "اختر ملف"}
+                  {file?.name || (language == "en" ? "Choose file" : "اختر ملف")}
                 </label>
               </div>
 
@@ -186,7 +168,7 @@ export default function Careers() {
                 value={joinData.message}
                 placeholder={language == "en" ? "Your Message" : "رسالة منك"}
               ></textarea>
-              {sucMess && sucMess?.length ? (
+              {sucMess !== "" ? (
                 <>
                   {" "}
                   {sucMess ? (
@@ -241,9 +223,9 @@ export default function Careers() {
               {WhyData?.map((item, index) => {
                 if (index < Math.floor(WhyData.length / 2)) {
                   return (
-                    <div className={styles.box}>
+                    <div className={styles.box} key={item.id || index}>
                       <div>{index + 1}</div>
-                      <p>{language == "en" ? item.text_en : item?.text_ar}</p>
+                      <p>{language == "en" ? item.textEn || item.text_en : item?.textAr || item?.text_ar}</p>
                     </div>
                   );
                 }
@@ -278,9 +260,9 @@ export default function Careers() {
               {WhyData?.map((item, index) => {
                 if (index > Math.floor(WhyData.length / 2) - 1) {
                   return (
-                    <div className={styles.box}>
+                    <div className={styles.box} key={item.id || index}>
                       <div>{index + 1}</div>
-                      <p>{language == "en" ? item?.text_en : item?.text_ar}</p>
+                      <p>{language == "en" ? item?.textEn || item?.text_en : item?.textAr || item?.text_ar}</p>
                     </div>
                   );
                 }

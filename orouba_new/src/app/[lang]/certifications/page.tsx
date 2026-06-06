@@ -1,34 +1,32 @@
 import CertificationsView from "@/views/Certifications/Certifications";
-import { db } from "@/db";
-import { certificates, certificateValues } from "@/db/schema";
-import { eq } from "drizzle-orm";
 import { resolveMediaTree } from "@/utils/media";
+import {
+  dashboardSettingsToSiteinfo,
+  getDashboardSiteData,
+} from "@/lib/dashboard-data";
+
+export const dynamic = "force-dynamic";
 
 type CertificationsData = {
   certifications: unknown[];
   values: unknown[];
+  siteinfo: Record<string, string>;
 };
 
-async function getCertificationsData(): Promise<CertificationsData> {
+async function getCertificationsData(locale: string): Promise<CertificationsData> {
   try {
-    const [certifications, values] = await Promise.all([
-      db.query.certificates.findMany({
-        where: eq(certificates.isHidden, false),
-      }),
-      db.query.certificateValues.findMany({
-        where: eq(certificateValues.isHidden, false),
-        orderBy: (values, { asc }) => [asc(values.number)],
-      }),
-    ]);
+    const data = await getDashboardSiteData(locale);
 
     return {
-      certifications,
-      values,
+      certifications: Array.isArray(data.certificates) ? data.certificates : [],
+      values: Array.isArray(data.values) ? data.values : [],
+      siteinfo: dashboardSettingsToSiteinfo(data.settings, locale),
     };
   } catch {
     return {
       certifications: [],
       values: [],
+      siteinfo: {},
     };
   }
 }
@@ -38,8 +36,8 @@ export default async function CertificationsPage({
 }: {
   params: Promise<{ lang: string }>;
 }) {
-  await params;
-  const certPageData = await getCertificationsData();
+  const { lang } = await params;
+  const certPageData = await getCertificationsData(lang);
 
   return <CertificationsView certPageData={resolveMediaTree(certPageData)} />;
 }

@@ -1,8 +1,11 @@
 import ExportView from "@/views/Export/Export";
-import { db } from "@/db";
-import { certificates, exportContinents, exportStandards } from "@/db/schema";
 import { resolveMediaTree } from "@/utils/media";
-import { eq } from "drizzle-orm";
+import {
+  dashboardSettingsToSiteinfo,
+  getDashboardSiteData,
+} from "@/lib/dashboard-data";
+
+export const dynamic = "force-dynamic";
 
 type ExportData = {
   siteinfo: Record<string, string | null | undefined>;
@@ -11,50 +14,19 @@ type ExportData = {
   certifications: unknown[];
 };
 
-async function getExportData(): Promise<ExportData> {
-  const siteinfo: ExportData["siteinfo"] = {};
-
+async function getExportData(locale: string): Promise<ExportData> {
   try {
-    const settings = await db.query.siteSettings.findMany();
-    settings.forEach((setting) => {
-      siteinfo[setting.key] = setting.valueEn;
-      siteinfo[`${setting.key}Ar`] = setting.valueAr;
-      siteinfo[`${setting.key}En`] = setting.valueEn;
-    });
-  } catch {
-    return {
-      siteinfo,
-      continents: [],
-      standers: [],
-      certifications: [],
-    };
-  }
-
-  try {
-    const [continents, standers, certifications] = await Promise.all([
-      db.query.exportContinents.findMany({
-        where: eq(exportContinents.isHidden, false),
-        orderBy: (continents, { asc }) => [asc(continents.createdAt)],
-      }),
-      db.query.exportStandards.findMany({
-        where: eq(exportStandards.isHidden, false),
-        orderBy: (standers, { asc }) => [asc(standers.createdAt)],
-      }),
-      db.query.certificates.findMany({
-        where: eq(certificates.isHidden, false),
-        orderBy: (certificates, { asc }) => [asc(certificates.createdAt)],
-      }),
-    ]);
+    const data = await getDashboardSiteData(locale);
 
     return {
-      siteinfo,
-      continents,
-      standers,
-      certifications,
+      siteinfo: dashboardSettingsToSiteinfo(data.settings, locale),
+      continents: Array.isArray(data.continents) ? data.continents : [],
+      standers: Array.isArray(data.standards) ? data.standards : [],
+      certifications: Array.isArray(data.certificates) ? data.certificates : [],
     };
   } catch {
     return {
-      siteinfo,
+      siteinfo: {},
       continents: [],
       standers: [],
       certifications: [],
@@ -67,8 +39,8 @@ export default async function ExportPage({
 }: {
   params: Promise<{ lang: string }>;
 }) {
-  await params;
-  const exportPageData = await getExportData();
+  const { lang } = await params;
+  const exportPageData = await getExportData(lang);
 
   return <ExportView exportPage={resolveMediaTree(exportPageData)} />;
 }
