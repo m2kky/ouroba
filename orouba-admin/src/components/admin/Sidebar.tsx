@@ -120,7 +120,7 @@ export default function Sidebar({ userRole }: SidebarProps) {
       items: [
         { name: dict.sidebar.brands, href: `/${locale}/admin/brands`, icon: Store },
         { name: dict.sidebar.categories, href: `/${locale}/admin/categories`, icon: Tags },
-        { name: dict.sidebar.productTypes || "Product Types", href: `/${locale}/admin/category-types`, icon: Layers },
+        { name: dict.sidebar.productTypes || "Product Types", href: `/${locale}/admin/types`, icon: Layers },
         { name: dict.sidebar.products, href: `/${locale}/admin/products`, icon: Package },
       ]
     },

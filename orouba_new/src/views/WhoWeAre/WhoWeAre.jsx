@@ -150,12 +150,12 @@ export default function WhoWeAre({ aboutData }) {
         className={`px-4 my-5 text-start downHeaderDiv whoweare rowDiv ${"pageContainer"}`}
       >
         <div className={`row ${"Pagerow"} whowearestyles`}>
-          <div className="col">
+          <div className="col aboutFactoryImageWrap">
             {heroImage ? (
               <img
                 src={heroImage}
                 alt="who we are image"
-                className={`${"img"} whowearestylesimg`}
+                className={`${"img"} whowearestylesimg aboutFactoryImage`}
               />
             ) : null}
           </div>
@@ -219,14 +219,14 @@ export default function WhoWeAre({ aboutData }) {
                 length: Math.ceil(orderedFeatures.length / 3),
               },
               (_, index) => (
-                <div style={{ flexWrap: "wrap" }} key={index} className="row">
+                <div style={{ flexWrap: "wrap" }} key={index} className="row aboutFeatureRow">
                   {orderedFeatures.slice(index * 3, (index + 1) * 3).map((item) => (
-                    <div key={item.id} className={`col ${"imgContainer"} imgContainer`}>
+                    <div key={item.id} className={`col ${"imgContainer"} imgContainer aboutFeatureItem`}>
                       {item.image ? <img src={item.image} alt="Area Img" /> : null}
                       <h5>
                         <b>{language == "en" ? item?.titleEn : item?.titleAr}</b>
                       </h5>
-                      <p className="w-75">
+                      <p className="w-75 aboutFeatureText">
                         {language == "en"
                           ? item?.descriptionEn
                           : item?.descriptionAr}

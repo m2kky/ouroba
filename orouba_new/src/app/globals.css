@@ -165,6 +165,99 @@ body .headerImage img + img {
   }
 }
 
+.whowearestyles {
+  justify-content: center !important;
+}
+
+.aboutFactoryImageWrap {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.aboutFactoryImage {
+  display: block !important;
+  width: min(980px, 100%) !important;
+  max-width: 100% !important;
+  height: auto !important;
+  max-height: 560px !important;
+  object-fit: contain !important;
+  margin: 0 auto !important;
+}
+
+.AreaRow .rowBoxes {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 62px !important;
+}
+
+.AreaRow .aboutFeatureRow {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  gap: 58px 96px !important;
+  width: 100% !important;
+  margin-inline: auto !important;
+}
+
+.AreaRow .aboutFeatureItem {
+  flex: 0 1 360px !important;
+  max-width: 390px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  text-align: center !important;
+  gap: 16px !important;
+  padding-inline: 12px !important;
+}
+
+.AreaRow .aboutFeatureItem img {
+  width: 66px !important;
+  height: 66px !important;
+  object-fit: contain !important;
+  margin: 0 auto !important;
+}
+
+.AreaRow .aboutFeatureItem h5 {
+  margin: 0 !important;
+  color: #035297 !important;
+  font-size: 21px !important;
+  line-height: 1.45 !important;
+  font-weight: 800 !important;
+  text-align: center !important;
+}
+
+.AreaRow .aboutFeatureText {
+  width: min(360px, 100%) !important;
+  margin: 0 auto !important;
+  color: #003f75 !important;
+  font-size: 18px !important;
+  line-height: 1.8 !important;
+  text-align: center !important;
+}
+
+@media (max-width: 768px) {
+  .aboutFactoryImage {
+    width: 100% !important;
+    max-height: none !important;
+  }
+
+  .AreaRow .rowBoxes {
+    gap: 42px !important;
+  }
+
+  .AreaRow .aboutFeatureRow {
+    gap: 42px !important;
+  }
+
+  .AreaRow .aboutFeatureItem {
+    flex-basis: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
 .bannerDiv,
 .banner,
 .banner video {
