@@ -48,6 +48,7 @@ const TopHeader = ({ data, siteinfo = {} }) => {
       <div className="imageHeader">
         <div className={`headerImage ${language == "ar" ? "active" : ""}`}>
           <img src={headerOrnament} alt="" />
+          <img src={headerOrnament} alt="" />
         </div>
       </div>
     </div>
