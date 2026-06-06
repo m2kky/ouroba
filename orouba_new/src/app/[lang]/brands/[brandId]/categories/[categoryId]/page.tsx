@@ -1,9 +1,12 @@
 import BrandsView from "@/views/brands/index";
-import { db } from "@/db";
-import { brands, categories, categoryProducts } from "@/db/schema";
-import { eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import { resolveMediaTree } from "@/utils/media";
+import {
+  brandCategories,
+  categoryProducts,
+  findDashboardBrand,
+  getDashboardSiteData,
+} from "@/lib/dashboard-data";
 
 export const dynamic = "force-dynamic";
 
@@ -13,39 +16,25 @@ export default async function BrandsCategoryPage({
   params: Promise<{ lang: string; brandId: string; categoryId: string }>;
 }) {
   const { lang, brandId, categoryId } = await params;
-
-  // Fetch Brand Data
-  const brandData = await db.query.brands.findFirst({
-    where: eq(brands.id, brandId),
-  });
+  const siteData = await getDashboardSiteData(lang);
+  const brandData = findDashboardBrand(siteData, brandId);
 
   if (!brandData) {
     notFound();
   }
 
-  // Fetch Categories for this Brand
-  const brandCategories = await db.query.categories.findMany({
-    where: eq(categories.brandId, brandId),
-    orderBy: (categories, { asc }) => [asc(categories.number)],
-  });
+  const categories = brandCategories(brandData);
+  const selectedCategory = categories.find((category: any) => category?.id === categoryId);
 
-  // Fetch Products for the selected Category
-  const products = await db.query.categoryProducts.findMany({
-    where: eq(categoryProducts.categoryId, categoryId),
-    with: {
-      product: {
-        with: {
-          images: true,
-        },
-      },
-    },
-  });
+  if (!selectedCategory) {
+    notFound();
+  }
 
   return (
     <BrandsView
-      data={resolveMediaTree(brandCategories)}
+      data={resolveMediaTree(categories)}
       brandData={resolveMediaTree(brandData)}
-      products={resolveMediaTree(products)}
+      products={resolveMediaTree(categoryProducts(selectedCategory, lang))}
       categoryId={categoryId}
       brandId={brandId}
     />

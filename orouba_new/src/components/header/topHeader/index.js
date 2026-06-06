@@ -10,9 +10,7 @@ import { resolveMediaUrl } from "@/utils/media";
 import { localizedPath } from "@/utils/routes";
 const fallbackLogo =
   "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png";
-const headerLeft =
-  "https://oroubafoods.com/static/media/headerRigh1.4eaddc7ebf9f04965208.png";
-const headerRight =
+const headerOrnament =
   "https://oroubafoods.com/static/media/headerRigh1.4eaddc7ebf9f04965208.png";
 
 const TopHeader = ({ data, siteinfo = {} }) => {
@@ -49,8 +47,7 @@ const TopHeader = ({ data, siteinfo = {} }) => {
       <HeaderIcons show={show} setShow={setShow} />
       <div className="imageHeader">
         <div className={`headerImage ${language == "ar" ? "active" : ""}`}>
-          <img src={language == "ar"?headerLeft : headerRight}/>
-          <img src={language == "ar"?headerLeft : headerRight}/>
+          <img src={headerOrnament} alt="" />
         </div>
       </div>
     </div>
