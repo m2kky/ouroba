@@ -3,6 +3,7 @@
 export const dynamic = "force-dynamic";
 
 import { useState, useEffect } from "react";
+import type { ClipboardEvent } from "react";
 import { PlusCircle, Trash2, ArrowRight, Save } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { useAdminTranslation } from "@/components/admin/AdminTranslationProvider";
@@ -77,6 +78,30 @@ export default function RecipeStepsPage() {
     setSteps(newSteps);
   };
 
+  const handleStepPaste = (
+    event: ClipboardEvent<HTMLTextAreaElement>,
+    index: number,
+    field: keyof RecipeStep
+  ) => {
+    const text = event.clipboardData.getData("text");
+    const lines = text
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter(Boolean);
+
+    if (lines.length <= 1) return;
+
+    event.preventDefault();
+
+    const newSteps = [...steps];
+    lines.forEach((line, offset) => {
+      const stepIndex = index + offset;
+      const currentStep = newSteps[stepIndex] || { stepAr: "", stepEn: "" };
+      newSteps[stepIndex] = { ...currentStep, [field]: line };
+    });
+    setSteps(newSteps);
+  };
+
   const removeStep = (index: number) => {
     setSteps(steps.filter((_, i) => i !== index));
   };
@@ -143,6 +168,7 @@ export default function RecipeStepsPage() {
                         placeholder={t("مثال: ٢/١ كيس بسلة بالجزر مجمد", "Example: 1/2 bag frozen peas and carrots")} 
                         value={step.stepAr} 
                         onChange={(e) => updateStep(idx, "stepAr", e.target.value)} 
+                        onPaste={(e) => handleStepPaste(e, idx, "stepAr")}
                         className="w-full px-4 py-3 border rounded-xl text-sm outline-none focus:ring-2 focus:ring-orouba-blue/20 resize-none" 
                         rows={3} 
                       />
@@ -154,6 +180,7 @@ export default function RecipeStepsPage() {
                         value={step.stepEn} 
                         dir="ltr" 
                         onChange={(e) => updateStep(idx, "stepEn", e.target.value)} 
+                        onPaste={(e) => handleStepPaste(e, idx, "stepEn")}
                         className="w-full px-4 py-3 border rounded-xl text-sm outline-none focus:ring-2 focus:ring-orouba-blue/20 resize-none" 
                         rows={3} 
                       />

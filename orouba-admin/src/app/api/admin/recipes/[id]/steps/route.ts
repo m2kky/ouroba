@@ -7,7 +7,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
   try {
     const steps = await prisma.recipeStep.findMany({
       where: { recipeId: params.id },
-      orderBy: { id: "asc" } // Assuming steps are added in order. If they have order/number, sort by that.
+      orderBy: [{ createdAt: "asc" }, { id: "asc" }],
     });
     return NextResponse.json(steps);
   } catch (error) {
@@ -28,17 +28,30 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
       return NextResponse.json({ error: "Invalid steps data" }, { status: 400 });
     }
 
-    // Bulk update: delete all existing and create new ones
-    await prisma.$transaction([
+    const normalizedSteps = steps
+      .map((step: any) => ({
+        stepAr: String(step.stepAr || "").trim(),
+        stepEn: String(step.stepEn || "").trim(),
+      }))
+      .filter((step: any) => step.stepAr || step.stepEn);
+
+    const operations: any[] = [
       prisma.recipeStep.deleteMany({ where: { recipeId: params.id } }),
-      prisma.recipeStep.createMany({
-        data: steps.map((step: any) => ({
-          recipeId: params.id,
-          stepAr: step.stepAr,
-          stepEn: step.stepEn,
-        }))
-      })
-    ]);
+    ];
+
+    if (normalizedSteps.length > 0) {
+      operations.push(
+        prisma.recipeStep.createMany({
+          data: normalizedSteps.map((step: any) => ({
+            recipeId: params.id,
+            stepAr: step.stepAr,
+            stepEn: step.stepEn,
+          })),
+        })
+      );
+    }
+
+    await prisma.$transaction(operations);
 
     return NextResponse.json({ success: true });
   } catch (error) {

@@ -1,6 +1,9 @@
 import React from "react";
 import UseGeneral from "../../../hooks/useGeneral";
 
+const first = (...values) =>
+  values.find((value) => typeof value === "string" && value.trim()) || "";
+
 const escapeHtml = (value) =>
   String(value)
     .replace(/&/g, "&amp;")
@@ -138,18 +141,24 @@ const splitDescriptionSections = (html, isArabic) => {
   };
 };
 
+const getStepHtml = (item, isArabic) =>
+  isArabic
+    ? first(item?.stepAr, item?.step_ar)
+    : first(item?.stepEn, item?.step_en);
+
 const RecipeAbout = ({ data }) => {
   const { language } = UseGeneral();
   const isArabic = language == "ar";
-  const ingredients = Array.isArray(data?.steps)
-    ? data.steps.filter((item) =>
-        isArabic
-          ? item?.stepAr && String(item.stepAr).trim()
-          : item?.stepEn && String(item.stepEn).trim()
-      )
+  const rawIngredients = Array.isArray(data?.steps)
+    ? data.steps
+    : Array.isArray(data?.step)
+    ? data.step
     : [];
+  const ingredients = rawIngredients.filter((item) => getStepHtml(item, isArabic));
   const hasIngredients = ingredients.length > 0;
-  const descriptionHtml = isArabic ? data?.descriptionAr : data?.descriptionEn;
+  const descriptionHtml = isArabic
+    ? first(data?.descriptionAr, data?.description_ar)
+    : first(data?.descriptionEn, data?.description_en);
   const descriptionSections = splitDescriptionSections(descriptionHtml, isArabic);
   const fallbackIngredientsHtml = hasIngredients
     ? ""
@@ -163,7 +172,9 @@ const RecipeAbout = ({ data }) => {
   return (
     <div className="recipe_about rowDiv">
       <div className="left">
-        {data?.internalImage ? <img src={data.internalImage} alt="" /> : null}
+        {first(data?.internalImage, data?.internal_image) ? (
+          <img src={first(data?.internalImage, data?.internal_image)} alt="" />
+        ) : null}
       </div>
 
       <div className="right">
@@ -176,7 +187,7 @@ const RecipeAbout = ({ data }) => {
         {hasIngredients ? (
           ingredients.map((item, index) => (
             <React.Fragment key={item.id || index}>
-              <HtmlBlock html={isArabic ? item?.stepAr : item?.stepEn} />
+              <HtmlBlock html={getStepHtml(item, isArabic)} />
             </React.Fragment>
           ))
         ) : (

@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "rsuite/Loader/styles/index.css";
 import "../globals.css";
 import StoreProvider from "@/components/StoreProvider";
+import LocalizedDigits from "@/components/LocalizedDigits";
 import Header from "@/layouts/header";
 import Footer from "@/layouts/footer";
 import {
@@ -80,6 +81,7 @@ export default async function RootLayout({
       </head>
       <body className={languageClass}>
         <StoreProvider initialLanguage={lang}>
+          <LocalizedDigits locale={lang} />
           <div className="defaultLayout">
             <Header brands={resolvedLayoutData.brands} siteinfo={resolvedLayoutData.siteinfo} />
             <main>{children}</main>

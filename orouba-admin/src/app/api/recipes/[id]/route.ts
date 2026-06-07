@@ -13,7 +13,7 @@ export async function GET(request: NextRequest, { params }: Params) {
       include: {
         images: true,
         properties: true,
-        steps: true,
+        steps: { orderBy: [{ createdAt: "asc" }, { id: "asc" }] },
         foods: {
           include: { food: true },
         },

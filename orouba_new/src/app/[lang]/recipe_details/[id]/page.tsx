@@ -19,7 +19,9 @@ export default async function RecipeDetailsPage({
     where: eq(recipes.id, id),
     with: {
       properties: true,
-      steps: true,
+      steps: {
+        orderBy: (steps, { asc }) => [asc(steps.createdAt), asc(steps.id)],
+      },
       images: true,
       foods: {
         with: {
@@ -55,5 +57,29 @@ export default async function RecipeDetailsPage({
     foodId: food?.id || "",
   };
 
-  return <RecipeDetailsView data={resolveMediaTree(recipeDetails)} breads={breads} />;
+  const steps = (recipeDetails.steps || []).map((step) => ({
+    ...step,
+    step_ar: step.stepAr,
+    step_en: step.stepEn,
+  }));
+
+  const properties = (recipeDetails.properties || []).map((property) => ({
+    ...property,
+    title_ar: property.titleAr,
+    title_en: property.titleEn,
+    text_ar: property.textAr,
+    text_en: property.textEn,
+  }));
+
+  const normalizedRecipeDetails = {
+    ...recipeDetails,
+    description_ar: recipeDetails.descriptionAr,
+    description_en: recipeDetails.descriptionEn,
+    internal_image: recipeDetails.internalImage,
+    properties,
+    step: steps,
+    steps,
+  };
+
+  return <RecipeDetailsView data={resolveMediaTree(normalizedRecipeDetails)} breads={breads} />;
 }
