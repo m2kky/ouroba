@@ -5,16 +5,34 @@ import Breadcrumb from "../../components/BreadCumbsLinks";
 import UseGeneral from "../../hooks/useGeneral";
 import { localizedPath } from "@/utils/routes";
 
-const categoryImageTypes = new Set(["frozen fruits", "pre-fried"]);
+const BRAND_LOGOS_BY_ID = {
+  5: "/basma.png",
+  7: "/farida.png",
+};
+
+const BRAND_LOGOS_BY_NAME = {
+  basma: "/basma.png",
+  "بسمة": "/basma.png",
+  "بسمه": "/basma.png",
+  farida: "/farida.png",
+  "فريدة": "/farida.png",
+  "فريده": "/farida.png",
+};
+
+const PRODUCT_TYPE_ORDER = {
+  "frozen vegetables": 0,
+  "frozen beans": 1,
+  "frozen beans & grains": 1,
+  "frozen fruits": 2,
+  "pre-fried": 3,
+  "frozen half fried": 3,
+};
 
 const normalizedTitle = (value) =>
   String(value || "")
     .toLowerCase()
     .replace(/\s+/g, " ")
     .trim();
-
-const shouldUseCategoryImages = (type) =>
-  categoryImageTypes.has(normalizedTitle(type?.titleEn));
 
 const hideBrokenMainImage = (event) => {
   const imageBox = event.currentTarget.closest(".product_continer_img");
@@ -27,14 +45,52 @@ const hideBrokenThumb = (event) => {
   event.currentTarget.style.display = "none";
 };
 
-const getCategoryImage = (type, item, language) => {
-  if (shouldUseCategoryImages(type)) {
-    return language === "ar"
-      ? item?.relation_image || item?.category_image
-      : item?.relation_image || item?.category_image_en || item?.category_image;
+const getBrandLogo = (item) => {
+  const brandId = item?.brand?.id != null ? String(item.brand.id) : "";
+  const brandName = normalizedTitle(
+    item?.brand?.nameEn ||
+      item?.brand?.name_en ||
+      item?.brand?.nameAr ||
+      item?.brand?.name_ar
+  );
+
+  return (
+    BRAND_LOGOS_BY_ID[brandId] ||
+    BRAND_LOGOS_BY_NAME[brandName] ||
+    item?.brand?.image ||
+    item?.relation_image ||
+    null
+  );
+};
+
+const getBrandLogoOrder = (item) => {
+  const brandId = item?.brand?.id != null ? String(item.brand.id) : "";
+  const brandName = normalizedTitle(
+    item?.brand?.nameEn ||
+      item?.brand?.name_en ||
+      item?.brand?.nameAr ||
+      item?.brand?.name_ar
+  );
+
+  if (
+    brandId === "7" ||
+    brandName === "farida" ||
+    brandName === "فريدة" ||
+    brandName === "فريده"
+  ) {
+    return 0;
   }
 
-  return item?.brand?.image || item?.category_image_en || item?.category_image;
+  if (
+    brandId === "5" ||
+    brandName === "basma" ||
+    brandName === "بسمة" ||
+    brandName === "بسمه"
+  ) {
+    return 1;
+  }
+
+  return 2;
 };
 
 const isUnresolvedLegacyImage = (src) =>
@@ -44,7 +100,23 @@ function ProductType({ types, pageDataObj }) {
   const { language } = UseGeneral();
   const productTypeImage = pageDataObj?.product_type_img;
   const visibleTypes = Array.isArray(types)
-    ? types.filter((item) => normalizedTitle(item?.titleEn) !== "products")
+    ? types
+        .map((item, originalIndex) => ({ item, originalIndex }))
+        .filter(({ item }) => {
+          const title = normalizedTitle(item?.titleEn);
+          return (
+            title !== "products" &&
+            item?.image &&
+            Array.isArray(item?.cattype) &&
+            item.cattype.length > 0
+          );
+        })
+        .sort((a, b) => {
+          const orderA = PRODUCT_TYPE_ORDER[normalizedTitle(a.item?.titleEn)] ?? 99;
+          const orderB = PRODUCT_TYPE_ORDER[normalizedTitle(b.item?.titleEn)] ?? 99;
+          return orderA - orderB || a.originalIndex - b.originalIndex;
+        })
+        .map(({ item }) => item)
     : [];
 
   return (
@@ -94,20 +166,29 @@ function ProductType({ types, pageDataObj }) {
           </div>
 
           {visibleTypes.map((item, index) => {
-            const isEven = index % 2 === 0;
+            const imageLeft = index % 2 === 0;
             const mainImage = isUnresolvedLegacyImage(item.image)
               ? null
               : item.image;
+            const brandLogoItems = Array.isArray(item?.cattype)
+              ? item.cattype
+                  .slice()
+                  .sort((a, b) => getBrandLogoOrder(a) - getBrandLogoOrder(b))
+              : [];
 
             return (
               <div
                 key={item.id}
                 style={
-                  isEven
+                  imageLeft
                     ? { marginTop: "20px", marginBottom: "20px" }
-                    : { direction: "rtl" }
+                    : undefined
                 }
-                className="product_continer"
+                className={`product_continer product-type-row ${
+                  imageLeft
+                    ? "product-type-row-image-left"
+                    : "product-type-row-image-right"
+                }`}
               >
                 {mainImage ? (
                   <div className="product_continer_img">
@@ -128,19 +209,15 @@ function ProductType({ types, pageDataObj }) {
                         ? item?.descriptionAr
                         : item?.descriptionEn}
                     </p>
-                    <div className="product_continer_text_data_img">
-                      {item?.cattype?.map((itCat, indCat) => {
+                    <div className="product_continer_text_data_img product-type-brand-logos">
+                      {brandLogoItems.map((itCat, indCat) => {
                         const brandName =
                           language == "ar"
                             ? itCat?.brand?.nameAr
                             : itCat?.brand?.nameEn;
                         const catName =
                           language == "ar" ? itCat?.name_ar : itCat?.name_en;
-                        const imageSrc = getCategoryImage(
-                          item,
-                          itCat,
-                          language
-                        );
+                        const imageSrc = getBrandLogo(itCat);
 
                         if (!imageSrc || !itCat?.brand?.id || !itCat?.category_id) {
                           return null;

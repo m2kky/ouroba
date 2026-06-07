@@ -47,8 +47,8 @@ const TopHeader = ({ data, siteinfo = {} }) => {
       <HeaderIcons show={show} setShow={setShow} />
       <div className="imageHeader">
         <div className={`headerImage ${language == "ar" ? "active" : ""}`}>
-          <img src={headerOrnament} alt="" />
-          <img src={headerOrnament} alt="" />
+          <img src={headerOrnament} alt="" style={{ transform: "scaleX(-1)" }} />
+          <img src={headerOrnament} alt="" style={{ transform: "scaleX(-1)" }} />
         </div>
       </div>
     </div>

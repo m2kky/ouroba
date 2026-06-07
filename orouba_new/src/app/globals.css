@@ -144,6 +144,8 @@ body .headerImage img {
   height: 300px !important;
   object-fit: contain !important;
   display: block !important;
+  transform: scaleX(-1) !important;
+  transform-origin: center !important;
 }
 
 body .headerImage img:first-child {
@@ -166,6 +168,12 @@ body .headerImage img:nth-child(2) {
 
   body.enVersion .headerImage {
     right: -175px !important;
+  }
+}
+
+@media (min-width: 793px) {
+  body.enVersion .headerBackground .HeaderIcons {
+    right: 0 !important;
   }
 }
 
@@ -269,6 +277,27 @@ body .headerImage img:nth-child(2) {
   z-index: 0;
 }
 
+body .bannerDiv .swiper,
+body .bannerDiv .swiper-wrapper,
+body .bannerDiv .swiper-slide,
+body .bannerDiv .banner {
+  cursor: default !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  width: 100% !important;
+}
+
+body .bannerDiv .banner img,
+body .bannerDiv .banner video {
+  display: block !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  user-select: none !important;
+  -webkit-user-drag: none !important;
+  -webkit-user-select: none !important;
+  width: 100% !important;
+}
+
 /* Logo Loader Animations */
 @keyframes bounce-slow {
   0%, 100% { transform: translateY(0); }
@@ -353,5 +382,64 @@ div.fixed.inset-0.bg-black\/40 > div {
   
   .nav-link {
     @apply rounded-md px-3 py-2 text-foreground/50 ring-1 ring-transparent transition hover:text-foreground focus:outline-none focus-visible:ring-brand;
+  }
+}
+
+body.enVersion #products_types_info .product-type-row,
+body.arVersion #products_types_info .product-type-row {
+  direction: ltr !important;
+  flex-wrap: nowrap !important;
+  gap: 10px !important;
+  justify-content: center !important;
+}
+
+body.enVersion #products_types_info .product-type-row.product-type-row-image-left,
+body.arVersion #products_types_info .product-type-row.product-type-row-image-left {
+  flex-direction: row !important;
+}
+
+body.enVersion #products_types_info .product-type-row.product-type-row-image-right,
+body.arVersion #products_types_info .product-type-row.product-type-row-image-right {
+  flex-direction: row-reverse !important;
+}
+
+body.enVersion #products_types_info .product-type-row .product_continer_text,
+body.enVersion #products_types_info .product-type-row .product_continer_text_data {
+  direction: ltr !important;
+}
+
+body.arVersion #products_types_info .product-type-row .product_continer_text,
+body.arVersion #products_types_info .product-type-row .product_continer_text_data {
+  direction: rtl !important;
+}
+
+body #products_types_info .product-type-brand-logos {
+  align-items: center !important;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  gap: 16px !important;
+  justify-content: center !important;
+  margin-top: 18px !important;
+}
+
+body #products_types_info .product-type-brand-logos a {
+  align-items: center !important;
+  display: inline-flex !important;
+  justify-content: center !important;
+}
+
+body #products_types_info .product-type-brand-logos img {
+  height: 52px !important;
+  margin: 0 !important;
+  object-fit: contain !important;
+  width: 84px !important;
+}
+
+@media (max-width: 792px) {
+  body.enVersion #products_types_info .product-type-row,
+  body.arVersion #products_types_info .product-type-row {
+    flex-direction: column !important;
+    flex-wrap: wrap !important;
   }
 }
