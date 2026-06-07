@@ -461,7 +461,7 @@ body #products_types_info .product-type-brand-logos img {
   color: #002f59;
   margin: 0 0 18px;
   padding: 0;
-  list-style-position: inside !important;
+  list-style-position: outside !important;
 }
 
 .recipe_about .recipe-structured ul {
@@ -474,6 +474,19 @@ body #products_types_info .product-type-brand-logos img {
 
 body.arVersion .recipe_about .recipe-structured ol {
   list-style-type: arabic-indic !important;
+  padding-right: 20px;
+}
+
+body.enVersion .recipe_about .recipe-structured ol {
+  padding-left: 20px;
+}
+
+body.arVersion .recipe_about .recipe-structured ul {
+  padding-right: 20px;
+}
+
+body.enVersion .recipe_about .recipe-structured ul {
+  padding-left: 20px;
 }
 
 .recipe_about .recipe-structured li {
@@ -509,15 +522,25 @@ body.enVersion .recipe_about .right .recipe-structured {
 }
 
 .recipe_about .bottom .recipe-structured {
-  text-align: center;
+  text-align: start !important;
 }
 
-body.arVersion .recipe_about .bottom .recipe-structured {
-  direction: rtl;
+body.arVersion .recipe_about .bottom,
+body.arVersion .recipe_about .bottom h3,
+body.arVersion .recipe_about .bottom .recipe-structured,
+body.arVersion .recipe_about .bottom .recipe-structured li,
+body.arVersion .recipe_about .bottom .recipe-subheading {
+  direction: rtl !important;
+  text-align: right !important;
 }
 
-body.enVersion .recipe_about .bottom .recipe-structured {
-  direction: ltr;
+body.enVersion .recipe_about .bottom,
+body.enVersion .recipe_about .bottom h3,
+body.enVersion .recipe_about .bottom .recipe-structured,
+body.enVersion .recipe_about .bottom .recipe-structured li,
+body.enVersion .recipe_about .bottom .recipe-subheading {
+  direction: ltr !important;
+  text-align: left !important;
 }
 
 @media (max-width: 792px) {
