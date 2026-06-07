@@ -27,13 +27,47 @@ type DashboardSiteData = {
 };
 
 const DEFAULT_DASHBOARD_URL = "https://admin1.oroubafoods.com";
+const LOCAL_DASHBOARD_URLS = ["http://localhost:3015", "http://localhost:3000"];
+
+function uniqueUrls(urls: string[]) {
+  return Array.from(new Set(urls.map((url) => url.replace(/\/+$/, "")).filter(Boolean)));
+}
 
 export function getDashboardBaseUrl() {
-  return (
-    process.env.OROUBA_DASHBOARD_URL ||
-    process.env.NEXT_PUBLIC_OROUBA_DASHBOARD_URL ||
-    DEFAULT_DASHBOARD_URL
-  ).replace(/\/+$/, "");
+  const configuredUrl =
+    process.env.OROUBA_DASHBOARD_URL || process.env.NEXT_PUBLIC_OROUBA_DASHBOARD_URL;
+
+  if (configuredUrl) return configuredUrl.replace(/\/+$/, "");
+  if (process.env.NODE_ENV !== "production") return LOCAL_DASHBOARD_URLS[0];
+  return DEFAULT_DASHBOARD_URL;
+}
+
+function getDashboardBaseUrls() {
+  const configuredUrl =
+    process.env.OROUBA_DASHBOARD_URL || process.env.NEXT_PUBLIC_OROUBA_DASHBOARD_URL;
+
+  return uniqueUrls([
+    ...(configuredUrl ? [configuredUrl] : []),
+    ...(process.env.NODE_ENV !== "production" && !configuredUrl ? LOCAL_DASHBOARD_URLS : []),
+    DEFAULT_DASHBOARD_URL,
+  ]);
+}
+
+async function fetchDashboard(path: string) {
+  let lastError: unknown;
+
+  for (const baseUrl of getDashboardBaseUrls()) {
+    try {
+      const url = new URL(path, baseUrl);
+      const response = await fetch(url, { cache: "no-store" });
+      if (response.ok) return response;
+      lastError = new Error(`Dashboard request failed from ${baseUrl}: ${response.status}`);
+    } catch (error) {
+      lastError = error;
+    }
+  }
+
+  throw lastError instanceof Error ? lastError : new Error("Dashboard request failed");
 }
 
 function settingValue(value: DashboardSetting, locale: string) {
@@ -51,32 +85,21 @@ function settingValue(value: DashboardSetting, locale: string) {
 }
 
 export async function getDashboardSiteData(locale = "ar"): Promise<DashboardSiteData> {
-  const url = new URL("/api/site-data", getDashboardBaseUrl());
-  url.searchParams.set("locale", locale === "en" ? "en" : "ar");
-
-  const response = await fetch(url, {
-    cache: "no-store",
-  });
-
-  if (!response.ok) {
-    throw new Error(`Dashboard site-data request failed: ${response.status}`);
-  }
-
+  const response = await fetchDashboard(
+    `/api/site-data?locale=${locale === "en" ? "en" : "ar"}`
+  );
   const payload = await response.json();
   return payload?.data ?? payload ?? {};
 }
 
 export async function getDashboardProduct(productId: string) {
-  const response = await fetch(new URL(`/api/products/${productId}`, getDashboardBaseUrl()), {
-    cache: "no-store",
-  });
-
-  if (!response.ok) {
+  try {
+    const response = await fetchDashboard(`/api/products/${productId}`);
+    const payload = await response.json();
+    return payload?.data ?? payload ?? null;
+  } catch {
     return null;
   }
-
-  const payload = await response.json();
-  return payload?.data ?? payload ?? null;
 }
 
 export function dashboardSettingsToSiteinfo(

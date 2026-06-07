@@ -16,7 +16,7 @@ const Home = ({ homePageData }) => {
         <Brands data={homePageData?.brands} />
         <div className="boxShadowSection">
           <WhyUs data={homePageData?.siteinfo} />
-          <Standards data={homePageData?.standers} />
+          <Standards data={homePageData?.standers} siteinfo={homePageData?.siteinfo} />
         </div>
         <MapSection data={homePageData?.siteinfo} />
         <Recips data={homePageData?.lastRecipess} withArrows={true} />

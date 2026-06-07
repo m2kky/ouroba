@@ -1,34 +1,52 @@
 "use client";
-import React from 'react';
-import { arrowLeft } from '../../../assets/svgIcons';
-import UseGeneral from '../../../hooks/useGeneral';
-import { useRouter } from 'next/navigation';
-import { localizedPath } from '@/utils/routes';
-function WhyUs({data}) {
+import React from "react";
+import { arrowLeft } from "../../../assets/svgIcons";
+import UseGeneral from "../../../hooks/useGeneral";
+import { useRouter } from "next/navigation";
+import { localizedPath } from "@/utils/routes";
+import { HOME_TEXT_FALLBACKS, localizedText, splitHeading } from "@/utils/siteText";
+
+function WhyUs({ data }) {
   const { language } = UseGeneral();
   const router = useRouter();
+  const title = localizedText(
+    data,
+    language,
+    ["home_why_title", "why_orouba_title"],
+    HOME_TEXT_FALLBACKS.whyTitle
+  );
+  const subtitle = localizedText(
+    data,
+    language,
+    ["home_why_subtitle", "why_orouba_subtitle"],
+    HOME_TEXT_FALLBACKS.whySubtitle
+  );
+  const body = localizedText(data, language, ["home_why_text", "why_orouba", "why_choose"]);
+  const buttonText = localizedText(
+    data,
+    language,
+    ["home_why_button_text", "learn_more_text"],
+    HOME_TEXT_FALLBACKS.learnMore
+  );
+  const titleParts = splitHeading(title);
+
   return (
     <div className="hero_section d-flex justify-content-between align-items-center w-full rowDiv why_us_section">
-      <img src={data?.why_orouba_img} />
+      {data?.why_orouba_img ? <img src={data.why_orouba_img} alt="" /> : null}
       <div className="hero_texts d-flex flex-column align-item-start ">
         <h1>
-          {language == "ar" ? "لماذا" : "Why"}
-          <span>{language == "ar" ? "العروبة ؟" : "Orouba ?"}</span>
+          {titleParts.first}
+          {titleParts.rest ? <span>{titleParts.rest}</span> : null}
         </h1>
         <div className="hero_content">
-          <h5>
-            {language == "ar"
-              ? "اكتشف الفرق في كل قضمة:"
-              : "Discover the Difference in Every Bite:"}
-          </h5>
-          <p style={{padding:"10px"}}>
-            {language != "ar"
-              ? data?.why_orouba_en
-              : data?.why_orouba_ar}
-          </p>
+          {subtitle ? <h5>{subtitle}</h5> : null}
+          {body ? <p style={{ padding: "10px" }}>{body}</p> : null}
         </div>
-        <button className="hone_sections_button d-flex"  onClick={() => router.push(localizedPath("/about/whoWeAre", language))}>
-        <span>{language == "ar" ? "المزيد" : "Learn More"}</span>
+        <button
+          className="hone_sections_button d-flex"
+          onClick={() => router.push(localizedPath("/about/whoWeAre", language))}
+        >
+          <span>{buttonText}</span>
           <span style={{ rotate: language == "ar" ? "180deg" : "0" }}>
             {arrowLeft}
           </span>
@@ -39,4 +57,3 @@ function WhyUs({data}) {
 }
 
 export default WhyUs;
-

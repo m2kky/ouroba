@@ -4,44 +4,45 @@ import { arrowLeft } from "../../../assets/svgIcons";
 import SectionTitle from "../../../components/sectionTitle";
 import ContentLoader from "react-content-loader";
 import Standard from "../../../components/standards";
-import Link from 'next/link';
+import Link from "next/link";
 import UseGeneral from "../../../hooks/useGeneral";
-function Standards({ data }) {
-  const { language } = UseGeneral();
-  const [standards, setStandards] = useState([
-    {
-      image: "",
-      title: "",
-      desc: "All products are free from any preservatives or chemical substances",
-      desc_ar: "جميع المنتجات خالية من أي مواد حافظة أو كيماوية",
-    },
-    {
-      image: "",
-      title: "",
-      desc: "All products undergo a selection, analysis process to choose the best and high-quality fresh produce only",
-      desc_ar:
-        "جميع المنتجات تخضع لعملية اختيار وتحليل لاختيار أفضل المنتجات الطازجة وذات الجودة العالية فقط",
-    },
-    {
-      image: "",
-      title: "",
-      desc: "Deep –freeze compartment or freezer at (-18 C) 0 F",
-      desc_ar:
-        "المقصورة العميقة المجمدة أو الفريزر عند (-18 درجة مئوية) 0 فهرنهايت",
-    },
-  ]);
-  useEffect(() => {
-    setStandards(data);
-  }, []);
-  useEffect(()=>{
+import { localizedPath } from "@/utils/routes";
+import { HOME_TEXT_FALLBACKS, localizedText, splitHeading } from "@/utils/siteText";
 
-  },[])
+function Standards({ data, siteinfo }) {
+  const { language } = UseGeneral();
+  const title = localizedText(
+    siteinfo,
+    language,
+    ["home_standards_title", "exportStandardsTitle"],
+    HOME_TEXT_FALLBACKS.standardsTitle
+  );
+  const text = localizedText(
+    siteinfo,
+    language,
+    ["home_standards_text", "exportStandardsText", "stander"],
+    HOME_TEXT_FALLBACKS.standardsText
+  );
+  const linkText = localizedText(
+    siteinfo,
+    language,
+    ["home_standards_button_text", "learn_more_text"],
+    HOME_TEXT_FALLBACKS.learnMore
+  );
+  const titleParts = splitHeading(title);
+  const [standards, setStandards] = useState([]);
+
+  useEffect(() => {
+    setStandards(Array.isArray(data) ? data : []);
+  }, [data]);
+
   return (
     <div className="hero_section standard_section d-flex justify-content-between flex-column w-full homeStandard rowDiv">
       <SectionTitle
-        minColorWord={"Our"}
-        secondColorWordAr={"معاييرنا"}
-        secondColorWord={"Standards"}
+        minColorWord={titleParts.first}
+        minColorWordAr={titleParts.first}
+        secondColorWordAr={titleParts.rest}
+        secondColorWord={titleParts.rest}
         classessName={[
           "justify-content-center",
           "align-item-center",
@@ -53,21 +54,21 @@ function Standards({ data }) {
           "text-center",
         ]}
       />
-      <p
-        className="text-center"
-        style={{
-          color: "var(--sec-color)",
-          width: "80%",
-          margin: "auto",
-          fontSize: "23px",
-          fontWeight: "400",
-          textAlign:"center  !important"
-        }}
-      > 
-        {language == "ar"
-          ? "نلتزم في العروبة بأعلى معايير الجودة لضمان أن كل منتج نقدمه يلبي احتياجاتك ويتجاوز توقعاتك."
-          : "At Orouba, we hold ourselves to the highest standards to ensure that every product."}
-      </p>
+      {text ? (
+        <p
+          className="text-center"
+          style={{
+            color: "var(--sec-color)",
+            width: "80%",
+            margin: "auto",
+            fontSize: "23px",
+            fontWeight: "400",
+            textAlign: "center  !important",
+          }}
+        >
+          {text}
+        </p>
+      ) : null}
       <div className="standardsImages d-flex justify-content-between">
         {!standards ? (
           <ContentLoader />
@@ -81,14 +82,13 @@ function Standards({ data }) {
                   language == "ar" ? item?.description_ar : item?.description_en
                 }
                 icon={item?.image}
-                // backgroundInternal={true}
               />
             );
           })
         ) : null}
       </div>
-      <Link href="/export">
-        <span>{language == "ar" ? "المزيد" : "Learn More"}</span>
+      <Link href={localizedPath("/export", language)}>
+        <span>{linkText}</span>
         <span
           style={{
             rotate: language == "ar" ? "180deg" : "0",

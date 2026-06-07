@@ -1,35 +1,50 @@
 "use client";
-import React from 'react';
-import { arrowLeft } from '../../../assets/svgIcons';
-import UseGeneral from '../../../hooks/useGeneral';
-import { useRouter } from 'next/navigation';
-import { localizedPath } from '@/utils/routes';
+import React from "react";
+import { arrowLeft } from "../../../assets/svgIcons";
+import UseGeneral from "../../../hooks/useGeneral";
+import { useRouter } from "next/navigation";
+import { localizedPath } from "@/utils/routes";
+import { HOME_TEXT_FALLBACKS, localizedText, splitHeading } from "@/utils/siteText";
+
 function MapSection({ data }) {
   const { language } = UseGeneral();
   const router = useRouter();
+  const title = localizedText(
+    data,
+    language,
+    ["home_world_title", "world_title"],
+    HOME_TEXT_FALLBACKS.worldTitle
+  );
+  const text = localizedText(data, language, ["home_world_text", "world_text", "export_world"]);
+  const buttonText = localizedText(
+    data,
+    language,
+    ["home_world_button_text", "learn_more_text"],
+    HOME_TEXT_FALLBACKS.learnMore
+  );
+  const titleParts = splitHeading(title);
+
   return (
     <div className="hero_section map_section d-flex justify-content-between w-full rowDiv">
       <div className="hero_texts d-flex flex-column align-item-start ">
         <h1>
-          {language == "ar" ? "العروبة" : "Orouba"}
-          <span> {language == "ar" ? "حول العالم" : "World Map"}</span>
+          {titleParts.first}
+          {titleParts.rest ? <span> {titleParts.rest}</span> : null}
         </h1>
-        <p>
-          {language == "ar"
-            ? data?.world_text_ar
-            : `${data?.world_text}`}
-        </p>
-        <button className="hone_sections_button d-flex"  onClick={() => router.push(localizedPath("/export", language))}>
-          <span>{language == "ar" ? "المزيد" : "Learn More"}</span>
+        {text ? <p>{text}</p> : null}
+        <button
+          className="hone_sections_button d-flex"
+          onClick={() => router.push(localizedPath("/export", language))}
+        >
+          <span>{buttonText}</span>
           <span style={{ rotate: language == "ar" ? "180deg" : "0" }}>
             {arrowLeft}
           </span>
         </button>
       </div>
-      <img src={data?.map} />
+      {data?.map ? <img src={data.map} alt="" /> : null}
     </div>
   );
 }
 
 export default MapSection;
-
