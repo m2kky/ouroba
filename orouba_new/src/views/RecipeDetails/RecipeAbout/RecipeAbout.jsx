@@ -237,28 +237,24 @@ const getStepHtml = (item, isArabic) =>
 const RecipeAbout = ({ data }) => {
   const { language } = UseGeneral();
   const isArabic = language == "ar";
+  // Ingredients are now stored as a single HTML string in the first step
   const rawIngredients = Array.isArray(data?.steps)
     ? data.steps
     : Array.isArray(data?.step)
     ? data.step
     : [];
-  const ingredients = rawIngredients.filter((item) => getStepHtml(item, isArabic));
-  const hasIngredients = ingredients.length > 0;
-  const ingredientsHtml = ingredients
-    .map((item) => getStepHtml(item, isArabic))
-    .filter(Boolean)
-    .join("\n");
-  const descriptionHtml = isArabic
+  
+  const ingredientsHtml = rawIngredients.length > 0 
+    ? getStepHtml(rawIngredients[0], isArabic) 
+    : "";
+    
+  const hasIngredients = Boolean(ingredientsHtml && String(ingredientsHtml).trim());
+
+  // Instructions are stored in descriptionAr / descriptionEn
+  const instructionsHtml = isArabic
     ? first(data?.descriptionAr, data?.description_ar)
     : first(data?.descriptionEn, data?.description_en);
-  const descriptionSections = splitDescriptionSections(descriptionHtml, isArabic);
-  const fallbackIngredientsHtml = hasIngredients
-    ? ""
-    : descriptionSections.ingredientsHtml;
-  const hasFallbackIngredients = Boolean(
-    fallbackIngredientsHtml && String(fallbackIngredientsHtml).trim()
-  );
-  const instructionsHtml = descriptionSections.instructionsHtml;
+    
   const hasInstructions = Boolean(instructionsHtml && String(instructionsHtml).trim());
 
   return (
@@ -270,17 +266,17 @@ const RecipeAbout = ({ data }) => {
       </div>
 
       <div className="right">
-        {hasIngredients || hasFallbackIngredients ? (
-          <h3>
-            <b>{isArabic ? "المكونات" : "Ingredients"}</b>
-          </h3>
-        ) : null}
-
         {hasIngredients ? (
-          <StructuredContent html={ingredientsHtml} variant="ingredients" />
-        ) : (
-          <StructuredContent html={fallbackIngredientsHtml} variant="ingredients" />
-        )}
+          <>
+            <h3>
+              <b>{isArabic ? "المكونات" : "Ingredients"}</b>
+            </h3>
+            <div 
+              className="recipe-structured recipe-structured-ingredients" 
+              dangerouslySetInnerHTML={{ __html: ingredientsHtml }} 
+            />
+          </>
+        ) : null}
       </div>
 
       <div className={`bottom ${isArabic ? "active" : ""}`}>
@@ -289,7 +285,10 @@ const RecipeAbout = ({ data }) => {
             <h3>
               <b>{isArabic ? "طريقة التحضير" : "Instructions"}</b>
             </h3>
-            <StructuredContent html={instructionsHtml} variant="instructions" />
+            <div 
+              className="recipe-structured recipe-structured-instructions" 
+              dangerouslySetInnerHTML={{ __html: instructionsHtml }} 
+            />
           </>
         ) : null}
       </div>
