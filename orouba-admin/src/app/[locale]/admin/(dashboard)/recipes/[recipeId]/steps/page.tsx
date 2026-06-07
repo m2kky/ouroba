@@ -3,16 +3,10 @@
 export const dynamic = "force-dynamic";
 
 import { useState, useEffect } from "react";
-import type { ClipboardEvent } from "react";
-import { PlusCircle, Trash2, ArrowRight, Save } from "lucide-react";
+import { ArrowRight, Save } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { useAdminTranslation } from "@/components/admin/AdminTranslationProvider";
-
-interface RecipeStep {
-  id?: string;
-  stepAr: string;
-  stepEn: string;
-}
+import RichTextEditor from "@/components/admin/RichTextEditor";
 
 export default function RecipeStepsPage() {
   const { t, dict } = useAdminTranslation();
@@ -20,7 +14,9 @@ export default function RecipeStepsPage() {
   const router = useRouter();
   const recipeId = params?.recipeId as string;
   
-  const [steps, setSteps] = useState<RecipeStep[]>([]);
+  const [stepAr, setStepAr] = useState("");
+  const [stepEn, setStepEn] = useState("");
+  
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -35,7 +31,15 @@ export default function RecipeStepsPage() {
     try {
       const res = await fetch(`/api/admin/recipes/${recipeId}/steps`);
       if (res.ok) {
-        setSteps(await res.json());
+        const data = await res.json();
+        // The API returns an array. We expect only 1 item containing the rich HTML block.
+        if (data && data.length > 0) {
+          setStepAr(data[0].stepAr || "");
+          setStepEn(data[0].stepEn || "");
+        } else {
+          setStepAr("");
+          setStepEn("");
+        }
       }
     } catch (error) {
       console.error("Failed to fetch steps", error);
@@ -47,10 +51,15 @@ export default function RecipeStepsPage() {
   const handleSave = async () => {
     setIsSaving(true);
     try {
+      // Send a single step object containing the HTML
+      const payload = {
+        steps: [{ stepAr, stepEn }]
+      };
+      
       const res = await fetch(`/api/admin/recipes/${recipeId}/steps`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ steps }),
+        body: JSON.stringify(payload),
       });
 
       if (res.ok) {
@@ -68,44 +77,6 @@ export default function RecipeStepsPage() {
     }
   };
 
-  const addStep = () => {
-    setSteps([...steps, { stepAr: "", stepEn: "" }]);
-  };
-
-  const updateStep = (index: number, field: keyof RecipeStep, value: string) => {
-    const newSteps = [...steps];
-    newSteps[index] = { ...newSteps[index], [field]: value };
-    setSteps(newSteps);
-  };
-
-  const handleStepPaste = (
-    event: ClipboardEvent<HTMLTextAreaElement>,
-    index: number,
-    field: keyof RecipeStep
-  ) => {
-    const text = event.clipboardData.getData("text");
-    const lines = text
-      .split(/\r?\n/)
-      .map((line) => line.trim())
-      .filter(Boolean);
-
-    if (lines.length <= 1) return;
-
-    event.preventDefault();
-
-    const newSteps = [...steps];
-    lines.forEach((line, offset) => {
-      const stepIndex = index + offset;
-      const currentStep = newSteps[stepIndex] || { stepAr: "", stepEn: "" };
-      newSteps[stepIndex] = { ...currentStep, [field]: line };
-    });
-    setSteps(newSteps);
-  };
-
-  const removeStep = (index: number) => {
-    setSteps(steps.filter((_, i) => i !== index));
-  };
-
   return (
     <div className="space-y-6">
       <button 
@@ -119,10 +90,7 @@ export default function RecipeStepsPage() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">{t("مكونات الوصفة", "Recipe Ingredients")}</h1>
-          <p className="text-gray-500 mt-1">{t("إدارة مكونات الوصفة التي تظهر في صفحة تفاصيل الوصفة", "Manage recipe ingredients shown on the recipe details page")}</p>
-          <p className="text-xs text-gray-400 mt-1">
-            {t("لإضافة عنوان فرعي اكتبه في سطر منفصل منتهي بـ : مثل مقادير التقلية:", "To add a subheading, write it on its own line ending with : like Frying ingredients:")}
-          </p>
+          <p className="text-gray-500 mt-1">{t("قم بإدخال وتنسيق مكونات الوصفة (عربي وإنجليزي)", "Enter and format recipe ingredients (Arabic and English)")}</p>
         </div>
         <button
           onClick={handleSave}
@@ -139,69 +107,32 @@ export default function RecipeStepsPage() {
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orouba-blue"></div>
         </div>
       ) : (
-        <div className="space-y-4 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-          <div className="flex justify-between items-center border-b pb-4">
-            <h4 className="text-lg font-bold text-gray-800">{t("المكونات الحالية", "Current Ingredients")}</h4>
-            <button 
-              type="button" 
-              onClick={addStep} 
-              className="text-sm flex items-center gap-1 text-orouba-blue hover:text-blue-700 bg-blue-50 px-4 py-2 rounded-xl font-bold transition-colors"
-            >
-              <PlusCircle className="w-4 h-4" /> 
-              {t("إضافة مكون", "Add Ingredient")}
-            </button>
+        <div className="space-y-8 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="space-y-2">
+              <label className="block text-sm font-bold text-gray-700">{t("المكونات (عربي)", "Ingredients (Arabic)")}</label>
+              <div className="border border-gray-200 rounded-xl overflow-hidden">
+                <RichTextEditor
+                  value={stepAr}
+                  onChange={setStepAr}
+                  dir="rtl"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-sm font-bold text-gray-700">{t("المكونات (إنجليزي)", "Ingredients (English)")}</label>
+              <div className="border border-gray-200 rounded-xl overflow-hidden">
+                <RichTextEditor
+                  value={stepEn}
+                  onChange={setStepEn}
+                  dir="ltr"
+                />
+              </div>
+            </div>
           </div>
 
-          {steps.length === 0 ? (
-            <div className="text-center py-10 text-gray-500">
-              {t("لا توجد مكونات حالياً. انقر على إضافة مكون للبدء.", "No ingredients found. Click Add Ingredient to start.")}
-            </div>
-          ) : (
-            <div className="space-y-4">
-              {steps.map((step, idx) => (
-                <div key={idx} className="flex gap-4 items-start bg-gray-50 p-4 rounded-xl border border-gray-100 hover:border-gray-300 transition-colors">
-                  <div className="bg-orouba-blue text-white w-10 h-10 rounded-full flex items-center justify-center font-bold shrink-0 shadow-sm mt-2">
-                    {idx + 1}
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1">
-                    <div>
-                      <label className="block text-xs font-semibold text-gray-500 mb-1">{t("المكون (عربي)", "Ingredient (Ar)")}</label>
-                      <textarea 
-                        placeholder={t("مثال: ٢/١ كيس بسلة بالجزر مجمد أو مقادير التقلية:", "Example: 1/2 bag frozen peas and carrots or Frying ingredients:")}
-                        value={step.stepAr} 
-                        onChange={(e) => updateStep(idx, "stepAr", e.target.value)} 
-                        onPaste={(e) => handleStepPaste(e, idx, "stepAr")}
-                        className="w-full px-4 py-3 border rounded-xl text-sm outline-none focus:ring-2 focus:ring-orouba-blue/20 resize-none" 
-                        rows={3} 
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-semibold text-gray-500 mb-1">{t("المكون (إنجليزي)", "Ingredient (En)")}</label>
-                      <textarea 
-                        placeholder="Example: 1/2 bag frozen peas and carrots or Frying ingredients:"
-                        value={step.stepEn} 
-                        dir="ltr" 
-                        onChange={(e) => updateStep(idx, "stepEn", e.target.value)} 
-                        onPaste={(e) => handleStepPaste(e, idx, "stepEn")}
-                        className="w-full px-4 py-3 border rounded-xl text-sm outline-none focus:ring-2 focus:ring-orouba-blue/20 resize-none" 
-                        rows={3} 
-                      />
-                    </div>
-                  </div>
-                  
-                  <button 
-                    type="button" 
-                    onClick={() => removeStep(idx)} 
-                    className="p-3 text-red-500 hover:bg-red-50 hover:text-red-600 rounded-xl transition-colors mt-2"
-                    title={dict.common.delete}
-                  >
-                    <Trash2 className="w-5 h-5" />
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       )}
     </div>

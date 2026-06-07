@@ -6,6 +6,7 @@ import DataTable, { Column } from "@/components/admin/DataTable";
 import { Trash2, Edit, Plus, Image as ImageIcon, PlusCircle, X, Eye, EyeOff } from "lucide-react";
 import Image from "next/image";
 import { useAdminTranslation } from "@/components/admin/AdminTranslationProvider";
+import RichTextEditor from "@/components/admin/RichTextEditor";
 
 interface Food {
   id: string;
@@ -70,6 +71,9 @@ export default function RecipesPage() {
   const [selectedFoodIds, setSelectedFoodIds] = useState<string[]>([]);
   const [selectedProductIds, setSelectedProductIds] = useState<string[]>([]);
   const [deletedImageIds, setDeletedImageIds] = useState<string[]>([]);
+  
+  const [descriptionAr, setDescriptionAr] = useState("");
+  const [descriptionEn, setDescriptionEn] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -128,6 +132,10 @@ export default function RecipesPage() {
     // Add JSON stringified arrays
     formData.append("foods", JSON.stringify(selectedFoodIds));
     formData.append("recommendedWith", JSON.stringify(selectedProductIds));
+    
+    // Add RichTextEditor states
+    formData.set("descriptionAr", descriptionAr);
+    formData.set("descriptionEn", descriptionEn);
 
     deletedImageIds.forEach(imgId => {
       formData.append("deletedImageIds", imgId);
@@ -160,9 +168,13 @@ export default function RecipesPage() {
     if (recipe) {
       setSelectedFoodIds(recipe.foods.map(f => f.food.id));
       setSelectedProductIds(recipe.recommendedWith.map(rp => rp.product.id));
+      setDescriptionAr(recipe.descriptionAr || "");
+      setDescriptionEn(recipe.descriptionEn || "");
     } else {
       setSelectedFoodIds([]);
       setSelectedProductIds([]);
+      setDescriptionAr("");
+      setDescriptionEn("");
     }
     setDeletedImageIds([]);
     setIsModalOpen(true);
@@ -338,30 +350,19 @@ export default function RecipesPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1">{t("طريقة التحضير (عربي)", "Preparation method (Arabic)")}</label>
-                    <textarea
-                      name="descriptionAr"
-                      defaultValue={editingRecipe?.descriptionAr}
-                      placeholder="اكتب كل خطوة في سطر منفصل. لإضافة عنوان فرعي اكتبه في سطر منفصل منتهي بـ : مثل طريقة التقلية:"
-                      className="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none resize-none"
-                      rows={7}
+                    <RichTextEditor
+                      value={descriptionAr}
+                      onChange={setDescriptionAr}
+                      dir="rtl"
                     />
-                    <p className="text-xs text-gray-400 mt-1">
-                      {t("لا تكتب أرقام الخطوات؛ الموقع سيرقمها تلقائياً.", "Do not type step numbers; the website numbers them automatically.")}
-                    </p>
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1">{t("طريقة التحضير (إنجليزي)", "Preparation method (English)")}</label>
-                    <textarea
-                      name="descriptionEn"
-                      defaultValue={editingRecipe?.descriptionEn}
+                    <RichTextEditor
+                      value={descriptionEn}
+                      onChange={setDescriptionEn}
                       dir="ltr"
-                      placeholder="Write one step per line. To add a subheading, write it on its own line ending with : like Frying method:"
-                      className="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none resize-none"
-                      rows={7}
                     />
-                    <p className="text-xs text-gray-400 mt-1">
-                      {t("لا تكتب أرقام الخطوات؛ الموقع سيرقمها تلقائياً.", "Do not type step numbers; the website numbers them automatically.")}
-                    </p>
                   </div>
                 </div>
 
