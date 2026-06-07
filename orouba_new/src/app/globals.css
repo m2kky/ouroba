@@ -451,6 +451,75 @@ body #products_types_info .product-type-brand-logos img {
   width: 84px !important;
 }
 
+.recipe_about .recipe-structured {
+  color: #002f59;
+  width: 100%;
+}
+
+.recipe_about .recipe-structured ul,
+.recipe_about .recipe-structured ol {
+  color: #002f59;
+  margin: 0 0 18px;
+  padding: 0;
+  list-style-position: inside !important;
+}
+
+.recipe_about .recipe-structured ul {
+  list-style-type: disc !important;
+}
+
+.recipe_about .recipe-structured ol {
+  list-style-type: decimal !important;
+}
+
+body.arVersion .recipe_about .recipe-structured ol {
+  list-style-type: arabic-indic !important;
+}
+
+.recipe_about .recipe-structured li {
+  color: #002f59;
+  display: list-item !important;
+  font-size: inherit;
+  line-height: 1.9;
+  margin: 0 0 8px;
+  padding: 0;
+}
+
+.recipe_about .recipe-structured li::marker {
+  color: #002f59;
+  font-weight: 800;
+}
+
+.recipe_about .recipe-subheading {
+  color: #002f59;
+  font-size: clamp(18px, 1.45vw, 24px);
+  font-weight: 800;
+  line-height: 1.6;
+  margin: 18px 0 10px;
+}
+
+body.arVersion .recipe_about .right .recipe-structured {
+  direction: rtl;
+  text-align: right;
+}
+
+body.enVersion .recipe_about .right .recipe-structured {
+  direction: ltr;
+  text-align: left;
+}
+
+.recipe_about .bottom .recipe-structured {
+  text-align: center;
+}
+
+body.arVersion .recipe_about .bottom .recipe-structured {
+  direction: rtl;
+}
+
+body.enVersion .recipe_about .bottom .recipe-structured {
+  direction: ltr;
+}
+
 @media (max-width: 792px) {
   body.enVersion #products_types_info .product-type-row,
   body.arVersion #products_types_info .product-type-row {

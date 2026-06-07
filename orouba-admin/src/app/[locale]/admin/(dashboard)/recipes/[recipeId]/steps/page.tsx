@@ -120,6 +120,9 @@ export default function RecipeStepsPage() {
         <div>
           <h1 className="text-2xl font-bold text-gray-900">{t("مكونات الوصفة", "Recipe Ingredients")}</h1>
           <p className="text-gray-500 mt-1">{t("إدارة مكونات الوصفة التي تظهر في صفحة تفاصيل الوصفة", "Manage recipe ingredients shown on the recipe details page")}</p>
+          <p className="text-xs text-gray-400 mt-1">
+            {t("لإضافة عنوان فرعي اكتبه في سطر منفصل منتهي بـ : مثل مقادير التقلية:", "To add a subheading, write it on its own line ending with : like Frying ingredients:")}
+          </p>
         </div>
         <button
           onClick={handleSave}
@@ -165,7 +168,7 @@ export default function RecipeStepsPage() {
                     <div>
                       <label className="block text-xs font-semibold text-gray-500 mb-1">{t("المكون (عربي)", "Ingredient (Ar)")}</label>
                       <textarea 
-                        placeholder={t("مثال: ٢/١ كيس بسلة بالجزر مجمد", "Example: 1/2 bag frozen peas and carrots")} 
+                        placeholder={t("مثال: ٢/١ كيس بسلة بالجزر مجمد أو مقادير التقلية:", "Example: 1/2 bag frozen peas and carrots or Frying ingredients:")}
                         value={step.stepAr} 
                         onChange={(e) => updateStep(idx, "stepAr", e.target.value)} 
                         onPaste={(e) => handleStepPaste(e, idx, "stepAr")}
@@ -176,7 +179,7 @@ export default function RecipeStepsPage() {
                     <div>
                       <label className="block text-xs font-semibold text-gray-500 mb-1">{t("المكون (إنجليزي)", "Ingredient (En)")}</label>
                       <textarea 
-                        placeholder="Example: 1/2 bag frozen peas and carrots" 
+                        placeholder="Example: 1/2 bag frozen peas and carrots or Frying ingredients:"
                         value={step.stepEn} 
                         dir="ltr" 
                         onChange={(e) => updateStep(idx, "stepEn", e.target.value)} 

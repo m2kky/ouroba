@@ -1,4 +1,3 @@
-import React from "react";
 import UseGeneral from "../../../hooks/useGeneral";
 
 const first = (...values) =>
@@ -47,20 +46,109 @@ const textToHtml = (text) => {
   return `<p>${escapeHtml(cleanText).replace(/\n+/g, "<br />")}</p>`;
 };
 
-const hasHtmlTags = (value) => /<\/?[a-z][\s\S]*>/i.test(String(value || ""));
+const listMarkerRegex =
+  /^\s*(?:[-*•‣▪]\s+|[0-9٠-٩۰-۹]+(?:[\).،]|[-–—])\s*)/;
+const headingMarkerRegex = /^\s*#{1,6}\s*/;
+const headingSuffixRegex = /[：:]\s*$/;
+const knownSubheadingRegex =
+  /^(?:مقادير|مكونات|التقلية|طريقة التقلية|الحشو|الصوص|الصوصات|التتبيلة|للتزيين)(?:\s|$)|^(?:for\s+|frying|sauce|dressing|marinade|filling|topping|garnish)(?:\s|$)/i;
 
-const HtmlBlock = ({ html }) => {
+const stripListMarker = (line) => String(line || "").replace(listMarkerRegex, "").trim();
+
+const stripHeadingMarker = (line) =>
+  String(line || "")
+    .replace(headingMarkerRegex, "")
+    .replace(headingSuffixRegex, "")
+    .trim();
+
+const isSubheadingLine = (line) => {
+  const value = String(line || "").trim();
+  const cleanValue = stripHeadingMarker(value);
+
+  if (!cleanValue) return false;
+  if (headingMarkerRegex.test(value) || headingSuffixRegex.test(value)) return true;
+  if (listMarkerRegex.test(value)) return false;
+
+  return knownSubheadingRegex.test(cleanValue);
+};
+
+const parseStructuredContent = (html) => {
+  const lines = htmlToText(html)
+    .split(/\n+/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+  const groups = [];
+  let currentItems = [];
+
+  const pushItems = () => {
+    if (currentItems.length) {
+      groups.push({ type: "items", items: currentItems });
+      currentItems = [];
+    }
+  };
+
+  lines.forEach((line) => {
+    if (isSubheadingLine(line)) {
+      pushItems();
+      groups.push({ type: "heading", text: stripHeadingMarker(line) });
+      return;
+    }
+
+    const itemText = stripListMarker(line);
+    if (itemText) {
+      currentItems.push(itemText);
+    }
+  });
+
+  pushItems();
+  return groups;
+};
+
+const StructuredContent = ({ html, variant }) => {
   if (!html || !String(html).trim()) {
     return null;
   }
 
-  const normalizedHtml = hasHtmlTags(html) ? html : textToHtml(html);
+  const groups = parseStructuredContent(html);
+  if (!groups.length) {
+    return null;
+  }
+
+  let orderedStart = 1;
 
   return (
-    <div
-      className="recipe-rich-text"
-      dangerouslySetInnerHTML={{ __html: normalizedHtml }}
-    />
+    <div className={`recipe-structured recipe-structured-${variant}`}>
+      {groups.map((group, index) => {
+        if (group.type === "heading") {
+          return (
+            <h4 className="recipe-subheading" key={`heading-${index}`}>
+              {group.text}
+            </h4>
+          );
+        }
+
+        if (variant === "instructions") {
+          const start = orderedStart;
+          orderedStart += group.items.length;
+
+          return (
+            <ol className="recipe-list recipe-list-instructions" start={start} key={`list-${index}`}>
+              {group.items.map((item, itemIndex) => (
+                <li key={`${index}-${itemIndex}`}>{item}</li>
+              ))}
+            </ol>
+          );
+        }
+
+        return (
+          <ul className="recipe-list recipe-list-ingredients" key={`list-${index}`}>
+            {group.items.map((item, itemIndex) => (
+              <li key={`${index}-${itemIndex}`}>{item}</li>
+            ))}
+          </ul>
+        );
+      })}
+    </div>
   );
 };
 
@@ -156,6 +244,10 @@ const RecipeAbout = ({ data }) => {
     : [];
   const ingredients = rawIngredients.filter((item) => getStepHtml(item, isArabic));
   const hasIngredients = ingredients.length > 0;
+  const ingredientsHtml = ingredients
+    .map((item) => getStepHtml(item, isArabic))
+    .filter(Boolean)
+    .join("\n");
   const descriptionHtml = isArabic
     ? first(data?.descriptionAr, data?.description_ar)
     : first(data?.descriptionEn, data?.description_en);
@@ -185,13 +277,9 @@ const RecipeAbout = ({ data }) => {
         ) : null}
 
         {hasIngredients ? (
-          ingredients.map((item, index) => (
-            <React.Fragment key={item.id || index}>
-              <HtmlBlock html={getStepHtml(item, isArabic)} />
-            </React.Fragment>
-          ))
+          <StructuredContent html={ingredientsHtml} variant="ingredients" />
         ) : (
-          <HtmlBlock html={fallbackIngredientsHtml} />
+          <StructuredContent html={fallbackIngredientsHtml} variant="ingredients" />
         )}
       </div>
 
@@ -201,7 +289,7 @@ const RecipeAbout = ({ data }) => {
             <h3>
               <b>{isArabic ? "طريقة التحضير" : "Instructions"}</b>
             </h3>
-            <HtmlBlock html={instructionsHtml} />
+            <StructuredContent html={instructionsHtml} variant="instructions" />
           </>
         ) : null}
       </div>

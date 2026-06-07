@@ -341,10 +341,13 @@ export default function RecipesPage() {
                     <textarea
                       name="descriptionAr"
                       defaultValue={editingRecipe?.descriptionAr}
-                      placeholder="اكتب طريقة التحضير هنا، ويمكنك استخدام كل خطوة في سطر منفصل."
+                      placeholder="اكتب كل خطوة في سطر منفصل. لإضافة عنوان فرعي اكتبه في سطر منفصل منتهي بـ : مثل طريقة التقلية:"
                       className="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none resize-none"
                       rows={7}
                     />
+                    <p className="text-xs text-gray-400 mt-1">
+                      {t("لا تكتب أرقام الخطوات؛ الموقع سيرقمها تلقائياً.", "Do not type step numbers; the website numbers them automatically.")}
+                    </p>
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1">{t("طريقة التحضير (إنجليزي)", "Preparation method (English)")}</label>
@@ -352,10 +355,13 @@ export default function RecipesPage() {
                       name="descriptionEn"
                       defaultValue={editingRecipe?.descriptionEn}
                       dir="ltr"
-                      placeholder="Write the preparation method here. You can use one step per line."
+                      placeholder="Write one step per line. To add a subheading, write it on its own line ending with : like Frying method:"
                       className="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none resize-none"
                       rows={7}
                     />
+                    <p className="text-xs text-gray-400 mt-1">
+                      {t("لا تكتب أرقام الخطوات؛ الموقع سيرقمها تلقائياً.", "Do not type step numbers; the website numbers them automatically.")}
+                    </p>
                   </div>
                 </div>
 
