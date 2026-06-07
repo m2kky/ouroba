@@ -1,19 +1,6 @@
 import React from "react";
 import UseGeneral from "../../../hooks/useGeneral";
 
-const HtmlBlock = ({ html }) => {
-  if (!html || !String(html).trim()) {
-    return null;
-  }
-
-  return (
-    <div
-      className="recipe-rich-text"
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
-  );
-};
-
 const escapeHtml = (value) =>
   String(value)
     .replace(/&/g, "&amp;")
@@ -57,10 +44,27 @@ const textToHtml = (text) => {
   return `<p>${escapeHtml(cleanText).replace(/\n+/g, "<br />")}</p>`;
 };
 
+const hasHtmlTags = (value) => /<\/?[a-z][\s\S]*>/i.test(String(value || ""));
+
+const HtmlBlock = ({ html }) => {
+  if (!html || !String(html).trim()) {
+    return null;
+  }
+
+  const normalizedHtml = hasHtmlTags(html) ? html : textToHtml(html);
+
+  return (
+    <div
+      className="recipe-rich-text"
+      dangerouslySetInnerHTML={{ __html: normalizedHtml }}
+    />
+  );
+};
+
 const labelPatterns = {
   ar: {
-    ingredients: ["المكونات", "مكونات"],
-    instructions: ["طريقة التحضير", "الخطوات", "طريقة العمل", "الطريقة"],
+    ingredients: ["المكونات", "مكونات", "المقادير", "مقادير"],
+    instructions: ["طريقة التحضير", "التحضير", "الخطوات", "طريقة العمل", "الطريقة"],
   },
   en: {
     ingredients: ["ingredients"],
@@ -73,7 +77,10 @@ const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const findLabel = (text, labels) => {
   const matches = labels
     .map((label) => {
-      const regex = new RegExp(`(^|\\n|\\s)${escapeRegex(label)}\\s*:?`, "i");
+      const regex = new RegExp(
+        `(^|\\n|\\s)(?:[#*\\-–—]+\\s*)?${escapeRegex(label)}\\s*:?`,
+        "i"
+      );
       const match = regex.exec(text);
       if (!match) {
         return null;

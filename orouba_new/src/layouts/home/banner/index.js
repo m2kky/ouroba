@@ -57,8 +57,30 @@ const Banner = ({ data }) => {
   const { language } = UseGeneral();
   const bannerRootRef = useRef(null);
   const visibleBanners = useMemo(
-    () => (Array.isArray(data) ? data.filter(hasBannerMedia) : []),
-    [data]
+    () => {
+      if (!Array.isArray(data)) return [];
+      const filtered = data.filter((item) => {
+        if (!hasBannerMedia(item)) return false;
+
+        const isEnglish = language === "en";
+
+        // Check if the item explicitly has media for EN vs AR (reversed based on old backend data structure)
+        const hasEnMedia = !!first(item?.image, item?.small_img, item?.video_link, item?.small_video);
+        const hasArMedia = !!first(item?.image_en, item?.small_img_en, item?.video_link_en, item?.small_video_en);
+
+        // If it's explicitly uploaded for one language, don't show it in the other.
+        if (isEnglish && hasEnMedia && !hasArMedia) return true;
+        if (!isEnglish && hasArMedia && !hasEnMedia) return true;
+
+        // If it has both, we can show it in both languages.
+        if (hasEnMedia && hasArMedia) return true;
+        
+        // If it has NO media for the current language, don't show it
+        return false;
+      });
+      return filtered.length > 0 ? [filtered[0]] : [];
+    },
+    [data, language]
   );
   const bannerCount = visibleBanners.length;
   const [isSmaller, setIsSmaller] = useState(false);

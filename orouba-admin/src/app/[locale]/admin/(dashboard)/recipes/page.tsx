@@ -254,8 +254,8 @@ export default function RecipesPage() {
         descriptionEn="Manage recipes, preparation instructions, and recommended Orouba products."
         prereq1Ar="⚠️ تنبيه هام: يجب إضافة (المكونات Foods) و (المنتجات Products) أولاً لتتمكن من ربط الوصفة بهم." 
         prereq1En="⚠️ Required first: Ingredient items (Foods) and Products must be created first."
-        prereq2Ar="بعد حفظ الوصفة، يمكنك استخدام الأزرار الجانبية لإدارة الخصائص (Props) وخطوات التحضير (Steps)." 
-        prereq2En="Use side-action buttons to configure individual Steps and Properties."
+        prereq2Ar="بعد حفظ الوصفة، يمكنك استخدام الأزرار الجانبية لإدارة الخصائص (Props) والمكونات." 
+        prereq2En="Use side-action buttons to configure Properties and Ingredients."
       />
 
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
@@ -295,7 +295,7 @@ export default function RecipesPage() {
                 {t("الخصائص", "Props")}
               </a>
               <a href={`/admin/recipes/${item.id}/steps`} className="p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg text-xs font-bold flex items-center gap-1 transition-colors">
-                {t("الخطوات", "Steps")}
+                {t("المكونات", "Ingredients")}
               </a>
               <button onClick={() => openModal(item)} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg" title={dict.common.edit}>
                 <Edit className="w-4 h-4" />
@@ -337,12 +337,25 @@ export default function RecipesPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">{dict.common.descriptionAr}</label>
-                    <textarea name="descriptionAr" defaultValue={editingRecipe?.descriptionAr} className="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none resize-none" rows={3} />
+                    <label className="block text-sm font-semibold text-gray-700 mb-1">{t("طريقة التحضير (عربي)", "Preparation method (Arabic)")}</label>
+                    <textarea
+                      name="descriptionAr"
+                      defaultValue={editingRecipe?.descriptionAr}
+                      placeholder="اكتب طريقة التحضير هنا، ويمكنك استخدام كل خطوة في سطر منفصل."
+                      className="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none resize-none"
+                      rows={7}
+                    />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">{dict.common.descriptionEn}</label>
-                    <textarea name="descriptionEn" defaultValue={editingRecipe?.descriptionEn} dir="ltr" className="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none resize-none" rows={3} />
+                    <label className="block text-sm font-semibold text-gray-700 mb-1">{t("طريقة التحضير (إنجليزي)", "Preparation method (English)")}</label>
+                    <textarea
+                      name="descriptionEn"
+                      defaultValue={editingRecipe?.descriptionEn}
+                      dir="ltr"
+                      placeholder="Write the preparation method here. You can use one step per line."
+                      className="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none resize-none"
+                      rows={7}
+                    />
                   </div>
                 </div>
 

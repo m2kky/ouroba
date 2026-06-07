@@ -53,7 +53,7 @@ export default function RecipeStepsPage() {
       });
 
       if (res.ok) {
-        alert(dict.common.saveSuccess || t("تم الحفظ بنجاح", "Saved successfully"));
+        alert(t("تم الحفظ بنجاح", "Saved successfully"));
         fetchData();
       } else {
         const error = await res.json();
@@ -93,8 +93,8 @@ export default function RecipeStepsPage() {
 
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">{t("خطوات التحضير", "Preparation Steps")}</h1>
-          <p className="text-gray-500 mt-1">{t("إدارة خطوات التحضير الخاصة بالوصفة", "Manage preparation steps for the recipe")}</p>
+          <h1 className="text-2xl font-bold text-gray-900">{t("مكونات الوصفة", "Recipe Ingredients")}</h1>
+          <p className="text-gray-500 mt-1">{t("إدارة مكونات الوصفة التي تظهر في صفحة تفاصيل الوصفة", "Manage recipe ingredients shown on the recipe details page")}</p>
         </div>
         <button
           onClick={handleSave}
@@ -113,20 +113,20 @@ export default function RecipeStepsPage() {
       ) : (
         <div className="space-y-4 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
           <div className="flex justify-between items-center border-b pb-4">
-            <h4 className="text-lg font-bold text-gray-800">{t("الخطوات الحالية", "Current Steps")}</h4>
+            <h4 className="text-lg font-bold text-gray-800">{t("المكونات الحالية", "Current Ingredients")}</h4>
             <button 
               type="button" 
               onClick={addStep} 
               className="text-sm flex items-center gap-1 text-orouba-blue hover:text-blue-700 bg-blue-50 px-4 py-2 rounded-xl font-bold transition-colors"
             >
               <PlusCircle className="w-4 h-4" /> 
-              {t("إضافة خطوة", "Add Step")}
+              {t("إضافة مكون", "Add Ingredient")}
             </button>
           </div>
 
           {steps.length === 0 ? (
             <div className="text-center py-10 text-gray-500">
-              {t("لا توجد خطوات حالياً. انقر على إضافة خطوة للبدء.", "No steps found. Click Add Step to start.")}
+              {t("لا توجد مكونات حالياً. انقر على إضافة مكون للبدء.", "No ingredients found. Click Add Ingredient to start.")}
             </div>
           ) : (
             <div className="space-y-4">
@@ -138,9 +138,9 @@ export default function RecipeStepsPage() {
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1">
                     <div>
-                      <label className="block text-xs font-semibold text-gray-500 mb-1">{t("وصف الخطوة (عربي)", "Step description (Ar)")}</label>
+                      <label className="block text-xs font-semibold text-gray-500 mb-1">{t("المكون (عربي)", "Ingredient (Ar)")}</label>
                       <textarea 
-                        placeholder={t("وصف الخطوة (عربي)", "Step description (Ar)")} 
+                        placeholder={t("مثال: ٢/١ كيس بسلة بالجزر مجمد", "Example: 1/2 bag frozen peas and carrots")} 
                         value={step.stepAr} 
                         onChange={(e) => updateStep(idx, "stepAr", e.target.value)} 
                         className="w-full px-4 py-3 border rounded-xl text-sm outline-none focus:ring-2 focus:ring-orouba-blue/20 resize-none" 
@@ -148,9 +148,9 @@ export default function RecipeStepsPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-gray-500 mb-1">{t("وصف الخطوة (إنجليزي)", "Step description (En)")}</label>
+                      <label className="block text-xs font-semibold text-gray-500 mb-1">{t("المكون (إنجليزي)", "Ingredient (En)")}</label>
                       <textarea 
-                        placeholder="Step description (En)" 
+                        placeholder="Example: 1/2 bag frozen peas and carrots" 
                         value={step.stepEn} 
                         dir="ltr" 
                         onChange={(e) => updateStep(idx, "stepEn", e.target.value)} 

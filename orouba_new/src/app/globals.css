@@ -272,6 +272,7 @@ body .headerImage img:nth-child(2) {
 
 .bannerDiv,
 .banner,
+.banner img,
 .banner video {
   position: relative;
   z-index: 0;
@@ -290,12 +291,26 @@ body .bannerDiv .banner {
 body .bannerDiv .banner img,
 body .bannerDiv .banner video {
   display: block !important;
-  height: 100% !important;
-  object-fit: cover !important;
   user-select: none !important;
   -webkit-user-drag: none !important;
   -webkit-user-select: none !important;
   width: 100% !important;
+}
+
+body .bannerDiv .banner img {
+  height: auto !important;
+  object-fit: contain !important;
+}
+
+body .bannerDiv .banner video {
+  height: auto !important;
+  object-fit: cover !important;
+}
+
+@media (max-width: 767px) {
+  html body .bannerDiv .swiper-pagination {
+    display: none !important;
+  }
 }
 
 /* Logo Loader Animations */
