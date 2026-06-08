@@ -3,9 +3,10 @@
 export const dynamic = "force-dynamic";
 
 import { useState, useEffect } from "react";
-import { PlusCircle, Trash2, ArrowRight, Save } from "lucide-react";
+import { ArrowRight, Save } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { useAdminTranslation } from "@/components/admin/AdminTranslationProvider";
+import { normalizeRecipeProperties } from "@/lib/recipe-properties";
 
 interface RecipeProperty {
   id?: string;
@@ -16,13 +17,15 @@ interface RecipeProperty {
   textEn: string;
 }
 
+type EditableRecipePropertyField = "textAr" | "textEn";
+
 export default function RecipePropertiesPage() {
   const { t, dict } = useAdminTranslation();
   const params = useParams();
   const router = useRouter();
   const recipeId = params?.recipeId as string;
   
-  const [properties, setProperties] = useState<RecipeProperty[]>([]);
+  const [properties, setProperties] = useState<RecipeProperty[]>(normalizeRecipeProperties([]));
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -37,7 +40,7 @@ export default function RecipePropertiesPage() {
     try {
       const res = await fetch(`/api/admin/recipes/${recipeId}/props`);
       if (res.ok) {
-        setProperties(await res.json());
+        setProperties(normalizeRecipeProperties(await res.json()));
       }
     } catch (error) {
       console.error("Failed to fetch properties", error);
@@ -70,18 +73,10 @@ export default function RecipePropertiesPage() {
     }
   };
 
-  const addProperty = () => {
-    setProperties([...properties, { icon: "", titleAr: "", titleEn: "", textAr: "", textEn: "" }]);
-  };
-
-  const updateProperty = (index: number, field: keyof RecipeProperty, value: string) => {
+  const updateProperty = (index: number, field: EditableRecipePropertyField, value: string) => {
     const newProps = [...properties];
     newProps[index] = { ...newProps[index], [field]: value };
     setProperties(newProps);
-  };
-
-  const removeProperty = (index: number) => {
-    setProperties(properties.filter((_, i) => i !== index));
   };
 
   return (
@@ -97,7 +92,7 @@ export default function RecipePropertiesPage() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">{t("خصائص الوصفة", "Recipe Properties")}</h1>
-          <p className="text-gray-500 mt-1">{t("إدارة الخصائص الإضافية للوصفة (مثل: وقت الطبخ، عدد الأفراد)", "Manage extra properties for the recipe (e.g. Prep time, Servings)")}</p>
+          <p className="text-gray-500 mt-1">{t("العناوين والأيقونات ثابتة في كل الوصفات. عدّل القيم فقط لكل وصفة.", "Titles and icons are fixed for every recipe. Edit values only per recipe.")}</p>
         </div>
         <button
           onClick={handleSave}
@@ -116,55 +111,48 @@ export default function RecipePropertiesPage() {
       ) : (
         <div className="space-y-4 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
           <div className="flex justify-between items-center border-b pb-4">
-            <h4 className="text-lg font-bold text-gray-800">{t("الخصائص الحالية", "Current Properties")}</h4>
-            <button 
-              type="button" 
-              onClick={addProperty} 
-              className="text-sm flex items-center gap-1 text-orouba-blue hover:text-blue-700 bg-blue-50 px-4 py-2 rounded-xl font-bold transition-colors"
-            >
-              <PlusCircle className="w-4 h-4" /> 
-              {t("إضافة خاصية", "Add Property")}
-            </button>
+            <h4 className="text-lg font-bold text-gray-800">{t("قيم الخصائص الثابتة", "Fixed Property Values")}</h4>
+            <span className="text-xs font-bold text-orouba-blue bg-blue-50 px-3 py-1 rounded-full">
+              {t("٤ خصائص ثابتة", "4 fixed properties")}
+            </span>
           </div>
 
-          {properties.length === 0 ? (
-            <div className="text-center py-10 text-gray-500">
-              {t("لا توجد خصائص حالياً. انقر على إضافة خاصية للبدء.", "No properties found. Click Add Property to start.")}
-            </div>
-          ) : (
-            <div className="space-y-3">
-              {properties.map((prop, idx) => (
-                <div key={idx} className="flex gap-2 items-start bg-gray-50 p-4 rounded-xl border border-gray-100 hover:border-gray-300 transition-colors">
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 flex-1">
-                    <div>
-                      <label className="block text-xs font-semibold text-gray-500 mb-1">{t("العنوان (عربي)", "Title (Ar)")}</label>
-                      <input type="text" placeholder={t("مثال: وقت التحضير", "e.g. Prep time")} value={prop.titleAr} onChange={(e) => updateProperty(idx, "titleAr", e.target.value)} className="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-2 focus:ring-orouba-blue/20" />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-semibold text-gray-500 mb-1">{t("العنوان (إنجليزي)", "Title (En)")}</label>
-                      <input type="text" placeholder="e.g. Prep time" value={prop.titleEn} dir="ltr" onChange={(e) => updateProperty(idx, "titleEn", e.target.value)} className="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-2 focus:ring-orouba-blue/20" />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-semibold text-gray-500 mb-1">{t("القيمة (عربي)", "Value (Ar)")}</label>
-                      <input type="text" placeholder={t("مثال: 15 دقيقة", "e.g. 15 min")} value={prop.textAr} onChange={(e) => updateProperty(idx, "textAr", e.target.value)} className="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-2 focus:ring-orouba-blue/20" />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-semibold text-gray-500 mb-1">{t("القيمة (إنجليزي)", "Value (En)")}</label>
-                      <input type="text" placeholder="e.g. 15 mins" value={prop.textEn} dir="ltr" onChange={(e) => updateProperty(idx, "textEn", e.target.value)} className="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-2 focus:ring-orouba-blue/20" />
+          <div className="space-y-3">
+            {properties.map((prop, idx) => (
+              <div key={prop.icon || idx} className="bg-gray-50 p-4 rounded-xl border border-gray-100 hover:border-gray-300 transition-colors">
+                <div className="grid grid-cols-1 md:grid-cols-[220px_1fr_1fr] gap-3 items-end">
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-500 mb-1">{t("الخاصية الثابتة", "Fixed Property")}</label>
+                    <div className="px-3 py-2 border border-gray-200 rounded-lg bg-white min-h-10">
+                      <p className="text-sm font-bold text-gray-900">{t(prop.titleAr, prop.titleEn)}</p>
+                      <p className="text-xs text-gray-400" dir="ltr">{prop.icon}</p>
                     </div>
                   </div>
-                  <button 
-                    type="button" 
-                    onClick={() => removeProperty(idx)} 
-                    className="p-2 text-red-500 hover:bg-red-50 hover:text-red-600 rounded-lg transition-colors self-center mt-4"
-                    title={dict.common.delete}
-                  >
-                    <Trash2 className="w-5 h-5" />
-                  </button>
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-500 mb-1">{t("القيمة (عربي)", "Value (Ar)")}</label>
+                    <input
+                      type="text"
+                      placeholder={idx === 0 ? t("مثال: ٥ دقائق", "e.g. 5 mins") : t("اكتب القيمة العربية", "Enter Arabic value")}
+                      value={prop.textAr}
+                      onChange={(e) => updateProperty(idx, "textAr", e.target.value)}
+                      className="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-2 focus:ring-orouba-blue/20"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-500 mb-1">{t("القيمة (إنجليزي)", "Value (En)")}</label>
+                    <input
+                      type="text"
+                      placeholder={idx === 0 ? "e.g. 5 mins" : "Enter English value"}
+                      value={prop.textEn}
+                      dir="ltr"
+                      onChange={(e) => updateProperty(idx, "textEn", e.target.value)}
+                      className="w-full px-3 py-2 border rounded-lg text-sm outline-none focus:ring-2 focus:ring-orouba-blue/20"
+                    />
+                  </div>
                 </div>
-              ))}
-            </div>
-          )}
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>

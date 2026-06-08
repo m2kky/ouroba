@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { uploadFile } from "@/lib/upload";
+import { normalizeRecipeProperties } from "@/lib/recipe-properties";
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -21,7 +22,12 @@ export async function GET() {
       },
       orderBy: { id: "desc" },
     });
-    return NextResponse.json(recipes);
+    return NextResponse.json(
+      recipes.map((recipe) => ({
+        ...recipe,
+        properties: normalizeRecipeProperties(recipe.properties),
+      }))
+    );
   } catch (error) {
     return NextResponse.json({ error: "Failed to fetch recipes" }, { status: 500 });
   }

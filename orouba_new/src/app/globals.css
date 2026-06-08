@@ -177,6 +177,97 @@ body .headerImage img:nth-child(2) {
   }
 }
 
+.recipe_details .features {
+  width: 100% !important;
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  align-items: start !important;
+  gap: 30px !important;
+  background: #ffffff !important;
+  padding: 42px 6vw 36px !important;
+}
+
+.recipe_details .feature_item {
+  min-width: 0 !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  color: #003f70 !important;
+}
+
+body.arVersion .recipe_details .feature_item {
+  flex-direction: row-reverse !important;
+  text-align: right !important;
+}
+
+body.enVersion .recipe_details .feature_item {
+  text-align: left !important;
+}
+
+.recipe_details .feature_item .left {
+  flex: 0 0 auto !important;
+  width: 42px !important;
+  height: 42px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.recipe_details .feature_item .left svg,
+.recipe_details .feature_item .left img {
+  width: 42px !important;
+  height: 42px !important;
+  display: block !important;
+}
+
+.recipe_details .feature_item .left svg {
+  fill: none !important;
+  stroke: #035297 !important;
+  stroke-width: 4 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+}
+
+.recipe_details .feature_item .right {
+  min-width: 0 !important;
+}
+
+.recipe_details .feature_item h5 {
+  margin: 0 0 8px !important;
+  color: #003f70 !important;
+  font-size: 23px !important;
+  line-height: 1.2 !important;
+  font-weight: 800 !important;
+  white-space: normal !important;
+}
+
+.recipe_details .feature_item p {
+  margin: 0 !important;
+  color: #003f70 !important;
+  font-size: 18px !important;
+  line-height: 1.4 !important;
+  font-weight: 500 !important;
+}
+
+@media (max-width: 992px) {
+  .recipe_details .features {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    padding-inline: 28px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .recipe_details .features {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  .recipe_details .feature_item {
+    justify-content: flex-start !important;
+  }
+}
+
 .whowearestyles {
   justify-content: center !important;
 }

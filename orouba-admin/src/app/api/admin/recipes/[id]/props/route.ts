@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { normalizeRecipeProperties, recipePropertiesForCreate } from "@/lib/recipe-properties";
 
 export async function GET(req: Request, { params }: { params: { id: string } }) {
   try {
@@ -9,7 +10,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
       where: { recipeId: params.id },
       orderBy: { id: "asc" }
     });
-    return NextResponse.json(props);
+    return NextResponse.json(normalizeRecipeProperties(props));
   } catch (error) {
     return NextResponse.json({ error: "Failed to fetch props" }, { status: 500 });
   }
@@ -28,18 +29,12 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
       return NextResponse.json({ error: "Invalid properties data" }, { status: 400 });
     }
 
-    // Bulk update: delete all existing and create new ones
+    const fixedProperties = recipePropertiesForCreate(properties, params.id);
+
     await prisma.$transaction([
       prisma.recipeProperty.deleteMany({ where: { recipeId: params.id } }),
       prisma.recipeProperty.createMany({
-        data: properties.map((prop: any) => ({
-          recipeId: params.id,
-          icon: prop.icon || null,
-          titleAr: prop.titleAr,
-          titleEn: prop.titleEn,
-          textAr: prop.textAr,
-          textEn: prop.textEn,
-        }))
+        data: fixedProperties
       })
     ]);
 

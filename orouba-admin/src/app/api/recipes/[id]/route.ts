@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { apiSuccess, apiError } from "@/lib/api-helpers";
 import { NextRequest } from "next/server";
+import { normalizeRecipeProperties, recipePropertiesForCreate } from "@/lib/recipe-properties";
 
 type Params = { params: Promise<{ id: string }> };
 
@@ -36,7 +37,10 @@ export async function GET(request: NextRequest, { params }: Params) {
     });
 
     if (!recipe) return apiError("Recipe not found", 404);
-    return apiSuccess(recipe);
+    return apiSuccess({
+      ...recipe,
+      properties: normalizeRecipeProperties(recipe.properties),
+    });
   } catch (error) {
     return apiError("Failed to fetch recipe", 500);
   }
@@ -62,14 +66,9 @@ export async function PUT(request: NextRequest, { params }: Params) {
 
     if (properties) {
       await prisma.recipeProperty.deleteMany({ where: { recipeId: id } });
-      if (properties.length > 0) {
-        await prisma.recipeProperty.createMany({
-          data: properties.map((p: any) => ({
-            recipeId: id, titleEn: p.titleEn, titleAr: p.titleAr,
-            textEn: p.textEn, textAr: p.textAr, icon: p.icon,
-          })),
-        });
-      }
+      await prisma.recipeProperty.createMany({
+        data: recipePropertiesForCreate(properties, id),
+      });
     }
 
     if (imageUrls) {
@@ -86,7 +85,14 @@ export async function PUT(request: NextRequest, { params }: Params) {
       include: { images: true, properties: true, steps: true },
     });
 
-    return apiSuccess(updated);
+    return apiSuccess(
+      updated
+        ? {
+            ...updated,
+            properties: normalizeRecipeProperties(updated.properties),
+          }
+        : updated
+    );
   } catch (error) {
     return apiError("Failed to update recipe", 500);
   }

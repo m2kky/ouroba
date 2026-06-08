@@ -11,9 +11,7 @@ const RecipeDetails = ({ data, breads }) => {
   return (
     <div className="recipe_details">
       <RecipeBanner data={data} breads={breads} />
-      {data?.properties && data?.properties?.length ? (
-        <Featues data={data?.properties} />
-      ) : null}
+      <Featues data={data?.properties || []} />
       <RecipeAbout data={data} />
     </div>
   );
