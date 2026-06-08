@@ -2,21 +2,31 @@
 
 import dynamic from "next/dynamic";
 import "react-quill-new/dist/quill.snow.css";
-import { forwardRef } from "react";
 
 const ReactQuill = dynamic(() => import("react-quill-new"), {
   ssr: false,
-  loading: () => <div className="h-40 w-full animate-pulse bg-gray-100 rounded-lg"></div>,
+  loading: () => <div className="h-40 w-full animate-pulse bg-gray-100 rounded-lg" />,
 });
 
 const modules = {
   toolbar: [
-    [{ header: [2, 3, 4, false] }],
     ["bold", "italic", "underline", "strike"],
+    ["blockquote", "code-block"],
+    [{ header: 1 }, { header: 2 }],
     [{ list: "ordered" }, { list: "bullet" }],
+    [{ script: "sub" }, { script: "super" }],
+    [{ indent: "-1" }, { indent: "+1" }],
+    [{ direction: "rtl" }],
+    [{ size: ["small", false, "large", "huge"] }],
+    [{ color: [] }, { background: [] }],
+    [{ font: [] }],
     [{ align: [] }],
+    ["link", "image"],
     ["clean"],
   ],
+  clipboard: {
+    matchVisual: false,
+  },
 };
 
 const formats = [
@@ -25,9 +35,20 @@ const formats = [
   "italic",
   "underline",
   "strike",
+  "blockquote",
+  "code-block",
   "list",
   "bullet",
+  "script",
+  "indent",
+  "direction",
+  "size",
+  "color",
+  "background",
+  "font",
   "align",
+  "link",
+  "image",
 ];
 
 interface RichTextEditorProps {
@@ -37,7 +58,12 @@ interface RichTextEditorProps {
   dir?: "rtl" | "ltr";
 }
 
-export default function RichTextEditor({ value, onChange, placeholder, dir }: RichTextEditorProps) {
+export default function RichTextEditor({
+  value,
+  onChange,
+  placeholder,
+  dir,
+}: RichTextEditorProps) {
   return (
     <div className={`rich-text-editor ${dir === "rtl" ? "ql-rtl" : "ql-ltr"}`}>
       <ReactQuill
@@ -51,10 +77,15 @@ export default function RichTextEditor({ value, onChange, placeholder, dir }: Ri
       />
       <style jsx global>{`
         .rich-text-editor .ql-container {
-          min-height: 150px;
+          min-height: 190px;
           border-bottom-left-radius: 0.5rem;
           border-bottom-right-radius: 0.5rem;
           font-family: inherit;
+        }
+        .rich-text-editor .ql-editor {
+          min-height: 190px;
+          font-size: 15px;
+          line-height: 1.8;
         }
         .rich-text-editor .ql-toolbar {
           border-top-left-radius: 0.5rem;

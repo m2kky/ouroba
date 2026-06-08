@@ -22,14 +22,13 @@ const HeaderIcons = ({ setShow, show }) => {
       typeof window !== "undefined"
         ? window.location.pathname + window.location.search + window.location.hash
         : "/";
-    const nextPath = currentPath.replace(
-      /^\/(ar|en)(?=\/|$)/,
-      `/${nextLanguage}`
-    );
+    const nextPath = /^\/(ar|en)(?=\/|$)/.test(currentPath)
+      ? currentPath.replace(/^\/(ar|en)(?=\/|$)/, `/${nextLanguage}`)
+      : localizedPath(currentPath, nextLanguage);
 
-    router.push(
-      nextPath === currentPath ? localizedPath("/", nextLanguage) : nextPath
-    );
+    if (nextPath !== currentPath) {
+      router.push(nextPath);
+    }
   };
 
   return (

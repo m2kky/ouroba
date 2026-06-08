@@ -1,11 +1,26 @@
 import RecipeDetailsView from "@/views/RecipeDetails/RecipeDetails";
-import { db } from "@/db";
-import { recipes } from "@/db/schema";
-import { eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import { resolveMediaTree } from "@/utils/media";
+import { getDashboardRecipe } from "@/lib/dashboard-data";
 
 export const dynamic = "force-dynamic";
+
+const first = (...values: Array<string | null | undefined>) =>
+  values.find((value) => typeof value === "string" && value.trim()) || "";
+
+const normalizeStep = (step: any) => ({
+  ...step,
+  step_ar: first(step?.stepAr, step?.step_ar),
+  step_en: first(step?.stepEn, step?.step_en),
+});
+
+const normalizeProperty = (property: any) => ({
+  ...property,
+  title_ar: first(property?.titleAr, property?.title_ar),
+  title_en: first(property?.titleEn, property?.title_en),
+  text_ar: first(property?.textAr, property?.text_ar),
+  text_en: first(property?.textEn, property?.text_en),
+});
 
 export default async function RecipeDetailsPage({
   params,
@@ -13,69 +28,36 @@ export default async function RecipeDetailsPage({
   params: Promise<{ lang: string; id: string }>;
 }) {
   const { id } = await params;
+  const recipeDetails = await getDashboardRecipe(id);
 
-  // 1. Fetch Recipe details by ID with properties and steps
-  const recipeDetails = await db.query.recipes.findFirst({
-    where: eq(recipes.id, id),
-    with: {
-      properties: true,
-      steps: {
-        orderBy: (steps, { asc }) => [asc(steps.createdAt), asc(steps.id)],
-      },
-      images: true,
-      foods: {
-        with: {
-          food: {
-            with: {
-              recipeCategories: {
-                with: {
-                  recipeCategory: true,
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-  });
-
-  if (!recipeDetails) {
+  if (!recipeDetails || recipeDetails.isHidden) {
     notFound();
   }
 
-  // Find associated food and category for breadcrumbs
   const firstFoodRelation = recipeDetails.foods?.[0];
   const food = firstFoodRelation?.food;
   const category = food?.recipeCategories?.[0]?.recipeCategory;
 
   const breads = {
-    recName: category?.nameEn || "",
-    recNameAr: category?.nameAr || "",
+    recName: first(category?.nameEn, category?.name_en),
+    recNameAr: first(category?.nameAr, category?.name_ar),
     recId: category?.id || "",
-    foodName: food?.nameEn || "",
-    foodNameAr: food?.nameAr || "",
+    foodName: first(food?.nameEn, food?.name_en),
+    foodNameAr: first(food?.nameAr, food?.name_ar),
     foodId: food?.id || "",
   };
 
-  const steps = (recipeDetails.steps || []).map((step) => ({
-    ...step,
-    step_ar: step.stepAr,
-    step_en: step.stepEn,
-  }));
-
-  const properties = (recipeDetails.properties || []).map((property) => ({
-    ...property,
-    title_ar: property.titleAr,
-    title_en: property.titleEn,
-    text_ar: property.textAr,
-    text_en: property.textEn,
-  }));
+  const steps = (recipeDetails.steps || []).map(normalizeStep);
+  const properties = (recipeDetails.properties || []).map(normalizeProperty);
 
   const normalizedRecipeDetails = {
     ...recipeDetails,
-    description_ar: recipeDetails.descriptionAr,
-    description_en: recipeDetails.descriptionEn,
-    internal_image: recipeDetails.internalImage,
+    name_ar: first(recipeDetails.nameAr, recipeDetails.name_ar),
+    name_en: first(recipeDetails.nameEn, recipeDetails.name_en),
+    description_ar: first(recipeDetails.descriptionAr, recipeDetails.description_ar),
+    description_en: first(recipeDetails.descriptionEn, recipeDetails.description_en),
+    internal_image: first(recipeDetails.internalImage, recipeDetails.internal_image),
+    video_link: first(recipeDetails.videoLink, recipeDetails.video_link),
     properties,
     step: steps,
     steps,

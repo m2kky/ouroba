@@ -15,6 +15,11 @@ import {
   XShareButton,
 } from "react-share";
 
+const first = (...values) =>
+  values.find((value) => typeof value === "string" && value.trim()) || "";
+
+const isVideoFile = (src) => /\.(mp4|webm|ogg)(?:[?#].*)?$/i.test(src || "");
+
 const RecipeBanner = ({ data, breads }) => {
   const { language } = UseGeneral();
 
@@ -45,6 +50,14 @@ const RecipeBanner = ({ data, breads }) => {
   const [isShare, setIsShare] = useState(false);
   const shareUrl = typeof window !== "undefined" ? window.location.href : "";
   const shareTitle = language == "ar" ? data?.nameAr : data?.nameEn;
+  const videoSrc = first(data?.videoLink, data?.video_link);
+  const imageSrc = first(
+    data?.internalImage,
+    data?.internal_image,
+    data?.images?.[0]?.url,
+    data?.image
+  );
+  const mediaSrc = isVideoFile(videoSrc) ? videoSrc : first(imageSrc, videoSrc);
   
   return (
     <div className="recipe_banner">
@@ -102,13 +115,11 @@ const RecipeBanner = ({ data, breads }) => {
         {language != "ar" ? <>{data?.nameEn}</> : <>{data?.nameAr}</>}
       </h5>
       <div className="right">
-        {data?.videoLink ? (
-          data?.videoLink?.split(".")[
-            data?.videoLink?.split(".")?.length - 1
-          ] == "mp4" ? (
-            <video src={data?.videoLink} loop muted autoPlay ></video>
+        {mediaSrc ? (
+          isVideoFile(mediaSrc) ? (
+            <video src={mediaSrc} loop muted autoPlay playsInline></video>
           ) : (
-            <img src={data?.videoLink} />
+            <img src={mediaSrc} alt={shareTitle || ""} />
           )
         ) : null}
       </div>

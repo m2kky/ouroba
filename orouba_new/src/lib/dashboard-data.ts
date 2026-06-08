@@ -102,6 +102,16 @@ export async function getDashboardProduct(productId: string) {
   }
 }
 
+export async function getDashboardRecipe(recipeId: string) {
+  try {
+    const response = await fetchDashboard(`/api/recipes/${recipeId}`);
+    const payload = await response.json();
+    return payload?.data ?? payload ?? null;
+  } catch {
+    return null;
+  }
+}
+
 export function dashboardSettingsToSiteinfo(
   settings: DashboardSiteData["settings"],
   locale = "ar"

@@ -133,10 +133,7 @@ function Recips({ withArrows, data }) {
                   const recipeImage = [
                     item?.images?.[0]?.url,
                     item?.internal_image,
-                    item?.video_link,
-                  ].find(
-                    (src) => typeof src === "string" && src.includes("r2.dev")
-                  ) || item?.images?.[0]?.url || item?.internal_image || item?.video_link;
+                  ].find((src) => typeof src === "string" && src.trim());
 
                 return (
                   <SwiperSlide key={item.id}>
@@ -150,10 +147,12 @@ function Recips({ withArrows, data }) {
                         naviagte.push(localizedPath(`/recipe_details/${item.id}`, language))
                       }
                     >
-                      <img
-                        src={recipeImage}
-                        alt={language == "ar" ? item?.name_ar : item?.name_en}
-                      />
+                      {recipeImage ? (
+                        <img
+                          src={recipeImage}
+                          alt={language == "ar" ? item?.name_ar : item?.name_en}
+                        />
+                      ) : null}
                       <div className="reciepe_name">
                         {language == "ar" ? item?.name_ar : item?.name_en}
                       </div>

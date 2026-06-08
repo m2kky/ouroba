@@ -15,7 +15,17 @@ export async function GET(request: NextRequest, { params }: Params) {
         properties: true,
         steps: { orderBy: [{ createdAt: "asc" }, { id: "asc" }] },
         foods: {
-          include: { food: true },
+          include: {
+            food: {
+              include: {
+                recipeCategories: {
+                  include: {
+                    recipeCategory: true,
+                  },
+                },
+              },
+            },
+          },
         },
         recommendedWith: {
           include: {

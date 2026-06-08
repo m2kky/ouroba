@@ -46,6 +46,14 @@ const textToHtml = (text) => {
   return `<p>${escapeHtml(cleanText).replace(/\n+/g, "<br />")}</p>`;
 };
 
+const hasHtml = (value) => /<[a-z][\s\S]*>/i.test(String(value || ""));
+
+const normalizeRichHtml = (value) => {
+  const text = String(value || "").trim();
+  if (!text) return "";
+  return hasHtml(text) ? text : textToHtml(text);
+};
+
 const listMarkerRegex =
   /^\s*(?:[-*•‣▪]\s+|[0-9٠-٩۰-۹]+(?:[\).،]|[-–—])\s*)/;
 const headingMarkerRegex = /^\s*#{1,6}\s*/;
@@ -234,26 +242,38 @@ const getStepHtml = (item, isArabic) =>
     ? first(item?.stepAr, item?.step_ar)
     : first(item?.stepEn, item?.step_en);
 
+const stepsToHtml = (steps, isArabic) => {
+  const values = (Array.isArray(steps) ? steps : [])
+    .map((item) => getStepHtml(item, isArabic))
+    .filter((value) => value && String(value).trim());
+
+  if (!values.length) return "";
+  if (values.length === 1) return normalizeRichHtml(values[0]);
+
+  if (values.every((value) => !hasHtml(value))) {
+    return `<ul>${values.map((value) => `<li>${escapeHtml(value)}</li>`).join("")}</ul>`;
+  }
+
+  return values.map(normalizeRichHtml).join("");
+};
+
 const RecipeAbout = ({ data }) => {
   const { language } = UseGeneral();
   const isArabic = language == "ar";
-  // Ingredients are now stored as a single HTML string in the first step
   const rawIngredients = Array.isArray(data?.steps)
     ? data.steps
     : Array.isArray(data?.step)
     ? data.step
     : [];
-  
-  const ingredientsHtml = rawIngredients.length > 0 
-    ? getStepHtml(rawIngredients[0], isArabic) 
-    : "";
+  const ingredientsHtml = stepsToHtml(rawIngredients, isArabic);
     
   const hasIngredients = Boolean(ingredientsHtml && String(ingredientsHtml).trim());
 
-  // Instructions are stored in descriptionAr / descriptionEn
-  const instructionsHtml = isArabic
-    ? first(data?.descriptionAr, data?.description_ar)
-    : first(data?.descriptionEn, data?.description_en);
+  const instructionsHtml = normalizeRichHtml(
+    isArabic
+      ? first(data?.descriptionAr, data?.description_ar)
+      : first(data?.descriptionEn, data?.description_en)
+  );
     
   const hasInstructions = Boolean(instructionsHtml && String(instructionsHtml).trim());
 
