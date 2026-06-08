@@ -123,7 +123,7 @@ body .headerImage {
 
 body.arVersion .headerImage,
 body .headerImage.active {
-  left: -15% !important;
+  left: clamp(-96px, -4vw, -34px) !important;
   right: auto !important;
   rotate: 0deg !important;
   transform: none !important;
@@ -131,7 +131,7 @@ body .headerImage.active {
 
 body.enVersion .headerImage {
   left: auto !important;
-  right: -15% !important;
+  right: clamp(-96px, -4vw, -34px) !important;
   rotate: 0deg !important;
   transform: scaleX(-1) !important;
 }
@@ -163,11 +163,26 @@ body .headerImage img:nth-child(2) {
 
   body.arVersion .headerImage,
   body .headerImage.active {
-    left: -175px !important;
+    left: -42px !important;
   }
 
   body.enVersion .headerImage {
-    right: -175px !important;
+    right: -42px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  body .headerImage {
+    width: 340px !important;
+  }
+
+  body.arVersion .headerImage,
+  body .headerImage.active {
+    left: -34px !important;
+  }
+
+  body.enVersion .headerImage {
+    right: -34px !important;
   }
 }
 

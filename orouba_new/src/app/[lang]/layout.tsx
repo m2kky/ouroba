@@ -15,6 +15,11 @@ import { resolveMediaTree } from "@/utils/media";
 export const metadata: Metadata = {
   title: "Orouba Foods",
   description: "Orouba Foods Official Website",
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
+  },
 };
 
 export const dynamic = "force-dynamic";
