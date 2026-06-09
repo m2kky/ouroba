@@ -23,15 +23,31 @@ const findText = (data, template) => {
   return {
     textAr: match?.textAr || match?.text_ar || match?.value_ar || '',
     textEn: match?.textEn || match?.text_en || match?.value_en || '',
+    icon: match?.icon || undefined,
   }
 }
 
 const featureTemplates = [
   {
+    key: 'level',
+    titleAr: 'المستوى',
+    titleEn: 'Level',
+    aliases: ['level', 'difficulty', 'المستوى', 'مستوى', 'المستوي'],
+    icon: (
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M12 52h40" />
+        <path d="M16 52V38" />
+        <path d="M26 52V30" />
+        <path d="M36 52V22" />
+        <path d="M46 52V14" />
+      </svg>
+    ),
+  },
+  {
     key: 'prep_time',
-    titleAr: 'وقت التحضير',
+    titleAr: 'وقت الاعداد',
     titleEn: 'Prep Time',
-    aliases: ['prep_time', 'prep time', 'preparation time', 'وقت التحضير'],
+    aliases: ['prep_time', 'prep time', 'preparation time', 'وقت التحضير', 'وقت الاعداد', 'وقت الإعداد'],
     icon: (
       <svg viewBox="0 0 64 64" aria-hidden="true">
         <circle cx="32" cy="32" r="24" />
@@ -58,7 +74,7 @@ const featureTemplates = [
     key: 'servings',
     titleAr: 'عدد الأفراد',
     titleEn: 'Servings',
-    aliases: ['servings', 'serving', 'عدد الأفراد', 'عدد الافراد', 'خدمة'],
+    aliases: ['servings', 'serving', 'عدد الأفراد', 'عدد الافراد', 'التقديم', 'خدمة'],
     icon: (
       <svg viewBox="0 0 64 64" aria-hidden="true">
         <circle cx="32" cy="20" r="8" />
@@ -67,21 +83,6 @@ const featureTemplates = [
         <path d="M6 54c1-9 5-14 11-16" />
         <circle cx="48" cy="26" r="6" />
         <path d="M58 54c-1-9-5-14-11-16" />
-      </svg>
-    ),
-  },
-  {
-    key: 'level',
-    titleAr: 'المستوى',
-    titleEn: 'Level',
-    aliases: ['level', 'difficulty', 'المستوى'],
-    icon: (
-      <svg viewBox="0 0 64 64" aria-hidden="true">
-        <path d="M12 52h40" />
-        <path d="M16 52V38" />
-        <path d="M26 52V30" />
-        <path d="M36 52V22" />
-        <path d="M46 52V14" />
       </svg>
     ),
   },

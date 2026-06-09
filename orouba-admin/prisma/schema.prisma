@@ -394,8 +394,10 @@ model Social {
   image     String?
   link      String
   isHidden  Boolean  @default(false)
+  parentId  String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  parent    SocialParent? @relation(fields: [parentId], references: [id], onDelete: Cascade)
 }
 
 model SocialParent {
@@ -403,6 +405,7 @@ model SocialParent {
   image     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  socials   Social[]
 }
 
 model ProductSocial {

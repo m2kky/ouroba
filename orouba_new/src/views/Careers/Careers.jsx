@@ -225,7 +225,7 @@ export default function Careers({ careerData }) {
                   return (
                     <div className={styles.box} key={item.id || index}>
                       <div>{index + 1}</div>
-                      <p>{language == "en" ? item.textEn || item.text_en : item?.textAr || item?.text_ar}</p>
+                      <p>{language == "en" ? item.descriptionEn || item.description_en || item.textEn || item.text_en : item?.descriptionAr || item?.description_ar || item?.textAr || item?.text_ar}</p>
                     </div>
                   );
                 }
@@ -262,7 +262,7 @@ export default function Careers({ careerData }) {
                   return (
                     <div className={styles.box} key={item.id || index}>
                       <div>{index + 1}</div>
-                      <p>{language == "en" ? item?.textEn || item?.text_en : item?.textAr || item?.text_ar}</p>
+                      <p>{language == "en" ? item?.descriptionEn || item?.description_en || item?.textEn || item?.text_en : item?.descriptionAr || item?.description_ar || item?.textAr || item?.text_ar}</p>
                     </div>
                   );
                 }
