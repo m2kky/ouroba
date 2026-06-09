@@ -46,6 +46,19 @@ function nullableText(value: string | null | undefined) {
   return text.length ? text : null;
 }
 
+function plainText(value: string | null | undefined) {
+  return cleanText(value)
+    .replace(/<[^>]*>/g, "")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function isPlaceholderDescription(value: string | null | undefined) {
+  const text = plainText(value).toLowerCase();
+  return !text || text === "instructions" || text === "طريقة التحضير";
+}
+
 function parseBool(value: string | null | undefined) {
   return cleanText(value) === "1";
 }
@@ -75,6 +88,34 @@ function recordSkippedOrCreated(stat: SeedStats, exists: boolean) {
   } else {
     stat.created++;
   }
+}
+
+function getRecipeDataToFill(
+  existing: Awaited<ReturnType<typeof prisma.recipe.findUnique>>,
+  data: {
+    descriptionAr: string;
+    descriptionEn: string;
+  },
+) {
+  if (!existing || overwrite) return {};
+
+  const fillData: Partial<typeof data> = {};
+
+  if (
+    isPlaceholderDescription(existing.descriptionAr) &&
+    !isPlaceholderDescription(data.descriptionAr)
+  ) {
+    fillData.descriptionAr = data.descriptionAr;
+  }
+
+  if (
+    isPlaceholderDescription(existing.descriptionEn) &&
+    !isPlaceholderDescription(data.descriptionEn)
+  ) {
+    fillData.descriptionEn = data.descriptionEn;
+  }
+
+  return fillData;
 }
 
 function parseSqlInserts(sqlContent: string, tableName: string): SqlRow[] {
@@ -328,7 +369,21 @@ async function seedRecipes(rows: SqlRow[]) {
     };
 
     if (existing && !overwrite) {
-      stats.recipes.skipped++;
+      const fillData = getRecipeDataToFill(existing, data);
+      const hasFillData = Object.keys(fillData).length > 0;
+
+      if (!hasFillData) {
+        stats.recipes.skipped++;
+        continue;
+      }
+
+      if (!apply) {
+        stats.recipes.updated++;
+        continue;
+      }
+
+      await prisma.recipe.update({ where: { id: existing.id }, data: fillData });
+      stats.recipes.updated++;
     } else if (!apply) {
       recordExistingOrCreated(stats.recipes, Boolean(existing));
     } else if (existing) {
