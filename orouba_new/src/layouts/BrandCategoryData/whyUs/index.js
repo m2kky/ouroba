@@ -50,7 +50,7 @@ function WhyUs({ data, id }) {
       ) : mediaSrc ? (
         <img src={mediaSrc} alt={language === "ar" ? data?.brand?.nameAr : data?.brand?.nameEn} />
       ) : null}
-      <RichText html={brandDescription} style={{ color: "white" }} />
+      <RichText html={brandDescription} style={{ color: "white", width: "100%" }} />
       <center
         className="rowDiv"
         style={{
