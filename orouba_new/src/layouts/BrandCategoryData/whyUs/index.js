@@ -59,8 +59,8 @@ function WhyUs({ data, id }) {
           fontSize: "23px",
           margin: " 0  auto",
           textAlign:"center",
-          maxWidth:"670px"
-          // width: "100%",
+          maxWidth:"100%",
+          width: "100%",
         }}
       >
         {"    "}
