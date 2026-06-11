@@ -2,6 +2,7 @@
 import React from "react";
 import UseGeneral from "../../../hooks/useGeneral";
 import Standard from "../../../components/standards";
+import RichText from "../../../components/RichText";
 
 const localizedSetting = (settings, key, language) => {
   const value =
@@ -31,12 +32,7 @@ const ExportStandars = ({ exportData, standersData = [] }) => {
           <span>{title}</span>
         </h4>
       ) : null}
-      {text ? (
-        <p
-          style={{ textAlign: "center" }}
-          dangerouslySetInnerHTML={{ __html: text }}
-        />
-      ) : null}
+      <RichText html={text} style={{ textAlign: "center" }} />
       <div className="standardsImages d-flex my-3 justify-content-between">
         {standars.map((item) => (
           <Standard

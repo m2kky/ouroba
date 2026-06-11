@@ -4,8 +4,9 @@ import Breadcrumb from "../../components/BreadCumbsLinks";
 import UseGeneral from "../../hooks/useGeneral";
 import Recips from "../../layouts/home/receips";
 import ProductTypeSmallSlider from "../../layouts/home/receips/productTypeSmallSlider";
+import RichText from "../../components/RichText";
 
-function ProductTypeCategory({ data, breads, sameProducts, recipes, brandId }) {
+function ProductTypeCategory({ data, breads, sameProducts, recipes, brandId, relatedType }) {
   const { language } = UseGeneral();
 
   const breadCrumbsArray = [
@@ -17,7 +18,7 @@ function ProductTypeCategory({ data, breads, sameProducts, recipes, brandId }) {
     },
     {
       name: language == "ar" ? breads.categoryNameAr : breads.categoryNameEn,
-      route: `/brands/${breads.brandId}/${breads.categoryId}`,
+      route: `/brands/${breads.brandId}/categories/${breads.categoryId}?q=${breads.categoryId}`,
     },
     {
       name: language == "ar" ? data?.nameAr : data?.nameEn,
@@ -55,13 +56,9 @@ function ProductTypeCategory({ data, breads, sameProducts, recipes, brandId }) {
               <div className="product_continer_text">
                 <div className="product_continer_text_data productDetailsPage">
                   <h1>{language == "ar" ? data?.nameAr : data?.nameEn}</h1>
-                  {language == 'ar' ? (
-                    data?.descriptionAr && data?.descriptionAr?.length ? (
-                      <p dangerouslySetInnerHTML={{ __html: data?.descriptionAr }}></p>
-                    ) : null
-                  ) : data?.descriptionEn && data?.descriptionEn?.length ? (
-                    <p dangerouslySetInnerHTML={{ __html: data?.descriptionEn }}></p>
-                  ) : null}
+                  <RichText
+                    html={language == "ar" ? data?.descriptionAr : data?.descriptionEn}
+                  />
                 </div>
               </div>
             </div>
@@ -72,6 +69,7 @@ function ProductTypeCategory({ data, breads, sameProducts, recipes, brandId }) {
         <ProductTypeSmallSlider
           brandId={brandId}
           data={sameProducts}
+          type={relatedType}
           withArrows={true}
         />
       ) : null}

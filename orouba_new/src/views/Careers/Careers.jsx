@@ -4,6 +4,7 @@ import UseGeneral from "../../hooks/useGeneral";
 import styles from "./Careers.module.css";
 import Breadcrumb from "../../components/BreadCumbsLinks";
 import { ThreeDots } from "react-loader-spinner";
+import RichText from "../../components/RichText";
 
 export default function Careers({ careerData }) {
   const { language } = UseGeneral();
@@ -20,6 +21,10 @@ export default function Careers({ careerData }) {
   const [message, setMessage] = useState("");
   const [sucMess, setSucMess] = useState("");
   const WhyData = Array.isArray(careerData?.whyChooseUs) ? careerData.whyChooseUs : [];
+  const getWhyText = (item) =>
+    language == "en"
+      ? item?.descriptionEn || item?.description_en || item?.textEn || item?.text_en
+      : item?.descriptionAr || item?.description_ar || item?.textAr || item?.text_ar;
 
   useEffect(() => {
     if (sucMess == true || sucMess == false) {
@@ -225,7 +230,7 @@ export default function Careers({ careerData }) {
                   return (
                     <div className={styles.box} key={item.id || index}>
                       <div>{index + 1}</div>
-                      <p>{language == "en" ? item.descriptionEn || item.description_en || item.textEn || item.text_en : item?.descriptionAr || item?.description_ar || item?.textAr || item?.text_ar}</p>
+                      <RichText html={getWhyText(item)} />
                     </div>
                   );
                 }
@@ -262,7 +267,7 @@ export default function Careers({ careerData }) {
                   return (
                     <div className={styles.box} key={item.id || index}>
                       <div>{index + 1}</div>
-                      <p>{language == "en" ? item?.descriptionEn || item?.description_en || item?.textEn || item?.text_en : item?.descriptionAr || item?.description_ar || item?.textAr || item?.text_ar}</p>
+                      <RichText html={getWhyText(item)} />
                     </div>
                   );
                 }

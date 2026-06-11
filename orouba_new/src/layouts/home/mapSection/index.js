@@ -5,6 +5,7 @@ import UseGeneral from "../../../hooks/useGeneral";
 import { useRouter } from "next/navigation";
 import { localizedPath } from "@/utils/routes";
 import { HOME_TEXT_FALLBACKS, localizedText, splitHeading } from "@/utils/siteText";
+import RichText from "../../../components/RichText";
 
 function MapSection({ data }) {
   const { language } = UseGeneral();
@@ -31,7 +32,7 @@ function MapSection({ data }) {
           {titleParts.first}
           {titleParts.rest ? <span> {titleParts.rest}</span> : null}
         </h1>
-        {text ? <p>{text}</p> : null}
+        <RichText html={text} className="hero_rich_text" />
         <button
           className="hone_sections_button d-flex"
           onClick={() => router.push(localizedPath("/export", language))}

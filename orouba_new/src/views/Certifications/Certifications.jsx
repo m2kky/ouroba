@@ -4,6 +4,7 @@ import UseGeneral from '../../hooks/useGeneral'
 import Breadcrumb from '../../components/BreadCumbsLinks'
 import ExportCertificatios from '../Export/ExportCertificatios/ExportCertificatios'
 import Values from './Values/Values'
+import RichText from '../../components/RichText'
 
 const localizedSetting = (settings, key, language) => {
   const value =
@@ -68,8 +69,8 @@ const Certifications = ({ certPageData }) => {
         }
       </h4>
       <div className="texts">
-        <p dangerouslySetInnerHTML={{ __html: introText }} />
-        <p dangerouslySetInnerHTML={{ __html: detailsText }} />
+        <RichText html={introText} />
+        <RichText html={detailsText} />
       </div>
       <ExportCertificatios certificationsData={certPageData?.certifications} showTit={false}/>
       <Values valuesData={certPageData?.values} introText={valuesIntro}/>

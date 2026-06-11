@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import UseGeneral from "../../hooks/useGeneral";
 import Breadcrumb from "./../../components/BreadCumbsLinks/index";
+import RichText from "../../components/RichText";
 import {
   HouseIcon,
   Printer,
@@ -10,6 +11,27 @@ import {
 } from "../../assets/svgIcons";
 import { ThreeDots } from "react-loader-spinner";
 import { submitContactForm } from "@/actions/contact";
+
+const CONTACT_FALLBACKS = {
+  addressAr:
+    "مدينة العبور، بلوك ١٢٠٠٨، قسم ٥، القاهرة، ص.ب: العبور ٤٢، مدينة العبور، مصر",
+  addressEn:
+    "El Obour City, Block 12008, Section 5, Cairo, P.O. Box: El Obour 42, El Obour City, Egypt",
+  phone: "202 44890220",
+  fax: "202 44890227",
+  email: "info@oroubafoods.com",
+};
+
+const INQUIRY_OPTIONS = [
+  { value: "general", ar: "استفسار عام", en: "General Inquiry" },
+  { value: "sales", ar: "المبيعات", en: "Sales" },
+  { value: "export", ar: "التصدير", en: "Export" },
+  { value: "careers", ar: "الوظائف", en: "Careers" },
+  { value: "suppliers", ar: "الموردين", en: "Suppliers" },
+];
+
+const firstText = (...values) =>
+  values.find((value) => typeof value === "string" && value.trim()) || "";
 
 const ContactUs = ({ data, socials }) => {
   const { language } = UseGeneral();
@@ -60,7 +82,7 @@ const ContactUs = ({ data, socials }) => {
         setMessage(res.message || "Error");
         setMesSuc(false);
       }
-    } catch (error) {
+    } catch {
       setMessage("Error");
       setMesSuc(false);
     } finally {
@@ -80,6 +102,59 @@ const ContactUs = ({ data, socials }) => {
   const arabicDigits = {
     0: "٠", 1: "١", 2: "٢", 3: "٣", 4: "٤", 5: "٥", 6: "٦", 7: "٧", 8: "٨", 9: "٩",
   };
+
+  const formatContactNumber = (value) => {
+    const text = String(value || "").trim();
+    if (language !== "ar" || !text) {
+      return text;
+    }
+
+    const localized = text.replace(/\d/g, (digit) => arabicDigits[digit]);
+    return /\d/.test(text) ? localized.split(/\s+/).reverse().join(" ") : localized;
+  };
+
+  const contactAddress =
+    language == "ar"
+      ? firstText(
+          data?.locationAr,
+          data?.addressAr,
+          data?.location_ar,
+          data?.address_ar,
+          CONTACT_FALLBACKS.addressAr,
+          data?.location,
+          data?.address
+        )
+      : firstText(
+          data?.locationEn,
+          data?.addressEn,
+          data?.location_en,
+          data?.address_en,
+          data?.location,
+          data?.address,
+          CONTACT_FALLBACKS.addressEn
+        );
+  const contactPhone = firstText(
+    data?.servicePhone,
+    data?.phone_1,
+    data?.phone,
+    CONTACT_FALLBACKS.phone
+  );
+  const contactFax = firstText(
+    data?.fax,
+    data?.phone_2,
+    data?.phone2,
+    CONTACT_FALLBACKS.fax
+  );
+  const contactEmail = firstText(
+    data?.email,
+    data?.email_support,
+    data?.mail,
+    CONTACT_FALLBACKS.email
+  );
+  const contactIntro =
+    language == "ar"
+      ? firstText(data?.contact_intro_ar, data?.contact_intro, data?.contactIntroAr)
+      : firstText(data?.contact_intro_en, data?.contact_intro, data?.contactIntroEn);
   
   return (
     <div className="me_cotactUs_page rowDiv">
@@ -110,39 +185,21 @@ const ContactUs = ({ data, socials }) => {
                 <div className="contact_info">
                   <div className="contact_info_row">
                     <div className="icon">{HouseIcon}</div>
-                    <div className="info">
-                      {language == "ar" ? data?.locationAr : data?.locationEn}
-                    </div>
+                    <div className="info">{contactAddress}</div>
                   </div>
                   <div className="contact_info_row">
                     <div className="icon">{SupportIcon}</div>
-                    <div className="info">
-                      {language == "ar"
-                        ? data?.servicePhone
-                            ?.replace(/\d/g, (digit) => arabicDigits[digit])
-                            ?.split(" ")
-                            ?.reverse()
-                            ?.join(" ")
-                        : data?.servicePhone}
-                    </div>
+                    <div className="info">{formatContactNumber(contactPhone)}</div>
                   </div>
                   <div className="contact_info_row">
                     <div className="icon">{Printer}</div>
-                    <div className="info">
-                      {language == "ar"
-                        ? data?.phone
-                            ?.replace(/\d/g, (digit) => arabicDigits[digit])
-                            ?.split(" ")
-                            ?.reverse()
-                            ?.join(" ")
-                        : data?.phone}
-                    </div>
+                    <div className="info">{formatContactNumber(contactFax)}</div>
                   </div>
                   <div className="contact_info_row">
                     <div style={{ color: "#035297" }} className="icon">
                       {Email}
                     </div>
-                    <div className="info">{data?.email}</div>
+                    <div className="info">{contactEmail}</div>
                   </div>
                   <div className="contact_social_parents">
                     {socials &&
@@ -190,11 +247,15 @@ const ContactUs = ({ data, socials }) => {
             {language == "ar" ? "اتصل بنا" : "Contact Us"}
           </div>
 
-          <div className="fill_up">
-            {language == "ar"
-              ? "املأ النموذج وسيقوم فريقنا بالرد عليك."
-              : "Fill up the form and our team will get back to you."}
-          </div>
+          <RichText
+            html={
+              contactIntro ||
+              (language == "ar"
+                ? "املأ النموذج وسيقوم فريقنا بالرد عليك."
+                : "Fill up the form and our team will get back to you.")
+            }
+            className="fill_up"
+          />
 
           <form
             onSubmit={(e) => {
@@ -274,16 +335,16 @@ const ContactUs = ({ data, socials }) => {
                 name=""
                 id=""
               >
-                <option value="pls">
+                <option value="">
                   {language == "ar"
                     ? "برجاء تحديد اختيار"
                     : "-Please choose an option-"}
                 </option>
-                <option value="Inquire About Receipes">
-                  {language != "ar"
-                    ? "Inquire About Receipes"
-                    : "الاستعلام عن الوجبات"}
-                </option>
+                {INQUIRY_OPTIONS.map((option) => (
+                  <option value={option.value} key={option.value}>
+                    {language == "ar" ? option.ar : option.en}
+                  </option>
+                ))}
               </select>
             </div>
 

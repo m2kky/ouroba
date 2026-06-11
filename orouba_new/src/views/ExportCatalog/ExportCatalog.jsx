@@ -3,6 +3,7 @@ import React from "react";
 import Breadcrumb from "../../components/BreadCumbsLinks";
 import ExportForm from "../Export/ExportForm/ExportForm";
 import UseGeneral from "../../hooks/useGeneral";
+import RichText from "../../components/RichText";
 
 const localizedSetting = (settings, key, language) => {
   const value =
@@ -44,7 +45,7 @@ const ExportCatalog = ({ exportCatData }) => {
       <div className="cat_expo_ban rowDiv">
         <div className="left">
           {title ? <h5>{title}</h5> : null}
-          {text ? <p>{text}</p> : null}
+          <RichText html={text} />
           {exportCatData?.catalogFile && buttonText ? (
             <em
               className="btn btn-primary"

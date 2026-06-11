@@ -5,6 +5,7 @@ import UseGeneral from "../../../hooks/useGeneral";
 import { useRouter } from "next/navigation";
 import { localizedPath } from "@/utils/routes";
 import { HOME_TEXT_FALLBACKS, localizedText, splitHeading } from "@/utils/siteText";
+import RichText from "../../../components/RichText";
 
 function WhyUs({ data }) {
   const { language } = UseGeneral();
@@ -40,7 +41,7 @@ function WhyUs({ data }) {
         </h1>
         <div className="hero_content">
           {subtitle ? <h5>{subtitle}</h5> : null}
-          {body ? <p style={{ padding: "10px" }}>{body}</p> : null}
+          <RichText html={body} className="hero_rich_text" style={{ padding: "10px" }} />
         </div>
         <button
           className="hone_sections_button d-flex"

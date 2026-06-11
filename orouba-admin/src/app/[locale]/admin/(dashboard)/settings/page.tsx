@@ -5,6 +5,7 @@ import AdminPageInfo from "@/components/admin/AdminPageInfo";
 import { useState, useEffect } from "react";
 import { Save, Plus, Trash2 } from "lucide-react";
 import { useAdminTranslation } from "@/components/admin/AdminTranslationProvider";
+import RichTextEditor from "@/components/admin/RichTextEditor";
 
 interface SiteSetting {
   key: string;
@@ -12,6 +13,47 @@ interface SiteSetting {
   valueAr: string | null;
   description: string | null;
 }
+
+const PLAIN_VALUE_KEY_PATTERN =
+  /(image|img|logo|map|url|link|href|file|phone|mobile|fax|email|whatsapp|number|tel|favicon|catalogfile|address)/i;
+
+const RICH_VALUE_KEY_PATTERN =
+  /(text|description|intro|note|quotation|how_we_are|vision|why|standards|world|catalog|certification|values|about)/i;
+
+const PLAIN_TEXT_SETTING_KEYS = new Set([
+  "site_description",
+  "copy_right",
+  "catalogTitle",
+  "catalogButtonText",
+  "contact_title",
+  "exportTitle",
+  "exportStandardsTitle",
+  "exportCertificationsTitle",
+  "exportCatalogButtonText",
+  "home_vision_title",
+  "home_why_title",
+  "home_why_subtitle",
+  "home_standards_title",
+  "home_world_title",
+  "production_steps_title",
+]);
+
+const isImageSettingKey = (key: string) => {
+  const normalizedKey = key.toLowerCase();
+  return (
+    normalizedKey.includes("image") ||
+    normalizedKey.includes("img") ||
+    normalizedKey.includes("logo") ||
+    normalizedKey.includes("map")
+  );
+};
+
+const isRichTextSettingKey = (key: string) => {
+  const trimmedKey = key.trim();
+  if (!trimmedKey || PLAIN_TEXT_SETTING_KEYS.has(trimmedKey)) return false;
+  if (PLAIN_VALUE_KEY_PATTERN.test(trimmedKey)) return false;
+  return RICH_VALUE_KEY_PATTERN.test(trimmedKey);
+};
 
 export default function SettingsPage() {
   const { t, dict } = useAdminTranslation();
@@ -70,6 +112,10 @@ export default function SettingsPage() {
           // ── Global Assets ──
           { key: "main_logo", desc: t("اللوجو الأساسي (الهيدر والفوتر)", "Main Logo (Header & Footer)"), valAr: "", valEn: "" },
           { key: "favicon_logo", desc: t("أيقونة المتصفح (Favicon)", "Browser Icon (Favicon)"), valAr: "", valEn: "" },
+          { key: "recipe_property_level_image", desc: t("أيقونة خاصية مستوى الوصفة", "Recipe level property icon"), valAr: "", valEn: "" },
+          { key: "recipe_property_prep_time_image", desc: t("أيقونة خاصية وقت التحضير", "Recipe prep time property icon"), valAr: "", valEn: "" },
+          { key: "recipe_property_cooking_time_image", desc: t("أيقونة خاصية وقت الطبخ", "Recipe cooking time property icon"), valAr: "", valEn: "" },
+          { key: "recipe_property_servings_image", desc: t("أيقونة خاصية عدد الأفراد", "Recipe servings property icon"), valAr: "", valEn: "" },
           // ── Product Types ──
           { key: "product_type_img", desc: t("صورة خلفية/بانر أصناف المنتجات", "Product types banner image"), valAr: "", valEn: "" },
           { key: "product_type_text", desc: t("نص مقدمة أصناف المنتجات", "Product types intro text"), valAr: "", valEn: "" },
@@ -225,6 +271,10 @@ export default function SettingsPage() {
     { key: "about_production_note", desc: t("ملاحظة أسفل مراحل الإنتاج", "Production steps bottom note") },
     { key: "quotation", desc: t("ملاحظة مراحل الإنتاج القديمة", "Legacy production steps note") },
     { key: "production_steps_title", desc: t("عنوان مراحل الإنتاج", "Production steps title") },
+    { key: "recipe_property_level_image", desc: t("أيقونة خاصية مستوى الوصفة", "Recipe level property icon") },
+    { key: "recipe_property_prep_time_image", desc: t("أيقونة خاصية وقت التحضير", "Recipe prep time property icon") },
+    { key: "recipe_property_cooking_time_image", desc: t("أيقونة خاصية وقت الطبخ", "Recipe cooking time property icon") },
+    { key: "recipe_property_servings_image", desc: t("أيقونة خاصية عدد الأفراد", "Recipe servings property icon") },
     { key: "product_type_img", desc: t("صورة بانر أصناف المنتجات", "Product types banner image") },
     { key: "product_type_text", desc: t("نص مقدمة أصناف المنتجات", "Product types intro text") },
     { key: "exportTitle", desc: t("عنوان صفحة التصدير", "Export page title") },
@@ -319,12 +369,8 @@ export default function SettingsPage() {
               </div>
             ) : (
               settings.map((setting, idx) => {
-                const normalizedKey = setting.key.toLowerCase();
-                const isImageKey =
-                  normalizedKey.includes("image") ||
-                  normalizedKey.includes("img") ||
-                  normalizedKey.includes("logo") ||
-                  normalizedKey.includes("map");
+                const isImageKey = isImageSettingKey(setting.key);
+                const isRichTextKey = isRichTextSettingKey(setting.key);
                 return (
                 <div key={idx} className="grid grid-cols-12 gap-4 items-start bg-gray-50 p-2 rounded-xl">
                   <div className="col-span-3 space-y-2">
@@ -375,23 +421,44 @@ export default function SettingsPage() {
                         </div>
                       </div>
                     </div>
-                  ) : (
+                  ) : isRichTextKey ? (
                     <>
                       <div className="col-span-4">
-                        <textarea
-                          placeholder={t("القيمة بالعربي", "Value in Arabic")}
+                        <RichTextEditor
                           value={setting.valueAr || ""}
-                          onChange={(e) => handleChange(idx, "valueAr", e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white resize-none h-20"
+                          onChange={(value) => handleChange(idx, "valueAr", value)}
+                          placeholder={t("Ø§Ù„Ù‚ÙŠÙ…Ø© Ø¨Ø§Ù„Ø¹Ø±Ø¨ÙŠ", "Value in Arabic")}
+                          dir="rtl"
                         />
                       </div>
                       <div className="col-span-4">
-                        <textarea
+                        <RichTextEditor
+                          value={setting.valueEn || ""}
+                          onChange={(value) => handleChange(idx, "valueEn", value)}
+                          placeholder="Value in English"
+                          dir="ltr"
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="col-span-4">
+                        <input
+                          type="text"
+                          placeholder={t("القيمة بالعربي", "Value in Arabic")}
+                          value={setting.valueAr || ""}
+                          onChange={(e) => handleChange(idx, "valueAr", e.target.value)}
+                          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white"
+                        />
+                      </div>
+                      <div className="col-span-4">
+                        <input
+                          type="text"
                           placeholder="Value in English"
                           value={setting.valueEn || ""}
                           dir="ltr"
                           onChange={(e) => handleChange(idx, "valueEn", e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white resize-none h-20"
+                          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white"
                         />
                       </div>
                     </>

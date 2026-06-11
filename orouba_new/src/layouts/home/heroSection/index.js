@@ -5,6 +5,7 @@ import UseGeneral from "../../../hooks/useGeneral";
 import { useRouter } from "next/navigation";
 import { localizedPath } from "@/utils/routes";
 import { HOME_TEXT_FALLBACKS, localizedText, splitHeading } from "@/utils/siteText";
+import RichText from "../../../components/RichText";
 
 function Hero({ data }) {
   const { language } = UseGeneral();
@@ -32,7 +33,7 @@ function Hero({ data }) {
           {titleParts.first}
           {titleParts.rest ? <span>{titleParts.rest}</span> : null}
         </h1>
-        {visionText ? <p>{visionText}</p> : null}
+        <RichText html={visionText} className="hero_rich_text" />
         <button
           className="hone_sections_button d-flex"
           onClick={() => router.push(localizedPath("/about/whoWeAre", language))}

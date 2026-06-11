@@ -1,5 +1,6 @@
 "use client";
 import AdminPageInfo from "@/components/admin/AdminPageInfo";
+import RichTextFormField from "@/components/admin/RichTextFormField";
 
 
 import { useState, useEffect } from "react";
@@ -346,26 +347,19 @@ export default function ProductsPage() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">{dict.common.descriptionAr}</label>
-                    <textarea
-                      name="descriptionAr"
-                      defaultValue={editingProduct?.descriptionAr}
-                      className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orouba-blue/20 outline-none resize-none"
-                      rows={3}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">{dict.common.descriptionEn}</label>
-                    <textarea
-                      name="descriptionEn"
-                      defaultValue={editingProduct?.descriptionEn}
-                      dir="ltr"
-                      className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orouba-blue/20 outline-none resize-none"
-                      rows={3}
-                    />
-                  </div>
+                <div className="grid grid-cols-1 gap-4">
+                  <RichTextFormField
+                    name="descriptionAr"
+                    label={dict.common.descriptionAr}
+                    defaultValue={editingProduct?.descriptionAr || ""}
+                    dir="rtl"
+                  />
+                  <RichTextFormField
+                    name="descriptionEn"
+                    label={dict.common.descriptionEn}
+                    defaultValue={editingProduct?.descriptionEn || ""}
+                    dir="ltr"
+                  />
                 </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

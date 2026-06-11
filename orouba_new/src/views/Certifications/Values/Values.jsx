@@ -2,6 +2,7 @@
 import React from "react";
 import UseGeneral from "../../../hooks/useGeneral";
 import Value from "./Value/Value";
+import RichText from "../../../components/RichText";
 
 const Values = ({ valuesData, introText }) => {
   const { language } = UseGeneral();
@@ -24,7 +25,7 @@ const Values = ({ valuesData, introText }) => {
           </>
         )}
       </h4>
-      <p dangerouslySetInnerHTML={{ __html: introText || fallbackIntro }} />
+      <RichText html={introText || fallbackIntro} />
       <div className="values">
         {valuesData &&
           valuesData.map((item, index) => {

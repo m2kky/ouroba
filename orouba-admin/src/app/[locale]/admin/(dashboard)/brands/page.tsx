@@ -1,8 +1,9 @@
 "use client";
 import AdminPageInfo from "@/components/admin/AdminPageInfo";
+import RichTextFormField from "@/components/admin/RichTextFormField";
 
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import DataTable, { Column } from "@/components/admin/DataTable";
 import { Trash2, Edit, Plus, Image as ImageIcon, Eye, EyeOff } from "lucide-react";
 import Image from "next/image";
@@ -18,6 +19,7 @@ interface Brand {
   brandTextEn: string | null;
   image: string | null;
   imageMain: string | null;
+  colorBrand: string;
   colorHover: string;
   number: number;
   isHidden: boolean;
@@ -250,7 +252,7 @@ export default function BrandsPage() {
       {/* Add / Edit Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 overflow-y-auto">
-          <div className="bg-white rounded-2xl w-full max-w-2xl overflow-hidden shadow-xl my-8">
+          <div className="bg-white rounded-2xl w-full max-w-4xl overflow-hidden shadow-xl my-8">
             <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
               <h3 className="text-xl font-bold text-gray-900">
                 {editingBrand ? dict.common.edit : dict.common.add}
@@ -314,48 +316,34 @@ export default function BrandsPage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">{dict.common.descriptionAr}</label>
-                  <textarea
-                    name="descriptionAr"
-                    defaultValue={editingBrand?.descriptionAr}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orouba-blue/20 focus:border-orouba-blue outline-none resize-none"
-                    rows={3}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">{dict.common.descriptionEn}</label>
-                  <textarea
-                    name="descriptionEn"
-                    defaultValue={editingBrand?.descriptionEn}
-                    dir="ltr"
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orouba-blue/20 focus:border-orouba-blue outline-none resize-none"
-                    rows={3}
-                  />
-                </div>
+              <div className="grid grid-cols-1 gap-4">
+                <RichTextFormField
+                  name="descriptionAr"
+                  label={dict.common.descriptionAr}
+                  defaultValue={editingBrand?.descriptionAr || ""}
+                  dir="rtl"
+                />
+                <RichTextFormField
+                  name="descriptionEn"
+                  label={dict.common.descriptionEn}
+                  defaultValue={editingBrand?.descriptionEn || ""}
+                  dir="ltr"
+                />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">{t("نص تفصيلي (عربي) - اختياري", "Detailed Text (Arabic) - Optional")}</label>
-                  <textarea
-                    name="brandTextAr"
-                    defaultValue={editingBrand?.brandTextAr || ""}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orouba-blue/20 focus:border-orouba-blue outline-none resize-none"
-                    rows={4}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">{t("نص تفصيلي (إنجليزي) - اختياري", "Detailed Text (English) - Optional")}</label>
-                  <textarea
-                    name="brandTextEn"
-                    defaultValue={editingBrand?.brandTextEn || ""}
-                    dir="ltr"
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orouba-blue/20 focus:border-orouba-blue outline-none resize-none"
-                    rows={4}
-                  />
-                </div>
+              <div className="grid grid-cols-1 gap-4">
+                <RichTextFormField
+                  name="brandTextAr"
+                  label={t("نص تفصيلي (عربي) - اختياري", "Detailed Text (Arabic) - Optional")}
+                  defaultValue={editingBrand?.brandTextAr || ""}
+                  dir="rtl"
+                />
+                <RichTextFormField
+                  name="brandTextEn"
+                  label={t("نص تفصيلي (إنجليزي) - اختياري", "Detailed Text (English) - Optional")}
+                  defaultValue={editingBrand?.brandTextEn || ""}
+                  dir="ltr"
+                />
               </div>
 
               <div className="space-y-4 border-t pt-4">

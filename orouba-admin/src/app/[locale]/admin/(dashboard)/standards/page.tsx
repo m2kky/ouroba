@@ -1,5 +1,6 @@
 "use client";
 import AdminPageInfo from "@/components/admin/AdminPageInfo";
+import RichTextFormField from "@/components/admin/RichTextFormField";
 
 
 import { useState, useEffect } from "react";
@@ -16,6 +17,9 @@ interface Standard {
   isHidden: boolean;
   createdAt: string;
 }
+
+const stripHtml = (value?: string | null) =>
+  (value || "").replace(/<[^>]*>/g, " ").replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim();
 
 export default function StandardsPage() {
   const [items, setItems] = useState<Standard[]>([]);
@@ -75,13 +79,13 @@ export default function StandardsPage() {
   };;
 
   const filtered = items.filter(i =>
-    i.descriptionAr?.toLowerCase().includes(search.toLowerCase()) ||
-    i.descriptionEn?.toLowerCase().includes(search.toLowerCase())
+    stripHtml(i.descriptionAr).toLowerCase().includes(search.toLowerCase()) ||
+    stripHtml(i.descriptionEn).toLowerCase().includes(search.toLowerCase())
   );
 
   const columns: Column<Standard>[] = [
-    { key: "descriptionAr", label: "الوصف (عربي)", render: (item) => <span className="line-clamp-2">{item.descriptionAr}</span> },
-    { key: "descriptionEn", label: "الوصف (إنجليزي)", render: (item) => <span className="line-clamp-2">{item.descriptionEn}</span> },
+    { key: "descriptionAr", label: "الوصف (عربي)", render: (item) => <span className="line-clamp-2">{stripHtml(item.descriptionAr)}</span> },
+    { key: "descriptionEn", label: "الوصف (إنجليزي)", render: (item) => <span className="line-clamp-2">{stripHtml(item.descriptionEn)}</span> },
     { key: "image", label: "الصورة", render: (item) => item.image ? <img src={item.image} alt="" className="w-12 h-12 rounded object-cover" /> : <span className="text-gray-400">—</span> },
     {
       key: "isHidden",
@@ -146,20 +150,14 @@ export default function StandardsPage() {
 
       {showModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl w-full max-w-lg shadow-xl" dir="rtl">
+          <div className="bg-white rounded-2xl w-full max-w-3xl shadow-xl" dir="rtl">
             <div className="p-6 border-b flex justify-between items-center">
               <h3 className="text-xl font-bold">{editItem ? "تعديل" : "إضافة"} معيار</h3>
               <button onClick={() => { setShowModal(false); setEditItem(null); }} className="text-gray-400 hover:text-gray-600">✕</button>
             </div>
             <form onSubmit={handleSubmit} className="p-6 space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-1">الوصف (عربي)</label>
-                <textarea name="descriptionAr" defaultValue={editItem?.descriptionAr || ""} required rows={3} className="w-full border rounded-lg px-3 py-2" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-1">الوصف (إنجليزي)</label>
-                <textarea name="descriptionEn" defaultValue={editItem?.descriptionEn || ""} required rows={3} className="w-full border rounded-lg px-3 py-2" />
-              </div>
+              <RichTextFormField name="descriptionAr" label="الوصف (عربي)" defaultValue={editItem?.descriptionAr || ""} dir="rtl" required />
+              <RichTextFormField name="descriptionEn" label="الوصف (إنجليزي)" defaultValue={editItem?.descriptionEn || ""} dir="ltr" required />
               <div>
                 <label className="block text-sm font-medium mb-1">الصورة</label>
                 {editItem?.image && <img src={editItem.image} alt="" className="w-20 h-20 object-cover rounded mb-2" />}

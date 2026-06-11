@@ -1,5 +1,6 @@
 "use client";
 import AdminPageInfo from "@/components/admin/AdminPageInfo";
+import RichTextFormField from "@/components/admin/RichTextFormField";
 
 
 import { useState, useEffect } from "react";
@@ -250,7 +251,7 @@ export default function CategoriesPage() {
       {/* Add / Edit Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 overflow-y-auto">
-          <div className="bg-white rounded-2xl w-full max-w-2xl overflow-hidden shadow-xl my-8">
+          <div className="bg-white rounded-2xl w-full max-w-4xl overflow-hidden shadow-xl my-8">
             <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
               <h3 className="text-xl font-bold text-gray-900">
                 {editingCategory ? dict.common.edit : dict.common.add}
@@ -314,26 +315,19 @@ export default function CategoriesPage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">{dict.common.descriptionAr}</label>
-                  <textarea
-                    name="descriptionAr"
-                    defaultValue={editingCategory?.descriptionAr}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orouba-blue/20 focus:border-orouba-blue outline-none resize-none"
-                    rows={3}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1">{dict.common.descriptionEn}</label>
-                  <textarea
-                    name="descriptionEn"
-                    defaultValue={editingCategory?.descriptionEn}
-                    dir="ltr"
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orouba-blue/20 focus:border-orouba-blue outline-none resize-none"
-                    rows={3}
-                  />
-                </div>
+              <div className="grid grid-cols-1 gap-4">
+                <RichTextFormField
+                  name="descriptionAr"
+                  label={dict.common.descriptionAr}
+                  defaultValue={editingCategory?.descriptionAr || ""}
+                  dir="rtl"
+                />
+                <RichTextFormField
+                  name="descriptionEn"
+                  label={dict.common.descriptionEn}
+                  defaultValue={editingCategory?.descriptionEn || ""}
+                  dir="ltr"
+                />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

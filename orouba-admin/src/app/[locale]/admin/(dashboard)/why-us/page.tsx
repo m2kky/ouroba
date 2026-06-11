@@ -1,11 +1,15 @@
 "use client";
 import AdminPageInfo from "@/components/admin/AdminPageInfo";
+import RichTextFormField from "@/components/admin/RichTextFormField";
 
 import { useState, useEffect } from "react";
 import DataTable, { Column } from "@/components/admin/DataTable";
 import { Trash2, Edit, Plus, Eye, EyeOff } from "lucide-react";
 
 interface WhyUs { id: string; descriptionAr: string; descriptionEn: string; isHidden: boolean; }
+
+const stripHtml = (value?: string | null) =>
+  (value || "").replace(/<[^>]*>/g, " ").replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim();
 
 export default function WhyUsPage() {
   const [items, setItems] = useState<WhyUs[]>([]);
@@ -40,10 +44,10 @@ export default function WhyUsPage() {
     }
   };
 
-  const filtered = items.filter(i => i.descriptionAr?.includes(search) || i.descriptionEn?.toLowerCase().includes(search.toLowerCase()));
+  const filtered = items.filter(i => stripHtml(i.descriptionAr).includes(search) || stripHtml(i.descriptionEn).toLowerCase().includes(search.toLowerCase()));
   const columns: Column<WhyUs>[] = [
-    { key: "descriptionAr", label: "الوصف (عربي)", render: (i) => <span className="line-clamp-2">{i.descriptionAr}</span> },
-    { key: "descriptionEn", label: "الوصف (إنجليزي)", render: (i) => <span className="line-clamp-2">{i.descriptionEn}</span> },
+    { key: "descriptionAr", label: "الوصف (عربي)", render: (i) => <span className="line-clamp-2">{stripHtml(i.descriptionAr)}</span> },
+    { key: "descriptionEn", label: "الوصف (إنجليزي)", render: (i) => <span className="line-clamp-2">{stripHtml(i.descriptionEn)}</span> },
     { 
       key: "isHidden", 
       label: "الحالة", 
@@ -87,11 +91,11 @@ export default function WhyUsPage() {
       )}
       {showModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl w-full max-w-lg shadow-xl" dir="rtl">
+          <div className="bg-white rounded-2xl w-full max-w-3xl shadow-xl" dir="rtl">
             <div className="p-6 border-b flex justify-between items-center"><h3 className="text-xl font-bold">{editItem ? "تعديل" : "إضافة"}</h3><button onClick={() => { setShowModal(false); setEditItem(null); }} className="text-gray-400 hover:text-gray-600">✕</button></div>
             <form onSubmit={handleSubmit} className="p-6 space-y-4">
-              <div><label className="block text-sm font-medium mb-1">الوصف (عربي)</label><textarea name="descriptionAr" defaultValue={editItem?.descriptionAr || ""} required rows={3} className="w-full border rounded-lg px-3 py-2" /></div>
-              <div><label className="block text-sm font-medium mb-1">الوصف (إنجليزي)</label><textarea name="descriptionEn" defaultValue={editItem?.descriptionEn || ""} required rows={3} className="w-full border rounded-lg px-3 py-2" /></div>
+              <RichTextFormField name="descriptionAr" label="الوصف (عربي)" defaultValue={editItem?.descriptionAr || ""} dir="rtl" required />
+              <RichTextFormField name="descriptionEn" label="الوصف (إنجليزي)" defaultValue={editItem?.descriptionEn || ""} dir="ltr" required />
               <div className="flex items-center gap-2"><input type="checkbox" name="isHidden" id="isHidden" defaultChecked={editItem?.isHidden || false} className="rounded" /><label htmlFor="isHidden" className="text-sm">إخفاء</label></div>
               <div className="flex gap-3 pt-4"><button type="submit" className="flex-1 bg-orouba-blue text-white py-2.5 rounded-xl font-bold hover:bg-blue-800">{editItem ? "تحديث" : "إضافة"}</button><button type="button" onClick={() => { setShowModal(false); setEditItem(null); }} className="px-6 py-2.5 border rounded-xl text-gray-700 hover:bg-gray-50">إلغاء</button></div>
             </form>

@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import UseGeneral from "../../../hooks/useGeneral";
+import RichText from "../../../components/RichText";
 
 const localizedSetting = (settings, key, language) => {
   const value =
@@ -26,7 +27,7 @@ const ExportBanner = ({ exportData }) => {
         {title ? <h5>{title}</h5> : null}
         {description ? (
           <div className="texts">
-            <p dangerouslySetInnerHTML={{ __html: description }} />
+            <RichText html={description} />
           </div>
         ) : null}
       </div>

@@ -4,6 +4,7 @@ import UseGeneral from "../../../hooks/useGeneral";
 import Link from "next/link";
 import { WhiteArrowLeft } from "../../../assets/svgIcons";
 import { localizedPath } from "@/utils/routes";
+import RichText from "../../../components/RichText";
 
 const isVideoMedia = (src) =>
   typeof src === "string" && /\.(mp4|webm|ogg|mov|m4v)(\?|#|$)/i.test(src);
@@ -32,6 +33,10 @@ const pickBrandMedia = (brand, language) => {
 function WhyUs({ data, id }) {
   const { language } = UseGeneral();
   const mediaSrc = pickBrandMedia(data?.brand, language);
+  const brandDescription =
+    language == "ar" ? data?.brand?.descriptionAr : data?.brand?.descriptionEn;
+  const brandText =
+    language == "ar" ? data?.brand?.brandTextAr : data?.brand?.brandTextEn;
   return (
     <div className="hero_section d-flex flex-column justify-content-between align-items-center w-full rowDiv why_us_section brands_section">
       {mediaSrc && isVideoMedia(mediaSrc) ? (
@@ -45,11 +50,7 @@ function WhyUs({ data, id }) {
       ) : mediaSrc ? (
         <img src={mediaSrc} alt={language === "ar" ? data?.brand?.nameAr : data?.brand?.nameEn} />
       ) : null}
-      <p style={{ color: "white" }}>
-        {language == "ar"
-          ? data?.brand?.descriptionAr
-          : data?.brand?.descriptionEn}
-      </p>
+      <RichText html={brandDescription} style={{ color: "white" }} />
       <center
         className="rowDiv"
         style={{
@@ -96,24 +97,13 @@ function WhyUs({ data, id }) {
             fill="#FFF100"
           />
         </svg>}
-        <> {language == 'ar' ? (
-               data?.brand?.brandTextAr && data?.brand?.brandTextAr ? (
-                <div
-                className="whyUs-text"
-                style={{textAlign:"center"}}
-                  dangerouslySetInnerHTML={{
-                    __html:  data?.brand?.brandTextAr,
-                  }}
-                ></div>
-              ) : null
-            ) :  data?.brand?.brandTextEn &&  data?.brand?.brandTextEn?.length ? (
-              <div
-              style={{textAlign:"center"}}
-                dangerouslySetInnerHTML={{
-                  __html:  data?.brand?.brandTextEn,
-                }}
-              ></div>
-            ) : null}</>
+        {brandText ? (
+          <RichText
+            html={brandText}
+            className="whyUs-text"
+            style={{ textAlign: "center" }}
+          />
+        ) : null}
         
         {language == "ar" ?<svg
           xmlns="http://www.w3.org/2000/svg"

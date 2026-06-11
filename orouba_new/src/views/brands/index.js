@@ -1,26 +1,71 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { useRouter } from 'next/navigation';
 import styled from "styled-components";
 import { arrowLeftBrand, shadow } from "../../assets/svgIcons";
 import UseGeneral from "../../hooks/useGeneral";
 import CategoriesSlider from "../../layouts/reciepe/categories/brands";
-import Link from "next/link";
 import { ThreeDots } from "react-loader-spinner";
 import { localizedPath } from "@/utils/routes";
 
 const StyledDiv = styled.div`
-  color: white;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
     background-color: ${(props) => props.$hoverColor};
   }
+
+  &:hover h4,
+  &:hover .learnShadowMore,
+  &:hover .learnShadowMore span {
+    color: ${(props) => props.$hoverTextColor} !important;
+  }
+
+  &:hover .learnShadowMore svg path {
+    stroke: currentColor !important;
+  }
 `;
+
+const normalizeColor = (value) =>
+  typeof value === "string" ? value.trim() : "";
+
+const isDefaultHoverColor = (value) =>
+  ["#eee", "#eeeeee"].includes(value.toLowerCase());
+
+const resolveBrandHoverColor = (brand) => {
+  const colors = [brand?.colorBrand, brand?.color, brand?.colorHover]
+    .map(normalizeColor)
+    .filter(Boolean);
+
+  return colors.find((color) => !isDefaultHoverColor(color)) || colors[0] || "#035297";
+};
+
+const getHoverTextColor = (color) => {
+  const hex = normalizeColor(color).replace("#", "");
+
+  if (!/^[0-9a-f]{3}([0-9a-f]{3})?$/i.test(hex)) {
+    return "#ffffff";
+  }
+
+  const fullHex =
+    hex.length === 3
+      ? hex
+          .split("")
+          .map((char) => char + char)
+          .join("")
+      : hex;
+
+  const red = parseInt(fullHex.slice(0, 2), 16);
+  const green = parseInt(fullHex.slice(2, 4), 16);
+  const blue = parseInt(fullHex.slice(4, 6), 16);
+  const luminance = (0.299 * red + 0.587 * green + 0.114 * blue) / 255;
+
+  return luminance > 0.58 ? "#002f59" : "#ffffff";
+};
 
 const Brands = ({ data, brandData, products, categoryId, brandId }) => {
   const { language } = UseGeneral();
   const router = useRouter();
-  const [hoveredItem, setHoveredItem] = useState(null);
 
   const brandName = language == "ar" ? brandData?.nameAr : brandData?.nameEn;
   const currentCategory = data?.find(item => item.id === categoryId);
@@ -51,15 +96,18 @@ const Brands = ({ data, brandData, products, categoryId, brandId }) => {
       <div className="rowDiv gridDiv">
         {products && products.length ? (
           <div className="brandsImages brandsImagesGrid brands_block">
-            {products.map((itemRelation, index) => {
+            {products.map((itemRelation) => {
               const item = itemRelation.product;
+              const itemBrand = itemRelation?.brand || item?.brand || brandData;
+              const brandHoverColor = resolveBrandHoverColor(itemBrand);
+              const brandHoverTextColor = getHoverTextColor(brandHoverColor);
+
               return (
                 <StyledDiv
                   key={item.id}
                   className="receipe_block brand_block"
-                  $hoverColor={brandData?.colorHover}
-                  onMouseEnter={() => setHoveredItem(index)}
-                  onMouseLeave={() => setHoveredItem(null)}
+                  $hoverColor={brandHoverColor}
+                  $hoverTextColor={brandHoverTextColor}
                   onClick={() => router.push(localizedPath(`/products/${item.id}`, language))}
                 >
                   <img src={item?.images?.[0]?.url} alt="" />

@@ -1,13 +1,13 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { arrowLeft } from "../../../assets/svgIcons";
 import SectionTitle from "../../../components/sectionTitle";
-import ContentLoader from "react-content-loader";
 import Standard from "../../../components/standards";
 import Link from "next/link";
 import UseGeneral from "../../../hooks/useGeneral";
 import { localizedPath } from "@/utils/routes";
 import { HOME_TEXT_FALLBACKS, localizedText, splitHeading } from "@/utils/siteText";
+import RichText from "../../../components/RichText";
 
 function Standards({ data, siteinfo }) {
   const { language } = UseGeneral();
@@ -30,11 +30,7 @@ function Standards({ data, siteinfo }) {
     HOME_TEXT_FALLBACKS.learnMore
   );
   const titleParts = splitHeading(title);
-  const [standards, setStandards] = useState([]);
-
-  useEffect(() => {
-    setStandards(Array.isArray(data) ? data : []);
-  }, [data]);
+  const standards = Array.isArray(data) ? data : [];
 
   return (
     <div className="hero_section standard_section d-flex justify-content-between flex-column w-full homeStandard rowDiv">
@@ -55,7 +51,8 @@ function Standards({ data, siteinfo }) {
         ]}
       />
       {text ? (
-        <p
+        <RichText
+          html={text}
           className="text-center"
           style={{
             color: "var(--sec-color)",
@@ -65,15 +62,11 @@ function Standards({ data, siteinfo }) {
             fontWeight: "400",
             textAlign: "center  !important",
           }}
-        >
-          {text}
-        </p>
+        />
       ) : null}
       <div className="standardsImages d-flex justify-content-between">
-        {!standards ? (
-          <ContentLoader />
-        ) : standards?.length ? (
-          standards?.map((item, index) => {
+        {standards.length ? (
+          standards.map((item, index) => {
             return (
               <Standard
                 key={item?.id ?? index}

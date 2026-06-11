@@ -6,10 +6,24 @@ import { Trash2, Edit, Plus, Image as ImageIcon, Eye, EyeOff, Info } from "lucid
 import Image from "next/image";
 import { useAdminTranslation } from "@/components/admin/AdminTranslationProvider";
 import { getImageUrl } from "@/lib/api-client";
+import RichTextEditor from "@/components/admin/RichTextEditor";
 
 const PUBLIC_SITE_URL = process.env.NEXT_PUBLIC_PUBLIC_SITE_URL || "https://oroubafoods.com";
 
 type SectionType = "certificates" | "standards" | "values" | "why-choose-us" | "buildings" | "features" | "production-steps" | "section-texts";
+type TranslateFn = (ar: string, en: string) => string;
+type AboutItem = {
+  id: string;
+  image?: string | null;
+  titleAr?: string | null;
+  titleEn?: string | null;
+  descriptionAr?: string | null;
+  descriptionEn?: string | null;
+  textAr?: string | null;
+  textEn?: string | null;
+  isHidden?: boolean;
+  [key: string]: string | number | boolean | null | undefined;
+};
 
 interface SectionConfig {
   title: string;
@@ -17,12 +31,24 @@ interface SectionConfig {
   fields: {
     key: string;
     label: string;
-    type: "text" | "textarea" | "number" | "image";
+    type: "text" | "richtext" | "number" | "image";
     dir?: "rtl" | "ltr";
   }[];
 }
 
-const getSectionConfigs = (t: any): Record<SectionType, SectionConfig> => ({
+const stripHtml = (value: string | null | undefined) =>
+  String(value || "")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const formValue = (value: AboutItem[keyof AboutItem]) =>
+  typeof value === "string" || typeof value === "number" ? value : "";
+
+const getSectionConfigs = (t: TranslateFn): Record<SectionType, SectionConfig> => ({
   certificates: {
     title: t("الشهادات (Certificates)", "Certificates"),
     desc: t("إدارة شهادات الجودة والاعتمادات", "Manage quality certificates and accreditations"),
@@ -34,8 +60,8 @@ const getSectionConfigs = (t: any): Record<SectionType, SectionConfig> => ({
     title: t("معايير الجودة (Standards)", "Quality Standards"),
     desc: t("إدارة معايير الإنتاج والجودة", "Manage production and quality standards"),
     fields: [
-      { key: "descriptionAr", label: t("الوصف (عربي)", "Description (Arabic)"), type: "textarea", dir: "rtl" },
-      { key: "descriptionEn", label: t("الوصف (إنجليزي)", "Description (English)"), type: "textarea", dir: "ltr" },
+      { key: "descriptionAr", label: t("الوصف (عربي)", "Description (Arabic)"), type: "richtext", dir: "rtl" },
+      { key: "descriptionEn", label: t("الوصف (إنجليزي)", "Description (English)"), type: "richtext", dir: "ltr" },
       { key: "image", label: t("أيقونة/صورة", "Icon/Image"), type: "image" }
     ]
   },
@@ -45,8 +71,8 @@ const getSectionConfigs = (t: any): Record<SectionType, SectionConfig> => ({
     fields: [
       { key: "titleAr", label: t("العنوان (عربي)", "Title (Arabic)"), type: "text", dir: "rtl" },
       { key: "titleEn", label: t("العنوان (إنجليزي)", "Title (English)"), type: "text", dir: "ltr" },
-      { key: "descriptionAr", label: t("الوصف (عربي)", "Description (Arabic)"), type: "textarea", dir: "rtl" },
-      { key: "descriptionEn", label: t("الوصف (إنجليزي)", "Description (English)"), type: "textarea", dir: "ltr" },
+      { key: "descriptionAr", label: t("الوصف (عربي)", "Description (Arabic)"), type: "richtext", dir: "rtl" },
+      { key: "descriptionEn", label: t("الوصف (إنجليزي)", "Description (English)"), type: "richtext", dir: "ltr" },
       { key: "image", label: t("أيقونة/صورة", "Icon/Image"), type: "image" }
     ]
   },
@@ -54,8 +80,8 @@ const getSectionConfigs = (t: any): Record<SectionType, SectionConfig> => ({
     title: t("لماذا نحن؟ (Why Choose Us)", "Why Choose Us"),
     desc: t("إدارة أسباب اختيار العميل لمنتجاتنا", "Manage reasons why customers choose our products"),
     fields: [
-      { key: "descriptionAr", label: t("الوصف (عربي)", "Description (Arabic)"), type: "textarea", dir: "rtl" },
-      { key: "descriptionEn", label: t("الوصف (إنجليزي)", "Description (English)"), type: "textarea", dir: "ltr" }
+      { key: "descriptionAr", label: t("الوصف (عربي)", "Description (Arabic)"), type: "richtext", dir: "rtl" },
+      { key: "descriptionEn", label: t("الوصف (إنجليزي)", "Description (English)"), type: "richtext", dir: "ltr" }
     ]
   },
   buildings: {
@@ -64,8 +90,8 @@ const getSectionConfigs = (t: any): Record<SectionType, SectionConfig> => ({
     fields: [
       { key: "titleAr", label: t("العنوان (عربي)", "Title (Arabic)"), type: "text", dir: "rtl" },
       { key: "titleEn", label: t("العنوان (إنجليزي)", "Title (English)"), type: "text", dir: "ltr" },
-      { key: "descriptionAr", label: t("الوصف (عربي)", "Description (Arabic)"), type: "textarea", dir: "rtl" },
-      { key: "descriptionEn", label: t("الوصف (إنجليزي)", "Description (English)"), type: "textarea", dir: "ltr" },
+      { key: "descriptionAr", label: t("الوصف (عربي)", "Description (Arabic)"), type: "richtext", dir: "rtl" },
+      { key: "descriptionEn", label: t("الوصف (إنجليزي)", "Description (English)"), type: "richtext", dir: "ltr" },
       { key: "image", label: t("صورة المرفق", "Facility Image"), type: "image" }
     ]
   },
@@ -75,8 +101,8 @@ const getSectionConfigs = (t: any): Record<SectionType, SectionConfig> => ({
     fields: [
       { key: "titleAr", label: t("العنوان (عربي)", "Title (Arabic)"), type: "text", dir: "rtl" },
       { key: "titleEn", label: t("العنوان (إنجليزي)", "Title (English)"), type: "text", dir: "ltr" },
-      { key: "descriptionAr", label: t("الوصف (عربي)", "Description (Arabic)"), type: "textarea", dir: "rtl" },
-      { key: "descriptionEn", label: t("الوصف (إنجليزي)", "Description (English)"), type: "textarea", dir: "ltr" },
+      { key: "descriptionAr", label: t("الوصف (عربي)", "Description (Arabic)"), type: "richtext", dir: "rtl" },
+      { key: "descriptionEn", label: t("الوصف (إنجليزي)", "Description (English)"), type: "richtext", dir: "ltr" },
       { key: "image", label: t("أيقونة/صورة", "Icon/Image"), type: "image" }
     ]
   },
@@ -84,8 +110,8 @@ const getSectionConfigs = (t: any): Record<SectionType, SectionConfig> => ({
     title: t("خطوات الإنتاج (Production Steps)", "Production Steps"),
     desc: t("إدارة مراحل عملية الإنتاج", "Manage production process stages"),
     fields: [
-      { key: "textAr", label: t("النص (عربي)", "Text (Arabic)"), type: "textarea", dir: "rtl" },
-      { key: "textEn", label: t("النص (إنجليزي)", "Text (English)"), type: "textarea", dir: "ltr" },
+      { key: "textAr", label: t("النص (عربي)", "Text (Arabic)"), type: "richtext", dir: "rtl" },
+      { key: "textEn", label: t("النص (إنجليزي)", "Text (English)"), type: "richtext", dir: "ltr" },
       { key: "number", label: t("رقم الخطوة (الترتيب)", "Step Number (Order)"), type: "number" },
       { key: "image", label: t("صورة الخطوة", "Step Image"), type: "image" }
     ]
@@ -96,8 +122,8 @@ const getSectionConfigs = (t: any): Record<SectionType, SectionConfig> => ({
     fields: [
       { key: "titleAr", label: t("العنوان (عربي)", "Title (Arabic)"), type: "text", dir: "rtl" },
       { key: "titleEn", label: t("العنوان (إنجليزي)", "Title (English)"), type: "text", dir: "ltr" },
-      { key: "textAr", label: t("النص (عربي)", "Text (Arabic)"), type: "textarea", dir: "rtl" },
-      { key: "textEn", label: t("النص (إنجليزي)", "Text (English)"), type: "textarea", dir: "ltr" },
+      { key: "textAr", label: t("النص (عربي)", "Text (Arabic)"), type: "richtext", dir: "rtl" },
+      { key: "textEn", label: t("النص (إنجليزي)", "Text (English)"), type: "richtext", dir: "ltr" },
       { key: "number", label: t("رقم القسم (ترتيب)", "Section Number (Order)"), type: "number" }
     ]
   }
@@ -109,12 +135,13 @@ export default function DynamicAboutPage({ params }: { params: Promise<{ section
   const section = resolvedParams.section as SectionType;
   const config = getSectionConfigs(t)[section];
 
-  const [items, setItems] = useState<any[]>([]);
+  const [items, setItems] = useState<AboutItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingItem, setEditingItem] = useState<any | null>(null);
+  const [editingItem, setEditingItem] = useState<AboutItem | null>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const [richTextValues, setRichTextValues] = useState<Record<string, string>>({});
 
   useEffect(() => {
     if (config) fetchItems();
@@ -128,7 +155,7 @@ export default function DynamicAboutPage({ params }: { params: Promise<{ section
     setIsLoading(true);
     try {
       const res = await fetch(`/api/admin/about/${section}`);
-      if (res.ok) setItems(await res.json());
+        if (res.ok) setItems((await res.json()) as AboutItem[]);
     } catch (error) {
       console.error("Failed to fetch", error);
     } finally {
@@ -186,6 +213,11 @@ export default function DynamicAboutPage({ params }: { params: Promise<{ section
 
     const formData = new FormData(e.currentTarget);
     formData.set("isHidden", (formData.get("isHidden") === "on").toString());
+    config.fields
+      .filter((field) => field.type === "richtext")
+      .forEach((field) => {
+        formData.set(field.key, richTextValues[field.key] || "");
+      });
 
     const url = editingItem ? `/api/admin/about/${section}/${editingItem.id}` : `/api/admin/about/${section}`;
     const method = editingItem ? "PUT" : "POST";
@@ -212,20 +244,35 @@ export default function DynamicAboutPage({ params }: { params: Promise<{ section
     }
   };
 
+  const openModal = (item: AboutItem | null) => {
+    const nextRichTextValues: Record<string, string> = {};
+
+    config.fields
+      .filter((field) => field.type === "richtext")
+      .forEach((field) => {
+        const value = item?.[field.key];
+        nextRichTextValues[field.key] = typeof value === "string" ? value : "";
+      });
+
+    setEditingItem(item);
+    setRichTextValues(nextRichTextValues);
+    setIsModalOpen(true);
+  };
+
   const filteredItems = items.filter(item => {
     const s = search.toLowerCase();
     if (!s) return true;
     return (
       (item.titleAr && item.titleAr.toLowerCase().includes(s)) ||
       (item.titleEn && item.titleEn.toLowerCase().includes(s)) ||
-      (item.descriptionAr && item.descriptionAr.toLowerCase().includes(s)) ||
-      (item.textAr && item.textAr.toLowerCase().includes(s)) ||
+      (item.descriptionAr && stripHtml(item.descriptionAr).toLowerCase().includes(s)) ||
+      (item.textAr && stripHtml(item.textAr).toLowerCase().includes(s)) ||
       (item.image && item.image.toLowerCase().includes(s))
     );
   });
 
-  const generateColumns = (): Column<any>[] => {
-    const cols: Column<any>[] = [];
+  const generateColumns = (): Column<AboutItem>[] => {
+    const cols: Column<AboutItem>[] = [];
     
     if (config.fields.some(f => f.key === "image")) {
       cols.push({ 
@@ -238,18 +285,18 @@ export default function DynamicAboutPage({ params }: { params: Promise<{ section
     }
 
     if (config.fields.some(f => f.key === "titleAr")) {
-      cols.push({ key: "titleAr", label: t("العنوان", "Title"), render: (item) => t(item.titleAr, item.titleEn) });
+      cols.push({ key: "titleAr", label: t("العنوان", "Title"), render: (item) => t(item.titleAr || "", item.titleEn || "") });
     } else if (config.fields.some(f => f.key === "descriptionAr")) {
       cols.push({ 
         key: "descriptionAr", 
         label: t("الوصف", "Description"),
-        render: (item) => <div className="truncate max-w-xs">{t(item.descriptionAr, item.descriptionEn)}</div>
+        render: (item) => <div className="truncate max-w-xs">{stripHtml(t(item.descriptionAr || "", item.descriptionEn || ""))}</div>
       });
     } else if (config.fields.some(f => f.key === "textAr")) {
       cols.push({ 
         key: "textAr", 
         label: t("النص", "Text"),
-        render: (item) => <div className="truncate max-w-xs">{t(item.textAr, item.textEn)}</div>
+        render: (item) => <div className="truncate max-w-xs">{stripHtml(t(item.textAr || "", item.textEn || ""))}</div>
       });
     }
 
@@ -258,7 +305,7 @@ export default function DynamicAboutPage({ params }: { params: Promise<{ section
       label: dict.common.status,
       render: (item) => (
         <button
-          onClick={() => handleToggleVisibility(item.id, item.isHidden)}
+          onClick={() => handleToggleVisibility(item.id, Boolean(item.isHidden))}
           className={`px-2.5 py-1 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer shadow-sm hover:scale-105 active:scale-95 flex items-center gap-1 ${
             item.isHidden 
               ? "bg-red-50 text-red-600 border border-red-200 hover:bg-red-100/70" 
@@ -287,8 +334,7 @@ export default function DynamicAboutPage({ params }: { params: Promise<{ section
         </div>
         <button
           onClick={() => {
-            setEditingItem(null);
-            setIsModalOpen(true);
+            openModal(null);
           }}
           className="flex items-center gap-2 bg-orouba-blue text-white px-4 py-2 rounded-xl font-bold hover:bg-orouba-blue/90 transition-colors shadow-sm"
         >
@@ -347,7 +393,7 @@ export default function DynamicAboutPage({ params }: { params: Promise<{ section
           searchPlaceholder={dict.common.search}
           actions={(item) => (
             <>
-              <button onClick={() => { setEditingItem(item); setIsModalOpen(true); }} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg" title={dict.common.edit}>
+              <button onClick={() => openModal(item)} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg" title={dict.common.edit}>
                 <Edit className="w-4 h-4" />
               </button>
               <button onClick={() => handleDelete(item.id)} className="p-2 text-red-600 hover:bg-red-50 rounded-lg" title={dict.common.delete}>
@@ -383,9 +429,9 @@ export default function DynamicAboutPage({ params }: { params: Promise<{ section
                           className="w-full text-sm border border-gray-200 rounded-lg p-1"
                           required={!editingItem && field.key === "image" && section === "certificates"}
                         />
-                        {editingItem?.[field.key] && (
+                        {typeof editingItem?.[field.key] === "string" && editingItem[field.key] && (
                           <div className="mt-2 text-xs text-green-600 flex items-center gap-2">
-                            <Image src={getImageUrl(editingItem[field.key])} alt="current" width={40} height={40} className="rounded object-cover" unoptimized />
+                            <Image src={getImageUrl(String(editingItem[field.key]))} alt="current" width={40} height={40} className="rounded object-cover" unoptimized />
                             {t("صورة حالية مرفوعة", "Current image uploaded")}
                           </div>
                         )}
@@ -393,16 +439,19 @@ export default function DynamicAboutPage({ params }: { params: Promise<{ section
                     );
                   }
 
-                  if (field.type === "textarea") {
+                  if (field.type === "richtext") {
                     return (
                       <div key={field.key} className="col-span-1 md:col-span-2">
                         <label className="block text-sm font-semibold text-gray-700 mb-1">{field.label}</label>
-                        <textarea
-                          name={field.key}
-                          defaultValue={editingItem?.[field.key] || ""}
+                        <RichTextEditor
+                          value={richTextValues[field.key] || ""}
+                          onChange={(value) =>
+                            setRichTextValues((current) => ({
+                              ...current,
+                              [field.key]: value,
+                            }))
+                          }
                           dir={field.dir}
-                          rows={3}
-                          className="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none resize-none"
                         />
                       </div>
                     );
@@ -414,7 +463,7 @@ export default function DynamicAboutPage({ params }: { params: Promise<{ section
                       <input
                         type={field.type}
                         name={field.key}
-                        defaultValue={editingItem?.[field.key] || ""}
+                        defaultValue={formValue(editingItem?.[field.key])}
                         dir={field.dir}
                         className="w-full px-4 py-2 border border-gray-200 rounded-lg outline-none"
                       />

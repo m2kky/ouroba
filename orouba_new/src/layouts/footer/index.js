@@ -12,13 +12,11 @@ import {
   SupportIcon,
 } from "../../assets/svgIcons";
 import { localizedPath } from "@/utils/routes";
+import footerLogo from "../../../footer_logo.ddae0bf40dad21fa904a.png";
 
 const Footer = ({ siteinfo = {}, socialParents = [], brands = [] }) => {
   const pageData = siteinfo || {};
-  const { language, data } = UseGeneral();
-  const footerLogoSrc = [pageData?.main_logo, pageData?.logo, data?.logo].find(
-    (src) => typeof src === "string" && src.trim()
-  );
+  const { language } = UseGeneral();
   const [openedMenu, setOpenedMenu] = useState(null);
   const [menus, setMenus] = useState(["brandatna", "linkatna", "baynatna"]);
   const footerBrands = useMemo(
@@ -84,17 +82,16 @@ const Footer = ({ siteinfo = {}, socialParents = [], brands = [] }) => {
         <div className="row footer_elements">
           <div className="footer_element">
             <div className="single_footer single_footer_address">
-              {footerLogoSrc ? (
-                <img
-                  src={footerLogoSrc}
-                  alt="Orouba Foods"
-                  style={{
-                    width: "222px",
-                    height: "203px",
-                    objectFit: "contain",
-                  }}
-                />
-              ) : null}
+              <img
+                src={footerLogo.src}
+                alt="Orouba Foods"
+                style={{
+                  width: "270px",
+                  maxWidth: "100%",
+                  height: "auto",
+                  objectFit: "contain",
+                }}
+              />
             </div>
           </div>
           <div className="footer_element">

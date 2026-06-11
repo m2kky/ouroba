@@ -86,6 +86,79 @@ html {
   max-width: 100vw;
 }
 
+.certification_values,
+.certification_values .values {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+.certification_values .value,
+.certification_values .value * {
+  box-sizing: border-box;
+}
+
+.certification_values .value h5,
+.certification_values .value p {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+@media (max-width: 768px) {
+  .certification_values {
+    width: 100%;
+    padding-inline: 16px;
+  }
+
+  .certification_values > p {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-wrap: anywhere;
+  }
+
+  .certification_values .values {
+    width: 100% !important;
+    padding-inline: 0 !important;
+    align-items: center !important;
+    gap: 36px !important;
+  }
+
+  .certification_values .value {
+    width: min(100%, 380px) !important;
+    max-width: calc(100vw - 32px) !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 440px;
+    padding: 34px 18px !important;
+    overflow: hidden !important;
+  }
+
+  .certification_values .value img {
+    width: min(96px, 28vw) !important;
+    height: auto !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+  }
+
+  .certification_values .value h5 {
+    width: 100% !important;
+    margin-inline: auto !important;
+    font-size: clamp(26px, 7.5vw, 36px) !important;
+    line-height: 1.25 !important;
+    text-align: center !important;
+  }
+
+  .certification_values .value p {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-inline: auto !important;
+    padding-inline: 0 !important;
+    font-size: clamp(16px, 4.6vw, 20px) !important;
+    line-height: 1.75 !important;
+    text-align: center !important;
+  }
+}
+
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -123,7 +196,7 @@ body .headerImage {
 
 body.arVersion .headerImage,
 body .headerImage.active {
-  left: clamp(-96px, -4vw, -34px) !important;
+  left: clamp(-216px, -10.5vw, -130px) !important;
   right: auto !important;
   rotate: 0deg !important;
   transform: none !important;
@@ -131,7 +204,7 @@ body .headerImage.active {
 
 body.enVersion .headerImage {
   left: auto !important;
-  right: clamp(-96px, -4vw, -34px) !important;
+  right: clamp(-216px, -10.5vw, -130px) !important;
   rotate: 0deg !important;
   transform: scaleX(-1) !important;
 }
@@ -163,11 +236,11 @@ body .headerImage img:nth-child(2) {
 
   body.arVersion .headerImage,
   body .headerImage.active {
-    left: -42px !important;
+    left: -62px !important;
   }
 
   body.enVersion .headerImage {
-    right: -42px !important;
+    right: -62px !important;
   }
 }
 
@@ -178,11 +251,11 @@ body .headerImage img:nth-child(2) {
 
   body.arVersion .headerImage,
   body .headerImage.active {
-    left: -34px !important;
+    left: -52px !important;
   }
 
   body.enVersion .headerImage {
-    right: -34px !important;
+    right: -52px !important;
   }
 }
 
@@ -190,6 +263,20 @@ body .headerImage img:nth-child(2) {
   body.enVersion .headerBackground .HeaderIcons {
     right: 0 !important;
   }
+}
+
+.me_cotactUs_page .left_content .contact_info {
+  overflow: visible !important;
+  width: min(560px, calc(100% - 32px)) !important;
+}
+
+.me_cotactUs_page .left_content .contact_info .contact_info_row {
+  align-items: flex-start !important;
+}
+
+.me_cotactUs_page .left_content .contact_info .contact_info_row .info {
+  overflow-wrap: anywhere !important;
+  white-space: normal !important;
 }
 
 .me_cotactUs_page .contact_social_parents {
@@ -362,32 +449,46 @@ body.enVersion .recipe_details .feature_item {
 
 .aboutFactoryImage {
   display: block !important;
-  width: min(980px, 100%) !important;
+  width: min(1180px, 100%) !important;
   max-width: 100% !important;
   height: auto !important;
-  max-height: 560px !important;
+  max-height: 680px !important;
   object-fit: contain !important;
   margin: 0 auto !important;
+}
+
+.whowearestylesh3,
+.buildingsContainer .buildingRow h4 {
+  color: #035297 !important;
+  font-family: Amaranth, Cairo, sans-serif !important;
+  font-weight: 800 !important;
+}
+
+.buildingsContainer .buildingRow h4 {
+  font-size: 28px !important;
+  line-height: 1.25 !important;
 }
 
 .AreaRow .rowBoxes {
   display: flex !important;
   flex-direction: column !important;
   gap: 62px !important;
+  max-width: 1180px !important;
+  margin-inline: auto !important;
 }
 
 .AreaRow .aboutFeatureRow {
   display: flex !important;
   justify-content: center !important;
   align-items: flex-start !important;
-  gap: 58px 96px !important;
+  gap: 58px 72px !important;
   width: 100% !important;
   margin-inline: auto !important;
 }
 
 .AreaRow .aboutFeatureItem {
-  flex: 0 1 360px !important;
-  max-width: 390px !important;
+  flex: 0 1 calc((100% - 144px) / 3) !important;
+  max-width: 360px !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
@@ -420,6 +521,49 @@ body.enVersion .recipe_details .feature_item {
   font-size: 18px !important;
   line-height: 1.8 !important;
   text-align: center !important;
+}
+
+.rich-text-content {
+  color: inherit;
+  line-height: inherit;
+}
+
+.rich-text-content p {
+  margin: 0 0 0.8em;
+}
+
+.rich-text-content p:last-child {
+  margin-bottom: 0;
+}
+
+.rich-text-content ul,
+.rich-text-content ol {
+  margin: 0.5em 0 0.8em;
+  padding-inline-start: 1.4em;
+}
+
+.rich-text-content strong {
+  font-weight: 800;
+}
+
+.rich-text-content em {
+  font-style: italic;
+}
+
+.rich-text-content .ql-align-center {
+  text-align: center;
+}
+
+.rich-text-content .ql-align-right {
+  text-align: right;
+}
+
+.rich-text-content .ql-align-left {
+  text-align: left;
+}
+
+.rich-text-content .ql-direction-rtl {
+  direction: rtl;
 }
 
 @media (max-width: 768px) {
@@ -617,10 +761,10 @@ body #products_types_info .product-type-brand-logos a {
 }
 
 body #products_types_info .product-type-brand-logos img {
-  height: 52px !important;
+  height: 64px !important;
   margin: 0 !important;
   object-fit: contain !important;
-  width: 84px !important;
+  width: 104px !important;
 }
 
 .ProductTypeSmallSlider {

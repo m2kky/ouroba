@@ -9,6 +9,23 @@ import {
 
 export const dynamic = "force-dynamic";
 
+type ProductBrand = {
+  id?: string;
+  nameEn?: string;
+  nameAr?: string;
+};
+
+type ProductCategory = {
+  id?: string;
+  nameEn?: string;
+  nameAr?: string;
+  brand?: ProductBrand | null;
+};
+
+type ProductRecipeRelation = {
+  recipe?: unknown;
+};
+
 export default async function ProductDetailsPage({
   params,
 }: {
@@ -26,7 +43,7 @@ export default async function ProductDetailsPage({
   }
 
   const categoryRelation = productData.categories?.[0];
-  const category = categoryRelation?.category as any;
+  const category = categoryRelation?.category as ProductCategory | undefined;
   const brand = category?.brand;
 
   const breads = {
@@ -37,6 +54,10 @@ export default async function ProductDetailsPage({
     categoryNameEn: category?.nameEn || "",
     categoryNameAr: category?.nameAr || "",
   };
+  const relatedType = {
+    name_en: category?.nameEn || "",
+    name_ar: category?.nameAr || "",
+  };
 
   const sameProducts =
     brand?.id && productData.typeId
@@ -44,7 +65,9 @@ export default async function ProductDetailsPage({
       : [];
 
   // Recipes related to this product via recommendedRecipes relation
-  const recipes = productData.recommendedRecipes?.map((r: any) => r.recipe) || [];
+  const recipes =
+    productData.recommendedRecipes?.map((relation: ProductRecipeRelation) => relation.recipe) ||
+    [];
 
   return (
     <ProductTypeCategoryView
@@ -53,6 +76,7 @@ export default async function ProductDetailsPage({
       sameProducts={resolveMediaTree(sameProducts)}
       recipes={resolveMediaTree(recipes)}
       brandId={brand?.id}
+      relatedType={relatedType}
     />
   );
 }

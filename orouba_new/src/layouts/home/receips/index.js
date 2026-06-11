@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import ContentLoader from "react-content-loader";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SectionTitle from "../../../components/sectionTitle";
@@ -7,6 +7,9 @@ import UseGeneral from "../../../hooks/useGeneral";
 import { FreeMode, Navigation } from "swiper/modules";
 import { useRouter } from 'next/navigation';
 import { localizedPath } from "@/utils/routes";
+
+const firstText = (...values) =>
+  values.find((value) => typeof value === "string" && value.trim()) || "";
 
 const CustomPrevButton = ({ onClick }) => (
   <button className="custom-prev-button" onClick={onClick}>
@@ -57,6 +60,18 @@ function Recips({ withArrows, data }) {
   const { language } = UseGeneral();
   const naviagte = useRouter();
   const recipeCount = Array.isArray(data) ? Math.min(data.length, 7) : 0;
+  const recipeName = (item) =>
+    language == "ar"
+      ? firstText(item?.name_ar, item?.nameAr, item?.name)
+      : firstText(item?.name_en, item?.nameEn, item?.name);
+  const recipeImage = (item) =>
+    firstText(
+      item?.images?.[0]?.url,
+      item?.internal_image,
+      item?.internalImage,
+      item?.image
+    );
+
   return (
     <div className="hero_section pb-4 reciepe_section d-flex justify-content-between flex-column w-full rowDiv">
       {/* <img className='background_img' src="https://res.cloudinary.com/duovxefh6/image/upload/v1716715996/WhatsApp_Image_2024-05-26_at_11.01.20_c622f338-removebg-preview_endygb.png" alt="" /> */}
@@ -130,10 +145,8 @@ function Recips({ withArrows, data }) {
             data?.map((item, index) => {
               if (index < 7)
                 {
-                  const recipeImage = [
-                    item?.images?.[0]?.url,
-                    item?.internal_image,
-                  ].find((src) => typeof src === "string" && src.trim());
+                  const image = recipeImage(item);
+                  const name = recipeName(item);
 
                 return (
                   <SwiperSlide key={item.id}>
@@ -147,14 +160,14 @@ function Recips({ withArrows, data }) {
                         naviagte.push(localizedPath(`/recipe_details/${item.id}`, language))
                       }
                     >
-                      {recipeImage ? (
+                      {image ? (
                         <img
-                          src={recipeImage}
-                          alt={language == "ar" ? item?.name_ar : item?.name_en}
+                          src={image}
+                          alt={name}
                         />
                       ) : null}
                       <div className="reciepe_name">
-                        {language == "ar" ? item?.name_ar : item?.name_en}
+                        {name}
                       </div>
                     </div>
                   </SwiperSlide>

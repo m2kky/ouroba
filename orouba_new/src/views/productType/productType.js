@@ -4,6 +4,7 @@ import Link from "next/link";
 import Breadcrumb from "../../components/BreadCumbsLinks";
 import UseGeneral from "../../hooks/useGeneral";
 import { localizedPath } from "@/utils/routes";
+import RichText from "../../components/RichText";
 
 const BRAND_LOGOS_BY_ID = {
   5: "/basma.png",
@@ -20,12 +21,28 @@ const BRAND_LOGOS_BY_NAME = {
 };
 
 const PRODUCT_TYPE_ORDER = {
-  "frozen vegetables": 0,
-  "frozen beans": 1,
-  "frozen beans & grains": 1,
-  "frozen fruits": 2,
-  "pre-fried": 3,
-  "frozen half fried": 3,
+  "frozen fruits": 0,
+  "frozen fruit": 0,
+  "الفواكه المجمدة": 0,
+  "الفواكة المجمدة": 0,
+  "pre-fried": 1,
+  "pre fried": 1,
+  "frozen pre-fried": 1,
+  "frozen half fried": 1,
+  "half fried": 1,
+  "النصف مقلي": 1,
+  "نصف مقلي": 1,
+  "frozen vegetables": 2,
+  "frozen vegetable": 2,
+  "الخضروات المجمدة": 2,
+  "frozen beans": 3,
+  "frozen beans & grains": 3,
+  "frozen beans and grains": 3,
+  "frozen legumes": 3,
+  "frozen legumes & grains": 3,
+  "frozen legumes and grains": 3,
+  "البقوليات والحبوب المجمدة": 3,
+  "البقوليات المجمدة": 3,
 };
 
 const normalizedTitle = (value) =>
@@ -96,6 +113,23 @@ const getBrandLogoOrder = (item) => {
 const isUnresolvedLegacyImage = (src) =>
   String(src || "").includes("camp-coding.site/eloroba/storage/app/images/");
 
+const getProductTypeOrder = (item) => {
+  const titles = [
+    item?.titleEn,
+    item?.title_en,
+    item?.titleAr,
+    item?.title_ar,
+  ].map(normalizedTitle);
+
+  for (const title of titles) {
+    if (title in PRODUCT_TYPE_ORDER) {
+      return PRODUCT_TYPE_ORDER[title];
+    }
+  }
+
+  return 99;
+};
+
 function ProductType({ types, pageDataObj }) {
   const { language } = UseGeneral();
   const productTypeImage = pageDataObj?.product_type_img;
@@ -112,8 +146,8 @@ function ProductType({ types, pageDataObj }) {
           );
         })
         .sort((a, b) => {
-          const orderA = PRODUCT_TYPE_ORDER[normalizedTitle(a.item?.titleEn)] ?? 99;
-          const orderB = PRODUCT_TYPE_ORDER[normalizedTitle(b.item?.titleEn)] ?? 99;
+          const orderA = getProductTypeOrder(a.item);
+          const orderB = getProductTypeOrder(b.item);
           return orderA - orderB || a.originalIndex - b.originalIndex;
         })
         .map(({ item }) => item)
@@ -151,18 +185,19 @@ function ProductType({ types, pageDataObj }) {
             <h1 className="page_title" style={{ padding: "0" }}>
               {language == "ar" ? "أصناف المنتجات" : "Product Types"}
             </h1>
-            <p
+            <RichText
+              html={
+                language == "ar"
+                  ? pageDataObj?.product_type_text_ar
+                  : pageDataObj?.product_type_text_en
+              }
               style={{
                 color: "#002F59",
                 width: "80%",
                 fontSize: "18px",
                 marginTop: "16px",
               }}
-            >
-              {language == "ar"
-                ? pageDataObj?.product_type_text_ar
-                : pageDataObj?.product_type_text_en}
-            </p>
+            />
           </div>
 
           {visibleTypes.map((item, index) => {
@@ -204,11 +239,13 @@ function ProductType({ types, pageDataObj }) {
                 <div className="product_continer_text">
                   <div className="product_continer_text_data">
                     <h1>{language == "ar" ? item?.titleAr : item?.titleEn}</h1>
-                    <p>
-                      {language == "ar"
-                        ? item?.descriptionAr
-                        : item?.descriptionEn}
-                    </p>
+                    <RichText
+                      html={
+                        language == "ar"
+                          ? item?.descriptionAr
+                          : item?.descriptionEn
+                      }
+                    />
                     <div className="product_continer_text_data_img product-type-brand-logos">
                       {brandLogoItems.map((itCat, indCat) => {
                         const brandName =

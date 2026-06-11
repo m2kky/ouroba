@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Plus, Trash2, Save, Eye } from "lucide-react";
 import { Suspense } from "react";
 import { useAdminTranslation } from "@/components/admin/AdminTranslationProvider";
+import RichTextEditor from "@/components/admin/RichTextEditor";
 
 interface PopupButton {
   id: string;
@@ -199,11 +200,11 @@ function PopupEditorInner() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">{t("المحتوى (عربي)", "Content (Arabic)")}</label>
-                <textarea value={popup.contentAr} onChange={e => update("contentAr", e.target.value)} rows={3} className="w-full border rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none" />
+                <RichTextEditor value={popup.contentAr} onChange={(value) => update("contentAr", value)} dir="rtl" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">{t("المحتوى (إنجليزي)", "Content (English)")}</label>
-                <textarea value={popup.contentEn} onChange={e => update("contentEn", e.target.value)} rows={3} className="w-full border rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none" dir="ltr" />
+                <RichTextEditor value={popup.contentEn} onChange={(value) => update("contentEn", value)} dir="ltr" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">{t("رابط الصورة", "Image URL")}</label>
@@ -393,7 +394,12 @@ function PopupEditorInner() {
                   {/* Content */}
                   <div className="p-6 text-center" dir={locale === 'ar' ? 'rtl' : 'ltr'}>
                     {(locale === 'ar' ? popup.titleAr : popup.titleEn) && <h3 className="text-xl font-bold mb-2">{locale === 'ar' ? popup.titleAr : popup.titleEn}</h3>}
-                    {(locale === 'ar' ? popup.contentAr : popup.contentEn) && <p className="text-sm leading-relaxed opacity-80 mb-5">{locale === 'ar' ? popup.contentAr : popup.contentEn}</p>}
+                    {(locale === 'ar' ? popup.contentAr : popup.contentEn) && (
+                      <div
+                        className="text-sm leading-relaxed opacity-80 mb-5"
+                        dangerouslySetInnerHTML={{ __html: locale === 'ar' ? popup.contentAr : popup.contentEn }}
+                      />
+                    )}
                     {/* Buttons */}
                     {popup.buttons.length > 0 && (
                       <div className="flex flex-wrap gap-3 justify-center">

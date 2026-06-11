@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import RichText from "../RichText";
 function Standard({ icon, title, description, backgroundInternal }) {
   const iconSrc = typeof icon === "string" && icon.trim() ? icon : null;
   const backgroundSrc =
@@ -20,7 +21,7 @@ function Standard({ icon, title, description, backgroundInternal }) {
       ) : null}
       <div className="standard_texts">
         {/* <h4>{title}</h4>  */}
-        <p style={{textAlign:"center !important"}}>{description}</p>
+        <RichText html={description} style={{ textAlign: "center" }} />
       </div>
     </div>
   );

@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Breadcrumb from "../../components/BreadCumbsLinks";
 import UseGeneral from "../../hooks/useGeneral";
+import RichText from "../../components/RichText";
 
 const FEATURE_ORDER = [
   "area",
@@ -13,6 +14,9 @@ const FEATURE_ORDER = [
 
 const getLocalizedValue = (item, enKey, arKey, language) =>
   language == "en" ? item?.[enKey] : item?.[arKey];
+
+const firstImage = (...sources) =>
+  sources.find((source) => typeof source === "string" && source.trim());
 
 const normalizeText = (value) =>
   String(value || "")
@@ -107,7 +111,12 @@ export default function WhoWeAre({ aboutData }) {
     (a, b) => featureRank(a) - featureRank(b)
   );
   const productionStepGroups = productionGroups(productionSteps);
-  const heroImage = isSmaller ? siteData?.small_about_img : siteData?.about_image;
+  const heroImage = firstImage(
+    isSmaller ? siteData?.small_about_img : null,
+    siteData?.about_image,
+    siteData?.about_image_2,
+    siteData?.about_image_1
+  );
   const productionNote =
     language == "ar"
       ? siteData?.about_production_note_ar || siteData?.quotation_ar
@@ -174,17 +183,15 @@ export default function WhoWeAre({ aboutData }) {
                 >
                   {language == "en" ? item.titleEn : item.titleAr}
                 </h3>
-                <p
+                <RichText
+                  html={language == "en" ? item.textEn : item.textAr}
                   className="whowearestylesp"
-                  dangerouslySetInnerHTML={{
-                    __html: language == "en" ? item.textEn : item.textAr,
-                  }}
                   style={
                     language == "en"
                       ? { textAlign: "left", marginRight: "auto" }
                       : { textAlign: "right", marginLeft: "auto" }
                   }
-                ></p>
+                />
               </div>
             );
           })}
@@ -198,11 +205,9 @@ export default function WhoWeAre({ aboutData }) {
                 <div key={item.id} className={`col d-flex gap-2 ${"buildingRow"}`}>
                   <div>
                     <h4>{language == "en" ? item?.titleEn : item?.titleAr}</h4>
-                    <p>
-                      {language == "en"
-                        ? item?.descriptionEn
-                        : item?.descriptionAr}
-                    </p>
+                    <RichText
+                      html={language == "en" ? item?.descriptionEn : item?.descriptionAr}
+                    />
                   </div>
                 </div>
               );
@@ -226,11 +231,10 @@ export default function WhoWeAre({ aboutData }) {
                       <h5>
                         <b>{language == "en" ? item?.titleEn : item?.titleAr}</b>
                       </h5>
-                      <p className="w-75 aboutFeatureText">
-                        {language == "en"
-                          ? item?.descriptionEn
-                          : item?.descriptionAr}
-                      </p>
+                      <RichText
+                        html={language == "en" ? item?.descriptionEn : item?.descriptionAr}
+                        className="w-75 aboutFeatureText"
+                      />
                     </div>
                   ))}
                 </div>
@@ -320,9 +324,11 @@ export default function WhoWeAre({ aboutData }) {
                 />
               </svg>}
 
-            <p className="rowDiv centeralized" style={{ textAlign: "center" }}>
-              {productionNote}
-            </p>
+            <RichText
+              html={productionNote}
+              className="rowDiv centeralized"
+              style={{ textAlign: "center" }}
+            />
 
             {language == "ar" ? <svg
               xmlns="http://www.w3.org/2000/svg"

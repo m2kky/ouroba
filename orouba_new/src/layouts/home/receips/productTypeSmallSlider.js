@@ -8,6 +8,9 @@ import { FreeMode, Navigation } from "swiper/modules";
 import { useRouter } from 'next/navigation';
 import { localizedPath } from "@/utils/routes";
 
+const firstText = (...values) =>
+  values.find((value) => typeof value === "string" && value.trim()) || "";
+
 const CustomPrevButton = ({ onClick }) => (
   <button
     className="custom-prev-button-ProductTypeSmallSlider"
@@ -59,14 +62,19 @@ const CustomNextButton = ({ onClick }) => (
     }
   </button>
 );
-function ProductTypeSmallSlider({ withArrows, data, type, brandId }) {
+function ProductTypeSmallSlider({ withArrows, data, type }) {
   const { language } = UseGeneral();
   const router = useRouter();
   const productTypeCount = Array.isArray(data) ? data.length : 0;
+  const relatedNameEn = firstText(type?.name_en, type?.nameEn);
+  const relatedNameAr = firstText(type?.name_ar, type?.nameAr);
+
   const productName = (item) =>
-    language == "ar" ? item?.name_ar || item?.nameAr : item?.name_en || item?.nameEn;
+    language == "ar"
+      ? firstText(item?.name_ar, item?.nameAr, item?.name)
+      : firstText(item?.name_en, item?.nameEn, item?.name);
   const productImage = (item) =>
-    item?.images?.[0]?.url || item?.image || item?.internal_image || item?.internalImage;
+    firstText(item?.images?.[0]?.url, item?.image, item?.internal_image, item?.internalImage);
   const goToProduct = (item) => {
     if (item?.id) {
       router.push(localizedPath(`/products/${item.id}`, language));
@@ -82,7 +90,9 @@ function ProductTypeSmallSlider({ withArrows, data, type, brandId }) {
         onClick={() => goToProduct(item)}
       >
         {image ? <img src={image} alt={name} /> : null}
-        <div className="product_type_name">{name}</div>
+        <div className="product_type_name">
+          {name}
+        </div>
       </div>
     );
   };
@@ -93,8 +103,8 @@ function ProductTypeSmallSlider({ withArrows, data, type, brandId }) {
         rem={true}
         minColorWord={"Other Types Of "}
         minColorWordAr={"أنواع أخرى من "}
-        secondColorWord={type?.name_en}
-        secondColorWordAr={type?.name_ar}
+        secondColorWord={relatedNameEn}
+        secondColorWordAr={relatedNameAr}
         ru={true}
         classessName={
           [
