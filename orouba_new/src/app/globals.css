@@ -530,7 +530,7 @@ body.enVersion .recipe_details .feature_item {
   overflow-wrap: break-word !important;
   word-wrap: break-word !important;
   word-break: normal !important;
-  white-space: normal !important;
+  white-space: pre-wrap !important;
 }
 
 .rich-text-content * {
@@ -542,7 +542,7 @@ body.enVersion .recipe_details .feature_item {
 .rich-text-content p {
   margin: 0 0 0.8em;
   max-width: 100% !important;
-  white-space: normal !important;
+  white-space: pre-wrap !important;
 }
 
 .rich-text-content p:last-child {

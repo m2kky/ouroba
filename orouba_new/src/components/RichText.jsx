@@ -15,14 +15,15 @@ const escapeHtml = (value) =>
 export const richTextToHtml = (value) => {
   const text = String(value || "").trim();
   if (!text) return "";
-  if (hasHtml(text)) return text;
+  if (hasHtml(text)) return text.replace(/&nbsp;/g, " ");
 
   return text
     .split(/\n{2,}/)
     .map((paragraph) => paragraph.trim())
     .filter(Boolean)
     .map((paragraph) => `<p>${escapeHtml(paragraph).replace(/\n/g, "<br />")}</p>`)
-    .join("");
+    .join("")
+    .replace(/&nbsp;/g, " ");
 };
 
 export const stripRichText = (value) =>
