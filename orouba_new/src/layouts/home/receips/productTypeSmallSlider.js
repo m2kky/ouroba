@@ -4,12 +4,42 @@ import ContentLoader from "react-content-loader";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SectionTitle from "../../../components/sectionTitle";
 import UseGeneral from "../../../hooks/useGeneral";
-import { FreeMode, Navigation } from "swiper/modules";
+import { FreeMode } from "swiper/modules";
 import { useRouter } from 'next/navigation';
 import { localizedPath } from "@/utils/routes";
 
 const firstText = (...values) =>
   values.find((value) => typeof value === "string" && value.trim()) || "";
+
+const repeatForLoop = (items, minimumItems) => {
+  if (!Array.isArray(items) || !items.length) return [];
+  const repeatedItems = [...items];
+
+  while (repeatedItems.length < minimumItems) {
+    repeatedItems.push(...items);
+  }
+
+  return repeatedItems;
+};
+
+const ArrowIcon = ({ direction }) => (
+  <svg
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+  >
+    <path
+      d={direction === "next" ? "M9 5l7 7-7 7" : "M15 5l-7 7 7 7"}
+      stroke="currentColor"
+      strokeWidth="2.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
 const CustomPrevButton = ({ className = "", onClick }) => (
   <button
@@ -18,24 +48,7 @@ const CustomPrevButton = ({ className = "", onClick }) => (
     className={["custom-prev-button-ProductTypeSmallSlider", className].filter(Boolean).join(" ")}
     onClick={onClick}
   >
-    {
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="44"
-        height="36"
-        viewBox="0 0 44 36"
-        fill="none"
-      >
-        <path
-          d="M17.5508 10.5517L26.4473 18L17.5508 25.4482"
-          stroke="#035297"
-          strokeWidth="3"
-          strokeMiterlimit="10"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    }
+    <ArrowIcon direction="prev" />
   </button>
 );
 
@@ -46,42 +59,28 @@ const CustomNextButton = ({ className = "", onClick }) => (
     className={["custom-next-button-ProductTypeSmallSlider", className].filter(Boolean).join(" ")}
     onClick={onClick}
   >
-    {
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="43"
-        height="36"
-        viewBox="0 0 43 36"
-        fill="none"
-      >
-        <path
-          d="M25.9482 10.5517L17.0517 18L25.9482 25.4482"
-          stroke="#035297"
-          strokeWidth="3"
-          strokeMiterlimit="10"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    }
+    <ArrowIcon direction="next" />
   </button>
 );
 function ProductTypeSmallSlider({ withArrows, data, type }) {
   const { language } = UseGeneral();
   const router = useRouter();
-  const productTypeCount = Array.isArray(data) ? data.length : 0;
+  const desktopSwiperRef = React.useRef(null);
+  const mobileSwiperRef = React.useRef(null);
+  const productItems = Array.isArray(data) ? data : [];
+  const productTypeCount = productItems.length;
   const largeSlidesPerView =
     productTypeCount > 3 ? 3 : Math.max(1, productTypeCount - 1);
   const smallSlidesPerView =
     productTypeCount > 2 ? 2 : Math.max(1, productTypeCount - 1);
-  const desktopNavigation = {
-    prevEl: ".custom-prev-button-ProductTypeSmallSlider-desktop",
-    nextEl: ".custom-next-button-ProductTypeSmallSlider-desktop",
-  };
-  const mobileNavigation = {
-    prevEl: ".custom-prev-button-ProductTypeSmallSlider-mobile",
-    nextEl: ".custom-next-button-ProductTypeSmallSlider-mobile",
-  };
+  const shouldLoopDesktop = productTypeCount > largeSlidesPerView;
+  const shouldLoopMobile = productTypeCount > smallSlidesPerView;
+  const desktopSliderItems = shouldLoopDesktop
+    ? repeatForLoop(productItems, largeSlidesPerView * 2 + 1)
+    : productItems;
+  const mobileSliderItems = shouldLoopMobile
+    ? repeatForLoop(productItems, smallSlidesPerView * 2 + 1)
+    : productItems;
   const relatedNameEn = firstText(type?.name_en, type?.nameEn);
   const relatedNameAr = firstText(type?.name_ar, type?.nameAr);
 
@@ -139,11 +138,14 @@ function ProductTypeSmallSlider({ withArrows, data, type }) {
       />
       <div className="brandsImages">
         <Swiper
-          loop={productTypeCount > 4}
+          loop={shouldLoopDesktop}
+          loopAdditionalSlides={productTypeCount}
           className="brandLargeScreen"
-          navigation={desktopNavigation}
+          onSwiper={(swiper) => {
+            desktopSwiperRef.current = swiper;
+          }}
           slidesPerView={largeSlidesPerView}
-          modules={[Navigation, FreeMode]}
+          modules={[FreeMode]}
           breakpoints={{
             // when window width is >= 320px
             320: {
@@ -164,20 +166,23 @@ function ProductTypeSmallSlider({ withArrows, data, type }) {
         >
           {!data ? (
             <ContentLoader />
-          ) : data?.length ? (
-            data?.map((item) => (
-              <SwiperSlide key={item.id}>
+          ) : desktopSliderItems.length ? (
+            desktopSliderItems.map((item, index) => (
+              <SwiperSlide key={`${item.id}-${index}`}>
                 {renderProductType(item)}
               </SwiperSlide>
             ))
           ) : null}
         </Swiper>
         <Swiper
-          loop={productTypeCount > 3}
+          loop={shouldLoopMobile}
+          loopAdditionalSlides={productTypeCount}
           className="brandSmallScreen"
-          navigation={mobileNavigation}
+          onSwiper={(swiper) => {
+            mobileSwiperRef.current = swiper;
+          }}
           slidesPerView={smallSlidesPerView}
-          modules={[Navigation, FreeMode]}
+          modules={[FreeMode]}
           breakpoints={{
             // when window width is >= 320px
             320: {
@@ -198,9 +203,9 @@ function ProductTypeSmallSlider({ withArrows, data, type }) {
         >
           {!data ? (
             <ContentLoader />
-          ) : data?.length ? (
-            data?.map((item) => (
-              <SwiperSlide key={item.id}>
+          ) : mobileSliderItems.length ? (
+            mobileSliderItems.map((item, index) => (
+              <SwiperSlide key={`${item.id}-${index}`}>
                 {renderProductType(item)}
               </SwiperSlide>
             ))
@@ -220,12 +225,24 @@ function ProductTypeSmallSlider({ withArrows, data, type }) {
         {withArrows && productTypeCount > 1 && (
           <>
             <div className="productTypeSliderArrow productTypeSliderArrowDesktop">
-              <CustomPrevButton className="custom-prev-button-ProductTypeSmallSlider-desktop" />
-              <CustomNextButton className="custom-next-button-ProductTypeSmallSlider-desktop" />
+              <CustomPrevButton
+                className="custom-prev-button-ProductTypeSmallSlider-desktop"
+                onClick={() => desktopSwiperRef.current?.slidePrev()}
+              />
+              <CustomNextButton
+                className="custom-next-button-ProductTypeSmallSlider-desktop"
+                onClick={() => desktopSwiperRef.current?.slideNext()}
+              />
             </div>
             <div className="productTypeSliderArrow productTypeSliderArrowMobile">
-              <CustomPrevButton className="custom-prev-button-ProductTypeSmallSlider-mobile" />
-              <CustomNextButton className="custom-next-button-ProductTypeSmallSlider-mobile" />
+              <CustomPrevButton
+                className="custom-prev-button-ProductTypeSmallSlider-mobile"
+                onClick={() => mobileSwiperRef.current?.slidePrev()}
+              />
+              <CustomNextButton
+                className="custom-next-button-ProductTypeSmallSlider-mobile"
+                onClick={() => mobileSwiperRef.current?.slideNext()}
+              />
             </div>
           </>
         )}

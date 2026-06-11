@@ -360,7 +360,7 @@ body .headerImage img:nth-child(2) {
 .ProductTypeSmallSlider .brandsImages {
   max-width: 100% !important;
   overflow: hidden !important;
-  padding-inline: 64px !important;
+  padding-inline: 84px !important;
   position: relative !important;
 }
 
@@ -404,7 +404,7 @@ body .headerImage img:nth-child(2) {
 .ProductTypeSmallSlider .productTypeSliderArrow {
   align-items: center !important;
   display: flex !important;
-  inset-inline: 0 !important;
+  inset-inline: 14px !important;
   justify-content: space-between !important;
   pointer-events: none !important;
   position: absolute !important;
@@ -415,19 +415,19 @@ body .headerImage img:nth-child(2) {
 
 .ProductTypeSmallSlider .productTypeSliderArrow button {
   align-items: center !important;
-  background: #fff100 !important;
-  border: 0 !important;
+  background: #d8f05e !important;
+  border: 2px solid rgba(255, 255, 255, 0.58) !important;
   border-radius: 50% !important;
-  box-shadow: 0 8px 24px rgba(0, 47, 89, 0.18) !important;
+  box-shadow: 0 10px 24px rgba(0, 47, 89, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.42) !important;
   color: #035297 !important;
   cursor: pointer !important;
   display: flex !important;
-  height: 48px !important;
+  height: 46px !important;
   justify-content: center !important;
   padding: 0 !important;
   pointer-events: auto !important;
-  transition: opacity 0.2s ease, transform 0.2s ease !important;
-  width: 48px !important;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease, transform 0.2s ease !important;
+  width: 46px !important;
 }
 
 .ProductTypeSmallSlider .productTypeSliderArrow button.custom-prev-button-ProductTypeSmallSlider,
@@ -442,7 +442,14 @@ body .headerImage img:nth-child(2) {
 }
 
 .ProductTypeSmallSlider .productTypeSliderArrow button:hover {
-  transform: translateY(-1px) !important;
+  background: #e6f875 !important;
+  box-shadow: 0 12px 28px rgba(0, 47, 89, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+  transform: translateY(-2px) !important;
+}
+
+.ProductTypeSmallSlider .productTypeSliderArrow button:focus-visible {
+  outline: 3px solid rgba(3, 82, 151, 0.28) !important;
+  outline-offset: 3px !important;
 }
 
 .ProductTypeSmallSlider .productTypeSliderArrow button.swiper-button-disabled {
@@ -457,12 +464,20 @@ body .headerImage img:nth-child(2) {
 
 .ProductTypeSmallSlider .productTypeSliderArrow button svg {
   display: block !important;
-  height: 28px !important;
-  width: 34px !important;
+  height: 18px !important;
+  pointer-events: none !important;
+  width: 18px !important;
 }
 
-body.arVersion .ProductTypeSmallSlider .productTypeSliderArrow {
+body.arVersion .ProductTypeSmallSlider .productTypeSliderArrow,
+body[dir="rtl"] .ProductTypeSmallSlider .productTypeSliderArrow {
   flex-direction: row-reverse !important;
+}
+
+body.arVersion .ProductTypeSmallSlider .productTypeSliderArrow button svg,
+body[dir="rtl"] .ProductTypeSmallSlider .productTypeSliderArrow button svg {
+  transform: scaleX(-1) !important;
+  transform-origin: center !important;
 }
 
 @media (max-width: 767px) {
@@ -483,12 +498,17 @@ body.arVersion .ProductTypeSmallSlider .productTypeSliderArrow {
 
   .ProductTypeSmallSlider .brandSmallScreen {
     display: block !important;
-    padding-inline: 52px !important;
+    padding-inline: 48px !important;
   }
 
   .ProductTypeSmallSlider .productTypeSliderArrow.productTypeSliderArrowMobile {
     display: flex !important;
-    inset-inline: 16px !important;
+    inset-inline: 2px !important;
+  }
+
+  .ProductTypeSmallSlider .productTypeSliderArrow button {
+    height: 42px !important;
+    width: 42px !important;
   }
 
   .ProductTypeSmallSlider .product_type {
