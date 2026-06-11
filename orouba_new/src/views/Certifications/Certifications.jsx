@@ -69,8 +69,8 @@ const Certifications = ({ certPageData }) => {
         }
       </h4>
       <div className="texts">
-        <RichText html={introText} />
-        <RichText html={detailsText} />
+        <RichText as="p" html={introText} />
+        <RichText as="p" html={detailsText} />
       </div>
       <ExportCertificatios certificationsData={certPageData?.certifications} showTit={false}/>
       <Values valuesData={certPageData?.values} introText={valuesIntro}/>

@@ -100,8 +100,9 @@ html {
 .certification_values .value h5,
 .certification_values .value p {
   max-width: 100%;
-  overflow-wrap: anywhere;
-  word-break: normal;
+  overflow-wrap: normal;
+  word-break: keep-all;
+  hyphens: none;
 }
 
 @media (max-width: 768px) {
@@ -113,7 +114,9 @@ html {
   .certification_values > p {
     width: 100% !important;
     max-width: 100% !important;
-    overflow-wrap: anywhere;
+    overflow-wrap: normal !important;
+    word-break: keep-all !important;
+    hyphens: none !important;
   }
 
   .certification_values .values {
@@ -275,8 +278,10 @@ body .headerImage img:nth-child(2) {
 }
 
 .me_cotactUs_page .left_content .contact_info .contact_info_row .info {
-  overflow-wrap: anywhere !important;
+  overflow-wrap: normal !important;
   white-space: normal !important;
+  word-break: keep-all !important;
+  hyphens: none !important;
 }
 
 .me_cotactUs_page .contact_social_parents {
@@ -527,22 +532,25 @@ body.enVersion .recipe_details .feature_item {
   color: inherit;
   line-height: inherit;
   max-width: 100% !important;
-  overflow-wrap: break-word !important;
-  word-wrap: break-word !important;
-  word-break: normal !important;
-  white-space: pre-wrap !important;
+  overflow-wrap: normal !important;
+  word-wrap: normal !important;
+  word-break: keep-all !important;
+  white-space: normal !important;
+  hyphens: none !important;
 }
 
 .rich-text-content * {
   max-width: 100% !important;
-  overflow-wrap: break-word !important;
-  word-break: normal !important;
+  overflow-wrap: normal !important;
+  word-wrap: normal !important;
+  word-break: keep-all !important;
+  hyphens: none !important;
 }
 
 .rich-text-content p {
   margin: 0 0 0.8em;
   max-width: 100% !important;
-  white-space: pre-wrap !important;
+  white-space: normal !important;
 }
 
 .rich-text-content p:last-child {
@@ -787,6 +795,8 @@ body #products_types_info .product-type-brand-logos img {
 .ProductTypeSmallSlider .brandsImages {
   max-width: 100% !important;
   overflow: hidden !important;
+  padding-inline: 64px !important;
+  position: relative !important;
 }
 
 .ProductTypeSmallSlider .product_type,
@@ -807,13 +817,66 @@ body #products_types_info .product-type-brand-logos img {
 
 .ProductTypeSmallSlider .product_type_name {
   max-width: 100% !important;
-  overflow-wrap: anywhere !important;
+  overflow-wrap: normal !important;
   white-space: normal !important;
-  word-break: normal !important;
+  word-break: keep-all !important;
+  hyphens: none !important;
 }
 
 .ProductTypeSmallSlider .productTypeMobileList {
   display: none !important;
+}
+
+.ProductTypeSmallSlider .productTypeSliderArrow {
+  align-items: center !important;
+  display: flex !important;
+  inset-inline: 0 !important;
+  justify-content: space-between !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 5 !important;
+}
+
+.ProductTypeSmallSlider .productTypeSliderArrow button {
+  align-items: center !important;
+  background: #fff100 !important;
+  border: 0 !important;
+  border-radius: 50% !important;
+  box-shadow: 0 8px 24px rgba(0, 47, 89, 0.18) !important;
+  color: #035297 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  height: 48px !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  pointer-events: auto !important;
+  transition: opacity 0.2s ease, transform 0.2s ease !important;
+  width: 48px !important;
+}
+
+.ProductTypeSmallSlider .productTypeSliderArrow button:hover {
+  transform: translateY(-1px) !important;
+}
+
+.ProductTypeSmallSlider .productTypeSliderArrow button.swiper-button-disabled {
+  cursor: default !important;
+  opacity: 0.35 !important;
+}
+
+.ProductTypeSmallSlider .productTypeSliderArrow button.swiper-button-lock {
+  display: none !important;
+}
+
+.ProductTypeSmallSlider .productTypeSliderArrow button svg {
+  display: block !important;
+  height: 28px !important;
+  width: 34px !important;
+}
+
+body.arVersion .ProductTypeSmallSlider .productTypeSliderArrow {
+  flex-direction: row-reverse !important;
 }
 
 .recipe_about .recipe-structured {

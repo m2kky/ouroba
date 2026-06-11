@@ -32,7 +32,7 @@ function MapSection({ data }) {
           {titleParts.first}
           {titleParts.rest ? <span> {titleParts.rest}</span> : null}
         </h1>
-        <RichText html={text} className="hero_rich_text" />
+        <RichText as="p" html={text} className="hero_rich_text" />
         <button
           className="hone_sections_button d-flex"
           onClick={() => router.push(localizedPath("/export", language))}

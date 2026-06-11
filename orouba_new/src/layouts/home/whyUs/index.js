@@ -41,7 +41,7 @@ function WhyUs({ data }) {
         </h1>
         <div className="hero_content">
           {subtitle ? <h5>{subtitle}</h5> : null}
-          <RichText html={body} className="hero_rich_text" style={{ padding: "10px" }} />
+          <RichText as="p" html={body} className="hero_rich_text" style={{ padding: "10px" }} />
         </div>
         <button
           className="hone_sections_button d-flex"

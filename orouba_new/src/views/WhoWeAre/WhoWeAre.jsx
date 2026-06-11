@@ -184,6 +184,7 @@ export default function WhoWeAre({ aboutData }) {
                   {language == "en" ? item.titleEn : item.titleAr}
                 </h3>
                 <RichText
+                  as="p"
                   html={language == "en" ? item.textEn : item.textAr}
                   className="whowearestylesp"
                   style={
@@ -206,6 +207,7 @@ export default function WhoWeAre({ aboutData }) {
                   <div>
                     <h4>{language == "en" ? item?.titleEn : item?.titleAr}</h4>
                     <RichText
+                      as="p"
                       html={language == "en" ? item?.descriptionEn : item?.descriptionAr}
                     />
                   </div>
@@ -232,6 +234,7 @@ export default function WhoWeAre({ aboutData }) {
                         <b>{language == "en" ? item?.titleEn : item?.titleAr}</b>
                       </h5>
                       <RichText
+                        as="p"
                         html={language == "en" ? item?.descriptionEn : item?.descriptionAr}
                         className="w-75 aboutFeatureText"
                       />
@@ -325,6 +328,7 @@ export default function WhoWeAre({ aboutData }) {
               </svg>}
 
             <RichText
+              as="p"
               html={productionNote}
               className="rowDiv centeralized"
               style={{ textAlign: "center" }}

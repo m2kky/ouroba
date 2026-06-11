@@ -230,7 +230,7 @@ export default function Careers({ careerData }) {
                   return (
                     <div className={styles.box} key={item.id || index}>
                       <div>{index + 1}</div>
-                      <RichText html={getWhyText(item)} />
+                      <RichText as="p" html={getWhyText(item)} />
                     </div>
                   );
                 }
@@ -267,7 +267,7 @@ export default function Careers({ careerData }) {
                   return (
                     <div className={styles.box} key={item.id || index}>
                       <div>{index + 1}</div>
-                      <RichText html={getWhyText(item)} />
+                      <RichText as="p" html={getWhyText(item)} />
                     </div>
                   );
                 }

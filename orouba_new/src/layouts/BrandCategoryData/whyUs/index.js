@@ -50,13 +50,26 @@ function WhyUs({ data, id }) {
       ) : mediaSrc ? (
         <img src={mediaSrc} alt={language === "ar" ? data?.brand?.nameAr : data?.brand?.nameEn} />
       ) : null}
-      <RichText html={brandDescription} style={{ color: "white", width: "100%" }} />
+      <RichText as="p" html={brandDescription} style={{ color: "white" }} />
       {brandText ? (
-        <RichText
-          html={brandText}
-          className="whyUs-text"
-          style={{ width: "100%" }}
-        />
+        <center
+          className="rowDiv"
+          style={{
+            display: "flex",
+            color: "#035297",
+            fontSize: "23px",
+            margin: "0 auto",
+            textAlign: "center",
+            maxWidth: "670px",
+          }}
+        >
+          <RichText
+            as="p"
+            html={brandText}
+            className="whyUs-text"
+            style={{ textAlign: "center" }}
+          />
+        </center>
       ) : null}
       {String(id) === "8" ? (
         <Link

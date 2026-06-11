@@ -21,7 +21,7 @@ function Standard({ icon, title, description, backgroundInternal }) {
       ) : null}
       <div className="standard_texts">
         {/* <h4>{title}</h4>  */}
-        <RichText html={description} style={{ textAlign: "center" }} />
+        <RichText as="p" html={description} style={{ textAlign: "center" }} />
       </div>
     </div>
   );

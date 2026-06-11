@@ -8,7 +8,7 @@ const Value = ({item}) => {
     <div className='value'>
       <img src={item.image} alt="" />
       <h5>{language=='ar'? item?.titleAr : item?.titleEn}</h5>
-      <RichText html={language=='ar'? item?.descriptionAr : item?.descriptionEn} />
+      <RichText as="p" html={language=='ar'? item?.descriptionAr : item?.descriptionEn} />
     </div>
   )
 }

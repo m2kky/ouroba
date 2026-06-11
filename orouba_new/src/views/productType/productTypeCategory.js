@@ -57,6 +57,7 @@ function ProductTypeCategory({ data, breads, sameProducts, recipes, brandId, rel
                 <div className="product_continer_text_data productDetailsPage">
                   <h1>{language == "ar" ? data?.nameAr : data?.nameEn}</h1>
                   <RichText
+                    as="p"
                     html={language == "ar" ? data?.descriptionAr : data?.descriptionEn}
                   />
                 </div>

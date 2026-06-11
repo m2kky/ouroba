@@ -27,7 +27,7 @@ const ExportBanner = ({ exportData }) => {
         {title ? <h5>{title}</h5> : null}
         {description ? (
           <div className="texts">
-            <RichText html={description} />
+            <RichText as="p" html={description} />
           </div>
         ) : null}
       </div>

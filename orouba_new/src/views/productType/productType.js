@@ -186,6 +186,7 @@ function ProductType({ types, pageDataObj }) {
               {language == "ar" ? "أصناف المنتجات" : "Product Types"}
             </h1>
             <RichText
+              as="p"
               html={
                 language == "ar"
                   ? pageDataObj?.product_type_text_ar
@@ -240,6 +241,7 @@ function ProductType({ types, pageDataObj }) {
                   <div className="product_continer_text_data">
                     <h1>{language == "ar" ? item?.titleAr : item?.titleEn}</h1>
                     <RichText
+                      as="p"
                       html={
                         language == "ar"
                           ? item?.descriptionAr

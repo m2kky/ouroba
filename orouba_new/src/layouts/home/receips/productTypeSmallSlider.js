@@ -13,6 +13,8 @@ const firstText = (...values) =>
 
 const CustomPrevButton = ({ onClick }) => (
   <button
+    type="button"
+    aria-label="Previous product"
     className="custom-prev-button-ProductTypeSmallSlider"
     onClick={onClick}
   >
@@ -39,6 +41,8 @@ const CustomPrevButton = ({ onClick }) => (
 
 const CustomNextButton = ({ onClick }) => (
   <button
+    type="button"
+    aria-label="Next product"
     className="custom-next-button-ProductTypeSmallSlider"
     onClick={onClick}
   >
@@ -162,12 +166,8 @@ function ProductTypeSmallSlider({ withArrows, data, type }) {
         <Swiper
           loop={productTypeCount > 4}
           className="brandSmallScreen"
-          navigation={{
-            prevEl: ".custom-prev-button-ProductTypeSmallSlider",
-            nextEl: ".custom-next-button-ProductTypeSmallSlider",
-          }}
           slidesPerView={4}
-          modules={[Navigation, FreeMode]}
+          modules={[FreeMode]}
           breakpoints={{
             // when window width is >= 320px
             320: {
@@ -207,7 +207,7 @@ function ProductTypeSmallSlider({ withArrows, data, type }) {
             ))
           ) : null}
         </div>
-        {withArrows && data?.length > 3 && (
+        {withArrows && productTypeCount > 1 && (
           <div className="productTypeSliderArrow">
             <CustomPrevButton />
             <CustomNextButton />

@@ -33,7 +33,7 @@ function Hero({ data }) {
           {titleParts.first}
           {titleParts.rest ? <span>{titleParts.rest}</span> : null}
         </h1>
-        <RichText html={visionText} className="hero_rich_text" />
+        <RichText as="p" html={visionText} className="hero_rich_text" />
         <button
           className="hone_sections_button d-flex"
           onClick={() => router.push(localizedPath("/about/whoWeAre", language))}

@@ -25,7 +25,7 @@ const Values = ({ valuesData, introText }) => {
           </>
         )}
       </h4>
-      <RichText html={introText || fallbackIntro} />
+      <RichText as="p" html={introText || fallbackIntro} />
       <div className="values">
         {valuesData &&
           valuesData.map((item, index) => {

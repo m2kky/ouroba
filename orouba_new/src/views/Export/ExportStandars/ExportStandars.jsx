@@ -32,7 +32,7 @@ const ExportStandars = ({ exportData, standersData = [] }) => {
           <span>{title}</span>
         </h4>
       ) : null}
-      <RichText html={text} style={{ textAlign: "center" }} />
+      <RichText as="p" html={text} style={{ textAlign: "center" }} />
       <div className="standardsImages d-flex my-3 justify-content-between">
         {standars.map((item) => (
           <Standard

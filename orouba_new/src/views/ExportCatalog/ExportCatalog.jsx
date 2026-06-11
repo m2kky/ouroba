@@ -45,7 +45,7 @@ const ExportCatalog = ({ exportCatData }) => {
       <div className="cat_expo_ban rowDiv">
         <div className="left">
           {title ? <h5>{title}</h5> : null}
-          <RichText html={text} />
+          <RichText as="p" html={text} />
           {exportCatData?.catalogFile && buttonText ? (
             <em
               className="btn btn-primary"

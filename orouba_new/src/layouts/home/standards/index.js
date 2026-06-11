@@ -52,6 +52,7 @@ function Standards({ data, siteinfo }) {
       />
       {text ? (
         <RichText
+          as="p"
           html={text}
           className="text-center"
           style={{

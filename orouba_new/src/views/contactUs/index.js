@@ -248,6 +248,7 @@ const ContactUs = ({ data, socials }) => {
           </div>
 
           <RichText
+            as="p"
             html={
               contactIntro ||
               (language == "ar"
