@@ -865,10 +865,6 @@ body #products_types_info .product-type-brand-logos img {
   opacity: 0.35 !important;
 }
 
-.ProductTypeSmallSlider .productTypeSliderArrow button.swiper-button-lock {
-  display: none !important;
-}
-
 .ProductTypeSmallSlider .productTypeSliderArrow button svg {
   display: block !important;
   height: 28px !important;
@@ -1044,26 +1040,20 @@ body.enVersion .recipe_about .bottom .recipe-subheading {
   }
 
   .ProductTypeSmallSlider .brandLargeScreen,
-  .ProductTypeSmallSlider .brandSmallScreen,
-  .ProductTypeSmallSlider .productTypeSliderArrow {
+  .ProductTypeSmallSlider .productTypeMobileList {
     display: none !important;
   }
 
-  .ProductTypeSmallSlider .productTypeMobileList {
-    display: grid !important;
-    gap: 28px !important;
-    grid-template-columns: 1fr !important;
-    margin: 0 auto !important;
-    max-width: 420px !important;
-    width: 100% !important;
+  .ProductTypeSmallSlider .brandSmallScreen {
+    display: block !important;
+    padding-inline: 52px !important;
   }
 
-  .ProductTypeSmallSlider .productTypeMobileListItem {
-    min-width: 0 !important;
-    width: 100% !important;
+  .ProductTypeSmallSlider .productTypeSliderArrow {
+    display: flex !important;
   }
 
-  .ProductTypeSmallSlider .product_type_mobile_card {
+  .ProductTypeSmallSlider .product_type {
     align-items: center !important;
     cursor: pointer !important;
     display: flex !important;
@@ -1074,7 +1064,7 @@ body.enVersion .recipe_about .bottom .recipe-subheading {
     width: 100% !important;
   }
 
-  .ProductTypeSmallSlider .product_type_mobile_card img {
+  .ProductTypeSmallSlider .product_type img {
     height: auto !important;
     margin: 0 auto 14px !important;
     max-height: 220px !important;
@@ -1082,7 +1072,7 @@ body.enVersion .recipe_about .bottom .recipe-subheading {
     width: min(100%, 320px) !important;
   }
 
-  .ProductTypeSmallSlider .product_type_mobile_card .product_type_name {
+  .ProductTypeSmallSlider .product_type .product_type_name {
     color: #003f70 !important;
     font-size: clamp(20px, 5.6vw, 27px) !important;
     font-weight: 800 !important;

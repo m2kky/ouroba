@@ -70,6 +70,10 @@ function ProductTypeSmallSlider({ withArrows, data, type }) {
   const { language } = UseGeneral();
   const router = useRouter();
   const productTypeCount = Array.isArray(data) ? data.length : 0;
+  const largeSlidesPerView =
+    productTypeCount > 3 ? 3 : Math.max(1, productTypeCount - 1);
+  const smallSlidesPerView =
+    productTypeCount > 2 ? 2 : Math.max(1, productTypeCount - 1);
   const relatedNameEn = firstText(type?.name_en, type?.nameEn);
   const relatedNameAr = firstText(type?.name_ar, type?.nameAr);
 
@@ -127,13 +131,13 @@ function ProductTypeSmallSlider({ withArrows, data, type }) {
       />
       <div className="brandsImages">
         <Swiper
-          loop={productTypeCount > 5}
+          loop={productTypeCount > 4}
           className="brandLargeScreen"
           navigation={{
             prevEl: ".custom-prev-button-ProductTypeSmallSlider",
             nextEl: ".custom-next-button-ProductTypeSmallSlider",
           }}
-          slidesPerView={5}
+          slidesPerView={largeSlidesPerView}
           modules={[Navigation, FreeMode]}
           breakpoints={{
             // when window width is >= 320px
@@ -148,7 +152,7 @@ function ProductTypeSmallSlider({ withArrows, data, type }) {
             },
             // when window width is >= 640px
             640: {
-              slidesPerView: 3,
+              slidesPerView: largeSlidesPerView,
               spaceBetween: 30,
             },
           }}
@@ -164,24 +168,28 @@ function ProductTypeSmallSlider({ withArrows, data, type }) {
           ) : null}
         </Swiper>
         <Swiper
-          loop={productTypeCount > 4}
+          loop={productTypeCount > 3}
           className="brandSmallScreen"
-          slidesPerView={4}
-          modules={[FreeMode]}
+          navigation={{
+            prevEl: ".custom-prev-button-ProductTypeSmallSlider",
+            nextEl: ".custom-next-button-ProductTypeSmallSlider",
+          }}
+          slidesPerView={smallSlidesPerView}
+          modules={[Navigation, FreeMode]}
           breakpoints={{
             // when window width is >= 320px
             320: {
-              slidesPerView: 3,
+              slidesPerView: 1,
               spaceBetween: 10,
             },
             // when window width is >= 480px
             480: {
-              slidesPerView: 3,
+              slidesPerView: smallSlidesPerView,
               spaceBetween: 20,
             },
             // when window width is >= 640px
             640: {
-              slidesPerView: 4,
+              slidesPerView: smallSlidesPerView,
               spaceBetween: 30,
             },
           }}

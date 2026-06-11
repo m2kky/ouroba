@@ -1,0 +1,30 @@
+{
+  "summary": {
+    "oldSource": "campcod3_eloroba.sql / products",
+    "newSource": "Postgres public.Product via orouba_new/.env.local",
+    "oldProducts": 67,
+    "newProducts": 67,
+    "matchedById": 67,
+    "missingInNew": 0,
+    "newOnly": 0,
+    "oldHasIngredientAr": 66,
+    "newHasIngredientAr": 66,
+    "oldHasIngredientEn": 66,
+    "newHasIngredientEn": 65,
+    "ingredientArDiffProducts": 0,
+    "ingredientEnDiffProducts": 1,
+    "preparationArDiffProducts": 0,
+    "preparationEnDiffProducts": 0,
+    "totalIssues": 1
+  },
+  "issues": [
+    {
+      "id": "45",
+      "nameAr": "ثوم مفروم (مكعبات)",
+      "nameEn": "Crushed Garlic",
+      "type": "ingredients_en",
+      "oldValue": "ingredients: garlic.",
+      "newValue": ""
+    }
+  ]
+}

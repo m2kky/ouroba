@@ -1,0 +1,10 @@
+
+> orouba-admin@0.1.0 start
+> next start -p 3016
+
+   ▲ Next.js 15.5.15
+   - Local:        http://localhost:3016
+   - Network:      http://192.168.1.4:3016
+
+ ✓ Starting...
+ ✓ Ready in 1148ms

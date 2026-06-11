@@ -1,0 +1,43 @@
+ ⚠ "next start" does not work with "output: standalone" configuration. Use "node .next/standalone/server.js" instead.
+[getSiteData] Failed: 404 Not Found from http://localhost:3000
+[getSiteData] Failed: 404 Not Found from http://localhost:3000
+Failed to load site data for layout Error: Failed to fetch site data (404)
+    at d (D:\Codes_Projects\oruba rep\orouba-admin\.next\server\app\_not-found\page.js:2:10342)
+    at async n (D:\Codes_Projects\oruba rep\orouba-admin\.next\server\chunks\1418.js:1:9853)
+Failed to fetch settings for metadata Error: Failed to fetch site data (404)
+    at d (D:\Codes_Projects\oruba rep\orouba-admin\.next\server\app\_not-found\page.js:2:10342)
+    at async Module.m (D:\Codes_Projects\oruba rep\orouba-admin\.next\server\app\_not-found\page.js:2:9292)
+[getSiteData] Failed: 404 Not Found from http://localhost:3000
+[getSiteData] Failed: 404 Not Found from http://localhost:3000
+Failed to load site data for layout Error: Failed to fetch site data (404)
+    at d (D:\Codes_Projects\oruba rep\orouba-admin\.next\server\app\_not-found\page.js:2:10342)
+    at async n (D:\Codes_Projects\oruba rep\orouba-admin\.next\server\chunks\1418.js:1:9853)
+Failed to fetch settings for metadata Error: Failed to fetch site data (404)
+    at d (D:\Codes_Projects\oruba rep\orouba-admin\.next\server\app\_not-found\page.js:2:10342)
+    at async Module.m (D:\Codes_Projects\oruba rep\orouba-admin\.next\server\app\_not-found\page.js:2:9292)
+[getSiteData] Failed: 404 Not Found from http://localhost:3000
+[getSiteData] Failed: 404 Not Found from http://localhost:3000
+Failed to load site data for layout Error: Failed to fetch site data (404)
+    at d (D:\Codes_Projects\oruba rep\orouba-admin\.next\server\app\_not-found\page.js:2:10342)
+    at async n (D:\Codes_Projects\oruba rep\orouba-admin\.next\server\chunks\1418.js:1:9853)
+Failed to fetch settings for metadata Error: Failed to fetch site data (404)
+    at d (D:\Codes_Projects\oruba rep\orouba-admin\.next\server\app\_not-found\page.js:2:10342)
+    at async Module.m (D:\Codes_Projects\oruba rep\orouba-admin\.next\server\app\_not-found\page.js:2:9292)
+[getSiteData] Failed: 404 Not Found from http://localhost:3000
+Failed to fetch settings for metadata Error: Failed to fetch site data (404)
+    at d (D:\Codes_Projects\oruba rep\orouba-admin\.next\server\app\_not-found\page.js:2:10342)
+    at async Module.m (D:\Codes_Projects\oruba rep\orouba-admin\.next\server\app\_not-found\page.js:2:9292)
+ ⨯ The requested resource isn't a valid image for /orouba_logo_transparent.png received null
+[getSiteData] Failed: 404 Not Found from http://localhost:3000
+[getSiteData] Failed: 404 Not Found from http://localhost:3000
+Failed to load site data for layout Error: Failed to fetch site data (404)
+    at d (D:\Codes_Projects\oruba rep\orouba-admin\.next\server\app\_not-found\page.js:2:10342)
+    at async n (D:\Codes_Projects\oruba rep\orouba-admin\.next\server\chunks\1418.js:1:9853)
+Failed to fetch settings for metadata Error: Failed to fetch site data (404)
+    at d (D:\Codes_Projects\oruba rep\orouba-admin\.next\server\app\_not-found\page.js:2:10342)
+    at async Module.m (D:\Codes_Projects\oruba rep\orouba-admin\.next\server\app\_not-found\page.js:2:9292)
+[getSiteData] Failed: 404 Not Found from http://localhost:3000
+Failed to fetch settings for metadata Error: Failed to fetch site data (404)
+    at d (D:\Codes_Projects\oruba rep\orouba-admin\.next\server\app\_not-found\page.js:2:10342)
+    at async Module.m (D:\Codes_Projects\oruba rep\orouba-admin\.next\server\app\_not-found\page.js:2:9292)
+ ⨯ The requested resource isn't a valid image for /orouba_logo_transparent.png received null

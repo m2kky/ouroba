@@ -1,0 +1,15 @@
+{
+  "summary": {
+    "oldSource": "campcod3_eloroba.sql / products",
+    "newSource": "Postgres public.Product via orouba_new/.env.local",
+    "oldProducts": 67,
+    "newProducts": 67,
+    "matchedById": 67,
+    "sameDescriptions": 67,
+    "descriptionDiffProducts": 0,
+    "missingInNew": 0,
+    "newOnly": 0,
+    "missingDescriptionFieldsInNew": 0
+  },
+  "issues": []
+}
