@@ -11,11 +11,11 @@ import { localizedPath } from "@/utils/routes";
 const firstText = (...values) =>
   values.find((value) => typeof value === "string" && value.trim()) || "";
 
-const CustomPrevButton = ({ onClick }) => (
+const CustomPrevButton = ({ className = "", onClick }) => (
   <button
     type="button"
     aria-label="Previous product"
-    className="custom-prev-button-ProductTypeSmallSlider"
+    className={["custom-prev-button-ProductTypeSmallSlider", className].filter(Boolean).join(" ")}
     onClick={onClick}
   >
     {
@@ -39,11 +39,11 @@ const CustomPrevButton = ({ onClick }) => (
   </button>
 );
 
-const CustomNextButton = ({ onClick }) => (
+const CustomNextButton = ({ className = "", onClick }) => (
   <button
     type="button"
     aria-label="Next product"
-    className="custom-next-button-ProductTypeSmallSlider"
+    className={["custom-next-button-ProductTypeSmallSlider", className].filter(Boolean).join(" ")}
     onClick={onClick}
   >
     {
@@ -74,6 +74,14 @@ function ProductTypeSmallSlider({ withArrows, data, type }) {
     productTypeCount > 3 ? 3 : Math.max(1, productTypeCount - 1);
   const smallSlidesPerView =
     productTypeCount > 2 ? 2 : Math.max(1, productTypeCount - 1);
+  const desktopNavigation = {
+    prevEl: ".custom-prev-button-ProductTypeSmallSlider-desktop",
+    nextEl: ".custom-next-button-ProductTypeSmallSlider-desktop",
+  };
+  const mobileNavigation = {
+    prevEl: ".custom-prev-button-ProductTypeSmallSlider-mobile",
+    nextEl: ".custom-next-button-ProductTypeSmallSlider-mobile",
+  };
   const relatedNameEn = firstText(type?.name_en, type?.nameEn);
   const relatedNameAr = firstText(type?.name_ar, type?.nameAr);
 
@@ -133,10 +141,7 @@ function ProductTypeSmallSlider({ withArrows, data, type }) {
         <Swiper
           loop={productTypeCount > 4}
           className="brandLargeScreen"
-          navigation={{
-            prevEl: ".custom-prev-button-ProductTypeSmallSlider",
-            nextEl: ".custom-next-button-ProductTypeSmallSlider",
-          }}
+          navigation={desktopNavigation}
           slidesPerView={largeSlidesPerView}
           modules={[Navigation, FreeMode]}
           breakpoints={{
@@ -170,10 +175,7 @@ function ProductTypeSmallSlider({ withArrows, data, type }) {
         <Swiper
           loop={productTypeCount > 3}
           className="brandSmallScreen"
-          navigation={{
-            prevEl: ".custom-prev-button-ProductTypeSmallSlider",
-            nextEl: ".custom-next-button-ProductTypeSmallSlider",
-          }}
+          navigation={mobileNavigation}
           slidesPerView={smallSlidesPerView}
           modules={[Navigation, FreeMode]}
           breakpoints={{
@@ -216,10 +218,16 @@ function ProductTypeSmallSlider({ withArrows, data, type }) {
           ) : null}
         </div>
         {withArrows && productTypeCount > 1 && (
-          <div className="productTypeSliderArrow">
-            <CustomPrevButton />
-            <CustomNextButton />
-          </div>
+          <>
+            <div className="productTypeSliderArrow productTypeSliderArrowDesktop">
+              <CustomPrevButton className="custom-prev-button-ProductTypeSmallSlider-desktop" />
+              <CustomNextButton className="custom-next-button-ProductTypeSmallSlider-desktop" />
+            </div>
+            <div className="productTypeSliderArrow productTypeSliderArrowMobile">
+              <CustomPrevButton className="custom-prev-button-ProductTypeSmallSlider-mobile" />
+              <CustomNextButton className="custom-next-button-ProductTypeSmallSlider-mobile" />
+            </div>
+          </>
         )}
       </div>
     </div>

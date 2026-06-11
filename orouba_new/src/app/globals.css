@@ -352,3 +352,173 @@ body .headerImage img:nth-child(2) {
 
 
 .recipe_about .recipe-structured-ingredients { display: flex !important; flex-direction: column !important; }
+
+.ProductTypeSmallSlider {
+  overflow-x: clip !important;
+}
+
+.ProductTypeSmallSlider .brandsImages {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  padding-inline: 64px !important;
+  position: relative !important;
+}
+
+.ProductTypeSmallSlider .product_type,
+.ProductTypeSmallSlider .product_type * {
+  box-sizing: border-box !important;
+}
+
+.ProductTypeSmallSlider .product_type {
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+
+.ProductTypeSmallSlider .product_type img {
+  display: block !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
+}
+
+.ProductTypeSmallSlider .product_type_name {
+  max-width: 100% !important;
+  overflow-wrap: normal !important;
+  white-space: normal !important;
+  word-break: keep-all !important;
+  hyphens: none !important;
+}
+
+.ProductTypeSmallSlider .productTypeMobileList {
+  display: none !important;
+}
+
+.ProductTypeSmallSlider .brandLargeScreen {
+  display: block !important;
+}
+
+.ProductTypeSmallSlider .brandSmallScreen,
+.ProductTypeSmallSlider .productTypeSliderArrow.productTypeSliderArrowMobile {
+  display: none !important;
+}
+
+.ProductTypeSmallSlider .productTypeSliderArrow {
+  align-items: center !important;
+  display: flex !important;
+  inset-inline: 0 !important;
+  justify-content: space-between !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 5 !important;
+}
+
+.ProductTypeSmallSlider .productTypeSliderArrow button {
+  align-items: center !important;
+  background: #fff100 !important;
+  border: 0 !important;
+  border-radius: 50% !important;
+  box-shadow: 0 8px 24px rgba(0, 47, 89, 0.18) !important;
+  color: #035297 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  height: 48px !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  pointer-events: auto !important;
+  transition: opacity 0.2s ease, transform 0.2s ease !important;
+  width: 48px !important;
+}
+
+.ProductTypeSmallSlider .productTypeSliderArrow button.custom-prev-button-ProductTypeSmallSlider,
+.ProductTypeSmallSlider .productTypeSliderArrow button.custom-next-button-ProductTypeSmallSlider {
+  bottom: auto !important;
+  inset: auto !important;
+  left: auto !important;
+  position: static !important;
+  right: auto !important;
+  top: auto !important;
+  transform: none !important;
+}
+
+.ProductTypeSmallSlider .productTypeSliderArrow button:hover {
+  transform: translateY(-1px) !important;
+}
+
+.ProductTypeSmallSlider .productTypeSliderArrow button.swiper-button-disabled {
+  cursor: default !important;
+  opacity: 0.35 !important;
+}
+
+.ProductTypeSmallSlider .productTypeSliderArrow button.custom-prev-button-ProductTypeSmallSlider.swiper-button-disabled,
+.ProductTypeSmallSlider .productTypeSliderArrow button.custom-next-button-ProductTypeSmallSlider.swiper-button-disabled {
+  opacity: 0.35 !important;
+}
+
+.ProductTypeSmallSlider .productTypeSliderArrow button svg {
+  display: block !important;
+  height: 28px !important;
+  width: 34px !important;
+}
+
+body.arVersion .ProductTypeSmallSlider .productTypeSliderArrow {
+  flex-direction: row-reverse !important;
+}
+
+@media (max-width: 767px) {
+  .ProductTypeSmallSlider {
+    padding-inline: 16px !important;
+  }
+
+  .ProductTypeSmallSlider .brandsImages {
+    padding-inline: 0 !important;
+    width: 100% !important;
+  }
+
+  .ProductTypeSmallSlider .brandLargeScreen,
+  .ProductTypeSmallSlider .productTypeMobileList,
+  .ProductTypeSmallSlider .productTypeSliderArrow.productTypeSliderArrowDesktop {
+    display: none !important;
+  }
+
+  .ProductTypeSmallSlider .brandSmallScreen {
+    display: block !important;
+    padding-inline: 52px !important;
+  }
+
+  .ProductTypeSmallSlider .productTypeSliderArrow.productTypeSliderArrowMobile {
+    display: flex !important;
+    inset-inline: 16px !important;
+  }
+
+  .ProductTypeSmallSlider .product_type {
+    align-items: center !important;
+    cursor: pointer !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    min-height: 0 !important;
+    padding: 0 8px !important;
+    width: 100% !important;
+  }
+
+  .ProductTypeSmallSlider .product_type img {
+    height: auto !important;
+    margin: 0 auto 14px !important;
+    max-height: 220px !important;
+    max-width: 100% !important;
+    width: min(100%, 320px) !important;
+  }
+
+  .ProductTypeSmallSlider .product_type .product_type_name {
+    color: #003f70 !important;
+    font-size: clamp(20px, 5.6vw, 27px) !important;
+    font-weight: 800 !important;
+    line-height: 1.3 !important;
+    margin: 0 auto !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+}
