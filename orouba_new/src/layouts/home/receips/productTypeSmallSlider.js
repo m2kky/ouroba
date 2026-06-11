@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import ContentLoader from "react-content-loader";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SectionTitle from "../../../components/sectionTitle";
@@ -63,6 +63,30 @@ function ProductTypeSmallSlider({ withArrows, data, type, brandId }) {
   const { language } = UseGeneral();
   const router = useRouter();
   const productTypeCount = Array.isArray(data) ? data.length : 0;
+  const productName = (item) =>
+    language == "ar" ? item?.name_ar || item?.nameAr : item?.name_en || item?.nameEn;
+  const productImage = (item) =>
+    item?.images?.[0]?.url || item?.image || item?.internal_image || item?.internalImage;
+  const goToProduct = (item) => {
+    if (item?.id) {
+      router.push(localizedPath(`/products/${item.id}`, language));
+    }
+  };
+  const renderProductType = (item, className = "") => {
+    const image = productImage(item);
+    const name = productName(item);
+
+    return (
+      <div
+        className={["product_type", className].filter(Boolean).join(" ")}
+        onClick={() => goToProduct(item)}
+      >
+        {image ? <img src={image} alt={name} /> : null}
+        <div className="product_type_name">{name}</div>
+      </div>
+    );
+  };
+
   return (
     <div className="hero_section pb-4 ProductTypeSmallSlider  reciepe_section d-flex justify-content-between flex-column w-full rowDiv">
       <SectionTitle
@@ -118,28 +142,11 @@ function ProductTypeSmallSlider({ withArrows, data, type, brandId }) {
           {!data ? (
             <ContentLoader />
           ) : data?.length ? (
-            data?.map((item) => {
-              return (
-                <SwiperSlide key={item.id}>
-                  <div
-                    className="product_type"
-                    onClick={() =>
-                      router.push(
-                        localizedPath(
-                          `/brands/${item?.brand?.id}/categories/${item?.category?.id}?q=${item?.category?.id}`,
-                          language
-                        )
-                      )
-                    }
-                  >
-                    <img src={item?.images[0]?.url} alt={item.name} />
-                    <div className="product_type_name">
-                      {language == "ar" ? item?.name_ar : item?.name_en}
-                    </div>
-                  </div>
-                </SwiperSlide>
-              );
-            })
+            data?.map((item) => (
+              <SwiperSlide key={item.id}>
+                {renderProductType(item)}
+              </SwiperSlide>
+            ))
           ) : null}
         </Swiper>
         <Swiper
@@ -172,30 +179,24 @@ function ProductTypeSmallSlider({ withArrows, data, type, brandId }) {
           {!data ? (
             <ContentLoader />
           ) : data?.length ? (
-            data?.map((item) => {
-              return (
-                <SwiperSlide key={item.id}>
-                  <div
-                    className="product_type"
-                    onClick={() =>
-                      router.push(
-                        localizedPath(
-                          `/brands/${item?.brand?.id}/categories/${item?.category?.id}?q=${item?.category?.id}`,
-                          language
-                        )
-                      )
-                    }
-                  >
-                    <img src={item?.images[0]?.url} alt={item.name} />
-                    <div className="product_type_name">
-                      {language == "ar" ? item?.name_ar : item?.name_en}
-                    </div>
-                  </div>
-                </SwiperSlide>
-              );
-            })
+            data?.map((item) => (
+              <SwiperSlide key={item.id}>
+                {renderProductType(item)}
+              </SwiperSlide>
+            ))
           ) : null}
         </Swiper>
+        <div className="productTypeMobileList">
+          {!data ? (
+            <ContentLoader />
+          ) : data?.length ? (
+            data?.map((item) => (
+              <div className="productTypeMobileListItem" key={item.id}>
+                {renderProductType(item, "product_type_mobile_card")}
+              </div>
+            ))
+          ) : null}
+        </div>
         {withArrows && data?.length > 3 && (
           <div className="productTypeSliderArrow">
             <CustomPrevButton />
