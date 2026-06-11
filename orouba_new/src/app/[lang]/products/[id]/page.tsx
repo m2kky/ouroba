@@ -55,8 +55,8 @@ export default async function ProductDetailsPage({
     categoryNameAr: category?.nameAr || "",
   };
   const relatedType = {
-    name_en: category?.nameEn || "",
-    name_ar: category?.nameAr || "",
+    name_en: productData.type?.nameEn || category?.nameEn || "",
+    name_ar: productData.type?.nameAr || category?.nameAr || "",
   };
 
   const sameProducts =
