@@ -144,42 +144,42 @@ const ContactUs = ({ data, socials }) => {
                     </div>
                     <div className="info">{data?.email}</div>
                   </div>
+                  <div className="contact_social_parents">
+                    {socials &&
+                      socials.map((itParent, indParent) => {
+                        return (
+                          <div className="parent_social" key={indParent}>
+                            {itParent.image && <img src={itParent?.image} alt="" />}
+                            <div className="me_social_icons">
+                              {itParent.socials &&
+                                itParent.socials.map((item, index) => {
+                                  return (
+                                    <div
+                                      key={index}
+                                      className="icon"
+                                      style={{ cursor: "pointer" }}
+                                      onClick={() =>
+                                        window.open(item.link, "_blank")
+                                      }
+                                    >
+                                      {item.image && <img
+                                        src={item.image}
+                                        style={{
+                                          width: "30px",
+                                          height: "30px",
+                                          cursor: "pointer",
+                                        }}
+                                        alt=""
+                                      />}
+                                    </div>
+                                  );
+                                })}
+                            </div>
+                          </div>
+                        );
+                      })}
+                  </div>
                 </div>
-              </div>
-              <div className="me_social_icons">
-                {socials &&
-                  socials.map((itParent, indParent) => {
-                    return (
-                      <div className="parent_social" key={indParent}>
-                        {itParent.image && <img src={itParent?.image} alt="" />}
-                        <div className="me_social_icons">
-                          {itParent.socials &&
-                            itParent.socials.map((item, index) => {
-                              return (
-                                <div
-                                  key={index}
-                                  className="icon"
-                                  style={{ cursor: "pointer" }}
-                                  onClick={() =>
-                                    window.open(item.link, "_blank")
-                                  }
-                                >
-                                  {item.image && <img
-                                    src={item.image}
-                                    style={{
-                                      width: "30px",
-                                      height: "30px",
-                                      cursor: "pointer",
-                                    }}
-                                    alt=""
-                                  />}
-                                </div>
-                              );
-                            })}
-                        </div>
-                      </div>
-                    );
-                  })}
               </div>
             </div>
           </div>

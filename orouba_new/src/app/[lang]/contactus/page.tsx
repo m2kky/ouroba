@@ -1,46 +1,47 @@
 import ContactUsView from "@/views/contactUs/index";
-import { db } from "@/db";
+import {
+  dashboardSettingsToSiteinfo,
+  getDashboardSiteData,
+} from "@/lib/dashboard-data";
 import { resolveMediaTree } from "@/utils/media";
 
 export const dynamic = "force-dynamic";
 
 type ContactData = {
-  siteSetting: Record<string, string | null | undefined>;
+  siteSetting: Record<string, string>;
   socials: unknown[];
 };
 
-async function getContactData(): Promise<ContactData> {
-  const siteSetting: ContactData["siteSetting"] = {};
+type SocialRecord = {
+  parentId?: string | null;
+  [key: string]: unknown;
+};
 
-  try {
-    const settings = await db.query.siteSettings.findMany();
-    settings.forEach((setting) => {
-      siteSetting[setting.key] = setting.valueEn;
-      siteSetting[`${setting.key}Ar`] = setting.valueAr;
-      siteSetting[`${setting.key}En`] = setting.valueEn;
-    });
-  } catch {
-    return {
-      siteSetting,
-      socials: [],
-    };
-  }
+type SocialParentRecord = {
+  id?: string | null;
+  [key: string]: unknown;
+};
 
+async function getContactData(locale: string): Promise<ContactData> {
   try {
-    const socials = await db.query.socialParents.findMany({
-      with: {
-        socials: true,
-      },
-      orderBy: (parents, { asc }) => [asc(parents.number)],
-    });
+    const data = await getDashboardSiteData(locale);
+    const socials = Array.isArray(data.socials)
+      ? (data.socials as SocialRecord[])
+      : [];
+    const parents = Array.isArray(data.socialParents)
+      ? (data.socialParents as SocialParentRecord[])
+      : [];
 
     return {
-      siteSetting,
-      socials,
+      siteSetting: dashboardSettingsToSiteinfo(data.settings, locale),
+      socials: parents.map((parent) => ({
+        ...parent,
+        socials: socials.filter((social) => social?.parentId === parent?.id),
+      })),
     };
   } catch {
     return {
-      siteSetting,
+      siteSetting: {},
       socials: [],
     };
   }
@@ -51,8 +52,8 @@ export default async function ContactUsPage({
 }: {
   params: Promise<{ lang: string }>;
 }) {
-  await params;
-  const { siteSetting, socials } = await getContactData();
+  const { lang } = await params;
+  const { siteSetting, socials } = await getContactData(lang);
 
   return <ContactUsView data={resolveMediaTree(siteSetting)} socials={resolveMediaTree(socials)} />;
 }

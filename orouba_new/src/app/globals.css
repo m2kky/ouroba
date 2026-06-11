@@ -192,6 +192,72 @@ body .headerImage img:nth-child(2) {
   }
 }
 
+.me_cotactUs_page .contact_social_parents {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 24px !important;
+  margin-top: 4px !important;
+}
+
+.me_cotactUs_page .contact_social_parents .parent_social {
+  align-items: center !important;
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 36px !important;
+  justify-content: flex-start !important;
+  margin-bottom: 0 !important;
+}
+
+.me_cotactUs_page .contact_social_parents .parent_social > img {
+  height: 74px !important;
+  object-fit: contain !important;
+  width: 120px !important;
+}
+
+.me_cotactUs_page .contact_social_parents .me_social_icons {
+  align-items: center !important;
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 22px !important;
+  justify-content: flex-start !important;
+}
+
+.me_cotactUs_page .contact_social_parents .me_social_icons .icon {
+  align-items: center !important;
+  background: #ffffff !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  height: 52px !important;
+  justify-content: center !important;
+  width: 52px !important;
+}
+
+.me_cotactUs_page .contact_social_parents .me_social_icons .icon img {
+  height: 30px !important;
+  object-fit: contain !important;
+  width: 30px !important;
+}
+
+@media (max-width: 576px) {
+  .me_cotactUs_page .contact_social_parents .parent_social {
+    gap: 18px !important;
+  }
+
+  .me_cotactUs_page .contact_social_parents .parent_social > img {
+    height: 58px !important;
+    width: 96px !important;
+  }
+
+  .me_cotactUs_page .contact_social_parents .me_social_icons {
+    gap: 14px !important;
+  }
+
+  .me_cotactUs_page .contact_social_parents .me_social_icons .icon {
+    height: 44px !important;
+    width: 44px !important;
+  }
+}
+
 .recipe_details .features {
   width: 100% !important;
   display: grid !important;
