@@ -526,10 +526,22 @@ body.enVersion .recipe_details .feature_item {
 .rich-text-content {
   color: inherit;
   line-height: inherit;
+  max-width: 100% !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  word-break: break-word !important;
+  white-space: normal !important;
+}
+
+.rich-text-content * {
+  max-width: 100% !important;
+  overflow-wrap: break-word !important;
 }
 
 .rich-text-content p {
   margin: 0 0 0.8em;
+  max-width: 100% !important;
+  white-space: normal !important;
 }
 
 .rich-text-content p:last-child {
