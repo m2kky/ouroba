@@ -86,7 +86,7 @@ const Footer = ({ siteinfo = {}, socialParents = [], brands = [] }) => {
                 src={footerLogo.src}
                 alt="Orouba Foods"
                 style={{
-                  width: "270px",
+                  width: "180px",
                   maxWidth: "100%",
                   height: "auto",
                   objectFit: "contain",
