@@ -52,24 +52,13 @@ function WhyUs({ data, id }) {
       ) : null}
       <RichText as="p" html={brandDescription} style={{ color: "white" }} />
       {brandText ? (
-        <center
-          className="rowDiv"
-          style={{
-            display: "flex",
-            color: "#035297",
-            fontSize: "23px",
-            margin: "0 auto",
-            textAlign: "center",
-            maxWidth: "670px",
-          }}
-        >
+        <div className="brand-detail-quote" aria-label={language === "ar" ? "نص تفصيلي" : "Detailed text"}>
           <RichText
-            as="p"
+            as="div"
             html={brandText}
-            className="whyUs-text"
-            style={{ textAlign: "center" }}
+            className="brand-detail-quote-text"
           />
-        </center>
+        </div>
       ) : null}
       {String(id) === "8" ? (
         <Link

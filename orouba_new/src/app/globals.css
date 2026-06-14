@@ -268,6 +268,68 @@ body .headerImage img:nth-child(2) {
   }
 }
 
+.brand-detail-quote {
+  position: relative !important;
+  width: min(100%, 1040px) !important;
+  margin: 28px auto 42px !important;
+  padding: 34px clamp(76px, 12vw, 140px) !important;
+  background: #7abd1c !important;
+  color: #ffffff !important;
+  text-align: center !important;
+  overflow: hidden !important;
+}
+
+.brand-detail-quote::before,
+.brand-detail-quote::after {
+  position: absolute !important;
+  top: 18px !important;
+  color: #fff100 !important;
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: 72px !important;
+  line-height: 1 !important;
+  font-weight: 700 !important;
+  pointer-events: none !important;
+}
+
+.brand-detail-quote::before {
+  content: "\201C" !important;
+  left: 38px !important;
+}
+
+.brand-detail-quote::after {
+  content: "\201D" !important;
+  right: 38px !important;
+}
+
+.brand-detail-quote .brand-detail-quote-text,
+.brand-detail-quote .brand-detail-quote-text p {
+  margin: 0 !important;
+  color: #ffffff !important;
+  text-align: center !important;
+  font-size: 18px !important;
+  line-height: 1.75 !important;
+  font-weight: 700 !important;
+}
+
+@media (max-width: 768px) {
+  .brand-detail-quote {
+    padding: 38px 48px 32px !important;
+  }
+
+  .brand-detail-quote::before {
+    left: 18px !important;
+  }
+
+  .brand-detail-quote::after {
+    right: 18px !important;
+  }
+
+  .brand-detail-quote .brand-detail-quote-text,
+  .brand-detail-quote .brand-detail-quote-text p {
+    font-size: 16px !important;
+  }
+}
+
 .me_cotactUs_page .left_content .contact_info {
   overflow: visible !important;
   width: min(560px, calc(100% - 32px)) !important;
