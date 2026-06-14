@@ -4,6 +4,7 @@ import {
   getDashboardSiteData,
 } from "@/lib/dashboard-data";
 import { resolveMediaTree } from "@/utils/media";
+import { mergeDashboardSocialLinks } from "@/utils/socialLinks";
 
 export const dynamic = "force-dynamic";
 
@@ -31,13 +32,15 @@ async function getContactData(locale: string): Promise<ContactData> {
     const parents = Array.isArray(data.socialParents)
       ? (data.socialParents as SocialParentRecord[])
       : [];
+    const siteSetting = dashboardSettingsToSiteinfo(data.settings, locale);
+    const socialParents = parents.map((parent) => ({
+      ...parent,
+      socials: socials.filter((social) => social?.parentId === parent?.id),
+    }));
 
     return {
-      siteSetting: dashboardSettingsToSiteinfo(data.settings, locale),
-      socials: parents.map((parent) => ({
-        ...parent,
-        socials: socials.filter((social) => social?.parentId === parent?.id),
-      })),
+      siteSetting,
+      socials: mergeDashboardSocialLinks(socialParents, siteSetting),
     };
   } catch {
     return {

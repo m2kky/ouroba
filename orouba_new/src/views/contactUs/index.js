@@ -211,13 +211,14 @@ const ContactUs = ({ data, socials }) => {
                               {itParent.socials &&
                                 itParent.socials.map((item, index) => {
                                   return (
-                                    <div
+                                    <a
                                       key={index}
                                       className="icon"
                                       style={{ cursor: "pointer" }}
-                                      onClick={() =>
-                                        window.open(item.link, "_blank")
-                                      }
+                                      href={item.link || "#"}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      aria-label={item.type || "Social link"}
                                     >
                                       {item.image && <img
                                         src={item.image}
@@ -228,7 +229,7 @@ const ContactUs = ({ data, socials }) => {
                                         }}
                                         alt=""
                                       />}
-                                    </div>
+                                    </a>
                                   );
                                 })}
                             </div>

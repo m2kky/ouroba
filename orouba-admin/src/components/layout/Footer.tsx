@@ -43,6 +43,8 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
   const phone1 = localizedSetting(settings, currentLocale, ["phone_1", "service_phone", "phone"], "202 44890220");
   const phone2 = localizedSetting(settings, currentLocale, ["phone_2", "phone"], "202 44890227");
   const email = localizedSetting(settings, currentLocale, ["email", "email_support"], "oroubamail@orouba.ajwa.com");
+  const dashboardFacebookUrl = localizedSetting(settings, currentLocale, ["facebook_url", "facebookUrl"], "");
+  const dashboardInstagramUrl = localizedSetting(settings, currentLocale, ["instagram_url", "instagramUrl"], "");
   const copyrightText = localizedSetting(
     settings,
     currentLocale,
@@ -178,13 +180,13 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                   <div className="flex items-center gap-3 justify-start">
                     <img src="/basma.png" alt="Basma" className="w-16 h-16 object-contain" />
                     <div className="flex gap-2 items-center">
-                      <a href="https://www.facebook.com/BasmaVegetables" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
+                      <a href={dashboardFacebookUrl || "#"} target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
                         <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
                           <circle cx="12" cy="12" r="12" fill="#1877F2" />
                           <path d="M14.5 12h-2v7h-3v-7h-1.5v-2.5h1.5v-1.636C9.5 5.742 10.662 4.5 12.827 4.5c1.037 0 2.127.185 2.127.185v2.337h-1.198c-1.127 0-1.478.7-1.478 1.417v1.56h2.619L14.5 12z" fill="white" />
                         </svg>
                       </a>
-                      <a href="https://www.instagram.com/basmavegetables" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
+                      <a href={dashboardInstagramUrl || "#"} target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
                         <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
                           <defs>
                             <radialGradient id="instaGradBasma" cx="30%" cy="107%" r="130%">
@@ -206,13 +208,13 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                   <div className="flex items-center gap-3 justify-start">
                     <img src="/vm0x6DYiCFTgbVkAekwe2SBVAyMnx1MrvLAziapn.png" alt="Bap Bites" className="w-16 h-16 object-contain" />
                     <div className="flex gap-2 items-center">
-                      <a href="https://www.facebook.com/profile.php?id=61551777392870" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
+                      <a href={dashboardFacebookUrl || "#"} target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
                         <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
                           <circle cx="12" cy="12" r="12" fill="#1877F2" />
                           <path d="M14.5 12h-2v7h-3v-7h-1.5v-2.5h1.5v-1.636C9.5 5.742 10.662 4.5 12.827 4.5c1.037 0 2.127.185 2.127.185v2.337h-1.198c-1.127 0-1.478.7-1.478 1.417v1.56h2.619L14.5 12z" fill="white" />
                         </svg>
                       </a>
-                      <a href="https://www.instagram.com/bap.bites" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
+                      <a href={dashboardInstagramUrl || "#"} target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
                         <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
                           <defs>
                             <radialGradient id="instaGradBap" cx="30%" cy="107%" r="130%">
@@ -403,13 +405,13 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                           <div className="flex items-center gap-4 justify-start">
                             <img src="/basma.png" alt="Basma" className="w-16 h-16 object-contain" />
                             <div className="flex gap-2 items-center">
-                              <a href="https://www.facebook.com/BasmaVegetables" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
+                              <a href={dashboardFacebookUrl || "#"} target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
                                 <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
                                   <circle cx="12" cy="12" r="12" fill="#1877F2" />
                                   <path d="M14.5 12h-2v7h-3v-7h-1.5v-2.5h1.5v-1.636C9.5 5.742 10.662 4.5 12.827 4.5c1.037 0 2.127.185 2.127.185v2.337h-1.198c-1.127 0-1.478.7-1.478 1.417v1.56h2.619L14.5 12z" fill="white" />
                                 </svg>
                               </a>
-                              <a href="https://www.instagram.com/basmavegetables" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
+                              <a href={dashboardInstagramUrl || "#"} target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
                                 <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
                                   <defs>
                                     <radialGradient id="instaGradBasmaMobile" cx="30%" cy="107%" r="130%">
@@ -431,13 +433,13 @@ export default function Footer({ settings, socials, brands }: FooterProps) {
                           <div className="flex items-center gap-4 justify-start">
                             <img src="/vm0x6DYiCFTgbVkAekwe2SBVAyMnx1MrvLAziapn.png" alt="Bap Bites" className="w-16 h-16 object-contain" />
                             <div className="flex gap-2 items-center">
-                              <a href="https://www.facebook.com/profile.php?id=61551777392870" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
+                              <a href={dashboardFacebookUrl || "#"} target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
                                 <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
                                   <circle cx="12" cy="12" r="12" fill="#1877F2" />
                                   <path d="M14.5 12h-2v7h-3v-7h-1.5v-2.5h1.5v-1.636C9.5 5.742 10.662 4.5 12.827 4.5c1.037 0 2.127.185 2.127.185v2.337h-1.198c-1.127 0-1.478.7-1.478 1.417v1.56h2.619L14.5 12z" fill="white" />
                                 </svg>
                               </a>
-                              <a href="https://www.instagram.com/bap.bites" target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
+                              <a href={dashboardInstagramUrl || "#"} target="_blank" rel="noreferrer" className="flex items-center justify-center hover:scale-110 transition-transform">
                                 <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
                                   <defs>
                                     <radialGradient id="instaGradBapMobile" cx="30%" cy="107%" r="130%">

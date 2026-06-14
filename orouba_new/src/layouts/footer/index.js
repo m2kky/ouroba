@@ -274,18 +274,19 @@ const Footer = ({ siteinfo = {}, socialParents = [], brands = [] }) => {
                   socialParents.map((itParent, indParent) => {
                     return (
                       <div className="parent_social" key={indParent}>
-                        <img src={itParent?.image} alt="" />
+                        {itParent?.image ? <img src={itParent.image} alt="" /> : null}
                         <div className="me_social_icons">
                           {itParent.socials &&
                             itParent.socials.map((item, index) => {
                               return (
-                                <div
+                                <a
                                   key={index}
                                   className="icon"
                                   style={{ cursor: "pointer" }}
-                                  onClick={() =>
-                                    window.open(item.link, "_target")
-                                  }
+                                  href={item.link || "#"}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  aria-label={item.type || "Social link"}
                                 >
                                   <img
                                     src={item.image}
@@ -296,7 +297,7 @@ const Footer = ({ siteinfo = {}, socialParents = [], brands = [] }) => {
                                     }}
                                     alt=""
                                   />
-                                </div>
+                                </a>
                               );
                             })}
                         </div>

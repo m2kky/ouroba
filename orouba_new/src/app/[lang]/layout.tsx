@@ -11,6 +11,7 @@ import {
   getDashboardSiteData,
 } from "@/lib/dashboard-data";
 import { resolveMediaTree } from "@/utils/media";
+import { mergeDashboardSocialLinks } from "@/utils/socialLinks";
 
 export const metadata: Metadata = {
   title: "Orouba Foods",
@@ -47,18 +48,20 @@ export default async function RootLayout({
     const data = await getDashboardSiteData(lang);
     const socials = Array.isArray(data.socials) ? data.socials : [];
     const parents = Array.isArray(data.socialParents) ? data.socialParents : [];
+    const siteinfo = dashboardSettingsToSiteinfo(data.settings, lang);
+    const socialParents = parents.map((parent: any) => ({
+      ...parent,
+      socials: socials.filter((social: any) => social?.parentId === parent?.id),
+    }));
 
     layoutData = {
-      siteinfo: dashboardSettingsToSiteinfo(data.settings, lang),
+      siteinfo,
       brands: (Array.isArray(data.brands) ? data.brands : []).map((brand: any) => ({
         ...brand,
         name_ar: brand?.nameAr || brand?.name_ar,
         name_en: brand?.nameEn || brand?.name_en,
       })),
-      socialParents: parents.map((parent: any) => ({
-        ...parent,
-        socials: socials.filter((social: any) => social?.parentId === parent?.id),
-      })),
+      socialParents: mergeDashboardSocialLinks(socialParents, siteinfo),
     };
   } catch {
     layoutData = {
