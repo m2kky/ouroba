@@ -273,8 +273,6 @@ body .headerImage img:nth-child(2) {
   width: min(100%, 1040px) !important;
   margin: 28px auto 42px !important;
   padding: 34px clamp(76px, 12vw, 140px) !important;
-  background: #7abd1c !important;
-  color: #ffffff !important;
   text-align: center !important;
   overflow: hidden !important;
 }
@@ -283,18 +281,9 @@ body .headerImage img:nth-child(2) {
 .brand-detail-quote .brand-detail-quote-text p,
 .brand-detail-quote .brand-detail-quote-text blockquote {
   margin: 0 !important;
-  color: #ffffff !important;
   text-align: center !important;
-  font-size: 18px !important;
-  line-height: 1.75 !important;
-  font-weight: 700 !important;
   border: 0 !important;
   padding: 0 !important;
-}
-
-.brand-detail-quote .brand-detail-quote-text span,
-.brand-detail-quote .brand-detail-quote-text strong {
-  color: #ffffff !important;
 }
 
 @media (max-width: 768px) {
@@ -308,11 +297,6 @@ body .headerImage img:nth-child(2) {
 
   .brand-detail-quote .brand-detail-quote-mark-end {
     right: 18px !important;
-  }
-
-  .brand-detail-quote .brand-detail-quote-text,
-  .brand-detail-quote .brand-detail-quote-text p {
-    font-size: 16px !important;
   }
 }
 

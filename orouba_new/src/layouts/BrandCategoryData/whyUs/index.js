@@ -14,8 +14,6 @@ const quoteBoxStyle = {
   width: "min(100%, 1040px)",
   margin: "28px auto 42px",
   padding: "34px clamp(76px, 12vw, 140px)",
-  background: "#7abd1c",
-  color: "#ffffff",
   textAlign: "center",
   overflow: "hidden",
 };
