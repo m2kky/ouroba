@@ -279,36 +279,22 @@ body .headerImage img:nth-child(2) {
   overflow: hidden !important;
 }
 
-.brand-detail-quote::before,
-.brand-detail-quote::after {
-  position: absolute !important;
-  top: 18px !important;
-  color: #fff100 !important;
-  font-family: Georgia, "Times New Roman", serif !important;
-  font-size: 72px !important;
-  line-height: 1 !important;
-  font-weight: 700 !important;
-  pointer-events: none !important;
-}
-
-.brand-detail-quote::before {
-  content: "\201C" !important;
-  left: 38px !important;
-}
-
-.brand-detail-quote::after {
-  content: "\201D" !important;
-  right: 38px !important;
-}
-
 .brand-detail-quote .brand-detail-quote-text,
-.brand-detail-quote .brand-detail-quote-text p {
+.brand-detail-quote .brand-detail-quote-text p,
+.brand-detail-quote .brand-detail-quote-text blockquote {
   margin: 0 !important;
   color: #ffffff !important;
   text-align: center !important;
   font-size: 18px !important;
   line-height: 1.75 !important;
   font-weight: 700 !important;
+  border: 0 !important;
+  padding: 0 !important;
+}
+
+.brand-detail-quote .brand-detail-quote-text span,
+.brand-detail-quote .brand-detail-quote-text strong {
+  color: #ffffff !important;
 }
 
 @media (max-width: 768px) {
@@ -316,11 +302,11 @@ body .headerImage img:nth-child(2) {
     padding: 38px 48px 32px !important;
   }
 
-  .brand-detail-quote::before {
+  .brand-detail-quote .brand-detail-quote-mark-start {
     left: 18px !important;
   }
 
-  .brand-detail-quote::after {
+  .brand-detail-quote .brand-detail-quote-mark-end {
     right: 18px !important;
   }
 

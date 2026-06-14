@@ -9,6 +9,28 @@ import RichText from "../../../components/RichText";
 const isVideoMedia = (src) =>
   typeof src === "string" && /\.(mp4|webm|ogg|mov|m4v)(\?|#|$)/i.test(src);
 
+const quoteBoxStyle = {
+  position: "relative",
+  width: "min(100%, 1040px)",
+  margin: "28px auto 42px",
+  padding: "34px clamp(76px, 12vw, 140px)",
+  background: "#7abd1c",
+  color: "#ffffff",
+  textAlign: "center",
+  overflow: "hidden",
+};
+
+const quoteMarkStyle = {
+  position: "absolute",
+  top: "18px",
+  color: "#fff100",
+  fontFamily: 'Georgia, "Times New Roman", serif',
+  fontSize: "72px",
+  lineHeight: 1,
+  fontWeight: 700,
+  pointerEvents: "none",
+};
+
 const pickBrandMedia = (brand, language) => {
   const candidates =
     language === "ar"
@@ -52,7 +74,17 @@ function WhyUs({ data, id }) {
       ) : null}
       <RichText as="p" html={brandDescription} style={{ color: "white" }} />
       {brandText ? (
-        <div className="brand-detail-quote" aria-label={language === "ar" ? "نص تفصيلي" : "Detailed text"}>
+        <div
+          className="brand-detail-quote"
+          aria-label={language === "ar" ? "نص تفصيلي" : "Detailed text"}
+          style={quoteBoxStyle}
+        >
+          <span aria-hidden="true" className="brand-detail-quote-mark brand-detail-quote-mark-start" style={{ ...quoteMarkStyle, left: "38px" }}>
+            “
+          </span>
+          <span aria-hidden="true" className="brand-detail-quote-mark brand-detail-quote-mark-end" style={{ ...quoteMarkStyle, right: "38px" }}>
+            ”
+          </span>
           <RichText
             as="div"
             html={brandText}
