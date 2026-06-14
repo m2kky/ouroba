@@ -163,6 +163,88 @@ html {
   width: min(100%, 390px) !important;
 }
 
+.AreaRow .aboutHardcodedFeatures {
+  align-items: start !important;
+  display: grid !important;
+  gap: 64px 84px !important;
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  margin: 0 auto !important;
+  max-width: 1180px !important;
+  width: 100% !important;
+}
+
+body.arVersion .AreaRow .aboutHardcodedFeatures {
+  direction: rtl !important;
+}
+
+body.enVersion .AreaRow .aboutHardcodedFeatures {
+  direction: ltr !important;
+}
+
+.AreaRow .aboutHardcodedFeature {
+  align-items: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  grid-column: span 2 !important;
+  justify-content: flex-start !important;
+  justify-self: center !important;
+  max-width: 390px !important;
+  min-width: 0 !important;
+  text-align: center !important;
+  width: 100% !important;
+}
+
+.AreaRow .aboutHardcodedFeature:nth-child(n + 4) {
+  grid-column: span 3 !important;
+}
+
+.AreaRow .aboutHardcodedFeature img {
+  display: block !important;
+  height: 72px !important;
+  margin: 0 auto 28px !important;
+  object-fit: contain !important;
+  width: 72px !important;
+}
+
+.AreaRow .aboutHardcodedFeature h5 {
+  color: #0066cc !important;
+  font-size: 30px !important;
+  font-weight: 800 !important;
+  line-height: 1.25 !important;
+  margin: 0 auto 14px !important;
+  max-width: 100% !important;
+  text-align: center !important;
+  width: 100% !important;
+}
+
+.AreaRow .aboutHardcodedFeature p {
+  color: #002f59 !important;
+  font-size: 18px !important;
+  line-height: 1.75 !important;
+  margin: 0 auto !important;
+  max-width: 390px !important;
+  text-align: center !important;
+  width: 100% !important;
+}
+
+@media (max-width: 992px) {
+  .AreaRow .aboutHardcodedFeatures {
+    gap: 48px 36px !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .AreaRow .aboutHardcodedFeature,
+  .AreaRow .aboutHardcodedFeature:nth-child(n + 4) {
+    grid-column: span 1 !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .AreaRow .aboutHardcodedFeatures {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 .certification_values,
 .certification_values .values {
   max-width: 100%;

@@ -4,12 +4,58 @@ import Breadcrumb from "../../components/BreadCumbsLinks";
 import UseGeneral from "../../hooks/useGeneral";
 import RichText from "../../components/RichText";
 
-const FEATURE_ORDER = [
-  "area",
-  "employees",
-  "capacity",
-  "capacity for pre-fried products",
-  "overall cold store capacity",
+const ABOUT_FEATURES = [
+  {
+    id: "employees",
+    titleAr: "الموظفون",
+    titleEn: "Employees",
+    descriptionAr: "أكثر من ٧٠٠ موظف متخصص يساهمون في نجاح شركتنا.",
+    descriptionEn: "Over 700 dedicated employees who contribute to our company's success.",
+    image:
+      "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/about-features/1779366352578-4xn2qxvs8bf-vGmUdMMJnlqBDY7kiOhfibwQDMUjWlG019c6Z7hZ.png",
+  },
+  {
+    id: "area",
+    titleAr: "المساحة",
+    titleEn: "Area",
+    descriptionAr: "تبلغ المساحة الإجمالية لمصنعنا أكثر من ٢٠,٠٠٠ متر مربع.",
+    descriptionEn: "Our factory is constructed over 20,000 square meters.",
+    image:
+      "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/features/1779202866861-e8shkiowoz6-0e9Yy5j3FdbU0DFTOXTWgrIeSaDRtunarfPxFmPh.webp",
+  },
+  {
+    id: "capacity",
+    titleAr: "السعة",
+    titleEn: "Capacity",
+    descriptionAr:
+      "يبلغ حجم إنتاجنا من الخضروات المجمدة تجميدا سريعا IQF حوالي ٢٥٠٠٠ طن سنويا.",
+    descriptionEn:
+      "Our capacity for individual quick freezing (IQF) frozen vegetables reaches 25,000 tons per year.",
+    image:
+      "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/features/1779202867885-mgqnk3go3p-4d4nAa9sK4dB1xOtha56c8VIpjO3sxyWxfJtv3n6.webp",
+  },
+  {
+    id: "prefried_capacity",
+    titleAr: "السعة التخزينية للمنتجات النصف مطهية",
+    titleEn: "Capacity for pre-fried products",
+    descriptionAr:
+      "تبلغ سعتنا التخزينية للمنتجات النصف مطهية حوالي ١٨٠٠ طن سنويا.",
+    descriptionEn:
+      "Our capacity for pre-fried products amounts to 1,800 tons per year.",
+    image:
+      "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/features/1779202868334-108iove1s7pr-YFrh6569OO6wE3mYThl0q1bb7L5zJqDOhoViwi71.webp",
+  },
+  {
+    id: "cold_store_capacity",
+    titleAr: "السعة الإجمالية لمخازن التبريد",
+    titleEn: "Overall cold store capacity",
+    descriptionAr:
+      "تبلغ سعة التخزين البارد لدينا ١٠٠٠٠ طن سنويا، ٥٠٠٠ متر مربع.",
+    descriptionEn:
+      "Our cold storage capacity totals 10,000 tons per year, 5,000 m2.",
+    image:
+      "https://pub-0aa6a0d8dfd847389f78cd7e6b6b93bf.r2.dev/features/1779202868840-bncwqvazfw-dcqw4l4DMEZsoL3P4rLPzBqJPGRIstkT5BdxiabT.webp",
+  },
 ];
 
 const getLocalizedValue = (item, enKey, arKey, language) =>
@@ -17,18 +63,6 @@ const getLocalizedValue = (item, enKey, arKey, language) =>
 
 const firstImage = (...sources) =>
   sources.find((source) => typeof source === "string" && source.trim());
-
-const normalizeText = (value) =>
-  String(value || "")
-    .toLowerCase()
-    .replace(/\s+/g, " ")
-    .trim();
-
-const featureRank = (item) => {
-  const title = normalizeText(item?.titleEn || item?.title_en);
-  const rank = FEATURE_ORDER.indexOf(title);
-  return rank === -1 ? FEATURE_ORDER.length : rank;
-};
 
 const sortedVisibleItems = (items, sorter) => {
   const safeItems = Array.isArray(items) ? items : [];
@@ -99,17 +133,13 @@ const groupHtml = (group, language) =>
 
 export default function WhoWeAre({ aboutData }) {
   const { language } = UseGeneral();
-  const { sections, buildings, productionSteps, features, siteInfo: siteData } = aboutData;
+  const { sections, buildings, productionSteps, siteInfo: siteData } = aboutData;
   const [isSmaller, setIsSmaller] = useState(false);
   const visibleSections = sortedVisibleItems(
     sections,
     (a, b) => (a?.number ?? 999) - (b?.number ?? 999)
   );
   const visibleBuildings = sortedVisibleItems(buildings, () => 0);
-  const orderedFeatures = sortedVisibleItems(
-    features,
-    (a, b) => featureRank(a) - featureRank(b)
-  );
   const productionStepGroups = productionGroups(productionSteps);
   const heroImage = firstImage(
     isSmaller ? siteData?.small_about_img : null,
@@ -217,32 +247,14 @@ export default function WhoWeAre({ aboutData }) {
         </div>
 
         <div className="mt-5 AreaRow">
-          <div
-            style={{ rowGap: "20px" }}
-            className={`row my-4 ${"rowBoxes"}`}
-          >
-            {Array.from(
-              {
-                length: Math.ceil(orderedFeatures.length / 3),
-              },
-              (_, index) => (
-                <div style={{ flexWrap: "wrap" }} key={index} className="row aboutFeatureRow">
-                  {orderedFeatures.slice(index * 3, (index + 1) * 3).map((item) => (
-                    <div key={item.id} className={`col ${"imgContainer"} imgContainer aboutFeatureItem`}>
-                      {item.image ? <img src={item.image} alt="Area Img" /> : null}
-                      <h5>
-                        <b>{language == "en" ? item?.titleEn : item?.titleAr}</b>
-                      </h5>
-                      <RichText
-                        as="p"
-                        html={language == "en" ? item?.descriptionEn : item?.descriptionAr}
-                        className="w-75 aboutFeatureText"
-                      />
-                    </div>
-                  ))}
-                </div>
-              )
-            )}
+          <div className="aboutHardcodedFeatures">
+            {ABOUT_FEATURES.map((item) => (
+              <div key={item.id} className="aboutHardcodedFeature">
+                <img src={item.image} alt={language == "en" ? item.titleEn : item.titleAr} />
+                <h5>{language == "en" ? item.titleEn : item.titleAr}</h5>
+                <p>{language == "en" ? item.descriptionEn : item.descriptionAr}</p>
+              </div>
+            ))}
           </div>
         </div>
 
