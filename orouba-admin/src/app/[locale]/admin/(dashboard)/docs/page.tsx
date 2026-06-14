@@ -35,7 +35,8 @@ export default function DocsPage() {
       tables: [
         { name: t("إعدادات الموقع (Site Settings)", "Site Settings"), link: "settings" },
         { name: t("خريطة التصدير (Export Map)", "Export Map"), link: "continents" },
-        { name: t("قائمة المحادثة (Chat Menu)", "Chat Menu"), link: "chat-menu" }
+        { name: t("قائمة المحادثة (Chat Menu)", "Chat Menu"), link: "chat-menu" },
+        { name: t("روابط السوشيال لكل لوجو", "Social links per logo"), link: "social-links" }
       ]
     },
     {
@@ -251,7 +252,7 @@ export default function DocsPage() {
       controls: [
         t("بيانات التواصل: من /admin/settings عبر contact_title و contact_intro و address و phone_1 و phone_2 و email و map_url.", "Contact data: /admin/settings via contact_title, contact_intro, address, phone_1, phone_2, email, and map_url."),
         t("اللوجو والفافيكون وحقوق الملكية: من main_logo و favicon_logo و copy_right.", "Logo, favicon, and copyright: main_logo, favicon_logo, and copy_right."),
-        t("روابط السوشيال وواتساب: من facebook_url و instagram_url و linkedin_url و whatsapp_number.", "Social and WhatsApp links: facebook_url, instagram_url, linkedin_url, and whatsapp_number.")
+        t("روابط السوشيال لكل لوجو: من /admin/social-links. مفاتيح facebook_url و instagram_url تعمل كاحتياطي عام فقط.", "Per-logo social links: /admin/social-links. facebook_url and instagram_url are fallback only.")
       ],
       settings: ["contact_title", "contact_intro", "address", "phone_1", "phone_2", "email", "map_url", "main_logo", "copy_right"]
     },

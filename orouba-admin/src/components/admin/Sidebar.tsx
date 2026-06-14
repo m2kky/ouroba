@@ -30,7 +30,8 @@ import {
   ChevronDown,
   Layers,
   FileText,
-  ListOrdered
+  ListOrdered,
+  Share2
 } from "lucide-react";
 import { useAdminTranslation } from "@/components/admin/AdminTranslationProvider";
 
@@ -157,6 +158,7 @@ export default function Sidebar({ userRole }: SidebarProps) {
         { name: dict.sidebar.export, href: `/${locale}/admin/continents`, icon: Globe2 },
         { name: dict.sidebar.popups, href: `/${locale}/admin/popups`, icon: Megaphone },
         { name: dict.sidebar.chatMenu, href: `/${locale}/admin/chat-menu`, icon: MessagesSquare },
+        { name: t("روابط السوشيال", "Social Links"), href: `/${locale}/admin/social-links`, icon: Share2 },
       ]
     },
     {

@@ -86,40 +86,31 @@ export const mergeDashboardSocialLinks = (
   socialParents: SocialParent[] = [],
   siteinfo: SiteInfo = {}
 ) => {
-  const settingSocials = dashboardSettingSocials(siteinfo);
-  if (!settingSocials.length) return socialParents;
-
-  const settingsByType = new Map(settingSocials.map((item) => [item.type, item]));
-  const replacedTypes = new Set<string | undefined>();
-  const updatedParents = socialParents
+  const parentsWithSocials = socialParents
     .map((parent) => ({
       ...parent,
       socials: (parent.socials || []).map((social) => {
         const type = social.type || socialTypeFromLink(social.link);
-        const settingSocial = settingsByType.get(type);
-        if (!settingSocial?.link) return social;
-
-        replacedTypes.add(type);
         return {
           ...social,
           type,
-          link: settingSocial.link,
-          image: settingSocial.image || social.image,
+          image: type === "facebook" || type === "instagram"
+            ? SOCIAL_ICONS[type]
+            : social.image,
         };
       }),
     }))
     .filter((parent) => parent.socials && parent.socials.length);
-  const missingSettingSocials = settingSocials.filter((social) => !replacedTypes.has(social.type));
+
+  if (parentsWithSocials.length) return parentsWithSocials;
+
+  const settingSocials = dashboardSettingSocials(siteinfo);
+  if (!settingSocials.length) return socialParents;
 
   return [
-    ...updatedParents,
-    ...(missingSettingSocials.length
-      ? [
-          {
-            id: "dashboard-social-links",
-            socials: missingSettingSocials,
-          },
-        ]
-      : []),
+    {
+      id: "dashboard-social-links",
+      socials: settingSocials,
+    },
   ];
 };
