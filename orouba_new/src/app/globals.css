@@ -86,6 +86,72 @@ html {
   max-width: 100vw;
 }
 
+@media (min-width: 993px) {
+  .whoweare .Pagerow.whowearestyles {
+    justify-content: center !important;
+    margin-inline: auto !important;
+    width: 100% !important;
+  }
+
+  .whoweare .aboutFactoryImageWrap {
+    align-items: center !important;
+    display: flex !important;
+    flex: 0 0 100% !important;
+    justify-content: center !important;
+    max-width: 100% !important;
+    padding-inline: 0 !important;
+    width: 100% !important;
+  }
+
+  .whoweare .aboutFactoryImage {
+    display: block !important;
+    height: auto !important;
+    margin-inline: auto !important;
+    max-height: 720px !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+    width: min(1180px, 92vw) !important;
+  }
+}
+
+.AreaRow .aboutFeatureRow {
+  align-items: flex-start !important;
+  gap: 56px 88px !important;
+  justify-content: center !important;
+  margin-inline: auto !important;
+  width: 100% !important;
+}
+
+.AreaRow .aboutFeatureItem {
+  align-items: center !important;
+  display: flex !important;
+  flex: 0 1 360px !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  max-width: 390px !important;
+  text-align: center !important;
+}
+
+.AreaRow .aboutFeatureItem img {
+  display: block !important;
+  height: 66px !important;
+  margin: 0 auto 20px !important;
+  object-fit: contain !important;
+  width: 66px !important;
+}
+
+.AreaRow .aboutFeatureItem h5,
+.AreaRow .aboutFeatureItem .aboutFeatureText,
+.AreaRow .aboutFeatureItem .aboutFeatureText p {
+  margin-inline: auto !important;
+  max-width: 100% !important;
+  text-align: center !important;
+}
+
+.AreaRow .aboutFeatureItem .aboutFeatureText {
+  width: min(100%, 390px) !important;
+}
+
 .certification_values,
 .certification_values .values {
   max-width: 100%;
