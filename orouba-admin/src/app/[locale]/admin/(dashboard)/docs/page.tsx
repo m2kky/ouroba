@@ -79,7 +79,8 @@ export default function DocsPage() {
       tables: [
         { name: t("المكونات الأساسية (Foods)", "Foods"), link: "foods" },
         { name: t("أقسام الوصفات (Recipe Categories)", "Recipe Categories"), link: "recipes/categories" },
-        { name: t("الوصفات (Recipes)", "Recipes"), link: "recipes" }
+        { name: t("الوصفات (Recipes)", "Recipes"), link: "recipes" },
+        { name: t("ترتيب وصفات الرئيسية", "Homepage Recipes Order"), link: "home-recipes" }
       ]
     },
     {
@@ -143,6 +144,11 @@ export default function DocsPage() {
           name: t("الوصفات (Recipes)", "Recipes"),
           desc: t("إضافة الوصفات بخطواتها والخصائص وتوصيتها للمنتجات المعنية.", "Complete recipes with cooking steps, time, levels, and products."),
           prereq: t("⚠️ يتطلب: مكونات مسبقة (Foods) ومنتجات (Products) لربطها.", "⚠️ Requires: Foods & Products to be linked.")
+        },
+        {
+          name: t("ترتيب وصفات الرئيسية", "Homepage Recipes Order"),
+          desc: t("اختيار وترتيب الوصفات التي تظهر فقط داخل سيكشن وصفات مقترحة في الصفحة الرئيسية.", "Choose and order only the recipes shown in the homepage Recommended Recipes section."),
+          prereq: t("يتطلب وصفات ظاهرة مسبقاً.", "Requires existing visible recipes.")
         }
       ]
     },
@@ -176,9 +182,10 @@ export default function DocsPage() {
       controls: [
         t("السلايدر الرئيسي: من /admin/banners، ويفضل ترتيب الصور والفيديوهات برقم واضح.", "Main slider: /admin/banners. Use clear ordering numbers for images and videos."),
         t("قسم الرؤية ولماذا العروبة ومعاييرنا وحول العالم: من /admin/settings باستخدام مفاتيح home_vision_* و home_why_* و home_standards_* و home_world_*.", "Vision, Why Orouba, Standards, and Around the World sections: /admin/settings using home_vision_*, home_why_*, home_standards_*, and home_world_* keys."),
-        t("البراندات والمنتجات والوصفات الظاهرة في الرئيسية تأتي من Brands وProducts وRecipes بعد ضبط الإظهار والترتيب.", "Homepage brands, products, and recipes come from Brands, Products, and Recipes after visibility and ordering are set.")
+        t("سيكشن وصفات مقترحة في الرئيسية: من /admin/home-recipes، وهو يتحكم في هذا السيكشن فقط.", "Homepage Recommended Recipes section: /admin/home-recipes, and it controls only that section."),
+        t("البراندات والمنتجات الظاهرة في الرئيسية تأتي من Brands وProducts بعد ضبط الإظهار والترتيب.", "Homepage brands and products come from Brands and Products after visibility and ordering are set.")
       ],
-      settings: ["home_vision_title", "home_vision_text", "home_why_title", "home_why_text", "home_standards_text", "home_world_text"]
+      settings: ["home_vision_title", "home_vision_text", "home_why_title", "home_why_text", "home_standards_text", "home_world_text", "home_recommended_recipe_order"]
     },
     {
       title: t("من نحن", "About / Who We Are"),

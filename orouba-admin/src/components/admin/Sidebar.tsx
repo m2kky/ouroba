@@ -29,7 +29,8 @@ import {
   Globe,
   ChevronDown,
   Layers,
-  FileText
+  FileText,
+  ListOrdered
 } from "lucide-react";
 import { useAdminTranslation } from "@/components/admin/AdminTranslationProvider";
 
@@ -97,7 +98,7 @@ function CollapsibleMenuGroup({ group, pathname, locale }: { group: any, pathnam
 
 export default function Sidebar({ userRole }: SidebarProps) {
   const pathname = usePathname();
-  const { dict, locale } = useAdminTranslation();
+  const { dict, locale, t } = useAdminTranslation();
 
   const toggleLocale = () => {
     const newLocale = locale === 'ar' ? 'en' : 'ar';
@@ -130,6 +131,7 @@ export default function Sidebar({ userRole }: SidebarProps) {
       items: [
         { name: dict.sidebar.recipeCategories || "Recipe Categories", href: `/${locale}/admin/recipes/categories`, icon: BookOpen },
         { name: dict.sidebar.recipes, href: `/${locale}/admin/recipes`, icon: ChefHat },
+        { name: t("ترتيب وصفات الرئيسية", "Homepage Recipes Order"), href: `/${locale}/admin/home-recipes`, icon: ListOrdered },
         { name: dict.sidebar.foods, href: `/${locale}/admin/foods`, icon: ChefHat },
       ]
     },

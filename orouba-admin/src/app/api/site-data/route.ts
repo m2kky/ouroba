@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
       socialParents,
       recipeCategories,
       categoryTypes,
-      recipes,
+      rawRecipes,
       sectionTexts,
     ] = await Promise.all([
       prisma.brand.findMany({
@@ -89,8 +89,8 @@ export async function GET(request: NextRequest) {
       }),
       prisma.recipe.findMany({
         where: { isHidden: false },
+        include: { images: true },
         orderBy: { createdAt: "desc" },
-        take: 6,
       }),
       prisma.sectionText.findMany({ where: { isHidden: false }, orderBy: { number: "asc" } })
     ]);
@@ -178,6 +178,22 @@ export async function GET(request: NextRequest) {
     alias("catalogText", ["catalog"]);
     alias("certificationText", ["certification_text"]);
     alias("copyrightText", ["copy_right"]);
+
+    const homeRecipeOrderValue =
+      settings.home_recommended_recipe_order?.en ||
+      settings.home_recommended_recipe_order?.ar ||
+      "";
+    const homeRecipeOrderIds = homeRecipeOrderValue
+      .split(",")
+      .map((id) => id.trim())
+      .filter(Boolean);
+    const recipesById = new Map(rawRecipes.map((recipe: any) => [recipe.id, recipe]));
+    const recipes = homeRecipeOrderIds.length
+      ? homeRecipeOrderIds
+          .map((id) => recipesById.get(id))
+          .filter(Boolean)
+          .slice(0, 6)
+      : rawRecipes.slice(0, 6);
 
     return apiSuccess({
       brands,
