@@ -29,22 +29,24 @@ const ArrowIcon = ({ direction }) => (
   </svg>
 );
 
-const CustomPrevButton = ({ className = "", onClick }) => (
+const CustomPrevButton = ({ className = "", disabled = false, onClick }) => (
   <button
     type="button"
     aria-label="Previous product"
     className={["custom-prev-button-ProductTypeSmallSlider", className].filter(Boolean).join(" ")}
+    disabled={disabled}
     onClick={onClick}
   >
     <ArrowIcon direction="prev" />
   </button>
 );
 
-const CustomNextButton = ({ className = "", onClick }) => (
+const CustomNextButton = ({ className = "", disabled = false, onClick }) => (
   <button
     type="button"
     aria-label="Next product"
     className={["custom-next-button-ProductTypeSmallSlider", className].filter(Boolean).join(" ")}
+    disabled={disabled}
     onClick={onClick}
   >
     <ArrowIcon direction="next" />
@@ -54,10 +56,29 @@ function ProductTypeSmallSlider({ withArrows, data, type }) {
   const { language } = UseGeneral();
   const router = useRouter();
   const swiperRef = React.useRef(null);
+  const [sliderState, setSliderState] = React.useState({
+    isBeginning: true,
+    isEnd: true,
+  });
   const productItems = Array.isArray(data) ? data : [];
   const productTypeCount = productItems.length;
+  const shouldUseDesktopSlider = productTypeCount > 3;
   const relatedNameEn = firstText(type?.name_en, type?.nameEn);
   const relatedNameAr = firstText(type?.name_ar, type?.nameAr);
+
+  const updateSliderState = React.useCallback((swiper) => {
+    if (!swiper) return;
+    setSliderState({
+      isBeginning: swiper.isBeginning,
+      isEnd: swiper.isEnd,
+    });
+  }, []);
+
+  React.useEffect(() => {
+    if (!shouldUseDesktopSlider) {
+      setSliderState({ isBeginning: true, isEnd: true });
+    }
+  }, [shouldUseDesktopSlider, productTypeCount]);
 
   const productName = (item) =>
     language == "ar"
@@ -86,6 +107,15 @@ function ProductTypeSmallSlider({ withArrows, data, type }) {
       </div>
     );
   };
+  const renderProductsGrid = (className) => (
+    <div className={["relatedProductsGrid", className].filter(Boolean).join(" ")}>
+      {productItems.map((item) => (
+        <div className="relatedProductsGridItem" key={item.id}>
+          {renderProductType(item)}
+        </div>
+      ))}
+    </div>
+  );
 
   return (
     <div className="hero_section pb-4 ProductTypeSmallSlider  reciepe_section d-flex justify-content-between flex-column w-full rowDiv">
@@ -112,49 +142,60 @@ function ProductTypeSmallSlider({ withArrows, data, type }) {
         }
       />
       <div className="brandsImages">
-        <Swiper
-          className="relatedProductsSwiper"
-          onSwiper={(swiper) => {
-            swiperRef.current = swiper;
-          }}
-          rewind={productTypeCount > 1}
-          slidesPerView={1}
-          spaceBetween={18}
-          breakpoints={{
-            480: {
-              slidesPerView: 1,
-              spaceBetween: 18,
-            },
-            640: {
-              slidesPerView: 2,
-              spaceBetween: 24,
-            },
-            992: {
-              slidesPerView: Math.min(3, Math.max(1, productTypeCount)),
-              spaceBetween: 30,
-            },
-          }}
-        >
-          {!data ? (
-            <ContentLoader />
-          ) : productItems.length ? (
-            productItems.map((item) => (
-              <SwiperSlide key={item.id}>
-                {renderProductType(item)}
-              </SwiperSlide>
-            ))
-          ) : null}
-        </Swiper>
-        {withArrows && productTypeCount > 1 && (
-          <div className="productTypeSliderArrow">
-            <CustomPrevButton
-              onClick={() => swiperRef.current?.slidePrev()}
-            />
-            <CustomNextButton
-              onClick={() => swiperRef.current?.slideNext()}
-            />
-          </div>
-        )}
+        {!data ? (
+          <ContentLoader />
+        ) : productItems.length ? (
+          <>
+            {shouldUseDesktopSlider ? (
+              <div className="relatedProductsDesktopSlider">
+                <Swiper
+                  className="relatedProductsSwiper"
+                  onSwiper={(swiper) => {
+                    swiperRef.current = swiper;
+                    updateSliderState(swiper);
+                  }}
+                  onSlideChange={updateSliderState}
+                  onResize={updateSliderState}
+                  slidesPerGroup={1}
+                  slidesPerView={3}
+                  spaceBetween={32}
+                  watchOverflow={true}
+                  breakpoints={{
+                    768: {
+                      slidesPerView: 2,
+                      spaceBetween: 28,
+                    },
+                    1100: {
+                      slidesPerView: 3,
+                      spaceBetween: 32,
+                    },
+                  }}
+                >
+                  {productItems.map((item) => (
+                    <SwiperSlide key={item.id}>
+                      {renderProductType(item)}
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+                {withArrows && (
+                  <div className="productTypeSliderArrow">
+                    <CustomPrevButton
+                      disabled={sliderState.isBeginning}
+                      onClick={() => swiperRef.current?.slidePrev()}
+                    />
+                    <CustomNextButton
+                      disabled={sliderState.isEnd}
+                      onClick={() => swiperRef.current?.slideNext()}
+                    />
+                  </div>
+                )}
+              </div>
+            ) : (
+              renderProductsGrid("relatedProductsGridDesktop")
+            )}
+            {renderProductsGrid("relatedProductsGridMobile")}
+          </>
+        ) : null}
       </div>
     </div>
   );
