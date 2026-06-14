@@ -213,7 +213,7 @@ const ContactUs = ({ data, socials }) => {
                                   return (
                                     <a
                                       key={index}
-                                      className="icon"
+                                      className="contact-social-icon"
                                       style={{ cursor: "pointer" }}
                                       href={item.link || "#"}
                                       target="_blank"

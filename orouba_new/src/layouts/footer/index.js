@@ -281,7 +281,7 @@ const Footer = ({ siteinfo = {}, socialParents = [], brands = [] }) => {
                               return (
                                 <a
                                   key={index}
-                                  className="icon"
+                                  className="footer-social-icon"
                                   style={{ cursor: "pointer" }}
                                   href={item.link || "#"}
                                   target="_blank"

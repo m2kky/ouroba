@@ -104,6 +104,7 @@ export const mergeDashboardSocialLinks = (
           ...social,
           type,
           link: settingSocial.link,
+          image: settingSocial.image || social.image,
         };
       }),
     }))

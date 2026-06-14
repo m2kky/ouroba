@@ -547,7 +547,7 @@ body .headerImage img:nth-child(2) {
   gap: 10px !important;
 }
 
-.footer .parent_social .me_social_icons .icon {
+.footer .parent_social .me_social_icons .footer-social-icon {
   align-items: center !important;
   background: transparent !important;
   border: 0 !important;
@@ -565,13 +565,39 @@ body .headerImage img:nth-child(2) {
   width: 32px !important;
 }
 
-.footer .parent_social .me_social_icons .icon img {
+.footer .parent_social .me_social_icons .footer-social-icon img {
   display: block !important;
   height: 30px !important;
   max-height: 30px !important;
   max-width: 30px !important;
   object-fit: contain !important;
   width: 30px !important;
+}
+
+.me_cotactUs_page .contact_social_parents .me_social_icons .contact-social-icon {
+  align-items: center !important;
+  background: #ffffff !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  height: 52px !important;
+  justify-content: center !important;
+  width: 52px !important;
+}
+
+.me_cotactUs_page .contact_social_parents .me_social_icons .contact-social-icon img {
+  display: block !important;
+  height: 30px !important;
+  max-height: 30px !important;
+  max-width: 30px !important;
+  object-fit: contain !important;
+  width: 30px !important;
+}
+
+@media (max-width: 576px) {
+  .me_cotactUs_page .contact_social_parents .me_social_icons .contact-social-icon {
+    height: 44px !important;
+    width: 44px !important;
+  }
 }
 
 
