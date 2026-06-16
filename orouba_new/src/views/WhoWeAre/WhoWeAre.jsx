@@ -203,16 +203,16 @@ export default function WhoWeAre({ aboutData }) {
           visibleSections.map((item) => {
             return (
               <div key={item.id} className={"label" + " whowearestyleslabel"}>
-                <h3
+                <RichText
+                  as="h3"
+                  html={language == "en" ? item.titleEn : item.titleAr}
                   style={
                     language == "en"
                       ? { textAlign: "left" }
                       : { textAlign: "right" }
                   }
                   className="whowearestylesh3"
-                >
-                  {language == "en" ? item.titleEn : item.titleAr}
-                </h3>
+                />
                 <RichText
                   as="p"
                   html={language == "en" ? item.textEn : item.textAr}
@@ -235,7 +235,10 @@ export default function WhoWeAre({ aboutData }) {
               return (
                 <div key={item.id} className={`col d-flex gap-2 ${"buildingRow"}`}>
                   <div>
-                    <h4>{language == "en" ? item?.titleEn : item?.titleAr}</h4>
+                    <RichText
+                      as="h4"
+                      html={language == "en" ? item?.titleEn : item?.titleAr}
+                    />
                     <RichText
                       as="p"
                       html={language == "en" ? item?.descriptionEn : item?.descriptionAr}

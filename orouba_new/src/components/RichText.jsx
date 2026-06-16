@@ -85,6 +85,17 @@ const getSingleParagraph = (content) => {
   };
 };
 
+const getSingleBlock = (content) => {
+  const match = content.match(/^<(p|h[1-6])([^>]*)>([\s\S]*)<\/\1>$/i);
+  if (!match || /<\/?(?:p|h[1-6])(?:\s|>)/i.test(match[3])) return null;
+
+  return {
+    tag: match[1].toLowerCase(),
+    attributes: match[2] || "",
+    body: match[3],
+  };
+};
+
 const preserveInlineStylePriority = (root) => {
   if (!root) return;
 
@@ -108,7 +119,28 @@ export default function RichText({ html, as: Tag = "div", className = "", style 
 
   if (!content) return null;
 
+  const isHeading = /^h[1-6]$/i.test(String(Tag));
+  const singleBlock = isHeading ? getSingleBlock(content) : null;
   const singleParagraph = Tag === "p" ? getSingleParagraph(content) : null;
+
+  if (isHeading && singleBlock) {
+    const blockClassName = getAttributeValue(singleBlock.attributes, "class");
+    const blockStyle = parseStyleAttribute(getAttributeValue(singleBlock.attributes, "style"));
+    const blockDir = getAttributeValue(singleBlock.attributes, "dir");
+    const HeadingTag = Tag;
+
+    return (
+      <HeadingTag
+        ref={rootRef}
+        className={["rich-text-content", className, blockClassName]
+          .filter(Boolean)
+          .join(" ")}
+        style={{ ...(style || {}), ...blockStyle }}
+        dir={blockDir || undefined}
+        dangerouslySetInnerHTML={{ __html: singleBlock.body }}
+      />
+    );
+  }
 
   if (singleParagraph) {
     const paragraphClassName = getAttributeValue(singleParagraph.attributes, "class");
@@ -130,7 +162,7 @@ export default function RichText({ html, as: Tag = "div", className = "", style 
     );
   }
 
-  const RenderTag = Tag === "p" ? "div" : Tag;
+  const RenderTag = Tag === "p" || isHeading ? "div" : Tag;
 
   return (
     <RenderTag

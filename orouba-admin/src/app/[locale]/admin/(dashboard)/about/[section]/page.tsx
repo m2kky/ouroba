@@ -69,8 +69,8 @@ const getSectionConfigs = (t: TranslateFn): Record<SectionType, SectionConfig> =
     title: t("القيم المؤسسية (Values)", "Institutional Values"),
     desc: t("إدارة قيم ومبادئ الشركة", "Manage company values and principles"),
     fields: [
-      { key: "titleAr", label: t("العنوان (عربي)", "Title (Arabic)"), type: "text", dir: "rtl" },
-      { key: "titleEn", label: t("العنوان (إنجليزي)", "Title (English)"), type: "text", dir: "ltr" },
+      { key: "titleAr", label: t("العنوان (عربي)", "Title (Arabic)"), type: "richtext", dir: "rtl" },
+      { key: "titleEn", label: t("العنوان (إنجليزي)", "Title (English)"), type: "richtext", dir: "ltr" },
       { key: "descriptionAr", label: t("الوصف (عربي)", "Description (Arabic)"), type: "richtext", dir: "rtl" },
       { key: "descriptionEn", label: t("الوصف (إنجليزي)", "Description (English)"), type: "richtext", dir: "ltr" },
       { key: "image", label: t("أيقونة/صورة", "Icon/Image"), type: "image" }
@@ -88,8 +88,8 @@ const getSectionConfigs = (t: TranslateFn): Record<SectionType, SectionConfig> =
     title: t("مرافق الشركة (Buildings)", "Company Facilities (Buildings)"),
     desc: t("إدارة معلومات المباني والمرافق", "Manage building and facility information"),
     fields: [
-      { key: "titleAr", label: t("العنوان (عربي)", "Title (Arabic)"), type: "text", dir: "rtl" },
-      { key: "titleEn", label: t("العنوان (إنجليزي)", "Title (English)"), type: "text", dir: "ltr" },
+      { key: "titleAr", label: t("العنوان (عربي)", "Title (Arabic)"), type: "richtext", dir: "rtl" },
+      { key: "titleEn", label: t("العنوان (إنجليزي)", "Title (English)"), type: "richtext", dir: "ltr" },
       { key: "descriptionAr", label: t("الوصف (عربي)", "Description (Arabic)"), type: "richtext", dir: "rtl" },
       { key: "descriptionEn", label: t("الوصف (إنجليزي)", "Description (English)"), type: "richtext", dir: "ltr" },
       { key: "image", label: t("صورة المرفق", "Facility Image"), type: "image" }
@@ -99,8 +99,8 @@ const getSectionConfigs = (t: TranslateFn): Record<SectionType, SectionConfig> =
     title: t("المميزات (Features)", "Features"),
     desc: t("إدارة مميزات المنتجات أو الشركة", "Manage product or company features"),
     fields: [
-      { key: "titleAr", label: t("العنوان (عربي)", "Title (Arabic)"), type: "text", dir: "rtl" },
-      { key: "titleEn", label: t("العنوان (إنجليزي)", "Title (English)"), type: "text", dir: "ltr" },
+      { key: "titleAr", label: t("العنوان (عربي)", "Title (Arabic)"), type: "richtext", dir: "rtl" },
+      { key: "titleEn", label: t("العنوان (إنجليزي)", "Title (English)"), type: "richtext", dir: "ltr" },
       { key: "descriptionAr", label: t("الوصف (عربي)", "Description (Arabic)"), type: "richtext", dir: "rtl" },
       { key: "descriptionEn", label: t("الوصف (إنجليزي)", "Description (English)"), type: "richtext", dir: "ltr" },
       { key: "image", label: t("أيقونة/صورة", "Icon/Image"), type: "image" }
@@ -120,8 +120,8 @@ const getSectionConfigs = (t: TranslateFn): Record<SectionType, SectionConfig> =
     title: t("نصوص الأقسام (Section Texts)", "Section Texts"),
     desc: t("إدارة النصوص العامة في الأقسام المختلفة", "Manage general texts in different sections"),
     fields: [
-      { key: "titleAr", label: t("العنوان (عربي)", "Title (Arabic)"), type: "text", dir: "rtl" },
-      { key: "titleEn", label: t("العنوان (إنجليزي)", "Title (English)"), type: "text", dir: "ltr" },
+      { key: "titleAr", label: t("العنوان (عربي)", "Title (Arabic)"), type: "richtext", dir: "rtl" },
+      { key: "titleEn", label: t("العنوان (إنجليزي)", "Title (English)"), type: "richtext", dir: "ltr" },
       { key: "textAr", label: t("النص (عربي)", "Text (Arabic)"), type: "richtext", dir: "rtl" },
       { key: "textEn", label: t("النص (إنجليزي)", "Text (English)"), type: "richtext", dir: "ltr" },
       { key: "number", label: t("رقم القسم (ترتيب)", "Section Number (Order)"), type: "number" }
@@ -263,8 +263,8 @@ export default function DynamicAboutPage({ params }: { params: Promise<{ section
     const s = search.toLowerCase();
     if (!s) return true;
     return (
-      (item.titleAr && item.titleAr.toLowerCase().includes(s)) ||
-      (item.titleEn && item.titleEn.toLowerCase().includes(s)) ||
+      (item.titleAr && stripHtml(item.titleAr).toLowerCase().includes(s)) ||
+      (item.titleEn && stripHtml(item.titleEn).toLowerCase().includes(s)) ||
       (item.descriptionAr && stripHtml(item.descriptionAr).toLowerCase().includes(s)) ||
       (item.textAr && stripHtml(item.textAr).toLowerCase().includes(s)) ||
       (item.image && item.image.toLowerCase().includes(s))
@@ -285,7 +285,11 @@ export default function DynamicAboutPage({ params }: { params: Promise<{ section
     }
 
     if (config.fields.some(f => f.key === "titleAr")) {
-      cols.push({ key: "titleAr", label: t("العنوان", "Title"), render: (item) => t(item.titleAr || "", item.titleEn || "") });
+      cols.push({
+        key: "titleAr",
+        label: t("العنوان", "Title"),
+        render: (item) => <div className="truncate max-w-xs">{stripHtml(t(item.titleAr || "", item.titleEn || ""))}</div>
+      });
     } else if (config.fields.some(f => f.key === "descriptionAr")) {
       cols.push({ 
         key: "descriptionAr", 
