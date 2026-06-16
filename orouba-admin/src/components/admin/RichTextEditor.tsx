@@ -141,6 +141,38 @@ export default function RichTextEditor({
           direction: ltr;
           text-align: left;
         }
+        .rich-text-editor .ql-editor ol,
+        .rich-text-editor .ql-editor ul {
+          margin: 0 0 0.75rem;
+          padding-inline-start: 1.5rem;
+          padding-inline-end: 0;
+        }
+        .rich-text-editor.ql-rtl .ql-editor ol,
+        .rich-text-editor.ql-rtl .ql-editor ul {
+          padding-inline-start: 0;
+          padding-inline-end: 1.5rem;
+        }
+        .rich-text-editor .ql-editor li {
+          display: list-item;
+          list-style-position: outside;
+          margin-bottom: 0.35rem;
+          padding-inline-start: 0.25rem;
+        }
+        .rich-text-editor .ql-editor ol li {
+          list-style-type: decimal;
+        }
+        .rich-text-editor .ql-editor ul li {
+          list-style-type: disc;
+        }
+        .rich-text-editor .ql-editor li[data-list="ordered"] {
+          list-style-type: decimal;
+        }
+        .rich-text-editor .ql-editor li[data-list="bullet"] {
+          list-style-type: disc;
+        }
+        .rich-text-editor .ql-editor li > .ql-ui {
+          display: none;
+        }
 
         /* Line Height CSS */
         .ql-snow .ql-picker.ql-lineHeight {
