@@ -130,10 +130,92 @@ const groupHtml = (group, language) =>
     .filter(Boolean)
     .join("");
 
-const featureFallbackByPosition = (item, index) => {
+const stripHtml = (value) =>
+  String(value || "")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const richTextHasText = (value) => stripHtml(value).length > 0;
+
+const emptyParagraphPattern =
+  /<p(?:\s[^>]*)?>\s*(?:&nbsp;|\s|<br\s*\/?>)*<\/p>/gi;
+
+const cleanRichText = (value) =>
+  String(value || "")
+    .replace(emptyParagraphPattern, "")
+    .trim();
+
+const leadingTitleBlock = (value) => {
+  const text = String(value || "").trim();
+  const match = text.match(/^<(h[1-6]|p)([^>]*)>([\s\S]*?)<\/\1>\s*/i);
+  if (!match || !stripHtml(match[3])) {
+    return null;
+  }
+
+  const isTitleLike =
+    /^h[1-6]$/i.test(match[1]) || /<(strong|b)(?:\s|>)/i.test(match[3]);
+
+  if (!isTitleLike) {
+    return null;
+  }
+
+  return {
+    block: match[0].trim(),
+    rest: text.slice(match[0].length).trim(),
+  };
+};
+
+const firstRichText = (...values) => {
+  const value = values.find((item) => richTextHasText(item));
+  return cleanRichText(value || "");
+};
+
+const filenameFromUrl = (value) => {
+  try {
+    const pathname = new URL(String(value || "")).pathname;
+    return pathname.split("/").filter(Boolean).pop() || "";
+  } catch {
+    return String(value || "").split("/").filter(Boolean).pop() || "";
+  }
+};
+
+const featureFallbackIndex = (item, index) => {
   const number = Number(item?.number);
-  const fallbackIndex = Number.isFinite(number) && number > 0 ? number - 1 : index;
+  if (Number.isFinite(number) && number > 0) {
+    return number - 1;
+  }
+
+  const imageName = filenameFromUrl(item?.image);
+  const imageIndex = ABOUT_FEATURES.findIndex(
+    (feature) => imageName && filenameFromUrl(feature.image) === imageName
+  );
+
+  return imageIndex > -1 ? imageIndex : index;
+};
+
+const featureFallbackByItem = (item, index) => {
+  const fallbackIndex = featureFallbackIndex(item, index);
   return ABOUT_FEATURES[fallbackIndex] || ABOUT_FEATURES[index] || ABOUT_FEATURES[0];
+};
+
+const normalizeFeatureCopy = (item, fallback, titleKey, titleSnakeKey, descKey, descSnakeKey) => {
+  const rawTitle = item?.[titleKey] || item?.[titleSnakeKey];
+  const rawDescription = item?.[descKey] || item?.[descSnakeKey];
+  const titleFromDescription = leadingTitleBlock(rawDescription);
+  const title = firstRichText(rawTitle, titleFromDescription?.block, fallback[titleKey]);
+  const description =
+    !richTextHasText(rawTitle) && titleFromDescription
+      ? cleanRichText(titleFromDescription.rest)
+      : cleanRichText(rawDescription);
+
+  return {
+    title,
+    description: firstRichText(description, fallback[descKey]),
+  };
 };
 
 const mergeAboutFeatures = (items) => {
@@ -145,19 +227,35 @@ const mergeAboutFeatures = (items) => {
 
   return sortedVisibleItems(
     safeItems,
-    (a, b) => (a?.number ?? 999) - (b?.number ?? 999)
+    (a, b) => featureFallbackIndex(a, 999) - featureFallbackIndex(b, 999)
   ).map((item, index) => {
-    const fallback = featureFallbackByPosition(item, index);
+    const fallback = featureFallbackByItem(item, index);
+    const arabicCopy = normalizeFeatureCopy(
+      item,
+      fallback,
+      "titleAr",
+      "title_ar",
+      "descriptionAr",
+      "description_ar"
+    );
+    const englishCopy = normalizeFeatureCopy(
+      item,
+      fallback,
+      "titleEn",
+      "title_en",
+      "descriptionEn",
+      "description_en"
+    );
 
     return {
       ...fallback,
       ...item,
       id: item.id || fallback.id,
       image: item.image || fallback.image,
-      titleAr: item.titleAr || item.title_ar || fallback.titleAr,
-      titleEn: item.titleEn || item.title_en || fallback.titleEn,
-      descriptionAr: item.descriptionAr || item.description_ar || fallback.descriptionAr,
-      descriptionEn: item.descriptionEn || item.description_en || fallback.descriptionEn,
+      titleAr: arabicCopy.title,
+      titleEn: englishCopy.title,
+      descriptionAr: arabicCopy.description,
+      descriptionEn: englishCopy.description,
     };
   });
 };
