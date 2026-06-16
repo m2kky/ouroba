@@ -3,25 +3,48 @@ export const RECIPE_PROPERTY_TEMPLATES = [
     key: "prep_time",
     titleAr: "وقت التحضير",
     titleEn: "Prep Time",
-    aliases: ["prep_time", "prep time", "preparation time", "وقت التحضير"],
+    icon: "/خصائص الوصفة/Prep Time.png",
+    aliases: [
+      "prep_time",
+      "prep time",
+      "preparation time",
+      "وقت التحضير",
+      "/خصائص الوصفة/prep time.png",
+    ],
   },
   {
     key: "cooking_time",
     titleAr: "وقت الطبخ",
     titleEn: "Cooking Time",
-    aliases: ["cooking_time", "cooking time", "cook time", "وقت الطبخ"],
+    icon: "/خصائص الوصفة/Cooking Time.png",
+    aliases: [
+      "cooking_time",
+      "cooking time",
+      "cook time",
+      "وقت الطبخ",
+      "/خصائص الوصفة/cooking time.png",
+    ],
   },
   {
     key: "servings",
     titleAr: "عدد الأفراد",
     titleEn: "Servings",
-    aliases: ["servings", "serving", "عدد الأفراد", "عدد الافراد", "خدمة"],
+    icon: "/خصائص الوصفة/Serving.png",
+    aliases: [
+      "servings",
+      "serving",
+      "عدد الأفراد",
+      "عدد الافراد",
+      "خدمة",
+      "/خصائص الوصفة/serving.png",
+    ],
   },
   {
     key: "level",
     titleAr: "المستوى",
     titleEn: "Level",
-    aliases: ["level", "difficulty", "المستوى"],
+    icon: "/خصائص الوصفة/Level.png",
+    aliases: ["level", "difficulty", "المستوى", "/خصائص الوصفة/level.png"],
   },
 ] as const;
 
@@ -56,7 +79,7 @@ export const normalizeRecipeProperties = (properties: RecipePropertyInput[] = []
 
     return {
       id: match?.id,
-      icon: template.key,
+      icon: template.icon,
       titleAr: template.titleAr,
       titleEn: template.titleEn,
       textAr: match?.textAr || "",
@@ -67,6 +90,15 @@ export const normalizeRecipeProperties = (properties: RecipePropertyInput[] = []
 export const recipePropertiesForCreate = (properties: RecipePropertyInput[], recipeId: string) =>
   normalizeRecipeProperties(properties).map((property) => ({
     recipeId,
+    icon: property.icon,
+    titleAr: property.titleAr,
+    titleEn: property.titleEn,
+    textAr: property.textAr,
+    textEn: property.textEn,
+  }));
+
+export const recipePropertiesForNestedCreate = (properties: RecipePropertyInput[] = []) =>
+  normalizeRecipeProperties(properties).map((property) => ({
     icon: property.icon,
     titleAr: property.titleAr,
     titleEn: property.titleEn,

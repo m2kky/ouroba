@@ -3,7 +3,10 @@ import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { uploadFile } from "@/lib/upload";
-import { normalizeRecipeProperties } from "@/lib/recipe-properties";
+import {
+  normalizeRecipeProperties,
+  recipePropertiesForNestedCreate,
+} from "@/lib/recipe-properties";
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -98,6 +101,9 @@ export async function POST(req: Request) {
         },
         recommendedWith: {
           create: recommendedProductIds.map((pid: string) => ({ productId: pid }))
+        },
+        properties: {
+          create: recipePropertiesForNestedCreate()
         }
       },
       include: {
@@ -109,7 +115,10 @@ export async function POST(req: Request) {
       }
     });
 
-    return NextResponse.json(recipe);
+    return NextResponse.json({
+      ...recipe,
+      properties: normalizeRecipeProperties(recipe.properties),
+    });
   } catch (error) {
     console.error("Error creating recipe:", error);
     return NextResponse.json({ error: "Failed to create recipe" }, { status: 500 });

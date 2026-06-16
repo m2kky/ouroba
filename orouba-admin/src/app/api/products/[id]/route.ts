@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { apiSuccess, apiError } from "@/lib/api-helpers";
 import { NextRequest } from "next/server";
+import { normalizeRecipeProperties } from "@/lib/recipe-properties";
 
 type Params = { params: Promise<{ id: string }> };
 
@@ -32,7 +33,18 @@ export async function GET(request: NextRequest, { params }: Params) {
     });
 
     if (!product) return apiError("Product not found", 404);
-    return apiSuccess(product);
+    return apiSuccess({
+      ...product,
+      recommendedRecipes: product.recommendedRecipes.map((relation) => ({
+        ...relation,
+        recipe: relation.recipe
+          ? {
+              ...relation.recipe,
+              properties: normalizeRecipeProperties(relation.recipe.properties),
+            }
+          : relation.recipe,
+      })),
+    });
   } catch (error) {
     return apiError("Failed to fetch product", 500);
   }

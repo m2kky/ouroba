@@ -45,7 +45,7 @@ const featureTemplates = [
   },
   {
     key: 'prep_time',
-    titleAr: 'وقت الاعداد',
+    titleAr: 'وقت التحضير',
     titleEn: 'Prep Time',
     aliases: ['prep_time', 'prep time', 'preparation time', 'وقت التحضير', 'وقت الاعداد', 'وقت الإعداد'],
     icon: (

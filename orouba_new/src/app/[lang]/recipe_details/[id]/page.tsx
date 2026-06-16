@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { resolveMediaTree } from "@/utils/media";
 import {
   dashboardSettingsToSiteinfo,
+  getDashboardBaseUrl,
   getDashboardRecipe,
   getDashboardSiteData,
 } from "@/lib/dashboard-data";
@@ -62,11 +63,40 @@ const PROPERTY_ICON_SETTINGS: Record<string, string> = {
   servings: "recipe_property_servings_image",
 };
 
+const FIXED_PROPERTY_ICONS: Record<string, string> = {
+  prep_time: "/خصائص الوصفة/Prep Time.png",
+  cooking_time: "/خصائص الوصفة/Cooking Time.png",
+  servings: "/خصائص الوصفة/Serving.png",
+  level: "/خصائص الوصفة/Level.png",
+};
+
 const PROPERTY_ALIASES: Record<string, string[]> = {
-  level: ["level", "difficulty", "المستوى", "مستوى", "المستوي"],
-  prep_time: ["prep_time", "prep time", "preparation time", "وقت التحضير", "وقت الاعداد", "وقت الإعداد"],
-  cooking_time: ["cooking_time", "cooking time", "cook time", "وقت الطبخ"],
-  servings: ["servings", "serving", "عدد الأفراد", "عدد الافراد", "التقديم", "خدمة"],
+  level: ["level", "difficulty", "المستوى", "مستوى", "المستوي", "/خصائص الوصفة/level.png"],
+  prep_time: [
+    "prep_time",
+    "prep time",
+    "preparation time",
+    "وقت التحضير",
+    "وقت الاعداد",
+    "وقت الإعداد",
+    "/خصائص الوصفة/prep time.png",
+  ],
+  cooking_time: [
+    "cooking_time",
+    "cooking time",
+    "cook time",
+    "وقت الطبخ",
+    "/خصائص الوصفة/cooking time.png",
+  ],
+  servings: [
+    "servings",
+    "serving",
+    "عدد الأفراد",
+    "عدد الافراد",
+    "التقديم",
+    "خدمة",
+    "/خصائص الوصفة/serving.png",
+  ],
 };
 
 const normalize = (value: unknown) =>
@@ -94,14 +124,29 @@ const propertyKey = (property: RecipeProperty) => {
 const isImageUrl = (value: unknown) =>
   typeof value === "string" && /^(https?:|\/|data:image)/i.test(value.trim());
 
+const dashboardAssetUrl = (value: string) => {
+  const trimmed = value.trim();
+  if (!trimmed || /^(https?:|data:image)/i.test(trimmed)) return trimmed;
+  if (trimmed.startsWith("/")) {
+    return new URL(trimmed, `${getDashboardBaseUrl()}/`).toString();
+  }
+  return trimmed;
+};
+
 const recipePropertyIcon = (property: RecipeProperty, siteInfo: Record<string, string>) => {
   const key = propertyKey(property);
   const settingKey = key ? PROPERTY_ICON_SETTINGS[key] : "";
   const globalIcon = settingKey
     ? first(siteInfo[settingKey], siteInfo[`${settingKey}Ar`], siteInfo[`${settingKey}En`])
     : "";
+  const fixedIcon = key ? FIXED_PROPERTY_ICONS[key] : "";
+  const propertyIcon = isImageUrl(property?.icon) ? String(property.icon) : "";
 
-  return first(globalIcon, isImageUrl(property?.icon) ? property.icon : "");
+  return first(
+    propertyIcon ? dashboardAssetUrl(propertyIcon) : "",
+    fixedIcon ? dashboardAssetUrl(fixedIcon) : "",
+    globalIcon ? dashboardAssetUrl(globalIcon) : ""
+  );
 };
 
 const normalizeProperty = (property: RecipeProperty, siteInfo: Record<string, string>) => ({

@@ -123,9 +123,18 @@ export default function RecipePropertiesPage() {
                 <div className="grid grid-cols-1 md:grid-cols-[220px_1fr_1fr] gap-3 items-end">
                   <div>
                     <label className="block text-xs font-semibold text-gray-500 mb-1">{t("الخاصية الثابتة", "Fixed Property")}</label>
-                    <div className="px-3 py-2 border border-gray-200 rounded-lg bg-white min-h-10">
-                      <p className="text-sm font-bold text-gray-900">{t(prop.titleAr, prop.titleEn)}</p>
-                      <p className="text-xs text-gray-400" dir="ltr">{prop.icon}</p>
+                    <div className="flex items-center gap-3 px-3 py-2 border border-gray-200 rounded-lg bg-white min-h-10">
+                      {prop.icon ? (
+                        <img
+                          src={prop.icon}
+                          alt=""
+                          className="h-8 w-8 shrink-0 object-contain"
+                        />
+                      ) : null}
+                      <div className="min-w-0">
+                        <p className="text-sm font-bold text-gray-900">{t(prop.titleAr, prop.titleEn)}</p>
+                        <p className="text-xs text-gray-400" dir="ltr">{prop.titleEn}</p>
+                      </div>
                     </div>
                   </div>
                   <div>

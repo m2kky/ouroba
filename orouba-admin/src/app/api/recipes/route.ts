@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { apiSuccess, apiError, parsePagination } from "@/lib/api-helpers";
 import { NextRequest } from "next/server";
+import { normalizeRecipeProperties } from "@/lib/recipe-properties";
 
 // GET /api/recipes — Public: list recipes (read-only)
 export async function GET(request: NextRequest) {
@@ -26,11 +27,13 @@ export async function GET(request: NextRequest) {
     ]);
 
     return apiSuccess({
-      recipes,
+      recipes: recipes.map((recipe) => ({
+        ...recipe,
+        properties: normalizeRecipeProperties(recipe.properties),
+      })),
       pagination: { total, page, limit, totalPages: Math.ceil(total / limit) },
     });
   } catch (error) {
     return apiError("Failed to fetch recipes", 500);
   }
 }
-
