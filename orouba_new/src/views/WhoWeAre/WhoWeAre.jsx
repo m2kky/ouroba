@@ -130,16 +130,49 @@ const groupHtml = (group, language) =>
     .filter(Boolean)
     .join("");
 
+const featureFallbackByPosition = (item, index) => {
+  const number = Number(item?.number);
+  const fallbackIndex = Number.isFinite(number) && number > 0 ? number - 1 : index;
+  return ABOUT_FEATURES[fallbackIndex] || ABOUT_FEATURES[index] || ABOUT_FEATURES[0];
+};
+
+const mergeAboutFeatures = (items) => {
+  const safeItems = Array.isArray(items) ? items : [];
+
+  if (!safeItems.length) {
+    return ABOUT_FEATURES;
+  }
+
+  return sortedVisibleItems(
+    safeItems,
+    (a, b) => (a?.number ?? 999) - (b?.number ?? 999)
+  ).map((item, index) => {
+    const fallback = featureFallbackByPosition(item, index);
+
+    return {
+      ...fallback,
+      ...item,
+      id: item.id || fallback.id,
+      image: item.image || fallback.image,
+      titleAr: item.titleAr || item.title_ar || fallback.titleAr,
+      titleEn: item.titleEn || item.title_en || fallback.titleEn,
+      descriptionAr: item.descriptionAr || item.description_ar || fallback.descriptionAr,
+      descriptionEn: item.descriptionEn || item.description_en || fallback.descriptionEn,
+    };
+  });
+};
+
 
 export default function WhoWeAre({ aboutData }) {
   const { language } = UseGeneral();
-  const { sections, buildings, productionSteps, siteInfo: siteData } = aboutData;
+  const { sections, buildings, productionSteps, features, siteInfo: siteData } = aboutData;
   const [isSmaller, setIsSmaller] = useState(false);
   const visibleSections = sortedVisibleItems(
     sections,
     (a, b) => (a?.number ?? 999) - (b?.number ?? 999)
   );
   const visibleBuildings = sortedVisibleItems(buildings, () => 0);
+  const aboutFeatures = mergeAboutFeatures(features);
   const productionStepGroups = productionGroups(productionSteps);
   const heroImage = firstImage(
     isSmaller ? siteData?.small_about_img : null,
@@ -251,11 +284,11 @@ export default function WhoWeAre({ aboutData }) {
 
         <div className="mt-5 AreaRow">
           <div className="aboutHardcodedFeatures">
-            {ABOUT_FEATURES.map((item) => (
+            {aboutFeatures.map((item) => (
               <div key={item.id} className="aboutHardcodedFeature">
                 <img src={item.image} alt={language == "en" ? item.titleEn : item.titleAr} />
-                <h5>{language == "en" ? item.titleEn : item.titleAr}</h5>
-                <p>{language == "en" ? item.descriptionEn : item.descriptionAr}</p>
+                <RichText as="h5" html={language == "en" ? item.titleEn : item.titleAr} />
+                <RichText as="p" html={language == "en" ? item.descriptionEn : item.descriptionAr} />
               </div>
             ))}
           </div>
