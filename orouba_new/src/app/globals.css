@@ -191,10 +191,10 @@ html {
 .AreaRow .aboutHardcodedFeatures {
   align-items: start;
   display: grid;
-  gap: 64px 84px;
+  gap: 96px clamp(96px, 8vw, 150px);
   grid-template-columns: repeat(6, minmax(0, 1fr));
   margin: 0 auto;
-  max-width: 1180px;
+  max-width: min(1360px, calc(100vw - 64px));
   width: 100%;
 }
 
@@ -302,7 +302,7 @@ body.enVersion .AreaRow .aboutHardcodedFeatures {
 
 @media (max-width: 992px) {
   .AreaRow .aboutHardcodedFeatures {
-    gap: 48px 36px;
+    gap: 64px 52px;
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -314,6 +314,7 @@ body.enVersion .AreaRow .aboutHardcodedFeatures {
 
 @media (max-width: 576px) {
   .AreaRow .aboutHardcodedFeatures {
+    gap: 52px;
     grid-template-columns: 1fr;
   }
 }
