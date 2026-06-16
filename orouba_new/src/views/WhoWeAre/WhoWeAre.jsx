@@ -442,7 +442,7 @@ export default function WhoWeAre({ aboutData }) {
               color: "#035297",
               fontSize: "23px",
               margin: "",
-              textAlign: "center !important"
+              textAlign: "center"
             }}
           >
             {"    "}

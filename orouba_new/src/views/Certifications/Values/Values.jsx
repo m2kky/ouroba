@@ -13,10 +13,10 @@ const Values = ({ valuesData, introText }) => {
   
   return (
     <div className="certification_values">
-      <h4 style={{ textAlign: "center !important" }}>
+      <h4 style={{ textAlign: "center" }}>
         {language == "ar" ? (
           <>
-            <span style={{ textAlign: "center !important" }}>قيمنا</span>
+            <span style={{ textAlign: "center" }}>قيمنا</span>
           </>
         ) : (
           <>

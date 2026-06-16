@@ -18,11 +18,11 @@ const StyledDiv = styled.div`
   &:hover h4,
   &:hover .learnShadowMore,
   &:hover .learnShadowMore span {
-    color: ${(props) => props.$hoverTextColor} !important;
+    color: ${(props) => props.$hoverTextColor};
   }
 
   &:hover .learnShadowMore svg path {
-    stroke: currentColor !important;
+    stroke: currentColor;
   }
 `;
 

@@ -61,7 +61,7 @@ function Standards({ data, siteinfo }) {
             margin: "auto",
             fontSize: "23px",
             fontWeight: "400",
-            textAlign: "center  !important",
+            textAlign: "center",
           }}
         />
       ) : null}
