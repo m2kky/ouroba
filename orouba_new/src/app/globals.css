@@ -432,7 +432,7 @@ body .headerImage {
 
 body.arVersion .headerImage,
 body .headerImage.active {
-  left: clamp(-216px, -10.5vw, -130px);
+  left: clamp(-168px, -7.2vw, -88px);
   right: auto;
   rotate: 0deg;
   transform: none;
@@ -440,7 +440,7 @@ body .headerImage.active {
 
 body.enVersion .headerImage {
   left: auto;
-  right: clamp(-216px, -10.5vw, -130px);
+  right: clamp(-168px, -7.2vw, -88px);
   rotate: 0deg;
   transform: scaleX(-1);
 }
@@ -472,11 +472,11 @@ body .headerImage img:nth-child(2) {
 
   body.arVersion .headerImage,
   body .headerImage.active {
-    left: -62px;
+    left: -38px;
   }
 
   body.enVersion .headerImage {
-    right: -62px;
+    right: -38px;
   }
 }
 
@@ -487,11 +487,11 @@ body .headerImage img:nth-child(2) {
 
   body.arVersion .headerImage,
   body .headerImage.active {
-    left: -52px;
+    left: -34px;
   }
 
   body.enVersion .headerImage {
-    right: -52px;
+    right: -34px;
   }
 }
 
