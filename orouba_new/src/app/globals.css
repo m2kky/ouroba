@@ -19,6 +19,10 @@
 }
 
 :root {
+  --main-color: #035297;
+  --sec-color: #002f59;
+  --dark: #002f59;
+  --heading-color: #fff100;
   /* ألوان الوضع النهاري (Light Mode) */
   --background: #f9fafb; /* Gray-50 */
   --foreground: #000000; /* Black */
@@ -84,6 +88,27 @@ body[dir="rtl"] nav * {
 html {
   overflow-x: clip;
   max-width: 100vw;
+}
+
+.downHeaderDiv.whoweare h3.whowearestylesh3,
+.downHeaderDiv.whoweare .buildingsContainer h4,
+.downHeaderDiv.whoweare .AreaRow h5,
+.downHeaderDiv.whoweare .aboutHardcodedFeature h5,
+.downHeaderDiv.whoweare .ProductionSteps h4 {
+  color: #035297 !important;
+}
+
+.downHeaderDiv.whoweare p,
+.downHeaderDiv.whoweare .rich-text-content,
+.downHeaderDiv.whoweare .rich-text-content p,
+.downHeaderDiv.whoweare .rich-text-content span,
+.downHeaderDiv.whoweare .buildingsContainer p,
+.downHeaderDiv.whoweare .AreaRow p,
+.downHeaderDiv.whoweare .aboutHardcodedFeature p,
+.downHeaderDiv.whoweare .pord_steps_content p,
+.downHeaderDiv.whoweare .pord_steps_content strong,
+.downHeaderDiv.whoweare center.rowDiv p {
+  color: #002f59 !important;
 }
 
 @media (min-width: 993px) {
@@ -207,7 +232,7 @@ body.enVersion .AreaRow .aboutHardcodedFeatures {
 }
 
 .AreaRow .aboutHardcodedFeature h5 {
-  color: #0066cc !important;
+  color: #035297 !important;
   font-size: 30px !important;
   font-weight: 800 !important;
   line-height: 1.25 !important;

@@ -1,6 +1,16 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
+
+const priorityStyleProperties = [
+  "color",
+  "background-color",
+  "line-height",
+  "letter-spacing",
+  "font-size",
+  "font-weight",
+  "text-align",
+];
 
 const hasHtml = (value) => /<[a-z][\s\S]*>/i.test(String(value || ""));
 
@@ -75,8 +85,27 @@ const getSingleParagraph = (content) => {
   };
 };
 
+const preserveInlineStylePriority = (root) => {
+  if (!root) return;
+
+  [root, ...root.querySelectorAll("[style]")].forEach((element) => {
+    priorityStyleProperties.forEach((property) => {
+      const value = element.style.getPropertyValue(property);
+      if (value) {
+        element.style.setProperty(property, value, "important");
+      }
+    });
+  });
+};
+
 export default function RichText({ html, as: Tag = "div", className = "", style }) {
   const content = richTextToHtml(html);
+  const rootRef = useRef(null);
+
+  useEffect(() => {
+    preserveInlineStylePriority(rootRef.current);
+  }, [content, style]);
+
   if (!content) return null;
 
   const singleParagraph = Tag === "p" ? getSingleParagraph(content) : null;
@@ -90,6 +119,7 @@ export default function RichText({ html, as: Tag = "div", className = "", style 
 
     return (
       <p
+        ref={rootRef}
         className={["rich-text-content", className, paragraphClassName]
           .filter(Boolean)
           .join(" ")}
@@ -104,6 +134,7 @@ export default function RichText({ html, as: Tag = "div", className = "", style 
 
   return (
     <RenderTag
+      ref={rootRef}
       className={`rich-text-content ${className}`.trim()}
       style={style}
       dangerouslySetInnerHTML={{ __html: content }}
