@@ -922,3 +922,35 @@ body[dir="rtl"] .ProductTypeSmallSlider .productTypeSliderArrow button svg {
     width: 100% !important;
   }
 }
+
+
+/* Quill Text Alignments */
+.ql-align-center {
+  text-align: center !important;
+}
+.ql-align-right {
+  text-align: right !important;
+}
+.ql-align-left {
+  text-align: left !important;
+}
+.ql-align-justify {
+  text-align: justify !important;
+}
+
+.brand-detail-quote .brand-detail-quote-text .ql-align-center,
+.brand-detail-quote .brand-detail-quote-text .ql-align-center p {
+  text-align: center !important;
+}
+.brand-detail-quote .brand-detail-quote-text .ql-align-right,
+.brand-detail-quote .brand-detail-quote-text .ql-align-right p {
+  text-align: right !important;
+}
+.brand-detail-quote .brand-detail-quote-text .ql-align-left,
+.brand-detail-quote .brand-detail-quote-text .ql-align-left p {
+  text-align: left !important;
+}
+.brand-detail-quote .brand-detail-quote-text .ql-align-justify,
+.brand-detail-quote .brand-detail-quote-text .ql-align-justify p {
+  text-align: justify !important;
+}

@@ -89,20 +89,34 @@ const featureTemplates = [
 ]
 
 const Featues = ({ data }) => {
-  const fixedFeatures = featureTemplates.map((template) => ({
-    ...template,
-    ...findText(data, template),
-  }))
+  const displayFeatures = (data || []).map((dbItem, index) => {
+    const values = [
+      dbItem?.icon,
+      dbItem?.titleAr,
+      dbItem?.title_ar,
+      dbItem?.titleEn,
+      dbItem?.title_en,
+    ].map(normalize)
+
+    const template = featureTemplates.find((t) =>
+      values.some((value) => value && t.aliases.includes(value))
+    )
+
+    return {
+      key: dbItem.id || `feature-${index}`,
+      titleAr: dbItem.titleAr || dbItem.title_ar || template?.titleAr,
+      titleEn: dbItem.titleEn || dbItem.title_en || template?.titleEn,
+      textAr: dbItem.textAr || dbItem.text_ar || dbItem.value_ar,
+      textEn: dbItem.textEn || dbItem.text_en || dbItem.value_en,
+      icon: dbItem.icon || template?.icon,
+    }
+  })
 
   return (
     <div className='features rowDiv'>
-      {
-        fixedFeatures.map((item) => {
-          return (
-            <Feature item={item} key={item.key} />
-          )
-        })
-      }
+      {displayFeatures.map((item) => {
+        return <Feature item={item} key={item.key} />
+      })}
     </div>
   )
 }
