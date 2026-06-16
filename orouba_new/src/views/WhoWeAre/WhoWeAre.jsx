@@ -385,8 +385,16 @@ export default function WhoWeAre({ aboutData }) {
             {aboutFeatures.map((item) => (
               <div key={item.id} className="aboutHardcodedFeature">
                 <img src={item.image} alt={language == "en" ? item.titleEn : item.titleAr} />
-                <RichText as="h5" html={language == "en" ? item.titleEn : item.titleAr} />
-                <RichText as="p" html={language == "en" ? item.descriptionEn : item.descriptionAr} />
+                <RichText
+                  as="div"
+                  className="aboutFeatureTitle"
+                  html={language == "en" ? item.titleEn : item.titleAr}
+                />
+                <RichText
+                  as="div"
+                  className="aboutFeatureDescription"
+                  html={language == "en" ? item.descriptionEn : item.descriptionAr}
+                />
               </div>
             ))}
           </div>

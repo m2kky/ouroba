@@ -93,9 +93,9 @@ html {
 .downHeaderDiv.whoweare h3.whowearestylesh3,
 .downHeaderDiv.whoweare .buildingsContainer h4,
 .downHeaderDiv.whoweare .AreaRow h5,
-.downHeaderDiv.whoweare .aboutHardcodedFeature h5,
+.downHeaderDiv.whoweare .aboutHardcodedFeature > h5,
 .downHeaderDiv.whoweare .ProductionSteps h4 {
-  color: #035297 !important;
+  color: #035297;
 }
 
 .downHeaderDiv.whoweare p,
@@ -104,11 +104,11 @@ html {
 .downHeaderDiv.whoweare .rich-text-content span,
 .downHeaderDiv.whoweare .buildingsContainer p,
 .downHeaderDiv.whoweare .AreaRow p,
-.downHeaderDiv.whoweare .aboutHardcodedFeature p,
+.downHeaderDiv.whoweare .aboutHardcodedFeature > p,
 .downHeaderDiv.whoweare .pord_steps_content p,
 .downHeaderDiv.whoweare .pord_steps_content strong,
 .downHeaderDiv.whoweare center.rowDiv p {
-  color: #002f59 !important;
+  color: #002f59;
 }
 
 @media (min-width: 993px) {
@@ -231,7 +231,7 @@ body.enVersion .AreaRow .aboutHardcodedFeatures {
   width: 72px !important;
 }
 
-.AreaRow .aboutHardcodedFeature h5 {
+.AreaRow .aboutHardcodedFeature > h5 {
   color: #035297 !important;
   font-size: 30px !important;
   font-weight: 800 !important;
@@ -242,7 +242,7 @@ body.enVersion .AreaRow .aboutHardcodedFeatures {
   width: 100% !important;
 }
 
-.AreaRow .aboutHardcodedFeature p {
+.AreaRow .aboutHardcodedFeature > p {
   color: #002f59 !important;
   font-size: 18px !important;
   line-height: 1.75 !important;
@@ -250,6 +250,54 @@ body.enVersion .AreaRow .aboutHardcodedFeatures {
   max-width: 390px !important;
   text-align: center !important;
   width: 100% !important;
+}
+
+.AreaRow .aboutHardcodedFeature .aboutFeatureTitle {
+  color: #035297;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.25;
+  margin: 0 auto 14px;
+  max-width: 100%;
+  text-align: center;
+  width: 100%;
+}
+
+.AreaRow .aboutHardcodedFeature .aboutFeatureDescription {
+  color: #002f59;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.75;
+  margin: 0 auto;
+  max-width: 390px;
+  text-align: center;
+  width: 100%;
+}
+
+.AreaRow .aboutHardcodedFeature .aboutFeatureTitle *,
+.AreaRow .aboutHardcodedFeature .aboutFeatureDescription * {
+  color: inherit;
+  margin-block: 0;
+}
+
+.AreaRow .aboutHardcodedFeature .aboutFeatureTitle p,
+.AreaRow .aboutHardcodedFeature .aboutFeatureTitle h1,
+.AreaRow .aboutHardcodedFeature .aboutFeatureTitle h2,
+.AreaRow .aboutHardcodedFeature .aboutFeatureTitle h3,
+.AreaRow .aboutHardcodedFeature .aboutFeatureTitle h4,
+.AreaRow .aboutHardcodedFeature .aboutFeatureTitle h5,
+.AreaRow .aboutHardcodedFeature .aboutFeatureTitle h6,
+.AreaRow .aboutHardcodedFeature .aboutFeatureDescription p,
+.AreaRow .aboutHardcodedFeature .aboutFeatureDescription h1,
+.AreaRow .aboutHardcodedFeature .aboutFeatureDescription h2,
+.AreaRow .aboutHardcodedFeature .aboutFeatureDescription h3,
+.AreaRow .aboutHardcodedFeature .aboutFeatureDescription h4,
+.AreaRow .aboutHardcodedFeature .aboutFeatureDescription h5,
+.AreaRow .aboutHardcodedFeature .aboutFeatureDescription h6 {
+  font: inherit;
+  line-height: inherit;
+  margin: 0;
+  text-align: inherit;
 }
 
 @media (max-width: 992px) {
@@ -936,6 +984,21 @@ body[dir="rtl"] .ProductTypeSmallSlider .productTypeSliderArrow button svg {
 }
 .ql-align-justify {
   text-align: justify !important;
+}
+
+.rich-text-content.ql-size-small,
+.rich-text-content .ql-size-small {
+  font-size: 0.75em !important;
+}
+
+.rich-text-content.ql-size-large,
+.rich-text-content .ql-size-large {
+  font-size: 1.5em !important;
+}
+
+.rich-text-content.ql-size-huge,
+.rich-text-content .ql-size-huge {
+  font-size: 2.5em !important;
 }
 
 .brand-detail-quote .brand-detail-quote-text .ql-align-center,
