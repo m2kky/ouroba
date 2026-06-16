@@ -20,8 +20,22 @@ const first = (...values) =>
 
 const isVideoFile = (src) => /\.(mp4|webm|ogg)(?:[?#].*)?$/i.test(src || "");
 
+const cleanText = (value) =>
+  String(value || "")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
 const RecipeBanner = ({ data, breads }) => {
   const { language } = UseGeneral();
+  const recipeTitle = cleanText(
+    language == "ar"
+      ? first(data?.nameAr, data?.name_ar)
+      : first(data?.nameEn, data?.name_en)
+  );
 
   const [pages, setPages] = useState([]);
   useEffect(() => {
@@ -30,26 +44,22 @@ const RecipeBanner = ({ data, breads }) => {
         {
           name: language == "ar" ? "الرئيسية" : "Home",
           route: "/",
+        },
+        {
+          name: language == "ar" ? "الوصفات" : "Recipes",
+          route: "/recipes",
+        },
+        {
+          name: recipeTitle,
           active: true,
-        },
-        {
-          name: language == "ar" ? breads?.recNameAr : breads?.recName,
-          route: "/recipes?c=" + breads?.recId,
-        },
-        {
-          name: language == "ar" ? breads?.foodNameAr : breads?.foodName,
-          route: "/recipes?c=" + breads?.recId + "&s_c=" + breads?.foodId,
-        },
-        {
-          name: language == "ar" ? data?.nameAr : data?.nameEn,
         },
       ]);
     }
-  }, [data, language, breads]);
+  }, [data, language, recipeTitle]);
   
   const [isShare, setIsShare] = useState(false);
   const shareUrl = typeof window !== "undefined" ? window.location.href : "";
-  const shareTitle = language == "ar" ? data?.nameAr : data?.nameEn;
+  const shareTitle = recipeTitle;
   const videoSrc = first(data?.videoLink, data?.video_link);
   const imageSrc = first(
     data?.internalImage,
@@ -65,7 +75,7 @@ const RecipeBanner = ({ data, breads }) => {
         <Breadcrumb links={pages} />
         <div className="content">
           <h5>
-            {language != "ar" ? <>{data?.nameEn}</> : <>{data?.nameAr}</>}
+            {recipeTitle}
           </h5>
           <button
             onClick={() => {
@@ -112,7 +122,7 @@ const RecipeBanner = ({ data, breads }) => {
         ) : null}
       </div>
       <h5 className="nameOfReciepe rowDiv" style={{ display: "none" }}>
-        {language != "ar" ? <>{data?.nameEn}</> : <>{data?.nameAr}</>}
+        {recipeTitle}
       </h5>
       <div className="right">
         {mediaSrc ? (
