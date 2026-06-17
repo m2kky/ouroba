@@ -257,6 +257,17 @@ export default function DocsPage() {
       settings: ["contact_title", "contact_intro", "address", "phone_1", "phone_2", "email", "map_url", "main_logo", "copy_right"]
     },
     {
+      title: t("الوظائف", "Careers"),
+      path: `/${locale}/careers`,
+      icon: FileText,
+      controls: [
+        t("مقدمة صفحة الوظائف: من /admin/settings عبر careers_intro، ويمكن التحكم في المحاذاة يمين/شمال/وسط من Rich Text Editor.", "Careers intro: /admin/settings via careers_intro. Alignment can be controlled from the Rich Text Editor."),
+        t("طلبات التوظيف المرسلة من الفورم: من /admin/careers.", "Submitted job applications: /admin/careers."),
+        t("نقاط لماذا تختار العمل معنا: من /admin/about/why-choose-us.", "Why choose us points: /admin/about/why-choose-us.")
+      ],
+      settings: ["careers_intro"]
+    },
+    {
       title: t("الوصفات والمحتوى التفاعلي", "Recipes & Interactive Content"),
       path: `/${locale}/recipes`,
       icon: ChefHat,

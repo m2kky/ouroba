@@ -6,6 +6,9 @@ import Breadcrumb from "../../components/BreadCumbsLinks";
 import { ThreeDots } from "react-loader-spinner";
 import RichText from "../../components/RichText";
 
+const firstText = (...values) =>
+  values.find((value) => typeof value === "string" && value.trim()) || "";
+
 export default function Careers({ careerData }) {
   const { language } = UseGeneral();
   const [joinData, setJoinData] = useState({
@@ -21,10 +24,22 @@ export default function Careers({ careerData }) {
   const [message, setMessage] = useState("");
   const [sucMess, setSucMess] = useState("");
   const WhyData = Array.isArray(careerData?.whyChooseUs) ? careerData.whyChooseUs : [];
+  const siteinfo = careerData?.siteinfo || {};
   const getWhyText = (item) =>
     language == "en"
       ? item?.descriptionEn || item?.description_en || item?.textEn || item?.text_en
       : item?.descriptionAr || item?.description_ar || item?.textAr || item?.text_ar;
+  const defaultCareerIntro =
+    language == "en"
+      ? `<h2 style="text-align:center">Join Our Team</h2><p style="text-align:center">If you are interested in joining our family, please send an email with your resume and cover letter to oroubamail@orouba.ajwa.com or fill out the employment form</p>`
+      : `<h2 style="text-align:center">انضم إلى فريقنا</h2><p style="text-align:center">إذا كنت مهتمًا بالانضمام إلى عائلتنا، يرجى إرسال بريد إلكتروني يحتوي على سيرتك الذاتية وخطاب تقديمي إلى oroubamail@orouba.ajwa.com أو ملء نموذج التوظيف</p>`;
+  const careerIntroHtml = firstText(
+    siteinfo.careers_intro,
+    language == "ar" ? siteinfo.careers_introAr : siteinfo.careers_introEn,
+    language == "ar" ? siteinfo.career_introAr : siteinfo.career_introEn,
+    siteinfo.career_intro,
+    defaultCareerIntro
+  );
 
   useEffect(() => {
     if (sucMess == true || sucMess == false) {
@@ -94,49 +109,10 @@ export default function Careers({ careerData }) {
             { name: language == "ar" ? "الوظائف" : "Careers", active: true },
           ]}
         />
-        <div
-          className={`${styles.careerForm} careerContentForm`}
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginInline: "auto",
-            width: "100%",
-          }}
-        >
-          <div
-            className={styles.careerContent}
-            style={{
-              marginInline: "auto",
-              maxWidth: "920px",
-              width: "100%",
-            }}
-          >
-            <div
-              className={`${styles.careerTitle} ${language == "ar" ? styles.rtlCareerTitle : ""}`}
-              style={{
-                alignItems: "center",
-                display: "flex",
-                flexDirection: "column",
-                marginInline: "auto",
-                textAlign: "center",
-                width: "100%",
-              }}
-            >
-              <h2 style={{ textAlign: "center", width: "100%" }}>
-                {language == "en" ? "Join Our Team" : "انضم إلى فريقنا"}
-              </h2>
-              <p
-                style={{
-                  marginInline: "auto",
-                  maxWidth: "860px",
-                  textAlign: "center",
-                  width: "min(100%, 860px)",
-                }}
-              >
-                {language == "en"
-                  ? "If you are interested in joining our family, please send an email with your resume and cover letter to oroubamail@orouba.ajwa.com or fill out the employment form"
-                  : `إذا كنت مهتمًا بالانضمام إلى عائلتنا، يرجى إرسال بريد إلكتروني يحتوي على سيرتك الذاتية وخطاب تقديمي إلى oroubamail@orouba.ajwa.com أو ملء نموذج التوظيف`}
-              </p>
+        <div className={`${styles.careerForm} careerContentForm`}>
+          <div className={styles.careerContent}>
+            <div className={`${styles.careerTitle} ${styles.careerIntroRichText}`}>
+              <RichText html={careerIntroHtml} />
             </div>
 
             <form className={styles.form} onSubmit={(e) => join(e)}>
