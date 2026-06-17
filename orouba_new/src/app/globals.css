@@ -421,7 +421,7 @@ body .imageHeader {
 
 body .headerImage {
   position: absolute;
-  top: -2px;
+  top: -24px;
   width: 500px;
   height: 100%;
   max-height: 100%;
