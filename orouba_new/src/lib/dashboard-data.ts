@@ -27,7 +27,8 @@ type DashboardSiteData = {
   settings?: Record<string, DashboardSetting>;
 };
 
-const DEFAULT_DASHBOARD_URL = "https://admin1.oroubafoods.com";
+const DEFAULT_DASHBOARD_URL = "https://admin.oroubafoods.com";
+const LEGACY_DASHBOARD_URL = "https://admin1.oroubafoods.com";
 const LOCAL_DASHBOARD_URLS = ["http://localhost:3015", "http://localhost:3000"];
 
 function uniqueUrls(urls: string[]) {
@@ -51,6 +52,7 @@ function getDashboardBaseUrls() {
     ...(configuredUrl ? [configuredUrl] : []),
     ...(process.env.NODE_ENV !== "production" && !configuredUrl ? LOCAL_DASHBOARD_URLS : []),
     DEFAULT_DASHBOARD_URL,
+    LEGACY_DASHBOARD_URL,
   ]);
 }
 
