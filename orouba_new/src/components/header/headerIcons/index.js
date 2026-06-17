@@ -32,7 +32,7 @@ const HeaderIcons = ({ setShow, show }) => {
   };
 
   return (
-    <div className="HeaderIcons">
+    <div className="headerActions">
       <button
         className="hoverable"
         onClick={() => router.push(localizedPath("/ExportCatalog", language))}
