@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "rsuite/Loader/styles/index.css";
+import "@/styles/orouba-main.css";
 import "../globals.css";
 import StoreProvider from "@/components/StoreProvider";
 import LocalizedDigits from "@/components/LocalizedDigits";
@@ -80,10 +81,6 @@ export default async function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link
           href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="/static/css/main.56115a45.css?v=20260617"
           rel="stylesheet"
         />
       </head>
