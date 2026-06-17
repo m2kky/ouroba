@@ -282,6 +282,16 @@ export default function WhoWeAre({ aboutData }) {
     language == "ar"
       ? siteData?.about_production_note_ar || siteData?.quotation_ar
       : siteData?.about_production_note_en || siteData?.quotation_en;
+  const productionStepsTitle =
+    language == "ar"
+      ? siteData?.production_steps_title_ar ||
+        siteData?.production_steps_titleAr ||
+        siteData?.production_steps_title ||
+        "مراحل الإنتاج"
+      : siteData?.production_steps_title_en ||
+        siteData?.production_steps_titleEn ||
+        siteData?.production_steps_title ||
+        "Production Steps";
 
   useEffect(() => {
     const updateMenuHeights = () => {
@@ -401,8 +411,8 @@ export default function WhoWeAre({ aboutData }) {
         </div>
 
         <div className="ProductionSteps">
-          <h4 style={{ fontSize: "40px", color: "#035297" }}>
-            {language == "ar" ? "مراحل الإنتاج" : "Production Steps"}
+          <h4 style={{ fontSize: "40px", color: "#035297", fontWeight: 700 }}>
+            {productionStepsTitle}
           </h4>
           <div className="pord_steps_content">
             {productionStepGroups &&

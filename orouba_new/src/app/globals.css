@@ -433,11 +433,11 @@ body .headerOriginalLines {
 }
 
 body.enVersion .headerOriginalLines {
-  inset-inline-end: calc((100% - 100vw) / 2 - 48px);
+  inset-inline-end: calc((100% - 100vw) / 2 - 82px);
 }
 
 body.arVersion .headerOriginalLines {
-  inset-inline-start: calc((100% - 100vw) / 2 - 48px);
+  inset-inline-start: calc((100% - 100vw) / 2 - 82px);
 }
 
 body .headerOriginalLinesTrack {
