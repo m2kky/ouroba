@@ -23,7 +23,7 @@
   --sec-color: #002f59;
   --dark: #002f59;
   --heading-color: #fff100;
-  /* ألوان الوضع النهاري (Light Mode) */
+  /* Brand light theme */
   --background: #f9fafb; /* Gray-50 */
   --foreground: #000000; /* Black */
   
@@ -33,21 +33,6 @@
   --card-bg: #ffffff;
   --card-ring: rgb(255 255 255 / 0.05);
   --card-hover-ring: rgb(0 0 0 / 0.2);
-}
-
-/* الوضع الليلي (Dark Mode) */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000000; /* Black */
-    --foreground: #ffffff; /* White */
-    
-    --brand-color: #FF2D20;
-    --brand-light: rgb(255 45 32 / 0.1);
-    
-    --card-bg: #18181b; /* zinc-900 */
-    --card-ring: #27272a; /* zinc-800 */
-    --card-hover-ring: #3f3f46; /* zinc-700 */
-  }
 }
 
 @theme inline {
