@@ -432,7 +432,7 @@ body .headerImage {
 
 body.arVersion .headerImage,
 body .headerImage.active {
-  left: clamp(-84px, -3vw, -24px);
+  left: -40px;
   right: auto;
   rotate: 0deg;
   transform: none;
@@ -440,7 +440,7 @@ body .headerImage.active {
 
 body.enVersion .headerImage {
   left: auto;
-  right: clamp(-84px, -3vw, -24px);
+  right: -40px;
   rotate: 0deg;
   transform: scaleX(-1);
 }
