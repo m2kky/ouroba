@@ -804,6 +804,24 @@ body .headerOriginalLinesTrack img:first-child {
 
 .recipe_about .recipe-structured-ingredients { display: flex; flex-direction: column; }
 
+body.arVersion .recipe_about.rowDiv,
+body[dir="rtl"] .recipe_about.rowDiv {
+  column-gap: clamp(30px, 4vw, 72px) !important;
+}
+
+body.arVersion .recipe_about > .right,
+body[dir="rtl"] .recipe_about > .right {
+  box-sizing: border-box;
+  padding-inline-start: clamp(20px, 3.2vw, 58px) !important;
+}
+
+@media (max-width: 767px) {
+  body.arVersion .recipe_about > .right,
+  body[dir="rtl"] .recipe_about > .right {
+    padding-inline-start: 18px !important;
+  }
+}
+
 .recipe_about .recipe-structured p {
   margin: 0 0 14px;
 }

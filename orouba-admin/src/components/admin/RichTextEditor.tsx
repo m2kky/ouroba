@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import type { ComponentType, Ref } from "react";
 import { useRef, useState } from "react";
 import "react-quill-new/dist/quill.snow.css";
 
@@ -24,23 +25,103 @@ const colorPalette = [
 
 const lineHeightOptions = ["1", "1.2", "1.5", "1.8", "2", "2.5", "3"];
 const letterSpacingOptions = ["-1px", "0px", "0.5px", "1px", "2px", "3px"];
+const fontSizeOptions = [
+  "12px",
+  "14px",
+  "16px",
+  "18px",
+  "20px",
+  "22px",
+  "24px",
+  "28px",
+  "32px",
+  "36px",
+  "42px",
+  "48px",
+  "56px",
+  "64px",
+];
 
-const applyBlockFormat = (quill: any, format: string, value: string | false) => {
+type QuillRange = {
+  index: number;
+  length: number;
+};
+
+type QuillEditor = {
+  focus: () => void;
+  format: (format: string, value: string | false) => void;
+  formatLine: (index: number, length: number, format: string, value: string | false) => void;
+  getSelection: (focus?: boolean) => QuillRange | null;
+};
+
+type QuillToolbarHandlerContext = {
+  quill: QuillEditor;
+};
+
+type ReactQuillRef = {
+  getEditor?: () => QuillEditor;
+};
+
+type ReactQuillComponentProps = {
+  className?: string;
+  formats?: string[];
+  modules?: Record<string, unknown>;
+  onChange?: (value: string) => void;
+  placeholder?: string;
+  ref?: Ref<ReactQuillRef>;
+  theme?: string;
+  value?: string;
+};
+
+type StyleAttributorConstructor = new (
+  attrName: string,
+  keyName: string,
+  options: { scope: unknown; whitelist: string[] }
+) => unknown;
+
+type ParchmentModule = {
+  Attributor?: {
+    Style?: StyleAttributorConstructor;
+  };
+  Scope: {
+    BLOCK: unknown;
+    INLINE: unknown;
+  };
+  StyleAttributor?: StyleAttributorConstructor;
+};
+
+type QuillConstructor = {
+  import: (path: string) => unknown;
+  register: (target: unknown, suppressWarning?: boolean) => void;
+};
+
+const applyBlockFormat = (quill: QuillEditor, format: string, value: string | false) => {
   const range = quill.getSelection(true);
   if (!range) return;
 
   quill.formatLine(range.index, Math.max(range.length, 1), format, value || false);
 };
 
-const ReactQuill = dynamic(
+const ReactQuill = dynamic<ReactQuillComponentProps>(
   async () => {
-    const { default: RQ, Quill } = await import("react-quill-new");
+    const { default: RQ, Quill: RawQuill } = await import("react-quill-new");
+    const Quill = RawQuill as QuillConstructor;
 
-    const Parchment = Quill.import("parchment");
-    const StyleAttributor = Parchment.StyleAttributor || (Parchment.Attributor && Parchment.Attributor.Style);
+    const Parchment = Quill.import("parchment") as ParchmentModule;
+    const StyleAttributor = Parchment.StyleAttributor || Parchment.Attributor?.Style;
     const Scope = Parchment.Scope;
 
     if (StyleAttributor) {
+      const FontSizeStyle = new StyleAttributor(
+        "size",
+        "font-size",
+        {
+          scope: Scope.INLINE,
+          whitelist: fontSizeOptions,
+        }
+      );
+      Quill.register(FontSizeStyle, true);
+
       // Line Height
       const LineHeightStyle = new StyleAttributor(
         "lineHeight",
@@ -64,7 +145,7 @@ const ReactQuill = dynamic(
       Quill.register(LetterSpacingStyle, true);
     }
 
-    return RQ;
+    return RQ as unknown as ComponentType<ReactQuillComponentProps>;
   },
   {
     ssr: false,
@@ -82,7 +163,7 @@ const toolbarOptions = [
     [{ script: "sub" }, { script: "super" }],
     [{ indent: "-1" }, { indent: "+1" }],
     [{ direction: "rtl" }],
-    [{ size: ["small", false, "large", "huge"] }],
+    [{ size: [false, ...fontSizeOptions] }],
     [{ color: colorPalette }, { background: colorPalette }],
     [{ font: [] }],
     [{ align: [] }],
@@ -96,10 +177,10 @@ const modules = {
   toolbar: {
     container: toolbarOptions,
     handlers: {
-      lineHeight(this: { quill: any }, value: string) {
+      lineHeight(this: QuillToolbarHandlerContext, value: string) {
         applyBlockFormat(this.quill, "lineHeight", value || false);
       },
-      letterSpacing(this: { quill: any }, value: string) {
+      letterSpacing(this: QuillToolbarHandlerContext, value: string) {
         applyBlockFormat(this.quill, "letterSpacing", value || false);
       },
     },
@@ -146,7 +227,7 @@ export default function RichTextEditor({
   placeholder,
   dir,
 }: RichTextEditorProps) {
-  const quillRef = useRef<any>(null);
+  const quillRef = useRef<ReactQuillRef | null>(null);
   const [textColor, setTextColor] = useState("#035297");
   const [backgroundColor, setBackgroundColor] = useState("#ffffff");
 
@@ -231,6 +312,21 @@ export default function RichTextEditor({
               if (event.key === "Enter") applyColor("background", backgroundColor);
             }}
           />
+        </label>
+
+        <label>
+          <span>Font size</span>
+          <select
+            defaultValue=""
+            onChange={(event) => applyFormat("size", event.target.value || false)}
+          >
+            <option value="">Default</option>
+            {fontSizeOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
         </label>
 
         <label>
@@ -321,6 +417,19 @@ export default function RichTextEditor({
         }
         .rich-text-editor-controls input[type="text"] {
           width: 86px;
+        }
+        .rich-text-editor .ql-snow .ql-picker.ql-size {
+          width: 82px;
+        }
+        .rich-text-editor .ql-snow .ql-picker.ql-size .ql-picker-label::before {
+          content: 'Size';
+        }
+        .rich-text-editor .ql-snow .ql-picker.ql-size .ql-picker-item::before {
+          content: 'Default';
+        }
+        .rich-text-editor .ql-snow .ql-picker.ql-size .ql-picker-label[data-value]::before,
+        .rich-text-editor .ql-snow .ql-picker.ql-size .ql-picker-item[data-value]::before {
+          content: attr(data-value);
         }
         .rich-text-editor.ql-rtl .ql-editor {
           direction: rtl;
