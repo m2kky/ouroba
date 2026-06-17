@@ -411,97 +411,88 @@ body.enVersion .AreaRow .aboutHardcodedFeatures {
   z-index: 2000;
 }
 
-body .navOrnamentLayer {
-  position: absolute;
-  inset-block: 0;
-  inset-inline: 0;
-  margin-inline: auto;
-  overflow: visible;
+body .headerBackground > .rowDiv {
+  position: relative;
+}
+
+body .headerBackground > .rowDiv > .row,
+body .headerBackground .menu_Toggle,
+body .headerBackground .HeaderIcons {
+  position: relative;
+  z-index: 2;
+}
+
+body .headerOriginalLines {
+  height: 100%;
+  inset-block-start: 0;
+  overflow: hidden;
   pointer-events: none;
-  width: 86%;
+  position: absolute;
+  width: 520px;
   z-index: 1;
 }
 
-body .navOrnament {
+body.enVersion .headerOriginalLines {
+  inset-inline-end: calc((100% - 100vw) / 2 - 48px);
+}
+
+body.arVersion .headerOriginalLines {
+  inset-inline-start: calc((100% - 100vw) / 2 - 48px);
+}
+
+body .headerOriginalLinesTrack {
   height: 100%;
   max-height: 100%;
   overflow: hidden;
   pointer-events: none;
   position: absolute;
-  top: -24px;
+  top: -2px;
   width: 500px;
-  z-index: 1;
 }
 
-body.arVersion .navOrnament,
-body .navOrnament.navOrnamentAr {
-  left: -82px;
-  right: auto;
-  rotate: 0deg;
-  transform: none;
+body.enVersion .headerOriginalLinesTrack {
+  inset-inline-end: 0;
 }
 
-body.enVersion .navOrnament,
-body .navOrnament.navOrnamentEn {
-  left: auto;
-  right: -82px;
-  rotate: 0deg;
-  transform: scaleX(-1);
+body.arVersion .headerOriginalLinesTrack {
+  inset-inline-start: 0;
 }
 
-body .navOrnamentImage {
+body .headerOriginalLinesTrack img {
   display: block;
   height: 300px;
   object-fit: contain;
   position: absolute;
   right: 0;
   top: 0;
-  transform: scaleX(-1);
-  transform-origin: center;
   width: 100%;
 }
 
-body .navOrnamentImage:first-child {
+body.arVersion .headerOriginalLinesTrack img {
+  transform: scaleX(-1);
+  transform-origin: center;
+}
+
+body .headerOriginalLinesTrack img:first-child {
   top: -40px;
 }
 
-body .navOrnamentImage:nth-child(2) {
-  top: 0;
-}
-
 @media (max-width: 992px) {
-  body .navOrnamentLayer {
-    width: 96%;
+  body .headerOriginalLines {
+    width: 320px;
   }
 
-  body .navOrnament {
-    width: 360px;
+  body.enVersion .headerOriginalLines {
+    inset-inline-end: -8%;
   }
 
-  body.arVersion .navOrnament,
-  body .navOrnament.navOrnamentAr {
-    left: -8px;
+  body.arVersion .headerOriginalLines {
+    inset-inline-start: -8%;
   }
 
-  body.enVersion .navOrnament,
-  body .navOrnament.navOrnamentEn {
-    right: -8px;
-  }
-}
-
-@media (max-width: 576px) {
-  body .navOrnament {
-    width: 340px;
-  }
-
-  body.arVersion .navOrnament,
-  body .navOrnament.navOrnamentAr {
-    left: -6px;
-  }
-
-  body.enVersion .navOrnament,
-  body .navOrnament.navOrnamentEn {
-    right: -6px;
+  body .headerOriginalLinesTrack {
+    top: 60px;
+    width: 300px;
   }
 }
 
