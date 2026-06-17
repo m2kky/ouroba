@@ -879,7 +879,8 @@ body[dir="rtl"] .recipe_about .recipe-structured ul {
 
 .ProductTypeSmallSlider .relatedProductsDesktopSlider {
   margin-inline: auto;
-  max-width: 1080px;
+  max-width: 1180px;
+  padding-inline: clamp(58px, 5vw, 76px);
   position: relative;
   width: 100%;
 }
@@ -966,7 +967,7 @@ body[dir="rtl"] .recipe_about .recipe-structured ul {
   align-items: center;
   direction: ltr;
   display: flex;
-  inset-inline: -68px;
+  inset-inline: 0;
   justify-content: space-between;
   pointer-events: none;
   position: absolute;
@@ -997,10 +998,10 @@ body[dir="rtl"] .recipe_about .recipe-structured ul {
 .ProductTypeSmallSlider .productTypeSliderArrow button.custom-prev-button-ProductTypeSmallSlider,
 .ProductTypeSmallSlider .productTypeSliderArrow button.custom-next-button-ProductTypeSmallSlider {
   bottom: auto;
-  inset: auto;
-  left: auto;
-  position: relative;
-  right: auto;
+  inset: auto !important;
+  left: auto !important;
+  position: relative !important;
+  right: auto !important;
   top: auto;
   transform: none;
 }
@@ -1055,8 +1056,12 @@ body[dir="rtl"] .ProductTypeSmallSlider .productTypeSliderArrow button svg {
     padding-inline: 58px;
   }
 
+  .ProductTypeSmallSlider .relatedProductsDesktopSlider {
+    padding-inline: 54px;
+  }
+
   .ProductTypeSmallSlider .productTypeSliderArrow {
-    inset-inline: -52px;
+    inset-inline: 0;
   }
 }
 

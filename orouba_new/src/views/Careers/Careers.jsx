@@ -94,11 +94,45 @@ export default function Careers({ careerData }) {
             { name: language == "ar" ? "الوظائف" : "Careers", active: true },
           ]}
         />
-        <div className={`${styles.careerForm} careerContentForm`}>
-          <div className={styles.careerContent}>
-            <div className={`${styles.careerTitle} ${language == "ar" ? styles.rtlCareerTitle : ""}`}>
-              <h2>{language == "en" ? "Join Our Team" : "انضم إلى فريقنا"}</h2>
-              <p>
+        <div
+          className={`${styles.careerForm} careerContentForm`}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginInline: "auto",
+            width: "100%",
+          }}
+        >
+          <div
+            className={styles.careerContent}
+            style={{
+              marginInline: "auto",
+              maxWidth: "920px",
+              width: "100%",
+            }}
+          >
+            <div
+              className={`${styles.careerTitle} ${language == "ar" ? styles.rtlCareerTitle : ""}`}
+              style={{
+                alignItems: "center",
+                display: "flex",
+                flexDirection: "column",
+                marginInline: "auto",
+                textAlign: "center",
+                width: "100%",
+              }}
+            >
+              <h2 style={{ textAlign: "center", width: "100%" }}>
+                {language == "en" ? "Join Our Team" : "انضم إلى فريقنا"}
+              </h2>
+              <p
+                style={{
+                  marginInline: "auto",
+                  maxWidth: "860px",
+                  textAlign: "center",
+                  width: "min(100%, 860px)",
+                }}
+              >
                 {language == "en"
                   ? "If you are interested in joining our family, please send an email with your resume and cover letter to oroubamail@orouba.ajwa.com or fill out the employment form"
                   : `إذا كنت مهتمًا بالانضمام إلى عائلتنا، يرجى إرسال بريد إلكتروني يحتوي على سيرتك الذاتية وخطاب تقديمي إلى oroubamail@orouba.ajwa.com أو ملء نموذج التوظيف`}

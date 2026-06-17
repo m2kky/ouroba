@@ -87,7 +87,7 @@ export default async function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className={languageClass}>
+      <body className={languageClass} dir={lang === "ar" ? "rtl" : "ltr"} suppressHydrationWarning>
         <StoreProvider initialLanguage={lang}>
           <LocalizedDigits locale={lang} />
           <div className="defaultLayout">
