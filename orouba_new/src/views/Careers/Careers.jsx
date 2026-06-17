@@ -96,7 +96,7 @@ export default function Careers({ careerData }) {
         />
         <div className={`${styles.careerForm} careerContentForm`}>
           <div className={styles.careerContent}>
-            <div className={styles.careerTitle}>
+            <div className={`${styles.careerTitle} ${language == "ar" ? styles.rtlCareerTitle : ""}`}>
               <h2>{language == "en" ? "Join Our Team" : "انضم إلى فريقنا"}</h2>
               <p>
                 {language == "en"

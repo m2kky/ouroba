@@ -23,6 +23,7 @@ type DashboardSiteData = {
   whyChooseUs?: unknown[];
   socials?: unknown[];
   socialParents?: unknown[];
+  recipeCategories?: unknown[];
   settings?: Record<string, DashboardSetting>;
 };
 
@@ -109,6 +110,17 @@ export async function getDashboardRecipe(recipeId: string) {
     return payload?.data ?? payload ?? null;
   } catch {
     return null;
+  }
+}
+
+export async function getDashboardRecipes(limit = 100) {
+  try {
+    const response = await fetchDashboard(`/api/recipes?limit=${limit}`);
+    const payload = await response.json();
+    const data = payload?.data ?? payload ?? {};
+    return Array.isArray(data?.recipes) ? data.recipes : [];
+  } catch {
+    return [];
   }
 }
 

@@ -20,6 +20,19 @@ export async function GET(request: NextRequest) {
         include: {
           images: true,
           properties: true,
+          foods: {
+            include: {
+              food: {
+                include: {
+                  recipeCategories: {
+                    include: {
+                      recipeCategory: true,
+                    },
+                  },
+                },
+              },
+            },
+          },
           _count: { select: { steps: true, foods: true } },
         },
       }),

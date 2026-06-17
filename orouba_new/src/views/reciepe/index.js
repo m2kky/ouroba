@@ -12,10 +12,12 @@ const Reciepe = ({ recipesPageData }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const { data, recs, cooks } = recipesPageData;
+  const { data, recs, cooks, selectedCategoryId, selectedFoodId } = recipesPageData;
 
-  const currentC = searchParams.get("c") || (data?.length > 0 ? data[0].id : null);
-  const currentSC = searchParams.get("s_c") || (recs?.length > 0 ? recs[0].id : null);
+  const currentC =
+    selectedCategoryId || searchParams.get("c") || (data?.length > 0 ? data[0].id : null);
+  const currentSC =
+    selectedFoodId || searchParams.get("s_c") || (recs?.length > 0 ? recs[0].id : null);
 
   const handleCategoryClick = (id) => {
     const newParams = new URLSearchParams(searchParams.toString());
@@ -96,7 +98,7 @@ const Reciepe = ({ recipesPageData }) => {
                         }
                       }}
                     >
-                      {language == "ar" ? item?.nameAr : item?.nameEn}
+                    {language == "ar" ? item?.nameAr || item?.name_ar : item?.nameEn || item?.name_en}
                     </span>
                   ))}
                 </div>
@@ -121,7 +123,7 @@ const Reciepe = ({ recipesPageData }) => {
                         </div>
                         <div className="receipe_details">
                           <h4 style={{ textAlign: "center" }}>
-                            {language == "ar" ? item?.nameAr : item?.nameEn}
+                            {language == "ar" ? item?.nameAr || item?.name_ar : item?.nameEn || item?.name_en}
                           </h4>
                         </div>
                       </div>

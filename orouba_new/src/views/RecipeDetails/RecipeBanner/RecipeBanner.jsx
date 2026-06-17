@@ -7,12 +7,32 @@ import {
   EmailShareButton,
   FacebookIcon,
   FacebookShareButton,
+  HatenaIcon,
+  HatenaShareButton,
+  InstapaperIcon,
+  InstapaperShareButton,
   LinkedinIcon,
   LinkedinShareButton,
+  LineIcon,
+  LineShareButton,
+  OKIcon,
+  OKShareButton,
+  PocketIcon,
+  PocketShareButton,
+  RedditIcon,
+  RedditShareButton,
+  TelegramIcon,
+  TelegramShareButton,
+  TumblrIcon,
+  TumblrShareButton,
+  TwitterIcon,
+  TwitterShareButton,
+  ViberIcon,
+  ViberShareButton,
+  VKIcon,
+  VKShareButton,
   WhatsappIcon,
   WhatsappShareButton,
-  XIcon,
-  XShareButton,
 } from "react-share";
 
 const first = (...values) =>
@@ -58,7 +78,8 @@ const RecipeBanner = ({ data, breads }) => {
   }, [data, language, recipeTitle]);
   
   const [isShare, setIsShare] = useState(false);
-  const shareUrl = typeof window !== "undefined" ? window.location.href : "";
+  const [shareUrl, setShareUrl] = useState("");
+  const [copied, setCopied] = useState(false);
   const shareTitle = recipeTitle;
   const videoSrc = first(data?.videoLink, data?.video_link);
   const imageSrc = first(
@@ -68,6 +89,130 @@ const RecipeBanner = ({ data, breads }) => {
     data?.image
   );
   const mediaSrc = isVideoFile(videoSrc) ? videoSrc : first(imageSrc, videoSrc);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setShareUrl(window.location.href);
+    }
+  }, [data?.id]);
+
+  const copyRecipeLink = async () => {
+    const url = shareUrl || (typeof window !== "undefined" ? window.location.href : "");
+    if (!url) return;
+
+    try {
+      if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(url);
+      } else {
+        const textArea = document.createElement("textarea");
+        textArea.value = url;
+        textArea.setAttribute("readonly", "");
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+      }
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1800);
+    } catch {
+      setCopied(false);
+    }
+  };
+
+  const shareItems = [
+    {
+      label: "Facebook",
+      Button: FacebookShareButton,
+      Icon: FacebookIcon,
+      props: { url: shareUrl },
+    },
+    {
+      label: "WhatsApp",
+      Button: WhatsappShareButton,
+      Icon: WhatsappIcon,
+      props: { url: shareUrl, title: shareTitle },
+    },
+    {
+      label: "Twitter",
+      Button: TwitterShareButton,
+      Icon: TwitterIcon,
+      props: { url: shareUrl, title: shareTitle },
+    },
+    {
+      label: "LinkedIn",
+      Button: LinkedinShareButton,
+      Icon: LinkedinIcon,
+      props: { url: shareUrl, title: shareTitle },
+    },
+    {
+      label: "Telegram",
+      Button: TelegramShareButton,
+      Icon: TelegramIcon,
+      props: { url: shareUrl, title: shareTitle },
+    },
+    {
+      label: "Reddit",
+      Button: RedditShareButton,
+      Icon: RedditIcon,
+      props: { url: shareUrl, title: shareTitle },
+    },
+    {
+      label: "Line",
+      Button: LineShareButton,
+      Icon: LineIcon,
+      props: { url: shareUrl, title: shareTitle },
+    },
+    {
+      label: "Instapaper",
+      Button: InstapaperShareButton,
+      Icon: InstapaperIcon,
+      props: { url: shareUrl, title: shareTitle },
+    },
+    {
+      label: "Hatena",
+      Button: HatenaShareButton,
+      Icon: HatenaIcon,
+      props: { url: shareUrl, title: shareTitle },
+    },
+    {
+      label: "Email",
+      Button: EmailShareButton,
+      Icon: EmailIcon,
+      props: { url: shareUrl, subject: shareTitle },
+    },
+    {
+      label: "Tumblr",
+      Button: TumblrShareButton,
+      Icon: TumblrIcon,
+      props: { url: shareUrl, title: shareTitle },
+    },
+    {
+      label: "VK",
+      Button: VKShareButton,
+      Icon: VKIcon,
+      props: { url: shareUrl, title: shareTitle },
+    },
+    {
+      label: "OK",
+      Button: OKShareButton,
+      Icon: OKIcon,
+      props: { url: shareUrl, title: shareTitle },
+    },
+    {
+      label: "Pocket",
+      Button: PocketShareButton,
+      Icon: PocketIcon,
+      props: { url: shareUrl, title: shareTitle },
+    },
+    {
+      label: "Viber",
+      Button: ViberShareButton,
+      Icon: ViberIcon,
+      props: { url: shareUrl, title: shareTitle },
+    },
+  ];
   
   return (
     <div className="recipe_banner">
@@ -86,38 +231,31 @@ const RecipeBanner = ({ data, breads }) => {
           </button>
         </div>
         {isShare ? (
-          <div style={{ display: "flex", gap: "8px", margin: "10px" }}>
-            <FacebookShareButton url={shareUrl} aria-label="Share on Facebook">
-              <FacebookIcon size={32} round />
-            </FacebookShareButton>
-            <WhatsappShareButton
-              title={shareTitle}
-              url={shareUrl}
-              aria-label="Share on WhatsApp"
-            >
-              <WhatsappIcon size={32} round />
-            </WhatsappShareButton>
-            <XShareButton
-              title={shareTitle}
-              url={shareUrl}
-              aria-label="Share on X"
-            >
-              <XIcon size={32} round />
-            </XShareButton>
-            <LinkedinShareButton
-              title={shareTitle}
-              url={shareUrl}
-              aria-label="Share on LinkedIn"
-            >
-              <LinkedinIcon size={32} round />
-            </LinkedinShareButton>
-            <EmailShareButton
-              subject={shareTitle}
-              url={shareUrl}
-              aria-label="Share by email"
-            >
-              <EmailIcon size={32} round />
-            </EmailShareButton>
+          <div className="recipeSharePanel" dir="ltr">
+            <div className="recipeShareButtons" aria-label="Recipe share links">
+              {shareItems.map(({ label, Button, Icon, props }) => (
+                <Button
+                  key={label}
+                  {...props}
+                  disabled={!shareUrl}
+                  className="recipeShareButton"
+                  aria-label={`Share on ${label}`}
+                >
+                  <Icon size={36} round />
+                </Button>
+              ))}
+            </div>
+            <div className="recipeShareCopy">
+              <input
+                readOnly
+                aria-label="Recipe link"
+                value={shareUrl}
+                onFocus={(event) => event.target.select()}
+              />
+              <button type="button" onClick={copyRecipeLink}>
+                {copied ? (language == "ar" ? "تم النسخ" : "Copied") : (language == "ar" ? "نسخ" : "Copy")}
+              </button>
+            </div>
           </div>
         ) : null}
       </div>
