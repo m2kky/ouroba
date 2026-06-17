@@ -44,12 +44,13 @@
 }
 
 .rtlCareerTitle h2 {
-  text-align: center;
+  text-align: right;
 }
 
 .rtlCareerTitle p {
-  margin-inline-end: 0;
-  margin-inline-start: auto;
+  margin-inline-end: auto;
+  margin-inline-start: 0;
+  text-align: right;
 }
 
 .form {
