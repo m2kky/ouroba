@@ -45,10 +45,10 @@ const TopHeader = ({ data, siteinfo = {} }) => {
       </div>
       <BottomHeader show={show} setShow={setShow} data={data} />
       <HeaderIcons show={show} setShow={setShow} />
-      <div className="imageHeader">
-        <div className={`headerImage ${language == "ar" ? "active" : ""}`}>
-          <img src={headerOrnament} alt="" style={{ transform: "scaleX(-1)" }} />
-          <img src={headerOrnament} alt="" style={{ transform: "scaleX(-1)" }} />
+      <div className="navOrnamentLayer">
+        <div className={`navOrnament ${language == "ar" ? "navOrnamentAr" : "navOrnamentEn"}`}>
+          <img className="navOrnamentImage" src={headerOrnament} alt="" />
+          <img className="navOrnamentImage" src={headerOrnament} alt="" />
         </div>
       </div>
     </div>
