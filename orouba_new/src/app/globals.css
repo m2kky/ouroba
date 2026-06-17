@@ -778,17 +778,21 @@ body[dir="rtl"] .recipe_about .recipe-structured ul {
 }
 
 .ProductTypeSmallSlider .brandsImages {
+  box-sizing: border-box;
   display: block;
   margin-inline: auto;
   max-width: 100%;
   overflow: visible;
-  padding-inline: 72px;
+  padding-inline: 82px;
   position: relative;
-  width: min(100%, 1120px);
+  width: min(100%, 1260px);
 }
 
 .ProductTypeSmallSlider .relatedProductsDesktopSlider {
+  margin-inline: auto;
+  max-width: 1080px;
   position: relative;
+  width: 100%;
 }
 
 .ProductTypeSmallSlider .relatedProductsSwiper {
@@ -873,7 +877,7 @@ body[dir="rtl"] .recipe_about .recipe-structured ul {
   align-items: center;
   direction: ltr;
   display: flex;
-  inset-inline: 4px;
+  inset-inline: -68px;
   justify-content: space-between;
   pointer-events: none;
   position: absolute;
@@ -955,6 +959,16 @@ body.arVersion .ProductTypeSmallSlider .productTypeSliderArrow button svg,
 body[dir="rtl"] .ProductTypeSmallSlider .productTypeSliderArrow button svg {
   transform: none;
   transform-origin: center;
+}
+
+@media (min-width: 768px) and (max-width: 1099px) {
+  .ProductTypeSmallSlider .brandsImages {
+    padding-inline: 58px;
+  }
+
+  .ProductTypeSmallSlider .productTypeSliderArrow {
+    inset-inline: -52px;
+  }
 }
 
 @media (max-width: 767px) {
