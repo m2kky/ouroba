@@ -82,10 +82,6 @@ export default async function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap"
           rel="stylesheet"
         />
-        <link
-          href="https://oroubafoods.com/static/css/main.56115a45.css"
-          rel="stylesheet"
-        />
       </head>
       <body className={languageClass} dir={lang === "ar" ? "rtl" : "ltr"} suppressHydrationWarning>
         <StoreProvider initialLanguage={lang}>
