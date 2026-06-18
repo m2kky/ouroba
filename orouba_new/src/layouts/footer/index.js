@@ -13,6 +13,7 @@ import {
 } from "../../assets/svgIcons";
 import { localizedPath } from "@/utils/routes";
 import footerLogo from "../../../footer_logo.ddae0bf40dad21fa904a.png";
+import LazyImage from "@/components/LazyImage";
 
 const Footer = ({ siteinfo = {}, socialParents = [], brands = [] }) => {
   const pageData = siteinfo || {};
@@ -82,9 +83,14 @@ const Footer = ({ siteinfo = {}, socialParents = [], brands = [] }) => {
         <div className="row footer_elements">
           <div className="footer_element">
             <div className="single_footer single_footer_address">
-              <img
+              <LazyImage
                 src={footerLogo.src}
                 alt="Orouba Foods"
+                loading="lazy"
+                decoding="async"
+                fetchPriority="low"
+                rootMargin="0px"
+                threshold={0.1}
                 style={{
                   width: "180px",
                   maxWidth: "100%",
@@ -274,7 +280,17 @@ const Footer = ({ siteinfo = {}, socialParents = [], brands = [] }) => {
                   socialParents.map((itParent, indParent) => {
                     return (
                       <div className="parent_social" key={indParent}>
-                        {itParent?.image ? <img src={itParent.image} alt="" /> : null}
+                        {itParent?.image ? (
+                          <LazyImage
+                            src={itParent.image}
+                            alt=""
+                            loading="lazy"
+                            decoding="async"
+                            fetchPriority="low"
+                            rootMargin="0px"
+                            threshold={0.1}
+                          />
+                        ) : null}
                         <div className="me_social_icons">
                           {itParent.socials &&
                             itParent.socials.map((item, index) => {
@@ -288,8 +304,13 @@ const Footer = ({ siteinfo = {}, socialParents = [], brands = [] }) => {
                                   rel="noopener noreferrer"
                                   aria-label={item.type || "Social link"}
                                 >
-                                  <img
+                                  <LazyImage
                                     src={item.image}
+                                    loading="lazy"
+                                    decoding="async"
+                                    fetchPriority="low"
+                                    rootMargin="0px"
+                                    threshold={0.1}
                                     style={{
                                       width: "30px",
                                       height: "30px",

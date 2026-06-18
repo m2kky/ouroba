@@ -96,5 +96,5 @@ export default async function HomePage({
     standers: (Array.isArray(data.standards) ? data.standards : []).map(normalizeStandard),
   };
 
-  return <Home homePageData={resolveMediaTree(homePageData)} />;
+  return <Home homePageData={resolveMediaTree(homePageData)} language={lang} />;
 }

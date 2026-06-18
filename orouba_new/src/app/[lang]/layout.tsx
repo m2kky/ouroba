@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import "rsuite/Loader/styles/index.css";
 import "@/styles/orouba-main.css";
 import "../globals.css";
+import "../performance-overrides.css";
 import StoreProvider from "@/components/StoreProvider";
 import LocalizedDigits from "@/components/LocalizedDigits";
 import Header from "@/layouts/header";
@@ -76,14 +76,7 @@ export default async function RootLayout({
 
   return (
     <html lang={lang} data-scroll-behavior="smooth">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+      <head />
       <body className={languageClass} dir={lang === "ar" ? "rtl" : "ltr"} suppressHydrationWarning>
         <StoreProvider initialLanguage={lang}>
           <LocalizedDigits locale={lang} />

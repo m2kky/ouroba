@@ -1,15 +1,16 @@
-"use client";
 import React from "react";
 import { arrowLeft } from "../../../assets/svgIcons";
-import UseGeneral from "../../../hooks/useGeneral";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { localizedPath } from "@/utils/routes";
 import { HOME_TEXT_FALLBACKS, localizedText, splitHeading } from "@/utils/siteText";
 import RichText from "../../../components/RichText";
 
-function Hero({ data }) {
-  const { language } = UseGeneral();
-  const router = useRouter();
+const optimizedImageSrc = (src, width = 828) => {
+  if (!src || !/^https?:\/\//i.test(src)) return src;
+  return `/_next/image?url=${encodeURIComponent(src)}&w=${width}&q=75`;
+};
+
+function Hero({ data, language = "en" }) {
   const visionTitle = localizedText(
     data,
     language,
@@ -24,15 +25,16 @@ function Hero({ data }) {
     HOME_TEXT_FALLBACKS.aboutUs
   );
   const titleParts = splitHeading(visionTitle);
+  const visionImage = optimizedImageSrc(data?.vision_image);
 
   return (
     <div className="hero_section home_vision_section d-flex justify-content-between w-full rowDiv">
-      {data?.vision_image ? (
+      {visionImage ? (
         <img
-          src={data.vision_image}
+          src={visionImage}
           alt=""
           decoding="async"
-          fetchPriority="low"
+          fetchPriority="high"
         />
       ) : null}
       <div className="hero_texts d-flex flex-column align-item-start ">
@@ -41,15 +43,16 @@ function Hero({ data }) {
           {titleParts.rest ? <span>{titleParts.rest}</span> : null}
         </h1>
         <RichText as="p" html={visionText} className="hero_rich_text" />
-        <button
+        <Link
           className="hone_sections_button d-flex"
-          onClick={() => router.push(localizedPath("/about/whoWeAre", language))}
+          href={localizedPath("/about/whoWeAre", language)}
+          prefetch={false}
         >
           <span>{buttonText}</span>
           <span style={{ rotate: language == "ar" ? "180deg" : "0" }}>
             {arrowLeft}
           </span>
-        </button>
+        </Link>
       </div>
     </div>
   );

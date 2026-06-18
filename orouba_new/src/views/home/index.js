@@ -7,12 +7,12 @@ import Standards from "../../layouts/home/standards";
 import MapSection from './../../layouts/home/mapSection/index';
 import Recips from "../../layouts/home/receips";
 
-const Home = ({ homePageData }) => {
+const Home = ({ homePageData, language }) => {
   return (
     <>
       <div style={{ minHeight: "100vh" }} className="home_sections">
         <Banner data={homePageData?.banners} />
-        <Hero data={homePageData?.siteinfo} />
+        <Hero data={homePageData?.siteinfo} language={language} />
         <Brands data={homePageData?.brands} />
         <div className="boxShadowSection">
           <WhyUs data={homePageData?.siteinfo} />

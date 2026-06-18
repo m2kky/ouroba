@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 const PLACEHOLDER_SRC =
   "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
 
-function LazyImage({ src, rootMargin = "200px", eager = false, ...props }) {
+function LazyImage({ src, rootMargin = "200px", threshold = 0, eager = false, ...props }) {
   const imageRef = useRef(null);
   const [canLoad, setCanLoad] = useState(eager);
 
@@ -24,12 +24,12 @@ function LazyImage({ src, rootMargin = "200px", eager = false, ...props }) {
           observer.disconnect();
         }
       },
-      { rootMargin }
+      { rootMargin, threshold }
     );
 
     observer.observe(image);
     return () => observer.disconnect();
-  }, [canLoad, eager, rootMargin, src]);
+  }, [canLoad, eager, rootMargin, src, threshold]);
 
   return (
     <img

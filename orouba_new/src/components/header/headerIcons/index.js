@@ -1,20 +1,17 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { language as languageIcon, search } from "../../../assets/svgIcons";
 import UseGeneral from "./../../../hooks/useGeneral";
-import SearchBox from "../searchBox";
 import { localizedPath } from "@/utils/routes";
+
+const SearchBox = dynamic(() => import("../searchBox"), { ssr: false });
 
 const HeaderIcons = ({ setShow, show }) => {
   const { changLang2, language } = UseGeneral();
   const router = useRouter();
-  const [top, setTop] = useState(0);
   const [showSearch, setShowSearh] = useState(false);
-
-  useEffect(() => {
-    setTop(document.querySelector("header")?.clientHeight);
-  }, []);
 
   const switchLanguage = (nextLanguage) => {
     changLang2(nextLanguage);

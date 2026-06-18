@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 
 const hasHtml = (value) => /<[a-z][\s\S]*>/i.test(String(value || ""));

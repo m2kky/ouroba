@@ -6,6 +6,12 @@ import ContentLoader from 'react-content-loader';
 import UseGeneral from '../../../hooks/useGeneral';
 import { localizedPath } from '@/utils/routes';
 import LazyImage from '../../../components/LazyImage';
+
+const optimizedImageSrc = (src, width = 640) => {
+  if (!src || !/^https?:\/\//i.test(src)) return src;
+  return `/_next/image?url=${encodeURIComponent(src)}&w=${width}&q=70`;
+};
+
 function Brands({ data }) {
   const router = useRouter();
   const { language } = UseGeneral();
@@ -35,13 +41,15 @@ function Brands({ data }) {
           data?.map((item, index) => (
             <LazyImage
               key={item?.id ?? index}
-              src={item?.image}
+              src={optimizedImageSrc(item?.image)}
               onClick={() => router.push(localizedPath("/brands/" + item?.id, language))}
               className="brandImage"
               alt={`Brand ${item?.id}`}
               loading="lazy"
               decoding="async"
               fetchPriority="low"
+              rootMargin="0px 0px -160px 0px"
+              threshold={0.2}
             />
           ))
         ) : null}

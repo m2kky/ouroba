@@ -23,6 +23,10 @@
   --sec-color: #002f59;
   --dark: #002f59;
   --heading-color: #fff100;
+  --font-amaranth: Arial, sans-serif;
+  --font-baloo: Tahoma, Arial, sans-serif;
+  --font-cairo: Tahoma, Arial, sans-serif;
+  --font-tajawal: Tahoma, Arial, sans-serif;
   /* Brand light theme */
   --background: #f9fafb; /* Gray-50 */
   --foreground: #000000; /* Black */
