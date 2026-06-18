@@ -6,9 +6,15 @@ import UseGeneral from "../../../hooks/useGeneral";
 import "swiper/css";
 
 const VIDEO_LOAD_DELAY_MS = 30000;
+const BANNER_IMAGE_QUALITY = 75;
 
 const first = (...values) =>
   values.find((value) => typeof value === "string" && value.trim()) || "";
+
+const optimizedImageSrc = (src, width) => {
+  if (!src || !/^https?:\/\//i.test(src)) return src;
+  return `/_next/image?url=${encodeURIComponent(src)}&w=${width}&q=${BANNER_IMAGE_QUALITY}`;
+};
 
 const hasBannerMedia = (item) =>
   !!first(
@@ -258,6 +264,13 @@ const Banner = ({ data }) => {
         >
           {visibleBanners.map((item, index) => {
             const media = getBannerMedia(item, language, isSmaller);
+            const optimizedWidth = isSmaller ? 828 : 1920;
+            const posterSrc = media.poster
+              ? optimizedImageSrc(media.poster, optimizedWidth)
+              : "";
+            const imageSrc = media.src
+              ? optimizedImageSrc(media.src, optimizedWidth)
+              : "";
 
             return (
               <SwiperSlide key={item?.id || index}>
@@ -266,7 +279,7 @@ const Banner = ({ data }) => {
                     <>
                       {!canLoadVideo && media.poster ? (
                         <img
-                          src={media.poster}
+                          src={posterSrc}
                           style={{ maxWidth: "100%", minWidth: "100%" }}
                           alt=""
                           draggable={false}
@@ -283,7 +296,7 @@ const Banner = ({ data }) => {
                           playsInline
                           preload="metadata"
                           src={media.src}
-                          poster={media.poster || undefined}
+                          poster={posterSrc || undefined}
                           controls={false}
                           draggable={false}
                           onDragStart={(event) => event.preventDefault()}
@@ -303,7 +316,7 @@ const Banner = ({ data }) => {
                     </>
                   ) : (
                     <img
-                      src={media.src}
+                      src={imageSrc}
                       style={{ maxWidth: "100%", minWidth: "100%" }}
                       alt=""
                       draggable={false}
