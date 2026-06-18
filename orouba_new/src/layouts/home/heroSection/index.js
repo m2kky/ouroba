@@ -26,7 +26,7 @@ function Hero({ data }) {
   const titleParts = splitHeading(visionTitle);
 
   return (
-    <div className="hero_section d-flex justify-content-between w-full rowDiv">
+    <div className="hero_section home_vision_section d-flex justify-content-between w-full rowDiv">
       {data?.vision_image ? (
         <img
           src={data.vision_image}
