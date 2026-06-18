@@ -6,6 +6,7 @@ import SectionTitle from "../../../components/sectionTitle";
 import UseGeneral from "../../../hooks/useGeneral";
 import { useRouter } from 'next/navigation';
 import { localizedPath } from "@/utils/routes";
+import LazyImage from "../../../components/LazyImage";
 
 const firstText = (...values) =>
   values.find((value) => typeof value === "string" && value.trim()) || "";
@@ -101,7 +102,7 @@ function ProductTypeSmallSlider({ withArrows, data, type }) {
         onClick={() => goToProduct(item)}
       >
         {image ? (
-          <img
+          <LazyImage
             src={image}
             alt={name}
             loading="lazy"

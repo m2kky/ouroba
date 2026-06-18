@@ -5,6 +5,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import UseGeneral from "../../../hooks/useGeneral";
 import "swiper/css";
 
+const VIDEO_LOAD_DELAY_MS = 30000;
+
 const first = (...values) =>
   values.find((value) => typeof value === "string" && value.trim()) || "";
 
@@ -150,25 +152,44 @@ const Banner = ({ data }) => {
   }, [syncSlideVideos, visibleBanners, isSmaller, language, canLoadVideo]);
 
   useEffect(() => {
-    const startVideoLoad = () => {
-      const timeoutId = window.setTimeout(() => setCanLoadVideo(true), 4000);
-      return () => window.clearTimeout(timeoutId);
+    let timeoutId;
+    let hasLoadedVideo = false;
+
+    const cleanup = () => {
+      if (timeoutId) {
+        window.clearTimeout(timeoutId);
+      }
+      window.removeEventListener("load", scheduleVideoLoad);
+      window.removeEventListener("pointerdown", loadVideo);
+      window.removeEventListener("scroll", loadVideo);
+      window.removeEventListener("keydown", loadVideo);
     };
 
-    if (document.readyState === "complete") {
-      return startVideoLoad();
+    const loadVideo = () => {
+      if (hasLoadedVideo) return;
+      hasLoadedVideo = true;
+      cleanup();
+      setCanLoadVideo(true);
+    };
+
+    function scheduleVideoLoad() {
+      timeoutId = window.setTimeout(loadVideo, VIDEO_LOAD_DELAY_MS);
     }
 
-    let cleanup = () => {};
-    const handleLoad = () => {
-      cleanup = startVideoLoad();
-    };
+    if (document.readyState === "complete") {
+      scheduleVideoLoad();
+    } else {
+      window.addEventListener("load", scheduleVideoLoad, { once: true });
+    }
 
-    window.addEventListener("load", handleLoad, { once: true });
-    return () => {
-      window.removeEventListener("load", handleLoad);
-      cleanup();
-    };
+    window.addEventListener("pointerdown", loadVideo, {
+      once: true,
+      passive: true,
+    });
+    window.addEventListener("scroll", loadVideo, { once: true, passive: true });
+    window.addEventListener("keydown", loadVideo, { once: true });
+
+    return cleanup;
   }, []);
 
   return (

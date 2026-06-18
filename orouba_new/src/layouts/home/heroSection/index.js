@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { localizedPath } from "@/utils/routes";
 import { HOME_TEXT_FALLBACKS, localizedText, splitHeading } from "@/utils/siteText";
 import RichText from "../../../components/RichText";
+import LazyImage from "../../../components/LazyImage";
 
 function Hero({ data }) {
   const { language } = UseGeneral();
@@ -28,7 +29,7 @@ function Hero({ data }) {
   return (
     <div className="hero_section d-flex justify-content-between w-full rowDiv">
       {data?.vision_image ? (
-        <img
+        <LazyImage
           src={data.vision_image}
           alt=""
           loading="lazy"

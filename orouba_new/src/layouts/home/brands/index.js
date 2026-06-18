@@ -5,6 +5,7 @@ import SectionTitle from '../../../components/sectionTitle';
 import ContentLoader from 'react-content-loader';
 import UseGeneral from '../../../hooks/useGeneral';
 import { localizedPath } from '@/utils/routes';
+import LazyImage from '../../../components/LazyImage';
 function Brands({ data }) {
   const router = useRouter();
   const { language } = UseGeneral();
@@ -32,7 +33,7 @@ function Brands({ data }) {
           <ContentLoader />
         ) : data?.length ? (
           data?.map((item, index) => (
-            <img
+            <LazyImage
               key={item?.id ?? index}
               src={item?.image}
               onClick={() => router.push(localizedPath("/brands/" + item?.id, language))}

@@ -7,6 +7,7 @@ import UseGeneral from "../../../hooks/useGeneral";
 import { FreeMode, Navigation } from "swiper/modules";
 import { useRouter } from 'next/navigation';
 import { localizedPath } from "@/utils/routes";
+import LazyImage from "../../../components/LazyImage";
 
 const firstText = (...values) =>
   values.find((value) => typeof value === "string" && value.trim()) || "";
@@ -161,7 +162,7 @@ function Recips({ withArrows, data }) {
                       }
                     >
                       {image ? (
-                        <img
+                        <LazyImage
                           src={image}
                           alt={name}
                           loading="lazy"

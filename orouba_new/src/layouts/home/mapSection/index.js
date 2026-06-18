@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { localizedPath } from "@/utils/routes";
 import { HOME_TEXT_FALLBACKS, localizedText, splitHeading } from "@/utils/siteText";
 import RichText from "../../../components/RichText";
+import LazyImage from "../../../components/LazyImage";
 
 function MapSection({ data }) {
   const { language } = UseGeneral();
@@ -44,7 +45,7 @@ function MapSection({ data }) {
         </button>
       </div>
       {data?.map ? (
-        <img
+        <LazyImage
           src={data.map}
           alt=""
           loading="lazy"

@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import RichText from "../RichText";
+import LazyImage from "../LazyImage";
 function Standard({ icon, title, description, backgroundInternal }) {
   const iconSrc = typeof icon === "string" && icon.trim() ? icon : null;
   const backgroundSrc =
@@ -11,7 +12,7 @@ function Standard({ icon, title, description, backgroundInternal }) {
   return (
     <div className="standard d-flex flex-column align-items-center justify-content-cener">
       {iconSrc ? (
-        <img
+        <LazyImage
           style={{ marginBottom: "10px" }}
           src={iconSrc}
           alt=""
@@ -21,7 +22,7 @@ function Standard({ icon, title, description, backgroundInternal }) {
         />
       ) : null}
       {backgroundSrc ? (
-        <img
+        <LazyImage
           className="backgroundInternal"
           style={{ marginBottom: "10px" }}
           src={backgroundSrc}

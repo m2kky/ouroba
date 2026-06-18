@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { localizedPath } from "@/utils/routes";
 import { HOME_TEXT_FALLBACKS, localizedText, splitHeading } from "@/utils/siteText";
 import RichText from "../../../components/RichText";
+import LazyImage from "../../../components/LazyImage";
 
 function WhyUs({ data }) {
   const { language } = UseGeneral();
@@ -34,7 +35,7 @@ function WhyUs({ data }) {
   return (
     <div className="hero_section d-flex justify-content-between align-items-center w-full rowDiv why_us_section">
       {data?.why_orouba_img ? (
-        <img
+        <LazyImage
           src={data.why_orouba_img}
           alt=""
           loading="lazy"

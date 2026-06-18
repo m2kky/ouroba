@@ -6,6 +6,7 @@ import UseGeneral from "../../hooks/useGeneral";
 import { ThreeDots } from "react-loader-spinner";
 import CategoriesSlider from "../../layouts/reciepe/categories";
 import { localizedPath } from "@/utils/routes";
+import LazyImage from "../../components/LazyImage";
 
 const Reciepe = ({ recipesPageData }) => {
   const { language } = UseGeneral();
@@ -119,7 +120,7 @@ const Reciepe = ({ recipesPageData }) => {
                         }
                       >
                         <div className="item_row">
-                          <img
+                          <LazyImage
                             src={item?.images?.[0]?.url}
                             alt=""
                             loading="lazy"
