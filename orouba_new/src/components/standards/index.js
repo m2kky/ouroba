@@ -10,13 +10,25 @@ function Standard({ icon, title, description, backgroundInternal }) {
 
   return (
     <div className="standard d-flex flex-column align-items-center justify-content-cener">
-      {iconSrc ? <img style={{ marginBottom: "10px" }} src={iconSrc} alt="" /> : null}
+      {iconSrc ? (
+        <img
+          style={{ marginBottom: "10px" }}
+          src={iconSrc}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
+        />
+      ) : null}
       {backgroundSrc ? (
         <img
           className="backgroundInternal"
           style={{ marginBottom: "10px" }}
           src={backgroundSrc}
           alt=""
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
         />
       ) : null}
       <div className="standard_texts">

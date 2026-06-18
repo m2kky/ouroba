@@ -164,6 +164,9 @@ function Recips({ withArrows, data }) {
                         <img
                           src={image}
                           alt={name}
+                          loading="lazy"
+                          decoding="async"
+                          fetchPriority="low"
                         />
                       ) : null}
                       <div className="reciepe_name">

@@ -119,7 +119,13 @@ const Reciepe = ({ recipesPageData }) => {
                         }
                       >
                         <div className="item_row">
-                          <img src={item?.images?.[0]?.url} alt="" />
+                          <img
+                            src={item?.images?.[0]?.url}
+                            alt=""
+                            loading="lazy"
+                            decoding="async"
+                            fetchPriority="low"
+                          />
                         </div>
                         <div className="receipe_details">
                           <h4 style={{ textAlign: "center" }}>

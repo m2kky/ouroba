@@ -100,7 +100,15 @@ function ProductTypeSmallSlider({ withArrows, data, type }) {
         className={["product_type", className].filter(Boolean).join(" ")}
         onClick={() => goToProduct(item)}
       >
-        {image ? <img src={image} alt={name} /> : null}
+        {image ? (
+          <img
+            src={image}
+            alt={name}
+            loading="lazy"
+            decoding="async"
+            fetchPriority="low"
+          />
+        ) : null}
         <div className="product_type_name">
           {name}
         </div>

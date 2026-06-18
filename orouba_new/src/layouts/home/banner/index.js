@@ -42,6 +42,9 @@ const getBannerMedia = (item, language, isSmaller) => {
       src: isSmaller
         ? first(mobileVideo, desktopVideo, mobileImage, desktopImage)
         : first(desktopVideo, mobileVideo, desktopImage, mobileImage),
+      poster: isSmaller
+        ? first(mobileImage, desktopImage)
+        : first(desktopImage, mobileImage),
     };
   }
 
@@ -84,6 +87,7 @@ const Banner = ({ data }) => {
   );
   const bannerCount = visibleBanners.length;
   const [isSmaller, setIsSmaller] = useState(false);
+  const [canLoadVideo, setCanLoadVideo] = useState(false);
 
   const syncSlideVideos = useCallback(() => {
     const root = bannerRootRef.current;
@@ -143,7 +147,29 @@ const Banner = ({ data }) => {
   useEffect(() => {
     const timeoutId = window.setTimeout(syncSlideVideos, 100);
     return () => window.clearTimeout(timeoutId);
-  }, [syncSlideVideos, visibleBanners, isSmaller, language]);
+  }, [syncSlideVideos, visibleBanners, isSmaller, language, canLoadVideo]);
+
+  useEffect(() => {
+    const startVideoLoad = () => {
+      const timeoutId = window.setTimeout(() => setCanLoadVideo(true), 4000);
+      return () => window.clearTimeout(timeoutId);
+    };
+
+    if (document.readyState === "complete") {
+      return startVideoLoad();
+    }
+
+    let cleanup = () => {};
+    const handleLoad = () => {
+      cleanup = startVideoLoad();
+    };
+
+    window.addEventListener("load", handleLoad, { once: true });
+    return () => {
+      window.removeEventListener("load", handleLoad);
+      cleanup();
+    };
+  }, []);
 
   return (
     <div className="rowDiv bannerDiv" ref={bannerRootRef}>
@@ -216,34 +242,52 @@ const Banner = ({ data }) => {
               <SwiperSlide key={item?.id || index}>
                 <div className="banner">
                   {!media.src ? null : media.isVideo ? (
-                    <video
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      preload="auto"
-                      src={media.src}
-                      controls={false}
-                      draggable={false}
-                      onDragStart={(event) => event.preventDefault()}
-                      onCanPlay={syncSlideVideos}
-                      onLoadedData={syncSlideVideos}
-                      onPlay={(event) => {
-                        if (
-                          !event.currentTarget
-                            .closest(".swiper-slide")
-                            ?.classList.contains("swiper-slide-active")
-                        ) {
-                          event.currentTarget.pause();
-                        }
-                      }}
-                    ></video>
+                    <>
+                      {!canLoadVideo && media.poster ? (
+                        <img
+                          src={media.poster}
+                          style={{ maxWidth: "100%", minWidth: "100%" }}
+                          alt=""
+                          draggable={false}
+                          fetchPriority="high"
+                          decoding="async"
+                          onDragStart={(event) => event.preventDefault()}
+                        />
+                      ) : null}
+                      {canLoadVideo ? (
+                        <video
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          preload="metadata"
+                          src={media.src}
+                          poster={media.poster || undefined}
+                          controls={false}
+                          draggable={false}
+                          onDragStart={(event) => event.preventDefault()}
+                          onCanPlay={syncSlideVideos}
+                          onLoadedData={syncSlideVideos}
+                          onPlay={(event) => {
+                            if (
+                              !event.currentTarget
+                                .closest(".swiper-slide")
+                                ?.classList.contains("swiper-slide-active")
+                            ) {
+                              event.currentTarget.pause();
+                            }
+                          }}
+                        ></video>
+                      ) : null}
+                    </>
                   ) : (
                     <img
                       src={media.src}
                       style={{ maxWidth: "100%", minWidth: "100%" }}
                       alt=""
                       draggable={false}
+                      fetchPriority={index === 0 ? "high" : "low"}
+                      decoding="async"
                       onDragStart={(event) => event.preventDefault()}
                     />
                   )}

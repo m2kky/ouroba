@@ -38,6 +38,9 @@ function Brands({ data }) {
               onClick={() => router.push(localizedPath("/brands/" + item?.id, language))}
               className="brandImage"
               alt={`Brand ${item?.id}`}
+              loading="lazy"
+              decoding="async"
+              fetchPriority="low"
             />
           ))
         ) : null}

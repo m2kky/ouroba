@@ -27,7 +27,15 @@ function Hero({ data }) {
 
   return (
     <div className="hero_section d-flex justify-content-between w-full rowDiv">
-      {data?.vision_image ? <img src={data.vision_image} alt="" /> : null}
+      {data?.vision_image ? (
+        <img
+          src={data.vision_image}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
+        />
+      ) : null}
       <div className="hero_texts d-flex flex-column align-item-start ">
         <h1>
           {titleParts.first}

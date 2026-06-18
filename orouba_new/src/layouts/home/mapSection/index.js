@@ -43,7 +43,15 @@ function MapSection({ data }) {
           </span>
         </button>
       </div>
-      {data?.map ? <img src={data.map} alt="" /> : null}
+      {data?.map ? (
+        <img
+          src={data.map}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
+        />
+      ) : null}
     </div>
   );
 }

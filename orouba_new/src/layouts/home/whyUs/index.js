@@ -33,7 +33,15 @@ function WhyUs({ data }) {
 
   return (
     <div className="hero_section d-flex justify-content-between align-items-center w-full rowDiv why_us_section">
-      {data?.why_orouba_img ? <img src={data.why_orouba_img} alt="" /> : null}
+      {data?.why_orouba_img ? (
+        <img
+          src={data.why_orouba_img}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
+        />
+      ) : null}
       <div className="hero_texts d-flex flex-column align-item-start ">
         <h1>
           {titleParts.first}
