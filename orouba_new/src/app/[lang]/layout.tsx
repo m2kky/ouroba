@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 export async function generateStaticParams() {
   return [{ lang: "en" }, { lang: "ar" }];

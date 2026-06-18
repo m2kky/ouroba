@@ -3,6 +3,8 @@ import { apiSuccess, apiError } from "@/lib/api-helpers";
 
 import { NextRequest } from "next/server";
 
+const PUBLIC_CACHE_CONTROL = "public, s-maxage=300, stale-while-revalidate=86400";
+
 /**
  * GET /api/site-data
  * 
@@ -195,7 +197,7 @@ export async function GET(request: NextRequest) {
           .slice(0, 6)
       : rawRecipes.slice(0, 6);
 
-    return apiSuccess({
+    const response = apiSuccess({
       brands,
       banners,
       certificates,
@@ -214,6 +216,8 @@ export async function GET(request: NextRequest) {
       recipes,
       sectionTexts,
     });
+    response.headers.set("Cache-Control", PUBLIC_CACHE_CONTROL);
+    return response;
   } catch (error) {
     console.error("site-data error:", error);
     return apiError("Failed to fetch site data", 500);

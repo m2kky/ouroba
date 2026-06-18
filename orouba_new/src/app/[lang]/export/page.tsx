@@ -5,7 +5,7 @@ import {
   getDashboardSiteData,
 } from "@/lib/dashboard-data";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 type ExportData = {
   siteinfo: Record<string, string | null | undefined>;

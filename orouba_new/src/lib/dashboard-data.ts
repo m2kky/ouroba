@@ -30,6 +30,7 @@ type DashboardSiteData = {
 const DEFAULT_DASHBOARD_URL = "https://admin.oroubafoods.com";
 const LEGACY_DASHBOARD_URL = "https://admin1.oroubafoods.com";
 const LOCAL_DASHBOARD_URLS = ["http://localhost:3015", "http://localhost:3000"];
+const PUBLIC_DATA_REVALIDATE_SECONDS = 300;
 
 function uniqueUrls(urls: string[]) {
   return Array.from(new Set(urls.map((url) => url.replace(/\/+$/, "")).filter(Boolean)));
@@ -62,7 +63,9 @@ async function fetchDashboard(path: string) {
   for (const baseUrl of getDashboardBaseUrls()) {
     try {
       const url = new URL(path, baseUrl);
-      const response = await fetch(url, { cache: "no-store" });
+      const response = await fetch(url, {
+        next: { revalidate: PUBLIC_DATA_REVALIDATE_SECONDS },
+      });
       if (response.ok) return response;
       lastError = new Error(`Dashboard request failed from ${baseUrl}: ${response.status}`);
     } catch (error) {

@@ -4,6 +4,7 @@ import { NextRequest } from "next/server";
 import { normalizeRecipeProperties } from "@/lib/recipe-properties";
 
 type Params = { params: Promise<{ id: string }> };
+const PUBLIC_CACHE_CONTROL = "public, s-maxage=300, stale-while-revalidate=86400";
 
 // GET /api/products/[id]
 export async function GET(request: NextRequest, { params }: Params) {
@@ -33,7 +34,7 @@ export async function GET(request: NextRequest, { params }: Params) {
     });
 
     if (!product) return apiError("Product not found", 404);
-    return apiSuccess({
+    const response = apiSuccess({
       ...product,
       recommendedRecipes: product.recommendedRecipes.map((relation) => ({
         ...relation,
@@ -45,6 +46,8 @@ export async function GET(request: NextRequest, { params }: Params) {
           : relation.recipe,
       })),
     });
+    response.headers.set("Cache-Control", PUBLIC_CACHE_CONTROL);
+    return response;
   } catch (error) {
     return apiError("Failed to fetch product", 500);
   }

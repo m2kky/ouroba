@@ -2,6 +2,8 @@ import { prisma } from "@/lib/prisma";
 import { apiSuccess, apiError, parsePagination } from "@/lib/api-helpers";
 import { NextRequest } from "next/server";
 
+const PUBLIC_CACHE_CONTROL = "public, s-maxage=300, stale-while-revalidate=86400";
+
 // GET /api/products — Public: list products (read-only)
 export async function GET(request: NextRequest) {
   try {
@@ -54,10 +56,12 @@ export async function GET(request: NextRequest) {
       prisma.product.count({ where }),
     ]);
 
-    return apiSuccess({
+    const response = apiSuccess({
       products,
       pagination: { total, page, limit, totalPages: Math.ceil(total / limit) },
     });
+    response.headers.set("Cache-Control", PUBLIC_CACHE_CONTROL);
+    return response;
   } catch (error) {
     return apiError("Failed to fetch products", 500);
   }

@@ -3,6 +3,8 @@ import { apiSuccess, apiError, parsePagination } from "@/lib/api-helpers";
 import { NextRequest } from "next/server";
 import { normalizeRecipeProperties } from "@/lib/recipe-properties";
 
+const PUBLIC_CACHE_CONTROL = "public, s-maxage=300, stale-while-revalidate=86400";
+
 // GET /api/recipes — Public: list recipes (read-only)
 export async function GET(request: NextRequest) {
   try {
@@ -39,13 +41,15 @@ export async function GET(request: NextRequest) {
       prisma.recipe.count({ where }),
     ]);
 
-    return apiSuccess({
+    const response = apiSuccess({
       recipes: recipes.map((recipe) => ({
         ...recipe,
         properties: normalizeRecipeProperties(recipe.properties),
       })),
       pagination: { total, page, limit, totalPages: Math.ceil(total / limit) },
     });
+    response.headers.set("Cache-Control", PUBLIC_CACHE_CONTROL);
+    return response;
   } catch (error) {
     return apiError("Failed to fetch recipes", 500);
   }

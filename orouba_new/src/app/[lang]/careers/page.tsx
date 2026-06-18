@@ -2,7 +2,7 @@ import CareersView from "@/views/Careers/Careers";
 import { dashboardSettingsToSiteinfo, getDashboardSiteData } from "@/lib/dashboard-data";
 import { resolveMediaTree } from "@/utils/media";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 export default async function CareersPage({
   params,

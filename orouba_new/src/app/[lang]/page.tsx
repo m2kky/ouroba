@@ -5,7 +5,7 @@ import {
   getDashboardSiteData,
 } from "@/lib/dashboard-data";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 const first = (...values: Array<string | null | undefined>) =>
   values.find((value) => typeof value === "string" && value.trim()) || "";

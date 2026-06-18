@@ -6,7 +6,7 @@ import {
 import { resolveMediaTree } from "@/utils/media";
 import { mergeDashboardSocialLinks } from "@/utils/socialLinks";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 type ContactData = {
   siteSetting: Record<string, string>;

@@ -4,6 +4,7 @@ import { NextRequest } from "next/server";
 import { normalizeRecipeProperties, recipePropertiesForCreate } from "@/lib/recipe-properties";
 
 type Params = { params: Promise<{ id: string }> };
+const PUBLIC_CACHE_CONTROL = "public, s-maxage=300, stale-while-revalidate=86400";
 
 // GET /api/recipes/[id]
 export async function GET(request: NextRequest, { params }: Params) {
@@ -37,10 +38,12 @@ export async function GET(request: NextRequest, { params }: Params) {
     });
 
     if (!recipe) return apiError("Recipe not found", 404);
-    return apiSuccess({
+    const response = apiSuccess({
       ...recipe,
       properties: normalizeRecipeProperties(recipe.properties),
     });
+    response.headers.set("Cache-Control", PUBLIC_CACHE_CONTROL);
+    return response;
   } catch (error) {
     return apiError("Failed to fetch recipe", 500);
   }

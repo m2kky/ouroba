@@ -7,7 +7,7 @@ import {
   sameBrandTypeProducts,
 } from "@/lib/dashboard-data";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 type ProductBrand = {
   id?: string;
