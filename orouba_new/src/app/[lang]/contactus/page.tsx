@@ -1,9 +1,11 @@
 import ContactUsView from "@/views/contactUs/index";
+import type { Metadata } from "next";
 import {
   dashboardSettingsToSiteinfo,
   getDashboardSiteData,
 } from "@/lib/dashboard-data";
 import { resolveMediaTree } from "@/utils/media";
+import { firstText, staticPageMetadata } from "@/lib/seo";
 import { mergeDashboardSocialLinks } from "@/utils/socialLinks";
 
 export const revalidate = 300;
@@ -48,6 +50,25 @@ async function getContactData(locale: string): Promise<ContactData> {
       socials: [],
     };
   }
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const { siteSetting } = await getContactData(lang);
+
+  return staticPageMetadata(lang, "contact", {
+    description: firstText(siteSetting.location, siteSetting.location_ar, siteSetting.location_en),
+    image: firstText(
+      siteSetting.contact_image,
+      siteSetting.contact_us_image,
+      siteSetting.logo,
+      "/static/media/contactUsImage.bc7db8fa7afd7e28c313.png"
+    ),
+  });
 }
 
 export default async function ContactUsPage({

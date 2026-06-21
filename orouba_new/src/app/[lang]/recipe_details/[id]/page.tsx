@@ -1,4 +1,5 @@
 import RecipeDetailsView from "@/views/RecipeDetails/RecipeDetails";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { resolveMediaTree } from "@/utils/media";
 import {
@@ -7,6 +8,7 @@ import {
   getDashboardRecipe,
   getDashboardSiteData,
 } from "@/lib/dashboard-data";
+import { createPageMetadata, firstText, localizedField } from "@/lib/seo";
 
 export const revalidate = 300;
 
@@ -157,6 +159,37 @@ const normalizeProperty = (property: RecipeProperty, siteInfo: Record<string, st
   text_ar: first(property?.textAr, property?.text_ar),
   text_en: first(property?.textEn, property?.text_en),
 });
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string; id: string }>;
+}): Promise<Metadata> {
+  const { lang, id } = await params;
+  const recipeDetails = await getDashboardRecipe(id);
+
+  if (!recipeDetails || recipeDetails.isHidden) {
+    return createPageMetadata({
+      lang,
+      path: `/recipe_details/${id}`,
+      title: lang === "en" ? "Recipe" : "وصفة",
+      noIndex: true,
+    });
+  }
+
+  return createPageMetadata({
+    lang,
+    path: `/recipe_details/${id}`,
+    title: localizedField(recipeDetails, lang, "name"),
+    description: localizedField(recipeDetails, lang, "description"),
+    image: firstText(
+      recipeDetails.internalImage,
+      recipeDetails.internal_image,
+      recipeDetails.images?.[0]?.url,
+      recipeDetails.image
+    ),
+  });
+}
 
 export default async function RecipeDetailsPage({
   params,

@@ -1,9 +1,11 @@
 import WhoWeAreView from "@/views/WhoWeAre/WhoWeAre";
+import type { Metadata } from "next";
 import { resolveMediaTree } from "@/utils/media";
 import {
   dashboardSettingsToSiteinfo,
   getDashboardSiteData,
 } from "@/lib/dashboard-data";
+import { firstText, staticPageMetadata } from "@/lib/seo";
 
 export const revalidate = 300;
 
@@ -38,6 +40,25 @@ async function getAboutData(locale: string): Promise<AboutData> {
     console.error("Error fetching about data:", error);
     return emptyAboutData;
   }
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const aboutData = await getAboutData(lang);
+  const siteInfo = aboutData.siteInfo;
+  const isArabic = lang !== "en";
+
+  return staticPageMetadata(lang, "about", {
+    description: firstText(
+      isArabic ? siteInfo.how_we_are_ar : siteInfo.how_we_are_en,
+      isArabic ? siteInfo.vision_ar : siteInfo.vision_en
+    ),
+    image: firstText(siteInfo.about_image, siteInfo.small_about_img, siteInfo.vision_image),
+  });
 }
 
 export default async function AboutPage({

@@ -1,4 +1,5 @@
 import ProductTypeCategoryView from "@/views/productType/productTypeCategory";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { resolveMediaTree } from "@/utils/media";
 import {
@@ -6,6 +7,7 @@ import {
   getDashboardSiteData,
   sameBrandTypeProducts,
 } from "@/lib/dashboard-data";
+import { createPageMetadata, firstText, localizedField } from "@/lib/seo";
 
 export const revalidate = 300;
 
@@ -25,6 +27,37 @@ type ProductCategory = {
 type ProductRecipeRelation = {
   recipe?: unknown;
 };
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string; id: string }>;
+}): Promise<Metadata> {
+  const { lang, id } = await params;
+  const productData = await getDashboardProduct(id);
+
+  if (!productData || productData.isHidden) {
+    return createPageMetadata({
+      lang,
+      path: `/products/${id}`,
+      title: lang === "en" ? "Product" : "منتج",
+      noIndex: true,
+    });
+  }
+
+  return createPageMetadata({
+    lang,
+    path: `/products/${id}`,
+    title: localizedField(productData, lang, "name"),
+    description: localizedField(productData, lang, "description"),
+    image: firstText(
+      productData.images?.[0]?.url,
+      productData.internalImage,
+      productData.internal_image,
+      productData.image
+    ),
+  });
+}
 
 export default async function ProductDetailsPage({
   params,

@@ -1,10 +1,12 @@
 import RecipesView from "@/views/reciepe";
+import type { Metadata } from "next";
 import {
   getDashboardRecipe,
   getDashboardRecipes,
   getDashboardSiteData,
 } from "@/lib/dashboard-data";
 import { resolveMediaTree } from "@/utils/media";
+import { firstText, staticPageMetadata } from "@/lib/seo";
 
 export const revalidate = 300;
 
@@ -87,6 +89,25 @@ async function recipesWithFoods() {
   );
 
   return detailedRecipes;
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+
+  try {
+    const recipes = (await getDashboardRecipes(12)) as Recipe[];
+    const firstRecipe = recipes.find((recipe) => visible(recipe));
+
+    return staticPageMetadata(lang, "recipes", {
+      image: firstText(firstRecipe?.images?.[0]?.url),
+    });
+  } catch {
+    return staticPageMetadata(lang, "recipes");
+  }
 }
 
 export default async function RecipesPage({

@@ -1,14 +1,18 @@
 import Home from "@/views/home";
+import type { Metadata } from "next";
 import { resolveMediaTree } from "@/utils/media";
 import {
   dashboardSettingsToSiteinfo,
   getDashboardSiteData,
 } from "@/lib/dashboard-data";
+import { staticPageMetadata } from "@/lib/seo";
 
 export const revalidate = 300;
 
-const first = (...values: Array<string | null | undefined>) =>
-  values.find((value) => typeof value === "string" && value.trim()) || "";
+const first = (...values: unknown[]): string => {
+  const value = values.find((item) => typeof item === "string" && item.trim());
+  return typeof value === "string" ? value : "";
+};
 
 const normalizeSiteinfo = (siteinfo: Record<string, string>) => ({
   ...siteinfo,
@@ -73,6 +77,43 @@ const normalizeRecipe = (recipe: any) => ({
   internal_image: recipe?.internalImage || recipe?.internal_image,
   video_link: recipe?.videoLink || recipe?.video_link,
 });
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+
+  try {
+    const data = await getDashboardSiteData(lang);
+    const siteinfo = normalizeSiteinfo(
+      dashboardSettingsToSiteinfo(data.settings, lang)
+    ) as Record<string, string>;
+    const isArabic = lang !== "en";
+    const banner = Array.isArray(data.banners)
+      ? (data.banners[0] as Record<string, unknown>)
+      : null;
+
+    return staticPageMetadata(lang, "home", {
+      description: first(
+        isArabic ? siteinfo.purposal_ar : siteinfo.purposal_en,
+        isArabic ? siteinfo.vision_ar : siteinfo.vision_en,
+        isArabic ? siteinfo.how_we_are_ar : siteinfo.how_we_are_en
+      ),
+      image: first(
+        banner?.imageEn,
+        banner?.image,
+        banner?.smallImgEn,
+        banner?.smallImg,
+        siteinfo.hero_img,
+        siteinfo.logo
+      ),
+    });
+  } catch {
+    return staticPageMetadata(lang, "home");
+  }
+}
 
 export default async function HomePage({
   params,
