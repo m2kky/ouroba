@@ -9,7 +9,7 @@ import LazyImage from '../../../components/LazyImage';
 
 const optimizedImageSrc = (src, width = 640) => {
   if (!src || !/^https?:\/\//i.test(src)) return src;
-  return `/_next/image?url=${encodeURIComponent(src)}&w=${width}&q=70`;
+  return `/_next/image?url=${encodeURIComponent(src)}&w=${width}&q=75`;
 };
 
 function Brands({ data }) {

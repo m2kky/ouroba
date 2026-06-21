@@ -1,9 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 
-const PLACEHOLDER_SRC =
-  "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
-
 function LazyImage({
   src,
   rootMargin = "200px",
@@ -18,6 +15,7 @@ function LazyImage({
   const imageRef = useRef(null);
   const [canLoad, setCanLoad] = useState(eager);
   const [loadedSrc, setLoadedSrc] = useState("");
+  const [failedSrc, setFailedSrc] = useState("");
 
   useEffect(() => {
     if (eager || canLoad || !src) return;
@@ -42,19 +40,21 @@ function LazyImage({
     return () => observer.disconnect();
   }, [canLoad, eager, rootMargin, src, threshold]);
 
-  const displaySrc = canLoad && src ? src : PLACEHOLDER_SRC;
+  const displaySrc = canLoad && src && failedSrc !== src ? src : undefined;
   const isLoading = Boolean(src && (!canLoad || loadedSrc !== src));
+  const shouldShowAlt = Boolean(src && loadedSrc === src);
 
   const handleLoad = (event) => {
     if (canLoad && src && event.currentTarget.getAttribute("src") === src) {
       setLoadedSrc(src);
+      setFailedSrc("");
       onLoad?.(event);
     }
   };
 
   const handleError = (event) => {
     if (canLoad && src && event.currentTarget.getAttribute("src") === src) {
-      setLoadedSrc(src);
+      setFailedSrc(src);
       onError?.(event);
     }
   };
@@ -63,7 +63,7 @@ function LazyImage({
     <img
       ref={imageRef}
       src={displaySrc}
-      alt={alt}
+      alt={shouldShowAlt ? alt : ""}
       data-src={!canLoad && src ? src : undefined}
       className={[
         className,
