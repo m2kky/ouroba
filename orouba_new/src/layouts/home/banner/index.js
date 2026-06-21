@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { Autoplay, FreeMode, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import UseGeneral from "../../../hooks/useGeneral";
+import LazyImage from "../../../components/LazyImage";
 import "swiper/css";
 
 const VIDEO_LOAD_DELAY_MS = 30000;
@@ -96,6 +97,13 @@ const Banner = ({ data }) => {
   const bannerCount = visibleBanners.length;
   const [isSmaller, setIsSmaller] = useState(false);
   const [canLoadVideo, setCanLoadVideo] = useState(false);
+  const [loadedVideos, setLoadedVideos] = useState({});
+
+  const markVideoLoaded = useCallback((mediaKey) => {
+    setLoadedVideos((current) =>
+      current[mediaKey] ? current : { ...current, [mediaKey]: true }
+    );
+  }, []);
 
   const syncSlideVideos = useCallback(() => {
     const root = bannerRootRef.current;
@@ -271,6 +279,13 @@ const Banner = ({ data }) => {
             const imageSrc = media.src
               ? optimizedImageSrc(media.src, optimizedWidth)
               : "";
+            const mediaKey = [
+              language,
+              isSmaller ? "small" : "large",
+              item?.id || index,
+              media.src || "",
+            ].join(":");
+            const isVideoLoaded = Boolean(loadedVideos[mediaKey]);
 
             return (
               <SwiperSlide key={item?.id || index}>
@@ -278,8 +293,9 @@ const Banner = ({ data }) => {
                   {!media.src ? null : media.isVideo ? (
                     <>
                       {!canLoadVideo && media.poster ? (
-                        <img
+                        <LazyImage
                           src={posterSrc}
+                          eager={index === 0}
                           style={{ maxWidth: "100%", minWidth: "100%" }}
                           alt=""
                           draggable={false}
@@ -290,6 +306,12 @@ const Banner = ({ data }) => {
                       ) : null}
                       {canLoadVideo ? (
                         <video
+                          className={[
+                            "mediaLoadTarget",
+                            isVideoLoaded ? "" : "mediaLoadTargetLoading",
+                          ]
+                            .filter(Boolean)
+                            .join(" ")}
                           autoPlay
                           loop
                           muted
@@ -301,7 +323,10 @@ const Banner = ({ data }) => {
                           draggable={false}
                           onDragStart={(event) => event.preventDefault()}
                           onCanPlay={syncSlideVideos}
-                          onLoadedData={syncSlideVideos}
+                          onLoadedData={() => {
+                            markVideoLoaded(mediaKey);
+                            syncSlideVideos();
+                          }}
                           onPlay={(event) => {
                             if (
                               !event.currentTarget
@@ -315,8 +340,9 @@ const Banner = ({ data }) => {
                       ) : null}
                     </>
                   ) : (
-                    <img
+                    <LazyImage
                       src={imageSrc}
+                      eager={index === 0}
                       style={{ maxWidth: "100%", minWidth: "100%" }}
                       alt=""
                       draggable={false}

@@ -1,3 +1,36 @@
+.mediaLoadTarget {
+  background-color: #f6fbff;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.mediaLoadTargetLoading {
+  animation: oroubaMediaLoadingPulse 1.35s ease-in-out infinite;
+  background-image:
+    url("/icon.png"),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(224, 240, 255, 0.76));
+  background-size: clamp(52px, 18%, 96px) auto, 100% 100%;
+}
+
+@keyframes oroubaMediaLoadingPulse {
+  0%,
+  100% {
+    filter: saturate(0.92);
+    opacity: 0.78;
+  }
+
+  50% {
+    filter: saturate(1);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mediaLoadTargetLoading {
+    animation: none;
+  }
+}
+
 @media (max-width: 792px) {
   html body header.header,
   html body header.header .headerBackground {
@@ -62,17 +95,24 @@
     margin: 0 !important;
   }
 
+  html body header.header .headerActions .menuLabel[role="button"],
+  html body header.header .headerActions .menuLabel[role="button"]:focus {
+    outline: 0 !important;
+    -webkit-tap-highlight-color: transparent !important;
+  }
+
   html body header.header .headerActions .menuLabel .languageMenu {
     background: #ffffff !important;
     border-radius: 0 0 16px 16px !important;
     box-shadow: 0 12px 28px rgba(0, 47, 89, 0.18) !important;
-    display: block !important;
+    display: none !important;
     left: auto !important;
     max-height: none !important;
     min-width: 220px !important;
+    opacity: 0 !important;
     overflow: visible !important;
     padding: 18px 0 !important;
-    pointer-events: auto !important;
+    pointer-events: none !important;
     position: fixed !important;
     right: 20px !important;
     top: 96px !important;
@@ -80,15 +120,7 @@
     z-index: 2147482999 !important;
   }
 
-  html body header.header .headerActions .menuLabel .languageMenu:not(.languageMenuOpen) {
-    display: none !important;
-    pointer-events: none !important;
-  }
-
-  html body header.header .headerActions .menuLabel:hover .languageMenu,
-  html body header.header .headerActions .menuLabel .languageMenu.languageMenuOpen,
-  html body header.header .headerActions .menuLabel.active .languageMenu,
-  html body header.header .headerActions .menuLabel:focus-within .languageMenu {
+  html body header.header .headerActions .menuLabel .languageMenu.languageMenuOpen {
     display: block !important;
     opacity: 1 !important;
     pointer-events: auto !important;
@@ -177,10 +209,7 @@
 }
 
 @media (max-width: 792px) {
-  html body header.header .headerBackground .rowDiv .headerActions .menuToggle .menuLabel:hover > ul.languageMenu,
-  html body header.header .headerBackground .rowDiv .headerActions .menuToggle .menuLabel > ul.languageMenu.languageMenuOpen,
-  html body header.header .headerBackground .rowDiv .headerActions .menuToggle .menuLabel.active > ul.languageMenu,
-  html body header.header .headerBackground .rowDiv .headerActions .menuToggle .menuLabel:focus-within > ul.languageMenu {
+  html body header.header .headerBackground .rowDiv .headerActions .menuToggle .menuLabel > ul.languageMenu.languageMenuOpen {
     display: block !important;
     opacity: 1 !important;
     pointer-events: auto !important;
