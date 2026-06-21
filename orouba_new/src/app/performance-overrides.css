@@ -38,7 +38,7 @@
     height: 128px !important;
     max-height: 128px !important;
     min-height: 128px !important;
-    overflow: hidden !important;
+    overflow: visible !important;
   }
 
   html body header.header .headerBackground > .rowDiv {
