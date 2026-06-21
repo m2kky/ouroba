@@ -944,6 +944,110 @@ body[dir="rtl"] .recipe_about .recipe-structured ul {
   margin: 18px 0 10px;
 }
 
+@media (max-width: 792px) {
+  .recipe_details,
+  .recipe_banner,
+  .recipe_about,
+  .recipe_about .left,
+  .recipe_about .right,
+  .recipe_about .bottom,
+  .recipe_banner .left,
+  .recipe_banner .right,
+  .recipe_banner .content,
+  .features,
+  .features .feature_item,
+  .features .feature_item .right,
+  .rec_name,
+  .sidebar_reciepe,
+  .brandsImages.brandsImagesGrid,
+  .receipe_block,
+  .receipe_details {
+    box-sizing: border-box !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .recipe_banner,
+  .recipe_about {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 22px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow-x: clip !important;
+    padding-inline: 18px !important;
+    width: 100% !important;
+  }
+
+  .recipe_banner .left,
+  .recipe_banner .right,
+  .recipe_about .left,
+  .recipe_about .right,
+  .recipe_about .bottom {
+    margin: 0 auto !important;
+    padding-inline: 0 !important;
+    width: 100% !important;
+  }
+
+  .recipe_banner .right,
+  .recipe_banner .right img,
+  .recipe_banner .right video,
+  .recipe_about .left img {
+    height: auto !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+    width: 100% !important;
+  }
+
+  .recipe_banner h5,
+  .recipe_banner .content h5,
+  .nameOfReciepe,
+  .recipe_about h3,
+  .recipe_about .recipe-structured,
+  .recipe_about .recipe-structured p,
+  .recipe_about .recipe-structured li,
+  .recipe_about .recipe-structured h1,
+  .recipe_about .recipe-structured h2,
+  .recipe_about .recipe-structured h3,
+  .recipe_about .recipe-structured h4,
+  .recipe_about .recipe-structured h5,
+  .recipe_about .recipe-structured h6,
+  .features .feature_item h5,
+  .features .feature_item p,
+  .categoryName,
+  .rec_name h3,
+  .sidebar_reciepe span,
+  .receipe_details h4 {
+    max-width: 100% !important;
+    overflow-wrap: anywhere !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+
+  .recipe_about .recipe-structured ol,
+  .recipe_about .recipe-structured ul {
+    max-width: 100% !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .features {
+    flex-wrap: wrap !important;
+    padding-inline: 18px !important;
+    width: 100% !important;
+  }
+
+  .features .feature_item {
+    flex: 1 1 100% !important;
+    width: 100% !important;
+  }
+
+  .recipeSharePanel,
+  .recipeShareCopy {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+}
+
 .ProductTypeSmallSlider {
   overflow-x: clip;
 }
