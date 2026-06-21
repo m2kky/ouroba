@@ -62,6 +62,60 @@
     margin: 0 !important;
   }
 
+  html body header.header .headerActions .menuLabel .languageMenu {
+    background: #ffffff !important;
+    border-radius: 0 0 16px 16px !important;
+    box-shadow: 0 12px 28px rgba(0, 47, 89, 0.18) !important;
+    display: block !important;
+    left: auto !important;
+    max-height: none !important;
+    min-width: 220px !important;
+    overflow: visible !important;
+    padding: 18px 0 !important;
+    pointer-events: auto !important;
+    position: fixed !important;
+    right: 20px !important;
+    top: 96px !important;
+    translate: 0 !important;
+    z-index: 2147482999 !important;
+  }
+
+  html body header.header .headerActions .menuLabel .languageMenu:not(.languageMenuOpen) {
+    display: none !important;
+    pointer-events: none !important;
+  }
+
+  html body header.header .headerActions .menuLabel:hover .languageMenu,
+  html body header.header .headerActions .menuLabel .languageMenu.languageMenuOpen,
+  html body header.header .headerActions .menuLabel.active .languageMenu,
+  html body header.header .headerActions .menuLabel:focus-within .languageMenu {
+    display: block !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  html body header.header .headerActions .menuLabel .languageMenu li {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  html body header.header .headerActions .menuLabel .languageMenu a {
+    color: #035297 !important;
+    display: block !important;
+    font-size: 24px !important;
+    line-height: 1.35 !important;
+    margin: 0 !important;
+    padding: 10px 26px !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+  }
+
+  html body.arVersion header.header .headerActions .menuLabel .languageMenu,
+  html body[dir="rtl"] header.header .headerActions .menuLabel .languageMenu {
+    left: 20px !important;
+    right: auto !important;
+  }
+
   html body header.header .headerOriginalLines {
     display: none !important;
   }
@@ -72,5 +126,63 @@
 
   html body .home_vision_section > img {
     width: min(100%, 330px) !important;
+  }
+}
+
+@media (max-width: 792px) {
+  html body header.header .menu_Toggle {
+    background: var(--main-color) !important;
+    bottom: 0 !important;
+    height: 100dvh !important;
+    left: -100vw !important;
+    max-height: 100dvh !important;
+    max-width: 100vw !important;
+    min-height: 100dvh !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    padding: 28px 24px calc(28px + env(safe-area-inset-bottom)) !important;
+    position: fixed !important;
+    right: auto !important;
+    top: 0 !important;
+    transition: left 0.35s ease-in-out !important;
+    width: 100vw !important;
+    z-index: 2147483000 !important;
+  }
+
+  html body header.header .menu_Toggle.active {
+    left: 0 !important;
+    right: auto !important;
+  }
+
+  html body.arVersion header.header .menu_Toggle,
+  html body[dir="rtl"] header.header .menu_Toggle {
+    left: auto !important;
+    right: -100vw !important;
+    transition: right 0.35s ease-in-out !important;
+  }
+
+  html body.arVersion header.header .menu_Toggle.active,
+  html body[dir="rtl"] header.header .menu_Toggle.active {
+    left: auto !important;
+    right: 0 !important;
+  }
+
+  html body header.header .menu_Toggle .menuToggle {
+    width: 100% !important;
+  }
+
+  html body header.header .menu_Toggle .menuLabel {
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 792px) {
+  html body header.header .headerBackground .rowDiv .headerActions .menuToggle .menuLabel:hover > ul.languageMenu,
+  html body header.header .headerBackground .rowDiv .headerActions .menuToggle .menuLabel > ul.languageMenu.languageMenuOpen,
+  html body header.header .headerBackground .rowDiv .headerActions .menuToggle .menuLabel.active > ul.languageMenu,
+  html body header.header .headerBackground .rowDiv .headerActions .menuToggle .menuLabel:focus-within > ul.languageMenu {
+    display: block !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
   }
 }

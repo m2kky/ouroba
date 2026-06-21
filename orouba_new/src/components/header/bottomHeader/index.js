@@ -28,8 +28,12 @@ const BottomHeader = ({ show, setShow, data }) => {
     if (show) {
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "initial";
+      document.body.style.overflow = "";
     }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [show]);
   const [menu, setMenu] = useState([]);
 
