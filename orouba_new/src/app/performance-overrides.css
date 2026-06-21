@@ -1,11 +1,11 @@
 .mediaLoadTarget {
-  background-color: #f6fbff;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .mediaLoadTargetLoading {
   animation: oroubaMediaLoadingPulse 1.35s ease-in-out infinite;
+  background-color: #f6fbff;
   background-image:
     url("/icon.png"),
     linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(224, 240, 255, 0.76));
