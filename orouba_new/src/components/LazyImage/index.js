@@ -40,9 +40,11 @@ function LazyImage({
     return () => observer.disconnect();
   }, [canLoad, eager, rootMargin, src, threshold]);
 
-  const displaySrc = canLoad && src && failedSrc !== src ? src : undefined;
-  const isLoading = Boolean(src && (!canLoad || loadedSrc !== src));
-  const shouldShowAlt = Boolean(src && loadedSrc === src);
+  const isFailed = Boolean(src && failedSrc === src);
+  const isLoaded = Boolean(src && loadedSrc === src);
+  const displaySrc = canLoad && src && !isFailed ? src : undefined;
+  const isLoading = Boolean(src && !isLoaded && !isFailed);
+  const shouldShowAlt = isLoaded;
 
   const handleLoad = (event) => {
     if (canLoad && src && event.currentTarget.getAttribute("src") === src) {
