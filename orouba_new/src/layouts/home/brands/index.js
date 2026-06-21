@@ -7,10 +7,7 @@ import UseGeneral from '../../../hooks/useGeneral';
 import { localizedPath } from '@/utils/routes';
 import LazyImage from '../../../components/LazyImage';
 
-const optimizedImageSrc = (src, width = 640) => {
-  if (!src || !/^https?:\/\//i.test(src)) return src;
-  return `/_next/image?url=${encodeURIComponent(src)}&w=${width}&q=75`;
-};
+const optimizedImageSrc = (src) => src;
 
 function Brands({ data }) {
   const router = useRouter();

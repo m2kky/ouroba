@@ -12,10 +12,7 @@ const fallbackLogo =
 const headerOrnament =
   "https://oroubafoods.com/static/media/headerRigh1.4eaddc7ebf9f04965208.png";
 
-const optimizedImageSrc = (src, width = 256) => {
-  if (!src || !/^https?:\/\//i.test(src)) return src;
-  return `/_next/image?url=${encodeURIComponent(src)}&w=${width}&q=75`;
-};
+const optimizedImageSrc = (src) => src;
 
 const TopHeader = ({ data, siteinfo = {} }) => {
   const router = useRouter();

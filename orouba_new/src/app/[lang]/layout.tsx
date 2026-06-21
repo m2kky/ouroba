@@ -55,7 +55,8 @@ export async function generateMetadata({
   };
 }
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export async function generateStaticParams() {
   return [{ lang: "en" }, { lang: "ar" }];

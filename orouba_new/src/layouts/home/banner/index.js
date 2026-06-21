@@ -7,15 +7,11 @@ import LazyImage from "../../../components/LazyImage";
 import "swiper/css";
 
 const VIDEO_LOAD_DELAY_MS = 30000;
-const BANNER_IMAGE_QUALITY = 75;
 
 const first = (...values) =>
   values.find((value) => typeof value === "string" && value.trim()) || "";
 
-const optimizedImageSrc = (src, width) => {
-  if (!src || !/^https?:\/\//i.test(src)) return src;
-  return `/_next/image?url=${encodeURIComponent(src)}&w=${width}&q=${BANNER_IMAGE_QUALITY}`;
-};
+const optimizedImageSrc = (src) => src;
 
 const hasBannerMedia = (item) =>
   !!first(

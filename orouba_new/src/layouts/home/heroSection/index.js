@@ -5,10 +5,7 @@ import { localizedPath } from "@/utils/routes";
 import { HOME_TEXT_FALLBACKS, localizedText, splitHeading } from "@/utils/siteText";
 import RichText from "../../../components/RichText";
 
-const optimizedImageSrc = (src, width = 828) => {
-  if (!src || !/^https?:\/\//i.test(src)) return src;
-  return `/_next/image?url=${encodeURIComponent(src)}&w=${width}&q=75`;
-};
+const optimizedImageSrc = (src) => src;
 
 function Hero({ data, language = "en" }) {
   const visionTitle = localizedText(

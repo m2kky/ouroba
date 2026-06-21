@@ -68,7 +68,7 @@ async function fetchDashboard(path: string, options: DashboardFetchOptions = {})
     try {
       const url = new URL(path, baseUrl);
       const fetchOptions =
-        options.cache === "no-store"
+        options.cache === "no-store" || options.revalidate === undefined
           ? { cache: "no-store" as RequestCache }
           : {
               next: {
