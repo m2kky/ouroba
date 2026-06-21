@@ -31,6 +31,10 @@ const DEFAULT_DASHBOARD_URL = "https://admin.oroubafoods.com";
 const LEGACY_DASHBOARD_URL = "https://admin1.oroubafoods.com";
 const LOCAL_DASHBOARD_URLS = ["http://localhost:3015", "http://localhost:3000"];
 const PUBLIC_DATA_REVALIDATE_SECONDS = 300;
+type DashboardFetchOptions = {
+  cache?: RequestCache;
+  revalidate?: number;
+};
 
 function uniqueUrls(urls: string[]) {
   return Array.from(new Set(urls.map((url) => url.replace(/\/+$/, "")).filter(Boolean)));
@@ -57,15 +61,22 @@ function getDashboardBaseUrls() {
   ]);
 }
 
-async function fetchDashboard(path: string) {
+async function fetchDashboard(path: string, options: DashboardFetchOptions = {}) {
   let lastError: unknown;
 
   for (const baseUrl of getDashboardBaseUrls()) {
     try {
       const url = new URL(path, baseUrl);
-      const response = await fetch(url, {
-        next: { revalidate: PUBLIC_DATA_REVALIDATE_SECONDS },
-      });
+      const fetchOptions =
+        options.cache === "no-store"
+          ? { cache: "no-store" as RequestCache }
+          : {
+              next: {
+                revalidate:
+                  options.revalidate ?? PUBLIC_DATA_REVALIDATE_SECONDS,
+              },
+            };
+      const response = await fetch(url, fetchOptions);
       if (response.ok) return response;
       lastError = new Error(`Dashboard request failed from ${baseUrl}: ${response.status}`);
     } catch (error) {
@@ -90,9 +101,13 @@ function settingValue(value: DashboardSetting, locale: string) {
   return (primary || fallback || "").trim();
 }
 
-export async function getDashboardSiteData(locale = "ar"): Promise<DashboardSiteData> {
+export async function getDashboardSiteData(
+  locale = "ar",
+  options: DashboardFetchOptions = {}
+): Promise<DashboardSiteData> {
   const response = await fetchDashboard(
-    `/api/site-data?locale=${locale === "en" ? "en" : "ar"}`
+    `/api/site-data?locale=${locale === "en" ? "en" : "ar"}`,
+    options
   );
   const payload = await response.json();
   return payload?.data ?? payload ?? {};

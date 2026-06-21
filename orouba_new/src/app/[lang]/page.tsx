@@ -7,7 +7,7 @@ import {
 } from "@/lib/dashboard-data";
 import { staticPageMetadata } from "@/lib/seo";
 
-export const revalidate = 300;
+export const revalidate = 0;
 
 const first = (...values: unknown[]): string => {
   const value = values.find((item) => typeof item === "string" && item.trim());
@@ -123,7 +123,7 @@ export default async function HomePage({
   const { lang } = await params;
   let data: Awaited<ReturnType<typeof getDashboardSiteData>> = {};
   try {
-    data = await getDashboardSiteData(lang);
+    data = await getDashboardSiteData(lang, { cache: "no-store" });
   } catch {
     data = {};
   }
