@@ -40,6 +40,9 @@ const fontSizeOptions = [
   "48px",
   "56px",
   "64px",
+  "72px",
+  "80px",
+  "96px",
 ];
 
 type QuillRange = {

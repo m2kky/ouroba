@@ -8,7 +8,8 @@ import { resolveMediaTree } from "@/utils/media";
 import { firstText, staticPageMetadata } from "@/lib/seo";
 import { mergeDashboardSocialLinks } from "@/utils/socialLinks";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 type ContactData = {
   siteSetting: Record<string, string>;

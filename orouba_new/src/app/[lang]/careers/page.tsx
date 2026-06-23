@@ -4,7 +4,8 @@ import { dashboardSettingsToSiteinfo, getDashboardSiteData } from "@/lib/dashboa
 import { resolveMediaTree } from "@/utils/media";
 import { firstText, staticPageMetadata } from "@/lib/seo";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 async function getCareersData(lang: string) {
   try {

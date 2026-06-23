@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { apiSuccess, apiError, parsePagination } from "@/lib/api-helpers";
 import { NextRequest } from "next/server";
 
-const PUBLIC_CACHE_CONTROL = "public, s-maxage=300, stale-while-revalidate=86400";
+const PUBLIC_CACHE_CONTROL = "no-store";
 
 // GET /api/products — Public: list products (read-only)
 export async function GET(request: NextRequest) {

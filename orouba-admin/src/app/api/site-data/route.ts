@@ -3,7 +3,7 @@ import { apiSuccess, apiError } from "@/lib/api-helpers";
 
 import { NextRequest } from "next/server";
 
-const PUBLIC_CACHE_CONTROL = "public, s-maxage=300, stale-while-revalidate=86400";
+const PUBLIC_CACHE_CONTROL = "no-store";
 
 /**
  * GET /api/site-data

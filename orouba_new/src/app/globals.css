@@ -944,6 +944,14 @@ body[dir="rtl"] .recipe_about .recipe-structured ul {
   margin: 18px 0 10px;
 }
 
+.brands_section .brand-detail-description {
+  box-sizing: border-box;
+  margin-inline: auto;
+  max-width: 1180px;
+  padding-inline: clamp(24px, 5vw, 80px) !important;
+  width: 100% !important;
+}
+
 @media (max-width: 792px) {
   .recipe_details,
   .recipe_banner,
@@ -1332,6 +1340,22 @@ body[dir="rtl"] .ProductTypeSmallSlider .productTypeSliderArrow button svg {
 .rich-text-content.ql-size-huge,
 .rich-text-content .ql-size-huge {
   font-size: 2.5em;
+}
+
+/* Dashboard rich text must beat older responsive !important rules. */
+.rich-text-content.rich-text-dashboard-style:not(#rich-text-dashboard-style-specificity),
+.rich-text-content .rich-text-dashboard-style:not(#rich-text-dashboard-style-specificity) {
+  font-size: var(--rich-font-size) !important;
+}
+
+.rich-text-content.rich-text-dashboard-style:not(#rich-text-dashboard-style-specificity),
+.rich-text-content .rich-text-dashboard-style:not(#rich-text-dashboard-style-specificity) {
+  line-height: var(--rich-line-height) !important;
+}
+
+.rich-text-content.rich-text-dashboard-style:not(#rich-text-dashboard-style-specificity),
+.rich-text-content .rich-text-dashboard-style:not(#rich-text-dashboard-style-specificity) {
+  letter-spacing: var(--rich-letter-spacing) !important;
 }
 
 .brand-detail-quote .brand-detail-quote-text .ql-align-center,

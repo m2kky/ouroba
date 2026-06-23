@@ -8,7 +8,8 @@ import {
 import { resolveMediaTree } from "@/utils/media";
 import { firstText, staticPageMetadata } from "@/lib/seo";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 type NamedItem = {
   id?: string | null;

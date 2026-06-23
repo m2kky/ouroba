@@ -22,7 +22,7 @@ export const splitHeading = (text) => {
   const words = String(text || "").trim().split(/\s+/).filter(Boolean);
   if (!words.length) return { first: "", rest: "" };
   return {
-    first: words[0],
+    first: words.length > 1 ? `${words[0]} ` : words[0],
     rest: words.slice(1).join(" "),
   };
 };

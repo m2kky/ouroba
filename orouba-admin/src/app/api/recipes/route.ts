@@ -3,7 +3,7 @@ import { apiSuccess, apiError, parsePagination } from "@/lib/api-helpers";
 import { NextRequest } from "next/server";
 import { normalizeRecipeProperties } from "@/lib/recipe-properties";
 
-const PUBLIC_CACHE_CONTROL = "public, s-maxage=300, stale-while-revalidate=86400";
+const PUBLIC_CACHE_CONTROL = "no-store";
 
 // GET /api/recipes — Public: list recipes (read-only)
 export async function GET(request: NextRequest) {

@@ -42,7 +42,9 @@ const getAttributeValue = (attributes, name) => {
 };
 
 const toReactStyleName = (property) =>
-  property.trim().replace(/-([a-z])/g, (_, char) => char.toUpperCase());
+  property.trim().startsWith("--")
+    ? property.trim()
+    : property.trim().replace(/-([a-z])/g, (_, char) => char.toUpperCase());
 
 const parseStyleAttribute = (styleText) =>
   styleText
@@ -62,6 +64,92 @@ const parseStyleAttribute = (styleText) =>
 
       return styles;
     }, {});
+
+const importantRichTextStyles = {
+  fontSize: "--rich-font-size",
+  lineHeight: "--rich-line-height",
+  letterSpacing: "--rich-letter-spacing",
+};
+
+const richTextDashboardClassName = "rich-text-dashboard-style";
+
+const cleanStyleValue = (value) =>
+  String(value || "")
+    .replace(/\s*!important\s*$/i, "")
+    .trim();
+
+const hasImportantRichTextStyle = (styles = {}) =>
+  Object.keys(importantRichTextStyles).some((property) => Boolean(styles[property]));
+
+const withDashboardClassName = (className, styles) =>
+  [className, hasImportantRichTextStyle(styles) ? richTextDashboardClassName : ""]
+    .filter(Boolean)
+    .join(" ");
+
+const withImportantRichTextVars = (styles = {}) =>
+  Object.entries(styles).reduce((next, [property, value]) => {
+    if (value == null || value === "") return next;
+
+    next[property] = value;
+
+    const variableName = importantRichTextStyles[property];
+    const variableValue = cleanStyleValue(value);
+
+    if (variableName && variableValue) {
+      next[variableName] = variableValue;
+    }
+
+    return next;
+  }, {});
+
+const addImportantRichTextVarsToStyle = (styleText) => {
+  const styles = parseStyleAttribute(styleText);
+  const variables = Object.entries(importantRichTextStyles)
+    .filter(([property, variableName]) => styles[property] && !styles[variableName])
+    .map(([property, variableName]) => {
+      const variableValue = cleanStyleValue(styles[property]);
+      return variableValue ? `${variableName}: ${variableValue}` : "";
+    })
+    .filter(Boolean);
+
+  if (!variables.length) return styleText;
+
+  const separator = styleText.trim().endsWith(";") ? " " : "; ";
+  return `${styleText}${separator}${variables.join("; ")}`;
+};
+
+const addDashboardClassToTag = (tagText) => {
+  const classMatch = tagText.match(/\sclass\s*=\s*("([^"]*)"|'([^']*)'|([^\s>]+))/i);
+
+  if (!classMatch) {
+    return tagText.replace(/\s*(\/?)>$/, ` class="${richTextDashboardClassName}"$1>`);
+  }
+
+  const classValue = classMatch[2] || classMatch[3] || classMatch[4] || "";
+  if (classValue.split(/\s+/).includes(richTextDashboardClassName)) return tagText;
+
+  const quote = classMatch[1].startsWith("'") ? "'" : '"';
+  return tagText.replace(
+    classMatch[0],
+    ` class=${quote}${`${classValue} ${richTextDashboardClassName}`.trim()}${quote}`
+  );
+};
+
+const addImportantRichTextVarsToHtml = (content) =>
+  content.replace(/<([a-z][\w:-]*)([^<>]*\sstyle\s*=\s*("([^"]*)"|'([^']*)')[^<>]*)>/gi, (match, tagName, attributes, quotedValue, doubleValue, singleValue) => {
+    const styleText = doubleValue ?? singleValue ?? "";
+    const styles = parseStyleAttribute(styleText);
+    if (!hasImportantRichTextStyle(styles)) return match;
+
+    const quote = quotedValue.startsWith("'") ? "'" : '"';
+    const nextStyle = addImportantRichTextVarsToStyle(styleText);
+    const nextTag = match.replace(
+      /style\s*=\s*("([^"]*)"|'([^']*)')/i,
+      `style=${quote}${nextStyle}${quote}`
+    );
+
+    return addDashboardClassToTag(nextTag);
+  });
 
 const getSingleParagraph = (content) => {
   const match = content.match(/^<p([^>]*)>([\s\S]*)<\/p>$/i);
@@ -86,6 +174,7 @@ const getSingleBlock = (content) => {
 
 export default function RichText({ html, as: Tag = "div", className = "", style }) {
   const content = richTextToHtml(html);
+  const richTextStyle = withImportantRichTextVars(style || {});
 
   if (!content) return null;
 
@@ -95,37 +184,43 @@ export default function RichText({ html, as: Tag = "div", className = "", style 
 
   if (isHeading && singleBlock) {
     const blockClassName = getAttributeValue(singleBlock.attributes, "class");
-    const blockStyle = parseStyleAttribute(getAttributeValue(singleBlock.attributes, "style"));
+    const rawBlockStyle = parseStyleAttribute(getAttributeValue(singleBlock.attributes, "style"));
+    const blockStyle = withImportantRichTextVars(
+      rawBlockStyle
+    );
     const blockDir = getAttributeValue(singleBlock.attributes, "dir");
     const HeadingTag = Tag;
 
     return (
       <HeadingTag
-        className={["rich-text-content", className, blockClassName]
+        className={["rich-text-content", withDashboardClassName(className, style), withDashboardClassName(blockClassName, rawBlockStyle)]
           .filter(Boolean)
           .join(" ")}
-        style={{ ...(style || {}), ...blockStyle }}
+        style={{ ...richTextStyle, ...blockStyle }}
         dir={blockDir || undefined}
-        dangerouslySetInnerHTML={{ __html: singleBlock.body }}
+        dangerouslySetInnerHTML={{ __html: addImportantRichTextVarsToHtml(singleBlock.body) }}
       />
     );
   }
 
   if (singleParagraph) {
     const paragraphClassName = getAttributeValue(singleParagraph.attributes, "class");
-    const paragraphStyle = parseStyleAttribute(
+    const rawParagraphStyle = parseStyleAttribute(
       getAttributeValue(singleParagraph.attributes, "style")
+    );
+    const paragraphStyle = withImportantRichTextVars(
+      rawParagraphStyle
     );
     const paragraphDir = getAttributeValue(singleParagraph.attributes, "dir");
 
     return (
       <p
-        className={["rich-text-content", className, paragraphClassName]
+        className={["rich-text-content", withDashboardClassName(className, style), withDashboardClassName(paragraphClassName, rawParagraphStyle)]
           .filter(Boolean)
           .join(" ")}
-        style={{ ...(style || {}), ...paragraphStyle }}
+        style={{ ...richTextStyle, ...paragraphStyle }}
         dir={paragraphDir || undefined}
-        dangerouslySetInnerHTML={{ __html: singleParagraph.body }}
+        dangerouslySetInnerHTML={{ __html: addImportantRichTextVarsToHtml(singleParagraph.body) }}
       />
     );
   }
@@ -134,9 +229,11 @@ export default function RichText({ html, as: Tag = "div", className = "", style 
 
   return (
     <RenderTag
-      className={`rich-text-content ${className}`.trim()}
-      style={style}
-      dangerouslySetInnerHTML={{ __html: content }}
+      className={["rich-text-content", withDashboardClassName(className, style)]
+        .filter(Boolean)
+        .join(" ")}
+      style={richTextStyle}
+      dangerouslySetInnerHTML={{ __html: addImportantRichTextVarsToHtml(content) }}
     />
   );
 }

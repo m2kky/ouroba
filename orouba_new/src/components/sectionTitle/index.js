@@ -11,13 +11,27 @@ function SectionTitle({
   secondColorWordAr,
   classessName,
   headerClassessName,
-  rem,
   linkNameAr,
   linkName,
   ru,
   link,
 }) {
   const { language } = UseGeneral();
+  const firstPart = language == "ar" ? minColorWordAr : minColorWord;
+  const secondPart = language == "ar" ? secondColorWordAr : secondColorWord;
+  const normalHeading = (
+    <>
+      {firstPart}
+      {secondPart ? <> <span>{secondPart}</span></> : null}
+    </>
+  );
+  const reversedHeading = (
+    <>
+      {secondPart ? <span>{secondPart}</span> : null}
+      {firstPart ? <> {firstPart}</> : null}
+    </>
+  );
+
   return (
    <div
       className={
@@ -27,27 +41,9 @@ function SectionTitle({
     >
    { <>   <h1 className={"d-flex " + headerClassessName?.join(" ")}>
         {language == "en" ? (
-          <>
-            {" "}
-            {language == "ar" ? minColorWordAr : minColorWord}
-            <span>
-              {language == "ar" ? secondColorWordAr : secondColorWord}
-            </span>
-          </>
+          normalHeading
         ) : (
-         ru ? <>
-         {" "}
-         {language == "ar" ? minColorWordAr : minColorWord}
-         <span>
-           {language == "ar" ? secondColorWordAr : secondColorWord}
-         </span>
-         </> : <>
-            {" "}
-            <span>
-              {language == "ar" ? secondColorWordAr : secondColorWord}
-            </span>
-            {language == "ar" ? minColorWordAr : minColorWord}
-            </>
+          ru ? normalHeading : reversedHeading
         )}
       </h1>
       {link && link?.length ? (

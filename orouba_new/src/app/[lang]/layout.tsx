@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Amaranth, Baloo_Bhaijaan_2, Cairo, Tajawal } from "next/font/google";
 import "rsuite/Loader/styles/index.css";
 import "@/styles/orouba-main.css";
 import "../globals.css";
@@ -36,6 +37,32 @@ type LayoutData = {
   brands: LayoutBrand[];
   socialParents: unknown[];
 };
+
+const amaranth = Amaranth({
+  display: "swap",
+  subsets: ["latin"],
+  variable: "--font-amaranth",
+  weight: ["400", "700"],
+});
+
+const baloo = Baloo_Bhaijaan_2({
+  display: "swap",
+  subsets: ["arabic", "latin"],
+  variable: "--font-baloo",
+});
+
+const cairo = Cairo({
+  display: "swap",
+  subsets: ["arabic", "latin"],
+  variable: "--font-cairo",
+});
+
+const tajawal = Tajawal({
+  display: "swap",
+  subsets: ["arabic"],
+  variable: "--font-tajawal",
+  weight: ["200", "300", "400", "500", "700", "800", "900"],
+});
 
 export async function generateMetadata({
   params,
@@ -111,7 +138,11 @@ export default async function RootLayout({
   return (
     <html lang={lang} data-scroll-behavior="smooth">
       <head />
-      <body className={languageClass} dir={lang === "ar" ? "rtl" : "ltr"} suppressHydrationWarning>
+      <body
+        className={`${languageClass} ${amaranth.variable} ${baloo.variable} ${cairo.variable} ${tajawal.variable}`}
+        dir={lang === "ar" ? "rtl" : "ltr"}
+        suppressHydrationWarning
+      >
         <MediaLoadState />
         <StoreProvider initialLanguage={lang}>
           <LocalizedDigits locale={lang} />

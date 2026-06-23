@@ -10,7 +10,8 @@ import {
 } from "@/lib/dashboard-data";
 import { createPageMetadata, firstText, localizedField } from "@/lib/seo";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 const first = (...values: Array<string | null | undefined>) =>
   values.find((value) => typeof value === "string" && value.trim()) || "";

@@ -4,7 +4,7 @@ import { NextRequest } from "next/server";
 import { normalizeRecipeProperties } from "@/lib/recipe-properties";
 
 type Params = { params: Promise<{ id: string }> };
-const PUBLIC_CACHE_CONTROL = "public, s-maxage=300, stale-while-revalidate=86400";
+const PUBLIC_CACHE_CONTROL = "no-store";
 
 // GET /api/products/[id]
 export async function GET(request: NextRequest, { params }: Params) {
