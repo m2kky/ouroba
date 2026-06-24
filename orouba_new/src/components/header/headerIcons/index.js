@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { language as languageIcon, search } from "../../../assets/svgIcons";
@@ -13,6 +13,30 @@ const HeaderIcons = ({ setShow, show }) => {
   const router = useRouter();
   const [showSearch, setShowSearh] = useState(false);
   const [showLanguageMenu, setShowLanguageMenu] = useState(false);
+  const [isDesktopLanguageToggle, setIsDesktopLanguageToggle] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 793px)");
+    const updateLanguageToggleMode = () => {
+      setIsDesktopLanguageToggle(mediaQuery.matches);
+      if (mediaQuery.matches) {
+        setShowLanguageMenu(false);
+      }
+    };
+
+    updateLanguageToggleMode();
+    mediaQuery.addEventListener("change", updateLanguageToggleMode);
+    return () => mediaQuery.removeEventListener("change", updateLanguageToggleMode);
+  }, []);
+
+  const toggleLanguageMenu = () => {
+    if (isDesktopLanguageToggle) {
+      setShowLanguageMenu(false);
+      return;
+    }
+
+    setShowLanguageMenu((open) => !open);
+  };
 
   const switchLanguage = (nextLanguage) => {
     setShowLanguageMenu(false);
@@ -40,15 +64,17 @@ const HeaderIcons = ({ setShow, show }) => {
       </button>
       <div className="menuToggle">
         <div
-          className={`menuLabel ${showLanguageMenu ? "active" : ""}`}
+          className={`menuLabel languageToggle ${showLanguageMenu ? "active" : ""}`}
           style={{ margin: 0 }}
-          role="button"
-          tabIndex={0}
-          onClick={() => setShowLanguageMenu((open) => !open)}
+          role={isDesktopLanguageToggle ? undefined : "button"}
+          tabIndex={isDesktopLanguageToggle ? undefined : 0}
+          aria-haspopup={isDesktopLanguageToggle ? undefined : "menu"}
+          aria-expanded={isDesktopLanguageToggle ? undefined : showLanguageMenu}
+          onClick={toggleLanguageMenu}
           onKeyDown={(event) => {
             if (event.key === "Enter" || event.key === " ") {
               event.preventDefault();
-              setShowLanguageMenu((open) => !open);
+              toggleLanguageMenu();
             }
           }}
         >
