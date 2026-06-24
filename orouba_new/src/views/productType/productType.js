@@ -189,9 +189,7 @@ function ProductType({ types, pageDataObj }) {
           id="products_types_info"
         >
           <div className="types_title">
-            <h1 className="page_title" style={{ padding: "0" }}>
-              {productTypesTitle}
-            </h1>
+            <RichText as="h1" html={productTypesTitle} className="page_title" style={{ padding: "0" }} />
             <RichText
               as="p"
               html={

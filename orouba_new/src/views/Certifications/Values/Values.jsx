@@ -2,7 +2,7 @@
 import React from "react";
 import UseGeneral from "../../../hooks/useGeneral";
 import Value from "./Value/Value";
-import RichText from "../../../components/RichText";
+import RichText, { hasRichTextMarkup } from "../../../components/RichText";
 
 const Values = ({ valuesData, introText, title }) => {
   const { language } = UseGeneral();
@@ -14,9 +14,13 @@ const Values = ({ valuesData, introText, title }) => {
   
   return (
     <div className="certification_values">
-      <h4 style={{ textAlign: "center" }}>
-        <span style={{ textAlign: "center" }}>{displayTitle}</span>
-      </h4>
+      {hasRichTextMarkup(displayTitle) ? (
+        <RichText as="h4" html={displayTitle} style={{ textAlign: "center" }} />
+      ) : (
+        <h4 style={{ textAlign: "center" }}>
+          <span style={{ textAlign: "center" }}>{displayTitle}</span>
+        </h4>
+      )}
       <RichText as="p" html={introText || fallbackIntro} />
       <div className="values">
         {valuesData &&

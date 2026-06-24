@@ -49,6 +49,7 @@ function Standards({ data, siteinfo }) {
           "align-item-center",
           "text-center",
         ]}
+        titleHtml={title}
       />
       {text ? (
         <RichText

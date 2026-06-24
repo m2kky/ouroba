@@ -118,6 +118,7 @@ function Recips({ withArrows, data, siteinfo }) {
               // "text-center",
             ]
           }
+          titleHtml={sectionTitle}
         />
       ) : null}
 

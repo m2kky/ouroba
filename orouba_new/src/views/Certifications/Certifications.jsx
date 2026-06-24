@@ -4,7 +4,7 @@ import UseGeneral from '../../hooks/useGeneral'
 import Breadcrumb from '../../components/BreadCumbsLinks'
 import ExportCertificatios from '../Export/ExportCertificatios/ExportCertificatios'
 import Values from './Values/Values'
-import RichText from '../../components/RichText'
+import RichText, { hasRichTextMarkup } from '../../components/RichText'
 import { splitHeading } from '../../utils/siteText'
 
 const localizedSetting = (settings, key, language) => {
@@ -62,10 +62,14 @@ const Certifications = ({ certPageData }) => {
     <>
       <div className='certifications_page rowDiv' style={{ minHeight: "100vh" }}>
       <Breadcrumb links={pages}/>
-      <h4>
-        {certificationsTitleParts.first}
-        {certificationsTitleParts.rest ? <span>{certificationsTitleParts.rest}</span> : null}
-      </h4>
+      {hasRichTextMarkup(certificationsTitle) ? (
+        <RichText as="h4" html={certificationsTitle} />
+      ) : (
+        <h4>
+          {certificationsTitleParts.first}
+          {certificationsTitleParts.rest ? <span>{certificationsTitleParts.rest}</span> : null}
+        </h4>
+      )}
       <div className="texts">
         <RichText as="p" html={introText} />
         <RichText as="p" html={detailsText} />

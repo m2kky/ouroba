@@ -44,7 +44,7 @@ const ExportCatalog = ({ exportCatData }) => {
       <Breadcrumb links={pages} />
       <div className="cat_expo_ban rowDiv">
         <div className="left">
-          {title ? <h5>{title}</h5> : null}
+          {title ? <RichText as="h5" html={title} /> : null}
           <RichText as="p" html={text} />
           {exportCatData?.catalogFile && buttonText ? (
             <em

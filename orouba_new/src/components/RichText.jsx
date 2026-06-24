@@ -1,6 +1,6 @@
 import React from "react";
 
-const hasHtml = (value) => /<[a-z][\s\S]*>/i.test(String(value || ""));
+export const hasRichTextMarkup = (value) => /<[a-z][\s\S]*>/i.test(String(value || ""));
 
 const escapeHtml = (value) =>
   String(value)
@@ -13,7 +13,7 @@ const escapeHtml = (value) =>
 export const richTextToHtml = (value) => {
   const text = String(value || "").trim();
   if (!text) return "";
-  if (hasHtml(text)) return text.replace(/&nbsp;/g, " ");
+  if (hasRichTextMarkup(text)) return text.replace(/&nbsp;/g, " ");
 
   return text
     .split(/\n{2,}/)

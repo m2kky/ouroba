@@ -5,6 +5,7 @@ import ContentLoader from "react-content-loader";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useRouter } from "next/navigation";
 import { localizedPath } from "@/utils/routes";
+import RichText from "../../../components/RichText";
 
 const localizedSetting = (settings, key, language) => {
   const value =
@@ -51,11 +52,7 @@ const ExportCertificatios = ({ showTit, exportData, certificationsData = [] }) =
           : "export_certificatios min_mar export_certificatios_page"
       }
     >
-      {showTit && title ? (
-        <h4>
-          <span>{title}</span>
-        </h4>
-      ) : null}
+      {showTit && title ? <RichText as="h4" html={title} /> : null}
       <div
         className={
           showTit

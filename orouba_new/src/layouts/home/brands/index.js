@@ -41,6 +41,7 @@ function Brands({ data, siteinfo }) {
           "align-item-center",
           "text-center",
         ]}
+        titleHtml={title}
       />
       <div className="brandsImages brandsImagesMainPages">
         {!data ? (

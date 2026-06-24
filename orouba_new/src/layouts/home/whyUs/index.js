@@ -5,7 +5,7 @@ import UseGeneral from "../../../hooks/useGeneral";
 import { useRouter } from "next/navigation";
 import { localizedPath } from "@/utils/routes";
 import { HOME_TEXT_FALLBACKS, localizedText, splitHeading } from "@/utils/siteText";
-import RichText from "../../../components/RichText";
+import RichText, { hasRichTextMarkup } from "../../../components/RichText";
 import LazyImage from "../../../components/LazyImage";
 
 function WhyUs({ data }) {
@@ -44,12 +44,22 @@ function WhyUs({ data }) {
         />
       ) : null}
       <div className="hero_texts d-flex flex-column align-item-start ">
-        <h1>
-          {titleParts.first}
-          {titleParts.rest ? <span>{titleParts.rest}</span> : null}
-        </h1>
+        {hasRichTextMarkup(title) ? (
+          <RichText as="h1" html={title} />
+        ) : (
+          <h1>
+            {titleParts.first}
+            {titleParts.rest ? <span>{titleParts.rest}</span> : null}
+          </h1>
+        )}
         <div className="hero_content">
-          {subtitle ? <h5>{subtitle}</h5> : null}
+          {subtitle ? (
+            hasRichTextMarkup(subtitle) ? (
+              <RichText as="h5" html={subtitle} />
+            ) : (
+              <h5>{subtitle}</h5>
+            )
+          ) : null}
           <RichText as="p" html={body} className="hero_rich_text" style={{ padding: "10px" }} />
         </div>
         <button

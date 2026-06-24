@@ -132,7 +132,7 @@ export default function Careers({ careerData }) {
         <div className={`${styles.careerForm} careerContentForm`}>
           <div className={styles.careerContent}>
             <div className={`${styles.careerTitle} ${styles.careerIntroRichText}`}>
-              <h2>{careerTitle}</h2>
+              <RichText as="h2" html={careerTitle} />
               <RichText html={careerIntroHtml} />
             </div>
 
@@ -244,9 +244,7 @@ export default function Careers({ careerData }) {
 
         <div className={`${styles.chooses} chooses`}>
           <div className={styles.chooseUsTitle}>
-            <h2 className="H2InLarge">
-              {careersWhyTitle}
-            </h2>
+            <RichText as="h2" html={careersWhyTitle} className="H2InLarge" />
             <RichText as="p" html={careersWhyText} />
           </div>
 

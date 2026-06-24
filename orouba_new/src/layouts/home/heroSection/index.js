@@ -3,7 +3,7 @@ import { arrowLeft } from "../../../assets/svgIcons";
 import Link from "next/link";
 import { localizedPath } from "@/utils/routes";
 import { HOME_TEXT_FALLBACKS, localizedText, splitHeading } from "@/utils/siteText";
-import RichText from "../../../components/RichText";
+import RichText, { hasRichTextMarkup } from "../../../components/RichText";
 
 const optimizedImageSrc = (src) => src;
 
@@ -35,10 +35,14 @@ function Hero({ data, language = "en" }) {
         />
       ) : null}
       <div className="hero_texts d-flex flex-column align-item-start ">
-        <h1>
-          {titleParts.first}
-          {titleParts.rest ? <span>{titleParts.rest}</span> : null}
-        </h1>
+        {hasRichTextMarkup(visionTitle) ? (
+          <RichText as="h1" html={visionTitle} />
+        ) : (
+          <h1>
+            {titleParts.first}
+            {titleParts.rest ? <span>{titleParts.rest}</span> : null}
+          </h1>
+        )}
         <RichText as="p" html={visionText} className="hero_rich_text" />
         <Link
           className="hone_sections_button d-flex"

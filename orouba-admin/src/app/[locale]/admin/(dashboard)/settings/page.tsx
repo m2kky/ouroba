@@ -85,7 +85,9 @@ const isImageSettingKey = (key: string) => {
 
 const isRichTextSettingKey = (key: string) => {
   const trimmedKey = key.trim();
-  if (!trimmedKey || PLAIN_TEXT_SETTING_KEYS.has(trimmedKey)) return false;
+  if (!trimmedKey) return false;
+  if (PAGE_TITLE_SETTING_KEY_SET.has(trimmedKey)) return true;
+  if (PLAIN_TEXT_SETTING_KEYS.has(trimmedKey)) return false;
   if (PLAIN_VALUE_KEY_PATTERN.test(trimmedKey)) return false;
   return RICH_VALUE_KEY_PATTERN.test(trimmedKey);
 };

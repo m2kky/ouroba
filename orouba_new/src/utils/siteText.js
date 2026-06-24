@@ -19,7 +19,14 @@ export const localizedText = (source, language, keys, fallback = "") => {
 };
 
 export const splitHeading = (text) => {
-  const words = String(text || "").trim().split(/\s+/).filter(Boolean);
+  const words = String(text || "")
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/g, " ")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
   if (!words.length) return { first: "", rest: "" };
   return {
     first: words.length > 1 ? `${words[0]} ` : words[0],

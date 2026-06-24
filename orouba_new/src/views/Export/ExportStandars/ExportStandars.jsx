@@ -27,11 +27,7 @@ const ExportStandars = ({ exportData, standersData = [] }) => {
 
   return (
     <div className="export_standars">
-      {title ? (
-        <h4>
-          <span>{title}</span>
-        </h4>
-      ) : null}
+      {title ? <RichText as="h4" html={title} /> : null}
       <RichText as="p" html={text} style={{ textAlign: "center" }} />
       <div className="standardsImages d-flex my-3 justify-content-between">
         {standars.map((item) => (

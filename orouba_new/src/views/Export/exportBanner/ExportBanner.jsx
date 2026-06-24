@@ -24,7 +24,7 @@ const ExportBanner = ({ exportData }) => {
         {image ? <img src={image} className="largeScreen" alt={title || ""} /> : null}
       </div>
       <div className="right">
-        {title ? <h5>{title}</h5> : null}
+        {title ? <RichText as="h5" html={title} /> : null}
         {description ? (
           <div className="texts">
             <RichText as="p" html={description} />

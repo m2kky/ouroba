@@ -5,7 +5,7 @@ import UseGeneral from "../../../hooks/useGeneral";
 import { useRouter } from "next/navigation";
 import { localizedPath } from "@/utils/routes";
 import { HOME_TEXT_FALLBACKS, localizedText, splitHeading } from "@/utils/siteText";
-import RichText from "../../../components/RichText";
+import RichText, { hasRichTextMarkup } from "../../../components/RichText";
 import LazyImage from "../../../components/LazyImage";
 
 function MapSection({ data }) {
@@ -29,10 +29,14 @@ function MapSection({ data }) {
   return (
     <div className="hero_section map_section d-flex justify-content-between w-full rowDiv">
       <div className="hero_texts d-flex flex-column align-item-start ">
-        <h1>
-          {titleParts.first}
-          {titleParts.rest ? <span> {titleParts.rest}</span> : null}
-        </h1>
+        {hasRichTextMarkup(title) ? (
+          <RichText as="h1" html={title} />
+        ) : (
+          <h1>
+            {titleParts.first}
+            {titleParts.rest ? <span> {titleParts.rest}</span> : null}
+          </h1>
+        )}
         <RichText as="p" html={text} className="hero_rich_text" />
         <button
           className="hone_sections_button d-flex"

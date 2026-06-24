@@ -411,9 +411,12 @@ export default function WhoWeAre({ aboutData }) {
         </div>
 
         <div className="ProductionSteps">
-          <h4 className="productionStepsTitle" style={{ color: "#035297", fontWeight: 700 }}>
-            {productionStepsTitle}
-          </h4>
+          <RichText
+            as="h4"
+            html={productionStepsTitle}
+            className="productionStepsTitle"
+            style={{ color: "#035297", fontWeight: 700 }}
+          />
           <div className="pord_steps_content">
             {productionStepGroups &&
               productionStepGroups.map((group, index) => {

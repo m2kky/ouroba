@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import UseGeneral from "../../hooks/useGeneral";
 import Breadcrumb from "./../../components/BreadCumbsLinks/index";
-import RichText from "../../components/RichText";
+import RichText, { hasRichTextMarkup } from "../../components/RichText";
 import {
   HouseIcon,
   Printer,
@@ -248,9 +248,11 @@ const ContactUs = ({ data, socials }) => {
         </div>
 
         <div className="Right_section">
-          <div className="title">
-            {contactTitle}
-          </div>
+          {hasRichTextMarkup(contactTitle) ? (
+            <RichText as="div" html={contactTitle} className="title" />
+          ) : (
+            <div className="title">{contactTitle}</div>
+          )}
 
           <RichText
             as="p"
