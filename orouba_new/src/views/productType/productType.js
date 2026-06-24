@@ -5,6 +5,7 @@ import Breadcrumb from "../../components/BreadCumbsLinks";
 import UseGeneral from "../../hooks/useGeneral";
 import { localizedPath } from "@/utils/routes";
 import RichText from "../../components/RichText";
+import { localizedText } from "../../utils/siteText";
 
 const BRAND_LOGOS_BY_ID = {
   5: "/basma.png",
@@ -133,6 +134,12 @@ const getProductTypeOrder = (item) => {
 function ProductType({ types, pageDataObj }) {
   const { language } = UseGeneral();
   const productTypeImage = pageDataObj?.product_type_img;
+  const productTypesTitle = localizedText(
+    pageDataObj,
+    language,
+    ["product_types_title"],
+    language == "ar" ? "أصناف المنتجات" : "Product Types"
+  );
   const visibleTypes = Array.isArray(types)
     ? types
         .map((item, originalIndex) => ({ item, originalIndex }))
@@ -183,7 +190,7 @@ function ProductType({ types, pageDataObj }) {
         >
           <div className="types_title">
             <h1 className="page_title" style={{ padding: "0" }}>
-              {language == "ar" ? "أصناف المنتجات" : "Product Types"}
+              {productTypesTitle}
             </h1>
             <RichText
               as="p"

@@ -6,20 +6,31 @@ import ContentLoader from 'react-content-loader';
 import UseGeneral from '../../../hooks/useGeneral';
 import { localizedPath } from '@/utils/routes';
 import LazyImage from '../../../components/LazyImage';
+import { localizedText, splitHeading } from '@/utils/siteText';
 
 const optimizedImageSrc = (src) => src;
 
-function Brands({ data }) {
+function Brands({ data, siteinfo }) {
   const router = useRouter();
   const { language } = UseGeneral();
+  const title = localizedText(
+    siteinfo,
+    language,
+    ["home_brands_title"],
+    language === "ar" ? "منتجاتنا" : "Our Brands"
+  );
+  const titleParts = splitHeading(title);
+  const firstTitlePart = titleParts.rest ? titleParts.first.trim() : "";
+  const secondTitlePart = titleParts.rest || titleParts.first;
 
   return (
     <div className="hero_section d-flex justify-content-between flex-column w-full rowDiv">
       <SectionTitle
-        minColorWord={"Our"}
-        minColorWordAr={""}
-        secondColorWord={"Brands"}
-        secondColorWordAr={"منتجاتنا"}
+        minColorWord={firstTitlePart}
+        minColorWordAr={firstTitlePart}
+        secondColorWord={secondTitlePart}
+        secondColorWordAr={secondTitlePart}
+        ru={true}
         classessName={[
           "justify-content-center",
           "align-item-center",

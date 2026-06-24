@@ -155,6 +155,10 @@ const ContactUs = ({ data, socials }) => {
     language == "ar"
       ? firstText(data?.contact_intro_ar, data?.contact_intro, data?.contactIntroAr)
       : firstText(data?.contact_intro_en, data?.contact_intro, data?.contactIntroEn);
+  const contactTitle =
+    language == "ar"
+      ? firstText(data?.contact_title_ar, data?.contact_title, data?.contactTitleAr, "اتصل بنا")
+      : firstText(data?.contact_title_en, data?.contact_title, data?.contactTitleEn, "Contact Us");
   
   return (
     <div className="me_cotactUs_page rowDiv">
@@ -245,7 +249,7 @@ const ContactUs = ({ data, socials }) => {
 
         <div className="Right_section">
           <div className="title">
-            {language == "ar" ? "اتصل بنا" : "Contact Us"}
+            {contactTitle}
           </div>
 
           <RichText

@@ -9,6 +9,11 @@ import RichText from "../../components/RichText";
 const firstText = (...values) =>
   values.find((value) => typeof value === "string" && value.trim()) || "";
 
+const stripLeadingHeading = (value) =>
+  String(value || "")
+    .replace(/^\s*<h[1-6][^>]*>[\s\S]*?<\/h[1-6]>\s*/i, "")
+    .trim();
+
 export default function Careers({ careerData }) {
   const { language } = UseGeneral();
   const [joinData, setJoinData] = useState({
@@ -31,15 +36,30 @@ export default function Careers({ careerData }) {
       : item?.descriptionAr || item?.description_ar || item?.textAr || item?.text_ar;
   const defaultCareerIntro =
     language == "en"
-      ? `<h2 style="text-align:center">Join Our Team</h2><p style="text-align:center">If you are interested in joining our family, please send an email with your resume and cover letter to oroubamail@orouba.ajwa.com or fill out the employment form</p>`
-      : `<h2 style="text-align:center">انضم إلى فريقنا</h2><p style="text-align:center">إذا كنت مهتمًا بالانضمام إلى عائلتنا، يرجى إرسال بريد إلكتروني يحتوي على سيرتك الذاتية وخطاب تقديمي إلى oroubamail@orouba.ajwa.com أو ملء نموذج التوظيف</p>`;
-  const careerIntroHtml = firstText(
+      ? `<p style="text-align:center">If you are interested in joining our family, please send an email with your resume and cover letter to oroubamail@orouba.ajwa.com or fill out the employment form</p>`
+      : `<p style="text-align:center">إذا كنت مهتمًا بالانضمام إلى عائلتنا، يرجى إرسال بريد إلكتروني يحتوي على سيرتك الذاتية وخطاب تقديمي إلى oroubamail@orouba.ajwa.com أو ملء نموذج التوظيف</p>`;
+  const localizedSiteText = (key) =>
+    language == "ar"
+      ? firstText(siteinfo?.[`${key}_ar`], siteinfo?.[`${key}Ar`], siteinfo?.[key])
+      : firstText(siteinfo?.[`${key}_en`], siteinfo?.[`${key}En`], siteinfo?.[key]);
+  const careerTitle =
+    localizedSiteText("careers_title") ||
+    (language == "en" ? "Join Our Team" : "انضم إلى فريقنا");
+  const careerIntroHtml = stripLeadingHeading(firstText(
     siteinfo.careers_intro,
     language == "ar" ? siteinfo.careers_introAr : siteinfo.careers_introEn,
     language == "ar" ? siteinfo.career_introAr : siteinfo.career_introEn,
     siteinfo.career_intro,
     defaultCareerIntro
-  );
+  ));
+  const careersWhyTitle =
+    localizedSiteText("careers_why_title") ||
+    (language == "en" ? "Why Choose Us?" : "لماذا تختار العمل معنا؟");
+  const careersWhyText =
+    localizedSiteText("careers_why_text") ||
+    (language == "en"
+      ? "We believe in fostering talent, encouraging growth and providing opportunities for individuals to achieve their full potential."
+      : "نحن نؤمن بتعزيز المواهب وتشجيع النمو وتوفير الفرص للأفراد لتحقيق إمكاناتهم الكاملة.");
 
   useEffect(() => {
     if (sucMess == true || sucMess == false) {
@@ -112,6 +132,7 @@ export default function Careers({ careerData }) {
         <div className={`${styles.careerForm} careerContentForm`}>
           <div className={styles.careerContent}>
             <div className={`${styles.careerTitle} ${styles.careerIntroRichText}`}>
+              <h2>{careerTitle}</h2>
               <RichText html={careerIntroHtml} />
             </div>
 
@@ -224,13 +245,9 @@ export default function Careers({ careerData }) {
         <div className={`${styles.chooses} chooses`}>
           <div className={styles.chooseUsTitle}>
             <h2 className="H2InLarge">
-              {language == "en" ? "Why Choose Us ?" : "لماذا تختار العمل معنا؟ "}
+              {careersWhyTitle}
             </h2>
-            <p>
-              {language == "en"
-                ? "We believe in fostering talent, encouraging growth and providing opportunities for individuals to achieve their full potential"
-                : "نحن نؤمن بتعزيز المواهب وتشجيع النمو وتوفير الفرص للأفراد لتحقيق إمكاناتهم الكاملة"}
-            </p>
+            <RichText as="p" html={careersWhyText} />
           </div>
 
           <div className={`row mt-4 ${styles.boxContainer} `}>

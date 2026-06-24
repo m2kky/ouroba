@@ -31,12 +31,47 @@ const PLAIN_TEXT_SETTING_KEYS = new Set([
   "exportCertificationsTitle",
   "exportCatalogButtonText",
   "home_vision_title",
+  "home_vision_button_text",
   "home_why_title",
   "home_why_subtitle",
+  "home_why_button_text",
+  "home_brands_title",
+  "home_recipes_title",
   "home_standards_title",
   "home_world_title",
   "production_steps_title",
+  "product_types_title",
+  "certifications_title",
+  "values_title",
+  "careers_title",
+  "careers_why_title",
 ]);
+
+const PAGE_TITLE_SETTING_KEYS = [
+  "home_vision_title",
+  "home_why_title",
+  "home_why_subtitle",
+  "home_brands_title",
+  "home_recipes_title",
+  "home_standards_title",
+  "home_world_title",
+  "production_steps_title",
+  "product_types_title",
+  "certifications_title",
+  "values_title",
+  "careers_title",
+  "careers_why_title",
+  "contact_title",
+  "exportTitle",
+  "exportStandardsTitle",
+  "exportCertificationsTitle",
+  "catalogTitle",
+] as const;
+
+const PAGE_TITLE_SETTING_KEY_SET = new Set<string>(PAGE_TITLE_SETTING_KEYS);
+const PAGE_TITLE_SETTING_ORDER = new Map<string, number>(
+  PAGE_TITLE_SETTING_KEYS.map((key, index) => [key, index])
+);
 
 const isImageSettingKey = (key: string) => {
   const normalizedKey = key.toLowerCase();
@@ -92,11 +127,15 @@ export default function SettingsPage() {
           // ── Homepage Content ──
           { key: "home_vision_image", desc: t("صورة قسم 'من الرؤية' (الرئيسية)", "Homepage Vision Section Image"), valAr: "", valEn: "" },
           { key: "home_vision_title", desc: t("عنوان 'من الرؤية إلى الواقع' (الرئيسية)", "Homepage Vision Title"), valAr: "من الرؤية إلى الواقع", valEn: "From Vision to Reality" },
+          { key: "home_vision_button_text", desc: t("نص زر قسم الرؤية", "Homepage Vision Button Text"), valAr: "عن العروبة", valEn: "About Us" },
           { key: "home_vision_text", desc: t("نص قسم 'من الرؤية' (الرئيسية)", "Homepage Vision Text"), valAr: "", valEn: "" },
           { key: "home_why_image", desc: t("صورة 'لماذا العروبة' (الرئيسية)", "Homepage Why Orouba Image"), valAr: "", valEn: "" },
           { key: "home_why_title", desc: t("عنوان 'لماذا العروبة' (الرئيسية)", "Homepage Why Orouba Title"), valAr: "لماذا العروبة ؟", valEn: "Why Orouba?" },
           { key: "home_why_subtitle", desc: t("عنوان فرعي 'لماذا العروبة' (الرئيسية)", "Homepage Why Orouba Subtitle"), valAr: "اكتشف الفرق في كل قضمة:", valEn: "Discover the Difference in Every Bite:" },
+          { key: "home_why_button_text", desc: t("نص زر لماذا العروبة", "Homepage Why Orouba Button Text"), valAr: "المزيد", valEn: "Learn More" },
           { key: "home_why_text", desc: t("نص 'لماذا العروبة' (الرئيسية)", "Homepage Why Orouba Text"), valAr: "", valEn: "" },
+          { key: "home_brands_title", desc: t("عنوان العلامات التجارية في الرئيسية", "Homepage Brands Title"), valAr: "منتجاتنا", valEn: "Our Brands" },
+          { key: "home_recipes_title", desc: t("عنوان الوصفات في الرئيسية", "Homepage Recipes Title"), valAr: "وصفات مقترحة", valEn: "Recommended Recipes" },
           { key: "home_standards_title", desc: t("عنوان 'معاييرنا' (الرئيسية)", "Homepage Standards Title"), valAr: "معاييرنا", valEn: "Our Standards" },
           { key: "home_standards_text", desc: t("نص 'معاييرنا' (الرئيسية)", "Homepage Standards Text"), valAr: "", valEn: "" },
           { key: "home_world_image", desc: t("صورة خريطة العالم (الرئيسية)", "Homepage World Map Image"), valAr: "", valEn: "" },
@@ -118,6 +157,7 @@ export default function SettingsPage() {
           { key: "recipe_property_servings_image", desc: t("أيقونة خاصية عدد الأفراد", "Recipe servings property icon"), valAr: "", valEn: "" },
           // ── Product Types ──
           { key: "product_type_img", desc: t("صورة خلفية/بانر أصناف المنتجات", "Product types banner image"), valAr: "", valEn: "" },
+          { key: "product_types_title", desc: t("عنوان صفحة أصناف المنتجات", "Product Types Page Title"), valAr: "أصناف المنتجات", valEn: "Product Types" },
           { key: "product_type_text", desc: t("نص مقدمة أصناف المنتجات", "Product types intro text"), valAr: "", valEn: "" },
           { key: "product_type_fruits_image", desc: t("صورة صنف الفواكه", "Fruits Category Image"), valAr: "", valEn: "" },
           { key: "product_type_prefried_image", desc: t("صورة صنف النصف مقلي", "Pre-Fried Category Image"), valAr: "", valEn: "" },
@@ -134,8 +174,13 @@ export default function SettingsPage() {
           { key: "exportCatalogButtonText", desc: t("نص زر كتالوج التصدير", "Export catalog button text"), valAr: "تحميل الكتالوج", valEn: "Export Catalogue" },
           { key: "contact_title", desc: t("عنوان صفحة التواصل", "Contact page title"), valAr: "تواصل معنا", valEn: "Contact Us" },
           { key: "contact_intro", desc: t("نص مقدمة نموذج التواصل", "Contact form intro text"), valAr: "املأ النموذج وسيقوم فريقنا بالرد عليك.", valEn: "Fill up the form and our team will get back to you." },
-          { key: "careers_intro", desc: t("مقدمة صفحة الوظائف Rich Text", "Careers page intro rich text"), valAr: `<h2 style="text-align:center">انضم إلى فريقنا</h2><p style="text-align:center">إذا كنت مهتمًا بالانضمام إلى عائلتنا، يرجى إرسال بريد إلكتروني يحتوي على سيرتك الذاتية وخطاب تقديمي إلى oroubamail@orouba.ajwa.com أو ملء نموذج التوظيف</p>`, valEn: `<h2 style="text-align:center">Join Our Team</h2><p style="text-align:center">If you are interested in joining our family, please send an email with your resume and cover letter to oroubamail@orouba.ajwa.com or fill out the employment form</p>` },
+          { key: "careers_title", desc: t("عنوان صفحة الوظائف", "Careers Page Title"), valAr: "انضم إلى فريقنا", valEn: "Join Our Team" },
+          { key: "careers_intro", desc: t("مقدمة صفحة الوظائف Rich Text", "Careers page intro rich text"), valAr: `<p style="text-align:center">إذا كنت مهتمًا بالانضمام إلى عائلتنا، يرجى إرسال بريد إلكتروني يحتوي على سيرتك الذاتية وخطاب تقديمي إلى oroubamail@orouba.ajwa.com أو ملء نموذج التوظيف</p>`, valEn: `<p style="text-align:center">If you are interested in joining our family, please send an email with your resume and cover letter to oroubamail@orouba.ajwa.com or fill out the employment form</p>` },
+          { key: "careers_why_title", desc: t("عنوان لماذا العمل معنا", "Why Work With Us Title"), valAr: "لماذا تختار العمل معنا؟", valEn: "Why Choose Us?" },
+          { key: "careers_why_text", desc: t("نص لماذا العمل معنا", "Why Work With Us Text"), valAr: "نحن نؤمن بتعزيز المواهب وتشجيع النمو وتوفير الفرص للأفراد لتحقيق إمكاناتهم الكاملة.", valEn: "We believe in fostering talent, encouraging growth and providing opportunities for individuals to achieve their full potential." },
+          { key: "certifications_title", desc: t("عنوان صفحة الشهادات", "Certifications Page Title"), valAr: "شهادات العروبة", valEn: "Orouba Certifications" },
           { key: "certificationText", desc: t("نص مقدمة صفحة الشهادات", "Certifications intro text"), valAr: "", valEn: "" },
+          { key: "values_title", desc: t("عنوان قسم القيم", "Values Section Title"), valAr: "قيمنا", valEn: "Our Values" },
           { key: "values_text", desc: t("نص مقدمة قيم الشركة", "Company values intro text"), valAr: "", valEn: "" },
           { key: "certification_image", desc: t("صورة بانر الشهادات", "Certifications hero image"), valAr: "", valEn: "" },
           { key: "catalogTitle", desc: t("عنوان صفحة كتالوج التصدير", "Export catalog page title"), valAr: "مرحبا بكم في تصدير الكتالوج", valEn: "Welcome To Export Catalogue" },
@@ -162,6 +207,15 @@ export default function SettingsPage() {
               existing.description = dk.desc;
             }
           }
+        });
+
+        merged.sort((a, b) => {
+          const aPriority = PAGE_TITLE_SETTING_ORDER.get(a.key);
+          const bPriority = PAGE_TITLE_SETTING_ORDER.get(b.key);
+          if (aPriority !== undefined || bPriority !== undefined) {
+            return (aPriority ?? Number.MAX_SAFE_INTEGER) - (bPriority ?? Number.MAX_SAFE_INTEGER);
+          }
+          return a.key.localeCompare(b.key);
         });
 
         setSettings(merged);
@@ -256,11 +310,15 @@ export default function SettingsPage() {
     { key: "whatsapp_number", desc: t("رقم واتساب", "WhatsApp Number") },
     { key: "home_vision_image", desc: t("صورة الرؤية (الرئيسية)", "Homepage Vision Image") },
     { key: "home_vision_title", desc: t("عنوان الرؤية (الرئيسية)", "Homepage Vision Title") },
+    { key: "home_vision_button_text", desc: t("نص زر الرؤية", "Homepage Vision Button Text") },
     { key: "home_vision_text", desc: t("نص الرؤية (الرئيسية)", "Homepage Vision Text") },
     { key: "home_why_image", desc: t("صورة لماذا العروبة (الرئيسية)", "Homepage Why Image") },
     { key: "home_why_title", desc: t("عنوان لماذا العروبة", "Homepage Why Title") },
     { key: "home_why_subtitle", desc: t("عنوان فرعي للعروبة", "Homepage Why Subtitle") },
+    { key: "home_why_button_text", desc: t("نص زر لماذا العروبة", "Homepage Why Button Text") },
     { key: "home_why_text", desc: t("نص لماذا العروبة", "Homepage Why Text") },
+    { key: "home_brands_title", desc: t("عنوان العلامات التجارية", "Homepage Brands Title") },
+    { key: "home_recipes_title", desc: t("عنوان الوصفات", "Homepage Recipes Title") },
     { key: "home_standards_title", desc: t("عنوان معاييرنا", "Homepage Standards Title") },
     { key: "home_standards_text", desc: t("نص معاييرنا", "Homepage Standards Text") },
     { key: "home_world_image", desc: t("صورة خريطة العالم", "Homepage World Map") },
@@ -277,6 +335,7 @@ export default function SettingsPage() {
     { key: "recipe_property_cooking_time_image", desc: t("أيقونة خاصية وقت الطبخ", "Recipe cooking time property icon") },
     { key: "recipe_property_servings_image", desc: t("أيقونة خاصية عدد الأفراد", "Recipe servings property icon") },
     { key: "product_type_img", desc: t("صورة بانر أصناف المنتجات", "Product types banner image") },
+    { key: "product_types_title", desc: t("عنوان صفحة أصناف المنتجات", "Product Types Page Title") },
     { key: "product_type_text", desc: t("نص مقدمة أصناف المنتجات", "Product types intro text") },
     { key: "exportTitle", desc: t("عنوان صفحة التصدير", "Export page title") },
     { key: "exportDescription", desc: t("وصف صفحة التصدير", "Export page description") },
@@ -288,8 +347,13 @@ export default function SettingsPage() {
     { key: "exportCatalogButtonText", desc: t("نص زر كتالوج التصدير", "Export catalog button text") },
     { key: "contact_title", desc: t("عنوان صفحة التواصل", "Contact page title") },
     { key: "contact_intro", desc: t("نص مقدمة نموذج التواصل", "Contact form intro text") },
+    { key: "careers_title", desc: t("عنوان صفحة الوظائف", "Careers Page Title") },
     { key: "careers_intro", desc: t("مقدمة صفحة الوظائف Rich Text", "Careers page intro rich text") },
+    { key: "careers_why_title", desc: t("عنوان لماذا العمل معنا", "Why Work With Us Title") },
+    { key: "careers_why_text", desc: t("نص لماذا العمل معنا", "Why Work With Us Text") },
+    { key: "certifications_title", desc: t("عنوان صفحة الشهادات", "Certifications Page Title") },
     { key: "certificationText", desc: t("نص مقدمة صفحة الشهادات", "Certifications intro text") },
+    { key: "values_title", desc: t("عنوان قسم القيم", "Values Section Title") },
     { key: "values_text", desc: t("نص مقدمة قيم الشركة", "Company values intro text") },
     { key: "certification_image", desc: t("صورة بانر الشهادات", "Certifications hero image") },
     { key: "catalogTitle", desc: t("عنوان صفحة كتالوج التصدير", "Export catalog page title") },
@@ -376,6 +440,11 @@ export default function SettingsPage() {
                 return (
                 <div key={idx} className="grid grid-cols-12 gap-4 items-start bg-gray-50 p-2 rounded-xl">
                   <div className="col-span-3 space-y-2">
+                    {PAGE_TITLE_SETTING_KEY_SET.has(setting.key) ? (
+                      <span className="inline-flex rounded-full bg-blue-100 px-2 py-1 text-[11px] font-bold text-orouba-blue">
+                        {t("عنوان صفحة / قسم", "Page / Section Title")}
+                      </span>
+                    ) : null}
                     <input
                       type="text"
                       placeholder={t("مثال: phone_1", "Example: phone_1")}

@@ -243,6 +243,24 @@ html {
   max-width: 100vw;
 }
 
+.hone_sections_button,
+.hone_sections_button:hover,
+.hone_sections_button:focus,
+.hone_sections_button:focus-visible,
+.hone_sections_button span,
+.hero_texts > a,
+.hero_texts > a:hover,
+.hero_texts > a:focus,
+.hero_texts > a:focus-visible,
+.hero_texts > a span,
+.viewAllBtn,
+.viewAllBtn:hover,
+.viewAllBtn:focus,
+.viewAllBtn:focus-visible,
+.viewAllBtn span {
+  text-decoration: none !important;
+}
+
 .downHeaderDiv.whoweare h3.whowearestylesh3,
 .downHeaderDiv.whoweare .buildingsContainer h4,
 .downHeaderDiv.whoweare .AreaRow h5,
@@ -372,6 +390,11 @@ body.enVersion .AreaRow .aboutHardcodedFeatures {
   width: 100%;
 }
 
+.AreaRow .aboutHardcodedFeature .aboutFeatureTitle,
+.AreaRow .aboutHardcodedFeature .aboutFeatureDescription {
+  align-self: stretch;
+}
+
 .AreaRow .aboutHardcodedFeature:nth-child(n + 4) {
   grid-column: span 3;
 }
@@ -450,7 +473,12 @@ body.enVersion .AreaRow .aboutHardcodedFeatures {
   font: inherit;
   line-height: inherit;
   margin: 0;
-  text-align: inherit;
+  text-align: center !important;
+  width: 100%;
+}
+
+.downHeaderDiv.whoweare .ProductionSteps .productionStepsTitle {
+  font-size: clamp(30px, 2.2vw, 36px) !important;
 }
 
 @media (max-width: 992px) {
@@ -1054,6 +1082,19 @@ body[dir="rtl"] .recipe_about .recipe-structured ul {
     max-width: 100% !important;
     width: 100% !important;
   }
+}
+
+.recipe_banner .right video {
+  background: #000;
+}
+
+.recipe_banner .right video::-webkit-media-controls {
+  display: flex !important;
+  opacity: 1 !important;
+}
+
+.recipe_banner .right video::-webkit-media-controls-start-playback-button {
+  display: block !important;
 }
 
 .ProductTypeSmallSlider {

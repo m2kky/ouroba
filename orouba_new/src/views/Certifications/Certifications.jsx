@@ -5,6 +5,7 @@ import Breadcrumb from '../../components/BreadCumbsLinks'
 import ExportCertificatios from '../Export/ExportCertificatios/ExportCertificatios'
 import Values from './Values/Values'
 import RichText from '../../components/RichText'
+import { splitHeading } from '../../utils/siteText'
 
 const localizedSetting = (settings, key, language) => {
   const value =
@@ -34,6 +35,13 @@ const Certifications = ({ certPageData }) => {
     (language == "ar"
       ? 'في العروبة، قيمنا هى أساس لكل ما نقوم به. فهي توجهنا في اتخاذ قراراتنا، وإجراءاتنا وتفاعلاتنا مع عملائنا، كما تعكس التزامنا بالنزاهة والتميز والمسؤولية الاجتماعية.'
       : 'At Orouba, our values serve as the foundation of everything we do. They guide our decisions, actions, and interactions with our stakeholders, and reflect our commitment to integrity, excellence, and social responsibility.');
+  const certificationsTitle =
+    localizedSetting(siteinfo, "certifications_title", language) ||
+    (language == "ar" ? "شهادات العروبة" : "Orouba Certifications");
+  const certificationsTitleParts = splitHeading(certificationsTitle);
+  const valuesTitle =
+    localizedSetting(siteinfo, "values_title", language) ||
+    (language == "ar" ? "قيمنا" : "Our Values");
   
   const pages = [
     {
@@ -55,25 +63,15 @@ const Certifications = ({ certPageData }) => {
       <div className='certifications_page rowDiv' style={{ minHeight: "100vh" }}>
       <Breadcrumb links={pages}/>
       <h4>
-        {
-          language=='ar'?
-          <>
-            <span>شهادات </span>
-            <span>العروبة</span>
-          </>
-          :
-          <>
-            <span>Orouba </span>
-            <span>Certifications</span>
-          </>
-        }
+        {certificationsTitleParts.first}
+        {certificationsTitleParts.rest ? <span>{certificationsTitleParts.rest}</span> : null}
       </h4>
       <div className="texts">
         <RichText as="p" html={introText} />
         <RichText as="p" html={detailsText} />
       </div>
       <ExportCertificatios certificationsData={certPageData?.certifications} showTit={false}/>
-      <Values valuesData={certPageData?.values} introText={valuesIntro}/>
+      <Values valuesData={certPageData?.values} introText={valuesIntro} title={valuesTitle}/>
     </div>
     </>
   )

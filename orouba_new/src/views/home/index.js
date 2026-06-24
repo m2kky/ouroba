@@ -13,13 +13,17 @@ const Home = ({ homePageData, language }) => {
       <div style={{ minHeight: "100vh" }} className="home_sections">
         <Banner data={homePageData?.banners} />
         <Hero data={homePageData?.siteinfo} language={language} />
-        <Brands data={homePageData?.brands} />
+        <Brands data={homePageData?.brands} siteinfo={homePageData?.siteinfo} />
         <div className="boxShadowSection">
           <WhyUs data={homePageData?.siteinfo} />
           <Standards data={homePageData?.standers} siteinfo={homePageData?.siteinfo} />
         </div>
         <MapSection data={homePageData?.siteinfo} />
-        <Recips data={homePageData?.lastRecipess} withArrows={true} />
+        <Recips
+          data={homePageData?.lastRecipess}
+          siteinfo={homePageData?.siteinfo}
+          withArrows={true}
+        />
       </div>
     </>
   );

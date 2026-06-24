@@ -1,11 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import { menus } from "../../../data/navBarData";
 import UseGeneral from "../../../hooks/useGeneral";
 import { FaWindowClose } from "react-icons/fa";
-import { WhiteArrowLeft, arrowLeft } from "../../../assets/svgIcons";
+import { WhiteArrowLeft } from "../../../assets/svgIcons";
 import { localizedPath } from "@/utils/routes";
 
 const BottomHeader = ({ show, setShow, data }) => {
@@ -22,7 +22,18 @@ const BottomHeader = ({ show, setShow, data }) => {
   const [top, setTop] = useState(0);
 
   useEffect(() => {
-    setTop(document.querySelector("header")?.clientHeight);
+    const header = document.querySelector("header");
+    if (!header) return undefined;
+
+    const updateTop = () => setTop(header.clientHeight);
+    const frameId = window.requestAnimationFrame(updateTop);
+    const resizeObserver = new ResizeObserver(updateTop);
+    resizeObserver.observe(header);
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      resizeObserver.disconnect();
+    };
   }, []);
   useEffect(() => {
     if (show) {
@@ -35,8 +46,6 @@ const BottomHeader = ({ show, setShow, data }) => {
       document.body.style.overflow = "";
     };
   }, [show]);
-  const [menu, setMenu] = useState([]);
-
   const [isSmaller, setIsSmaller] = useState(false);
   useEffect(() => {
     const updateMenuHeights = () => {
@@ -62,14 +71,10 @@ const BottomHeader = ({ show, setShow, data }) => {
       (typeof window !== 'undefined' ? window : {removeEventListener: ()=>{}}).removeEventListener("resize", handleResize);
     };
   }, []);
-  useEffect(() => {
-    let submenu = language == "ar" ? menus?.slice().reverse() : menus;
-    // alert(isSmaller)
-    if(isSmaller){
-      submenu = menus
-    }
-    setMenu(submenu);
-  }, [menus, language, isSmaller]);
+  const menu = useMemo(
+    () => (language == "ar" && !isSmaller ? menus.slice().reverse() : menus),
+    [language, isSmaller]
+  );
 
   const router = useRouter();
   return (

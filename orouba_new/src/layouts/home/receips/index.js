@@ -8,6 +8,7 @@ import { FreeMode, Navigation } from "swiper/modules";
 import { useRouter } from 'next/navigation';
 import { localizedPath } from "@/utils/routes";
 import LazyImage from "../../../components/LazyImage";
+import { localizedText, splitHeading } from "@/utils/siteText";
 
 const firstText = (...values) =>
   values.find((value) => typeof value === "string" && value.trim()) || "";
@@ -57,10 +58,25 @@ const CustomNextButton = ({ onClick }) => (
     }
   </button>
 );
-function Recips({ withArrows, data }) {
+function Recips({ withArrows, data, siteinfo }) {
   const { language } = UseGeneral();
   const naviagte = useRouter();
   const recipeCount = Array.isArray(data) ? Math.min(data.length, 7) : 0;
+  const sectionTitle = localizedText(
+    siteinfo,
+    language,
+    ["home_recipes_title"],
+    language === "ar"
+      ? withArrows
+        ? "وصفات مقترحة"
+        : "أحدث وصفات"
+      : withArrows
+        ? "Recommended Recipes"
+        : "Latest Recipes"
+  );
+  const sectionTitleParts = splitHeading(sectionTitle);
+  const firstTitlePart = sectionTitleParts.rest ? sectionTitleParts.first.trim() : "";
+  const secondTitlePart = sectionTitleParts.rest || sectionTitleParts.first;
   const recipeName = (item) =>
     language == "ar"
       ? firstText(item?.name_ar, item?.nameAr, item?.name)
@@ -79,10 +95,11 @@ function Recips({ withArrows, data }) {
       {data && data?.length ? (
         <SectionTitle
           rem={true}
-          minColorWord={withArrows ? "Recommended " : "Latest "}
-          minColorWordAr={withArrows ? "مقترحة" : "أحدث "}
-          secondColorWord={"Recipes"}
-          secondColorWordAr={"وصفات"}
+          minColorWord={firstTitlePart}
+          minColorWordAr={firstTitlePart}
+          secondColorWord={secondTitlePart}
+          secondColorWordAr={secondTitlePart}
+          ru={true}
           linkName={"Show More"}
           linkNameAr={"عرض المزيد"}
           link={"/Reciepe"}

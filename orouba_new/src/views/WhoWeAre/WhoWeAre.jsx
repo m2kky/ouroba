@@ -411,7 +411,7 @@ export default function WhoWeAre({ aboutData }) {
         </div>
 
         <div className="ProductionSteps">
-          <h4 style={{ fontSize: "40px", color: "#035297", fontWeight: 700 }}>
+          <h4 className="productionStepsTitle" style={{ color: "#035297", fontWeight: 700 }}>
             {productionStepsTitle}
           </h4>
           <div className="pord_steps_content">

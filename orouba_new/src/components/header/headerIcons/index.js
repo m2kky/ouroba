@@ -1,7 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { language as languageIcon, search } from "../../../assets/svgIcons";
 import UseGeneral from "./../../../hooks/useGeneral";
 import { localizedPath } from "@/utils/routes";
@@ -9,8 +10,10 @@ import { localizedPath } from "@/utils/routes";
 const SearchBox = dynamic(() => import("../searchBox"), { ssr: false });
 
 const HeaderIcons = ({ setShow, show }) => {
-  const { changLang2, language } = UseGeneral();
+  const { language } = UseGeneral();
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [showSearch, setShowSearh] = useState(false);
   const [showLanguageMenu, setShowLanguageMenu] = useState(false);
   const [isDesktopLanguageToggle, setIsDesktopLanguageToggle] = useState(false);
@@ -38,20 +41,13 @@ const HeaderIcons = ({ setShow, show }) => {
     setShowLanguageMenu((open) => !open);
   };
 
-  const switchLanguage = (nextLanguage) => {
-    setShowLanguageMenu(false);
-    changLang2(nextLanguage);
-    const currentPath =
-      typeof window !== "undefined"
-        ? window.location.pathname + window.location.search + window.location.hash
-        : "/";
-    const nextPath = /^\/(ar|en)(?=\/|$)/.test(currentPath)
+  const languagePath = (nextLanguage) => {
+    const currentPath = pathname || "/";
+    const localizedRoute = /^\/(ar|en)(?=\/|$)/.test(currentPath)
       ? currentPath.replace(/^\/(ar|en)(?=\/|$)/, `/${nextLanguage}`)
       : localizedPath(currentPath, nextLanguage);
-
-    if (nextPath !== currentPath) {
-      router.push(nextPath);
-    }
+    const query = searchParams.toString();
+    return query ? `${localizedRoute}?${query}` : localizedRoute;
   };
 
   return (
@@ -88,24 +84,22 @@ const HeaderIcons = ({ setShow, show }) => {
             onClick={(event) => event.stopPropagation()}
           >
             <li className={language == "ar" ? "active" : undefined}>
-              <a
-                href="#"
-                onClick={(event) => {
-                  event.preventDefault();
-                  switchLanguage("ar");
-                }}
+              <Link
+                href={languagePath("ar")}
+                prefetch
+                scroll={false}
+                onClick={() => setShowLanguageMenu(false)}
               >
                 العربية
-              </a>
-              <a
-                href="#"
-                onClick={(event) => {
-                  event.preventDefault();
-                  switchLanguage("en");
-                }}
+              </Link>
+              <Link
+                href={languagePath("en")}
+                prefetch
+                scroll={false}
+                onClick={() => setShowLanguageMenu(false)}
               >
                 English
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

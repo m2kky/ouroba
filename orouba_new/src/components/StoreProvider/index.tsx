@@ -1,7 +1,8 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { makeStore } from "../../store";
+import { change2 } from "../../store/languageReducer";
 
 type StoreProviderProps = {
   children: React.ReactNode;
@@ -13,17 +14,18 @@ export default function StoreProvider({
   initialLanguage,
 }: StoreProviderProps) {
   const normalizedLanguage = initialLanguage === "ar" ? "ar" : "en";
-  const storeRef = useRef<ReturnType<typeof makeStore> | null>(null);
-
-  if (!storeRef.current) {
-    storeRef.current = makeStore({
+  const [store] = useState(() =>
+    makeStore({
       language: { language: normalizedLanguage },
-    });
-  }
+    })
+  );
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    if (store.getState().language.language !== normalizedLanguage) {
+      store.dispatch(change2(normalizedLanguage));
+    }
     localStorage.setItem("ouroubaLanguage", normalizedLanguage);
-  }, [normalizedLanguage]);
+  }, [normalizedLanguage, store]);
 
-  return <Provider store={storeRef.current}>{children}</Provider>;
+  return <Provider store={store}>{children}</Provider>;
 }

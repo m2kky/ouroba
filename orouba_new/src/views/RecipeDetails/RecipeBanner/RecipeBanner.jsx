@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Breadcrumb from "../../../components/BreadCumbsLinks";
 import UseGeneral from "../../../hooks/useGeneral";
 import {
@@ -57,25 +57,26 @@ const RecipeBanner = ({ data, breads }) => {
       : first(data?.nameEn, data?.name_en)
   );
 
-  const [pages, setPages] = useState([]);
-  useEffect(() => {
-    if (data) {
-      setPages([
-        {
-          name: language == "ar" ? "الرئيسية" : "Home",
-          route: "/",
-        },
-        {
-          name: language == "ar" ? "الوصفات" : "Recipes",
-          route: "/recipes",
-        },
-        {
-          name: recipeTitle,
-          active: true,
-        },
-      ]);
-    }
-  }, [data, language, recipeTitle]);
+  const pages = useMemo(
+    () =>
+      data
+        ? [
+            {
+              name: language == "ar" ? "الرئيسية" : "Home",
+              route: "/",
+            },
+            {
+              name: language == "ar" ? "الوصفات" : "Recipes",
+              route: "/recipes",
+            },
+            {
+              name: recipeTitle,
+              active: true,
+            },
+          ]
+        : [],
+    [data, language, recipeTitle]
+  );
   
   const [isShare, setIsShare] = useState(false);
   const [shareUrl, setShareUrl] = useState("");
@@ -92,8 +93,12 @@ const RecipeBanner = ({ data, breads }) => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setShareUrl(window.location.href);
+      const frameId = window.requestAnimationFrame(() => {
+        setShareUrl(window.location.href);
+      });
+      return () => window.cancelAnimationFrame(frameId);
     }
+    return undefined;
   }, [data?.id]);
 
   const copyRecipeLink = async () => {
@@ -265,7 +270,18 @@ const RecipeBanner = ({ data, breads }) => {
       <div className="right">
         {mediaSrc ? (
           isVideoFile(mediaSrc) ? (
-            <video src={mediaSrc} loop muted autoPlay playsInline></video>
+            <video
+              src={mediaSrc}
+              controls
+              playsInline
+              preload="metadata"
+              poster={imageSrc || undefined}
+              aria-label={recipeTitle || (language == "ar" ? "فيديو الوصفة" : "Recipe video")}
+            >
+              {language == "ar"
+                ? "متصفحك لا يدعم تشغيل الفيديو."
+                : "Your browser does not support video playback."}
+            </video>
           ) : (
             <img src={mediaSrc} alt={shareTitle || ""} />
           )
