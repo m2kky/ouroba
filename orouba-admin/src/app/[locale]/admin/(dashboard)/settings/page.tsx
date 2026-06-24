@@ -86,7 +86,7 @@ const isImageSettingKey = (key: string) => {
 const isRichTextSettingKey = (key: string) => {
   const trimmedKey = key.trim();
   if (!trimmedKey) return false;
-  if (PAGE_TITLE_SETTING_KEY_SET.has(trimmedKey)) return true;
+  if (PAGE_TITLE_SETTING_KEY_SET.has(trimmedKey)) return false;
   if (PLAIN_TEXT_SETTING_KEYS.has(trimmedKey)) return false;
   if (PLAIN_VALUE_KEY_PATTERN.test(trimmedKey)) return false;
   return RICH_VALUE_KEY_PATTERN.test(trimmedKey);
@@ -97,6 +97,7 @@ export default function SettingsPage() {
   const [settings, setSettings] = useState<SiteSetting[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
+  const [activeRichTextEditor, setActiveRichTextEditor] = useState<string | null>(null);
   const productionNoteAr = "بعض الخطوات تتم لأنواع محددة فقط، مثل: فصل الحجم حسب الدرجات للبامية. الفرم والتصفية للطماطم. التقطيع لبعض المنتجات. بشر وفرم بعض المنتجات مثل البصل والثوم";
   const productionNoteEn = "Some steps are done for specific types only, like: size separation by grades for okra. Chopping and sifting for tomatoes. Cutting for some products. Grating and crushing some products like onion and garlic.";
 
@@ -373,6 +374,57 @@ export default function SettingsPage() {
     }
   };
 
+  const renderRichTextField = (
+    setting: SiteSetting,
+    idx: number,
+    field: "valueAr" | "valueEn",
+    placeholder: string,
+    dir: "rtl" | "ltr"
+  ) => {
+    const editorId = `${idx}:${field}`;
+    const isOpen = activeRichTextEditor === editorId;
+
+    return (
+      <div className="space-y-2">
+        {isOpen ? (
+          <>
+            <RichTextEditor
+              value={setting[field] || ""}
+              onChange={(value) => handleChange(idx, field, value)}
+              placeholder={placeholder}
+              dir={dir}
+            />
+            <button
+              type="button"
+              onClick={() => setActiveRichTextEditor(null)}
+              className="rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-xs font-bold text-gray-600 hover:border-orouba-blue hover:text-orouba-blue"
+            >
+              {t("إغلاق المحرر", "Close editor")}
+            </button>
+          </>
+        ) : (
+          <>
+            <textarea
+              placeholder={placeholder}
+              value={setting[field] || ""}
+              dir={dir}
+              rows={PAGE_TITLE_SETTING_KEY_SET.has(setting.key) ? 2 : 4}
+              onChange={(e) => handleChange(idx, field, e.target.value)}
+              className="w-full resize-y rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 outline-none focus:border-orouba-blue"
+            />
+            <button
+              type="button"
+              onClick={() => setActiveRichTextEditor(editorId)}
+              className="rounded-lg bg-blue-50 px-3 py-1.5 text-xs font-bold text-orouba-blue hover:bg-blue-100"
+            >
+              {t("فتح محرر التنسيق", "Open rich text editor")}
+            </button>
+          </>
+        )}
+      </div>
+    );
+  };
+
   return (
     <div className="space-y-6">
       <AdminPageInfo 
@@ -453,14 +505,14 @@ export default function SettingsPage() {
                       value={setting.key}
                       dir="ltr"
                       onChange={(e) => handleChange(idx, "key", e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white"
+                      className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white text-gray-900 placeholder:text-gray-400"
                     />
                     <input
                       type="text"
                       placeholder={t("وصف (اختياري)", "Description (Optional)")}
                       value={setting.description || ""}
                       onChange={(e) => handleChange(idx, "description", e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-lg text-xs text-gray-500 bg-transparent"
+                      className="w-full px-3 py-2 border border-gray-200 rounded-lg text-xs text-gray-700 placeholder:text-gray-400 bg-white"
                     />
                   </div>
                   
@@ -489,7 +541,7 @@ export default function SettingsPage() {
                               handleChange(idx, "valueAr", e.target.value);
                             }}
                             dir="ltr"
-                            className="w-full px-3 py-1 border border-gray-100 rounded text-xs bg-gray-50"
+                            className="w-full px-3 py-1 border border-gray-100 rounded text-xs bg-gray-50 text-gray-900 placeholder:text-gray-400"
                           />
                         </div>
                       </div>
@@ -497,20 +549,22 @@ export default function SettingsPage() {
                   ) : isRichTextKey ? (
                     <>
                       <div className="col-span-4">
-                        <RichTextEditor
-                          value={setting.valueAr || ""}
-                          onChange={(value) => handleChange(idx, "valueAr", value)}
-                          placeholder={t("Ø§Ù„Ù‚ÙŠÙ…Ø© Ø¨Ø§Ù„Ø¹Ø±Ø¨ÙŠ", "Value in Arabic")}
-                          dir="rtl"
-                        />
+                        {renderRichTextField(
+                          setting,
+                          idx,
+                          "valueAr",
+                          t("القيمة بالعربي", "Value in Arabic"),
+                          "rtl"
+                        )}
                       </div>
                       <div className="col-span-4">
-                        <RichTextEditor
-                          value={setting.valueEn || ""}
-                          onChange={(value) => handleChange(idx, "valueEn", value)}
-                          placeholder="Value in English"
-                          dir="ltr"
-                        />
+                        {renderRichTextField(
+                          setting,
+                          idx,
+                          "valueEn",
+                          "Value in English",
+                          "ltr"
+                        )}
                       </div>
                     </>
                   ) : (
@@ -521,7 +575,7 @@ export default function SettingsPage() {
                           placeholder={t("القيمة بالعربي", "Value in Arabic")}
                           value={setting.valueAr || ""}
                           onChange={(e) => handleChange(idx, "valueAr", e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white"
+                          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white text-gray-900 placeholder:text-gray-400"
                         />
                       </div>
                       <div className="col-span-4">
@@ -531,7 +585,7 @@ export default function SettingsPage() {
                           value={setting.valueEn || ""}
                           dir="ltr"
                           onChange={(e) => handleChange(idx, "valueEn", e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white"
+                          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white text-gray-900 placeholder:text-gray-400"
                         />
                       </div>
                     </>
