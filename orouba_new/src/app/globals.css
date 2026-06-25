@@ -261,6 +261,13 @@ html {
   text-decoration: none !important;
 }
 
+body.enVersion .home_vision_section .hero_texts > a.hone_sections_button,
+body.enVersion .home_vision_section .hero_texts > a.hone_sections_button:hover,
+body.enVersion .home_vision_section .hero_texts > a.hone_sections_button:focus,
+body.enVersion .home_vision_section .hero_texts > a.hone_sections_button span {
+  text-decoration: none !important;
+}
+
 .downHeaderDiv.whoweare h3.whowearestylesh3,
 .downHeaderDiv.whoweare .buildingsContainer h4,
 .downHeaderDiv.whoweare .AreaRow h5,
