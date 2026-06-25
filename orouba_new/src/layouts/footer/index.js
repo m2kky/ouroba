@@ -12,7 +12,6 @@ import {
   SupportIcon,
 } from "../../assets/svgIcons";
 import { localizedPath } from "@/utils/routes";
-import footerLogo from "../../../footer_logo.ddae0bf40dad21fa904a.png";
 import LazyImage from "@/components/LazyImage";
 
 const Footer = ({ siteinfo = {}, socialParents = [], brands = [] }) => {
@@ -84,7 +83,7 @@ const Footer = ({ siteinfo = {}, socialParents = [], brands = [] }) => {
           <div className="footer_element">
             <div className="single_footer single_footer_address">
               <LazyImage
-                src={footerLogo.src}
+                src="/orouba-logo.png"
                 alt="Orouba Foods"
                 loading="lazy"
                 decoding="async"

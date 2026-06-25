@@ -86,7 +86,7 @@ body {
 
 .orouba-media-loader::after {
   animation: orouba-media-breathe 1.55s ease-in-out infinite;
-  background: url("/static/media/logo.c0b669f6b893b6ff3c5b.png") center / contain no-repeat;
+  background: url("/orouba-logo.png") center / contain no-repeat;
   content: "";
   filter: drop-shadow(0 8px 16px rgba(0, 47, 89, 0.2));
   height: min(64px, 36%);

@@ -5,31 +5,19 @@ import { useRouter } from 'next/navigation';
 import BottomHeader from "../bottomHeader";
 import { list } from "../../../assets/svgIcons";
 import UseGeneral from "../../../hooks/useGeneral";
-import { resolveMediaUrl } from "@/utils/media";
 import { localizedPath } from "@/utils/routes";
-const fallbackLogo =
-  "https://oroubafoods.com/static/media/logo.c0b669f6b893b6ff3c5b.png";
+const brandLogo = "/orouba-logo.png";
 const headerOrnament =
   "https://oroubafoods.com/static/media/headerRigh1.4eaddc7ebf9f04965208.png";
 
 const optimizedImageSrc = (src) => src;
 
-const TopHeader = ({ data, siteinfo = {} }) => {
+const TopHeader = ({ data }) => {
   const router = useRouter();
   const [show, setShow] = useState(false);
   const [showOrnament, setShowOrnament] = useState(false);
-  const { language, data: siteData } = UseGeneral();
-  const logoSrc =
-    resolveMediaUrl(
-      [
-        siteinfo?.main_logo,
-        siteinfo?.logo,
-        siteinfo?.favicon_logo,
-        siteData?.logo,
-      ].find((src) => typeof src === "string" && src.trim())
-        || fallbackLogo
-    );
-  const optimizedLogoSrc = optimizedImageSrc(logoSrc);
+  const { language } = UseGeneral();
+  const optimizedLogoSrc = optimizedImageSrc(brandLogo);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(min-width: 793px)");
