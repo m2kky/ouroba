@@ -29,7 +29,6 @@ async function main() {
     prisma.categoryType.deleteMany(),
     prisma.brand.deleteMany(),
     prisma.banner.deleteMany(),
-    prisma.certificate.deleteMany(),
     prisma.standard.deleteMany(),
     prisma.value.deleteMany(),
     prisma.whyChooseUs.deleteMany(),
@@ -254,16 +253,6 @@ async function main() {
     },
   });
   console.log("✅ Category Types created (1)");
-
-  // ─── Certificates ───
-  await prisma.certificate.createMany({
-    data: [
-      { image: "https://camp-coding.site/eloroba/storage/app/images/cert-iso.png" },
-      { image: "https://camp-coding.site/eloroba/storage/app/images/cert-halal.png" },
-      { image: "https://camp-coding.site/eloroba/storage/app/images/cert-haccp.png" },
-    ],
-  });
-  console.log("✅ Certificates created (3)");
 
   // ─── Standards ───
   await prisma.standard.createMany({

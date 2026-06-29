@@ -111,7 +111,7 @@ const Reciepe = ({ recipesPageData }) => {
                   <div className="brandsImages brandsImagesGrid">
                     {cooks?.map((item, index) => (
                       <div
-                        key={index}
+                        key={item.id}
                         className="receipe_block"
                         onClick={() =>
                           router.push(
@@ -123,9 +123,9 @@ const Reciepe = ({ recipesPageData }) => {
                           <LazyImage
                             src={item?.images?.[0]?.url}
                             alt=""
-                            loading="lazy"
+                            loading={index < 6 ? "eager" : "lazy"}
                             decoding="async"
-                            fetchPriority="low"
+                            fetchPriority={index < 6 ? "high" : "low"}
                           />
                         </div>
                         <div className="receipe_details">
