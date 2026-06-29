@@ -1355,45 +1355,45 @@ body[dir="rtl"] .ProductTypeSmallSlider .productTypeSliderArrow button svg {
   transform-origin: center;
 }
 
+body.enVersion #products_types_info .product-type-row {
+  align-items: center !important;
+  display: grid !important;
+  gap: 16px !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-block: 24px !important;
+}
+
+body.enVersion #products_types_info .product-type-row .product_continer_img,
+body.enVersion #products_types_info .product-type-row .product_continer_text {
+  min-width: 0;
+  width: 100% !important;
+}
+
+body.enVersion #products_types_info .product-type-row-image-left .product_continer_text,
+body.enVersion #products_types_info .product-type-row-image-right .product_continer_img {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+body.enVersion #products_types_info .product-type-row-image-left .product_continer_img,
+body.enVersion #products_types_info .product-type-row-image-right .product_continer_text {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+body.enVersion #products_types_info .product-type-row .product_continer_img img {
+  display: block;
+  height: auto !important;
+  max-width: 100%;
+  object-fit: contain;
+  width: 100% !important;
+}
+
+body.enVersion #products_types_info .product-type-row .product_continer_text_data {
+  width: 100% !important;
+}
+
 @media (max-width: 792px) {
-  body.enVersion #products_types_info .product-type-row {
-    align-items: center !important;
-    display: grid !important;
-    gap: 16px !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    margin-block: 24px !important;
-  }
-
-  body.enVersion #products_types_info .product-type-row .product_continer_img,
-  body.enVersion #products_types_info .product-type-row .product_continer_text {
-    min-width: 0;
-    width: 100% !important;
-  }
-
-  body.enVersion #products_types_info .product-type-row-image-left .product_continer_text,
-  body.enVersion #products_types_info .product-type-row-image-right .product_continer_img {
-    grid-column: 1;
-    grid-row: 1;
-  }
-
-  body.enVersion #products_types_info .product-type-row-image-left .product_continer_img,
-  body.enVersion #products_types_info .product-type-row-image-right .product_continer_text {
-    grid-column: 2;
-    grid-row: 1;
-  }
-
-  body.enVersion #products_types_info .product-type-row .product_continer_img img {
-    display: block;
-    height: auto !important;
-    max-width: 100%;
-    object-fit: contain;
-    width: 100% !important;
-  }
-
-  body.enVersion #products_types_info .product-type-row .product_continer_text_data {
-    width: 100% !important;
-  }
-
   .brandsImagesGrid .receipe_block {
     height: auto !important;
     overflow: visible !important;
