@@ -48,8 +48,11 @@ const textToHtml = (text) => {
 
 const hasHtml = (value) => /<[a-z][\s\S]*>/i.test(String(value || ""));
 
+const normalizeBreakableSpaces = (value) =>
+  String(value || "").replace(/&nbsp;|&#160;|&#xa0;|\u00a0/gi, " ");
+
 const normalizeRichHtml = (value) => {
-  const text = String(value || "").trim();
+  const text = normalizeBreakableSpaces(value).trim();
   if (!text) return "";
   return hasHtml(text) ? text : textToHtml(text);
 };
@@ -245,6 +248,7 @@ const getStepHtml = (item, isArabic) =>
 const stepsToHtml = (steps, isArabic) => {
   const values = (Array.isArray(steps) ? steps : [])
     .map((item) => getStepHtml(item, isArabic))
+    .map(normalizeBreakableSpaces)
     .filter((value) => value && String(value).trim());
 
   if (!values.length) return "";

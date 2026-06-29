@@ -901,7 +901,26 @@ body .headerOriginalLinesTrack img:first-child {
 }
 
 
-.recipe_about .recipe-structured-ingredients { display: flex; flex-direction: column; }
+.recipe_about .recipe-structured-ingredients {
+  display: flex;
+  flex-direction: column;
+}
+
+.recipe_about .recipe-structured {
+  line-height: 1.65;
+  width: 100%;
+}
+
+.recipe_about > .right,
+.recipe_about > .bottom {
+  box-sizing: border-box;
+  padding: clamp(20px, 2.5vw, 32px) !important;
+}
+
+.recipe_about > .right > h3,
+.recipe_about > .bottom > h3 {
+  margin: 0 0 16px;
+}
 
 body.arVersion .recipe_about.rowDiv,
 body[dir="rtl"] .recipe_about.rowDiv {
@@ -922,7 +941,7 @@ body[dir="rtl"] .recipe_about > .right {
 }
 
 .recipe_about .recipe-structured p {
-  margin: 0 0 14px;
+  margin: 0 0 16px;
 }
 
 .recipe_about .recipe-structured ol,
@@ -937,8 +956,8 @@ body.arVersion .recipe_about .recipe-structured ol,
 body.arVersion .recipe_about .recipe-structured ul,
 body[dir="rtl"] .recipe_about .recipe-structured ol,
 body[dir="rtl"] .recipe_about .recipe-structured ul {
-  padding-inline-end: 30px;
-  padding-inline-start: 0;
+  padding-inline-end: 0;
+  padding-inline-start: 30px;
 }
 
 .recipe_about .recipe-structured ol {
@@ -952,8 +971,39 @@ body[dir="rtl"] .recipe_about .recipe-structured ul {
 .recipe_about .recipe-structured li {
   display: list-item;
   list-style-position: outside;
-  margin: 0 0 8px;
+  margin: 0 0 12px;
   padding-inline-start: 4px;
+}
+
+.recipe_about .recipe-structured-instructions :is(ol, ul) {
+  counter-reset: recipe-step;
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+.recipe_about .recipe-structured-instructions :is(ol, ul) > li {
+  counter-increment: recipe-step;
+  display: block;
+  padding-inline-start: 34px;
+  position: relative;
+}
+
+.recipe_about .recipe-structured-instructions :is(ol, ul) > li::before {
+  content: counter(recipe-step) ".";
+  inset-inline-start: 0;
+  line-height: inherit;
+  position: absolute;
+  top: 0;
+}
+
+body.arVersion .recipe_about .recipe-structured-instructions :is(ol, ul) > li::before,
+body[dir="rtl"] .recipe_about .recipe-structured-instructions :is(ol, ul) > li::before {
+  content: counter(recipe-step, arabic-indic) ".";
+}
+
+.recipe_about .recipe-structured > :last-child,
+.recipe_about .recipe-structured li:last-child {
+  margin-bottom: 0;
 }
 
 .recipe_about .recipe-structured li[data-list="ordered"] {
@@ -1014,7 +1064,7 @@ body[dir="rtl"] .recipe_about .recipe-structured ul {
   .recipe_about {
     display: flex !important;
     flex-direction: column !important;
-    gap: 22px !important;
+    gap: 32px !important;
     height: auto !important;
     min-height: 0 !important;
     overflow-x: clip !important;
@@ -1024,11 +1074,16 @@ body[dir="rtl"] .recipe_about .recipe-structured ul {
 
   .recipe_banner .left,
   .recipe_banner .right,
-  .recipe_about .left,
+  .recipe_about .left {
+    margin: 0 auto !important;
+    padding-inline: 0 !important;
+    width: 100% !important;
+  }
+
   .recipe_about .right,
   .recipe_about .bottom {
     margin: 0 auto !important;
-    padding-inline: 0 !important;
+    padding: 20px 16px !important;
     width: 100% !important;
   }
 
@@ -1045,16 +1100,6 @@ body[dir="rtl"] .recipe_about .recipe-structured ul {
   .recipe_banner h5,
   .recipe_banner .content h5,
   .nameOfReciepe,
-  .recipe_about h3,
-  .recipe_about .recipe-structured,
-  .recipe_about .recipe-structured p,
-  .recipe_about .recipe-structured li,
-  .recipe_about .recipe-structured h1,
-  .recipe_about .recipe-structured h2,
-  .recipe_about .recipe-structured h3,
-  .recipe_about .recipe-structured h4,
-  .recipe_about .recipe-structured h5,
-  .recipe_about .recipe-structured h6,
   .features .feature_item h5,
   .features .feature_item p,
   .categoryName,
@@ -1067,10 +1112,27 @@ body[dir="rtl"] .recipe_about .recipe-structured ul {
     word-break: break-word !important;
   }
 
+  .recipe_about h3,
+  .recipe_about .recipe-structured,
+  .recipe_about .recipe-structured p,
+  .recipe_about .recipe-structured li,
+  .recipe_about .recipe-structured h1,
+  .recipe_about .recipe-structured h2,
+  .recipe_about .recipe-structured h3,
+  .recipe_about .recipe-structured h4,
+  .recipe_about .recipe-structured h5,
+  .recipe_about .recipe-structured h6 {
+    hyphens: none !important;
+    max-width: 100% !important;
+    overflow-wrap: normal !important;
+    white-space: normal !important;
+    word-break: normal !important;
+  }
+
   .recipe_about .recipe-structured ol,
   .recipe_about .recipe-structured ul {
     max-width: 100% !important;
-    overflow-wrap: anywhere !important;
+    overflow-wrap: normal !important;
   }
 
   .features {
