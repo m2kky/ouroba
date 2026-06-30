@@ -728,12 +728,33 @@ body .headerOriginalLinesTrack img:first-child {
 }
 
 .brand-detail-quote {
+  box-sizing: border-box;
   position: relative;
   width: min(100%, 1040px);
   margin: 28px auto 42px;
   padding: 34px clamp(76px, 12vw, 140px);
   text-align: center;
   overflow: hidden;
+  overflow-wrap: break-word;
+}
+
+.brand-detail-quote-mark {
+  position: absolute;
+  top: 18px;
+  color: #fff100;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.brand-detail-quote-mark-start {
+  left: 38px;
+}
+
+.brand-detail-quote-mark-end {
+  right: 38px;
 }
 
 .brand-detail-quote .brand-detail-quote-text,
@@ -747,15 +768,21 @@ body .headerOriginalLinesTrack img:first-child {
 
 @media (max-width: 768px) {
   .brand-detail-quote {
-    padding: 38px 48px 32px;
+    margin: 20px auto 30px;
+    padding: 32px 28px 28px;
   }
 
   .brand-detail-quote .brand-detail-quote-mark-start {
-    left: 18px;
+    left: 12px;
   }
 
   .brand-detail-quote .brand-detail-quote-mark-end {
-    right: 18px;
+    right: 12px;
+  }
+
+  .brand-detail-quote .brand-detail-quote-mark {
+    top: 10px;
+    font-size: 54px;
   }
 }
 
@@ -1536,4 +1563,18 @@ body.enVersion #products_types_info .product-type-row .product_continer_text_dat
 .brand-detail-quote .brand-detail-quote-text .ql-align-justify,
 .brand-detail-quote .brand-detail-quote-text .ql-align-justify p {
   text-align: justify;
+}
+
+@media (max-width: 768px) {
+  .brands_section .brand-detail-description {
+    padding-inline: 18px !important;
+  }
+
+  .brands_section .brand-detail-description.rich-text-dashboard-style:not(#rich-text-dashboard-style-specificity),
+  .brands_section .brand-detail-description .rich-text-dashboard-style:not(#rich-text-dashboard-style-specificity),
+  .brands_section .brand-detail-quote-text.rich-text-dashboard-style:not(#rich-text-dashboard-style-specificity),
+  .brands_section .brand-detail-quote-text .rich-text-dashboard-style:not(#rich-text-dashboard-style-specificity) {
+    font-size: clamp(16px, 4.8vw, 19px) !important;
+    line-height: 1.55 !important;
+  }
 }
