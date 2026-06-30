@@ -171,7 +171,7 @@ function ProductType({ types, pageDataObj }) {
             },
             {
               name: language == "ar" ? "عن العروبة" : "About US",
-              route: "/",
+              route: "/about",
             },
             {
               name: language == "ar" ? "أصناف المنتجات" : "Product Type",

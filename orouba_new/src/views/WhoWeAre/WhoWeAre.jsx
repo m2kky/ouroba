@@ -318,7 +318,7 @@ export default function WhoWeAre({ aboutData }) {
         <Breadcrumb
           links={[
             { name: language == "ar" ? "الصفحةالرئيسية" : "Home", route: "/" },
-            { name: language == "ar" ? "عن العروبة" : "About US" },
+            { name: language == "ar" ? "عن العروبة" : "About US", route: "/about" },
             {
               name: language == "ar" ? "من نحن" : "Who We Are ",
               active: true,

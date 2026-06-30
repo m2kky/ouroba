@@ -11,7 +11,7 @@ function ProductTypeCategory({ data, breads, sameProducts, recipes, brandId, rel
 
   const breadCrumbsArray = [
     { name: language == "ar" ? "الصفحةالرئيسية" : "Home", route: "/" },
-    { name: language == "ar" ? "المنتجات" : "Brands" },
+    { name: language == "ar" ? "المنتجات" : "Brands", route: "/brands" },
     {
       name: language != "ar" ? breads.brandNameEn : breads.brandNameAr,
       route: "/brands/" + breads.brandId,

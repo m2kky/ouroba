@@ -11,7 +11,7 @@ const BrandCategoryData = ({ data, id }) => {
 
   const breadCrumbsArray = [
     { name: language == "ar" ? "الصفحةالرئيسية" : "Home", route: "/" },
-    { name: language == "ar" ? "المنتجات" : "Brands" },
+    { name: language == "ar" ? "المنتجات" : "Brands", route: "/brands" },
     {
       name: language == "ar" ? data?.brand?.nameAr : data?.brand?.nameEn,
       active: true,

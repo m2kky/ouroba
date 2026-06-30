@@ -1503,6 +1503,25 @@ body.enVersion #products_types_info .product-type-row .product_continer_text_dat
 }
 
 
+.breadcrumb a {
+  background: none;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: inherit;
+}
+
+.breadcrumb a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
 /* Quill Text Alignments */
 .ql-align-center {
   text-align: center;
